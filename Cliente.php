@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conexion = new mysqli("localhost", "root", "", "TecnicosAsociados");
+$conexion = new mysqli("localhost", "root", "", "tecnicoasociados");
 
 if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
@@ -21,7 +21,7 @@ if (isset($_POST['Registrar'])) {
 
             if ($insert_query) {
                 $registration_message = "Usuario registrado exitosamente.";
-                header("Location:ListClient.php");
+                header("Location:a.php");
             } else {
                 $registration_error = "Error al registrar el usuario: " . $conexion->error;
             }
@@ -34,7 +34,7 @@ if (isset($_POST['Registrar'])) {
 $conexion->close();
 ?>
 <h1>Registro de Nuevo Cliente</h1>
-        <form method="post" action="FormClient.php">
+        <form method="post" action="a.php">
             <label for="NameClient">Nombre:</label>
             <input type="text" name="NameClient" required><br><br>
 
