@@ -1,7 +1,6 @@
 <?php
 session_start();
 $conexion = new mysqli("localhost", "root", "", "tecnicoasociados");
-
 if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }
@@ -12,7 +11,7 @@ if (isset($_POST['Registrar'])) {
     $new_Passwd = $_POST['Passwd'];
 
     if (!empty($new_NameClient) && !empty($new_email) && !empty($new_Passwd)) {
-        $check_query = $conexion->query("SELECT * FROM usuario WHERE NameClient = '$new_NameClient'");
+        $check_query = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$new_NameClient'");
 
         if ($check_query->num_rows > 0) {
             $registration_error = "El nombre de usuario ya existe.";
@@ -34,7 +33,7 @@ if (isset($_POST['Registrar'])) {
 $conexion->close();
 ?>
 <h1>Registro de Nuevo Cliente</h1>
-        <form method="post" action="a.php">
+        <form method="post" action="Cliente.php">
             <label for="NameClient">Nombre:</label>
             <input type="text" name="NameClient" required><br><br>
 
