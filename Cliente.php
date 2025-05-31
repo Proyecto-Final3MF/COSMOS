@@ -14,15 +14,15 @@ if (isset($_POST['Registrar'])) {
         $check_query = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$new_NameClient'");
 
         if ($check_query->num_rows > 0) {
-            $registration_error = "El nombre de usuario ya existe.";
+            echo "El nombre de usuario ya existe.";
         } else {
             $insert_query = $conexion->query("INSERT INTO cliente (NameClient, email, Passwd) VALUES ('$new_NameClient', '$new_email', '$new_Passwd')");
 
             if ($insert_query) {
-                $registration_message = "Usuario registrado exitosamente.";
+                echo "Usuario registrado exitosamente.";
                 header("Location:a.php");
             } else {
-                $registration_error = "Error al registrar el usuario: " . $conexion->error;
+                echo"Error al registrar el usuario: " . $conexion->error;
             }
         }
     } else {
