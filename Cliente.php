@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conexion = new mysqli("localhost", "root", "", "tecnicoasociados"); //no tenemos la base de datos thiago
+$conexion = new mysqli("localhost", "root", "", "tecnicoasociados"); 
 if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }

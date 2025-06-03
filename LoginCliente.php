@@ -1,4 +1,6 @@
 <?php
+$conexion = new mysqli("localhost", "root", "", "tecnicoasociados");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_NameClient = $_POST['NameClient'];
     $new_email = $_POST['email'];
@@ -8,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($resultado && $resultado->num_rows > 0) {
         session_start();
-        $_SESSION["loggedin"] = $NameUser;
+        $_SESSION["loggedin"] = $NameClient;
         header("Location: a.php");
         exit();
     } else {
@@ -22,7 +24,7 @@ if(isset($_SESSION['loggedin'])){
 ?>
 <form method="POST">
     <label>Usuario:</label>
-    <input type="text" name="Name" required><br><br>
+    <input type="text" name="NameClient" required><br><br>
 
     <label>Contraseña:</label>
     <input type="password" name="Passwd" required><br><br>
