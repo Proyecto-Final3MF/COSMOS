@@ -9,6 +9,7 @@ if (isset($_POST['Registrar'])) {
     $new_NameClient = $_POST['NameClient'];
     $new_email = $_POST['email'];
     $new_Passwd = $_POST['Passwd'];
+    $_SESSION['loggedin'] = true;
 
     if (!empty($new_NameClient) && !empty($new_email) && !empty($new_Passwd)) {
         $check_query = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$new_NameClient'");
