@@ -2,4 +2,6 @@ El Usuario debe ingresar y identificarse como cliente, tecnico o administrativo
 
 Al ser ingresado con Cliente lo debe llevar al portal de cliente donde pordra realizar solicitudes con fotos y descripcion detallada, podra seguir en tiempo real la reparación con diferentes estados, podra comunicarse con el tecnico asignado de manera bi direccional
 
-Al 
+Al ser ingresado como tecnico lo debe llevar al panel de tecnico donde podra ser asiganado automatica o manualmente a reparaciones segun su especializacion, podra registrar su acciones realizadas y gestionara los repuestos utilizados
+
+Al ser ingresado como Aministrativo lo debe llevar a 
