@@ -6,4 +6,4 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 } else {
     echo "Estas logeado";
 }
-?>
+?><a href="logout.php">Cerrar Session
