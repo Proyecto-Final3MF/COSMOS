@@ -1,28 +1,37 @@
 <?php
 $conexion = new mysqli("localhost", "root", "", "tecnicoasociados");
 
+if ($conexion->connect_error) {
+    die("Connection failed: " . $conexion->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_NameClient = $_POST['NameClient'];
-    $new_email = $_POST['email'];
     $new_Passwd = $_POST['Passwd'];
 
-    $resultado = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$NameClient' AND Passwd = '$Passwd'");
+    $sanitized_NameClient = $conexion->real_escape_string($new_NameClient);
+    $sanitized_Passwd = $conexion->real_escape_string($new_Passwd);
 
-if ($resultado && $resultado->num_rows > 0) {
+    $resultado = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$sanitized_NameClient' AND Passwd = '$sanitized_Passwd'");
+
+    if ($resultado && $resultado->num_rows > 0) {
         session_start();
-        $_SESSION["loggedin"] = $NameClient;
+        $_SESSION["loggedin"] = $sanitized_NameClient;
         header("Location: a.php");
         exit();
     } else {
         echo "Usuario o contraseña incorrectos.";
     }
 }
+
+session_start();
 if(isset($_SESSION['loggedin'])){
-    header("Location:a.php");
+    header("Location: a.php");
     exit();
 }
 ?>
 <form method="POST">
+    <h1>Login Cliente</h1>
     <label>Usuario:</label>
     <input type="text" name="NameClient" required><br><br>
 
