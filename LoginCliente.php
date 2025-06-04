@@ -24,13 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-session_start(); // Added semicolon here
+session_start();
 if(isset($_SESSION['loggedin'])){
     header("Location: a.php");
     exit();
 }
 ?>
 <form method="POST">
+    <h1>Login Cliente</h1>
     <label>Usuario:</label>
     <input type="text" name="NameClient" required><br><br>
 
