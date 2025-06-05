@@ -3,3 +3,4 @@
 ### Corporacion Tecnico y Asociados.
 Hecho por: Thiago Carballo, Alex Gonzalez, Federico Mosegui, Franco Fagundez, Lucas Vargas.
 No se si los nombres tan bien escritos, arreglen y borren esta lina.
+(Fede escribi el resto del README, solo explica el programa).
