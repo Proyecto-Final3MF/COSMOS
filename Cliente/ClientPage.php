@@ -4,6 +4,6 @@ if (!isset($_SESSION['cliente_L']) || $_SESSION['cliente_L'] !== true) {
     header("Location: LoginCliente.php");
     exit;
 } else {
-    echo "Estas logeado";
+    echo "Estas logeado como Cliente";
 }
 ?><a href="Cliente/logout.php">Cerrar Session

@@ -9,9 +9,10 @@ if (isset($_POST['Registrar'])) {
     $new_NameTec = $_POST['NameTec'];
     $new_email = $_POST['email'];
     $new_Passwd = $_POST['Passwd'];
+    $new_Espec = $_POST['Espec'];
     $_SESSION['loggedin'] = true;
 
-    if (!empty($new_NameTec) && !empty($new_email) && !empty($new_Passwd)) {
+    if (!empty($new_NameTec) && !empty($new_email) && !empty($new_Passwd) && !empty($new_Espec)) {
         $check_query = $conexion->query("SELECT * FROM tecnico WHERE NameTec = '$new_NameTec'");
 
         if ($check_query->num_rows > 0) {
@@ -34,7 +35,7 @@ if (isset($_POST['Registrar'])) {
 $conexion->close();
 ?>
 <h1>Registro de Nuevo Tecnico</h1>
-        <form method="post" action="Tece.php">
+        <form method="post" action="Tecnico.php">
             <label for="NameTec">Nombre:</label>
             <input type="text" name="NameTec" required><br><br>
 
@@ -43,6 +44,9 @@ $conexion->close();
 
             <label for="Passwd">Contraseña:</label>
             <input type="password" name="Passwd" required><br><br>
+
+            <label>Espec:</label>
+            <input type="text" name="Espec" required><br><br>
 
             <input type="submit" name="Registrar" value="Registrar">
         </form>
