@@ -6,18 +6,18 @@ if ($conexion->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $new_NameClient = $_POST['NameClient'];
+    $new_NameTec = $_POST['NameTec'];
     $new_Passwd = $_POST['Passwd'];
 
-    $sanitized_NameClient = $conexion->real_escape_string($new_NameClient);
+    $sanitized_NameTec = $conexion->real_escape_string($new_NameTec);
     $sanitized_Passwd = $conexion->real_escape_string($new_Passwd);
 
-    $resultado = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$sanitized_NameClient' AND Passwd = '$sanitized_Passwd'");
+    $resultado = $conexion->query("SELECT * FROM tecnico WHERE NameTec = '$sanitized_NameTec' AND Passwd = '$sanitized_Passwd'");
 
     if ($resultado && $resultado->num_rows > 0) {
         session_start();
-        $_SESSION["cliente_L"] = $sanitized_NameClient;
-        header("Location: ClientPage.php");
+        $_SESSION["tecnico_L"] = $sanitized_NameTec;
+        header("Location: TecPage.php");
         exit();
     } else {
         echo "Usuario o contraseña incorrectos.";
@@ -25,15 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 session_start();
-if(isset($_SESSION['cliente_L'])){
-    header("Location: ClientPage.php");
+if(isset($_SESSION['tecnico_L'])){
+    header("Location: TecPage.php");
     exit();
 }
 ?>
 <form method="POST">
-    <h1>Login Cliente</h1>
+    <h1>Login Tecnico</h1>
     <label>Usuario:</label>
-    <input type="text" name="NameClient" required><br><br>
+    <input type="text" name="NameTec" required><br><br>
 
     <label>Contraseña:</label>
     <input type="password" name="Passwd" required><br><br>

@@ -1,0 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['tecnico_L']) || $_SESSION['tecnico_L'] !== true) {
+    header("Location:TecLogin.php");
+    exit;
+} else {
+    echo "Estas logeado";
+}
+?><a href="Tecnico/logout.php">Cerrar Session

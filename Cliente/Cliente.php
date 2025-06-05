@@ -9,7 +9,7 @@ if (isset($_POST['Registrar'])) {
     $new_NameClient = $_POST['NameClient'];
     $new_email = $_POST['email'];
     $new_Passwd = $_POST['Passwd'];
-    $_SESSION['loggedin'] = true;
+    $_SESSION['cliente_L'] = true;
 
     if (!empty($new_NameClient) && !empty($new_email) && !empty($new_Passwd)) {
         $check_query = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$new_NameClient'");
@@ -21,7 +21,7 @@ if (isset($_POST['Registrar'])) {
 
             if ($insert_query) {
                 echo "Usuario registrado exitosamente.";
-                header("Location:a.php");
+                header("Location:ClientPage.php");
             } else {
                 echo"Error al registrar el usuario: " . $conexion->error;
             }
