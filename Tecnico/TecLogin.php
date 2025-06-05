@@ -8,6 +8,7 @@ if ($conexion->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_NameTec = $_POST['NameTec'];
     $new_Passwd = $_POST['Passwd'];
+    $new_Espec = $_POST['Espec'];
 
     $sanitized_NameTec = $conexion->real_escape_string($new_NameTec);
     $sanitized_Passwd = $conexion->real_escape_string($new_Passwd);
@@ -40,6 +41,9 @@ if(isset($_SESSION['tecnico_L'])){
 
     <label>Email:</label>
     <input type="email" name="email" required><br><br>
+
+    <label>Especialidad:</label>
+    <input type="text" name="Espec" required><br><br>
 
     <button type="submit">Iniciar Sesión</button>
 </form>

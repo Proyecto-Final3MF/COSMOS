@@ -4,6 +4,6 @@ if (!isset($_SESSION['tecnico_L']) || $_SESSION['tecnico_L'] !== true) {
     header("Location:TecLogin.php");
     exit;
 } else {
-    echo "Estas logeado";
+    echo "Estas logeado como Tecnico";
 }
 ?><a href="Tecnico/logout.php">Cerrar Session
