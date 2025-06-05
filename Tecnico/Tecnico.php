@@ -13,7 +13,7 @@ if (isset($_POST['Registrar'])) {
     $_SESSION['loggedin'] = true;
 
     if (!empty($new_NameTec) && !empty($new_email) && !empty($new_Passwd) && !empty($new_Espec)) {
-        $check_query = $conexion->query("SELECT * FROM tecnico WHERE NameTec = '$new_NameTec'");
+        $check_query = $conexion->query("SELECT * FROM tecnico WHERE email = '$new_email'");
 
         if ($check_query->num_rows > 0) {
             echo "El nombre de usuario ya existe.";
@@ -22,7 +22,8 @@ if (isset($_POST['Registrar'])) {
 
             if ($insert_query) {
                 echo "Usuario registrado exitosamente.";
-                header("Location:a.php");
+                header("Location:TecPage.php");
+                exit();
             } else {
                 echo"Error al registrar el usuario: " . $conexion->error;
             }
