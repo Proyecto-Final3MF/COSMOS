@@ -6,4 +6,4 @@ if (!isset($_SESSION['cliente_L']) || $_SESSION['cliente_L'] !== true) {
 } else {
     echo "Estas logeado como Cliente";
 }
-?><a href="Cliente/logout.php">Cerrar Session
+?><a href="./Cliente/logout.php">Cerrar Session
