@@ -1,0 +1,2 @@
+Pueden cambiar cosas en la tablas y base de datos, solo avisen 👍
+Y el nombre de las tablas actuales son "cliente" y "tecnico" todo minuscula.

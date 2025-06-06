@@ -46,8 +46,8 @@ $conexion->close();
             <label for="Passwd">Contraseña:</label>
             <input type="password" name="Passwd" required><br><br>
 
-            <label>Espec:</label>
+            <label for="Espec" >Especialidad:</label>
             <input type="text" name="Espec" required><br><br>
 
             <input type="submit" name="Registrar" value="Registrar">
-        </form>
+        </form

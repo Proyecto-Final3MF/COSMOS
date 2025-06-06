@@ -36,11 +36,11 @@ if(isset($_SESSION['tecnico_L'])){
     <label>Usuario:</label>
     <input type="text" name="NameTec" required><br><br>
 
-    <label>Contraseña:</label>
-    <input type="password" name="Passwd" required><br><br>
-
     <label>Email:</label>
     <input type="email" name="email" required><br><br>
+
+    <label>Contraseña:</label>
+    <input type="password" name="Passwd" required><br><br>
 
     <label>Especialidad:</label>
     <input type="text" name="Espec" required><br><br>
