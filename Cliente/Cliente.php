@@ -12,10 +12,10 @@ if (isset($_POST['Registrar'])) {
     $_SESSION['cliente_L'] = true;
 
     if (!empty($new_NameClient) && !empty($new_email) && !empty($new_Passwd)) {
-        $check_query = $conexion->query("SELECT * FROM cliente WHERE NameClient = '$new_NameClient'");
+        $check_query = $conexion->query("SELECT * FROM cliente WHERE email = '$new_email'");
 
         if ($check_query->num_rows > 0) {
-            echo "El nombre de usuario ya existe.";
+            echo "Email ya en uso.";
         } else {
             $insert_query = $conexion->query("INSERT INTO cliente (NameClient, email, Passwd) VALUES ('$new_NameClient', '$new_email', '$new_Passwd')");
 
