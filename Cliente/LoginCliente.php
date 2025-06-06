@@ -35,11 +35,11 @@ if(isset($_SESSION['cliente_L'])){
     <label>Usuario:</label>
     <input type="text" name="NameClient" required><br><br>
 
-    <label>Contraseña:</label>
-    <input type="password" name="Passwd" required><br><br>
-
     <label>Email:</label>
     <input type="email" name="email" required><br><br>
+
+    <label>Contraseña:</label>
+    <input type="password" name="Passwd" required><br><br>
 
     <button type="submit">Iniciar Sesión</button>
 </form>
