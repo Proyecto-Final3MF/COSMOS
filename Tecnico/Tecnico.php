@@ -16,7 +16,7 @@ if (isset($_POST['Registrar'])) {
         $check_query = $conexion->query("SELECT * FROM tecnico WHERE email = '$new_email'");
 
         if ($check_query->num_rows > 0) {
-            echo "El nombre de usuario ya existe.";
+            echo "Email ya en uso.";
         } else {
             $insert_query = $conexion->query("INSERT INTO tecnico (NameTec, email, Passwd) VALUES ('$new_NameTec', '$new_email', '$new_Passwd')");
 
