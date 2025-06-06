@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['tecnico_L']) || $_SESSION['tecnico_L'] !== true) {
-    header("Location:TecLogin.php");
+    header("Location:LoginTec.php");
     exit;
 } else {
     echo "Estas logeado como Tecnico";
