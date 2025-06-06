@@ -1,0 +1,7 @@
+Cosas que faltan:
+-Incorporar el cosa orientado a objetos que el profe enseño.
+-CSS
+-Pagina para que el cliente haga los pedidos.
+-Pagina que el tecnico haga cosas de tecnico.
+-Administrador y Supervisor.
+-Todo el resto que dice en el pdf del proyecto final.
