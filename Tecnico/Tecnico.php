@@ -10,7 +10,7 @@ if (isset($_POST['Registrar'])) {
     $new_email = $_POST['email'];
     $new_Passwd = $_POST['Passwd'];
     $new_Espec = $_POST['Espec'];
-    $_SESSION['loggedin'] = true;
+    $_SESSION['tecnico_L'] = true;
 
     if (!empty($new_NameTec) && !empty($new_email) && !empty($new_Passwd) && !empty($new_Espec)) {
         $check_query = $conexion->query("SELECT * FROM tecnico WHERE email = '$new_email'");
