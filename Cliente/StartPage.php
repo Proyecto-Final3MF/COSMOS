@@ -1,2 +1,2 @@
-<a href="LoginCliente.php">Login
+<a href="LoginCliente.php">Login 
 <a href="Cliente.php">Registrar

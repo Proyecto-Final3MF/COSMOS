@@ -6,4 +6,4 @@ if (!isset($_SESSION['tecnico_L']) || $_SESSION['tecnico_L'] !== true) {
 } else {
     echo "Estas logeado como Tecnico";
 }
-?><a href="Tecnico/logout.php">Cerrar Session
+?><a href="logout.php">Cerrar Session
