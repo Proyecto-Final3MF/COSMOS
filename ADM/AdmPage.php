@@ -1,0 +1,1 @@
+<a href="Tecnico.php">Registrar nuevo tecnico
