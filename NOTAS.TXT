@@ -4,4 +4,6 @@ Cosas que faltan:
 -Pagina para que el cliente haga los pedidos.
 -Pagina que el tecnico haga cosas de tecnico.
 -Administrador y Supervisor.
+-Adm da los permisos y crea, edita, eliman y dan roles para las cuentas de otros funcionarios.
+-Supervisor monitorea y hace reportes para el adm.
 -Todo el resto que dice en el pdf del proyecto final.
