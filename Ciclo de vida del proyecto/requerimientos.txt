@@ -2,7 +2,31 @@ requerimientos funcionales
 
 requerimientos principales:
 
-CRUD de clientes, productos, tecnicos y categorias
+Crear cliente
+Leer cliente
+Actualizar cliente
+Eliminar cliente
+
+Crear productos
+Leer productos
+Actualizar productos
+Eliminar productos
+
+Crear tecnico
+Leer tecnico
+Actualizar tecnico
+Eliminar tecnico
+
+Crear categoria
+Leer categoria
+Actualizar categoria
+Eliminar categoria
+
+Crear admin
+Leer admin
+Actualizar admin
+Eliminar admin
+
 seguimineto de reparaciones en tiempo real
 comunicacion birideccional entre cliente tecnico
 generacion de metricas para optimizacion operativa
