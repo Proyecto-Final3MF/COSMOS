@@ -28,19 +28,21 @@ Actualizar admin
 Eliminar admin
 
 seguimineto de reparaciones en tiempo real
-comunicacion birideccional entre cliente tecnico
-generacion de metricas para optimizacion operativa
 
-requerimientos basicos:
+comunicacion birideccional entre cliente tecnico
+
+generacion de metricas para optimizacion operativa
 
 1 cliente:
 	Registro de solicitudes de servicios con fotos/descripcion deteallada
 	Visualizar de reparaciones activas
 	Sistema de notificaciones por email/SMS/Whatsapp para cambios de estado
+
 2 tecnico:
 	Asignacion automatica/manual de reparaciones segun especializacion
 	Registro de acciones realizadas
 	Gestion de repuestos utilizados (vinculacion con inventario)
+	
 3 Dashboard admin:
 	Control garantia y devolucion
 	Generacion de reportes de productividad por tecnico
