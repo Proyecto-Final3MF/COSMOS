@@ -1,6 +1,4 @@
-requerimientos funcionales
-
-requerimientos principales:
+requerimientos funcionales:
 
 Crear cliente
 Leer cliente
