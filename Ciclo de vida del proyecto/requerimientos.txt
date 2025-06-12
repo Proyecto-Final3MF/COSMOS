@@ -31,13 +31,19 @@ comunicacion birideccional entre cliente tecnico
 
 generacion de metricas para optimizacion operativa
 
+Usuario:
+	Registro de sesion
+	Logeado de sesion
+	Cerrado de sesion
+	opcional: cambio de sesion
+
 1 cliente:
-	Registro de solicitudes de servicios con fotos/descripcion deteallada
-	Visualizar de reparaciones activas
-	Sistema de notificaciones por email/SMS/Whatsapp para cambios de estado
+	Registro de solicitudes de servicios
+	Visualizar reparaciones activas
+	Sistema de notificaciones
 
 2 tecnico:
-	Asignacion automatica/manual de reparaciones segun especializacion
+	Asignacion automatica/manual de reparaciones
 	Registro de acciones realizadas
 	Gestion de repuestos utilizados (vinculacion con inventario)
 	
