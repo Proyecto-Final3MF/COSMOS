@@ -1,4 +1,4 @@
-El Usuario debe ingresar y identificarse como cliente, tecnico o administrativo
+El Usuario debe ingresar e identificarse como cliente, tecnico o administrativo
 
 Al ser ingresado con Cliente lo debe llevar al portal de cliente donde pordra realizar solicitudes con fotos y descripcion detallada, podra seguir en tiempo real la reparación con diferentes estados, podra comunicarse con el tecnico asignado de manera bi direccional
 
