@@ -1,1 +1,1 @@
-<a href="LoginTec.php">Login 
+<a href="LoginTec.php">Login
