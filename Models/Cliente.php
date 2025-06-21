@@ -13,23 +13,23 @@ class Cliente {
         return $this->db->query($sql);
     }
 
-    public function guardar($cedula, $nombre) {
-        $sql = "INSERT INTO cliente (cedula, nombre) VALUES ($cedula, '$nombre')";
+    public function guardar($nombre) {
+        $sql = "INSERT INTO cliente (nombre) VALUES ('$nombre')";
         return $this->db->query($sql);
     }
 
-    public function buscarPorCedula($cedula){
-        $sql = "SELECT * FROM cliente WHERE cedula = $cedula";
+    public function buscarPorId($id){
+        $sql = "SELECT * FROM cliente WHERE id = $id";
         return $this->db->query($sql)->fetch_assoc();
     }
 
-    public function actualizar($cedula, $nombre) {
-        $sql = "UPDATE cliente SET cedula='$cedula' nombre='$nombre', WHERE cedula='$cedula'";
+    public function actualizar($id, $nombre) {
+        $sql = "UPDATE cliente SET nombre='$nombre', WHERE id='$id'";
         return $this->db->query($sql);
     }
 
-    public function borrar($cedula) {
-        $sql = "DELETE FROM cliente WHERE cedula=$cedula";
+    public function borrar($id) {
+        $sql = "DELETE FROM cliente WHERE id=$id";
         return $this->db->query($sql);
     }
 }
