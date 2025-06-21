@@ -1,8 +1,12 @@
     <?php
+    require_once("config/conexion.php");
+    
     class LoginController {
         public function index() {
             require_once 'views/login.php';
         }
+
+
 
         public function login() {
             $username = $_POST['username'];
