@@ -13,16 +13,15 @@ class ClienteC {
     
     public function guardar() {
         $cliente = new Cliente();
-        $cedula = $_POST['cedula'];
         $nombre = $_POST['nombre'];
-        $cliente->guardar($cedula, $nombre);
+        $cliente->guardar($nombre);
         header("Location: index.php");
     }
 
     public function editar() {
         $cliente = new Cliente();
-        $cedula = $_GET['cedula'];
-        $datos = $cliente->buscarPorCedula($cedula);
+        $id = $_GET['id'];
+        $datos = $cliente->buscarPorId($id);
         include("views/Cliente/editarC.php");
     }
 
@@ -36,8 +35,8 @@ class ClienteC {
     
     public function borrar() {
         $cliente = new Cliente();
-        $cedula = $_GET['cedula'];
-        $cliente->borrar($cedula);
+        $id = $_GET['id'];
+        $cliente->borrar($id);
         header("Location: index.php");
     }
 }

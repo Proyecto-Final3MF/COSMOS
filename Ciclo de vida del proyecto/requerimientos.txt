@@ -1,33 +1,28 @@
 requerimientos funcionales:
 
-Crear cliente
-Leer cliente
-Actualizar cliente
-Eliminar cliente
+Crear usuario
+Editar usuario
+Eliminar usuario
+Mostrar usuario
+
+Crear rol
+Editar rol
+Eliminar rol
+Mostrar rol
+
+Crear categoria
+Editar categoria
+Eliminar categoria
+Listar categoria
 
 Crear productos
 Leer productos
 Actualizar productos
 Eliminar productos
 
-Crear tecnico
-Leer tecnico
-Actualizar tecnico
-Eliminar tecnico
 
-Crear categoria
-Leer categoria
-Actualizar categoria
-Eliminar categoria
-
-Crear admin
-Leer admin
-Actualizar admin
-Eliminar admin
 
 seguimineto de reparaciones en tiempo real
-
-comunicacion birideccional entre cliente tecnico
 
 generacion de metricas para optimizacion operativa
 
@@ -35,18 +30,19 @@ Usuario:
 	Registro de sesion
 	Logeado de sesion
 	Cerrado de sesion
-	opcional: cambio de sesion
 
-1 cliente:
+Rol cliente:
 	Registro de solicitudes de servicios
 	Visualizar reparaciones activas
 	Sistema de notificaciones
+	Comunicacion con rol tecnico
 
 2 tecnico:
 	Asignacion automatica/manual de reparaciones
+	Comunicacion con rol usuario
 	Registro de acciones realizadas
-	Gestion de repuestos utilizados (vinculacion con inventario)
 	
-3 Dashboard admin:
-	Control garantia y devolucion
-	Generacion de reportes de productividad por tecnico
+	
+Rol admin:
+	CRUD de categorias
+	CRUD de roles
