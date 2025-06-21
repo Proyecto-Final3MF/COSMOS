@@ -18,7 +18,7 @@
         
         <p>Contraseña:</p> <input type="text" name="contrasena" placeholder="Ingrese su contraseña"><br><br>
         
-        <input type="submit" value="Guardar">
+        <input type="submit" value="Iniciar Sesion"> <a href="">Registrarse</a>
 
     </form>
 </body>
