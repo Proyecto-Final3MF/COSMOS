@@ -1,12 +1,6 @@
 <?php
 class ClienteC {
 
-    public function index() {
-        $cliente = new Cliente();
-        $resultados = $cliente->listar();
-        include("views/cliente/cliente.php");
-    }
-
     public function crear() {
         include("views/Cliente/crearC.php");
     }
@@ -27,9 +21,9 @@ class ClienteC {
 
     public function actualizar() {
         $cliente = new Cliente();
-        $cedula = $_POST['cedula'];
+        $id = $_POST['id'];
         $nombre = $_POST['nombre'];
-        $cliente->actualizar($cedula, $nombre);
+        $cliente->actualizar($id, $nombre);
         header("Location: index.php");
     }
     

@@ -8,11 +8,6 @@ class Cliente {
         $this->db = conectar();
     }
 
-    public function listar() {
-        $sql = "SELECT * FROM cliente";
-        return $this->db->query($sql);
-    }
-
     public function guardar($nombre) {
         $sql = "INSERT INTO cliente (nombre) VALUES ('$nombre')";
         return $this->db->query($sql);
