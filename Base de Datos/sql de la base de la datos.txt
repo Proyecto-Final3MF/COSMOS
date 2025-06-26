@@ -1,0 +1,26 @@
+Si copian esto en su base de datos de nombre tencioasociados les crea todas las tablas necesarias hasta ahora
+
+CREATE TABLE rol (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100)
+);
+
+CREATE TABLE categoria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100)
+);
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    contrasena VARCHAR(255),
+    email VARCHAR(255),
+    rol_id INT, FOREING KEY (rol_id) REFERENCES rol(id)
+);
+
+CREATE TABLE solicitud (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT, FOREING KEY (usuario_id) REFERENCES usuario(id),
+    imagen VARCHAR(255),
+    categoria_id INT, FOREING KEY (categoria_id) REFERENCES categoria(id)
+)
