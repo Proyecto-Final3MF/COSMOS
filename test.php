@@ -1,6 +1,10 @@
-<? //test para paginacion
+<?php
+
 require_once("config/conexion.php");
-?>?>
+
+$conexion = conectar();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,24 +14,28 @@ require_once("config/conexion.php");
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Listado de Productos</h1>
+    <?php
+    $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id = 1;";
+
+    $resultado = $conexion->query($sql);
+
+    if (!$resultado) {
+        die("Error en la consulta: " . $conexion->error);
+    }
+    ?>
+    <h1>Listado de Solicitudes disponibles</h1>
     <div id="productos-container">
-        <div class="producto">Producto 1</div>
-        <div class="producto">Producto 2</div>
-        <div class="producto">Producto 3</div>
-        <div class="producto">Producto 4</div>
-        <div class="producto">Producto 5</div>
-        <div class="producto">Producto 6</div>
-        <div class="producto">Producto 7</div>
-        <div class="producto">Producto 8</div>
-        <div class="producto">Producto 9</div>
-        <div class="producto">Producto 10</div>
-        <div class="producto">Producto 11</div>
-        <div class="producto">Producto 12</div>
-        <div class="producto">Producto 13</div>
-        <div class="producto">Producto 14</div>
-        <div class="producto">Producto 15</div>
-        </div>
+        <?php
+        while ($fila = $resultado->fetch_assoc()) {
+        ?>
+            <div class="producto">
+                <?php echo htmlspecialchars($fila['obs']); ?>
+                <?php echo htmlspecialchars($fila['estado']); ?>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
 
     <div id="paginacion-container">
         </div>
