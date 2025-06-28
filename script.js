@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const productosContainer = document.getElementById('productos-container');
+    const productosContainer = document.getElementById('solicitud-container');
     const paginacionContainer = document.getElementById('paginacion-container');
-    const todosLosProductos = Array.from(productosContainer.getElementsByClassName('producto'));
+    const todosLosProductos = Array.from(productosContainer.getElementsByClassName('solicitud'));
 
     const elementosPorPagina = 5; // Cantidad de elementos a mostrar por página
     let paginaActual = 1;
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Botón "Primera Página" ---
         const btnPrimera = document.createElement('button');
-        btnPrimera.textContent = '<< Primera';
+        btnPrimera.textContent = '<<';
         btnPrimera.classList.add('pagina-btn', 'control-btn');
         btnPrimera.disabled = (paginaActual === 1); // Deshabilita si ya estás en la primera página
         btnPrimera.addEventListener('click', () => {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Botón "Anterior" ---
         const btnAnterior = document.createElement('button');
-        btnAnterior.textContent = '< Anterior';
+        btnAnterior.textContent = '<';
         btnAnterior.classList.add('pagina-btn', 'control-btn');
         btnAnterior.disabled = (paginaActual === 1); // Deshabilita si ya estás en la primera página
         btnAnterior.addEventListener('click', () => {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Botón "Siguiente" ---
         const btnSiguiente = document.createElement('button');
-        btnSiguiente.textContent = 'Siguiente >';
+        btnSiguiente.textContent = '>';
         btnSiguiente.classList.add('pagina-btn', 'control-btn');
         btnSiguiente.disabled = (paginaActual === totalPaginas); // Deshabilita si ya estás en la última página
         btnSiguiente.addEventListener('click', () => {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Botón "Última Página" ---
         const btnUltima = document.createElement('button');
-        btnUltima.textContent = 'Última >>';
+        btnUltima.textContent = '>>';
         btnUltima.classList.add('pagina-btn', 'control-btn');
         btnUltima.disabled = (paginaActual === totalPaginas); // Deshabilita si ya estás en la última página
         btnUltima.addEventListener('click', () => {
