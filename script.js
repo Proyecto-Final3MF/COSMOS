@@ -1,11 +1,9 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const productosContainer = document.getElementById('productos-container');
     const paginacionContainer = document.getElementById('paginacion-container');
     const todosLosProductos = Array.from(productosContainer.getElementsByClassName('producto'));
 
-    const elementosPorPagina = 5; // Puedes ajustar cuántos elementos quieres por página
+    const elementosPorPagina = 5;
     let paginaActual = 1;
 
     function mostrarProductosPorPagina(pagina) {
@@ -14,15 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         todosLosProductos.forEach((producto, index) => {
             if (index >= inicio && index < fin) {
-                producto.style.display = 'block'; // Muestra el producto
+                producto.style.display = 'block';
             } else {
-                producto.style.display = 'none'; // Oculta el producto
+                producto.style.display = 'none'; 
             }
         });
     }
 
     function generarControlesPaginacion() {
-        paginacionContainer.innerHTML = ''; // Limpia los controles existentes
+        paginacionContainer.innerHTML = ''; 
 
         const totalPaginas = Math.ceil(todosLosProductos.length / elementosPorPagina);
 
@@ -32,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
             botonPagina.classList.add('pagina-btn');
 
             if (i === paginaActual) {
-                botonPagina.classList.add('activa'); // Para estilizar la página actual
+                botonPagina.classList.add('activa');
             }
 
             botonPagina.addEventListener('click', () => {
                 paginaActual = i;
                 mostrarProductosPorPagina(paginaActual);
-                generarControlesPaginacion(); // Regenera los controles para actualizar el estado activo
+                generarControlesPaginacion();
             });
             paginacionContainer.appendChild(botonPagina);
         }
