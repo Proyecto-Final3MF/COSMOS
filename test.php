@@ -1,4 +1,6 @@
-<? //test para paginacion?>
+<? //test para paginacion
+require_once("config/conexion.php");
+?>?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

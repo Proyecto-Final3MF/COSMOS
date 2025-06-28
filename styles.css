@@ -14,6 +14,10 @@
 #paginacion-container {
     margin-top: 20px;
     text-align: center;
+    display: flex; /* Usamos flexbox para alinear los botones */
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no caben */
+    gap: 8px; /* Espacio entre los botones */
 }
 
 .pagina-btn {
@@ -21,17 +25,29 @@
     color: white;
     border: none;
     padding: 8px 12px;
-    margin: 0 5px;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    font-weight: bold;
 }
 
-.pagina-btn:hover {
+.pagina-btn:hover:not(:disabled) {
     background-color: #0056b3;
 }
 
 .pagina-btn.activa {
     background-color: #28a745;
     cursor: default;
+}
+
+/* Estilos para botones deshabilitados */
+.pagina-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Estilos específicos para los botones de control (Primera, Anterior, Siguiente, Última) */
+.control-btn {
+    min-width: 100px; /* Ancho mínimo para que todos los botones de control se vean uniformes */
 }
