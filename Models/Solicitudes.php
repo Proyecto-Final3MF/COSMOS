@@ -12,10 +12,7 @@ class Solicitud {
         $sql = "INSERT INTO solicitud (usuario_id, imagen, categoria_id, obs) VALUES ('$usuario_id, $imagen, $categoria_id, $obs')";
         return $this->db->query($sql);
     }
-    public function listarLibres() {
-        $sql = "SELECT * FROM solicitud WHERE id=1";
-        return $this->db->query($sql);
-    }
+    
     public function buscarPorId($id){
         $sql = "SELECT * FROM solicitud WHERE id = $id";
         return $this->db->query($sql)->fetch_assoc();
