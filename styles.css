@@ -1,10 +1,10 @@
 /* styles.css */
 
-#productos-container {
+#solicitud-container {
     margin-top: 20px;
 }
 
-.producto {
+.solicitud {
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 5px;
@@ -49,5 +49,5 @@
 
 /* Estilos específicos para los botones de control (Primera, Anterior, Siguiente, Última) */
 .control-btn {
-    min-width: 100px; /* Ancho mínimo para que todos los botones de control se vean uniformes */
+    min-width: 10px; /* Ancho mínimo para que todos los botones de control se vean uniformes */
 }

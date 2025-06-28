@@ -24,11 +24,11 @@ $conexion = conectar();
     }
     ?>
     <h1>Listado de Solicitudes disponibles</h1>
-    <div id="productos-container">
+    <div id="solicitud-container">
         <?php
         while ($fila = $resultado->fetch_assoc()) {
         ?>
-            <div class="producto">
+            <div class="solicitud">
                 <?php echo htmlspecialchars($fila['obs']); ?>
                 <?php echo htmlspecialchars($fila['estado']); ?>
             </div>
