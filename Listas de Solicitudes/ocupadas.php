@@ -26,6 +26,8 @@ $conexion = conectar();
     <div id="solicitud-container">
         <form action="Selec.php">
         <?php
+        if (solicitud.estado_id === 2) {
+            $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id = 2;"; 
         while ($fila = $resultado->fetch_assoc()) {
         ?>
             <div class="solicitud">
@@ -33,7 +35,7 @@ $conexion = conectar();
                 <?php echo htmlspecialchars($fila['estado']); ?>
             </div>
         <?php
-        }
+        }}
         ?>
     </div>
 </form>
