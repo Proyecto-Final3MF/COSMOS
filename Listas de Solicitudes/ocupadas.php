@@ -1,6 +1,6 @@
 <?php
 
-require_once("config/conexion.php");
+require_once("../config/conexion.php");
 
 $conexion = conectar();
 
@@ -15,7 +15,7 @@ $conexion = conectar();
 </head>
 <body>
     <?php
-    $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id = 1;";
+    $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id != 1;";
 
     $resultado = $conexion->query($sql);
     if (!$resultado) {
@@ -41,6 +41,6 @@ $conexion = conectar();
     <div id="paginacion-container">
         </div>
 
-    <script src="script.js"></script>
+    <script src="listado.js"></script>
 </body>
 </html>
