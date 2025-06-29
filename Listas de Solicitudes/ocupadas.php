@@ -1,5 +1,5 @@
 <?php
-
+//Aqui el Tecnico haria no se que con las solicitudes que el tiene para trabajar.
 require_once("../config/conexion.php");
 
 $conexion = conectar();
@@ -15,7 +15,7 @@ $conexion = conectar();
 </head>
 <body>
     <?php
-    $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id != 1;";
+    $sql = "SELECT solicitud.obs AS obs, estado.nombre AS estado FROM solicitud JOIN estado ON solicitud.estado_id = estado.id WHERE solicitud.estado_id != 1;"; 
 
     $resultado = $conexion->query($sql);
     if (!$resultado) {
