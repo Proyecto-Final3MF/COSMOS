@@ -10,7 +10,7 @@ $conexion = conectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paginación Dinámica</title>
+    <title>Solicitudes Aceptadas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,7 +22,7 @@ $conexion = conectar();
         die("Error en la consulta: " . $conexion->error);
     }
     ?>
-    <h1>Listado de Solicitudes disponibles</h1>
+    <h1>Listado de Solicitudes Aceptadas</h1>
     <div id="solicitud-container">
         <form action="Selec.php">
         <?php
@@ -31,7 +31,6 @@ $conexion = conectar();
             <div class="solicitud">
                 <?php echo htmlspecialchars($fila['obs']); ?>
                 <?php echo htmlspecialchars($fila['estado']); ?>
-                <input type="submit" value="Seleccionar">
             </div>
         <?php
         }
