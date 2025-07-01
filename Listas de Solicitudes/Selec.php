@@ -1,5 +1,5 @@
 <?php
-
+//Se necesita el formulario de solicitudes para q funcione.
 require_once("../config/conexion.php");
 
 $conexion = conectar();
