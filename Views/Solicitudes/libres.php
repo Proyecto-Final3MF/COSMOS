@@ -40,7 +40,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
     <div id="solicitud-container">
         <?php
-        // Itera sobre os dados obtidos do controlador
         if (!empty($solicitudes)) {
             foreach ($solicitudes as $fila) {
         ?>
