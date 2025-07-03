@@ -35,7 +35,6 @@ class Solicitud {
         if ($estado_filter === 'all') {
             $sql .= " WHERE solicitud.estado_id != 1";
         } else {
-            // Use prepared statements for security against SQL injection
             $filter_id = (int)$estado_filter;
             $sql .= " WHERE solicitud.estado_id = ?";
         }
@@ -62,7 +61,6 @@ class Solicitud {
         return $solicitudes;
     }
 
-    // You might add methods here to update a solicitud's state, e.g., 'selectSolicitud'
     public function updateSolicitudEstado($solicitudId, $newEstadoId) {
         $sql = "UPDATE solicitud SET estado_id = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
