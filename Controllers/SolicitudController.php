@@ -1,6 +1,4 @@
 <?php
-// controllers/SolicitudController.php
-
 require_once(__DIR__ . '/../models/Solicitud.php');
 
 class SolicitudController {
