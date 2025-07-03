@@ -1,6 +1,4 @@
 <?php
-// models/Solicitud.php
-
 require_once(__DIR__ . '/../config/conexion.php'); // Adjust path as needed
 
 class Solicitud {
