@@ -1,14 +1,10 @@
 <?php
-// ocupadas.php - Agora funcionando como uma View que interage com o Controller
-
 require_once(__DIR__ . '/../../controllers/SolicitudController.php');
 
 $controller = new SolicitudController();
 
-// Obtém o filtro de estado da URL
 $estado_filter = isset($_GET['estado']) ? $_GET['estado'] : 'all';
 
-// Obtém os dados do controlador com base no filtro
 $solicitudes = $controller->getOcupadasData($estado_filter);
 
 ?>
@@ -33,7 +29,6 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
 
     <div id="solicitud-container">
         <?php
-        // Itera sobre os dados obtidos do controlador
         if (!empty($solicitudes)) {
             foreach ($solicitudes as $fila) {
         ?>
