@@ -1,18 +1,13 @@
 <?php
-require_once(__DIR__ . '/../config/conexion.php'); // Adjust path as needed
+require_once(__DIR__ . '/../config/conexion.php');
 
 class Solicitud {
     private $conn;
 
     public function __construct() {
-        $this->conn = conectar(); // Uses your existing connection function
+        $this->conn = conectar();
     }
 
-    /**
-     * Retrieves all available (estado_id = 1) Solicitudes.
-     *
-     * @return array An array of Solicitud data.
-     */
     public function getSolicitudesDisponibles() {
         $sql = "SELECT solicitud.id, solicitud.obs AS obs, estado.nombre AS estado
                 FROM solicitud
@@ -22,7 +17,7 @@ class Solicitud {
 
         if (!$resultado) {
             error_log("Error en la consulta getSolicitudesDisponibles: " . $this->conn->error);
-            return []; // Return empty array on error
+            return [];
         }
 
         $solicitudes = [];
@@ -32,12 +27,6 @@ class Solicitud {
         return $solicitudes;
     }
 
-    /**
-     * Retrieves Solicitudes based on their status, excluding status 1 if 'all' is selected.
-     *
-     * @param string $estado_filter The status ID or 'all'.
-     * @return array An array of Solicitud data.
-     */
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.obs AS obs, estado.nombre AS estado
                 FROM solicitud
@@ -62,7 +51,7 @@ class Solicitud {
 
         if (!$resultado) {
             error_log("Error en la consulta getSolicitudesOcupadas: " . $this->conn->error);
-            return []; // Return empty array on error
+            return [];
         }
 
         $solicitudes = [];
@@ -84,9 +73,7 @@ class Solicitud {
     }
 
     public function __destruct() {
-        // It's generally better to close the connection when it's no longer needed,
-        // but for short-lived scripts, PHP handles it. For persistent connections, be careful.
-        // $this->conn->close();
+       
     }
 }
 ?>
