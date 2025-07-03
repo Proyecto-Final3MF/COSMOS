@@ -1,12 +1,10 @@
 <?php
-// libres.php - Agora funcionando como uma View que interage com o Controller
 
 require_once(__DIR__ . '/../../controllers/SolicitudController.php');
 
 $controller = new SolicitudController();
 $solicitudes = $controller->getLibresData(); // Obtém os dados do controlador
 
-// Lida com a ação de seleção, se houver um ID
 if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
     $solicitudId = (int)$_GET['id'];
     if ($controller->handleSelectSolicitud($solicitudId)) {
@@ -18,7 +16,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])
     }
 }
 
-// Mensagens de feedback
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
