@@ -1,12 +1,14 @@
 <?php
-require_once("config/conexion.php");
-require_once("controllers/ProductoController.php");
-$controller = new ProductoController();
+require_once("Config/conexion.php");
+require_once("Controllers/LoginC.php");
+$controller = new LoginController();
 
 $accion = $_GET['accion'] ?? 'index';
 
-if ($accion == 'crear') {
-    $controller->crear();
+if ($accion == 'login') {
+    $controller->login();
+} else if($accion == 'register'){
+    $controller->register();
 } else {
     $controller->index();
 }
