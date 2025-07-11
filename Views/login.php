@@ -6,20 +6,22 @@
     <title>Login</title>
     <link rel="stylesheet" href="">
 </head>
-<?php 
 
-?>
 <body>
-    <h1>Login</h1> <br>
+    <section>
+        <h1>Login</h1> <br>
 
-    <form method="POST" action="">
-        
-        <p>Nombre:</p> <input type="text" name="nombre" placeholder="Ingrese su nombre de usuario"><br>
-        
-        <p>Contraseña:</p> <input type="text" name="contrasena" placeholder="Ingrese su contraseña"><br><br>
-        
-        <input type="submit" value="Iniciar Sesion"> <a href="">Registrarse</a>
+        <form method="POST" action="">
+            
+            <p>Usuario:</p> <input type="text" name="nombre" placeholder="Ingrese su nombre de usuario"><br>
+            
+            <p>Correo:</p> <input type="text" name="mail" placeholder="Ingrese su correo"><br><br>
 
-    </form>
+            <p>Contraseña:</p> <input type="text" name="contrasena" placeholder="Ingrese su contraseña"><br><br>
+            
+            <input type="submit" value="Iniciar Sesion"><br> <p>¿no tiene una cuenta?</p><a href="">Registrarse</a>
+
+        </form>
+    </section>
 </body>
 </html>
