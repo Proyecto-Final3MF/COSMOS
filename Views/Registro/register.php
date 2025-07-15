@@ -17,11 +17,9 @@
             
             <p>Correo:</p> <input type="text" name="mail" placeholder="Ingrese su correo"><br><br>
 
-            <p>Rol:</p> <input type="text" name="contrasena" placeholder="Ingrese su rol"><br><br>
-
             <p>Contraseña:</p> <input type="text" name="contrasena" placeholder="Ingrese su contraseña"><br><br>
             
-            <input type="submit" value="Iniciar Sesion"><br><br><a href="./register.php">¿no tiene una cuenta? Registrarse</a>
+            <input type="submit" value="Iniciar Sesion"><br> <p>¿no tiene una cuenta?</p><a href="">Registrarse</a>
 
         </form>
     </section>

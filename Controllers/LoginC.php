@@ -6,11 +6,10 @@
             require_once 'views/login.php';
         }
 
-
-
-        public function login() {
+        public function vacio() {
             $nombre = $_POST['nombre'];
             $mail = $_POST['mail'];
+            $rol = $_POST['rol'];
             $contrasena = $_POST['contrasena'];
 
  
@@ -21,18 +20,13 @@
             }
         }
 
-        public function register(){
+        public function login(){
             $nombre = $_POST['nombre'];
             $mail = $_POST['mail'];
+            $rol = $_POST['rol'];
             $contrasena = $_POST['contrasena'];
 
-            if (empty($nombre) || empty($mail) || empty($contrasena)) {
-                $error = "Por favor, complete todos los campos.";
-                require_once 'views/login.php';
-                return;
-            } elseif ($nombre){
-
-            }
+            $sql = "SELECT * FROM usuario WHERE nombre = $nombre, mail = $mail, $rol = rol_id,";
         }
     }
     ?>
