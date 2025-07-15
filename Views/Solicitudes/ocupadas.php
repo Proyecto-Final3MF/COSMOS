@@ -14,7 +14,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes Ocupadas</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../Assets/css/Listado.css">
 </head>
 <body>
     <h1>Listado de Solicitudes Ocupadas</h1>
@@ -47,6 +47,6 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <div id="paginacion-container">
     </div>
 
-    <script src="../../Assets/js/listadoll.js"></script>
+    <script src="../../Assets/js/listado.js"></script>
 </body>
 </html>
