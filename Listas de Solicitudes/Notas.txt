@@ -1,1 +1,0 @@
-Es una carpeta temporaria, MVC no fue integrado en el codigo y falta algunos otros detalles:
