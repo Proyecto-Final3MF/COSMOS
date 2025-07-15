@@ -26,7 +26,7 @@
             $rol = $_POST['rol'];
             $contrasena = $_POST['contrasena'];
 
-            $sql = "SELECT * FROM usuario WHERE nombre = $nombre, mail = $mail, $rol = rol_id,";
+            $sql = "SELECT * FROM usuario WHERE (nombre, mail, rol_id and contrasena) VALUES ('$nombre', '$mail', '$rol', '$contrasena')";
         }
     }
     ?>
