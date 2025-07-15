@@ -57,6 +57,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     </div>
     <div id="paginacion-container">
     </div>
-    <script src="listado.js"></script>
+    <script src="../../Assets/js/listado.js"></script>
 </body>
 </html>
