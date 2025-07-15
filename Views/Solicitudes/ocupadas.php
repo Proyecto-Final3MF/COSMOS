@@ -21,10 +21,10 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
 
     <div class="filter-buttons">
     <button id="filter-all" data-filter="all">Todas</button>
-    <button id="filter-2" data-filter="2">Estado 2</button>
-    <button id="filter-3" data-filter="3">Estado 3</button>
-    <button id="filter-4" data-filter="4">Estado 4</button>
-    <button id="filter-5" data-filter="5">Estado 5</button>
+    <button id="filter-2" data-filter="2">En Diagnóstico</button>
+    <button id="filter-3" data-filter="3">En Espera de respuestos</button>
+    <button id="filter-4" data-filter="4">En Reparación</button>
+    <button id="filter-5" data-filter="5">Finalizado</button>
 </div>
 
     <div id="solicitud-container">

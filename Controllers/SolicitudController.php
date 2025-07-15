@@ -17,7 +17,7 @@ class SolicitudController {
     }
 
     public function handleSelectSolicitud($solicitudId) {
-        $newEstadoId = 2; // Supondo que 2 é o estado 'em progresso'
+        $newEstadoId = 2;
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
         return $success;
     }
