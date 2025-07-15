@@ -25,7 +25,8 @@ CREATE TABLE estado(
 
 CREATE TABLE solicitud (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT, FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+    cliente_id INT, FOREIGN KEY (cliente_id) REFERENCES usuario(id),
+    tecnico_id INT, FOREIGN KEY (tecnico_id) REFERENCES usuario(id),
     imagen VARCHAR(255),
     categoria_id INT, FOREIGN KEY (categoria_id) REFERENCES categoria(id),
     estado_id INT, FOREIGN KEY (estado_id) REFERENCES estado(id),
