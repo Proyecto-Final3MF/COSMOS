@@ -1,4 +1,42 @@
-/* styles.css */
+/* Estilos padrão do body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; /* Remover margens padrão do navegador */
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para o tema */
+}
+
+/* Tema Claro (padrão ou aplicado via classe) */
+.tema-claro {
+    background-color: #f0f2f5; /* Um cinza claro */
+    color: #333; /* Texto escuro */
+}
+
+/* Tema Escuro */
+.tema-escuro {
+    background-color: #282c34; /* Um azul escuro quase preto */
+    color: #f4f4f4; /* Texto claro */
+}
+
+/* Algum elemento para demonstrar */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Ajustes para o container no tema escuro (opcional, mas comum) */
+.tema-escuro .container {
+    background-color: #3b4049; /* Um cinza mais escuro para elementos internos */
+}
+.tema-escuro h1 {
+    color: #ffffff; /* Um tom de azul mais claro/ciano para o h1 no tema escuro */
+    background-color: #282c34; /* Um cinza mais escuro para elementos internos */
+}
+
 
 #solicitud-container {
     margin-top: 20px;
@@ -9,6 +47,9 @@
     padding: 10px;
     margin-bottom: 5px;
     background-color: #f9f9f9;
+    display: none;
+    width: 60%;
+    color: black;
 }
 
 #paginacion-container {

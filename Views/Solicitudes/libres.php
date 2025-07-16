@@ -28,8 +28,10 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     <title>Solicitudes disponibles</title>
     <link rel="stylesheet" href="../../Assets/css/Listado.css">
 </head>
-<body>
-    <h1>Listado de Solicitudes disponibles</h1>
+<body class="tema-claro"> 
+    <button id="toggleTemaBtn">Alternar Tema</button>   
+</div class="container"> 
+    <h1 class="titulo tema-claro">Listado de Solicitudes disponibles</h1>
 
     <?php if ($message): ?>
         <p style="color: green;"><?php echo $message; ?></p>
@@ -57,6 +59,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     </div>
     <div id="paginacion-container">
     </div>
-    <script src="../../Assets/js/listado.js"></script>
+    <script src="../../Assets/js/listado.js"></script></div>
 </body>
 </html>

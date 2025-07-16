@@ -16,7 +16,11 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <title>Solicitudes Ocupadas</title>
     <link rel="stylesheet" href="../../Assets/css/Listado.css">
 </head>
-<body>
+<body class="tema-claro"> 
+        <button id="toggleTemaBtn">Alternar Tema</button>   
+    </div class="container"> 
+
+
     <h1>Listado de Solicitudes Ocupadas</h1>
 
     <div class="filter-buttons">
@@ -47,6 +51,6 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <div id="paginacion-container">
     </div>
 
-    <script src="../../Assets/js/listado.js"></script>
+    <script src="../../Assets/js/listado.js"></script></div>
 </body>
 </html>
