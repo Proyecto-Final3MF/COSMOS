@@ -5,6 +5,7 @@ $controller = new SolicitudController();
 
 $estado_filter = isset($_GET['estado']) ? $_GET['estado'] : 'all';
 
+
 $solicitudes = $controller->getOcupadasData($estado_filter);
 
 
@@ -91,8 +92,9 @@ $estados_map = [
                     <div class="status-change-section">
                         <label for="new_estado_<?php echo htmlspecialchars($fila['id']); ?>">Cambiar Estado a:</label>
                         <select id="new_estado_<?php echo htmlspecialchars($fila['id']); ?>" class="new-estado-select">
+                            
                             <?php foreach ($estados_map as $id => $name) : ?>
-                                <option value="<?php echo $id; ?>" <?php echo ($fila['estado_id'] == $id) ? 'selected' : ''; ?>>
+                                <option value="<?php echo $id; ?>" <?php echo ($fila['estado'] == $id) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($name); ?>
                                 </option>
                             <?php endforeach; ?>
