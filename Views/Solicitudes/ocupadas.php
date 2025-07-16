@@ -16,6 +16,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <title>Solicitudes Ocupadas</title>
     <link rel="stylesheet" href="../../Assets/css/Listado.css">
 </head>
+
 <body class="tema-claro"> 
         <button id="toggleTemaBtn">Alternar Tema</button>   
     </div class="container"> 
