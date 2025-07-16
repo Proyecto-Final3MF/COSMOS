@@ -1,17 +1,7 @@
 <?php
-
-require_once("Controllers/LoginC.php");
-$controller = new SesionC();
-
-$accion = $_GET['accion'] ?? 'index';
-
-
-?>
-
-<?php
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/LoginC.php");
+require_once("controllers/SesionC.php");
 
 // Obtener la acción solicitada
 $accion = $_GET['accion'] ?? 'index';
@@ -31,57 +21,23 @@ if (!in_array($accion, $acciones_publicas)) {
 switch ($accion) {
     // === ACCIONES DE USUARIO ===
     case 'login':
-        $controller = new UsuarioController();
+        $controller = new SesionC();
         $controller->login();
         break;
         
     case 'autenticar':
-        $controller = new UsuarioController();
+        $controller = new SesionC();
         $controller->autenticar();
         break;
         
     case 'logout':
-        $controller = new UsuarioController();
+        $controller = new SesionC();
         $controller->logout();
         break;
-    
-    // === ACCIONES DE PRODUCTOS ===
-    case 'crear':
-        $controller = new ProductoController();
-        $controller->crear();
-        break;
-        
-    case 'guardar':
-        $controller = new ProductoController();
-        $controller->guardar();
-        break;
-        
-    case 'editar':
-        $controller = new ProductoController();
-        $controller->editar();
-        break;
-        
-    case 'actualizar':
-        $controller = new ProductoController();
-        $controller->actualizar();
-        break;
-        
-    // Ejemplo: solo los admin pueden borrar productos
-    case 'borrar':
-        if ($_SESSION['rol'] !== 'admin') {
-            // Puedes mostrar un mensaje o redirigir
-            header("Location: index.php?error=No tienes permisos para borrar");
-            exit;
-        }
-        $controller = new ProductoController();
-        $controller->borrar();
-        break;
-    
-    // === ACCIÓN POR DEFECTO (LISTAR PRODUCTOS) ===
-    case 'index':
-    default:
-        $controller = new ProductoController();
-        $controller->index();
+
+    case 'registro':
+        $controller = new SesionC();
+        $controller->register();
         break;
 }
 ?>
