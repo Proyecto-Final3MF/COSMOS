@@ -64,10 +64,10 @@ body {
 #paginacion-container {
     margin-top: 20px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: flex; /* Usamos flexbox para alinear los botones */
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no caben */
+    gap: 8px; /* Espacio entre los botones */
 }
 
 .pagina-btn {
@@ -105,6 +105,12 @@ body {
     cursor: default;
 }
 
+.tema-escuro .pagina-btn.activa {
+    background-color: #d919ff;
+    cursor: default;
+}
+
+/* Estilos para botones deshabilitados */
 .pagina-btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
