@@ -9,21 +9,25 @@
 
 <body>
     <section>
-        <h1>Login</h1> <br>
+        <?php include('../includes/header.php'); ?>
+                <h3>Iniciar Sesión</h3>
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger"><?= $error ?></div>
+                <?php endif; ?>
+                <form method="POST" action="SesionI.php?accion=autenticar">
 
-        <form method="POST" action="">
-            
-            <p>Usuario:</p> <input type="text" name="nombre" placeholder="Ingrese su nombre de usuario"><br>
-            
-            <p>Correo:</p> <input type="text" name="mail" placeholder="Ingrese su correo"><br><br>
+                        <label for="usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" required> <br>
 
-            <p>Rol:</p> <input type="text" name="contrasena" placeholder="Ingrese su rol"><br><br>
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required> <br>
 
-            <p>Contraseña:</p> <input type="text" name="contrasena" placeholder="Ingrese su contraseña"><br><br>
-            
-            <input type="submit" value="Iniciar Sesion"><br><br><a href="./register.php">¿no tiene una cuenta? Registrarse</a>
+                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                </form>
 
-        </form>
+
+        <?php include('../includes/footer.php'); ?>
     </section>
 </body>
 </html>
+
