@@ -9,7 +9,7 @@ body {
 /* Tema Claro (padrão ou aplicado via classe) */
 .tema-claro {
     background-color: #f0f2f5; /* Um cinza claro */
-    color: #333; /* Texto escuro */
+    color: #000000; /* Texto escuro */
 }
 
 /* Tema Escuro */
@@ -51,6 +51,15 @@ body {
     width: 60%;
     color: black;
 }
+.tema-escuro .solicitud {
+    border: 1px solid #363636;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #1b1b1b;
+    display: none;
+    width: 60%;
+    color: rgb(255, 255, 255);
+}
 
 #paginacion-container {
     margin-top: 20px;
@@ -72,12 +81,32 @@ body {
     font-weight: bold;
 }
 
+.tema-escuro .pagina-btn  {
+    background-color: #fbff00;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    font-weight: bold;
+}
+
 .pagina-btn:hover:not(:disabled) {
     background-color: #0056b3;
 }
 
+.tema-escuro .pagina-btn:hover:not(:disabled) {
+    background-color: #b3b000;
+}
+
 .pagina-btn.activa {
     background-color: #28a745;
+    cursor: default;
+}
+
+.tema-escuro .pagina-btn.activa {
+    background-color: #d919ff;
     cursor: default;
 }
 
@@ -90,22 +119,31 @@ body {
 
 .control-btn {
     min-width: 10px; 
-}.filter-buttons button {
-            margin-right: 10px;
-            padding: 8px 15px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-        }
-        .filter-buttons button.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .solicitud {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
+}
+.filter-buttons button {
+margin-right: 10px;
+padding: 8px 15px;
+cursor: pointer;
+border: 1px solid #ccc;
+background-color: #f0f0f0;
+border-radius: 4px;
+}
+.tema-escuro .filter-buttons button {
+margin-right: 10px;
+padding: 8px 15px;
+cursor: pointer;
+border: 1px solid #363636;
+background-color: #181818;
+border-radius: 4px;
+color: white;
+}
+.filter-buttons button.active {
+background-color: #007bff;
+color: white;
+border-color: #007bff;
+}
+.tema-escuro .filter-buttons button.active {
+background-color: #d9ff00;
+color: rgb(0, 0, 0);
+border-color: #fbff00;
+}
