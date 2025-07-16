@@ -3,21 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const paginacionContainer = document.getElementById('paginacion-container');
     const filterButtons = document.querySelectorAll('.filter-buttons button');
 
-    const elementosPorPagina = 3; // Cantidad de elementos a mostrar por página
+    const elementosPorPagina = 3;
     let paginaActual = 1;
-    let todosLosProductos = []; // This will store the currently visible products after filtering
+    let todosLosProductos = []; // Esto almacenará los productos actualmente visibles después del filtrado.
 
-    // Function to initialize or re-initialize pagination
+    // Función para inicializar o reinicializar la paginación
     function initializePagination() {
-        // Re-fetch the current products after a filter might have changed them
+        // Re-fetch Los productos actuales después de un filtro podrían haber cambiado.
         todosLosProductos = Array.from(solicitudContainer.getElementsByClassName('solicitud'));
-        paginaActual = 1; // Reset to the first page when filters change
+        paginaActual = 1;
         mostrarProductosPorPagina(paginaActual);
         generarControlesPaginacion();
-        updateActiveFilterButton(); // Update active button state
+        updateActiveFilterButton();
     }
 
-    // Function to show products for the current page
+    // Función para mostrar productos de la página actual
     function mostrarProductosPorPagina(pagina) {
         const inicio = (pagina - 1) * elementosPorPagina;
         const fin = inicio + elementosPorPagina;
@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to generate pagination controls
+    // Función para generar controles de paginación
     function generarControlesPaginacion() {
         paginacionContainer.innerHTML = '';
 
         const totalPaginas = Math.ceil(todosLosProductos.length / elementosPorPagina);
 
-        if (totalPaginas <= 1) { // Hide pagination if only one page or no products
+        if (totalPaginas <= 1) { // Ocultar la paginación si solo hay una página o ningún producto
             return;
         }
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         paginacionContainer.appendChild(btnAnterior);
 
-        // --- Page Number Buttons ---
+        // --- Botones de los números de la página ---
         for (let i = 1; i <= totalPaginas; i++) {
             const botonPagina = document.createElement('button');
             botonPagina.textContent = i;
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         paginacionContainer.appendChild(btnUltima);
     }
 
-    // Function to update the active state of filter buttons
+    // Función para actualizar el estado activo de los botones de filtro
     function updateActiveFilterButton() {
         const urlParams = new URLSearchParams(window.location.search);
         const currentFilter = urlParams.get('estado') || 'all';
@@ -126,16 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add event listeners to filter buttons
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filterValue = button.dataset.filter;
-            // Redirect to the same page with the new 'estado' query parameter
+            // Redirigir a la misma página con el nuevo parámetro de consulta 'estado'
             window.location.href = `?estado=${filterValue}`;
         });
     });
 
-    // Initialize pagination and active button state on page load
+// Inicializar la paginación y el estado del botón activo al cargar la página
     initializePagination();
 });
 
