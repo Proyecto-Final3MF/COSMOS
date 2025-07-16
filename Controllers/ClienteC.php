@@ -4,6 +4,8 @@ class ClienteC {
     public function crear() {
         include("views/Cliente/crearC.php");
     }
+
+    
     
     public function guardar() {
         $cliente = new Cliente();
