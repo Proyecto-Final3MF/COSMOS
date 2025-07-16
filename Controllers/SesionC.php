@@ -26,4 +26,8 @@ class SesionC {
         session_destroy();
         header("Location: index.php?accion=login");
     }
+
+    public function register(){
+        
+    }
 }
