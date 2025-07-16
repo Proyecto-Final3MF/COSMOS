@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../controllers/SolicitudController.php');
+require_once(__DIR__ . '/../../controllers/SolicitudC.php');
 
 $controller = new SolicitudController();
 
