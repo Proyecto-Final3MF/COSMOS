@@ -26,12 +26,14 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes disponibles</title>
-    <link rel="stylesheet" href="../../Assets/css/Listado.css">
+        <link rel="stylesheet" href="../../Assets/css/Listado.css">
+
 </head>
-<body class="tema-claro"> 
-    <button id="toggleTemaBtn">Alternar Tema</button>   
-</div class="container"> 
-    <h1 class="titulo tema-claro">Listado de Solicitudes disponibles</h1>
+<body class="tema-claro">
+
+        <button id="toggleTemaBtn">Alternar Tema</button>   
+
+    <h1 class="titulo">Listado de Solicitudes disponibles</h1>
 
     <?php if ($message): ?>
         <p style="color: green;"><?php echo $message; ?></p>
@@ -59,6 +61,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     </div>
     <div id="paginacion-container">
     </div>
-    <script src="../../Assets/js/listado.js"></script></div>
-</body>
+<script src="../../Assets/js/listado.js"></script>
+ </body>
 </html>
