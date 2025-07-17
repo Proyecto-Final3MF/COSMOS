@@ -1,5 +1,5 @@
 <?php
-require_once('/../models/Solicitud.php');
+require_once('../../Models/solicitudesM.php');
 
 class SolicitudController {
     private $solicitudModel;
