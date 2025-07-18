@@ -3,21 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const paginacionContainer = document.getElementById('paginacion-container');
     const filterButtons = document.querySelectorAll('.filter-buttons button');
 
-    const elementosPorPagina = 3; // Cantidad de elementos a mostrar por página
+    const elementosPorPagina = 3;
     let paginaActual = 1;
-    let todosLosProductos = []; // This will store the currently visible products after filtering
+    let todosLosProductos = [];
 
-    // Function to initialize or re-initialize pagination
     function initializePagination() {
-        // Re-fetch the current products after a filter might have changed them
         todosLosProductos = Array.from(solicitudContainer.getElementsByClassName('solicitud'));
-        paginaActual = 1; // Reset to the first page when filters change
+        paginaActual = 1;
         mostrarProductosPorPagina(paginaActual);
         generarControlesPaginacion();
-        updateActiveFilterButton(); // Update active button state
+        updateActiveFilterButton();
     }
 
-    // Function to show products for the current page
     function mostrarProductosPorPagina(pagina) {
         const inicio = (pagina - 1) * elementosPorPagina;
         const fin = inicio + elementosPorPagina;
@@ -31,13 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to generate pagination controls
     function generarControlesPaginacion() {
         paginacionContainer.innerHTML = '';
 
         const totalPaginas = Math.ceil(todosLosProductos.length / elementosPorPagina);
 
-        if (totalPaginas <= 1) { // Hide pagination if only one page or no products
+        if (totalPaginas <= 1) {
             return;
         }
 
@@ -112,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         paginacionContainer.appendChild(btnUltima);
     }
 
-    // Function to update the active state of filter buttons
     function updateActiveFilterButton() {
         const urlParams = new URLSearchParams(window.location.search);
         const currentFilter = urlParams.get('estado') || 'all';
@@ -126,16 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add event listeners to filter buttons
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filterValue = button.dataset.filter;
-            // Redirect to the same page with the new 'estado' query parameter
             window.location.href = `?estado=${filterValue}`;
         });
     });
 
-    // Initialize pagination and active button state on page load
     initializePagination();
 });
 
@@ -143,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleTemaBtn = document.getElementById('toggleTemaBtn');
     const bodyElement = document.body; // 'document.body' já se refere diretamente ao elemento body
 
-    // Adiciona um ouvinte de evento de clique ao botão
     toggleTemaBtn.addEventListener('click', function() {
         // Alterna entre as classes 'tema-claro' e 'tema-escuro' no body
         bodyElement.classList.toggle('tema-claro');
