@@ -9,34 +9,33 @@
 
 <body>
     <section>
-                <h3>Iniciar Sesión</h3>
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger"><?= $error ?></div>
-                <?php endif; ?>
-                <form method="POST" action="UsuarioI.php?accion=autenticar">
+        <h3>Iniciar Sesión</h3>
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?= $error ?></div>
+        <?php endif; ?>
+        <form method="POST" action="UsuarioI.php?accion=autenticar">
 
-                        <p>Usuario: </p>
-                        <label for="usuario" class="form-label"></label>
-                        <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
+            <p>Usuario: </p>
+            <label for="usuario" class="form-label"></label>
+            <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
 
-                        <p>Email: </p>
-                        <label for="mail" class="form-label"></label>
-                        <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
+            <p>Email: </p>
+            <label for="mail" class="form-label"></label>
+            <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
                         
-                        <p>Rol:</p>
-                        <label for="rol" class="form-label"></label>
-                        <input type="text" class="form-control" id="rol" name="rol" required> <br><br>
+            <p>Rol:</p>
+            <label for="rol" class="form-label"></label>
+            <input type="text" class="form-control" id="rol" name="rol" required> <br><br>
                         
-                        <p>Contraseña: </p>
-                        <label for="contrasena" class="form-label"></label>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
+            <p>Contraseña: </p>
+            <label for="contrasena" class="form-label"></label>
+            <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 
 
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button><br><br>
-                    <a href="./Register.php">¿No tiene cuenta? Registrese</a>
-                </form>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button><br><br>
+            <a href="./Register.php">¿No tiene cuenta? Registrese</a>
+        </form>
 
-        <?php include('../includes/footer.php'); ?>
     </section>
 </body>
 </html>
