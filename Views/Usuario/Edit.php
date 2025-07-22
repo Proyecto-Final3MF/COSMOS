@@ -1,3 +1,7 @@
+<?php
+    require_once("views/includes/header.php");
+?>
+
 <h2>Editar Usuario</h2>
 
 <form method="POST" action="UsuarioI.php?accion=actualizar">

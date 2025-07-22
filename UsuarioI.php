@@ -3,7 +3,7 @@ session_start();
 
 require_once("controllers/LoginC.php");
 
-// Obtener la acción solicitada
+
 $accion = $_GET['accion'] ?? 'index';
 
 $acciones_publicas = ['login', 'autenticar'];
