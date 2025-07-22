@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/../../controllers/SolicitudC.php');
 
 $controller = new SolicitudController();
-$solicitudes = $controller->getLibresData(); // Obtém os dados do controlador
+$solicitudes = $controller->getLibresData();
 
 if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
     $solicitudId = (int)$_GET['id'];
@@ -26,10 +26,13 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes disponibles</title>
-    <link rel="stylesheet" href="../../Assets/css/Listado.css">
+        <link rel="stylesheet" href="../../Assets/css/Listado.css">
+
 </head>
-<body>
-    <h1>Listado de Solicitudes disponibles</h1>
+<body class="tema-claro">
+
+        <button id="toggleTemaBtn">Alternar Tema</button>   
+    <h1 class="titulo">Listado de Solicitudes disponibles</h1>
 
     <?php if ($message): ?>
         <p style="color: green;"><?php echo $message; ?></p>
@@ -44,10 +47,10 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
             foreach ($solicitudes as $fila) {
         ?>
                 <div class="solicitud">
-                    <?php echo htmlspecialchars($fila['obs']); ?>
-                    <?php echo htmlspecialchars($fila['estado']); ?>  
-                    <a href="libres.php?action=select&id=<?php echo htmlspecialchars($fila['id']); ?>" class="button">Seleccionar</a>
-                </div>
+    <p><strong>Observación: </strong><?php echo htmlspecialchars($fila['obs']); ?></p></p>
+    <p><strong>Estado: </strong><?php echo htmlspecialchars($fila['estado']); ?></p>
+    <a href="libres.php?action=select&id=<?php echo htmlspecialchars($fila['id']); ?>" class="button" data-translate="select_button">Seleccionar</a>
+</div>
         <?php
             }
         } else {
@@ -57,6 +60,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     </div>
     <div id="paginacion-container">
     </div>
-    <script src="../../Assets/js/listado.js"></script>
+<script src="../../Assets/js/listado.js"></script>
 </body>
 </html>
