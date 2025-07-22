@@ -9,12 +9,11 @@
 
 <body>
     <section>
-        <?php include('../includes/header.php'); ?>
                 <h3>Iniciar Sesión</h3>
                 <?php if (!empty($error)): ?>
                     <div class="alert alert-danger"><?= $error ?></div>
                 <?php endif; ?>
-                <form method="POST" action="SesionI.php?accion=autenticar">
+                <form method="POST" action="UsuarioI.php?accion=autenticar">
 
                         <p>Usuario: </p>
                         <label for="usuario" class="form-label"></label>
@@ -34,7 +33,7 @@
 
 
                     <button type="submit" class="btn btn-primary w-100">Entrar</button><br><br>
-                    <a href="./register.php">¿No tiene cuenta? Registrese</a>
+                    <a href="./Register.php">¿No tiene cuenta? Registrese</a>
                 </form>
 
         <?php include('../includes/footer.php'); ?>
