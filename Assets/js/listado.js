@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const elementosPorPagina = 3;
     let paginaActual = 1;
-    let todosLosProductos = []; // Esto almacenará los productos actualmente visibles después del filtrado.
+    let todosLosProductos = [];
 
-    // Función para inicializar o reinicializar la paginación
     function initializePagination() {
-        // Re-fetch Los productos actuales después de un filtro podrían haber cambiado.
         todosLosProductos = Array.from(solicitudContainer.getElementsByClassName('solicitud'));
         paginaActual = 1;
         mostrarProductosPorPagina(paginaActual);
@@ -17,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveFilterButton();
     }
 
-    // Función para mostrar productos de la página actual
     function mostrarProductosPorPagina(pagina) {
         const inicio = (pagina - 1) * elementosPorPagina;
         const fin = inicio + elementosPorPagina;
@@ -31,13 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Función para generar controles de paginación
     function generarControlesPaginacion() {
         paginacionContainer.innerHTML = '';
 
         const totalPaginas = Math.ceil(todosLosProductos.length / elementosPorPagina);
 
-        if (totalPaginas <= 1) { // Ocultar la paginación si solo hay una página o ningún producto
+        if (totalPaginas <= 1) {
             return;
         }
 
@@ -67,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         paginacionContainer.appendChild(btnAnterior);
 
-        // --- Botones de los números de la página ---
+        // --- Page Number Buttons ---
         for (let i = 1; i <= totalPaginas; i++) {
             const botonPagina = document.createElement('button');
             botonPagina.textContent = i;
@@ -112,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         paginacionContainer.appendChild(btnUltima);
     }
 
-    // Función para actualizar el estado activo de los botones de filtro
     function updateActiveFilterButton() {
         const urlParams = new URLSearchParams(window.location.search);
         const currentFilter = urlParams.get('estado') || 'all';
@@ -129,11 +124,38 @@ document.addEventListener('DOMContentLoaded', () => {
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filterValue = button.dataset.filter;
-            // Redirigir a la misma página con el nuevo parámetro de consulta 'estado'
             window.location.href = `?estado=${filterValue}`;
         });
     });
 
-// Inicializar la paginación y el estado del botón activo al cargar la página
     initializePagination();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleTemaBtn = document.getElementById('toggleTemaBtn');
+    const bodyElement = document.body; // 'document.body' já se refere diretamente ao elemento body
+
+    toggleTemaBtn.addEventListener('click', function() {
+        // Alterna entre as classes 'tema-claro' e 'tema-escuro' no body
+        bodyElement.classList.toggle('tema-claro');
+        bodyElement.classList.toggle('tema-escuro');
+
+        // Opcional: Salvar a preferência do usuário (ex: no LocalStorage)
+        // Isso faria com que o tema escolhido persistisse mesmo se o usuário sair da página e voltar
+        if (bodyElement.classList.contains('tema-escuro')) {
+            localStorage.setItem('tema', 'escuro');
+        } else {
+            localStorage.setItem('tema', 'claro');
+        }
+    });
+
+    // Opcional: Carregar a preferência de tema ao carregar a página
+    const savedTheme = localStorage.getItem('tema');
+    if (savedTheme === 'escuro') {
+        bodyElement.classList.remove('tema-claro');
+        bodyElement.classList.add('tema-escuro');
+    } else {
+        bodyElement.classList.remove('tema-escuro');
+        bodyElement.classList.add('tema-claro');
+    }
 });

@@ -37,9 +37,7 @@
                     <a href="./register.php">¿No tiene cuenta? Registrese</a>
                 </form>
 
-
         <?php include('../includes/footer.php'); ?>
     </section>
 </body>
 </html>
-

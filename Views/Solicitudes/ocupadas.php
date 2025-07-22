@@ -69,8 +69,13 @@ $estados_map = [
         }
     </style>
 </head>
-<body>
-    <h1>Listado de Solicitudes Ocupadas</h1>
+
+<body class="tema-claro"> 
+        <button id="toggleTemaBtn">Alternar Tema</button>   
+    </div class="container"> 
+
+
+    <h1>Listado de Solicitudes que aceptaste</h1>
 
     <div class="filter-buttons">
         <button id="filter-all" data-filter="all">Todas</button>
@@ -114,6 +119,6 @@ $estados_map = [
     <div id="paginacion-container">
     </div>
 
-    <script src="../../Assets/js/listado.js"></script>
-    <script src="../../Assets/js/ocupadas.js"></script> </body>
+    <script src="../../Assets/js/listado.js"></script></div>
+</body>
 </html>
