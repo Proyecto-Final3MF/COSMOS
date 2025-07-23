@@ -11,7 +11,6 @@
     require_once("views/includes/header.php");
 ?>
 
-
 <body>  
     <main class="main-content">
         <section class="hero">
