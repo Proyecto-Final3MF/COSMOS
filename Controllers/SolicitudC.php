@@ -19,12 +19,8 @@ class SolicitudController {
         return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
 
-    public function handleSelectSolicitud($solicitudId, $usuarioId = null) { // Add usuarioId parameter
-        // Get the current state before updating (optional, for more detailed log)
-        // You might need to fetch the current solicitud details from the model first
-        // For simplicity, we'll just log the change to the new state.
-
-        $newEstadoId = 2; // Assuming this is the new state for "selected" or "occupied"
+    public function handleSelectSolicitud($solicitudId, $usuarioId = null) {
+        $newEstadoId = 2;
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
 
         if ($success) {
