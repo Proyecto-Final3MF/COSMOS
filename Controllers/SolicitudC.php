@@ -1,14 +1,14 @@
 <?php
 require_once(__DIR__ . '/../models/SolicitudM.php');
-require_once(__DIR__ . '/HistorialController.php'); // Include HistorialController
+require_once(__DIR__ . '/HistorialController.php');
 
 class SolicitudController {
     private $solicitudModel;
-    private $historialController; // Declare historialController
+    private $historialController;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
-        $this->historialController = new HistorialController(); // Instantiate HistorialController
+        $this->historialController = new HistorialController();
     }
 
     public function getLibresData() {
