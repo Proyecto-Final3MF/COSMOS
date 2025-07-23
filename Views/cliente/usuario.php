@@ -15,7 +15,7 @@
 </ul>
 
 <?php
-$conn = mysqli_connect("localhost", "root", "", "tecnicoasociados");
+$conn = mysqli_connect("localhost", "root", "", "tecnicosasociados");
 $result = mysqli_query($conn, "SELECT * FROM solicitud");
 while ($fila = mysqli_fetch_assoc($result)) {
  echo "Producto: " . $fila['id'] . "<br>";
