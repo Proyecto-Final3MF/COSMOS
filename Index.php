@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/SesionC.php");
+require_once("controllers/usuarioC.php");
 
 // Obtener la acción solicitada
 $accion = $_GET['accion'] ?? 'index';
@@ -30,7 +30,11 @@ switch ($accion) {
         $controller->autenticar();
         break;
         
+
+
+       ?>
        
+
         <ul class="nav-links" id="nav-links">
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Tecnicos</a></li>
@@ -83,6 +87,8 @@ switch ($accion) {
     </main>
 </body>
 </html>
+
+<?php
     case 'logout':
         $controller = new UsuarioC();
         $controller->logout();
