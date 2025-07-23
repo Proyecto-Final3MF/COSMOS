@@ -13,7 +13,7 @@
 
     }
 
-    public funtion actualizar() {
+    public function actualizar() {
 
     }
 
