@@ -11,4 +11,15 @@
 
 <ul class="nav-links" id="nav-links">
             <li><a href="../../views/cliente/CrearS.php">Crear solicitud</a></li>
+        
 </ul>
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "tecnicoasociados");
+$result = mysqli_query($conn, "SELECT * FROM solicitud");
+while ($fila = mysqli_fetch_assoc($result)) {
+ echo "Producto: " . $fila['id'] . "<br>";
+ echo "Precio:" . $fila['estado_id'] . "<br>";
+ echo "Precio:" . $fila['obs'] . "<br>";
+}
+?>
