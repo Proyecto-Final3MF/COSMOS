@@ -15,7 +15,7 @@
 
 <body>
     
-    <form method="POST" action="UsuarioI.php?accion=guardar">
+    <form method="POST" action="Index.php?accion=guardar">
         
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
@@ -35,6 +35,7 @@
 
 
         <input type="submit" value="Guardar">
+        <a href="./Login.php">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
     

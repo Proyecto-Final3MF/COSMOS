@@ -17,9 +17,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])
 }
 
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
-$error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
-
-?>
+$error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,7 +45,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
             foreach ($solicitudes as $fila) {
         ?>
                 <div class="solicitud">
-    <p><strong>Observación: </strong><?php echo htmlspecialchars($fila['obs']); ?></p></p>
+    <p><strong>Observación: </strong><?php echo htmlspecialchars($fila['obs']); ?></p>
     <p><strong>Estado: </strong><?php echo htmlspecialchars($fila['estado']); ?></p>
     <a href="libres.php?action=select&id=<?php echo htmlspecialchars($fila['id']); ?>" class="button" data-translate="select_button">Seleccionar</a>
 </div>
