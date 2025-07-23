@@ -33,8 +33,8 @@ CREATE TABLE solicitud (
     descripcion VARCHAR(255)
 );
 
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('4','En reparacion');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
+INSERT INTO 'estado'('id', 'nombre') VALUES ('1', 'Disponible');
+INSERT INTO 'estado'('id', 'nombre') VALUES ('2', 'En Diagnostico');
+INSERT INTO 'estado'('id', 'nombre') VALUES ('3', 'En espera de respuestos');
+INSERT INTO 'estado'('id', 'nombre') VALUES ('4', 'En reparacion');
+INSERT INTO 'estado'('id', 'nombre') VALUES ('5', 'Finalizado');
