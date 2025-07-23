@@ -1,19 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tecnicos y Asociados</title>
-    <link rel="stylesheet" href="Assets/css/index.css">
-</head>
+<?php
+session_start();
+require_once("Config/conexion.php");
+require_once("controllers/SesionC.php");
 
-<body>
-    <nav class="navbar">
-       
-        <a href="#" class="logo">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz59MAQOT2A_bbCS4Agn-5_40puEUcq69CM19b6obLlg5ugTM34Vs1wq65mAtsoCsv_Kc&usqp=CAU" height="55px" alt="logo con una T y A por tencicos y asociados :V"> 
-        </a>
+// Obtener la acción solicitada
+$accion = $_GET['accion'] ?? 'index';
+
+// Definir acciones públicas (que no requieren autenticación)
+$acciones_publicas = ['login', 'autenticar'];
+
+// Verificar autenticación para acciones privadas
+if (!in_array($accion, $acciones_publicas)) {
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: index.php?accion=login");
+        exit;
+    }
+}
+
+// Enrutamiento de acciones
+switch ($accion) {
+    // === ACCIONES DE USUARIO ===
+    case 'login':
+        $controller = new UsuarioC();
+        $controller->login();
+        break;
         
+    case 'autenticar':
+        $controller = new UsuarioC();
+        $controller->autenticar();
+        break;
         
        
         <ul class="nav-links" id="nav-links">
@@ -68,3 +83,9 @@
     </main>
 </body>
 </html>
+    case 'logout':
+        $controller = new UsuarioC();
+        $controller->logout();
+        break;
+}
+?>

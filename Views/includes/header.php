@@ -23,8 +23,8 @@
         
        
         <div class="action-buttons">
-            <a href="../Usuario/Login.php"><button class="btn btn-login">Iniciar sesión</button></a>
-            <button class="btn btn-signup pulse">Registrarse</button>
+            <a href="/Proyecto_Final/Views/Usuario/Login.php"><button class="btn btn-login">Iniciar sesión</button></a>
+            <a href="/Proyecto_Final/Views/Usuario/Register.php"><button class="btn btn-signup pulse">Registrarse</button></a>
         </div>
     </nav>
 </header>

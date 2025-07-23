@@ -1,11 +1,14 @@
 <?php
 require_once(__DIR__ . '/../models/SolicitudM.php');
+require_once(__DIR__ . '/HistorialController.php'); // Include HistorialController
 
 class SolicitudController {
     private $solicitudModel;
+    private $historialController; // Declare historialController
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
+        $this->historialController = new HistorialController(); // Instantiate HistorialController
     }
 
     public function getLibresData() {
@@ -16,10 +19,24 @@ class SolicitudController {
         return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
 
-    public function handleSelectSolicitud($solicitudId) {
-        $newEstadoId = 2;
+    public function handleSelectSolicitud($solicitudId, $usuarioId = null) { // Add usuarioId parameter
+        // Get the current state before updating (optional, for more detailed log)
+        // You might need to fetch the current solicitud details from the model first
+        // For simplicity, we'll just log the change to the new state.
+
+        $newEstadoId = 2; // Assuming this is the new state for "selected" or "occupied"
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
-        return $success;
+
+        if ($success) {
+        $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
+        $this->historialController->registrarModificacao(
+            $usuarioId,
+            'solicitud',
+            $solicitudId,
+            $obs
+        );
     }
+    return $success;
+}
 }
 ?>
