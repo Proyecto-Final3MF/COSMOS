@@ -9,11 +9,12 @@
 
 <body>
     <section>
-        <h3>Iniciar Sesión</h3>
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>
-        <form method="POST" action="UsuarioI.php?accion=autenticar">
+
+        <h3>Iniciar Sesion</h3>
+        <form method="POST" action="index.php?accion=autenticar">
 
             <p>Usuario: </p>
             <label for="usuario" class="form-label"></label>
@@ -31,9 +32,8 @@
             <label for="contrasena" class="form-label"></label>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 
-
-            <button type="submit" class="btn btn-primary w-100">Entrar</button><br><br>
-            <a href="./Register.php">¿No tiene cuenta? Registrese</a>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <a href="./Register.php">¿No tiene una cuenta? Registrese</a>
         </form>
 
     </section>
