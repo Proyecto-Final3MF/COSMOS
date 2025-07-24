@@ -29,7 +29,7 @@ class Solicitud {
 
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
-                FROM solicitud WHERE solicitud.tecnico_id = $id
+                FROM solicitud WHERE solicitud.tecnico_id = $Tid
                 JOIN estado ON solicitud.estado_id = estado.id";
 
         if ($estado_filter === 'all') {
