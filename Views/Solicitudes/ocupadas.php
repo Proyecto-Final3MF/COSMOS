@@ -38,7 +38,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
             foreach ($solicitudes as $fila) {
         ?>
                 <div class="solicitud">
-                    <p><strong>Observación:</strong> <?php echo htmlspecialchars($fila['obs']); ?></p>
+                    <p><strong>Descripcion:</strong> <?php echo htmlspecialchars($fila['descripcion']); ?></p>
                     <p><strong>Estado:</strong> <?php echo htmlspecialchars($fila['estado']); ?></p>
                 </div>
         <?php
