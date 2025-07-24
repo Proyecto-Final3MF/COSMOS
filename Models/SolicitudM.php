@@ -70,6 +70,16 @@ class Solicitud {
         return $success;
     }
 
+    public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
+        $titulo = $this->db->real_escape_string($titulo);
+        $descripcion = $this->db->real_escape_string($descripcion);
+        
+        $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
+                VALUES ('$titulo', '$descripcion', $categoria_id, $usuario_id, '$prioridad')";
+        
+        return $this->db->query($sql);
+    }
+
     public function __destruct() {
        
     }
