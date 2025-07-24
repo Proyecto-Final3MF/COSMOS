@@ -191,7 +191,7 @@
         .hero p {
             font-size: 1.1rem;
             color: #555;
-            max-width: 700px;
+            max-width: 890px;
             margin: 0 auto 2rem;
         }
 
@@ -203,7 +203,7 @@
         }
 
             .feature-card {
-            background-color: white;
+            background-color: rgb(0, 0, 0);
             border-radius: var(--border-radius);
             padding: 1.5rem;
             box-shadow: var(--box-shadow);
@@ -212,7 +212,7 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(43, 41, 41, 0.514);
         }
 
         .feature-card img {
