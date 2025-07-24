@@ -15,12 +15,11 @@ class SolicitudController {
         
         $solicitud = new Solicitud();
         $categorias = $solicitud->obtenerCategorias();
-        include("views/Solicitudes/crear.php");
+        include ("views/Solicitudes/crear.php");
     }
 
     public function guardar() {
-        
-        $ticket = new Ticket();
+        $solicitud = new Solicitud();
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         $categoria_id = $_POST['categoria_id'];
