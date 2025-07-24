@@ -1,5 +1,4 @@
 <?php
-// public/index.php
 require_once __DIR__ . '/controllers/HistorialController.php';
 
 // Um roteador muito simples. Em uma aplicação maior, você usaria um framework de roteamento.
