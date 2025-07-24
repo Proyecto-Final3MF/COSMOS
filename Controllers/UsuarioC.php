@@ -4,6 +4,13 @@ class UsuarioC {
         include("views/usuario/login.php");
     }
 
+    public function crear() {
+        
+        $usuario = new Usuario();
+        $rol = $usuario->obtenerRol();
+        include("views/Usuario/Register.php");
+    }
+
     public function autenticar() {
         require_once("models/Usuario.php");
         $usuario = $_POST['usuario'];

@@ -6,6 +6,12 @@ class Usuario {
         $this->db = conectar();
     }
 
+    public function obtenerRol() {
+        $sql = "SELECT * FROM rol";
+        $resultado = $this->db->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function verificar($usuario, $password) {
         $usuario = $this->db->real_escape_string($usuario);
         $sql = "SELECT * FROM usuario WHERE usuario='$usuario' LIMIT 1";
