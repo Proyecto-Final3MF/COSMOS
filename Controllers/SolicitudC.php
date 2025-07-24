@@ -11,6 +11,23 @@ class SolicitudController {
         $this->historialController = new HistorialController();
     }
 
+    public function crear() {
+        
+        $solicitud = new Solicitud();
+        $categorias = $solicitud->obtenerCategorias();
+        include("views/Solicitudes/crear.php");
+    }
+
+    public function guardar() {
+        
+        $ticket = new Ticket();
+        $titulo = $_POST['titulo'];
+        $descripcion = $_POST['descripcion'];
+        $categoria_id = $_POST['categoria_id'];
+        $prioridad = $_POST['prioridad'];
+        $usuario_id = $_SESSION['usuario_id'];
+    }
+
     public function getLibresData() {
         return $this->solicitudModel->getSolicitudesDisponibles();
     }
