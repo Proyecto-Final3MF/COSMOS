@@ -1,3 +1,9 @@
+<?php
+    require_once("../../Config/conexion.php");
+    $rol=mysqli_query($conexion, "SELECT * from rol");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +31,10 @@
             <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
                         
             <p>Rol:</p>
-            <label for="rol" class="form-label"></label>
-            <input type="text" class="form-control" id="rol" name="rol" required> <br><br>
+            <select name="categoria_id"><?php while($Rol = mysqli_fetch_assoc($rol)) {?>
+            <option value="<?php echo $Rol['id']; ?>"> <?php echo $Rol['nombre'];?></option>
+            <?php } ?>    
+            <br><br>
                         
             <p>Contraseña: </p>
             <label for="contrasena" class="form-label"></label>
