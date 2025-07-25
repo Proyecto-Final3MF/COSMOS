@@ -72,22 +72,57 @@ class Solicitud {
 
     public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
         $titulo = $this->db->real_escape_string($titulo);
-        $descripcion = $this->db->real_escape_string($descripcion);
+        $descripcion = $this->conn->real_escape_string($descripcion);
         
         $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
                 VALUES ('$titulo', '$descripcion', $categoria_id, $usuario_id, '$prioridad')";
         
-        return $this->db->query($sql);
+        return $this->conn->query($sql);
     }
 
     public function cancelar($id) {
-        if ('estado_id' !== 1){
-            $sql = "UPDATE solicitud SET estado_id = 1 WHERE id = $id";
-        } else {
-            $sql = "DELETE FROM solicitud WHERE id = $id";
+        $sql = "SELECT estado_id FROM solicitud WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Error al preparar la declaración select al cancelar: " . $this->conn->error);
+            return false;
         }
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        return $this->db->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $estado_id_actual = $row['estado_id'];
+            $stmt->close();
+
+            if ($estado_id_actual !== 1) {
+                $sql = "UPDATE solicitud SET estado_id = 1 WHERE id = ?";
+                $stmt_update = $this->conn->prepare($sql);
+                if (!$stmt_update) {
+                    error_log("Error al preparar la declaración de actualización al cancelar: " . $this->conn->error);
+                    return false;
+                }
+                $stmt_update->bind_param("i", $id);
+                $success = $stmt_update->execute();
+                $stmt_update->close();
+                return $success ? 'updated' : false;
+            } else {
+                $sql = "DELETE FROM solicitud WHERE id = ?";
+                $stmt_delete = $this->conn->prepare($sql);
+                if (!$stmt_delete) {
+                    error_log("Error al preparar la declaración de eliminación en cancelar: " . $this->conn->error);
+                    return false;
+                }
+                $stmt_delete->bind_param("i", $id);
+                $success = $stmt_delete->execute();
+                $stmt_delete->close();
+                return $success ? 'deleted' : false;
+            }
+        } else {
+            error_log("No se encontró solicitud con ID $id o error al obtener el estado al cancelar.");
+            return false;
+        }
     }
 
     public function __destruct() {
