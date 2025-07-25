@@ -1,8 +1,3 @@
-<?php
-    require_once("../../Config/conexion.php");
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +25,7 @@
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
                         
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            <a href="./Register.php">¿No tiene una cuenta? Registrese</a>
+            <a href="index.php?accion=register">¿No tiene una cuenta? Registrese</a>
         </form>
 
     </section>

@@ -5,7 +5,7 @@ require_once("controllers/usuarioC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar'];
+$acciones_publicas = ['login', 'autenticar', 'register'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -29,5 +29,17 @@ switch ($accion) {
         $controller = new UsuarioC();
         $controller->logout();
         break;
+
+    case 'register':
+        $controller = new UsuarioC();
+        $controller->crear();
+        break;
+
+    case 'guardar':
+        $controller = new Usuario();
+        $controller->guardar();
+        break;
+        
+      
 }
 ?>

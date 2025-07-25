@@ -6,12 +6,7 @@ class Usuario {
         $this->db = conectar();
     }
 
-    public function obtenerRol() {
-        $sql = "SELECT * FROM rol";
-        $resultado = $this->db->query($sql);
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    }
-
+    
     public function crear($usuario, $mail, $rol_id, $constrasena) {        
         $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id) 
                 VALUES ('$usuario', '$constrasena', '$mail', '$rol_id')";
@@ -31,5 +26,11 @@ class Usuario {
         return false;
     }
     
+    public function obtenerRol() {
+        $sql = "SELECT * FROM rol";
+        $resultado = $this->db->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>
