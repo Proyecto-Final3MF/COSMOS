@@ -1,5 +1,6 @@
 <?
     require_once("config/conexion.php");
+    require_once("../../Models/Roles.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +27,12 @@
         <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
                         
         <p>Rol:</p>
-        <option value="">Selecciona una categoría</option>
-        <?php foreach ($rol as $Rol): ?>
-            <option value="<?= $Rol['id'] ?>"><?= htmlspecialchars($Rol['nombre']) ?></option>
-        <?php endforeach; ?> <br><br>
+        <select class="" id="rol" name="rol" required>
+                <option value="">Selecciona un Rol</option>
+                <?php foreach ($roles as $crol): ?>
+                    <option value="<?= $rol['id'] ?>"><?= htmlspecialchars($rol['nombre']) ?></option>
+                <?php endforeach; ?>
+        </select>
                         
         <p>Contraseña: </p>
         <label for="contrasena" class="form-label"></label>
