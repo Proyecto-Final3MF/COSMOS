@@ -80,6 +80,16 @@ class Solicitud {
         return $this->db->query($sql);
     }
 
+    public function cancelar($id) {
+        if ('estado_id' !== 1){
+            $sql = "UPDATE solicitud SET estado_id = 1 WHERE id = $id";
+        } else {
+            $sql = "DELETE FROM solicitud WHERE id = $id";
+        }
+
+        return $this->db->query($sql);
+    }
+
     public function __destruct() {
        
     }
