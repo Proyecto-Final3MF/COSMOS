@@ -1,5 +1,5 @@
 <?php
-
+wed
 require_once __DIR__ . '/../Config/conexion.php';
 
 class HistorialModel {
