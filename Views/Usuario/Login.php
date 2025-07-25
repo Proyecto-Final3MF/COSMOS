@@ -18,11 +18,11 @@
 
             <p>Usuario: </p>
             <label for="usuario" class="form-label"></label>
-            <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
+            <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
             <p>Contraseña: </p>
             <label for="contrasena" class="form-label"></label>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
+            <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required> <br><br>
                         
             <button type="submit">Entrar</button>
             <a href="index.php?accion=register">¿No tiene una cuenta? Registrese</a>

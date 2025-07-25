@@ -13,19 +13,19 @@
 
 <body>
     
-    <form method="POST" action="Index.php?accion=guardar">
+    <form method="POST" action="index.php?accion=guardar">
         
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
-        <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
+        <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
         <p>Email: </p>
         <label for="mail" class="form-label"></label>
-        <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
+        <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
         <p>Rol:</p>
         <select id="rol" name="rol" required>
-                <option value="">Selecciona un Rol</option>
+                <option value=""></option>
                 <?php foreach ($roles as $rol): ?>
                     <option value="<?= $rol['id'] ?>"><?= htmlspecialchars($rol['nombre']) ?></option>
                 <?php endforeach; ?>
