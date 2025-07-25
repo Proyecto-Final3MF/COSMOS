@@ -7,12 +7,9 @@ class HistorialModel {
 
     public function __construct() {
         $this->conexion = conectar();
-        if ($this->conexion) {
-            $this->conexion->set_charset("utf8mb4");
-        }
     }
 
-    public function registrarModificacao($usuario_id, $item, $solicitud_id, $obs) {
+    public function registrarModificacion($usuario_id, $item, $solicitud_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
         $query = "INSERT INTO historial (usuario_id, item, solicitud_id, fecha_hora, obs)
