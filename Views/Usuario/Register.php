@@ -1,14 +1,12 @@
 <?
     require_once("config/conexion.php");
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registro</title>
 </head>
 
 <header>
@@ -17,14 +15,30 @@
 
 <body>
     
-    <form method="POST" action="UsuarioI.php?accion=guardar">
+    <form method="POST" action="Index.php?accion=guardar">
         
-        Nombre: <input type="text" name="nombre"><br>
-        
-        Email: <input type="mail" name="email"><br>
-        
-        <input type="submit" value="Guardar">
+        <p>Usuario: </p>
+        <label for="usuario" class="form-label"></label>
+        <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
 
+        <p>Email: </p>
+        <label for="mail" class="form-label"></label>
+        <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
+                        
+        <p>Rol:</p>
+        <option value="">Selecciona una categoría</option>
+        <?php foreach ($rol as $Rol): ?>
+            <option value="<?= $Rol['id'] ?>"><?= htmlspecialchars($Rol['nombre']) ?></option>
+        <?php endforeach; ?> <br><br>
+                        
+        <p>Contraseña: </p>
+        <label for="contrasena" class="form-label"></label>
+        <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
+
+
+        <input type="submit" value="Guardar">
+        <a href="./Login.php">¿Ya tiene una cuenta? Inicie Sesion</a>
+        
     </form>
     
 </body>
