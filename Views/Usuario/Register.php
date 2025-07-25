@@ -36,7 +36,7 @@
         <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 
 
-        <input type="submit" value="Guardar">
+        <input type="submit" value="guardar">
         <a href="Index.php?accion">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
