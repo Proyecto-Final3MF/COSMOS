@@ -24,7 +24,7 @@ class UsuarioC {
         if ($user->crear($usuario, $mail, $rol_id, $contrasena)) {
             header("Location: index.php?accion=redirigir");
         } else {
-            header("Location: index.php?accion=ticket_listar&error=Error al crear ticket");
+            header("Location: index.php?accion=register");
         }
     }
 
@@ -47,7 +47,9 @@ class UsuarioC {
         }
     }
 
-    
+    public function redirigir(){
+        include ("views/Usuario/Cliente/cliente.php");
+    }
 
 
     public function logout() {

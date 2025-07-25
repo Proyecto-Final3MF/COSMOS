@@ -12,6 +12,8 @@ class Usuario {
                 VALUES ('$usuario', '$constrasena', '$mail', '$rol_id')";
         
         return $this->db->query($sql);
+
+        
     }
 
     public function verificar($usuario, $password) {
@@ -25,7 +27,7 @@ class Usuario {
         }
         return false;
     }
-    
+
     public function obtenerRol() {
         $sql = "SELECT * FROM rol";
         $resultado = $this->db->query($sql);
