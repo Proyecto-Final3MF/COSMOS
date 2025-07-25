@@ -12,6 +12,13 @@ class Usuario {
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function crear($usuario, $mail, $rol_id, $constrasena) {        
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id) 
+                VALUES ('$usuario', '$constrasena', '$mail', '$rol_id')";
+        
+        return $this->db->query($sql);
+    }
+
     public function verificar($usuario, $password) {
         $usuario = $this->db->real_escape_string($usuario);
         $sql = "SELECT * FROM usuario WHERE usuario='$usuario' LIMIT 1";
@@ -23,5 +30,6 @@ class Usuario {
         }
         return false;
     }
+    
 }
 ?>

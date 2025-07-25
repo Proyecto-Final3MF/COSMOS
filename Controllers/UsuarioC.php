@@ -7,8 +7,23 @@ class UsuarioC {
     public function crear() {
         
         $usuario = new Usuario();
-        $rol = $usuario->obtenerRol();
+        $roles = $usuario->obtenerRol();
         include("views/Usuario/Register.php");
+    }
+
+    public function guardar() {
+        
+        $user = new Usuario();
+        $usuario = $_POST['usuario'];
+        $mail = $_POST['mail'];
+        $rol_id = $_POST['rol_id'];
+        $contrasena = $_POST['contrasena'];
+        
+        if ($user->crear($usuario, $mail, $rol_id, $contrasena)) {
+            header("Location: index.php?accion=ticket_listar&mensaje=Ticket creado exitosamente");
+        } else {
+            header("Location: index.php?accion=ticket_listar&error=Error al crear ticket");
+        }
     }
 
     public function autenticar() {

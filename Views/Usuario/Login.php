@@ -1,6 +1,5 @@
 <?php
     require_once("../../Config/conexion.php");
-    $rol=mysqli_query($conexion, "SELECT * from rol");
 ?>
 
 
@@ -26,20 +25,10 @@
             <label for="usuario" class="form-label"></label>
             <input type="text" class="form-control" id="usuario" name="usuario" required> <br><br>
 
-            <p>Email: </p>
-            <label for="mail" class="form-label"></label>
-            <input type="mail" class="form-control" id="mail" name="mail" required> <br><br>
-                        
-            <p>Rol:</p>
-            <select name="categoria_id"><?php while($Rol = mysqli_fetch_assoc($rol)) {?>
-            <option value="<?php echo $Rol['id']; ?>"> <?php echo $Rol['nombre'];?></option>
-            <?php } ?>    
-            <br><br>
-                        
             <p>Contraseña: </p>
             <label for="contrasena" class="form-label"></label>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
-
+                        
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
             <a href="./Register.php">¿No tiene una cuenta? Registrese</a>
         </form>
