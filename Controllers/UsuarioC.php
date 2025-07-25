@@ -1,4 +1,6 @@
 <?php
+require_once("models/Usuario.php");
+
 class UsuarioC {
     public function login() {
         include("views/usuario/login.php");
@@ -20,7 +22,7 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         
         if ($user->crear($usuario, $mail, $rol_id, $contrasena)) {
-            header("Location: index.php?accion=ticket_listar&mensaje=Ticket creado exitosamente");
+            header("Location: index.php?accion=redirigir");
         } else {
             header("Location: index.php?accion=ticket_listar&error=Error al crear ticket");
         }
@@ -44,6 +46,9 @@ class UsuarioC {
             include("views/Usuario/Login.php");
         }
     }
+
+    
+
 
     public function logout() {
         session_start();
