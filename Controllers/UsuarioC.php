@@ -18,11 +18,11 @@ class UsuarioC {
         $user = new Usuario();
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
-        $rol_id = $_POST['rol_id'];
+        $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena'];
         
         if ($user->crear($usuario, $mail, $rol_id, $contrasena)) {
-            header("Location: index.php?accion=redirigir");
+            header("Location: ./Views/Usuario/Cliente/Cliente.php");
         } else {
             header("Location: index.php?accion=register");
         }

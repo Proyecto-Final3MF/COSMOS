@@ -24,7 +24,7 @@
             <label for="contrasena" class="form-label"></label>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
                         
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <button type="submit">Entrar</button>
             <a href="index.php?accion=register">¿No tiene una cuenta? Registrese</a>
         </form>
 
