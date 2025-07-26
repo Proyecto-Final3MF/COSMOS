@@ -12,7 +12,7 @@ class HistorialModel {
     public function registrarModificacion($usuario_id, $item, $solicitud_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
-        $query = "INSERT INTO historial (usuario_id, item, solicitud_id, fecha_hora, obs)
+        $query = "INSERT INTO historial (usuario_id, item, item_id, fecha_hora, obs)
                   VALUES (?, ?, ?, NOW(), ?)";
 
         $stmt = $this->conexion->prepare($query);
@@ -24,7 +24,7 @@ class HistorialModel {
 
         // Bind all parameters, including 'item'
         // 'i' for usuario_id, 's' for item, 'i' for solicitud_id, 's' for obs
-        $stmt->bind_param("isis", $usuario_id_para_db, $item, $solicitud_id, $obs);
+        $stmt->bind_param("isis", $usuario_id_para_db, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
@@ -38,7 +38,7 @@ class HistorialModel {
 
     public function getHistorial() {
         $historial = [];
-        $query = "SELECT h.id, h.usuario_id, u.nombre AS nombre_usuario, h.item, h.solicitud_id, h.fecha_hora, h.obs
+        $query = "SELECT h.id, h.usuario_id, u.nombre AS nombre_usuario, h.item, h.item_id, h.fecha_hora, h.obs
                   FROM historial h
                   LEFT JOIN usuario u ON h.usuario_id = u.id
                   ORDER BY h.fecha_hora DESC";
