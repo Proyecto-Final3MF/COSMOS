@@ -24,7 +24,7 @@ class HistorialModel {
 
         // Bind all parameters, including 'item'
         // 'i' for usuario_id, 's' for item, 'i' for solicitud_id, 's' for obs
-        $stmt->bind_param("isis", $usuario_id_para_db, $item, $solicitud_id, $obs);
+        $stmt->bind_param("isis", $usuario_id_para_db, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
