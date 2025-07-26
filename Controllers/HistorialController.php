@@ -14,7 +14,7 @@ class HistorialController {
         $historial = $this->historialModel->getHistorial();
         include __DIR__ . '/../views/historial_view.php';
     }
-    public function registrarModificacion($usuario_id, $item, $solicitud_id, $obs) {
-        $this->historialModel->registrarModificacion($usuario_id, $item, $solicitud_id, $obs);
+    public function registrarModificacion($usuario_id, $item, $item_id, $obs) {
+        $this->historialModel->registrarModificacion($usuario_id, $item,$item_id, $obs);
     }
 }
