@@ -29,15 +29,77 @@ class Solicitud {
 
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
-                FROM solicitud WHERE solicitud.tecnico_id = $Tid
-                JOIN estado ON solicitud.estado_id = estado.id";
+        FROM solicitud
+        JOIN estado ON solicitud.estado_id = estado.id";
 
-        if ($estado_filter === 'all') {
-            $sql .= " WHERE solicitud.estado_id != 1";
-        } else {
-            $filter_id = (int)$estado_filter;
-            $sql .= " WHERE solicitud.estado_id = ?";
-        }
+$conditions = [];
+$params = [];
+$param_types = ''; // String to hold parameter types for bind_param
+
+// Add the tecnico_id condition first
+if (isset($Tid)) { // Make sure $Tid is actually set
+    $conditions[] = "solicitud.tecnico_id = ?";
+    $params[] = $Tid;
+    $param_types .= 'i'; // Assuming tecnico_id is an integer ('i')
+} else {
+    // Handle the case where $Tid is not set, perhaps throw an error or set a default.
+    // For now, let's assume it should always be set.
+    error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+    // You might want to return false, throw an exception, or handle this gracefully.
+    return false;
+}
+
+
+// Add the estado_filter condition
+if ($estado_filter === 'all') {
+    $conditions[] = "solicitud.estado_id != 1";
+    // No parameter needed for this specific '!= 1' condition
+} else {
+    $filter_id = (int)$estado_filter; // Cast to int for safety
+    $conditions[] = "solicitud.estado_id = ?";
+    $params[] = $filter_id;
+    $param_types .= 'i'; // Assuming estado_id is an integer ('i')
+}
+
+
+// Construct the WHERE clause if there are conditions
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
+}
+
+// Add ORDER BY or LIMIT if needed (e.g., for pagination)
+// $sql .= " ORDER BY solicitud.fecha_creacion DESC";
+
+// --- Debugging (Crucial Step) ---
+error_log("Final SQL Query: " . $sql); // Log to PHP error log
+// echo "<pre>Final SQL Query: " . htmlspecialchars($sql) . "</pre>"; // For browser output (remove in production)
+// var_dump($params); // Check parameters
+// var_dump($param_types); // Check parameter types
+
+
+// Prepare the statement
+$stmt = $this->db->prepare($sql); // Assuming $this->db is your mysqli connection object
+
+if ($stmt === false) {
+    // Handle the prepare error (e.g., log it, show a user-friendly message)
+    error_log("MySQLi Prepare Error: " . $this->db->error . " | SQL: " . $sql);
+    throw new mysqli_sql_exception("Failed to prepare statement: " . $this->db->error);
+}
+
+// Bind parameters if there are any
+if (!empty($params)) {
+    call_user_func_array([$stmt, 'bind_param'], array_merge([$param_types], refValues($params)));
+}
+
+// Execute the statement
+$stmt->execute();
+
+// Get results
+$result = $stmt->get_result();
+
+// ... fetch your data ...
+
+$stmt->close();
 
         $stmt = $this->conn->prepare($sql);
 
