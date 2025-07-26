@@ -133,7 +133,7 @@ $stmt->close();
     }
 
     public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
-        $titulo = $this->db->real_escape_string($titulo);
+        $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
         $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
