@@ -12,7 +12,7 @@ class HistorialModel {
     public function registrarModificacion($usuario_id, $item, $solicitud_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
-        $query = "INSERT INTO historial (usuario_id, item, solicitud_id, fecha_hora, obs)
+        $query = "INSERT INTO historial (usuario_id, item, item_id, fecha_hora, obs)
                   VALUES (?, ?, ?, NOW(), ?)";
 
         $stmt = $this->conexion->prepare($query);
