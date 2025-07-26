@@ -38,7 +38,7 @@ class HistorialModel {
 
     public function getHistorial() {
         $historial = [];
-        $query = "SELECT h.id, h.usuario_id, u.nombre AS nombre_usuario, h.item, h.solicitud_id, h.fecha_hora, h.obs
+        $query = "SELECT h.id, h.usuario_id, u.nombre AS nombre_usuario, h.item, h.item_id, h.fecha_hora, h.obs
                   FROM historial h
                   LEFT JOIN usuario u ON h.usuario_id = u.id
                   ORDER BY h.fecha_hora DESC";
