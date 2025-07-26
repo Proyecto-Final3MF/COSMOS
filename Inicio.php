@@ -1,3 +1,8 @@
+<?php
+    require_once("views/includes/header.php");
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,16 +12,13 @@
     <link rel="stylesheet" href="Assets/css/inicio.css">
 </head>
 
-<?php
-    require_once("views/includes/header.php");
-?>
 
 <body>  
     <main class="main-content">
         <section class="hero">
             <h1>Bienvenido a Tecnicos y Asociados</h1>
             <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-            <a href="Index.php?accion"><button class="btn btn-signup">Empezar ahora</button></a>
+            <a href="Index.php?accion"><button>Empezar ahora</button></a>
         </section>
         
         <section class="features">
