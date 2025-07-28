@@ -14,6 +14,9 @@ if (!in_array($accion, $acciones_publicas)) {
     }
 }
 
+const ROL_TECNICO = 1;
+const ROL_CLIENTE = 2; 
+
 switch ($accion) {
     case 'login':
         $controller = new UsuarioC();
@@ -39,10 +42,29 @@ switch ($accion) {
         $controller = new UsuarioC();
         $controller->guardar();
         break;
-    
-    case 'default':
-        $controller = new UsuarioC();
-        $controller->login();
+
+    case 'redireccion':
+        if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
+            if ($_SESSION['rol'] == ROL_CLIENTE) {
+                include("./Views/Usuario/Cliente/ClienteP.php");
+            } elseif ($_SESSION['rol'] == ROL_TECNICO) {
+                include("./Views/Usuario/Tecnico/TecnicoP.php");
+            } else {
+                echo "<h1>Error: Rol no reconocido.</h1>";
+                echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";
+            }
+        } else {
+            header("Location: index.php?accion=login");
+            exit();
+        }
         break;
+    
+    default:
+        if (isset($_SESSION['usuario'])) {
+            header("Location: index.php?accion=panel");
+        } else {
+            header("Location: index.php?accion=login");
+        }
+        exit();
 }
 ?>

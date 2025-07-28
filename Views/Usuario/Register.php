@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +36,7 @@
 
 
         <input type="submit" value="guardar">
-        <a href="Index.php?accion">¿Ya tiene una cuenta? Inicie Sesion</a>
+        <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
     
