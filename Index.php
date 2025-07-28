@@ -40,10 +40,6 @@ switch ($accion) {
         $controller->guardar();
         break;
     
-    case 'redirigir':
-        $controller = new UsuarioC();
-        $controller->redirigir();
-        break;
     case 'default':
         $controller = new UsuarioC();
         $controller->login();

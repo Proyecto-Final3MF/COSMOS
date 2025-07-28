@@ -11,6 +11,7 @@ class UsuarioC {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
         include("views/Usuario/Register.php");
+        include("views/Usuario/Login.php");
     }
 
     public function guardar() {
@@ -22,7 +23,7 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         
         if ($user->crear($usuario, $mail, $rol_id, $contrasena)) {
-            header("Location: ./Views/Usuario/Cliente/Cliente.php");
+            header("Location: index.php?accion=auntenticar");
         } else {
             header("Location: index.php?accion=register");
         }
@@ -31,31 +32,25 @@ class UsuarioC {
     public function autenticar() {
         require_once("models/Usuario.php");
         $usuario = $_POST['usuario'];
-        $mail = $_POST['mail'];
-        $rol = $_POST['rol'];
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
-        $user = $modelo->verificar($usuario, $mail, $rol, $contrasena);
+        $user = $modelo->verificar($usuario, $contrasena);
         if ($user) {
             session_start();
             $_SESSION['usuario'] = $user['usuario'];
             $_SESSION['rol'] = $user['rol'];
-            header("Location: index.php");
+            header("Location: index.php?accion=redirigri");
         } else {
             $error = "Usuario o contraseña incorrectos";
             include("views/Usuario/Login.php");
         }
     }
 
-    public function redirigir(){
-        include ("views/Usuario/Cliente/cliente.php");
-    }
-
 
     public function logout() {
         session_start();
         session_destroy();
-        header("Location: index.php?accion=login");
+        header("Location:inico.php");
     }
 }
 ?>
