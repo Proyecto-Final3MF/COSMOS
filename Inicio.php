@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="Assets/css/inicio.css">
 </head>
 
-
 <body>  
     <main class="main-content">
         <section class="hero">
             <h1>Bienvenido a Tecnicos y Asociados</h1>
             <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-            <a href="Index.php?accion"><button>Empezar ahora</button></a>
+            <a href="Index.php?accion"><button class="btn btn-login">Empezar ahora</button></a>
         </section>
         
         <section class="features">
