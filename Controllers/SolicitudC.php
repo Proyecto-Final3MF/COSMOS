@@ -11,6 +11,22 @@ class SolicitudController {
         $this->historialController = new HistorialController();
     }
 
+    public function crear() {
+        
+        $solicitud = new Solicitud();
+        $categorias = $solicitud->obtenerCategorias();
+        include ("views/Solicitudes/crear.php");
+    }
+
+    public function guardar() {
+        $solicitud = new Solicitud();
+        $titulo = $_POST['titulo'];
+        $descripcion = $_POST['descripcion'];
+        $categoria_id = $_POST['categoria_id'];
+        $prioridad = $_POST['prioridad'];
+        $usuario_id = $_SESSION['usuario_id'];
+    }
+
     public function getLibresData() {
         return $this->solicitudModel->getSolicitudesDisponibles();
     }
@@ -25,7 +41,7 @@ class SolicitudController {
 
         if ($success) {
         $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
-        $this->historialController->registrarModificacao(
+        $this->historialController->registrarModificacion(
             $usuarioId,
             'solicitud',
             $solicitudId,
@@ -34,5 +50,36 @@ class SolicitudController {
     }
     return $success;
 }
+
+public function cancelarRequest($id) {
+        if (!isset($id)) {
+            echo "Id invalida";
+        }
+
+        $result_status = $this->requestModel->cancelar($id);
+
+        if ($result_status === 'updated') {
+            $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
+            $this->historialController->registrarModificacion(
+                $usuarioId,
+                'solicitud',
+                $solicitudId,
+                $obs
+            );
+            exit();
+        } elseif ($result_status === 'deleted') {
+            $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
+            $this->historialController->registrarModificacion(
+                $usuarioId,
+                'solicitud',
+                $solicitudId,
+                $obs
+            );
+            exit();
+        } else {
+            Echo "Cancelacion fallada";
+            exit();
+        }
+    }
 }
 ?>
