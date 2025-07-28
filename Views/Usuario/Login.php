@@ -20,14 +20,6 @@
             <label for="usuario" class="form-label"></label>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
-            <p>Rol:</p>
-            <select id="rol" name="rol" required>
-                <option value=""></option>
-                <?php foreach ($roles as $rol): ?>
-                    <option value="<?= $rol['id'] ?>"><?= htmlspecialchars($rol['nombre']) ?></option>
-                <?php endforeach; ?>
-            </select>
-
             <p>Contraseña: </p>
             <label for="contrasena" class="form-label"></label>
             <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required> <br><br>
