@@ -5,7 +5,7 @@ require_once("controllers/usuarioC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'redirigir', 'guardar'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardar'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -43,7 +43,7 @@ switch ($accion) {
         $controller->guardar();
         break;
 
-    case 'redireccion':
+    case 'panel':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
                 include("./Views/Usuario/Cliente/ClienteP.php");

@@ -26,7 +26,7 @@ class UsuarioC {
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
-                header("Location: index.php?accion=redireccion");
+                header("Location: index.php?accion=panel");
                 exit();
             } else {
                 header("Location: index.php?accion=login");
