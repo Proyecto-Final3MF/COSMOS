@@ -1,5 +1,5 @@
 <?php
-//echo "DEBUG: HistorialController.php está sendo carregado.<br>";
+
 
 require_once __DIR__ . '/../models/HistorialModel.php';
 

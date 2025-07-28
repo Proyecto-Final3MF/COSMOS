@@ -1,6 +1,9 @@
-<?php
 wed
-require_once __DIR__ . '/../Config/conexion.php';
+<?php
+
+require_once(__DIR__ . '/../config/conexion.php');
+
+
 
 class HistorialModel {
     private $conexion;
@@ -25,8 +28,7 @@ class HistorialModel {
             return false;
         }
 
-        // Bind all parameters, including 'item'
-        // 'i' for usuario_id, 's' for item, 'i' for solicitud_id, 's' for obs
+       
         $stmt->bind_param("isis", $usuario_id_para_db, $item, $solicitud_id, $obs);
 
         $success = $stmt->execute();
