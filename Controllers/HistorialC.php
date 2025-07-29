@@ -7,7 +7,7 @@ class HistorialController {
     private $historialModel;
 
     public function __construct() {
-        $this->historialModel = new HistorialModel();
+        $this->historialModel = new HistorialM();
     }
 
     public function mostrarHistorial() {
