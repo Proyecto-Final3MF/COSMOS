@@ -59,8 +59,8 @@ class UsuarioC {
 
     public function logout() {
         session_start();
+        include("../Views/Usuario/Login.php");
         session_destroy();
-        header("Location: Views/inicio.php");
     }
 }
 ?>
