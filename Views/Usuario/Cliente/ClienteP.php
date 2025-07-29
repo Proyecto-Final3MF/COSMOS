@@ -1,5 +1,4 @@
 <? 
-require_once("../../includes/headerU.php"); 
 
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){

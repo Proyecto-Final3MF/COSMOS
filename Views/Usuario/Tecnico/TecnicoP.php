@@ -1,8 +1,11 @@
 <?php
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
     if (isset($_SESSION['rol']) == ROL_TECNICO) {
     } elseif (isset($_SESSION['rol']) == ROL_CLIENTE){
         header("Location: index.php?accion=panel");
@@ -26,6 +29,8 @@
     
     <main>
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
-        </main>
+    </main>
+
+    <a href="../../../Index.php?accion=loguot">cerrar sesion</a>
 </body>
 </html>
