@@ -4,9 +4,8 @@ session_start();
 
     if (isset($_SESSION['rol']) == ROL_TECNICO or isset($_SESSION['rol']) == ROL_CLIENTE){
         header("Location: index.php?accion=panel");
-    } else {
-        header("Location: index.php?accion=login");
-    }
+    } 
+        
 
 ?>
 <!DOCTYPE html>
