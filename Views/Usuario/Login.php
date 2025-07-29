@@ -1,3 +1,12 @@
+<?php
+
+    if (isset($_SESSION['rol']) == ROL_TECNICO or isset($_SESSION['rol']) == ROL_CLIENTE){
+        header("Location: index.php?accion=panel");
+    } 
+        
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
