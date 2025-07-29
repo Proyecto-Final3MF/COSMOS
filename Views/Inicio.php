@@ -1,5 +1,5 @@
 <?php
-    require_once("views/includes/header.php");
+    require_once("../Views/includes/header.php");
 ?>
 
 
@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tecnicos y Asociados</title>
-    <link rel="stylesheet" href="Assets/css/inicio.css">
+    <link rel="stylesheet" href="../Assets/css/inicio.css">
 </head>
 
 <body>  
@@ -17,7 +17,7 @@
         <section class="hero">
             <h1>Bienvenido a Tecnicos y Asociados</h1>
             <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-            <a href="Index.php?accion=login"><button class="btn btn-login">Empezar ahora</button></a>
+            <a href="../Index.php?accion=login"><button class="btn btn-login">Empezar ahora</button></a>
         </section>
         
         <section class="features">
