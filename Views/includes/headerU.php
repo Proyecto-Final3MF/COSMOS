@@ -6,30 +6,8 @@
     <title>Bienvenido, Cliente</title>
     <!-- Para hacer el diseño más rápido, incluimos Tailwind CSS directamente desde su CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Pequeños ajustes de estilo para que se vea mejor y centrado */
-        body {
-            font-family: 'Inter', sans-serif; /* Una fuente moderna y limpia */
-            margin: 0;
-            background-color: #f3f4f6; /* Un gris suave para el fondo */
-        }
-        /* Definimos un ancho máximo para el contenido principal y le damos bordes redondeados */
-        header, nav, main, footer {
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 0.5rem; /* ¡Nos encantan los bordes redondeados! */
-        }
-        /* Para que el encabezado y la navegación se vean unidos */
-        header {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        nav {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body class="flex flex-col items-center py-4">
 
