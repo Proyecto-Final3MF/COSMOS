@@ -24,6 +24,6 @@ session_start();
         <p>Aquí encontrarás todas tus opciones como cliente.</p>
     </main>
 
-    <a href="../../../Index.php?accion=logout">cerrar sesion</a>
+    <a href="../../../index.php?accion=logout">cerrar sesion</a>
 </body>
 </html>
