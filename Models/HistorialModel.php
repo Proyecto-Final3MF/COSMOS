@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../config/conexion.php');
 
 
 
-class HistorialModel {
+class HistorialM {
     private $conexion;
 
     public function __construct() {

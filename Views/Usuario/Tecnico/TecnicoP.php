@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../css.css"> </head>
 <body>
     <header>
-        <h1>Bienvenido, Técnico <?= htmlspecialchars($_SESSION['usuario']) ?>!</h1>
+        <h1>Bienvenido, Técnico <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
     </header>
     
     <main>
