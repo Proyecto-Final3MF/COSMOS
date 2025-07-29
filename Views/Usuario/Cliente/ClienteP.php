@@ -21,6 +21,6 @@
         <p>Aquí encontrarás todas tus opciones como cliente.</p>
     </main>
 
-    <a href="../../../Index.php?accion=loguot">cerrar sesion</a>
+    <a href="Index.php?accion=logout">cerrar sesion</a>
 </body>
 </html>

@@ -25,6 +25,6 @@
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
     </main>
 
-    <a href="../../../Index.php?accion=loguot">cerrar sesion</a>
+    <a href="Index.php?accion=logout">cerrar sesion</a>
 </body>
 </html>
