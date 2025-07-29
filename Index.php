@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("Config/conexion.php");
 require_once("controllers/usuarioC.php");
 
