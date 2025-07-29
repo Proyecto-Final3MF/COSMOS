@@ -8,6 +8,7 @@
     <title>Panel de Cliente</title>
     <link rel="stylesheet" href="../../css.css"> </head>
 <body>
+    <h1>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
     
     <main>
         <p>Aquí encontrarás todas tus opciones como cliente.</p>
