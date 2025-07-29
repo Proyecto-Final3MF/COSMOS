@@ -90,23 +90,9 @@ $estados_map = [
         if (!empty($solicitudes)) {
             foreach ($solicitudes as $fila) {
         ?>
-                <div class="solicitud" data-solicitud-id="<?php echo htmlspecialchars($fila['id']); ?>">
-                    <p><strong>Observación:</strong> <?php echo htmlspecialchars($fila['obs']); ?></p>
-                    <p><strong>Estado Actual:</strong> <span class="current-estado"><?php echo htmlspecialchars($fila['estado']); ?></span></p>
-
-                    <div class="status-change-section">
-                        <label for="new_estado_<?php echo htmlspecialchars($fila['id']); ?>">Cambiar Estado a:</label>
-                        <select id="new_estado_<?php echo htmlspecialchars($fila['id']); ?>" class="new-estado-select">
-                            
-                            <?php foreach ($estados_map as $id => $name) : ?>
-                                <option value="<?php echo $id; ?>" <?php echo ($fila['estado'] == $id) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($name); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <button class="change-status-btn" data-solicitud-id="<?php echo htmlspecialchars($fila['id']); ?>">Cambiar Estado</button>
-                        <div class="status-message" id="message_<?php echo htmlspecialchars($fila['id']); ?>"></div>
-                    </div>
+                <div class="solicitud">
+                    <p><strong>Descripcion:</strong> <?php echo htmlspecialchars($fila['descripcion']); ?></p>
+                    <p><strong>Estado:</strong> <?php echo htmlspecialchars($fila['estado']); ?></p>
                 </div>
         <?php
             }
