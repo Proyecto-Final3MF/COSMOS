@@ -2,7 +2,7 @@
 session_start();
 require_once("Config/conexion.php");
 require_once("controllers/usuarioC.php");
-require_once ("controllers/HistorialController.php");
+require_once ("./Controllers/HistorialC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -58,11 +58,6 @@ switch ($accion) {
             header("Location: index.php?accion=login");
             exit();
         }
-        break;
-
-    case 'mostrarHistorial':
-        $controller = new HistorialM;
-        $controller->mostrarHistorial;
         break;
     
     default:
