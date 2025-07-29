@@ -1,9 +1,12 @@
 <?php
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     if (isset($_SESSION['rol']) == ROL_TECNICO) {
