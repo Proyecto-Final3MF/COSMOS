@@ -1,7 +1,6 @@
 <? 
 require_once("../../includes/headerU.php"); 
 
-session_start();
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=panel");
@@ -24,6 +23,6 @@ session_start();
         <p>Aquí encontrarás todas tus opciones como cliente.</p>
     </main>
 
-    <a href="../../../index.php?accion=logout">cerrar sesion</a>
+    <a href="../../../Index.php?accion=loguot">cerrar sesion</a>
 </body>
 </html>

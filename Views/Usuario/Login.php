@@ -14,7 +14,7 @@
         <?php endif; ?>
 
         <h3>Iniciar Sesion</h3>
-        <form method="POST" action="index.php?accion=autenticar">
+        <form method="POST" action="Index.php?accion=autenticar">
 
             <p>Usuario: </p>
             <label for="usuario" class="form-label"></label>
