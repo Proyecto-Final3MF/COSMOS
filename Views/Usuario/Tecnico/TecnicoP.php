@@ -1,9 +1,8 @@
 <?php
 
-const ROL_TECNICO = 1;
-const ROL_CLIENTE = 2; 
 
-session_start();
+
+
     if (isset($_SESSION['rol']) == ROL_TECNICO) {
     } elseif (isset($_SESSION['rol']) == ROL_CLIENTE){
         header("Location: index.php?accion=panel");
