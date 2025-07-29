@@ -22,8 +22,7 @@
 
             <p>Descripcion: </p>
             <label for="descripcion" class="form-label"></label>
-            <input type="text" class="form-control" id="descripcion" name="descripcion" required> <br><br>
-            <textarea name="descripcion" id="descripcion"></textarea>
+            <textarea class="form-control" name="descripcion" id="descripcion"></textarea required> <br><br>
 
 
             <p>Fecha Limite: </p>
