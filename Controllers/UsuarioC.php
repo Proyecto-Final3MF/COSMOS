@@ -57,11 +57,8 @@ class UsuarioC {
     }
 
     public function logout() {
-        session_start();
         session_destroy();
-        $_SESSION = array(); 
-        header("Location: ../Index.php?accion=login");
-        exit();
+        header("Location: Index.php");
     }
 }
 ?>

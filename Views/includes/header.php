@@ -24,7 +24,7 @@
        
         <div class="action-buttons">
             <a href="../Index.php?accion=login"><button class="btn btn-login">Iniciar sesión</button></a>
-            <a href="../../Index.php?accion=register"><button class="btn btn-signup pulse">Registrarse</button></a>
+            <a href="../Index.php?accion=register"><button class="btn btn-signup pulse">Registrarse</button></a>
         </div>
     </nav>
 </header>
