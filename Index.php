@@ -31,7 +31,7 @@ switch ($accion) {
     case 'logout':
         $_SESSION = array();
         session_destroy();
-        header("Location: /proyecto_final/index.php?accion=login");
+        header("Location: /Proyecto_final/Index.php?accion=login");
         exit;
         break;
 
