@@ -29,8 +29,10 @@ switch ($accion) {
         break;
         
     case 'logout':
+        $_SESSION = array();
         session_destroy();
-        header("Location: index.php?login");
+        header("Location: /proyecto_final/index.php?accion=login");
+        exit;
         break;
 
     case 'register':
