@@ -2,7 +2,6 @@
 session_start();
 require_once("Config/conexion.php");
 require_once("controllers/usuarioC.php");
-require_once ("./Controllers/HistorialC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -30,8 +29,8 @@ switch ($accion) {
         break;
         
     case 'logout':
-        $controller = new UsuarioC();
-        $controller->logout();
+        session_destroy();
+        header("Location: index.php?login");
         break;
 
     case 'register':

@@ -60,7 +60,7 @@ class UsuarioC {
     public function logout() {
         session_start();
         session_destroy();
-        header("Location:inico.php");
+        header("Location: Views/inicio.php");
     }
 }
 ?>
