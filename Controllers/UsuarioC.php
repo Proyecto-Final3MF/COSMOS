@@ -56,18 +56,12 @@ class UsuarioC {
         }
     }
 
-
-    // In controllers/usuarioC.php
     public function logout() {
-        session_start(); // Always start the session to access or destroy it
-        session_destroy(); // Destroy the session data on the server
-    
-    // Optional but good practice: Clear the $_SESSION superglobal
+        session_start();
+        session_destroy();
         $_SESSION = array(); 
-
-    // Redirect the user to the login page
-        header("Location: index.php?accion=login");
-        exit(); // Crucial: Stop script execution immediately after the redirect
+        header("Location: ../Index.php?accion=login");
+        exit();
     }
 }
 ?>
