@@ -1,11 +1,30 @@
 <?php
-require_once('../../Models/solicitudesM.php');
+require_once(__DIR__ . '/../models/SolicitudM.php');
+require_once(__DIR__ . '/HistorialController.php');
 
 class SolicitudController {
     private $solicitudModel;
+    private $historialController;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
+        $this->historialController = new HistorialController();
+    }
+
+    public function crear() {
+        
+        $solicitud = new Solicitud();
+        $categorias = $solicitud->obtenerCategorias();
+        include ("views/Solicitudes/crear.php");
+    }
+
+    public function guardar() {
+        $solicitud = new Solicitud();
+        $titulo = $_POST['titulo'];
+        $descripcion = $_POST['descripcion'];
+        $categoria_id = $_POST['categoria_id'];
+        $prioridad = $_POST['prioridad'];
+        $usuario_id = $_SESSION['usuario_id'];
     }
 
     public function getLibresData() {
@@ -16,10 +35,51 @@ class SolicitudController {
         return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
 
-    public function handleSelectSolicitud($solicitudId) {
+    public function handleSelectSolicitud($solicitudId, $usuarioId = null) {
         $newEstadoId = 2;
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
-        return $success;
+
+        if ($success) {
+        $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
+        $this->historialController->registrarModificacion(
+            $usuarioId,
+            'solicitud',
+            $solicitudId,
+            $obs
+        );
+    }
+    return $success;
+}
+
+public function cancelarRequest($id) {
+        if (!isset($id)) {
+            echo "Id invalida";
+        }
+
+        $result_status = $this->requestModel->cancelar($id);
+
+        if ($result_status === 'updated') {
+            $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
+            $this->historialController->registrarModificacion(
+                $usuarioId,
+                'solicitud',
+                $solicitudId,
+                $obs
+            );
+            exit();
+        } elseif ($result_status === 'deleted') {
+            $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
+            $this->historialController->registrarModificacion(
+                $usuarioId,
+                'solicitud',
+                $solicitudId,
+                $obs
+            );
+            exit();
+        } else {
+            Echo "Cancelacion fallada";
+            exit();
+        }
     }
 }
 ?>|
