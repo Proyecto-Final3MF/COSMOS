@@ -69,7 +69,7 @@ error_log("Final SQL Query: " . $sql); // Log to PHP error log
 // var_dump($param_types); // Check parameter types
 
 
-$stmt = $this->db->prepare($sql); // Assuming $this->db is your mysqli connection object
+$stmt = $this->conn->prepare($sql); // Assuming $this->db is your mysqli connection object
 
 if ($stmt === false) {
     error_log("MySQLi Prepare Error: " . $this->db->error . " | SQL: " . $sql);
