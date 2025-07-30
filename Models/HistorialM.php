@@ -11,7 +11,7 @@ class HistorialM {
         $this->conexion = conectar();
     }
 
-    public function registrarModificacion($usuario_id, $accion, $item, $solicitud_id, $obs) {
+    public function registrarModificacion($usuario_id, $accion, $item, $item_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
         $query = "INSERT INTO historial (usuario_id, accion, item, item_id, fecha_hora, obs)
@@ -25,7 +25,7 @@ class HistorialM {
         }
 
        
-        $stmt->bind_param("isis", $usuario_id_para_db, $item, $solicitud_id, $obs);
+        $stmt->bind_param("issis", $usuario_id_para_db, $accion, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
