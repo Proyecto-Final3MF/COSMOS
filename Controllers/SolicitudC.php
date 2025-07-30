@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../models/SolicitudM.php');
-require_once(__DIR__ . '/HistorialController.php');
+require_once(__DIR__ . '/HistorialC.php');
 
 class SolicitudController {
     private $solicitudModel;
@@ -43,7 +43,7 @@ class SolicitudController {
         $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
         $this->historialController->registrarModificacion(
             $usuarioId,
-            'modifico'
+            'modifico',
             'solicitud',
             $solicitudId,
             $obs
