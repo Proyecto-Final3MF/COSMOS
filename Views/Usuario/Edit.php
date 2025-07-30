@@ -4,7 +4,7 @@
 
 <h2>Editar Usuario</h2>
 
-<form method="POST" action="UsuarioI.php?accion=actualizar">
+<form method="POST" action="Index.php?accion=actualizar">
     
     <input type="hidden" name="id" value="<?= $datos['id'] ?>">
         
