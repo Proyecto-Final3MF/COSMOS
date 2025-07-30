@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../controllers/HistorialController.php';
-$historialModel = new HistorialModel();
+require_once __DIR__ . '/../controllers/HistorialC.php';
+$historialModel = new HistorialM();
 $historial = $historialModel->getHistorial();
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ $historial = $historialModel->getHistorial();
 </head>
 <body>
     <div class="container">
-        <h1>Histórico</h1>
+        <h1>Histórial de actividades</h1>
 
         <?php if (!empty($historial)): ?>
     <?php foreach ($historial as $registro): ?>
