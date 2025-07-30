@@ -23,7 +23,7 @@
         <section class="features">
             <article class="feature-card">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamHeMYQ8nCOH82kWTvlVr8emS0NTU3a8Gd8YiL2wsC_fhItbzWdEC5tX4cXJH6l3m_C0&usqp=CAU" alt="Foto de algun tencino ahi vemos en clase">
-                <h3>Benito Camelo</h3>
+                <h3>Benito Freitas</h3>
                 <p>Tecnico del caiocelular de los mas rapidos</p>
             </article>
             
