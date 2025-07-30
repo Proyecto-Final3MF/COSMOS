@@ -61,7 +61,7 @@ switch ($accion) {
     
     default:
         if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=panel");
+            header("Location: index.php?accion=redireccion");
         } else {
             header("Location: index.php?accion=login");
         }
