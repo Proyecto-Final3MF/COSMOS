@@ -7,7 +7,7 @@
         header("Location: index.php?accion=login");
     }
 
-    require_once ("./Views/includes/TH.php");
+    require_once ("./Views/include/TH.php");
 ?>
 
 
