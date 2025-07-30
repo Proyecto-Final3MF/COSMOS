@@ -1,5 +1,5 @@
 <?php
-    require_once("Views/includes/InicioH.php");
+    require_once("Views/include/InicioH.php");
 ?>
 
 
