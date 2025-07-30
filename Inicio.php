@@ -1,5 +1,5 @@
 <?php
-    require_once("../Views/includes/header.php");
+    require_once("Views/includes/header.php");
 ?>
 
 
@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tecnicos y Asociados</title>
-    <link rel="stylesheet" href="../Assets/css/inicio.css">
+    <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
 
 <body>  
@@ -24,7 +24,7 @@
             <article class="feature-card">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamHeMYQ8nCOH82kWTvlVr8emS0NTU3a8Gd8YiL2wsC_fhItbzWdEC5tX4cXJH6l3m_C0&usqp=CAU" alt="Foto de algun tencino ahi vemos en clase">
                 <h3>Benito Freitas</h3>
-                <p>Tecnico del caiocelular de los mas rapidos</p>
+                <p>Tecnico de caiocelular de los mas rapidos</p>
             </article>
             
             <article class="feature-card">
@@ -36,7 +36,7 @@
             <article class="feature-card">
                 <img src="https://content.imageresizer.com/images/memes/I-robot-Tesla-meme-96v08g.jpg" alt="lo mismo que el de arriba del de arriba">
                 <h3>Daniel Domingo</h3>
-                <p>Tecnico indie, lo mas nuevo en tecnologia</p>
+                <p>Tecnico independiente, lo mas nuevo en tecnologia</p>
             </article>
         </section>
     </main>
