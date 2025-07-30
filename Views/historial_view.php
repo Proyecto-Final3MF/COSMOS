@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../controllers/HistorialController.php';
-$historialModel = new HistorialModel();
+require_once __DIR__ . '/../controllers/HistorialC.php';
+$historialModel = new HistorialM();
 $historial = $historialModel->getHistorial();
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ $historial = $historialModel->getHistorial();
                 <strong><?php echo htmlspecialchars(ucfirst($registro->item)); ?></strong>
                 #<?php
                     if ($registro->item === 'solicitud') {
-                        echo htmlspecialchars($registro->solicitud_id);
+                        echo htmlspecialchars($registro->item_id);
                     }
                 ?>
                 a las <span class="data-hora"><?php echo date('d/m/Y H:i:s', strtotime($registro->fecha_hora)); ?>.</span>
