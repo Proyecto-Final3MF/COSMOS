@@ -6,6 +6,8 @@
     } else {
         header("Location: index.php?accion=login");
     }
+
+    require_once ("./Views/includes/TH.php");
 ?>
 
 
@@ -17,10 +19,6 @@
     <title>Panel de Técnico</title>
     <link rel="stylesheet" href="../../css.css"> </head>
 <body>
-    <header>
-        <h1>Bienvenido, Técnico <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
-    </header>
-    
     <main>
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
     </main>
