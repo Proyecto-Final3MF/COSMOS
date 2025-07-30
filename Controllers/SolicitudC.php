@@ -43,6 +43,7 @@ class SolicitudController {
         $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
         $this->historialController->registrarModificacion(
             $usuarioId,
+            'modifico'
             'solicitud',
             $solicitudId,
             $obs
