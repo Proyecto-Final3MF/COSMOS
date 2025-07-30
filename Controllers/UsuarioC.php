@@ -23,6 +23,14 @@ class UsuarioC {
         if ($usuarioM->crear($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificar($usuario, $contrasena);
             if ($usuarioN) {
+
+                $obs = "...";
+                $this->historialController->registrarModificacion(
+                $usuarioId,
+                'usuario',
+                $usuarioId,
+                $obs
+                );
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
