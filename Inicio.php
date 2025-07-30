@@ -17,7 +17,7 @@
         <section class="hero">
             <h1>Bienvenido a Tecnicos y Asociados</h1>
             <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-            <a href="../Index.php?accion=login"><button class="btn btn-login">Empezar ahora</button></a>
+            <a href="Index.php?accion=login"><button class="btn btn-login">Empezar ahora</button></a>
         </section>
         
         <section class="features">
