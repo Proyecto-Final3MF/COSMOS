@@ -1,6 +1,5 @@
-<?php 
-    require_once(__DIR__ . "Config/conexion.php");
-
+<?php
+    require_once __DIR__ . "Config/conexion.php";
     class SolicitudT {
         private $db;
 

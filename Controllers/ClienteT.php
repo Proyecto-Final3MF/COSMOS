@@ -1,5 +1,7 @@
-<?php 
+<?php
     require_once("Models/SolicitudT.php");
+
+    $solicitud = new SolicitudT();
 
     class ClienteT {
             private $modelo;
