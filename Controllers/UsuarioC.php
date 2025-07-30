@@ -27,6 +27,7 @@ class UsuarioC {
                 $obs = "...";
                 $this->historialController->registrarModificacion(
                 $usuarioId,
+                'creo',
                 'usuario',
                 $usuarioId,
                 $obs
