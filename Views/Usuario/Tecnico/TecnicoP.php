@@ -2,7 +2,7 @@
 
     if (isset($_SESSION['rol']) == ROL_TECNICO) {
     } elseif (isset($_SESSION['rol']) == ROL_CLIENTE){
-        header("Location: index.php?accion=panel");
+        header("Location: index.php?accion=redireccion");
     } else {
         header("Location: index.php?accion=login");
     }
