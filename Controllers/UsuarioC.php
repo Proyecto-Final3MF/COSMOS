@@ -42,7 +42,7 @@ class UsuarioC {
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
-                header("Location: index.php?accion=panel");
+                header("Location: index.php?accion=redireccion");
                 exit();
             } else {
                 header("Location: index.php?accion=login");
@@ -64,7 +64,7 @@ class UsuarioC {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
-            header("Location: index.php?accion=panel");
+            header("Location: index.php?accion=redireccion");
             exit();
         } else {
             $error = "Usuario o contraseña incorrectos";
