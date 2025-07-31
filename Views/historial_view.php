@@ -20,14 +20,14 @@ $historial = $historialModel->getHistorial();
         <div class="historial-item">
             <p>
                 <strong>
-                    [<?php echo htmlspecialchars($registro->nombre_usuario ? $registro->nombre_usuario : 'Sistema/Desconocido'); ?>]
+                    [<?php echo htmlspecialchars($registro->h.usuario ? $registro->nombre_usuario : 'Sistema/Desconocido'); ?>]
                 </strong>
                 #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
                 <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
                 <strong><?php echo htmlspecialchars(ucfirst($registro->item)); ?></strong>
-                #<?php
-                    if ($registro->item === 'solicitud') {
-                        echo htmlspecialchars($registro->item_id);
+                <?php
+                    if ($registro->item !== null) {
+                        echo "#".  htmlspecialchars($registro->item_id);
                     }
                 ?>
                 a las <span class="data-hora"><?php echo date('d/m/Y H:i:s', strtotime($registro->fecha_hora)); ?>.</span>
