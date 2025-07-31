@@ -1,7 +1,14 @@
 <?php
 require_once("models/Usuario.php");
+require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
+    private $historialController;
+
+    public function __construct(){
+        $this->historialController = new HistorialController();
+    }
+
     public function login() {
         include("views/usuario/login.php");
     }
@@ -23,6 +30,15 @@ class UsuarioC {
         if ($usuarioM->crear($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificar($usuario, $contrasena);
             if ($usuarioN) {
+            
+            $obs = "Usuario creado atravez del formulario de registro";
+            $this->historialController->registrarModificacion(
+                $usuarioId,
+                'creo',
+                $usuario,
+                $item_id,
+                $obs
+            );
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
