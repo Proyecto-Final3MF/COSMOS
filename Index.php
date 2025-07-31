@@ -43,7 +43,7 @@ switch ($accion) {
         $controller->guardar();
         break;
 
-    case 'panel':
+    case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
                 include("./Views/Usuario/Cliente/ClienteP.php");
@@ -61,7 +61,7 @@ switch ($accion) {
     
     default:
         if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=panel");
+            header("Location: index.php?accion=redireccion");
         } else {
             header("Location: index.php?accion=login");
         }
