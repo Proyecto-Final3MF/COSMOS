@@ -30,13 +30,13 @@ class UsuarioC {
         if ($usuarioM->crear($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificar($usuario, $contrasena);
             if ($usuarioN) {
-            $id_user = $row['id'];
+            $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
             $this->historialController->registrarModificacion(
-                $usuarioId,
+                null,
                 'creo',
                 $usuario,
-                $row['id'],
+                $id_user,
                 $obs
             );
                 session_start();
