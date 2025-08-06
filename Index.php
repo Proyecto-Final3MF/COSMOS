@@ -5,7 +5,7 @@ require_once("controllers/usuarioC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardar'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardar', 'mostrarHistorial'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -59,6 +59,11 @@ switch ($accion) {
         }
         break;
     
+    case 'mostrarHistorial':
+        $controller = new HistorialController();
+        $controller->mostrarHistorial();
+        break;
+        
     default:
         if (isset($_SESSION['usuario'])) {
             header("Location: index.php?accion=redireccion");
