@@ -10,7 +10,7 @@ class HistorialM {
     public function __construct() {
         $this->conexion = conectar();
     }
-
+    
     public function registrarModificacion($usuario_id, $accion, $item, $item_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
