@@ -5,7 +5,7 @@ Hecho por: Thiago Carballo, Alex Gonzalez, Federico Mosegui, Franco Fagundez, Lu
 
 Cosmos es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
-¿Cómo funciona?
+<p style="font-size: 22px;">¿Cómo funciona?</p>
 
 Para los Clientes
 
@@ -26,4 +26,3 @@ Encontrar oportunidades de trabajo: Accede a una lista de solicitudes de cliente
 Gestionar tus proyectos: Coordina tus trabajos, comunicate con los clientes y actualiza el estado de cada servicio de manera sencilla.
 
 Construir tu reputación: Demuestra tu profesionalismo y habilidad en cada trabajo, lo que te permitirá atraer a más clientes.
-<img width="466" height="617" alt="image" src="https://github.com/user-attachments/assets/52db8909-195e-4b68-a437-dbe2e82a5029" />
