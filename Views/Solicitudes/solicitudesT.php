@@ -22,7 +22,6 @@
                 <option value="3">Celular</option>
             </select><br><br>
 
-            
             <label for="descripcion" class="form-label"><p>Descripcion: </p></label><br>
             <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
 
