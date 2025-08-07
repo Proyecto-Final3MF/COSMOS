@@ -33,7 +33,7 @@ $historial = $historialModel->getHistorial();
                 a las <span class="data-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro->fecha_hora)); ?>.</span>
             </p>
             <?php if (!empty($registro->obs)): ?>
-                <p><strong>Observacion:</strong> <?php echo htmlspecialchars($registro->obs); ?></p>
+                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro->obs); ?></p>
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
