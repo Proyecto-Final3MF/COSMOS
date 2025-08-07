@@ -3,6 +3,7 @@
 ### Corporacion Tecnico y Asociados.
 Hecho por: Thiago Carballo, Alex Gonzalez, Federico Mosegui, Franco Fagundez, Lucas Vargas.
 
+<img width="3306" height="2016" alt="image" src="https://github.com/user-attachments/assets/aac8b964-9cf2-43e6-ae31-9bf8648c3351" />
 Cosmos es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
 ¿Cómo funciona?
