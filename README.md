@@ -2,15 +2,12 @@
 ## Sistema Web de Gestión de Servicio Técnico Cosmos.
 ### Corporacion Tecnico y Asociados.
 Hecho por: Thiago Carballo, Alex Gonzalez, Federico Mosegui, Franco Fagundez, Lucas Vargas.
-No se si los nombres tan bien escritos, arreglen y borren esta lina
-(Fede o alguien mas escribi el resto del README, solo explica el programa, no se escribir
-Ass: Thyago).
 
 Cosmos es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
-##¿Cómo funciona?
+¿Cómo funciona?
 
-###Para los Clientes 🛠️
+Para los Clientes 🛠️
 
 Si necesitas una reparación urgente, Cosmos te permite:
 
@@ -20,7 +17,7 @@ Comunicación directa: Una vez que un técnico acepta tu solicitud, tendrás la 
 
 Seguimiento en tiempo real: Visualiza el estado y el progreso del trabajo del técnico desde tu panel de control. Sabrás en todo momento en qué etapa se encuentra la reparación, lo que te brinda tranquilidad y confianza.
 
-###Para los Técnicos 🧑‍💻
+Para los Técnicos 🧑‍💻
 
 Cosmos ofrece a los técnicos freelancers una plataforma para:
 
