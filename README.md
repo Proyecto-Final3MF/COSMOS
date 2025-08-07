@@ -1,7 +1,7 @@
 # Proyecto Final 3°MF Tecnologias de la Información.
 ## Sistema Web de Gestión de Servicio Técnico Cosmos.
 ### Corporacion Tecnico y Asociados.
-Hecho por: Thiago Carballo, Alex Gonzalez, Federico Mosegui, Franco Fagundez, Lucas Vargas.
+Hecho por: Thiago Carballo, Alex González, Federico Mosegui, Franco Fagundez, Lucas Vargas.
 
 Cosmos es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
