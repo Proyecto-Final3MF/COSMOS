@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/../config/conexion.php');
 
 class Solicitud {
-    private $db;
     private $conn;
 
     public function __construct() {
@@ -35,7 +34,7 @@ class Solicitud {
 
 $conditions = [];
 $params = [];
-$param_types = ''; // String to hold parameter types for bind_param
+$param_types = '';
 
 if (isset($Tid)) {
     $conditions[] = "solicitud.tecnico_id = ?";
@@ -61,19 +60,13 @@ if (!empty($conditions)) {
     $sql .= " WHERE " . implode(" AND ", $conditions);
 }
 
+error_log("Final SQL Query: " . $sql);
 
-// --- Debugging (Crucial Step) ---
-error_log("Final SQL Query: " . $sql); // Log to PHP error log
-// echo "<pre>Final SQL Query: " . htmlspecialchars($sql) . "</pre>"; // For browser output (remove in production)
-// var_dump($params); // Check parameters
-// var_dump($param_types); // Check parameter types
-
-
-$stmt = $this->conn->prepare($sql); // Assuming $this->db is your mysqli connection object
+$stmt = $this->conn->prepare($sql);
 
 if ($stmt === false) {
-    error_log("MySQLi Prepare Error: " . $this->db->error . " | SQL: " . $sql);
-    throw new mysqli_sql_exception("Failed to prepare statement: " . $this->db->error);
+    error_log("MySQLi Prepare Error: " . $this->conn->error . " | SQL: " . $sql);
+    throw new mysqli_sql_exception("Failed to prepare statement: " . $this->conn->error);
 }
 
 if (!empty($params)) {
