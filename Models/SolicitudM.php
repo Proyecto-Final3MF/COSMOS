@@ -49,7 +49,7 @@ if (isset($Tid)) {
 if ($estado_filter === 'all') {
     $conditions[] = "solicitud.estado_id != 1";
 } else {
-    $filter_id = (int)$estado_filter; // Cast to int for safety
+    $filter_id = (int)$estado_filter;
     $conditions[] = "solicitud.estado_id = ?";
     $params[] = $filter_id;
     $param_types .= 'i';
