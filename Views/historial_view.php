@@ -8,7 +8,7 @@ $historial = $historialModel->getHistorial();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórial de Modificaciones</title>
+    <title>Histórial de actividades</title>
     <link rel="stylesheet" href="Assets/css/historial.css">
 </head>
 <body>
