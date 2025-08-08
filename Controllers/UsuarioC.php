@@ -1,7 +1,14 @@
 <?php
 require_once("models/Usuario.php");
+require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
+    private $historialController;
+
+    public function __construct(){
+        $this->historialController = new HistorialController();
+    }
+
     public function login() {
         include("views/usuario/login.php");
     }
@@ -23,10 +30,19 @@ class UsuarioC {
         if ($usuarioM->crear($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificar($usuario, $contrasena);
             if ($usuarioN) {
+            $id_user = $usuarioN['id'];
+            $obs = "Usuario creado atravez del formulario de registro";
+            $this->historialController->registrarModificacion(
+                null,
+                'creo',
+                $usuario,
+                $id_user,
+                $obs
+            );
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
-                header("Location: index.php?accion=panel");
+                header("Location: index.php?accion=redireccion");
                 exit();
             } else {
                 header("Location: index.php?accion=login");
@@ -48,7 +64,7 @@ class UsuarioC {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
-            header("Location: index.php?accion=panel");
+            header("Location: index.php?accion=redireccion");
             exit();
         } else {
             $error = "Usuario o contraseña incorrectos";
@@ -57,11 +73,8 @@ class UsuarioC {
     }
 
     public function logout() {
-        session_start();
         session_destroy();
-        $_SESSION = array(); 
-        header("Location: ../Index.php?accion=login");
-        exit();
+        header("Location: Index.php");
     }
 }
 ?>

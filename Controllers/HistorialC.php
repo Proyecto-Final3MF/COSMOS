@@ -1,7 +1,7 @@
 <?php
 
 
-require_once __DIR__ . '/../models/HistorialModel.php';
+require_once __DIR__ . '/../models/HistorialM.php';
 
 class HistorialController {
     private $historialModel;
@@ -14,7 +14,7 @@ class HistorialController {
         $historial = $this->historialModel->getHistorial();
         include __DIR__ . '/../views/historial_view.php';
     }
-    public function registrarModificacion($usuario_id, $item, $item_id, $obs) {
-        $this->historialModel->registrarModificacion($usuario_id, $item,$item_id, $obs);
+    public function registrarModificacion($usuario_id, $accion, $item, $item_id, $obs) {
+        $this->historialModel->registrarModificacion($usuario_id, $accion, $item, $item_id, $obs);
     }
 }

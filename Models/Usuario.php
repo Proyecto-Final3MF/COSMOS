@@ -18,10 +18,10 @@ class Usuario {
 
     public function verificar($usuario, $contrasena) {
         $usuario = $this->db->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
+        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 5";
         $res = $this->db->query($sql);
         if ($row = $res->fetch_assoc()) {
-            if ($row['contrasena'] === $contrasena) { 
+            if ($row['contrasena'] === $contrasena) {
                 return $row;
             }
         }
