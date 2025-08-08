@@ -5,7 +5,7 @@ require_once("controllers/usuarioC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardar', 'logout'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardar', 'mostrarHistorial'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -16,6 +16,7 @@ if (!in_array($accion, $acciones_publicas)) {
 
 const ROL_TECNICO = 1;
 const ROL_CLIENTE = 2; 
+const ROL_ADMIN = 3; 
 
 switch ($accion) {
     case 'login':
@@ -43,7 +44,7 @@ switch ($accion) {
         $controller->guardar();
         break;
 
-    case 'panel':
+    case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
                 include("./Views/Usuario/Cliente/ClienteP.php");
@@ -59,9 +60,14 @@ switch ($accion) {
         }
         break;
     
+    case 'mostrarHistorial':
+        $controller = new HistorialController();
+        $controller->mostrarHistorial();
+        break;
+        
     default:
         if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=panel");
+            header("Location: index.php?accion=redireccion");
         } else {
             header("Location: index.php?accion=login");
         }

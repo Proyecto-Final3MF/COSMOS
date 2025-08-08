@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../controllers/HistorialController.php';
-$historialModel = new HistorialModel();
+require_once __DIR__ . '/../controllers/HistorialC.php';
+$historialModel = new HistorialM();
 $historial = $historialModel->getHistorial();
 ?>
 <!DOCTYPE html>
@@ -8,12 +8,12 @@ $historial = $historialModel->getHistorial();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Modificações</title>
-    <link rel="stylesheet" href="../Assets/css/historial.css">
+    <title>Histórial de Modificaciones</title>
+    <link rel="stylesheet" href="Assets/css/historial.css">
 </head>
 <body>
     <div class="container">
-        <h1>Histórico</h1>
+        <h1>Histórial de actividades</h1>
 
         <?php if (!empty($historial)): ?>
     <?php foreach ($historial as $registro): ?>
@@ -23,17 +23,17 @@ $historial = $historialModel->getHistorial();
                     [<?php echo htmlspecialchars($registro->nombre_usuario ? $registro->nombre_usuario : 'Sistema/Desconocido'); ?>]
                 </strong>
                 #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
-                modifico
+                <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
                 <strong><?php echo htmlspecialchars(ucfirst($registro->item)); ?></strong>
-                #<?php
-                    if ($registro->item === 'solicitud') {
-                        echo htmlspecialchars($registro->solicitud_id);
+                <?php
+                    if ($registro->item !== null) {
+                        echo "#".  htmlspecialchars($registro->item_id);
                     }
                 ?>
-                a las <span class="data-hora"><?php echo date('d/m/Y H:i:s', strtotime($registro->fecha_hora)); ?>.</span>
+                a las <span class="data-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro->fecha_hora)); ?>.</span>
             </p>
             <?php if (!empty($registro->obs)): ?>
-                <p><strong>Observacion:</strong> <?php echo htmlspecialchars($registro->obs); ?></p>
+                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro->obs); ?></p>
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
