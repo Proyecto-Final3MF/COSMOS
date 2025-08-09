@@ -1,14 +1,3 @@
-<?
-if (isset($_SESSION['rol']) == ROL_ADMIN) {
-    } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
-        header("Location: index.php?accion=redireccion");
-    } elseif (isset($_SESSION['rol']) == ROL_CLIENTE){
-        header("Location: index.php?accion=redireccion");
-    } else {
-        header("Location: index.php?accion=login");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
