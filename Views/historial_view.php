@@ -15,7 +15,7 @@
             <div class="historial-item">
                 <p>
                     <strong>
-                        [<?php echo htmlspecialchars($registro->nombre_usuario ? $registro->nombre_usuario : 'Sistema/Desconocido'); ?>]
+                        [<?php echo htmlspecialchars($registro->usuario ? $registro->usuario : 'Sistema/Desconocido'); ?>]
                     </strong>
                     #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
                     <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
