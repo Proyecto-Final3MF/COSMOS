@@ -34,6 +34,7 @@ class UsuarioC {
             $obs = "Usuario creado atravez del formulario de registro";
             $this->historialController->registrarModificacion(
                 null,
+                null,
                 'creo',
                 $usuario,
                 $id_user,
