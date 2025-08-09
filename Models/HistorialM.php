@@ -11,11 +11,11 @@ class HistorialM {
         $this->conexion = conectar();
     }
     
-    public function registrarModificacion($usuario_id, $accion, $item, $item_id, $obs) {
+    public function registrarModificacion($usuario_id, $nombre_usuario, $accion, $item, $item_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
-        $query = "INSERT INTO historial (usuario_id, accion, item, item_id, fecha_hora, obs)
-                  VALUES (?, ?, ?, ?, NOW(), ?)";
+        $query = "INSERT INTO historial (usuario_id, nombre_usuario, accion, item, item_id, fecha_hora, obs)
+                 VALUES (?, ?, ?, ?, ?, NOW(), ?)";
 
         $stmt = $this->conexion->prepare($query);
 
@@ -24,8 +24,7 @@ class HistorialM {
             return false;
         }
 
-       
-        $stmt->bind_param("issis", $usuario_id_para_db, $accion, $item, $item_id, $obs);
+        $stmt->bind_param("issis", $usuario_id_para_db, $nombre_usuario, $accion, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
@@ -39,10 +38,9 @@ class HistorialM {
 
     public function getHistorial() {
         $historial = [];
-        $query = "SELECT h.id, h.usuario_id, h.accion, u.nombre AS nombre_usuario, h.item, h.item_id, h.fecha_hora, h.obs
-                  FROM historial h
-                  LEFT JOIN usuario u ON h.usuario_id = u.id
-                  ORDER BY h.fecha_hora DESC";
+        $query = "SELECT h.id, h.usuario_id, h.nombre_usuario, h.accion, h.item, h.item_id, h.fecha_hora, h.obs
+                 FROM historial h
+                 ORDER BY h.fecha_hora DESC";
         $resultado = $this->conexion->query($query);
 
         if ($resultado === false) {
