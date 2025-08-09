@@ -10,8 +10,8 @@ CREATE TABLE categoria (
 
 CREATE TABLE producto (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR (255),
-    Id_cat INT NOT NULL, FOREIGN KEY (id_cat),REFERENCES categoria(id)
+    nombre VARCHAR (255),
+    id_cat INT NOT NULL, FOREIGN KEY (id_cat),REFERENCES categoria(id)
 );
 
 CREATE TABLE usuario (
