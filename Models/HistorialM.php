@@ -11,7 +11,7 @@ class HistorialM {
         $this->conexion = conectar();
     }
     
-    public function registrarModificacion($usuario_id, $nombre_usuario, $accion, $item, $item_id, $obs) {
+    public function registrarModificacion($usuario, $usuario_id, $accion, $item, $item_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
         $query = "INSERT INTO historial (usuario, usuario_id, accion, item, item_id, fecha_hora, obs)
