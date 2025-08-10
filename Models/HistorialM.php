@@ -36,75 +36,23 @@ class HistorialM {
         return $success;
     }
 
-    public function getHistorial(?string $nombre = null, ?int $id_usuario = null, ?string $fecha_1 = null, ?string $fecha_2 = null): array
-{
-    $historial = [];
-    $sql = "SELECT h.id, h.usuario_id, h.usuario, h.accion, h.item, h.item_id, h.fecha_hora, h.obs FROM historial h";
-    
-    $condicoes = [];
-    $params = [];
-    $param_types = '';
-    if ($nombre_user !== null) {
-        $condicoes[] = "h.usuario = ?";
-        $params[] = $nombre_user;
-        $param_types .= 's';
+    public function getHistorial() {
+        $historial = [];
+        $query = "SELECT h.id, h.usuario_id, h.usuario, h.accion, h.item, h.item_id, h.fecha_hora, h.obs
+                 FROM historial h
+                 ORDER BY h.fecha_hora DESC";
+        $resultado = $this->conexion->query($query);
+
+        if ($resultado === false) {
+            error_log("ERROR: Query failed in getHistorial: " . $this->conexion->error);
+        } else {
+            while ($fila = $resultado->fetch_object()) {
+                $historial[] = $fila;
+            }
+            $resultado->free();
+        }
+        return $historial;
     }
-    if ($id_usuario !== null) {
-        $condicoes[] = "h.usuario_id = ?";
-        $params[] = $id_usuario;
-        $param_types .= 'i';
-    }
-    
-    if ($nombre_item !== null) {
-        $condicoes[] = "h.usuario = ?";
-        $params[] = $nombre_item;
-        $param_types .= 's';
-    }
-    if ($id_item !== null) {
-        $condicoes[] = "h.usuario_id = ?";
-        $params[] = $id_item;
-        $param_types .= 'i';
-    }
-    if ($fecha_1 !== null && $fecha_2 !== null) {
-        $condicoes[] = "h.fecha_hora BETWEEN ? AND ?";
-        $params[] = $fecha_1;
-        $params[] = $fecha_2;
-        $param_types .= 'ss';
-    }
-    
-    if (!empty($condicoes)) {
-        $sql .= " WHERE " . implode(" AND ", $condicoes);
-    }
-    
-    $sql .= " ORDER BY h.fecha_hora DESC";
-    
-    $stmt = $this->conn->prepare($sql);
-    
-    if ($stmt === false) {
-        error_log("MySQLi Prepare Error: " . $this->conn->error . " | SQL: " . $sql);
-        throw new mysqli_sql_exception("Failed to prepare statement: " . $this->conn->error);
-    }
-    
-    if (!empty($params)) {
-        $stmt->bind_param($param_types, ...$params);
-    }
-    
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    if ($resultado === false) {
-        error_log("ERROR: Query failed in getHistorial: " . $stmt->error);
-        return [];
-    }
-    
-    while ($fila = $resultado->fetch_object()) {
-        $historial[] = $fila;
-    }
-    
-    $resultado->free();
-    $stmt->close();
-    
-    return $historial;
-}
 
     public function __destruct() {
         if ($this->conexion && $this->conexion->ping()) {
