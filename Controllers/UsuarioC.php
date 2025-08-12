@@ -19,7 +19,7 @@ class UsuarioC {
         include("views/Usuario/Register.php");
     }
 
-    public function guardar() {
+    public function guardarU() {
         
         $usuarioM = new Usuario();
         $usuario = $_POST['usuario'];
@@ -27,7 +27,7 @@ class UsuarioC {
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena'];
         
-        if ($usuarioM->crear($usuario, $mail, $rol_id, $contrasena)) {
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificar($usuario, $contrasena);
             if ($usuarioN) {
             $id_user = $usuarioN['id'];

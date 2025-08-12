@@ -1,11 +1,12 @@
 <?php
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/usuarioC.php");
+require_once("controllers/UsuarioC.php");
+require_once("controller/SolicitudC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardar', 'mostrarHistorial'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -39,9 +40,9 @@ switch ($accion) {
         $controller->crear();
         break;
 
-    case 'guardar':
+    case 'guardarU':
         $controller = new UsuarioC();
-        $controller->guardar();
+        $controller->guardarU();
         break;
 
     case 'redireccion':
@@ -65,6 +66,14 @@ switch ($accion) {
     case 'mostrarHistorial':
         $controller = new HistorialController();
         $controller->mostrarHistorial();
+        break;
+    
+    case 'crearS':
+        $controller = new
+        break;
+
+    case 'crearP':
+        
         break;
         
     default:
