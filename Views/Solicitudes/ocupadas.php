@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../../controllers/SolicitudC.php');
 
-$controller = new SolicitudController();
+$controller = new SolicitudC();
 
 $estado_filter = isset($_GET['estado']) ? $_GET['estado'] : 'all';
 
