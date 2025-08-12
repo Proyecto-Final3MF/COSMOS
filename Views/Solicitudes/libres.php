@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../../controllers/SolicitudC.php');
 
-$controller = new SolicitudController();
+$controller = new SolicitudC();
 $solicitudes = $controller->getLibresData();
 
 if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
