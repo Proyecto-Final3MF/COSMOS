@@ -11,7 +11,8 @@ CREATE TABLE categoria (
 CREATE TABLE producto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR (255),
-    id_cat INT NOT NULL, FOREIGN KEY (id_cat),REFERENCES categoria(id)
+    imagen VARCHAR(255) NOT NULL,
+    id_cat INT NOT NULL, FOREIGN KEY (id_cat) REFERENCES categoria(id)
 );
 
 CREATE TABLE usuario (
@@ -32,7 +33,6 @@ CREATE TABLE solicitud (
     titulo VARCHAR(200) NOT NULL,
     cliente_id INT NOT NULL, FOREIGN KEY (cliente_id) REFERENCES usuario(id),
     tecnico_id INT NULL, FOREIGN KEY (tecnico_id) REFERENCES usuario(id),
-    imagen VARCHAR(255) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     prioridad ENUM ('baja', 'media', 'alta', 'urgente') DEFAULT 'media',

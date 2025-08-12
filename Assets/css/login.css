@@ -1,22 +1,82 @@
-  *
-   .body {
-            font-family: 'Inter', sans-serif; 
-            margin: 0;
-            background-color: #f3f4f6; 
-        }
-        
-        header, nav, main, footer {
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 0.5rem;
-        }
-        
-        header {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        nav {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+section {
+    background-color: #ffffff; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h3 {
+    color: #007bff; 
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24; 
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+form p {
+    color: #495057; 
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+button[type="submit"] {
+    background-color: #007bff; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; 
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #e83e8c; 
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #c82365; 
+    text-decoration: underline;
+}
