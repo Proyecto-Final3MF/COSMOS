@@ -19,6 +19,8 @@
     <link rel="stylesheet" href=""> </head>
 <body>
     <p> cliente </p>
+    <a href="Index.php?accion=crearP">Crear Nuevo Producto</a>
+    <a href="Index.php?accion=crearS">Crear Nueva Solicitud</a>
     <a href="Index.php?accion=logout">cerrar sesion</a>
 </body>
 </html>

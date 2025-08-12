@@ -1,0 +1,59 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    width: 0%;
+}
+
+h3 {
+    color: #007bff; 
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form {
+    background-color: #ffffff; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+form p {
+    color: #495057;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="mail"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 16px;
+    margin-bottom: 15px; 
+}
+
+select {
+    appearance: none; 
+    background-color: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.48A.5.5 0 0 1 2 5.5h9.591a.5.5 0 0 1 .401.834L7.247 11.14z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1;
+
+}
