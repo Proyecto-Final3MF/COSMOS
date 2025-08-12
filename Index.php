@@ -16,6 +16,7 @@ if (!in_array($accion, $acciones_publicas)) {
 
 const ROL_TECNICO = 1;
 const ROL_CLIENTE = 2;
+const ROL_ADMIN = 3;
 
 switch ($accion) {
     case 'login':
@@ -49,6 +50,8 @@ switch ($accion) {
                 include("./Views/Usuario/Cliente/ClienteP.php");
             } elseif ($_SESSION['rol'] == ROL_TECNICO) {
                 include("./Views/Usuario/Tecnico/TecnicoP.php");
+            } elseif ($_SESSION['rol'] == ROL_ADMIN) {
+                include("./Views/Usuario/Admin/AdminP.php");
             } else {
                 echo "<h1>Error: Rol no reconocido.</h1>";
                 echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";

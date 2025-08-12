@@ -1,1 +1,0 @@
-Precisamos un Header q sea dinamico, osea no cambie, segun el profe se puede hacer como una views y se puede llamar de otros lados.
