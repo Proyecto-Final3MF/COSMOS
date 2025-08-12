@@ -15,8 +15,7 @@ if (!in_array($accion, $acciones_publicas)) {
 }
 
 const ROL_TECNICO = 1;
-const ROL_CLIENTE = 2; 
-const ROL_ADMIN = 3; 
+const ROL_CLIENTE = 2;
 
 switch ($accion) {
     case 'login':
