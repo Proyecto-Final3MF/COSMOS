@@ -47,7 +47,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
                 <div class="solicitud">
     <p><strong>Descripcion: </strong><?php echo htmlspecialchars($fila['descripcion']); ?></p>
     <p><strong>Estado: </strong><?php echo htmlspecialchars($fila['estado']); ?></p>
-    <a href="libres.php?action=select&id=<?php echo htmlspecialchars($fila['id']); ?>" class="button" data-translate="select_button">Seleccionar</a>
+    <a href="libres.php?action=select&id=<?php echo htmlspecialchars($fila['id']); ?>" class="button">Seleccionar</a>
 </div>
         <?php
             }

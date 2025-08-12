@@ -2,8 +2,6 @@
 
 require_once(__DIR__ . '/../config/conexion.php');
 
-
-
 class HistorialM {
     private $conexion;
 
@@ -11,11 +9,11 @@ class HistorialM {
         $this->conexion = conectar();
     }
     
-    public function registrarModificacion($usuario_id, $accion, $item, $item_id, $obs) {
+    public function registrarModificacion($usuario, $usuario_id, $accion, $item, $item_id, $obs) {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
-        $query = "INSERT INTO historial (usuario_id, accion, item, item_id, fecha_hora, obs)
-                  VALUES (?, ?, ?, ?, NOW(), ?)";
+        $query = "INSERT INTO historial (usuario, usuario_id, accion, item, item_id, fecha_hora, obs)
+                 VALUES (?, ?, ?, ?, ?, NOW(), ?)";
 
         $stmt = $this->conexion->prepare($query);
 
@@ -24,8 +22,7 @@ class HistorialM {
             return false;
         }
 
-       
-        $stmt->bind_param("issis", $usuario_id_para_db, $accion, $item, $item_id, $obs);
+        $stmt->bind_param("sissis", $nombre_usuario, $usuario_id_para_db, $accion, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
@@ -37,24 +34,69 @@ class HistorialM {
         return $success;
     }
 
-    public function getHistorial() {
-        $historial = [];
-        $query = "SELECT h.id, h.usuario_id, h.accion, u.nombre AS nombre_usuario, h.item, h.item_id, h.fecha_hora, h.obs
-                  FROM historial h
-                  LEFT JOIN usuario u ON h.usuario_id = u.id
-                  ORDER BY h.fecha_hora DESC";
-        $resultado = $this->conexion->query($query);
+    public function getHistorial($search = null, $startDate = null, $endDate = null) {
+    $historial = [];
 
-        if ($resultado === false) {
-            error_log("ERROR: Query failed in getHistorial: " . $this->conexion->error);
-        } else {
-            while ($fila = $resultado->fetch_object()) {
-                $historial[] = $fila;
-            }
-            $resultado->free();
-        }
-        return $historial;
+    $query = "SELECT h.id, h.usuario_id, h.usuario, h.accion, h.item, h.item_id, h.fecha_hora, h.obs FROM historial h";
+
+    $conditions = [];
+    $params = [];
+    $param_types = '';
+
+    if (!empty($search)) {
+        $conditions[] = "(h.usuario LIKE ? OR h.accion LIKE ? OR h.item LIKE ? OR h.obs LIKE ?)";
+        $search_term = "%" . $search . "%";
+        $params[] = $search_term;
+        $params[] = $search_term;
+        $params[] = $search_term;
+        $params[] = $search_term;
+        $param_types .= 'ssss';
     }
+
+    if (!empty($startDate)) {
+        $conditions[] = "h.fecha_hora >= ?";
+        $params[] = $startDate . ' 00:00:00';
+        $param_types .= 's';
+    }
+
+    if (!empty($endDate)) {
+        $conditions[] = "h.fecha_hora <= ?";
+        $params[] = $endDate . ' 23:59:59';
+        $param_types .= 's';
+    }
+
+    if (!empty($conditions)) {
+        $query .= " WHERE " . implode(" AND ", $conditions);
+    }
+
+    $query .= " ORDER BY h.fecha_hora DESC";
+
+    $stmt = $this->conexion->prepare($query);
+
+    if ($stmt === false) {
+        error_log("ERROR: Prepared statement failed in getHistorial: " . $this->conexion->error);
+        return [];
+    }
+
+    if (!empty($params)) {
+        $stmt->bind_param($param_types, ...$params);
+    }
+
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado === false) {
+        error_log("ERROR: get_result failed in getHistorial: " . $stmt->error);
+    } else {
+        while ($fila = $resultado->fetch_object()) {
+            $historial[] = $fila;
+        }
+        $resultado->free();
+    }
+
+    $stmt->close();
+    return $historial;
+}
 
     public function __destruct() {
         if ($this->conexion && $this->conexion->ping()) {

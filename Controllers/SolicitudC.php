@@ -42,6 +42,7 @@ class SolicitudController {
         if ($success) {
         $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
         $this->historialController->registrarModificacion(
+            $usuario,
             $usuarioId,
             'modifico',
             'solicitud',
@@ -62,6 +63,7 @@ public function cancelarRequest($id) {
         if ($result_status === 'updated') {
             $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
             $this->historialController->registrarModificacion(
+                $usuario,
                 $usuarioId,
                 'solicitud',
                 $solicitudId,
@@ -71,6 +73,7 @@ public function cancelarRequest($id) {
         } elseif ($result_status === 'deleted') {
             $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
             $this->historialController->registrarModificacion(
+                $usuario,
                 $usuarioId,
                 'solicitud',
                 $solicitudId,
