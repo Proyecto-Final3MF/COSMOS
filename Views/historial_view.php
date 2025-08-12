@@ -46,7 +46,7 @@
                                     echo "#".  htmlspecialchars($registro->item_id);
                                 }
                             ?>
-                            a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro->fecha_hora)); ?>.</span>
+                            a las <span class="data-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro->fecha_hora)); ?>.</span>
                         </p>
                         <?php if (!empty($registro->obs)): ?>
                             <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro->obs); ?></p>
