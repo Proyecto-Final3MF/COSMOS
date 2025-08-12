@@ -7,7 +7,7 @@ class Usuario {
     }
 
     
-    public function crear($usuario, $mail, $rol_id, $contrasena) {
+    public function crearU($usuario, $mail, $rol_id, $contrasena) {
         $usuario = $this->db->real_escape_string($usuario);
         $mail = $this->db->real_escape_string($mail);
         $contrasena = $this->db->real_escape_string($contrasena);
