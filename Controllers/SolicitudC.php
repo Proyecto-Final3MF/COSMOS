@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../models/SolicitudM.php');
 require_once(__DIR__ . '/HistorialC.php');
 
-class SolicitudController {
+class SolicitudC {
     private $solicitudModel;
     private $historialController;
 

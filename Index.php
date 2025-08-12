@@ -69,7 +69,7 @@ switch ($accion) {
         break;
     
     case 'crearS':
-
+        $controller = new
         break;
 
     case 'crearP':
