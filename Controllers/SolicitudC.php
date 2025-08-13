@@ -11,11 +11,14 @@ class SolicitudC {
         $this->historialController = new HistorialController();
     }
 
-    public function crear() {
-        
+    public function formularioS(){  
         $solicitud = new Solicitud();
-        $categorias = $solicitud->obtenerCategorias();
-        include ("views/Solicitudes/crear.php");
+        $categorias = $solicitud->obtenerProductos();
+        include ("./Views/Solicitudes/FormularioS.php");
+        
+    }
+
+    public function crearS() {
     }
 
     public function guardar() {
