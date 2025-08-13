@@ -5,8 +5,17 @@ $controller = new SolicitudC();
 
 $estado_filter = isset($_GET['estado']) ? $_GET['estado'] : 'all';
 
+
 $solicitudes = $controller->getOcupadasData($estado_filter);
 
+
+$estados_map = [
+    1 => 'Pendiente', 
+    2 => 'En Diagnóstico',
+    3 => 'En Espera de repuestos',
+    4 => 'En Reparación',
+    5 => 'Finalizado'
+];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,12 +34,12 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     <h1>Listado de Solicitudes que aceptaste</h1>
 
     <div class="filter-buttons">
-    <button id="filter-all" data-filter="all">Todas</button>
-    <button id="filter-2" data-filter="2">En Diagnóstico</button>
-    <button id="filter-3" data-filter="3">En Espera de respuestos</button>
-    <button id="filter-4" data-filter="4">En Reparación</button>
-    <button id="filter-5" data-filter="5">Finalizado</button>
-</div>
+        <button id="filter-all" data-filter="all">Todas</button>
+        <button id="filter-2" data-filter="2">En Diagnóstico</button>
+        <button id="filter-3" data-filter="3">En Espera de respuestos</button>
+        <button id="filter-4" data-filter="4">En Reparación</button>
+        <button id="filter-5" data-filter="5">Finalizado</button>
+    </div>
 
     <div id="solicitud-container">
         <?php
