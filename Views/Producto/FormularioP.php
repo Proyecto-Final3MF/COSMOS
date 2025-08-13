@@ -24,7 +24,7 @@
                     <?php endforeach; ?>
             </select> <br><br>
                         
-            <button type="submit">Entrar</button>
+            <button type="submit">Crear</button>
         </form>
 </body>
 </html>

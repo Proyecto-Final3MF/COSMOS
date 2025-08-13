@@ -38,14 +38,14 @@ class ProductoC {
 
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
-        $rutaFinal = 'image/' . $nombreArchivo;
+        $rutaFinal = "" . $nombreArchivo;
 
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
             // The file was successfully uploaded. Now save the product to the database.
             if($producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario)){
                 echo "Producto creado exitosamente.";
                 
-                // header("Location: index.php?accion=redireccion");
+                header("Location: index.php?accion=redireccion");
             } else {
                 echo "Error al guardar el producto en la base de datos.";
             }
