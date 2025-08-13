@@ -57,6 +57,7 @@
                 <p class="no-records">No se encontró ningún registro que coincida con los filtros.</p>
             <?php endif; ?>
         <?php endif; ?>
+
     </div>
 </body>
 </html>
