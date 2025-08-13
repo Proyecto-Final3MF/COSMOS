@@ -3,6 +3,7 @@ session_start();
 require_once("Config/conexion.php");
 require_once("controllers/usuarioC.php");
 require_once("controllers/SolicitudC.php");
+require_once("controllers/ProductoC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -23,27 +24,27 @@ switch ($accion) {
     case 'login':
         $controller = new UsuarioC();
         $controller->login();
-        break;
+    break;
         
     case 'autenticar':
         $controller = new UsuarioC();
         $controller->autenticar();
-        break;
+    break;
         
     case 'logout':
         $controller = new UsuarioC();
         $controller->logout();
-        break;
+    break;
 
     case 'register':
         $controller = new UsuarioC();
         $controller->crear();
-        break;
+    break;
 
     case 'guardarU':
         $controller = new UsuarioC();
         $controller->guardarU();
-        break;
+    break;
 
     case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
@@ -61,44 +62,44 @@ switch ($accion) {
             header("Location: index.php?accion=login");
             exit();
         }
-        break;
+    break;
     
     case 'mostrarHistorial':
         $controller = new HistorialController();
         $controller->mostrarHistorial();
-        break;
+    break;
     
     case 'formularioS':
         $controller = new SolicitudC();
         $controller->formularioS();
-        break;
+    break;
 
     case 'formularioP':
         $controller = new ProductoC();
         $controller->formularioP();
     break;
 
-    case 'crearP':
+    case 'guardarP':
         $controller = new ProductoC();
-        $controller->crearP();
-        break;
+        $controller->guardarP();
+    break;
     
     case 'crearS':
         $controller = new SolicitudC();
         $controller->crearS();
-        break;
+    break;
         
     case 'SolicitudesLibres':
         $controller = new SolicitudC();
         $controller->getLibresData();
         require_once("Views/Solicitudes/libres.php");
-        break;
+    break;
 
     case 'SolicitudesOcupadas':
         $controller = new SolicitudC();
         $controller->getOcupadasData($estado_filter = 'all');
         require_once("Views/Solicitudes/ocupadas.php");
-        break;
+    break;
         
     default:
         if (isset($_SESSION['usuario'])) {

@@ -17,22 +17,10 @@
 </head>
 <body>
     
-
-<header>
-    <h3>Registrarse</h3>
-</header>
-
-    
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <form method="POST" action="index.php?accion=guardarU">
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
-        
+
+        <h3>Registrarse</h3>
+
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
