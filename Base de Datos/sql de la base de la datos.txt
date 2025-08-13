@@ -41,6 +41,17 @@ CREATE TABLE solicitud (
     descripcion TEXT NOT NULL
 );
 
+CREATE TABLE historial (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100),
+    usuario_id INT,
+    accion VARCHAR(100),
+    item VARCHAR(100),
+    item_id INT,
+    fecha_hora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+    obs VARCHAR(255)
+):
+
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
