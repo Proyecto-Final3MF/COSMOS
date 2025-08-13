@@ -48,53 +48,52 @@ class Solicitud {
         FROM solicitud
         JOIN estado ON solicitud.estado_id = estado.id";
 
-$conditions = [];
-$params = [];
-$param_types = '';
+        $conditions = [];
+        $params = [];
+        $param_types = '';
 
-if (isset($Tid)) {
-    $conditions[] = "solicitud.tecnico_id = ?";
-    $params[] = $Tid;
-    $param_types .= 'i';
-} else {
-    error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
-    return false;
-}
-
-
-if ($estado_filter === 'all') {
-    $conditions[] = "solicitud.estado_id != 1";
-} else {
-    $filter_id = (int)$estado_filter;
-    $conditions[] = "solicitud.estado_id = ?";
-    $params[] = $filter_id;
-    $param_types .= 'i';
-}
+        if (isset($Tid)) {
+            $conditions[] = "solicitud.tecnico_id = ?";
+            $params[] = $Tid;
+            $param_types .= 'i';
+        } else {
+            error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+            return false;
+        }
 
 
-if (!empty($conditions)) {
-    $sql .= " WHERE " . implode(" AND ", $conditions);
-}
-
-error_log("Final SQL Query: " . $sql);
-
-$stmt = $this->conn->prepare($sql);
-
-if ($stmt === false) {
-    error_log("MySQLi Prepare Error: " . $this->conn->error . " | SQL: " . $sql);
-    throw new mysqli_sql_exception("Failed to prepare statement: " . $this->conn->error);
-}
-
-if (!empty($params)) {
-    call_user_func_array([$stmt, 'bind_param'], array_merge([$param_types], refValues($params)));
-}
-
-$stmt->execute();
-
-$result = $stmt->get_result();
+        if ($estado_filter === 'all') {
+            $conditions[] = "solicitud.estado_id != 1";
+        } else {
+            $filter_id = (int)$estado_filter;
+            $conditions[] = "solicitud.estado_id = ?";
+            $params[] = $filter_id;
+            $param_types .= 'i';
+        }
 
 
-$stmt->close();
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        error_log("Final SQL Query: " . $sql);
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error . " | SQL: " . $sql);
+            throw new mysqli_sql_exception("Failed to prepare statement: " . $this->conn->error);
+        }
+
+        if (!empty($params)) {
+            call_user_func_array([$stmt, 'bind_param'], array_merge([$param_types], refValues($params)));
+        }
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $stmt->close();
 
         $stmt = $this->conn->prepare($sql);
 
@@ -112,8 +111,8 @@ $stmt->close();
 
         $solicitudes = [];
         while ($fila = $resultado->fetch_assoc()) {
-            $solicitudes[] = $fila;
-        }
+                $solicitudes[] = $fila;
+            }
         $stmt->close();
         return $solicitudes;
     }

@@ -16,11 +16,11 @@
      <link rel="stylesheet" href="./Assets/css/register.css">
 </head>
 <body>
-
 <section>
-    <h3>Registrarse</h3>
+        <form method="POST" action="index.php?accion=guardarU">
 
-    <form method="POST" action="index.php?accion=guardarU">
+        <h3>Registrarse</h3>
+
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
