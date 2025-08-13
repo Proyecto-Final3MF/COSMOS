@@ -19,6 +19,7 @@ class SolicitudC {
     }
 
     public function crearS() {
+        
     }
 
     public function guardar() {

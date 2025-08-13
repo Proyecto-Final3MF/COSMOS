@@ -8,15 +8,15 @@ class Producto {
         $this->conn = conectar();
     }
 
-     public function obtenerCategorias(){
-        $sql = "SELECT * FROM producto";
+    public function obtenerCategorias(){
+        $sql = "SELECT * FROM categoria";
         $resultado = $this->conn->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerCategoriaporId($categoria_id) {
         $categoria_id = (int)$categoria_id;
-        $sql = "SELECT nombre FROM producto WHERE id = $categoria_id LIMIT 1";
+        $sql = "SELECT nombre FROM categoria WHERE id = $categoria_id LIMIT 1";
         $result = $this->conn->query($sql);
         if ($row = $result->fetch_assoc()) {
             return $row['nombre'];
@@ -24,13 +24,27 @@ class Producto {
         return null;
     }
 
-    public function crearP($categoria_id, $nombre, $producto) {
-        $usuario = $this->conn->real_escape_string($categoria_id);
-        $mail = $this->conn->real_escape_string($nombre);
-        $contrasena = $this->conn->real_escape_string($producto);
-        
-        $sql = "INSERT INTO usuario () VALUES ()";
-        return $this-conn->query($sql);
+    // New method to check if a product already exists
+    public function existeProducto($nombre, $id_usuario) {
+        $nombre = $this->conn->real_escape_string($nombre);
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT COUNT(*) AS count FROM producto WHERE nombre = '$nombre' AND id_usuario = '$id_usuario'";
+        $result = $this->conn->query($sql);
+        if ($result && $row = $result->fetch_assoc()) {
+            return $row['count'] > 0;
+        }
+        return false;
+    }
+
+    // Corrected crearP function with proper column names and user_id
+    public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
+        $nombre = $this->conn->real_escape_string($nombre);
+        $imagen = $this->conn->real_escape_string($imagen);
+        $categoria_id = (int)$categoria_id;
+        $id_usuario = (int)$id_usuario;
+
+        $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES ('$nombre', '$imagen', '$categoria_id', '$id_usuario')";
+        return $this->conn->query($sql);
     }
 }
 ?>
