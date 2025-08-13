@@ -1,6 +1,6 @@
 <?php
 
-    if (isset($_SESSION['rol']) == ROL_TECNICO || isset($_SESSION['rol']) == ROL_CLIENTE){
+    if (isset($_SESSION['rol']) == ROL_TECNICO || isset($_SESSION['rol']) == ROL_CLIENTE || isset($_SESSION['rol']) == ROL_ADMIN){
         header("Location: index.php?accion=redireccion");
     } 
         
