@@ -23,7 +23,7 @@
 </header>
 
     
-    <form method="POST" action="index.php?accion=guardar">
+    <form method="POST" action="index.php?accion=guardarU">
         
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
