@@ -8,6 +8,22 @@ class Solicitud {
         $this->conn = conectar();
     }
 
+    public function obtenerProductos(){
+        $sql = "SELECT * FROM producto";
+        $resultado = $this->conn->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function obtenerProductoporId($producto_id) {
+        $producto_id = (int)$producto_id;
+        $sql = "SELECT nombre FROM producto WHERE id = $producto_id LIMIT 1";
+        $result = $this->conn->query($sql);
+        if ($row = $result->fetch_assoc()) {
+            return $row['nombre'];
+        }
+        return null;
+    }
+
     public function getSolicitudesDisponibles() {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
                 FROM solicitud
