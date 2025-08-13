@@ -23,15 +23,7 @@
 </header>
 
     
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <form method="POST" action="index.php?accion=guardarU">
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
         
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>

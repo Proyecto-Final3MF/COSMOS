@@ -6,7 +6,7 @@ require_once("controllers/SolicitudC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU'];
 
 if (!in_array($accion, $acciones_publicas)) {
     if (!isset($_SESSION['usuario'])) {
@@ -68,28 +68,23 @@ switch ($accion) {
         $controller->mostrarHistorial();
         break;
     
-    case 'formularioS':
+    case 'crearS':
         $controller = new SolicitudC();
-        $controller->formularioS();
+        $controller->crear();
         break;
 
     case 'crearP':
         
         break;
-    
-    case 'crearS':
-        $controller = new SolicitudC();
-        $controller->crearS();
-        break;
         
     case 'SolicitudesLibres':
-        $controller = new SolicitudC();
+        $controller = new SolicitudController();
         $controller->getLibresData();
         require_once("Views/Solicitudes/libres.php");
         break;
 
     case 'SolicitudesOcupadas':
-        $controller = new SolicitudC();
+        $controller = new SolicitudController();
         $controller->getOcupadasData($estado_filter = 'all');
         require_once("Views/Solicitudes/ocupadas.php");
         break;
