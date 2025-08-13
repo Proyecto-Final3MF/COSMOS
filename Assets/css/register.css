@@ -8,26 +8,23 @@ body {
     margin: 0;
 }
 
-header {
-    text-align: center;
-    width: 0%;
-}
-
-h3 {
-    color: #007bff; 
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-form {
+section {
     background-color: #ffffff; 
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    text-align: left;
+    text-align: center;
 }
+
+h3 {
+    color: #e83e8c; 
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+
 
 form p {
     color: #495057;
@@ -56,4 +53,36 @@ select {
     background-repeat: no-repeat;
     background-position: right 1;
 
+}
+
+
+input[type="submit"] {
+    background-color: #e83e8c; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #e83e8c; 
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #b7c72a; 
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #b7c72a; 
+    text-decoration: underline;
 }
