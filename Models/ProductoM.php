@@ -24,10 +24,10 @@ class Producto {
         return null;
     }
 
-    public function crearP() {
-        $usuario = $this->conn->real_escape_string();
-        $mail = $this->conn->real_escape_string();
-        $contrasena = $this->conn->real_escape_string();
+    public function crearP($categoria_id, $nombre, $producto) {
+        $usuario = $this->conn->real_escape_string($categoria_id);
+        $mail = $this->conn->real_escape_string($nombre);
+        $contrasena = $this->conn->real_escape_string($producto);
         
         $sql = "INSERT INTO usuario () VALUES ()";
         return $this-conn->query($sql);
