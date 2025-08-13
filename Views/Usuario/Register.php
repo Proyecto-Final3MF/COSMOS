@@ -17,10 +17,10 @@
 </head>
 <body>
 
-    <form method="POST" action="index.php?accion=guardarU">
-        
-        <h3>Registrarse</h3>
+<section>
+    <h3>Registrarse</h3>
 
+    <form method="POST" action="index.php?accion=guardarU">
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
@@ -46,7 +46,7 @@
         <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
-    
+    </section>
 </body>
 
 </html>
