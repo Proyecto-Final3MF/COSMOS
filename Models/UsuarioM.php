@@ -6,7 +6,6 @@ class Usuario {
         $this->db = conectar();
     }
 
-    
     public function crearU($usuario, $mail, $rol_id, $contrasena) {
         $usuario = $this->db->real_escape_string($usuario);
         $mail = $this->db->real_escape_string($mail);

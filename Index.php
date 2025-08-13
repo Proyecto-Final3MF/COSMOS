@@ -73,8 +73,14 @@ switch ($accion) {
         $controller->formularioS();
         break;
 
+    case 'formularioP':
+        $controller = new ProductoC();
+        $controller->formularioP();
+    break;
+
     case 'crearP':
-        
+        $controller = new ProductoC();
+        $controller->crearP();
         break;
     
     case 'crearS':
