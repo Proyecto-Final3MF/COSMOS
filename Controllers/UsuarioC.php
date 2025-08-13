@@ -56,7 +56,7 @@ class UsuarioC {
     }
 
     public function autenticar() {
-        require_once("models/Usuario.php");
+        require_once("models/UsuarioM.php");
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();

@@ -18,21 +18,12 @@
 <body>
     
 
-<header>
+<section>
     <h3>Registrarse</h3>
-</header>
 
-    
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
+
     <form method="POST" action="index.php?accion=guardarU">
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
-=======
-    <form method="POST" action="Index.php?accion=guardar">
->>>>>>> Stashed changes
-        
         <p>Usuario: </p>
         <label for="usuario" class="form-label"></label>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
@@ -58,7 +49,7 @@
         <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
-    
+    </section>
 </body>
 
 </html>
