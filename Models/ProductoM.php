@@ -24,7 +24,6 @@ class Producto {
         return null;
     }
 
-    // New method to check if a product already exists
     public function existeProducto($nombre, $id_usuario) {
         $nombre = $this->conn->real_escape_string($nombre);
         $id_usuario = (int)$id_usuario;
@@ -36,7 +35,6 @@ class Producto {
         return false;
     }
 
-    // Corrected crearP function with proper column names and user_id
     public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
         $nombre = $this->conn->real_escape_string($nombre);
         $imagen = $this->conn->real_escape_string($imagen);
