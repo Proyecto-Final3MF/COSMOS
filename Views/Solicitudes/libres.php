@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../../controllers/SolicitudC.php');
+require_once('controllers/SolicitudC.php');
 
-$controller = new SolicitudController();
+$controller = new SolicitudC();
 $solicitudes = $controller->getLibresData();
 
 if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
@@ -24,7 +24,7 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes disponibles</title>
-        <link rel="stylesheet" href="../../Assets/css/Listado.css">
+        <link rel="stylesheet" href="Assets/css/Listado.css">
 
 </head>
 <body class="tema-claro">
@@ -58,6 +58,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
     </div>
     <div id="paginacion-container">
     </div>
-<script src="../../Assets/js/listado.js"></script>
+<script src="Assets/js/listado.js"></script>
 </body>
 </html>
