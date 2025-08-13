@@ -1,0 +1,48 @@
+<?php
+require_once("./Config/conexion.php");
+
+class Producto {
+    private $conn;
+
+    public function __construct() {
+        $this->conn = conectar();
+    }
+
+    public function obtenerCategorias(){
+        $sql = "SELECT * FROM categoria";
+        $resultado = $this->conn->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function obtenerCategoriaporId($categoria_id) {
+        $categoria_id = (int)$categoria_id;
+        $sql = "SELECT nombre FROM categoria WHERE id = $categoria_id LIMIT 1";
+        $result = $this->conn->query($sql);
+        if ($row = $result->fetch_assoc()) {
+            return $row['nombre'];
+        }
+        return null;
+    }
+
+    public function existeProducto($nombre, $id_usuario) {
+        $nombre = $this->conn->real_escape_string($nombre);
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT COUNT(*) AS count FROM producto WHERE nombre = '$nombre' AND id_usuario = '$id_usuario'";
+        $result = $this->conn->query($sql);
+        if ($result && $row = $result->fetch_assoc()) {
+            return $row['count'] > 0;
+        }
+        return false;
+    }
+
+    public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
+        $nombre = $this->conn->real_escape_string($nombre);
+        $imagen = $this->conn->real_escape_string($imagen);
+        $categoria_id = (int)$categoria_id;
+        $id_usuario = (int)$id_usuario;
+
+        $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES ('$nombre', '$imagen', '$categoria_id', '$id_usuario')";
+        return $this->conn->query($sql);
+    }
+}
+?>

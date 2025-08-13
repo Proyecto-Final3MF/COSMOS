@@ -8,13 +8,6 @@ CREATE TABLE categoria (
     nombre VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE producto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR (255),
-    imagen VARCHAR(255) NOT NULL,
-    id_cat INT NOT NULL, FOREIGN KEY (id_cat) REFERENCES categoria(id)
-);
-
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -22,6 +15,15 @@ CREATE TABLE usuario (
     email VARCHAR(255) NOT NULL,
     rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id)
 );
+
+CREATE TABLE producto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR (255),
+    imagen VARCHAR(255) NOT NULL,
+    id_cat INT NOT NULL, FOREIGN KEY (id_cat) REFERENCES categoria(id),
+    id_usuario INT NOT NULL, FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
+
 
 CREATE TABLE estado(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,3 +59,5 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('4','En reparacion');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
+INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
+INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
