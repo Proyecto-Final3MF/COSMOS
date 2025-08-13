@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../Config/conexion.php');
+require_once(__DIR__ . '/../config/conexion.php');
 
 class Solicitud {
     private $conn;

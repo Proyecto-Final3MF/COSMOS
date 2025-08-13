@@ -4,17 +4,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    min-height: 100vh;
+    margin: 0;
 }
 
-section {
-    background-color: #ffffff; 
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+header {
     text-align: center;
+    width: 0%;
 }
 
 h3 {
@@ -23,8 +19,15 @@ h3 {
     font-size: 24px;
 }
 
-
-
+form {
+    background-color: #ffffff; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
 
 form p {
     color: #495057;
@@ -49,35 +52,8 @@ select {
 select {
     appearance: none; 
     background-color: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.48A.5.5 0 0 1 2 5.5h9.591a.5.5 0 0 1 .401.834L7.247 11.14z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 1;
 
-}
-
-
-input[type="submit"] {
-    background-color: #007bff; 
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-a {
-    display: block;
-    margin-top: 15px;
-    color: #e83e8c; 
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #c82365; 
-    text-decoration: underline;
 }
