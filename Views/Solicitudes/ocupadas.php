@@ -54,8 +54,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
 
     <script src="Assets/js/listado.js"></script></div>
 </body>
-</html> }
-        ?>
+</html>
     </div>
 
     <div id="paginacion-container">
