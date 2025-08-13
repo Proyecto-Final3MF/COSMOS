@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/UsuarioC.php");
-require_once("controller/SolicitudC.php");
+require_once("controllers/usuarioC.php");
+require_once("controllers/SolicitudC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -69,11 +69,24 @@ switch ($accion) {
         break;
     
     case 'crearS':
-        $controller = new
+        $controller = new SolicitudC();
+        $controller->crear();
         break;
 
     case 'crearP':
         
+        break;
+        
+    case 'SolicitudesLibres':
+        $controller = new SolicitudController();
+        $controller->getLibresData();
+        require_once("Views/Solicitudes/libres.php");
+        break;
+
+    case 'SolicitudesOcupadas':
+        $controller = new SolicitudController();
+        $controller->getOcupadasData($estado_filter = 'all');
+        require_once("Views/Solicitudes/ocupadas.php");
         break;
         
     default:

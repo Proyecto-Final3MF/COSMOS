@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/../../controllers/SolicitudC.php');
+require_once('controllers/SolicitudC.php');
 
-$controller = new SolicitudController();
+$controller = new SolicitudC();
 
 $estado_filter = isset($_GET['estado']) ? $_GET['estado'] : 'all';
 
@@ -23,51 +23,7 @@ $estados_map = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes Ocupadas</title>
-    <link rel="stylesheet" href="../../Assets/css/Listado.css">
-    <style>
-        
-        .solicitud {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-        .solicitud p {
-            margin: 5px 0;
-        }
-        .status-change-section {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed #eee;
-        }
-        .status-change-section select,
-        .status-change-section button {
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .status-change-section button {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .status-change-section button:hover {
-            background-color: #0056b3;
-        }
-        .status-message {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .status-message.success {
-            color: green;
-        }
-        .status-message.error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="Assets/css/Listado.css">
 </head>
 
 <body class="tema-claro"> 
@@ -105,6 +61,6 @@ $estados_map = [
     <div id="paginacion-container">
     </div>
 
-    <script src="../../Assets/js/listado.js"></script></div>
+    <script src="Assets/js/listado.js"></script></div>
 </body>
 </html>
