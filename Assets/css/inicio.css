@@ -1,11 +1,6 @@
  :root {
-            --primary-color: #3a86ff;
-            --secondary-color: #8338ec;
-            --dark-color: #212529;
-            --light-color: #f8f9fa;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --warning-color: #fd7e14;
+            --primary-color: #e83e8c;
+            --secondary-color: #e83e8c;
             --border-radius: 4px;
             --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -19,7 +14,7 @@
         }
 
          body {
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             color: var(--dark-color);
             line-height: 1.6;
         }
@@ -122,7 +117,7 @@
         }
 
         .search-bar button:hover {
-            background-color: #2979e6;
+            background-color: #972f5f;
         }
 
         
@@ -151,19 +146,26 @@
             margin-right: 1rem;
         }
 
+        .btn-signup {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            margin-right: 1rem;
+
+        }
+
         .btn-login:hover {
             background-color: var(--primary-color);
             color: white;
         }
 
-         .btn-signup {
+        
+        .btn-signup:hover {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .btn-signup:hover {
-            background-color: #2979e6;
-        }
+        
 
         
         .main-content {
@@ -173,7 +175,7 @@
         }
 
         .hero {
-            background-color: white;
+            background-color: rgb(255, 255, 255);
             border-radius: var(--border-radius);
             padding: 3rem 2rem;
             text-align: center;
