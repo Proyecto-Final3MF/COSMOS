@@ -56,4 +56,41 @@ select {
     background-repeat: no-repeat;
     background-position: right 1;
 
+<<<<<<< Updated upstream
+=======
+}
+
+
+input[type="submit"] {
+    background-color: #e83e8c; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button[type="submit"]:hover {
+    background-color: #972f5f; 
+    }
+
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #266937; 
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+
+a:hover {
+    color: #266937; 
+    text-decoration: underline;
+>>>>>>> Stashed changes
 }
