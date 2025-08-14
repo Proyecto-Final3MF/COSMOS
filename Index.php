@@ -25,7 +25,12 @@ switch ($accion) {
         $controller = new UsuarioC();
         $controller->login();
     break;
-        
+    
+    case 'editar': 
+        $controller = new UsuarioC();
+        $controller->editar();
+    break;
+
     case 'autenticar':
         $controller = new UsuarioC();
         $controller->autenticar();

@@ -12,6 +12,10 @@ class UsuarioC {
     public function login() {
         include("views/usuario/login.php");
     }
+     public function editar() {
+        include("views/usuario/EditarU.php");
+    }
+
 
     public function crear() {
         $usuario = new Usuario();

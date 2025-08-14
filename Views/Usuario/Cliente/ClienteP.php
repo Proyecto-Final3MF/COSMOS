@@ -21,5 +21,6 @@
     <a href="Index.php?accion=formularioP">Crear Nuevo Producto</a><br>
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
     <a href="Index.php?accion=logout">cerrar sesion</a>
+    <a href="Index.php?accion=actualizar">Actualizar</a>
 </body>
 </html>
