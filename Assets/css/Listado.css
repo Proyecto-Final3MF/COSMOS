@@ -82,9 +82,9 @@ border-radius: 4px;
 }
 
 .filter-buttons button.active {
-background-color: #007bff;
+background-color: #e83e8c;
 color: white;
-border-color: #007bff;
+border-color: #cc2f78;
 }
 
 /* Dark Mode */
