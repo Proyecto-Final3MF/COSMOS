@@ -53,9 +53,16 @@
         }
 
         .nav-links li {
-            margin-left: 1.5rem;
-        }
+    margin-left: 1.5rem;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
 
+
+.nav-links li img {
+    margin-bottom: 5px; 
+}
          .nav-links a {
             text-decoration: none;
             color: var(--dark-color);
