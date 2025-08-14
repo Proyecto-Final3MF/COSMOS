@@ -7,7 +7,7 @@
         
        
         <ul class="nav-links" id="nav-links">
-            <li><a href="../../Index.php">Inicio</a></li>
+            <li><a href="inicio.php">Inicio</a></li>
             <li><a href="#">Tecnicos</a></li>
             <li><a href="#">Servicios</a></li>
             <li><a href="#">Nosotros</a></li>
