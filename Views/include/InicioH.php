@@ -1,6 +1,9 @@
 <header>
     <nav class="navbar">
-    <ul class="nav-links" id="nav-links">
+       
+        
+       
+        <ul class="nav-links" id="nav-links">
     <li>
     <a href="inicio.php">
     <img src="Assets/imagenes/WhatsApp Image 2025-08-13 at 21.13.14.jpeg" height="50px" alt="logo de la app/pagina cosmos :V">
