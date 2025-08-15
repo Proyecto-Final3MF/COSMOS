@@ -22,11 +22,29 @@
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
 
     <div>
-        Lista De Productos
-        <ul>
-            
-        </ul>
-    </div>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($resultados as $p): ?>
+                <tr>
+                    <td><?= $p['id'] ?></td>
+                    <td><?= htmlspecialchars($p['nombre']) ?></td>
+                    <td>$<?= number_format($p['precio'], 2) ?></td>
+                    <td>
+                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
+                        <a href="index.php?accion=borrar&id=<?= $p['id'] ?>">Borrar</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>s
 </body>
 </html>
