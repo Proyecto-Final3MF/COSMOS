@@ -64,6 +64,7 @@ class UsuarioC {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
+            $_SESSION['id'] = $user['id'];
             header("Location: index.php?accion=redireccion");
             exit();
         } else {

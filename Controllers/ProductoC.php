@@ -10,16 +10,13 @@ class ProductoC {
     }
 
     public function guardarP(){
+        
 
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         
-        if (!isset($_SESSION['usuario']['id'])) {
-            header("Location: index.php?accion=login");
-            exit();
-        }
-        $id_usuario = $_SESSION['usuario']['id'];
+        $id_usuario = $_SESSION['id'];
 
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
             echo "Error: Todos los campos son obligatorios.";
@@ -33,8 +30,7 @@ class ProductoC {
 
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
-        $rutaFinal = "" . $nombreArchivo;
-
+        $rutaFinal = "Image/" . $nombreArchivo;
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
             if($producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario)){
                 echo "Producto creado exitosamente.";
