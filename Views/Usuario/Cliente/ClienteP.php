@@ -1,5 +1,5 @@
 <?php
-require_once("Views/include/InicioH.php");
+    require_once ("./Views/include/InicioH.php");
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
@@ -16,11 +16,18 @@ require_once("Views/include/InicioH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Cliente</title>
-    <link rel="stylesheet" href="./Assets/css/TecnicoP.css"> </head>
+    <link rel="stylesheet" href="./Assets/css/Usuarios.css"> </head>
 <body>
     <p> ¿En que podemos ayudarte? </p>
     <a href="Index.php?accion=formularioP">Crear Nuevo Producto</a><br>
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
-    <a href="Index.php?accion=logout">Cerrar sesion</a>
+
+    <div>
+        Lista De Productos
+        <ul>
+            
+        </ul>
+    </div>
+
 </body>
 </html>
