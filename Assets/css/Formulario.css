@@ -88,3 +88,22 @@ a:hover {
     color: #266937; 
     text-decoration: underline;
 }
+
+button[type="submit"] {
+    background-color: #e83e8c; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+
+    background-color: #972f5f; 
+
+}

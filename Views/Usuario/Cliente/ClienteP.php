@@ -1,4 +1,5 @@
 <?php
+    require_once ("./Views/include/InicioH.php");
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
