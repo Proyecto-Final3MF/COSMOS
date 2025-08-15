@@ -19,7 +19,7 @@ section {
 }
 
 h3 {
-    color: #007bff; 
+    color: #e83e8c; 
     margin-bottom: 20px;
     font-size: 24px;
 }
@@ -51,7 +51,7 @@ input[type="password"] {
 }
 
 button[type="submit"] {
-    background-color: #007bff; 
+    background-color: #e83e8c; 
     color: white;
     padding: 12px 20px;
     border: none;
@@ -64,31 +64,25 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-<<<<<<< Updated upstream
-    background-color: #0056b3; 
-=======
+
     background-color: #972f5f; 
->>>>>>> Stashed changes
+
 }
 
 a {
     display: block;
     margin-top: 15px;
-<<<<<<< Updated upstream
-    color: #e83e8c; 
-=======
+
     color: #266937; 
->>>>>>> Stashed changes
+
     text-decoration: none;
     font-size: 14px;
     transition: color 0.3s ease;
 }
 
 a:hover {
-<<<<<<< Updated upstream
-    color: #c82365; 
-=======
+
     color: #266937; 
->>>>>>> Stashed changes
+
     text-decoration: underline;
 }

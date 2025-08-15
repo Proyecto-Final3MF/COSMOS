@@ -8,26 +8,23 @@ body {
     margin: 0;
 }
 
-header {
-    text-align: center;
-    width: 0%;
-}
-
-h3 {
-    color: #007bff; 
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-form {
+section {
     background-color: #ffffff; 
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    text-align: left;
+    text-align: center;
 }
+
+h3 {
+    color: #e83e8c; 
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+
 
 form p {
     color: #495057;
@@ -56,8 +53,6 @@ select {
     background-repeat: no-repeat;
     background-position: right 1;
 
-<<<<<<< Updated upstream
-=======
 }
 
 
@@ -92,5 +87,4 @@ a {
 a:hover {
     color: #266937; 
     text-decoration: underline;
->>>>>>> Stashed changes
 }

@@ -1,10 +1,7 @@
 <?php
-<<<<<<< Updated upstream
 
-    if (isset($_SESSION['rol']) == ROL_TECNICO or isset($_SESSION['rol']) == ROL_CLIENTE){
-=======
     if (isset($_SESSION['rol']) == ROL_TECNICO || isset($_SESSION['rol']) == ROL_CLIENTE || isset($_SESSION['rol']) == ROL_ADMIN){
->>>>>>> Stashed changes
+
         header("Location: index.php?accion=redireccion");
     } 
 ?>
@@ -18,8 +15,8 @@
      <link rel="stylesheet" href="./Assets/css/register.css">
 </head>
 <body>
-    
-    <form method="POST" action="index.php?accion=guardarU">
+<section>
+        <form method="POST" action="index.php?accion=guardarU">
 
         <h3>Registrarse</h3>
 
@@ -50,7 +47,7 @@
         <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
-    
+    </section>
 </body>
 
 </html>
