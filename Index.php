@@ -100,6 +100,11 @@ switch ($accion) {
         $controller->getOcupadasData($estado_filter = 'all');
         require_once("Views/Solicitudes/ocupadas.php");
     break;
+
+    case 'SolicitudSelec';
+        $controller = new SolicitudC();
+        $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
+    break;
         
     default:
         if (isset($_SESSION['usuario'])) {
