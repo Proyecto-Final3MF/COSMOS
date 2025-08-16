@@ -24,9 +24,25 @@
     <div>
         <p>Lista de Productos</p> <br>
         <table>
-            <th>Nombre</th>
-            <th>Imagen</th>
-            <th>Categoria</th>
+            <thead>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Categoria</th>
+            </thead>
+            <tbody>
+                <?php foreach ($resultados as $p): ?>
+                <tr>
+                <td><?= $p['id'] ?></td>
+                <td><?= htmlspecialchars($p['nombre']) ?></td>
+                <td>$<?= number_format($p['imagen']) ?></td>
+                <td>$<?= htmlspecialchars($p['categoria']) ?></td>
+                <td>
+                    <a href="index.php?accion=editar&id=<?= $p['id'] ?>"class="btn btn-sm btn-outline-primary">Editar</a>
+                    <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" class="btn btn-danger" onclick="return confirmarBorrar();">Borrar</a>
+                </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
     </div>
 </body>
