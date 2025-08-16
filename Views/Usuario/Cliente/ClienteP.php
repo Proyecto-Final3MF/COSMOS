@@ -22,6 +22,7 @@
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
 
     <div>
+<<<<<<< Updated upstream
         <table>
             <thead>
                 <tr>
@@ -46,5 +47,15 @@
             </tbody>
         </table>
     </div>s
+=======
+        Lista De Productos
+        <table>
+            <tr>Nombre</tr>
+            <tr>Imagen</tr>
+            <tr>Categoria</tr>
+        </table>
+    </div>
+
+>>>>>>> Stashed changes
 </body>
 </html>
