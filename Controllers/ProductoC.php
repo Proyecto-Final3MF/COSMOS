@@ -11,7 +11,6 @@ class ProductoC {
 
     public function guardarP(){
         
-
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';

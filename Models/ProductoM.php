@@ -24,6 +24,11 @@ class Producto {
         return null;
     }
 
+    public function listar($id_usuario) {
+        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario";
+        return $this->db->query($sql);
+    }
+
     public function existeProducto($nombre, $id_usuario) {
         $nombre = $this->conn->real_escape_string($nombre);
         $id_usuario = (int)$id_usuario;
