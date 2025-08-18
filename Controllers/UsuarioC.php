@@ -35,7 +35,7 @@ class UsuarioC {
             $this->historialController->registrarModificacion(
                 null,
                 null,
-                'creo',
+                'Guardo el usuario',
                 $usuario,
                 $id_user,
                 $obs
