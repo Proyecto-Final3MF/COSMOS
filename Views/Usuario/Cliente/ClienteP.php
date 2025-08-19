@@ -1,5 +1,4 @@
 <?php
-    require_once ("./Views/include/InicioH.php");
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
         // No action needed, since the user is a client.
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
@@ -26,7 +25,6 @@
 </head>
 <body>
     <p> ¿En que podemos ayudarte? </p>
-    <a href="Index.php?accion=formularioP">Crear Nuevo Producto</a><br>
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
 
     <div>
@@ -38,14 +36,15 @@
                     <th>Imagen</th>
                     <th>Categoria</th>
                     <th>Modificaciones</th>
+                    <th>Agregar Producto</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($resultados as $producto): ?>
+                <?php foreach ($resultados as $p): ?>
                 <tr>
-                    <td><?= htmlspecialchars($producto['nombre']) ?></td>
+                    <td><?= htmlspecialchars($p['nombre']) ?></td>
                     <td>
-                        <img src="<?= htmlspecialchars($producto['imagen']) ?>" alt="Imagen de producto">
+                        <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto">
                     </td>
                     <td>
                         <?php 
@@ -56,10 +55,14 @@
                     </td>
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                    </td>
+                
+                <?php endforeach; ?>
+                    <td>
+                        <a href="Index.php?accion=formularioP">+</a><br>
                     </td>
                 </tr>
-                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
