@@ -10,6 +10,8 @@
     <div class="container">
         <h1>Histórial de actividades</h1>
 
+        <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda.</p>
+
         <form action="index.php" method="GET" class="filter-form">
             <input type="hidden" name="accion" value="mostrarHistorial">
             <div class="form-group">
@@ -18,10 +20,10 @@
             </div>
             <div class="form-group">
                 <label for="start_date">Fecha de inicio:</label>
-                <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($_GET['start_date'] ?? ''); ?>">
+                <input required type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($_GET['start_date'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label for="end_date">Fecha de fin:</label>
+                <label required for="end_date">Fecha de fin:</label>
                 <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($_GET['end_date'] ?? ''); ?>">
             </div>
             <button type="submit">Aplicar Filtros</button>
@@ -36,7 +38,7 @@
                     <div class="historial-item">
                         <p>
                             <strong>
-                                [<?php echo htmlspecialchars($registro->usuario ? $registro->usuario : 'Sistema/Desconocido'); ?>]
+                                [<?php echo htmlspecialchars($registro->usuario ? $registro->usuario : 'Sistema'); ?>]
                             </strong>
                             #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
                             <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>

@@ -53,16 +53,9 @@
         }
 
         .nav-links li {
-    margin-left: 1.5rem;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-}
+            margin-left: 1.5rem;
+        }
 
-
-.nav-links li img {
-    margin-bottom: 5px; 
-}
          .nav-links a {
             text-decoration: none;
             color: var(--dark-color);
@@ -172,72 +165,36 @@
             color: white;
         }
 
+
+       a {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    color: #266937; 
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+
+a:hover {
+    color: #266937; 
+    text-decoration: underline;
+}
+
+p {
+text-align: center;
+
+}
+
+.navbar h1 {
+    text-align: center;
+    width: 100%; 
+}
         
-
-        
-        .main-content {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero {
-            background-color: rgb(255, 255, 255);
-            border-radius: var(--border-radius);
-            padding: 3rem 2rem;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 2rem;
-            background-image: linear-gradient(to bottom right, rgba(58, 134, 255, 0.1), rgba(131, 56, 236, 0.1));
-        }
-
-          .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #555;
-            max-width: 890px;
-            margin: 0 auto 2rem;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-            .feature-card {
-            background-color: rgb(187, 197, 218);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(43, 41, 41, 0.514);
-        }
-
-        .feature-card img {
-            width: 100%;
-            border-radius: var(--border-radius);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 0.8rem;
-            color: var(--primary-color);
-        }
-
-         .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            padding: 0.5rem;
-        }
+div{
+    background-color: #e83e8c;
+    width: 500px;
+    height: 200px;
+    
+}

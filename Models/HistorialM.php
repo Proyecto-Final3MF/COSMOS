@@ -14,7 +14,6 @@ class HistorialM {
 
         $query = "INSERT INTO historial (usuario, usuario_id, accion, item, item_id, fecha_hora, obs)
                  VALUES (?, ?, ?, ?, ?, NOW(), ?)";
-
         $stmt = $this->conexion->prepare($query);
 
         if ($stmt === false) {
@@ -53,16 +52,11 @@ class HistorialM {
         $param_types .= 'ssss';
     }
 
-    if (!empty($startDate)) {
-        $conditions[] = "h.fecha_hora >= ?";
+    if (!empty($startDate) && !empty($endDate)) {
+        $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
         $params[] = $startDate . ' 00:00:00';
-        $param_types .= 's';
-    }
-
-    if (!empty($endDate)) {
-        $conditions[] = "h.fecha_hora <= ?";
         $params[] = $endDate . ' 23:59:59';
-        $param_types .= 's';
+        $param_types .= 'ss';
     }
 
     if (!empty($conditions)) {

@@ -1,4 +1,5 @@
 <?php
+//test franco
 session_start();
 require_once("Config/conexion.php");
 require_once("controllers/usuarioC.php");
@@ -104,6 +105,11 @@ break;
         $controller = new SolicitudC();
         $controller->getOcupadasData($estado_filter = 'all');
         require_once("Views/Solicitudes/ocupadas.php");
+    break;
+
+    case 'SolicitudSelec';
+        $controller = new SolicitudC();
+        $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
     break;
         
     default:
