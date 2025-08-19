@@ -6,7 +6,7 @@
     } else {
         header("Location: index.php?accion=login");
     }
-require_once ("./Views/include/InicioH.php");
+
     require_once ("./Views/include/TH.php");
     
 ?>
