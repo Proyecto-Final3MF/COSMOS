@@ -24,18 +24,14 @@ class Producto {
         return null;
     }
 
-        // In Models/ProductoM.php
     public function listar($id_usuario) {
-        // Corrected to use $this->conn
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario";
         $resultado = $this->conn->query($sql);
         
-        // Check if the query was successful before fetching results
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
-            // Return an empty array if there's an error
             return [];
         }
     }
