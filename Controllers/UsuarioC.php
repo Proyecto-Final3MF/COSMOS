@@ -33,7 +33,7 @@ class UsuarioC {
             $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
 
-            $this->historialController->registrarModificacion(null, null, 'creo', $usuario, $id_user, $obs);
+            $this->historialController->registrarModificacion(null, null, 'guardo el usuario', $usuario, $id_user, $obs);
 
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
