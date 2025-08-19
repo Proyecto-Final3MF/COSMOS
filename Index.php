@@ -50,7 +50,8 @@ switch ($accion) {
     case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
-                include("./Views/Usuario/Cliente/ClienteP.php");
+                $controller = new ProductoC();
+                $controller->mostrarPanelCliente();
             } elseif ($_SESSION['rol'] == ROL_TECNICO) {
                 include("./Views/Usuario/Tecnico/TecnicoP.php");
             } elseif ($_SESSION['rol'] == ROL_ADMIN) {

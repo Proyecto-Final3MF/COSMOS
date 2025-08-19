@@ -1,5 +1,4 @@
 <?php
-    require_once ("./Views/include/InicioH.php");
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
         // No action needed, since the user is a client.
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
@@ -41,11 +40,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($resultados as $producto): ?>
+                <?php foreach ($resultados as $p): ?>
                 <tr>
-                    <td><?= htmlspecialchars($producto['nombre']) ?></td>
+                    <td><?= htmlspecialchars($p['nombre']) ?></td>
                     <td>
-                        <img src="<?= htmlspecialchars($producto['imagen']) ?>" alt="Imagen de producto">
+                        <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto">
                     </td>
                     <td>
                         <?php 

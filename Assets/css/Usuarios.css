@@ -193,8 +193,9 @@ text-align: center;
 }
         
 div{
-    background-color: #e83e8c;
-    width: 500px;
-    height: 200px;
+    background-color: #f15fa3;
+    margin: 25px;
+    width: 50%;
+    height: 50%;
     
 }
