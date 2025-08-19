@@ -8,10 +8,14 @@ class UsuarioC {
     public function __construct(){
         $this->historialController = new HistorialController();
     }
-
+    
     public function login() {
         include("views/usuario/login.php");
     }
+     public function editar() {
+        include("views/usuario/EditarU.php");
+    }
+
 
     public function crear() {
         $usuario = new Usuario();
@@ -32,14 +36,9 @@ class UsuarioC {
             if ($usuarioN) {
             $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
-            $this->historialController->registrarModificacion(
-                null,
-                null,
-                'creo',
-                $usuario,
-                $id_user,
-                $obs
-            );
+
+            $this->historialController->registrarModificacion(null, null, 'guardo el usuario', $usuario, $id_user, $obs);
+
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
@@ -53,7 +52,26 @@ class UsuarioC {
             header("Location: index.php?accion=register");
             exit();
         }
+    } 
+
+    public function actualizar() {
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $email = $_POST['email'];
+    
+    $usuarioM = new Usuario();
+    if ($usuarioM->actualizarU($id, $nombre, $email)) {
+        // Actualiza el nombre en la sesión si es necesario
+        $_SESSION['usuario'] = $nombre;
+        
+        // Redirige al panel del usuario con un mensaje de éxito
+        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+    } else {
+        // Redirige al panel con un mensaje de error
+        header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
+exit();
+}
 
     public function autenticar() {
         $usuario = $_POST['usuario'];
