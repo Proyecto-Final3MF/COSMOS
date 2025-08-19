@@ -36,6 +36,7 @@
                     <th>Imagen</th>
                     <th>Categoria</th>
                     <th>Modificaciones</th>
+                    <th>Agregar Producto</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,12 +55,12 @@
                     </td>
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
                     </td>
                 
                 <?php endforeach; ?>
                     <td>
-                        <a href="Index.php?accion=formularioP">Crear Nuevo Producto</a><br>
+                        <a href="Index.php?accion=formularioP">+</a><br>
                     </td>
                 </tr>
             </tbody>
