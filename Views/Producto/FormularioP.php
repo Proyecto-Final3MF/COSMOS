@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Producto</title>
+    <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
-    <form method="POST" action="Index.php?accion=guardarP">
+    <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
             <p>Nombre del Equipo: </p>
             <label for="nombre" class="form-label"></label>

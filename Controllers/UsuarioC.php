@@ -36,14 +36,9 @@ class UsuarioC {
             if ($usuarioN) {
             $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
-            $this->historialController->registrarModificacion(
-                null,
-                null,
-                'creo',
-                $usuario,
-                $id_user,
-                $obs
-            );
+
+            $this->historialController->registrarModificacion(null, null, 'guardo el usuario', $usuario, $id_user, $obs);
+
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
@@ -87,6 +82,7 @@ exit();
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
+            $_SESSION['id'] = $user['id'];
             header("Location: index.php?accion=redireccion");
             exit();
         } else {

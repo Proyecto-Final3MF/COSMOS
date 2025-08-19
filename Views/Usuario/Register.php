@@ -1,5 +1,7 @@
 <?php
+
     if (isset($_SESSION['rol']) == ROL_TECNICO || isset($_SESSION['rol']) == ROL_CLIENTE || isset($_SESSION['rol']) == ROL_ADMIN){
+
         header("Location: index.php?accion=redireccion");
     } 
 ?>
@@ -10,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-     <link rel="stylesheet" href="./Assets/css/register.css">
+     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
 <section>

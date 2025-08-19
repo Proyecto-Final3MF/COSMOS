@@ -44,17 +44,10 @@ class SolicitudC {
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
 
         if ($success) {
-        $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
-        $this->historialController->registrarModificacion(
-            $usuario,
-            $usuarioId,
-            'modifico',
-            'solicitud',
-            $solicitudId,
-            $obs
-        );
-    }
-    return $success;
+            $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
+            $this->historialController->registrarModificacion($usuario, $usuarioId, 'modifico', 'solicitud', $solicitudId, $obs);
+        }
+        return $success;
 }
 
 public function cancelarRequest($id) {

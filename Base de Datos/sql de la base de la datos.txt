@@ -17,8 +17,8 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE producto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR (255),
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
     imagen VARCHAR(255) NOT NULL,
     id_cat INT NOT NULL, FOREIGN KEY (id_cat) REFERENCES categoria(id),
     id_usuario INT NOT NULL, FOREIGN KEY (id_usuario) REFERENCES usuario(id)
@@ -50,9 +50,9 @@ CREATE TABLE historial (
     accion VARCHAR(100),
     item VARCHAR(100),
     item_id INT,
-    fecha_hora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+    fecha_hora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     obs VARCHAR(255)
-):
+);
 
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
