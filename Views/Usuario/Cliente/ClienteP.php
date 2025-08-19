@@ -32,11 +32,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Imagen</th>
-                    <th>Categoria</th>
-                    <th>Modificaciones</th>
-                    <th>Agregar Producto</th>
+                    <th> Nombre </th>
+                    <th> Imagen </th>
+                    <th> Categoria </th>
+                    <th> Modificaciones </th>
+                    <th> Agregar Producto </th>
                 </tr>
             </thead>
             <tbody>
