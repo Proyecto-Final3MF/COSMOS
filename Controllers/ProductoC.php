@@ -59,5 +59,12 @@ class ProductoC {
         
         include("./Views/Usuario/Cliente/ClienteP.php");
     }
+    
+    public function borrar() {
+        $producto = new Producto();
+        $id = $_GET['id'];
+        $producto->borrar($id);
+        header("Location: index.php?accion=redireccion");
+    }
 }
 ?>

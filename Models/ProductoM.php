@@ -56,5 +56,10 @@ class Producto {
         $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES ('$nombre', '$imagen', '$categoria_id', '$id_usuario')";
         return $this->conn->query($sql);
     }
+
+    public function borrar($id) {
+        $sql = "DELETE FROM producto WHERE id=$id";
+        return $this->conn->query($sql);
+    }
 }
 ?>

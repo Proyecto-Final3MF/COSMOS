@@ -55,7 +55,8 @@ break;
     case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
-                include("./Views/Usuario/Cliente/ClienteP.php");
+                $controller = new ProductoC();
+                $controller->mostrarPanelCliente();
             } elseif ($_SESSION['rol'] == ROL_TECNICO) {
                 include("./Views/Usuario/Tecnico/TecnicoP.php");
             } elseif ($_SESSION['rol'] == ROL_ADMIN) {
@@ -89,7 +90,12 @@ break;
         $controller = new ProductoC();
         $controller->guardarP();
     break;
-    
+
+    case 'borrarP':
+        $controller = new ProductoC();
+        $controller->borrar();
+    break;
+
     case 'crearS':
         $controller = new SolicitudC();
         $controller->crearS();
