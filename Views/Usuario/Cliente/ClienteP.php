@@ -63,5 +63,7 @@
             </tbody>
         </table>
     </div>
+    <a href="Index.php?accion=logout">cerrar sesion</a>
+    <a href="Index.php?accion=actualizar">Actualizar</a>
 </body>
 </html>

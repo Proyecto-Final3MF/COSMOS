@@ -1,6 +1,4 @@
-<?php
-    require_once("views/includes/header.php");
-?>
+
 
 <h2>Editar Usuario</h2>
 
