@@ -1,4 +1,5 @@
 <?php
+    require_once ("./Views/include/InicioH.php");
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
         // No action needed, since the user is a client.
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
