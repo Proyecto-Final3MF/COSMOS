@@ -85,7 +85,12 @@ switch ($accion) {
         $controller = new ProductoC();
         $controller->guardarP();
     break;
-    
+
+    case 'borrarP':
+        $controller = new ProductoC();
+        $controller->borrar();
+    break;
+
     case 'crearS':
         $controller = new SolicitudC();
         $controller->crearS();
