@@ -11,7 +11,6 @@ class ProductoC {
 
     public function guardarP(){
         
-
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
@@ -42,6 +41,23 @@ class ProductoC {
         } else {
             echo "Error al subir la imagen.";
         }
+    }
+    
+    public function mostrarPanelCliente() {
+        // Retrieve the user ID from the session
+        $id_usuario = $_SESSION['id'] ?? null;
+        
+        // Check if the ID exists before proceeding
+        if ($id_usuario === null) {
+            header("Location: index.php?accion=login");
+            exit();
+        }
+
+        $producto = new Producto();
+        // Pass the user ID to the listar method
+        $resultados = $producto->listar($id_usuario);
+        
+        include("./Views/Usuario/Cliente/ClienteP.php");
     }
 }
 ?>
