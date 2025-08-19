@@ -22,7 +22,7 @@
 
         <h3>Iniciar Sesion</h3>
         <form method="POST" action="Index.php?accion=autenticar">
-
+fsa
             <p>Usuario </p>
             <label for="usuario" class="form-label"></label>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
