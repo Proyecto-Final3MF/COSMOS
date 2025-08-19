@@ -25,25 +25,37 @@
         <p>Lista de Productos</p> <br>
         <table>
             <thead>
-                <th>Nombre</th>
-                <th>Imagen</th>
-                <th>Categoria</th>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Categoria</th>
+                    <th>Acciones</th> </tr>
             </thead>
             <tbody>
                 <?php foreach ($resultados as $p): ?>
                 <tr>
-                <td><?= $p['id'] ?></td>
-                <td><?= htmlspecialchars($p['nombre']) ?></td>
-                <td>$<?= number_format($p['imagen']) ?></td>
-                <td>$<?= htmlspecialchars($p['categoria']) ?></td>
-                <td>
-                    <a href="index.php?accion=editar&id=<?= $p['id'] ?>"class="btn btn-sm btn-outline-primary">Editar</a>
-                    <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" class="btn btn-danger" onclick="return confirmarBorrar();">Borrar</a>
-                </td>
+                    <td><?= htmlspecialchars($p['nombre']) ?></td>
+                    <td>
+                        <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" style="width: 50px;">
+                    </td>
+                    <td>
+                        <?php 
+                            // To get the category name, you need to call the method from your model.
+                            // Instantiate the class here or pass the object from the controller.
+                            $productoModel = new Producto();
+                            $categoriaNombre = $productoModel->obtenerCategoriaporId($p['id_cat']);
+                            echo htmlspecialchars($categoriaNombre);
+                        ?>
+                    </td>
+                    <td>
+                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
+                        <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </body>
+</html>
 </html>

@@ -42,5 +42,11 @@ class ProductoC {
             echo "Error al subir la imagen.";
         }
     }
+
+     public function listarProductosUsuario(){
+        $producto = new Producto();
+        $resultados = $producto->listar($id_usuario);
+        include("./Views/Producto/PanelCliente.php"); 
+    }
 }
 ?>
