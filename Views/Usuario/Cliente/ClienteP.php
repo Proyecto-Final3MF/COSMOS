@@ -1,6 +1,5 @@
 <?php
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        // No action needed, since the user is a client.
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
     } else {
@@ -9,9 +8,6 @@
 
     require_once ("./Views/include/CH.php");
 
-    // The logic to get the products should be in the controller (ProductoC)
-    // and passed to this view. Make sure the $resultados variable is set.
-    // If it's not set, we can initialize it to an empty array to prevent errors.
     $resultados = $resultados ?? [];
 ?>
 
@@ -55,7 +51,7 @@
                     </td>
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>">Borrar</a>
                     </td>
                 
                 <?php endforeach; ?>
