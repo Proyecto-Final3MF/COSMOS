@@ -24,10 +24,13 @@
     <link rel="stylesheet" href="./Assets/css/Usuarios.css">
 </head>
 <body>
+
+ <div>
+
     <p> ¿En que podemos ayudarte? </p>
     <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
 
-    <div>
+   
         <p>Lista de Productos</p> <br>
         <table>
             <thead>
@@ -66,7 +69,6 @@
             </tbody>
         </table>
     </div>
-    <a href="Index.php?accion=logout">cerrar sesion</a>
     <a href="Index.php?accion=actualizar">Actualizar</a>
 </body>
 </html>
