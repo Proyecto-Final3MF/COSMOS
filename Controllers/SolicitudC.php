@@ -22,13 +22,20 @@ class SolicitudC {
         
     }
 
-    public function guardar() {
+    public function guardarP() {
         $solicitud = new Solicitud();
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         $categoria_id = $_POST['categoria_id'];
         $prioridad = $_POST['prioridad'];
         $usuario_id = $_SESSION['usuario_id'];
+    }
+
+    public function borrarS() {
+        $solicitud = new Solicitud();
+        $id = $_GET['id'];
+        $solicitud->borrarS($id);
+        header("Location: index.php?accion=redireccion");
     }
 
     public function getLibresData() {

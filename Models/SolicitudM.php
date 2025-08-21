@@ -24,6 +24,11 @@ class Solicitud {
         return null;
     }
 
+    public function borrarS($id) {
+        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
+        return $this->conn->query($sql);
+    }
+
     public function getSolicitudesDisponibles() {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
                 FROM solicitud

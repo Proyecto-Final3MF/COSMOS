@@ -11,11 +11,7 @@
         <p>Titulo: </p>
         <label for="titulo" class="form-label"></label>
         <input type="text" class="form-control" id="titulo" name="titulo" autocomplete="off" required> <br><br>
-
-        <p>Email: </p>
-        <label for="mail" class="form-label"></label>
-        <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
-                        
+               
         <p>Producto:</p>
         <select id="producto" name="producto" required>
                 <option value=""></option>
@@ -23,6 +19,8 @@
                     <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre']) ?></option>
                 <?php endforeach; ?>
         </select>
+
+        <p>Descripcion</p>
                         
         <label for="prioridad"><p>Nivel de Prioridad: </p></label>
             <select name="prioridad" id="prioridad" required>
@@ -33,7 +31,6 @@
             </select><br><br>
 
         <input type="submit" value="guardar">
-        <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie Sesion</a>
         
     </form>
 </body>
