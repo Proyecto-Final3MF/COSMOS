@@ -1,8 +1,7 @@
 <?php
-//test franco
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/usuarioC.php");
+require_once("controllers/UsuarioC.php");
 require_once("controllers/SolicitudC.php");
 require_once("controllers/ProductoC.php");
 
@@ -76,6 +75,16 @@ switch ($accion) {
         $controller->formularioS();
     break;
 
+    case 'guardarS':
+        $controller = new SolicitudC();
+        $controller->guardarS();
+    break;
+
+    case 'borrarS':
+        $controller = new SolicitudC();
+        $controller->borrarS();
+    break;
+
     case 'formularioP':
         $controller = new ProductoC();
         $controller->formularioP();
@@ -88,12 +97,7 @@ switch ($accion) {
 
     case 'borrarP':
         $controller = new ProductoC();
-        $controller->borrar();
-    break;
-
-    case 'crearS':
-        $controller = new SolicitudC();
-        $controller->crearS();
+        $controller->borrarP();
     break;
         
     case 'SolicitudesLibres':
