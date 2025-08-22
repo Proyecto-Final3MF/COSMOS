@@ -1,5 +1,5 @@
 <?php
-require_once("models/UsuarioM.php");
+require_once("Models/UsuarioM.php");
 require_once("Controllers/HistorialC.php");
 
 class UsuarioC {

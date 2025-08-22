@@ -2,9 +2,9 @@
 //test franco
 session_start();
 require_once("Config/conexion.php");
-require_once("controllers/usuarioC.php");
-require_once("controllers/SolicitudC.php");
-require_once("controllers/ProductoC.php");
+require_once("Controllers/UsuarioC.php");
+require_once("Controllers/SolicitudC.php");
+require_once("Controllers/ProductoC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 

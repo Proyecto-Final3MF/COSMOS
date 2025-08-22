@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../models/HistorialM.php';
+require_once __DIR__ . '/../Models/HistorialM.php';
 
 class HistorialController {
     private $historialModel;
