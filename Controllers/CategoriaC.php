@@ -34,7 +34,7 @@ class CategoriaC {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
             session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
+            $_SESSION['usuario'] = $usuarioN['nombre'];
             $this->historialController->registrarModificacion($_SESSION['usuario'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
             header("Location: index.php?accion=FormularioC");
             exit();
