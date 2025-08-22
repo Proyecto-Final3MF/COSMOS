@@ -15,7 +15,7 @@ class Usuario {
         return $this->conn->query($sql);
     }
 
-    public function verificar($usuario, $contrasena) {
+    public function verificarU($usuario, $contrasena) {
         $usuario = $this->conn->real_escape_string($usuario);
         $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 5";
         $res = $this->conn->query($sql);
