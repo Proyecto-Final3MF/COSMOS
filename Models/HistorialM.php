@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../config/conexion.php');
+require_once(__DIR__ . '/../Config/conexion.php');
 
 class HistorialM {
     private $conexion;
