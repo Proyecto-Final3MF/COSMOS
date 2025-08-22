@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../models/SolicitudM.php');
+require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/HistorialC.php');
 
 class SolicitudC {
