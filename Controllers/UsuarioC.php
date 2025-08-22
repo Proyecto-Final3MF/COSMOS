@@ -28,7 +28,7 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-            $usuarioN = $usuarioM->verificar($usuario, $contrasena);
+            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
             if ($usuarioN) {
             $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
@@ -54,7 +54,7 @@ class UsuarioC {
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
-        $user = $modelo->verificar($usuario, $contrasena);
+        $user = $modelo->verificarU($usuario, $contrasena);
         if ($user) {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
