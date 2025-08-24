@@ -20,7 +20,7 @@
                             <div class="btn-group-actions d-flex">
                             <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-primary">Editar</a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                                <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-danger" onclick="return confirmarBorrar();">Borrar</a>
+                                <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-danger">Borrar</a>
                             <?php endif; ?>
                             </div>
                     </td>

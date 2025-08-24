@@ -1,5 +1,4 @@
 <?php
-//test franco
 session_start();
 require_once("Config/conexion.php");
 require_once("Controllers/UsuarioC.php");
@@ -46,7 +45,7 @@ switch ($accion) {
    case 'actualizar':
     $controller = new UsuarioC();
     $controller->actualizar();
-break;
+    break;
 
     case 'autenticar':
         $controller = new UsuarioC();
@@ -158,6 +157,11 @@ break;
     case 'actualizarC':
         $controller = new CategoriaC();
         $controller->actualizarC();
+    break;
+
+    case 'borrarC':
+        $controller = new CategoriaC();
+        $controller->borrarC();
     break;
         
     default:
