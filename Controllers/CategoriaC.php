@@ -29,15 +29,14 @@ class CategoriaC {
         if ($categoria->verificarExistencia($nombre)) {
             $_SESSION['mensaje'] = "La categoria '{$nombre}' ya existe.";
             header("Location: index.php?accion=FormularioC");
+            exit();
         } else {
             if ($categoria->guardarC($nombre)) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
-            session_start();
-            $_SESSION['usuario'] = $usuarioN['nombre'];
-            $this->historialController->registrarModificacion($_SESSION['usuario'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
+            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
             header("Location: index.php?accion=FormularioC");
-            exit();
+            die();
             } else {
                 $_SESSION['mensaje'] = "Error al guardar la categoria.";
                 header("Location: index.php?accion=FormularioC");
@@ -82,4 +81,24 @@ class CategoriaC {
             exit();
         }
     }
+
+    public function borrarC() {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+            $categoria = new Categoria();
+            $id = (int) $_GET['id'];
+            $categoria->verificarExistencia($id);
+
+            if ($categoria) {
+                if ($categoria->borrarC($id)) {
+                $_SESSION['mensaje'] = "Categoría eliminada exitosamente.";                    
+            } else {
+                $_SESSION['mensaje'] = "Error: Categoría no encontrada.";
+            }
+        } else {
+            $_SESSION['mensaje'] = "Error: Solicitud no válida.";
+        }
+        header("Location: index.php?accion=listarC");
+        exit();
+    }
+}
 }

@@ -76,5 +76,15 @@ class Categoria {
             return false;
         }
     }
+public function borrarC($id) {
+        $sql = "DELETE FROM categoria WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt) {
+        $stmt->bind_Param('i', $id);
+        return $stmt->execute();
+        } else {
+            return false;
+        }
+}
 }
 ?>
