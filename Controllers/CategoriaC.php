@@ -28,21 +28,16 @@ class CategoriaC {
 
         if ($categoria->verificarExistencia($nombre)) {
             $_SESSION['mensaje'] = "La categoria '{$nombre}' ya existe.";
-            header("Location: index.php?accion=FormularioC");
-            exit();
         } else {
             if ($categoria->guardarC($nombre)) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
             $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
-            header("Location: index.php?accion=FormularioC");
-            die();
             } else {
                 $_SESSION['mensaje'] = "Error al guardar la categoria.";
-                header("Location: index.php?accion=FormularioC");
-                exit();
             }
         }
+        header("Location: index.php?accion=FormularioC");
     }
 
     public function listarC() {
@@ -70,12 +65,10 @@ class CategoriaC {
                 $categoria->actualizarC($id, $nombre);
 
                 $_SESSION['mensaje'] = "Categoria fue cambiada para '{$nombre}'.";
-                header("Location: index.php?accion=listarC");
-                exit();
             } else {
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización..";
-                header("Location: index.php?accion=listarC");
             }
+            header("Location: index.php?accion=listarC");
         } else {
             header("Location: index.php?accion=listarC");
             exit();
