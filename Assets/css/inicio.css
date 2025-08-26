@@ -55,7 +55,7 @@ margin-right: 0.5rem;
 }
 
         
-        .nav-links li {
+.nav-links li {
     margin-left: 1.5rem;
     display: flex; 
     flex-direction: column; 
