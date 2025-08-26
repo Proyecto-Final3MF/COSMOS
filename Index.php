@@ -1,10 +1,10 @@
 <?php
-//test franco
 session_start();
 require_once("Config/conexion.php");
 require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
+require_once("Controllers/CategoriaC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -15,6 +15,21 @@ if (!in_array($accion, $acciones_publicas)) {
         header("Location: index.php?accion=login");
         exit;
     }
+}
+
+if (isset($_SESSION['mensaje'])) {
+    echo '<link rel="stylesheet" href="Assets/css/popup.css">
+          <div class="modal active">
+              <div class="modal-header">
+                  <div class="title">Mensaje</div>
+                  <a href="index.php?accion='.$_GET['accion'].'" class="close-button">&times;</a>
+              </div>
+              <div class="modal-body">
+                  <p>' . $_SESSION['mensaje'] . '</p>
+              </div>
+          </div>
+          <div id="overlay" class="active"></div>';
+    unset($_SESSION['mensaje']);
 }
 
 const ROL_TECNICO = 1;
@@ -30,7 +45,7 @@ switch ($accion) {
    case 'actualizar':
     $controller = new UsuarioC();
     $controller->actualizar();
-break;
+    break;
 
     case 'autenticar':
         $controller = new UsuarioC();
@@ -113,9 +128,40 @@ break;
         require_once("Views/Solicitudes/ocupadas.php");
     break;
 
-    case 'SolicitudSelec';
+    case 'SolicitudSelec':
         $controller = new SolicitudC();
         $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
+    break;
+
+    case 'FormularioC':
+        $controller = new CategoriaC();
+        $controller->FormularioC();
+        require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
+    break;
+
+    case 'guardarC':
+        $controller = new CategoriaC();
+        $controller->guardarC();
+    break;
+
+    case 'listarC':
+        $controller = new CategoriaC();
+        $controller->listarC();
+    break;
+
+    case 'editarC':
+        $controller = new CategoriaC();
+        $controller->editarC();
+    break;
+
+    case 'actualizarC':
+        $controller = new CategoriaC();
+        $controller->actualizarC();
+    break;
+
+    case 'borrarC':
+        $controller = new CategoriaC();
+        $controller->borrarC();
     break;
         
     default:
