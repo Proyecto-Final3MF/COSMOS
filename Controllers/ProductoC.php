@@ -32,7 +32,7 @@ class ProductoC {
         $rutaFinal = "Image/" . $nombreArchivo;
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
             if($producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario)){
-                echo "Producto creado exitosamente.";
+                $_SESSION['mensaje'] = "Producto creado exitosamente.";
                 
                 header("Location: index.php?accion=redireccion");
             } else {
@@ -64,6 +64,7 @@ class ProductoC {
         $producto = new Producto();
         $id = $_GET['id'];
         $producto->borrar($id);
+        $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
         header("Location: index.php?accion=redireccion");
     }
 }
