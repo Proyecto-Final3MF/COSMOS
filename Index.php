@@ -42,9 +42,15 @@ switch ($accion) {
         $controller->login();
     break;
     
-   case 'actualizar':
+   
+    case 'actualizar':
     $controller = new UsuarioC();
     $controller->actualizar();
+    break;
+
+    case 'eliminarU':
+    $controller = new UsuarioC();
+    $controller->eliminar();
     break;
 
     case 'autenticar':

@@ -7,7 +7,7 @@
         header("Location: index.php?accion=login");
     }
 
-    require_once ("./Views/include/CH.php");
+    require_once ("./Views/include/UH.php");
 
     // The logic to get the products should be in the controller (ProductoC)
     // and passed to this view. Make sure the $resultados variable is set.
@@ -56,6 +56,7 @@
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
                         <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                        <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');">Eliminar</a>
                     </td>
                 
                 <?php endforeach; ?>
@@ -67,6 +68,6 @@
         </table>
     </div>
     <a href="Index.php?accion=logout">cerrar sesion</a>
-    <a href="Index.php?accion=actualizar">Actualizar</a>
+    
 </body>
 </html>

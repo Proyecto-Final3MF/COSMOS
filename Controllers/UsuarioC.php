@@ -12,10 +12,10 @@ class UsuarioC {
     public function login() {
         include("views/usuario/login.php");
     }
-     public function editar() {
-        include("views/usuario/EditarU.php");
+     
+    public function editarU(){
+        include("views/usuario/editarU");
     }
-
 
     public function crear() {
         $usuario = new Usuario();
@@ -53,14 +53,15 @@ class UsuarioC {
             exit();
         }
     } 
-
-    public function actualizar() {
+    
+    // En tu clase UsuarioC...
+public function actualizar() {
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
     
-    $usuarioM = new Usuario();
-    if ($usuarioM->actualizarU($id, $nombre, $email)) {
+    $usuarioM = new UsuarioC();
+    if ($usuarioM->actualizar($id, $nombre, $email)) {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
         
@@ -70,7 +71,29 @@ class UsuarioC {
         // Redirige al panel con un mensaje de error
         header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
-exit();
+    exit();
+}
+// En tu clase UsuarioC...
+    public function eliminar() {
+    // Verifica si se recibió el ID del usuario a eliminar
+    if (!isset($_GET['id'])) {
+        // Si no hay ID, redirige con un mensaje de error
+        header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
+        exit();
+    }
+    
+    $id = $_GET['id'];
+    $usuarioM = new UsuarioC();
+    
+    // Llama al método del modelo para eliminar al usuario
+    if ($usuarioM->eliminar($id)) {
+        // Redirige al panel con un mensaje de éxito
+        header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
+    } else {
+        // Redirige al panel con un mensaje de error si la eliminación falla
+        header("Location: index.php?accion=redireccion&error=No se pudo eliminar el usuario.");
+    }
+    exit();
 }
 
     public function autenticar() {
@@ -78,18 +101,26 @@ exit();
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
         $user = $modelo->verificar($usuario, $contrasena);
-        if ($user) {
-            session_start();
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
-    }
+  
+    if ($user) {
+   
+    session_start();
+    $_SESSION['usuario'] = $user['nombre'];
+    $_SESSION['rol'] = $user['rol_id'];
+    $_SESSION['id'] = $user['id'];
+    
+    header("Location: index.php?accion=redireccion");
+    exit();
+}   else {
+   
+    $error = "Usuario o contraseña incorrectos";
+  
+    session_start(); 
+    $_SESSION['error_login'] = "Usuario o contraseña incorrectos";
+    header("Location: index.php?accion=login");
+    exit();
+}
+}
 
     public function logout() {
         session_destroy();
