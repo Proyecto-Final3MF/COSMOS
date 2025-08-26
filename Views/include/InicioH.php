@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar">
         <a href="inicio.php" class="logo-link">
-            <img src="Assets/imagenes/WhatsApp Image 2025-08-13 at 21.13.14.jpeg" height="50px" alt="logo de la app/pagina cosmos :V">
+            <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app/pagina cosmos :V">
         </a>
         
         <ul class="nav-links" id="nav-links">
