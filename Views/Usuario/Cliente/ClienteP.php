@@ -1,6 +1,6 @@
 <?php
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        // No action needed, since the user is a client.
+        
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
     } else {
@@ -9,10 +9,7 @@
 
     require_once ("./Views/include/CH.php");
 
-    // The logic to get the products should be in the controller (ProductoC)
-    // and passed to this view. Make sure the $resultados variable is set.
-    // If it's not set, we can initialize it to an empty array to prevent errors.
-    $resultados = $resultados ?? [];
+   
 ?>
 
 <!DOCTYPE html>
