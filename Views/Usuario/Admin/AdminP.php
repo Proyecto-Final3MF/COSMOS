@@ -5,6 +5,7 @@ if (!isset($_SESSION['rol']) == ROL_TECNICO) {
 
 require_once ("./Views/include/InicioH.php");
 require_once ("./Views/include/TH.php");
+require_once ("./Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
