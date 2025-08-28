@@ -74,19 +74,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($resultados as $p): ?>
+                <?php //foreach ($resultados as $p): //?>
                 <tr>
-                    <td><?= htmlspecialchars($p['nombre']) ?></td>
+                    <td><?//= htmlspecialchars($p['nombre']) //?></td>
                     <td></td>
                     <td>
                         
                     </td>
                     <td>
-                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>">Borrar</a>
+                        <a href="index.php?accion=editar&id=<?//= $p['id']/?>">Editar</a>
+                        <a href="index.php?accion=borrarP&id=<?//= $p['id'] ?>">Borrar</a>
                     </td>
                 
-                <?php endforeach; ?>
+                <?php //endforeach; //?>
                     <td>
                         <button class="button"><a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a></button><br>
                     </td>
