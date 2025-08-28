@@ -15,8 +15,12 @@ class UsuarioC {
      public function editar() {
         include("views/usuario/EditarU.php");
     }
-
-
+    public function borrarU(){
+            $usuario = new UsuarioC();
+            $id = $_GET["id"];
+            $datos = $usuario->borrarU($id);
+            header("Location: index.php");
+        }
     public function crear() {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();

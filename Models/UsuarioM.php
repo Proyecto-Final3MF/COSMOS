@@ -49,5 +49,9 @@ class Usuario {
     $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
     return $this->conn->query($sql);
     }
+    public function borrar($id){
+            $sql = "DELETE FROM usuario WHERE id=$id";
+            return $this->conn->query($sql);
+        }
 }
 ?>
