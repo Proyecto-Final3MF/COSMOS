@@ -7,7 +7,7 @@
         header("Location: index.php?accion=login");
     }
 
-    require_once ("./Views/include/CH.php");
+    require_once ("./Views/include/UH.php");
 
    
 ?>
@@ -56,6 +56,7 @@
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
                         <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
+                        <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');">Eliminar</a>
                     </td>
                 
                 <?php endforeach; ?>
@@ -67,5 +68,7 @@
         </table>
     </div>
     <a href="Index.php?accion=actualizar">Actualizar</a>
+    <a href="Index.php?accion=logout">cerrar sesion</a>
+    
 </body>
 </html>
