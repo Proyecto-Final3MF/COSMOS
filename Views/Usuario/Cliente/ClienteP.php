@@ -1,6 +1,5 @@
 <?php
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        // No action needed, since the user is a client.
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
     } else {
@@ -9,9 +8,6 @@
 
     require_once ("./Views/include/UH.php");
 
-    // The logic to get the products should be in the controller (ProductoC)
-    // and passed to this view. Make sure the $resultados variable is set.
-    // If it's not set, we can initialize it to an empty array to prevent errors.
     $resultados = $resultados ?? [];
 ?>
 
@@ -25,7 +21,6 @@
 </head>
 <body>
     <p> ¿En que podemos ayudarte? </p>
-    <a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a><br>
 
     <div>
         <p>Lista de Productos</p> <br>
@@ -43,9 +38,7 @@
                 <?php foreach ($resultados as $p): ?>
                 <tr>
                     <td><?= htmlspecialchars($p['nombre']) ?></td>
-                    <td>
-                        <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto">
-                    </td>
+                    <td> <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto"> </td>
                     <td>
                         <?php 
                             $productoModel = new Producto();
@@ -55,13 +48,47 @@
                     </td>
                     <td>
                         <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirmarBorrar();">Borrar</a>
-                        <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');">Eliminar</a>
+                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>">Borrar</a>
                     </td>
                 
                 <?php endforeach; ?>
                     <td>
-                        <a href="Index.php?accion=formularioP">+</a><br>
+                        <button class="button"><a href="Index.php?accion=formularioP">+</a></button><br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+        <p>Solicitudes no asignadas</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Producto</th>
+                    <th>Prioridad</th>
+                    <th>Descripcion</th>
+                    <th>Fecha de Creacion</th>
+                    <th>Agregar Solicitud</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php //foreach ($resultados as $p): //?>
+                <tr>
+                    <td><?//= htmlspecialchars($p['nombre']) //?></td>
+                    <td></td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <a href="index.php?accion=editar&id=<?//= $p['id']/?>">Editar</a>
+                        <a href="index.php?accion=borrarP&id=<?//= $p['id'] ?>">Borrar</a>
+                    </td>
+                
+                <?php //endforeach; //?>
+                    <td>
+                        <button class="button"><a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a></button><br>
                     </td>
                 </tr>
             </tbody>

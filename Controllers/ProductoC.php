@@ -60,7 +60,7 @@ class ProductoC {
         include("./Views/Usuario/Cliente/ClienteP.php");
     }
     
-    public function borrar() {
+    public function borrarP() {
         $producto = new Producto();
         $id = $_GET['id'];
         $producto->borrar($id);

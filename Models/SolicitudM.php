@@ -24,6 +24,11 @@ class Solicitud {
         return null;
     }
 
+    public function borrarS($id) {
+        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
+        return $this->conn->query($sql);
+    }
+
     public function getSolicitudesDisponibles() {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
                 FROM solicitud
@@ -126,12 +131,12 @@ class Solicitud {
         return $success;
     }
 
-    public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
+    public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
-        $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
-                VALUES ('$titulo', '$descripcion', $categoria_id, $usuario_id, '$prioridad')";
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, descripcion)
+                VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, '$descripcion')";
         
         return $this->conn->query($sql);
     }
