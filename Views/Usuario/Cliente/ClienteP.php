@@ -6,7 +6,7 @@
         header("Location: index.php?accion=login");
     }
 
-    require_once ("./Views/include/CH.php");
+    require_once ("./Views/include/UH.php");
 
     $resultados = $resultados ?? [];
 ?>
@@ -27,11 +27,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Imagen</th>
-                    <th>Categoria</th>
-                    <th>Modificaciones</th>
-                    <th>Agregar Producto</th>
+                    <th> Nombre </th>
+                    <th> Imagen </th>
+                    <th> Categoria </th>
+                    <th> Modificaciones </th>
+                    <th> Agregar Producto </th>
                 </tr>
             </thead>
             <tbody>
@@ -94,5 +94,7 @@
             </tbody>
         </table>
     </div>
+    <a href="Index.php?accion=logout">cerrar sesion</a>
+    
 </body>
 </html>
