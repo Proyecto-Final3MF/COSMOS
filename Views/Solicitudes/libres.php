@@ -59,5 +59,6 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
     <div id="paginacion-container">
     </div>
 <script src="Assets/js/listado.js"></script>
+<script src="Assets/js/darkmode.js"></script>
 </body>
 </html>
