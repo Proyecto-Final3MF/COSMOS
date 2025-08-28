@@ -6,7 +6,7 @@
     <title>Nueva Solicitud</title>
 </head>
 <body>
-    <form method="POST" action="Index.php?accion=crearS">
+    <form method="POST" action="Index.php?accion=guardarS">
         
         <p>Titulo: </p>
         <label for="titulo" class="form-label"></label>
@@ -16,11 +16,12 @@
         <select id="producto" name="producto" required>
                 <option value=""></option>
                 <?php foreach ($productos as $producto): ?>
-                    <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre']) ?></option>
+                    <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre'])?></option>
                 <?php endforeach; ?>
         </select>
 
         <p>Descripcion</p>
+        <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
                         
         <label for="prioridad"><p>Nivel de Prioridad: </p></label>
             <select name="prioridad" id="prioridad" required>
