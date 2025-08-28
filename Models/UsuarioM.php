@@ -50,16 +50,15 @@ class Usuario {
     $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
     return $this->conn->query($sql);
 }
-// En tu clase Usuario...
+
 public function eliminar($id) {
-    // Convierte el ID a entero para mayor seguridad
+    
     $id = (int)$id;
-    // Prepara la consulta SQL para eliminar el usuario por su ID
+    
     $sql = "DELETE FROM usuario WHERE id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    // Ejecuta la consulta y devuelve true si se borró correctamente
-    return $stmt->execute();
+    $sql = $this->conn->prepare($sql);
+    $sql->bind_param("i", $id);
+   return $this->conn->query($sql);
 }
 }
 ?>
