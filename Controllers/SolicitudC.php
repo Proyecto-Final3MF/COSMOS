@@ -13,22 +13,31 @@ class SolicitudC {
 
     public function formularioS(){  
         $solicitud = new Solicitud();
-        $categorias = $solicitud->obtenerProductos();
+        $productos = $solicitud->obtenerProductos();
         include ("./Views/Solicitudes/FormularioS.php");
         
     }
 
-    public function crearS() {
+    public function guardarS() {
+        $solicitud = new Solicitud();
+        $titulo = $_POST['titulo'] ?? '';
+        $producto = $_POST['producto'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
+        $prioridad = $_POST['prioridad'] ?? '';
+        $usuario_id = $_SESSION['id'] ?? '';
+        $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
+
+        if ($solicitud){
+            header("Location: index.php?accion=redireccion");
+        };
         
     }
 
-    public function guardar() {
+    public function borrarS() {
         $solicitud = new Solicitud();
-        $titulo = $_POST['titulo'];
-        $descripcion = $_POST['descripcion'];
-        $categoria_id = $_POST['categoria_id'];
-        $prioridad = $_POST['prioridad'];
-        $usuario_id = $_SESSION['usuario_id'];
+        $id = $_GET['id'];
+        $solicitud->borrarS($id);
+        header("Location: index.php?accion=redireccion");
     }
 
     public function getLibresData() {

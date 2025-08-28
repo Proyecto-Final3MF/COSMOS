@@ -102,6 +102,16 @@ switch ($accion) {
         $controller->formularioS();
     break;
 
+    case 'guardarS':
+        $controller = new SolicitudC();
+        $controller->guardarS();
+    break;
+
+    case 'borrarS':
+        $controller = new SolicitudC();
+        $controller->borrarS();
+    break;
+
     case 'formularioP':
         $controller = new ProductoC();
         $controller->formularioP();
@@ -114,12 +124,7 @@ switch ($accion) {
 
     case 'borrarP':
         $controller = new ProductoC();
-        $controller->borrar();
-    break;
-
-    case 'crearS':
-        $controller = new SolicitudC();
-        $controller->crearS();
+        $controller->borrarP();
     break;
         
     case 'SolicitudesLibres':

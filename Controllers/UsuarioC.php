@@ -32,7 +32,7 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-            $usuarioN = $usuarioM->verificar($usuario, $contrasena);
+            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
             if ($usuarioN) {
             $id_user = $usuarioN['id'];
             $obs = "Usuario creado atravez del formulario de registro";
@@ -100,27 +100,19 @@ public function actualizar() {
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
-        $user = $modelo->verificar($usuario, $contrasena);
-  
-    if ($user) {
-   
-    session_start();
-    $_SESSION['usuario'] = $user['nombre'];
-    $_SESSION['rol'] = $user['rol_id'];
-    $_SESSION['id'] = $user['id'];
-    
-    header("Location: index.php?accion=redireccion");
-    exit();
-}   else {
-   
-    $error = "Usuario o contraseña incorrectos";
-  
-    session_start(); 
-    $_SESSION['error_login'] = "Usuario o contraseña incorrectos";
-    header("Location: index.php?accion=login");
-    exit();
-}
-}
+        $user = $modelo->verificarU($usuario, $contrasena);
+        if ($user) {
+            session_start();
+            $_SESSION['usuario'] = $user['nombre'];
+            $_SESSION['rol'] = $user['rol_id'];
+            $_SESSION['id'] = $user['id'];
+            header("Location: index.php?accion=redireccion");
+            exit();
+        } else {
+            $error = "Usuario o contraseña incorrectos";
+            include("views/Usuario/Login.php");
+        }
+    }
 
     public function logout() {
         session_destroy();
