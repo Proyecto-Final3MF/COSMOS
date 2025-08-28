@@ -13,10 +13,10 @@
             <label for="nombre" class="form-label"></label>
             <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>
 
-            <p>Imagen: </p>
-            <label for="imagen" class="form-label"></label>
-            <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required> <br><br>
-
+           <p>Imagen: </p>
+           <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required>
+           <label for="imagen" class="boton-personalizado-input">Seleccionar archivo</label>
+           <br><br>
             <p>Categoria:</p>
             <select id="categoria" name="categoria" required>
                     <option value=""></option>

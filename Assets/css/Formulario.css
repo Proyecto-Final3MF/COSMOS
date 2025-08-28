@@ -69,6 +69,7 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+
 .button[type="submit"]:hover {
     background-color: #972f5f; 
     }
@@ -107,3 +108,4 @@ button[type="submit"]:hover {
     background-color: #972f5f; 
 
 }
+
