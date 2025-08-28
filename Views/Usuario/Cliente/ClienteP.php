@@ -52,7 +52,7 @@
                         ?>
                     </td>
                     <td>
-                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
+                        <a href="Index.php?accion=editar&id=<?= htmlspecialchars($_SESSION['id']) ?>">Editar Usuario</a><br>
                         <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');">Eliminar</a>
                     </td>
                 
