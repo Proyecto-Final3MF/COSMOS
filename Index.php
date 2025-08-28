@@ -31,7 +31,11 @@ switch ($accion) {
     $controller = new UsuarioC();
     $controller->actualizar();
 break;
-
+    case 'borrarU':
+        $controller = new UsuarioC();
+        $controller->borrarU();
+    break;
+    
     case 'autenticar':
         $controller = new UsuarioC();
         $controller->autenticar();
