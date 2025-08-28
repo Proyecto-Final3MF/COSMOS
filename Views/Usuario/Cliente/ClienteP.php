@@ -1,5 +1,6 @@
 <?php
     if (isset($_SESSION['rol']) == ROL_CLIENTE) {
+        
     } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
         header("Location: index.php?accion=redireccion");
     } else {
@@ -7,8 +8,6 @@
     }
 
     require_once ("./Views/include/UH.php");
-
-    $resultados = $resultados ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +19,12 @@
     <link rel="stylesheet" href="./Assets/css/Usuarios.css">
 </head>
 <body>
+
+ <div>
+
     <p> ¿En que podemos ayudarte? </p>
 
-    <div>
+   
         <p>Lista de Productos</p> <br>
         <table>
             <thead>
@@ -94,6 +96,7 @@
             </tbody>
         </table>
     </div>
+    <a href="Index.php?accion=actualizar">Actualizar</a>
     <a href="Index.php?accion=logout">cerrar sesion</a>
     
 </body>

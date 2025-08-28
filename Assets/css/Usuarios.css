@@ -182,8 +182,18 @@ a:hover {
     text-decoration: underline;
 }
 
+br {
+text-align: center;
+
+}
+
 p {
 text-align: center;
+
+}
+
+thead {
+align-items: center;
 
 }
 
@@ -191,11 +201,19 @@ text-align: center;
     text-align: center;
     width: 100%; 
 }
+
+table {
+    width: 80%; 
+    margin-left: auto;
+    margin-right: auto;
+}
         
 div{
-    background-color: #f15fa3;
-    margin: 25px;
-    width: 50%;
-    height: 50%;
+    align-items: center;
+    text-align: center;
+    background-color: #f15fd1;
+    margin: 35px;
+    width: 95%;
+    height: 70%;
     
 }

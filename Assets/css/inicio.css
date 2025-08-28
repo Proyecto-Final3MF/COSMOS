@@ -14,51 +14,53 @@
         }
 
          body {
-            background-color: #ffffff;
+            background-image: none;
             color: var(--dark-color);
             line-height: 1.6;
         }
 
        
         .navbar {
-            background-color: white;
-            box-shadow: var(--box-shadow);
-            padding: 0.8rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
+.nav-links {
+    display: flex;
+    list-style: none;
+    
+    margin: 0 20px; 
+}
 
-        .logo-icon {
-            margin-right: 0.5rem;
-        }
+.logo {
+font-size: 1.8rem;
+font-weight: 700;
+color: var(--primary-color);
+text-decoration: none;
+display: flex;
+align-items: center;
+}
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            margin-left: auto;
-        }
+.logo-icon {
+margin-right: 0.5rem;
+}
 
-        .nav-links li {
+        
+.nav-links li {
     margin-left: 1.5rem;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
 }
-
 
 .nav-links li img {
     margin-bottom: 5px; 
@@ -90,44 +92,7 @@
           .nav-links a:hover::after {
             width: 100%;
         }
-
-        
-        .search-bar {
-            display: flex;
-            margin: 0 1.5rem;
-            flex-grow: 1;
-            max-width: 500px;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 0.6rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius) 0 0 var(--border-radius);
-            font-size: 0.9rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-          .search-bar input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .search-bar button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-bar button:hover {
-            background-color: #972f5f;
-        }
-
-        
+    
         .action-buttons {
             display: flex;
             align-items: center;
