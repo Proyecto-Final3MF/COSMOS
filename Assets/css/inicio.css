@@ -20,18 +20,17 @@
         }
 
        
-        .navbar {
-    background-color: white;
-    box-shadow: var(--box-shadow);
-    padding: 0.8rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+   .navbar {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  padding: 0.8rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .nav-links {

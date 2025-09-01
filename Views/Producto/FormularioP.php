@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+<section>
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
             <p>Nombre del Equipo: </p>
@@ -15,7 +16,7 @@
 
            <p>Imagen: </p>
            <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required>
-           <label for="imagen" class="boton-personalizado-input">Seleccionar archivo</label>
+           <label for="imagen" class="boton-personalizado-input"></label>
            <br><br>
             <p>Categoria:</p>
             <select id="categoria" name="categoria" required>
@@ -27,5 +28,6 @@
                         
             <button type="submit">Crear</button>
         </form>
+</section>
 </body>
 </html>
