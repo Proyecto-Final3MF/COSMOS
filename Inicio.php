@@ -13,12 +13,11 @@
 </head>
 
 <body>  
-    <main class="main-content">
-        <section class="hero">
-            <h1>Bienvenido a COSMOS</h1>
-            <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-            <a href="Index.php"><button class="btn btn-login">Empezar ahora</button></a>
-        </section>
-    </main>
+
+<h1>Bienvenido a COSMOS</h1>
+<p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
+<a href="Index.php"><button class="btn btn-boton">Empezar ahora</button></a>
+       
+  
 </body>
 </html>

@@ -25,7 +25,6 @@
             box-shadow: var(--box-shadow);
             padding: 0.8rem 2rem;
             position: sticky;
-            top: 0;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
@@ -84,43 +83,6 @@
             width: 100%;
         }
 
-        
-        .search-bar {
-            display: flex;
-            margin: 0 1.5rem;
-            flex-grow: 1;
-            max-width: 500px;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 0.6rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius) 0 0 var(--border-radius);
-            font-size: 0.9rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-          .search-bar input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .search-bar button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-bar button:hover {
-            background-color: #972f5f;
-        }
-
-        
         .action-buttons {
             display: flex;
             align-items: center;
@@ -139,58 +101,19 @@
             font-size: 0.9rem;
         }
 
-        .btn-login {
+        .btn-boton {
             background-color: transparent;
             color: var(--primary-color);
             border: 1px solid var(--primary-color);
             margin-right: 1rem;
         }
 
-        .btn-signup {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            margin-right: 1rem;
-
-        }
-
-        .btn-login:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        
-        .btn-signup:hover {
+        .btn-boton:hover {
             background-color: var(--primary-color);
             color: white;
         }
 
 
-       a {
-    text-align: center;
-    display: block;
-    margin-top: 15px;
-    color: #266937; 
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-
-a:hover {
-    color: #266937; 
-    text-decoration: underline;
-}
-
-br {
-text-align: center;
-
-}
-
-p {
-text-align: center;
-
-}
 
 thead {
 align-items: center;
@@ -203,15 +126,29 @@ align-items: center;
 }
 
 table {
-    width: 80%; 
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%; 
+}
+
+th, td {
+border: solid 1px;
+border-collapse: collapse;
+padding: 5px;
+
+}
+
+th {
+background-color: #e83e8c;
+
+}
+
+tr:hover {
+background-color: #b43b74;
+
 }
         
 div{
-    align-items: center;
     text-align: center;
-    background-color: #f15fd1;
+    background-color: #f3a6e2;
     margin: 35px;
     width: 95%;
     height: 70%;
