@@ -4,6 +4,8 @@
             <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app/pagina cosmos :V"> 
         </a>
        <h1>Bienvenido Tecnico <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
+       <a href=""><button class="btn btn-boton">no nada</button></a>
+       <a href=""><button class="btn btn-boton">testeando</button></a>
        <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
     </nav>
 </header>
