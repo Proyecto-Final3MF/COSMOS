@@ -41,7 +41,7 @@
                 <?php foreach ($resultados as $p): ?>
                 <tr>
                     <td><?= htmlspecialchars($p['nombre']) ?></td>
-                    <td> <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto"> </td>
+                    <td> <img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto"></td>
                     <td>
                         <?php 
                             $productoModel = new Producto();
