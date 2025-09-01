@@ -24,8 +24,7 @@
     <main>
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
     </main>
-    <a href="Index.php?accion=SolicitudesLibres">Solicitudes disponibles</a>
-    <a href="Index.php?accion=SolicitudesOcupadas">Tus trabajos pendientes</a>
-
+    <a href="Index.php?accion=SolicitudesLibres"><button class="btn btn-boton">Solicitudes Disponibles</button></a>
+    <a href="Index.php?accion=SolicitudesOcupadas"><button class="btn btn-boton">Tus Trabajos Pendientes</button></a>
 </body>
 </html>

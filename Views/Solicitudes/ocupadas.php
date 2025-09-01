@@ -23,7 +23,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
 
 
     <h1>Listado de Solicitudes que aceptaste</h1>
-
+    
     <div class="filter-buttons">
     <button id="filter-all" data-filter="all">Todas</button>
     <button id="filter-2" data-filter="2">En Diagnóstico</button>
