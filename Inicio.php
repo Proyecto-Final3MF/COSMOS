@@ -11,7 +11,6 @@
     <title>C O S M O S</title>
     <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
-
 <body>  
 
 <h1>Bienvenido a COSMOS</h1>
