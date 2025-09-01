@@ -1,10 +1,12 @@
 <header>
     <nav class="navbar">
-         <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app/pagina cosmos :V">
-       <h1>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
-       <a href="Index.php?accion=logout">Cerrar sesion</a>
-      <a href="Index.php?accion=editar&id=<?= htmlspecialchars($_SESSION['id']) ?>">Editar Usuario</a><br>
-      <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');">Eliminar</a>
+          <a href="inicio.php" class="logo-link">
+            <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app/pagina cosmos :V"></a> <h1>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
+        
+       
+      <a href="Index.php?accion=editar&id=<?= htmlspecialchars($_SESSION['id']) ?>"><button class="btn btn-boton">Editar Usuario</button></a><br>
+      <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"><button class="btn btn-boton">Eliminar</button></a>
+       <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
     </nav>
 
 </header> 

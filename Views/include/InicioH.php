@@ -9,9 +9,9 @@
             <li><a href="#">Contacto</a></li>
         </ul>
         
-        <div class="action-buttons">
-            <a href="Index.php?accion=login"><button class="btn btn-login">Iniciar sesión</button></a>
-            <a href="Index.php?accion=register"><button class="btn btn-signup">Registrarse</button></a>
-        </div>
+         <class="action-buttons">
+            <a href="Index.php?accion=login"><button class="btn btn-boton">Iniciar sesión</button></a>
+            <a href="Index.php?accion=register"><button class="btn btn-boton">Registrarse</button></a>
+        
     </nav>
 </header>

@@ -16,13 +16,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Cliente</title>
-    <link rel="stylesheet" href="./Assets/css/Usuarios.css">
+    <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
 <body>
 
+
  <div>
 
-    <p> ¿En que podemos ayudarte? </p>
+    <h2> ¿En que podemos ayudarte? </h2>
 
    
         <p>Lista de Productos</p> <br>
@@ -49,8 +50,8 @@
                         ?>
                     </td>
                     <td>
-                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>">Borrar</a>
+                        <a href="index.php?accion=editar&id=<?= $p['id'] ?>"><button class="btn btn-boton">Editar</button></a>
+                        <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>"><button class="btn btn-boton">Borrar</button></a>
                     </td>
                 
                 <?php endforeach; ?>
@@ -83,21 +84,21 @@
                     <td>
                         
                     </td>
+                    
                     <td>
-                        <a href="index.php?accion=editar&id=<?//= $p['id']/?>">Editar</a>
-                        <a href="index.php?accion=borrarP&id=<?//= $p['id'] ?>">Borrar</a>
+                        <a href="index.php?accion=editar&id=<?//= $p['id']/?>"><button class="btn btn-boton">Editar</button></a>
+                        <a href="index.php?accion=borrarP&id=<?//= $p['id'] ?>"><button class="btn btn-boton">Borrar</button></a>
                     </td>
                 
                 <?php //endforeach; //?>
                     <td>
-                        <button class="button"><a href="Index.php?accion=formularioS">Crear Nueva Solicitud</a></button><br>
+                    <a href="Index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
                     </td>
+                    
                 </tr>
             </tbody>
         </table>
     </div>
-    <a href="Index.php?accion=actualizar">Actualizar</a>
-    <a href="Index.php?accion=logout">cerrar sesion</a>
-    
+    <a href="Index.php?accion=actualizar"><button class="btn btn-boton">Actualizar</button></a>    
 </body>
 </html>

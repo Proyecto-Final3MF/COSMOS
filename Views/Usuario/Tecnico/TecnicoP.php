@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Técnico</title>
-    <link rel="stylesheet" href="./Assets/css/Usuarios.css"> </head>
+    <link rel="stylesheet" href="./Assets/css/inicio.css"> </head>
 <body>
     <main>
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
@@ -27,6 +27,5 @@
     <a href="Index.php?accion=SolicitudesLibres">Solicitudes disponibles</a>
     <a href="Index.php?accion=SolicitudesOcupadas">Tus trabajos pendientes</a>
 
-    <a href="Index.php?accion=logout">cerrar sesion</a>
 </body>
 </html>
