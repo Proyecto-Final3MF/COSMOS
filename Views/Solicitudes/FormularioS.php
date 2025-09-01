@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+<section>
     <form method="POST" action="Index.php?accion=guardarS">
         
         <p>Titulo: </p>
@@ -35,5 +36,6 @@
         <input type="submit" value="guardar">
         
     </form>
+    </section>
 </body>
 </html>
