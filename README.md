@@ -1,5 +1,4 @@
-# Proyecto Final 3°MF Tecnologias de la Información.
-## Sistema Web de Gestión de Servicio Técnico COSMOS.
+# Sistema Web de Gestión de Servicio Técnico COSMOS.
 Hecho por: 
 * Thiago Carballo 
 * Alex González 
