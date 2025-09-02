@@ -61,3 +61,4 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('4','En reparacion');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
+INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Admin');
