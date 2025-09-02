@@ -4,20 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     toggleTemaBtn.addEventListener('click', function() {
         bodyElement.classList.toggle('tema-claro');
-        bodyElement.classList.toggle('tema-escuro');
-        if (bodyElement.classList.contains('tema-escuro')) {
-            localStorage.setItem('tema', 'escuro');
+        bodyElement.classList.toggle('tema-oscuro');
+        if (bodyElement.classList.contains('tema-oscuro')) {
+            localStorage.setItem('tema', 'oscuro');
         } else {
             localStorage.setItem('tema', 'claro');
         }
     });
 
     const savedTheme = localStorage.getItem('tema');
-    if (savedTheme === 'escuro') {
+    if (savedTheme === 'oscuro') {
         bodyElement.classList.remove('tema-claro');
-        bodyElement.classList.add('tema-escuro');
+        bodyElement.classList.add('tema-oscuro');
     } else {
-        bodyElement.classList.remove('tema-escuro');
+        bodyElement.classList.remove('tema-oscuro');
         bodyElement.classList.add('tema-claro');
     }
 });
