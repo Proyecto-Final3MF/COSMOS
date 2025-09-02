@@ -135,8 +135,7 @@ class Solicitud {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
-        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, descripcion)
-                VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, '$descripcion')";
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, '$descripcion')";
         
         return $this->conn->query($sql);
     }
