@@ -59,37 +59,25 @@ class SolicitudC {
         return $success;
 }
 
-public function cancelarRequest($id) {
-        if (!isset($id)) {
-            echo "Id invalida";
-        }
+    public function cancelarRequest($id) {
+            if (!isset($id)) {
+                echo "Id invalida";
+            }
 
-        $result_status = $this->requestModel->cancelar($id);
+            $result_status = $this->requestModel->cancelar($id);
 
-        if ($result_status === 'updated') {
-            $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
-            $this->historialController->registrarModificacion(
-                $usuario,
-                $usuarioId,
-                'solicitud',
-                $solicitudId,
-                $obs
-            );
-            exit();
-        } elseif ($result_status === 'deleted') {
-            $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
-            $this->historialController->registrarModificacion(
-                $usuario,
-                $usuarioId,
-                'solicitud',
-                $solicitudId,
-                $obs
-            );
-            exit();
-        } else {
-            Echo "Cancelacion fallada";
-            exit();
+            if ($result_status === 'updated') {
+                $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
+                exit();
+            } elseif ($result_status === 'deleted') {
+                $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
+                exit();
+            } else {
+                Echo "Cancelacion fallada";
+                exit();
+            }
         }
     }
-}
 ?>
