@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['rol']) !== ROL_ADMIN) {
+    header("Location: index.php?accion=redireccion");
+}
+?>
+
 <h1>Editar Categoria</h1>
 
 <form action="index.php?accion=actualizarC" method="POST">
