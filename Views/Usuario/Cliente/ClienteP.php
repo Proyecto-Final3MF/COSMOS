@@ -1,13 +1,10 @@
 <?php
-    if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        
-    } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
-        header("Location: index.php?accion=redireccion");
-    } else {
-        header("Location: index.php?accion=login");
-    }
 
-    require_once ("./Views/include/UH.php");
+if (isset($_SESSION['rol']) !== ROL_CLIENTE) {
+    header("Location: index.php?accion=redireccion");
+}
+
+require_once ("./Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
