@@ -75,18 +75,18 @@ body {
 }
 
 .filter-buttons button {
-margin-right: 10px;
-padding: 8px 15px;
-cursor: pointer;
-border: 1px solid #ccc;
-background-color: #f0f0f0;
-border-radius: 4px;
+    margin-right: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 4px;
 }
 
 .filter-buttons button.active {
-background-color: #e83e8c;
-color: white;
-border-color: #cc2f78;
+    background-color: #e83e8c;
+    color: white;
+    border-color: #cc2f78;
 }
 
 /* Dark Mode */
@@ -110,27 +110,32 @@ border-color: #cc2f78;
 .tema-oscuro a {
     color: green;
 }
+
 .tema-oscuro .filter-buttons button.active {
-background-color: #d9ff00;
-color: rgb(0, 0, 0);
-border-color: #fbff00;
+    background-color: #d9ff00;
+    color: rgb(0, 0, 0);
+    border-color: #fbff00;
 }
+
 .tema-oscuro .filter-buttons button {
-margin-right: 10px;
-padding: 8px 15px;
-cursor: pointer;
-border: 1px solid #363636;
-background-color: #181818;
-border-radius: 4px;
-color: white;
+    margin-right: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: 1px solid #363636;
+    background-color: #181818;
+    border-radius: 4px;
+    color: white;
 }
+
 .tema-oscuro .pagina-btn.activa {
     background-color: #d919ff;
     cursor: default;
 }
+
 .tema-oscuro .pagina-btn:hover:not(:disabled) {
     background-color: #b3b000;
 }
+
 .tema-oscuro .pagina-btn  {
     background-color: #fbff00;
     color: rgb(0, 0, 0);
@@ -141,9 +146,11 @@ color: white;
     transition: background-color 0.3s ease, opacity 0.3s ease;
     font-weight: bold;
 }
+
 .tema-oscuro .container {
     background-color: #3b4049;
 }
+
 .tema-oscuro h1 {
     color: #ffffff;
     background-color: #282c34;
