@@ -26,7 +26,7 @@ h1 {
 }
 
 .historial-item:last-child {
-border-bottom: none;
+    border-bottom: none;
 }
 
 .historial-item p {
