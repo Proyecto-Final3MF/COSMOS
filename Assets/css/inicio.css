@@ -122,6 +122,12 @@ margin-right: 0.5rem;
     color: white;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
@@ -158,7 +164,6 @@ table {
     height: 40%;
 }
 
-
 th, td {
 border: solid 1px;
 border-collapse: collapse;
@@ -178,4 +183,10 @@ background-color: #e83e8c;
 
 tr:hover {
 background-color: #b43b74;
+}
+
+.iframe-container {
+text-align: center;
+justify-content: center;
+
 }
