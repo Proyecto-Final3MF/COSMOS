@@ -112,9 +112,9 @@ body {
 }
 
 .tema-oscuro .filter-buttons button.active {
-    background-color: #d9ff00;
-    color: rgb(0, 0, 0);
-    border-color: #fbff00;
+    background-color: #e83e8c;
+    color: rgb(255, 255, 255);
+    border-color: #cc2f78;
 }
 
 .tema-oscuro .filter-buttons button {
