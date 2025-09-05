@@ -1,7 +1,5 @@
 <?php
-    if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        
-    } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
+    if (isset($_SESSION['rol']) != ROL_CLIENTE) {
         header("Location: index.php?accion=redireccion");
     } else {
         header("Location: index.php?accion=login");
