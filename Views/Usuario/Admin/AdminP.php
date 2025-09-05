@@ -18,8 +18,9 @@ require_once ("./Views/include/AH.php");
     <main>
         <p>Aquí podrás gestionar tus tareas como Admin.</p>
     </main>
+<div class="btn-container">
 <a href="index.php?accion=FormularioC"><button class="btn btn-boton">Crear Nueva Categoria</button></a>
 <a href="index.php?accion=listarC"><button class="btn btn-boton">Todas Las Categorias</button></a>
-<a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
+</div>
 </body>
 </html>

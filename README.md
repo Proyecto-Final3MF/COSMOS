@@ -9,6 +9,9 @@ Hecho por:
 
 COSMOS es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
+## Documentacion
+[Documentación Tecnicos y Asociados.odt](https://github.com/user-attachments/files/22164176/Documentacion.Tecnicos.y.Asociados.odt)
+
 ## ¿Cómo funciona?
 
 ### Para los Clientes

@@ -42,7 +42,7 @@ switch ($accion) {
         $controller->login();
     break;
 
-    case 'actualizar':
+    case 'actualizarU':
     $controller = new UsuarioC();
     $controller->actualizarU();
     break;
