@@ -45,7 +45,7 @@ switch ($accion) {
    
     case 'actualizar':
     $controller = new UsuarioC();
-    $controller->actualizar();
+    $controller->actualizarU();
     break;
 
     case 'eliminarU':
