@@ -99,6 +99,6 @@
             </tbody>
         </table>
     </div>
-    <a href="Index.php?accion=actualizar"><button class="btn btn-boton">Actualizar</button></a>    
+    <a href="Index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>    
 </body>
 </html>
