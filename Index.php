@@ -45,7 +45,7 @@ switch ($accion) {
    
     case 'actualizar':
     $controller = new UsuarioC();
-    $controller->actualizar();
+    $controller->actualizarU();
     break;
 
     case 'eliminarU':
@@ -176,11 +176,10 @@ switch ($accion) {
     break;
         
     default:
-        if (!isset($_SESSION['usuario'])) {
-             header("Location: index.php?accion=login");
+        if (isset($_SESSION['usuario'])) {
+            header("Location: index.php?accion=redireccion");
         } else {
-            http_response_code(404);
-            header("Location: Error.php");
+            header("Location: index.php?accion=login");
         }
         exit();
 }

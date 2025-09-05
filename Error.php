@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="/Assets/css/error.css">
 </head>
 <body>
+    <video autoplay muted loop playsinline id="background-video">
+    <source src="2025-08-10 20-25-25.mp4" type="video/mp4" />
+
+Your browser does not support the video tag.
+
+</video>
     <div class="error">
         <h1>Ops!</h1>
         <p>La página que estás buscando no existe o se produjo un error.</p>
