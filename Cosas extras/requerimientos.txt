@@ -32,15 +32,16 @@ Usuario:
 	Cerrado de sesion
 
 Rol cliente:
-	Registro de solicitudes de servicios
-	Visualizar reparaciones activas
+	CRUD solicitudes
 	Sistema de notificaciones
 	Comunicacion con rol tecnico
 
 2 tecnico:
 	Asignacion automatica/manual de reparaciones
 	Comunicacion con rol usuario
-	Registro de acciones realizadas
+
+Historial:
+
 	
 	
 Rol admin:

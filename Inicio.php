@@ -15,8 +15,10 @@
 
 <h1>Bienvenido a COSMOS</h1>
 <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
-<a href="Index.php"><button class="btn btn-boton">Empezar ahora</button></a>
-       
-  
+
+<div class="btn-container">
+  <a href="Index.php"><button class="btn btn-boton">Empezar ahora</button></a>
+</div>
+
 </body>
 </html>

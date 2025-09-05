@@ -1,7 +1,5 @@
 <?php
-    if (isset($_SESSION['rol']) == ROL_CLIENTE) {
-        
-    } elseif (isset($_SESSION['rol']) == ROL_TECNICO){
+    if (isset($_SESSION['rol']) != ROL_CLIENTE) {
         header("Location: index.php?accion=redireccion");
     } else {
         header("Location: index.php?accion=login");
@@ -99,6 +97,6 @@
             </tbody>
         </table>
     </div>
-    <a href="Index.php?accion=actualizar"><button class="btn btn-boton">Actualizar</button></a>    
+    <a href="Index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>    
 </body>
 </html>
