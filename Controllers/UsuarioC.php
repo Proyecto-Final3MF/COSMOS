@@ -10,7 +10,7 @@ class UsuarioC {
     }
     
     public function login() {
-        include("views/usuario/login.php");
+        include("Views/Usuario/Login.php");
     }
      
     public function editarU(){
