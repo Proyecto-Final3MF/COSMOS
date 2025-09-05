@@ -1,5 +1,5 @@
 <?php
-require_once("Models/UsuarioM.php");
+require_once ("Models/UsuarioM.php");
 require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
@@ -55,13 +55,13 @@ class UsuarioC {
     } 
     
     // En tu clase UsuarioC...
-public function actualizar() {
+public function actualizarU() {
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
     
-    $usuarioM = new UsuarioC();
-    if ($usuarioM->actualizar($id, $nombre, $email)) {
+    $usuarioM = new Usuario();
+    if ($usuarioM->actualizarU($id, $nombre, $email)) {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
         
@@ -71,7 +71,7 @@ public function actualizar() {
         // Redirige al panel con un mensaje de error
         header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
-    exit();
+exit();
 }
 // En tu clase UsuarioC...
     public function eliminar() {
