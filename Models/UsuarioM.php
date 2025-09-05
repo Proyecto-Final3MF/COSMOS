@@ -43,7 +43,7 @@ class Usuario {
         return null;
     }
    
-    public function actualizarU($id, $nombre, $email) {
+  public function actualizarU($id, $nombre, $email) {
     $id = (int)$id;
     $nombre = $this->conn->real_escape_string($nombre);
     $email = $this->conn->real_escape_string($email);
