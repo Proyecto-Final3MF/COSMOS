@@ -1,9 +1,3 @@
-<?
-if (isset($_SESSION['rol']) !== ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
