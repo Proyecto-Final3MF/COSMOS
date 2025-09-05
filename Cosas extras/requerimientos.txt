@@ -43,6 +43,7 @@ Rol cliente:
 Historial:
 - Registrar y mostrar todas las modificaciones en la base de datos.
 - Un formulario que pide filtros para no mostrar todos los registros y sobrecargar.
+- Cada registro contiene el usuario que ejecuto la acción, la acción en si, el item modificado y el momento exacto en que la acción fue efectuada.
 	
 Rol admin:
 	CRUD de categorias
