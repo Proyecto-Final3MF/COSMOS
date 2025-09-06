@@ -180,6 +180,6 @@ switch ($accion) {
         } else {
             header("Location: index.php?accion=login");
         }
-        exit();
+    exit();
 }
 ?>
