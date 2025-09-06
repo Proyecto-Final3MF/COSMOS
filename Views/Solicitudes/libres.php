@@ -5,17 +5,6 @@ require_once('controllers/SolicitudC.php');
 $controller = new SolicitudC();
 $solicitudes = $controller->getLibresData();
 
-if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
-    $solicitudId = (int)$_GET['id'];
-    if ($controller->handleSelectSolicitud($solicitudId)) {
-        header('Location: libres.php?message=Solicitud seleccionada con éxito.');
-        exit();
-    } else {
-        header('Location: libres.php?error=Error al seleccionar la solicitud.');
-        exit();
-    }
-}
-
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
 <!DOCTYPE html>
