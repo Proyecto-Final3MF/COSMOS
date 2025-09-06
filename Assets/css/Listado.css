@@ -58,7 +58,6 @@ body {
     background-color: #0056b3;
 }
 
-
 .pagina-btn.activa {
     background-color: #28a745;
     cursor: default;
@@ -95,7 +94,6 @@ body {
     background-color: #282c34;
     color: #f4f4f4;
 }
-
 
 .tema-oscuro .solicitud {
     border: 1px solid #363636;
