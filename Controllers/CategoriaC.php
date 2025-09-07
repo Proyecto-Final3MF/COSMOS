@@ -58,15 +58,20 @@ class CategoriaC {
     public function actualizarC() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+            $nuevoNombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
 
-            if ($id > 0 && !empty($nombre)) {
-                $categoria = new Categoria(); 
-                $categoria->actualizarC($id, $nombre);
+            if ($id > 0 && !empty($nuevoNombre)) {
+                $categoria_modelo = new Categoria();
+                $categoriaAntigua = $categoria_modelo->buscarPorId($id);
+                $nombreAntiguo = $categoriaAntigua['nombre'] ?? 'Nombre desconocido';
 
-                $_SESSION['mensaje'] = "Categoria fue cambiada para '{$nombre}'.";
+                $categoria_modelo->actualizarC($id, $nuevoNombre);
+
+                $obs = "La categoria '{$nombreAntiguo}' fue renombrada para '{$nuevoNombre}'.";
+                $_SESSION['mensaje'] = "Categoria {$nombreAntiguo}' fue cambiada para '{$nuevoNombre}'.";
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'renombro la', 'categoria', $id, $obs);
             } else {
-                $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización..";
+                $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
             header("Location: index.php?accion=listarC");
         } else {
