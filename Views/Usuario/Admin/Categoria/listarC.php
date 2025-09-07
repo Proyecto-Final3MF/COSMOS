@@ -1,4 +1,7 @@
-<?php if (empty($resultados)): ?>
+<?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
+    header("Location: index.php?accion=redireccion");
+} 
+if (empty($resultados)): ?>
     <div class="alert alert-info">
          No hay productos registrados. <a href="index.php?accion=crear">Crear el primero</a>
     </div>
