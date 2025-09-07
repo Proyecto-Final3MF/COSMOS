@@ -32,7 +32,7 @@ class CategoriaC {
             if ($categoria->guardarC($nombre)) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
-            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
+            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $id, $obs);
             } else {
                 $_SESSION['mensaje'] = "Error al guardar la categoria.";
             }
@@ -85,10 +85,13 @@ class CategoriaC {
             $categoria = new Categoria();
             $id = (int) $_GET['id'];
             $categoria->verificarExistencia($id);
+            $nombre = $categoria['nombre'] ?? 'Nombre desconocido';
 
             if ($categoria) {
                 if ($categoria->borrarC($id)) {
-                $_SESSION['mensaje'] = "Categoría eliminada exitosamente.";                    
+                $_SESSION['mensaje'] = "Categoría eliminada exitosamente.";
+                $obs = "La categoria '{$nombre}' fue eliminada";
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'elimino la', 'categoria', $id, $obs);         
             } else {
                 $_SESSION['mensaje'] = "Error: Categoría no encontrada.";
             }
