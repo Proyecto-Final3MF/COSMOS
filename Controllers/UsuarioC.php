@@ -64,6 +64,7 @@ public function actualizarU() {
     if ($usuarioM->actualizarU($id, $nombre, $email)) {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
+        $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
         
      header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
