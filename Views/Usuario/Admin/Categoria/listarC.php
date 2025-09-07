@@ -1,5 +1,6 @@
 <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     header("Location: index.php?accion=redireccion");
+    exit();
 } 
 if (empty($resultados)): ?>
     <div class="alert alert-info">
