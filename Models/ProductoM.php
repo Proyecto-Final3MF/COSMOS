@@ -61,5 +61,24 @@ class Producto {
         $sql = "DELETE FROM producto WHERE id=$id";
         return $this->conn->query($sql);
     }
+    public function obtenerProductoPorId($id) {
+    $id = (int)$id;
+    $sql = "SELECT * FROM producto WHERE id = $id LIMIT 1";
+    $result = $this->conn->query($sql);
+    if ($result && $row = $result->fetch_assoc()) {
+        return $row;
+    }
+    return null;
 }
-?>
+
+public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
+    $id = (int)$id;
+    $nombre = $this->conn->real_escape_string($nombre);
+    $imagen = $this->conn->real_escape_string($imagen);
+    $categoria_id = (int)$categoria_id;
+
+    $sql = "UPDATE producto SET nombre = '$nombre', imagen = '$imagen', id_cat = $categoria_id WHERE id = $id";
+    return $this->conn->query($sql);
+}
+    }
+    ?>
