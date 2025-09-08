@@ -9,9 +9,9 @@
 
 <body>
     <div id="chat-box">
-        <?php foreach($mensajes as $m): ?>
+        <?php foreach ($mensajes as $m): ?>
             <p><strong><?= $m['usuario'] ?>:</strong> <?= htmlspecialchars($m['mensaje']) ?></p>
-        <?php endfpreach; ?>
+        <?php endforeach; ?>
     </div>
 
     <form id="form-chat">
@@ -20,6 +20,7 @@
         <button type="submit">Enviar</button>
     </form>
 </body>
+
 </html>
 
 <script>
@@ -35,7 +36,7 @@
     });
 
     async function cargarMensajes() {
-        let res = await fetch ("index.php?c=ChatC&a=mostrarChat&receptor=<?= $receptor_id ?? 'null' ?>");
+        let res = await fetch("index.php?c=ChatC&a=mostrarChat&receptor=<?= $receptor_id ?? 'null' ?>");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
