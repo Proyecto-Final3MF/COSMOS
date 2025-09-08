@@ -11,7 +11,7 @@ class Mensaje
         $this->conexion = conectar();
     }
 
-    public function obtenerMensaje($receptor_id = null)
+    public function obtenerMensajes($receptor_id = null)
     {
         $sql = "SELECT m.*, u.nombre as usuario
                 FROM mensaje m
