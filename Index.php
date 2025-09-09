@@ -187,10 +187,11 @@ case 'actualizarP':
     break;
         
     default:
-        if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=redireccion");
+        if (!isset($_SESSION['usuario'])) {
+             header("Location: index.php?accion=login");
         } else {
-            header("Location: index.php?accion=login");
+            http_response_code(404);
+            header("Location: Error.php");
         }
     exit();
 }
