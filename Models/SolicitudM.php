@@ -62,7 +62,7 @@ class Solicitud {
             $params[] = $Tid;
             $param_types .= 'i';
         } else {
-            error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+            error_log("Error: \$Tid no está configurado en SolicitudM.php para getSolicitudesOcupadas");
             return false;
         }
 
