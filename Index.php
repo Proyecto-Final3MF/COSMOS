@@ -44,13 +44,13 @@ switch ($accion) {
     break;
 
     case 'actualizarU':
-    $controller = new UsuarioC();
-    $controller->actualizarU();
+        $controller = new UsuarioC();
+        $controller->actualizarU();
     break;
 
     case 'eliminarU':
-    $controller = new UsuarioC();
-    $controller->eliminar();
+        $controller = new UsuarioC();
+        $controller->eliminar();
     break;
 
     case 'autenticar':
@@ -127,12 +127,12 @@ switch ($accion) {
         $controller->borrarP();
     break;
 
-case 'editarP':
-       $controller = new ProductoC();
-    $controller->editarP();
+    case 'editarP':
+        $controller = new ProductoC();
+        $controller->editarP();
     break;
 
-case 'actualizarP':
+    case 'actualizarP':
        $controller = new ProductoC();
        $controller->actualizarP();
    break;
