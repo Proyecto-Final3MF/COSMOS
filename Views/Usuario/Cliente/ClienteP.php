@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== ROL_CLIENTE) {
 }
 
 require_once ("./Views/include/UH.php");
-require_once ("./Models/ProductoM.php"); // Asegúrate de incluir el modelo Producto
+require_once ("./Models/ProductoM.php");
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,6 @@ require_once ("./Models/ProductoM.php"); // Asegúrate de incluir el modelo Prod
 
     <p>Lista de Productos</p><br>
 
-    <!-- Botón Agregar Producto fuera de la tabla -->
     <button class="button"><a href="index.php?accion=formularioP">+ Agregar Producto</a></button><br><br>
 
     <table>
@@ -38,7 +37,7 @@ require_once ("./Models/ProductoM.php"); // Asegúrate de incluir el modelo Prod
         </thead>
         <tbody>
             <?php 
-            $productoModel = new Producto(); // Crear objeto una sola vez
+            $productoModel = new Producto();
             foreach ($resultados as $p): ?>
             <tr>
                 <td><?= htmlspecialchars($p['nombre']) ?></td>
