@@ -21,7 +21,7 @@ class CategoriaC {
         $nombre = $_POST['nombre'] ?? '';
 
         if (empty($nombre)) {
-            $_SESSION['mensaje'] = "La categoria no puede tener un nombre vacio.";
+            $_SESSION['mensaje'] = "La categoria debe tener un nombre.";
             header("Location: index.php?accion=FormularioC");
             return;
         }
@@ -91,12 +91,12 @@ class CategoriaC {
                 if ($categoria->borrarC($id)) {
                 $_SESSION['mensaje'] = "Categoría eliminada exitosamente.";
                 $obs = "La categoria '{$nombre}' fue eliminada";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'elimino la', 'categoria', $id, $obs);         
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'eliminó la', 'categoria', $id, $obs);         
             } else {
                 $_SESSION['mensaje'] = "Error: Categoría no encontrada.";
             }
         } else {
-            $_SESSION['mensaje'] = "Error: Solicitud no válida.";
+            $_SESSION['mensaje'] = "Error: Solicitud inválida.";
         }
         header("Location: index.php?accion=listarC");
         exit();

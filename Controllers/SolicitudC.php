@@ -54,7 +54,7 @@ class SolicitudC {
 
         if ($success) {
             $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
-            $this->historialController->registrarModificacion($usuario, $usuarioId, 'modifico', 'solicitud', $solicitudId, $obs);
+            $this->historialController->registrarModificacion($usuario, $usuarioId, 'modificó', 'solicitud', $solicitudId, $obs);
         }
         return $success;
 }
@@ -67,7 +67,7 @@ class SolicitudC {
             $result_status = $this->requestModel->cancelar($id);
 
             if ($result_status === 'updated') {
-                $obs = "Solicitud cancelada por parte del tecnico, volvio a estar disponible.";
+                $obs = "Solicitud cancelada por parte del tecnico, retornó a estar disponible.";
                 $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
                 exit();
             } elseif ($result_status === 'deleted') {
