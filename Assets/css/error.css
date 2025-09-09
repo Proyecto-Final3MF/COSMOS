@@ -1,28 +1,21 @@
 body {
     font-family: Arial, sans-serif;
+    /* Remover background-color para ver a imagem de fundo */
+    /* background-color: #f4f4f4; */
+    
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-}
 
-#background-video {
-
-position: fixed;
-
-right: 0;
-
-bottom: 0;
-
-min-width: 100%;
-
-min-height: 100%;
-
-z-index: -1;
-
-object-fit: cover;
-
+    /* --- NOVAS PROPRIEDADES PARA A IMAGEM DE FUNDO --- */
+    background-image: url('Assets/imagenes/error.png'); /* Altere 'background.jpg' pelo nome e caminho da sua imagem */
+    background-size:cover; /* Faz a imagem cobrir toda a área, cortando se necessário */
+    background-position: center center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-attachment: fixed; /* Opcional: Faz a imagem de fundo permanecer fixa enquanto a página rola */
+    /* --- FIM DAS NOVAS PROPRIEDADES --- */
 }
 
 .error {
@@ -53,5 +46,5 @@ p {
 }
 
 .btn:hover {
-    background-color: #d43680;
+    background-color: d43680;
 }
