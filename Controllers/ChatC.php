@@ -3,12 +3,23 @@ require_once "Models/Mensaje.php";
 
 class ChatC
 {
+    // Mostrar chat normal
     public function mostrarChat()
     {
         $mensaje = new Mensaje();
-        $receptor_id = $_GET['receptor'] ?? null;
-        $mensajes = $mensaje->obtenerMensajes($receptor_id);
-        include "Views/chat.php";
+        $usuario_id = $_SESSION['id'];
+        $rol = $_SESSION['rol']; //'usuario', 'tecnico' o 'admin'
+
+        // Si es admin -> ver todo
+        $esAdmin = ($rol === 'admin');
+
+        $mensajes = $mensaje->obtenerMensajes($usuario_id, $esAdmin);
+
+        if ($esAdmin) {
+            include "Views/chat_admin.php"; //vista especial
+        } else {
+            include "Views/chat.php"; // vista normal
+        }
     }
 
     public function enviar()
