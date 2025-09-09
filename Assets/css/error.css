@@ -10,7 +10,7 @@ body {
     margin: 0;
 
     /* --- NOVAS PROPRIEDADES PARA A IMAGEM DE FUNDO --- */
-    background-image: url('Assets/imagenes/error.png'); /* Altere 'background.jpg' pelo nome e caminho da sua imagem */
+    background-image: url('../imagenes/error.png'); /* Altere 'background.jpg' pelo nome e caminho da sua imagem */
     background-size:cover; /* Faz a imagem cobrir toda a área, cortando se necessário */
     background-position: center center; /* Centraliza a imagem no fundo */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
