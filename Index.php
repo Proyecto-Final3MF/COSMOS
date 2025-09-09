@@ -5,6 +5,7 @@ require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
 require_once("Controllers/CategoriaC.php");
+require_once("Models/ProductoM.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -125,6 +126,17 @@ switch ($accion) {
         $controller = new ProductoC();
         $controller->borrarP();
     break;
+
+case 'editarP':
+       $controller = new ProductoC();
+    $controller->editarP();
+    break;
+
+case 'actualizarP':
+       $controller = new ProductoC();
+       $controller->actualizarP();
+   break;
+  
         
     case 'SolicitudesLibres':
         $controller = new SolicitudC();
