@@ -3,7 +3,6 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_CLIENTE) {
     header("Location: index.php?accion=redireccion");
     exit();
 }  
-session_start();
 
 require_once ("./Views/include/UH.php");
 require_once ("./Models/ProductoM.php");
