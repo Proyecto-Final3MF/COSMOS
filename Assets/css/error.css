@@ -5,29 +5,12 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('Assets/imagenes/error.png');
+
+    background-image: url('../imagenes/error.png');
     background-size:cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
-
-#background-video {
-
-position: fixed;
-
-right: 0;
-
-bottom: 0;
-
-min-width: 100%;
-
-min-height: 100%;
-
-z-index: -1;
-
-object-fit: cover;
-
 }
 
 .error {
@@ -58,5 +41,5 @@ p {
 }
 
 .btn:hover {
-    background-color: #d43680;
+    background-color: d43680;
 }

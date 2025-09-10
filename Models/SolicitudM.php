@@ -30,10 +30,20 @@ class Solicitud {
     }
 
     public function getSolicitudesDisponibles() {
-        $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
+        // Modified SQL query to include product image URL
+        $sql = "SELECT 
+                    solicitud.id, 
+                    solicitud.titulo, 
+                    solicitud.descripcion, 
+                    solicitud.fecha_creacion, 
+                    solicitud.prioridad, 
+                    producto.nombre AS producto_nombre,
+                    producto.imagen AS producto_imagen
                 FROM solicitud
+                JOIN producto ON solicitud.producto_id = producto.id
                 JOIN estado ON solicitud.estado_id = estado.id
-                WHERE solicitud.estado_id = 1";
+                WHERE solicitud.estado_id = 1"; // Assuming 1 is the ID for "available"
+
         $resultado = $this->conn->query($sql);
 
         if (!$resultado) {
@@ -62,7 +72,7 @@ class Solicitud {
             $params[] = $Tid;
             $param_types .= 'i';
         } else {
-            error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+            error_log("Error: \$Tid no está configurado en SolicitudM.php para getSolicitudesOcupadas");
             return false;
         }
 
@@ -135,7 +145,7 @@ class Solicitud {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
-        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, '$descripcion')";
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, 1, '$descripcion')";
         
         return $this->conn->query($sql);
     }
