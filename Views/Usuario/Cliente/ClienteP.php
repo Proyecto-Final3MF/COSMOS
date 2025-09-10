@@ -6,6 +6,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_CLIENTE) {
 
 require_once ("./Views/include/UH.php");
 require_once ("./Models/ProductoM.php");
+
+$solicitudController = new SolicitudC();
+$solicitudes = $solicitudController->getLibresData();
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +34,7 @@ require_once ("./Models/ProductoM.php");
                 <th>Imagen</th>
                 <th>Categoria</th>
                 <th>Modificaciones</th>
+                <th>Cear</th>
             </tr>
         </thead>
         <tbody>
@@ -45,8 +49,9 @@ require_once ("./Models/ProductoM.php");
                     <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton">Editar</button></a>
                     <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton">Borrar</button></a>
                 </td>
-            </tr>
             <?php endforeach; ?>
+                <td> <a href="index.php?accion=formularioP"><button class="btn btn-boton">Crear Nuevo Producto</button></a></td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -61,23 +66,49 @@ require_once ("./Models/ProductoM.php");
                 <th>Prioridad</th>
                 <th>Descripcion</th>
                 <th>Fecha de Creacion</th>
-                <th>Agregar Solicitud</th>
+                <th>Acciones</th>
+                <th>Crear Solicitud</th>
             </tr>
         </thead>
         <tbody>
-            <?php // Aquí debes agregar el código para mostrar solicitudes si tienes datos ?>
+    <?php
+    if (!empty($solicitudes)) {
+        foreach ($solicitudes as $solicitud) {
+            ?>
             <tr>
-                <td><!-- Título aquí --></td>
-                <td><!-- Producto aquí --></td>
-                <td><!-- Prioridad aquí --></td>
-                <td><!-- Descripción aquí --></td>
-                <td><!-- Fecha aquí --></td>
+                <td><?= htmlspecialchars($solicitud['titulo']); ?></td>
                 <td>
-                    <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
+                    <img src="<?= htmlspecialchars($solicitud['producto_imagen']) ?>" alt="Imagen del producto" style="max-width:100px; max-height:100px;" /><br>
+                    <?= htmlspecialchars($solicitud['producto_nombre']) ?>
                 </td>
-            </tr>
-        </tbody>
+                <td><?= htmlspecialchars($solicitud['prioridad']); ?></td>
+                <td><?= htmlspecialchars($solicitud['descripcion']); ?></td>
+                <td><?= htmlspecialchars($solicitud['fecha_creacion']); ?></td>
+                <td>
+                    <a href="index.php?accion=borrarS&id=<?= $solicitud['id']; ?>">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </a>
+                </td>
+           
+            <?php
+        }
+        ?> 
+        <td> <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a> </td>
+         </tr>
+        <?php
+    } else {
+        ?>
+        <tr>
+            <td colspan="6">No hay solicitudes no asignadas.</td>
+        </tr>
+        <?php
+    }
+    ?>
+</tbody>
     </table>
+    <a href="index.php?accion=formularioS">
+        <button class="btn btn-boton">Crear Nueva Solicitud</button>
+    </a>
 </div>
 
 <a href="index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>
