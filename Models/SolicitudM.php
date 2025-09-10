@@ -30,7 +30,6 @@ class Solicitud {
     }
 
     public function getSolicitudesDisponibles() {
-        // Modified SQL query to include product image URL
         $sql = "SELECT 
                     solicitud.id, 
                     solicitud.titulo, 
@@ -42,7 +41,7 @@ class Solicitud {
                 FROM solicitud
                 JOIN producto ON solicitud.producto_id = producto.id
                 JOIN estado ON solicitud.estado_id = estado.id
-                WHERE solicitud.estado_id = 1"; // Assuming 1 is the ID for "available"
+                WHERE solicitud.estado_id = 1";
 
         $resultado = $this->conn->query($sql);
 
