@@ -6,5 +6,5 @@
     <label for="nombre">Nuevo nombre de la Categoria:</label>
     <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($categoria['nombre']) ?>" required>
     
-    <button type="submit">Atualizar</button>
+    <button type="submit">Actualizar</button>
 </form>
