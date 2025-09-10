@@ -5,6 +5,7 @@ require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
 require_once("Controllers/CategoriaC.php");
+require_once("Models/ProductoM.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -43,13 +44,13 @@ switch ($accion) {
     break;
 
     case 'actualizarU':
-    $controller = new UsuarioC();
-    $controller->actualizarU();
+        $controller = new UsuarioC();
+        $controller->actualizarU();
     break;
 
     case 'eliminarU':
-    $controller = new UsuarioC();
-    $controller->eliminar();
+        $controller = new UsuarioC();
+        $controller->eliminar();
     break;
 
     case 'autenticar':
@@ -125,6 +126,17 @@ switch ($accion) {
         $controller = new ProductoC();
         $controller->borrarP();
     break;
+
+    case 'editarP':
+        $controller = new ProductoC();
+        $controller->editarP();
+    break;
+
+    case 'actualizarP':
+       $controller = new ProductoC();
+       $controller->actualizarP();
+   break;
+  
         
     case 'SolicitudesLibres':
         $controller = new SolicitudC();
@@ -175,10 +187,11 @@ switch ($accion) {
     break;
         
     default:
-        if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=redireccion");
+        if (!isset($_SESSION['usuario'])) {
+             header("Location: index.php?accion=login");
         } else {
-            header("Location: index.php?accion=login");
+            http_response_code(404);
+            header("Location: Error.php");
         }
     exit();
 }
