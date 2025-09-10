@@ -54,30 +54,27 @@ class UsuarioC {
         }
     } 
     
-    // En tu clase UsuarioC...
-public function actualizarU() {
-    $id = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    
-    $usuarioM = new UsuarioC();
-    if ($usuarioM->actualizarU($id, $nombre, $email)) {
-        // Actualiza el nombre en la sesión si es necesario
-        $_SESSION['usuario'] = $nombre;
-        $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
+    public function actualizarU() {
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $email = $_POST['email'];
         
-     header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-    } else {
-        
-        header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+        $usuarioM = new UsuarioC();
+        if ($usuarioM->actualizarU($id, $nombre, $email)) {
+            // Actualiza el nombre en la sesión si es necesario
+            $_SESSION['usuario'] = $nombre;
+            $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
+            
+        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+        } else {
+            
+            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+        }
+    exit();
     }
-exit();
-}
-// En tu clase UsuarioC...
+
     public function eliminar() {
-    // Verifica si se recibió el ID del usuario a eliminar
     if (!isset($_GET['id'])) {
-        // Si no hay ID, redirige con un mensaje de error
         header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
         exit();
     }
@@ -85,12 +82,9 @@ exit();
     $id = $_GET['id'];
     $usuarioM = new UsuarioC();
     
-    // Llama al método del modelo para eliminar al usuario
     if ($usuarioM->eliminar($id)) {
-        // Redirige al panel con un mensaje de éxito
         header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
     } else {
-        // Redirige al panel con un mensaje de error si la eliminación falla
         header("Location: index.php?accion=redireccion&error=No se pudo eliminar el usuario.");
     }
     exit();
