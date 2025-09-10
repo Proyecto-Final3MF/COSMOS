@@ -53,7 +53,6 @@ select {
 
 }
 
-
 input[type="submit"] {
     background-color: #e83e8c; 
     color: white;
@@ -67,11 +66,9 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-
 .button[type="submit"]:hover {
     background-color: #972f5f; 
     }
-
 
 a {
     display: block;
@@ -81,7 +78,6 @@ a {
     font-size: 14px;
     transition: color 0.3s ease;
 }
-
 
 a:hover {
     color: #266937; 
