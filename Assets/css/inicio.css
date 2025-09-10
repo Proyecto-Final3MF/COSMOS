@@ -21,16 +21,16 @@ body {
 
        
 .navbar {
-	  background-color: white;
-	  box-shadow: var(--box-shadow);
-	  padding: 0.8rem 2rem;
-	  position: sticky;
-	  top: 0;
-	  z-index: 1000;
-	  display: flex;
-	  justify-content: space-between; 
-	  align-items: center;
-	  flex-wrap: wrap;
+	background-color: white;
+	box-shadow: var(--box-shadow);
+	padding: 0.8rem 2rem;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	display: flex;
+	justify-content: space-between; 
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .nav-links {
@@ -40,19 +40,18 @@ body {
 }
 
 .logo {
-		font-size: 1.8rem;
-		font-weight: 700;
-		color: var(--primary-color);
-		text-decoration: none;
-		display: flex;
-		align-items: center;
+	font-size: 1.8rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	text-decoration: none;
+	display: flex;
+	align-items: center;
 }
 
 .logo-icon {
-		margin-right: 0.5rem;
+	margin-right: 0.5rem;
 }
-
-        
+    
 .nav-links li {
     margin-left: 1.5rem;
     display: flex; 
@@ -165,20 +164,20 @@ table {
 }
 
 th, td {
-		border: solid 1px;
-		border-collapse: collapse;
-		padding: 5px;
+	border: solid 1px;
+	border-collapse: collapse;
+	padding: 5px;
 
 }
 
 img {
-		max-width: 350;
+	max-width: 350;
 }
 
 th {
-		background-color: #e83e8c;
+	background-color: #e83e8c;
 }
 
 tr:hover {
-		background-color: #b43b74;
+	background-color: #b43b74;
 }
