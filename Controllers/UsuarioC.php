@@ -66,11 +66,12 @@ class UsuarioC
         $nombre = $_POST['nombre'];
         $email = $_POST['email'];
 
-        $usuarioM = new UsuarioC();
+        $usuarioM = new Usuario();
         if ($usuarioM->actualizarU($id, $nombre, $email)) {
             // Actualiza el nombre en la sesión si es necesario
             $_SESSION['usuario'] = $nombre;
-            $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null);
+            $obs = "Usuario actualizado a través del formulario de edición";
+            $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
 
             header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
         } else {
@@ -88,7 +89,7 @@ class UsuarioC
         }
 
         $id = $_GET['id'];
-        $usuarioM = new UsuarioC();
+        $usuarioM = new Usuario();
 
         if ($usuarioM->eliminar($id)) {
             header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
