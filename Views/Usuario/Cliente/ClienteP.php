@@ -25,7 +25,9 @@ $solicitudes = $solicitudController->getLibresData();
 
     <p>Lista de Productos</p><br>
 
-    <button class="button"><a href="index.php?accion=formularioP">+ Agregar Producto</a></button><br><br>
+    <div class="botones-container">
+    <a href="index.php?accion=formularioP"><button class="btn btn-boton">Agregar Producto</button></a>
+    </div>
 
     <table>
         <thead>
@@ -34,7 +36,6 @@ $solicitudes = $solicitudController->getLibresData();
                 <th>Imagen</th>
                 <th>Categoria</th>
                 <th>Modificaciones</th>
-                <th>Crear</th>
             </tr>
         </thead>
         <tbody>
@@ -46,11 +47,10 @@ $solicitudes = $solicitudController->getLibresData();
                 <td><img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" style="max-width:100px; max-height:100px;" /></td>
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
-                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton">Editar</button></a>
-                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton">Borrar</button></a>
+                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2">Editar</button></a>
+                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton2">Borrar</button></a>
                 </td>
             <?php endforeach; ?>
-                <td> <a href="index.php?accion=formularioP"><button class="btn btn-boton">Crear Nuevo Producto</button></a></td>
             </tr>
         </tbody>
     </table>
@@ -58,6 +58,9 @@ $solicitudes = $solicitudController->getLibresData();
 
 <div>
     <p>Solicitudes no asignadas</p>
+    <div class="botones-container">
+    <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
+</div>
     <table>
         <thead>
             <tr>
@@ -105,10 +108,6 @@ $solicitudes = $solicitudController->getLibresData();
     }
     ?>
 </tbody>
-    </table>
-    <a href="index.php?accion=formularioS">
-        <button class="btn btn-boton">Crear Nueva Solicitud</button>
-    </a>
 </div>
 
 <a href="index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>

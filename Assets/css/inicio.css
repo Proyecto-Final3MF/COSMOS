@@ -120,10 +120,31 @@ body {
     color: white;
 }
 
+.btn-boton2 {
+     margin-right: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.btn-boton2:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 .btn-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.botones-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px 0;
 }
 
 h1 {
@@ -156,7 +177,7 @@ thead {
 
 table {
     width: 95%; 
-    background-color: #e83e8c;
+    background-color: #f873b1;
     text-align: center;
     margin: 40px;
     height: 40%;
@@ -174,7 +195,7 @@ img {
 }
 
 th {
-	background-color: #e83e8c;
+	background-color: #b61e65;
 }
 
 tr:hover {
