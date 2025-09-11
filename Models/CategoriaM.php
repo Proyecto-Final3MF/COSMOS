@@ -25,16 +25,22 @@ class Categoria {
     }
 
     public function guardarC($nombre) {
-        $sql = "INSERT INTO categoria (nombre) VALUES (?)";
-        
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('s', $nombre);
-        $result = $stmt->execute();
-        
-        $stmt->close();
-        
-        return $result;
+    $sql = "INSERT INTO categoria (nombre) VALUES (?)";
+    
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param('s', $nombre);
+    $result = $stmt->execute();
+    
+    if ($result) {
+        $newId = $this->conn->insert_id;
+    } else {
+        $newId = false;
     }
+
+    $stmt->close();
+    
+    return $newId;
+}
 
     public function listarC() {
         $sql = "SELECT * FROM categoria";
