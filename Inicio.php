@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
 <body>  
-
 <h1>Bienvenido a COSMOS</h1>
 <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
 

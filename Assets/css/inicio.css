@@ -18,8 +18,7 @@ body {
     color: var(--dark-color);
     line-height: 1.6;
  }
-
-       
+ 
 .navbar {
 	background-color: white;
 	box-shadow: var(--box-shadow);
@@ -90,7 +89,7 @@ body {
 .nav-links a:hover::after {
     width: 100%;
 }
-    
+
 .action-buttons {
     display: flex;
     align-items: center;
