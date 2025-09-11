@@ -1,4 +1,5 @@
-<?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
+<?php 
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     header("Location: index.php?accion=redireccion");
     exit();
 } 
@@ -7,11 +8,21 @@ if (empty($resultados)):
 require_once ("./Views/include/AH.php");
 
 ?>
-    <div class="alert alert-info">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Categorias</title>
+    <link rel="stylesheet" href="./Assets/css/inicio.css">
+</head>
+<body>
+    
+<div class="alert alert-info">
          No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>
     </div>
 <?php else: ?>
-    <link rel="stylesheet" href="./Assets/css/inicio.css">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -43,3 +54,7 @@ require_once ("./Views/include/AH.php");
 <?php endif; ?>
 </div>
 </div>
+
+</body>
+</html>
+    

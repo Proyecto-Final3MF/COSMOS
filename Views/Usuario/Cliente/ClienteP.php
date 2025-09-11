@@ -34,7 +34,7 @@ $solicitudes = $solicitudController->getLibresData();
                 <th>Imagen</th>
                 <th>Categoria</th>
                 <th>Modificaciones</th>
-                <th>Cear</th>
+                <th>Crear</th>
             </tr>
         </thead>
         <tbody>
