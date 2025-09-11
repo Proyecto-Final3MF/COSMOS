@@ -17,7 +17,7 @@
 <p>Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
 
 <div class="btn-container">
-  <a href="Index.php"><button class="btn btn-boton">Empezar ahora</button></a>
+  <a href="Index.php?accion=login"><button class="btn btn-boton">Empezar ahora</button></a>
 </div>
 
 </body>
