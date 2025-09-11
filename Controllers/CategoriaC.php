@@ -68,7 +68,7 @@ class CategoriaC {
                 $categoria_modelo->actualizarC($id, $nuevoNombre);
 
                 $obs = "La categoria '{$nombreAntiguo}' fue renombrada para '{$nuevoNombre}'.";
-                $_SESSION['mensaje'] = "Categoria {$nombreAntiguo}' fue cambiada para '{$nuevoNombre}'.";
+                $_SESSION['mensaje'] = "Categoria '{$nombreAntiguo}' fue cambiada para '{$nuevoNombre}'.";
                 $this->historialController->registrarModificacion($usuario, $usuarioId, 'renombro la', 'categoria', $id, $obs);
             } else {
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
