@@ -3,10 +3,8 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     header("Location: index.php?accion=redireccion");
     exit();
 } 
-if (empty($resultados)): 
 
-require_once ("./Views/include/AH.php");
-
+require_once("./Views/include/AH.php");
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +16,10 @@ require_once ("./Views/include/AH.php");
     <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
 <body>
-    
-<div class="alert alert-info">
-         No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>
+
+<?php if (empty($resultados)): ?>
+    <div class="alert alert-info">
+        No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
@@ -35,26 +34,20 @@ require_once ("./Views/include/AH.php");
             <?php foreach ($resultados as $c): ?>
                 <tr>
                     <td><?= $c['id'] ?></td>
-                        <td><?= htmlspecialchars($c['nombre']) ?></td>
-                        <td>
-                            <div class="btn-group-actions d-flex">
+                    <td><?= htmlspecialchars($c['nombre']) ?></td>
+                    <td>
+                        <div class="btn-group-actions d-flex">
                             <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-primary">Editar</a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
                                 <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-danger">Borrar</a>
                             <?php endif; ?>
-                            </div>
+                        </div>
                     </td>
-                    </tr>
-                <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
-        </table>
-    </div>
-    </div>
-    </div>
+    </table>
 <?php endif; ?>
-</div>
-</div>
 
 </body>
 </html>
-    
