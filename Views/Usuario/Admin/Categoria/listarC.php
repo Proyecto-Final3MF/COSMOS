@@ -2,11 +2,16 @@
     header("Location: index.php?accion=redireccion");
     exit();
 } 
-if (empty($resultados)): ?>
+if (empty($resultados)): 
+
+require_once ("./Views/include/AH.php");
+
+?>
     <div class="alert alert-info">
          No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>
     </div>
 <?php else: ?>
+    <link rel="stylesheet" href="./Assets/css/inicio.css">
     <table class="table table-striped">
         <thead>
             <tr>
