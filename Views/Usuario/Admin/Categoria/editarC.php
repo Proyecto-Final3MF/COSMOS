@@ -1,4 +1,7 @@
-<h1>Editar Categoria</h1>
+<body>
+<section>
+<h3>Editar Categoria</h3>
+<link rel="stylesheet" href="./Assets/css/Formulario.css">
 
 <form action="index.php?accion=actualizarC" method="POST">
     <input type="hidden" name="id" value="<?= htmlspecialchars($categoria['id']) ?>">
@@ -8,3 +11,5 @@
     
     <button type="submit">Actualizar</button>
 </form>
+</section>
+</body>

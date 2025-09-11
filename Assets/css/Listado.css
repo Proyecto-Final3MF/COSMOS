@@ -58,7 +58,6 @@ body {
     background-color: #0056b3;
 }
 
-
 .pagina-btn.activa {
     background-color: #28a745;
     cursor: default;
@@ -96,7 +95,6 @@ body {
     color: #f4f4f4;
 }
 
-
 .tema-oscuro .solicitud {
     border: 1px solid #363636;
     padding: 10px;
@@ -112,9 +110,9 @@ body {
 }
 
 .tema-oscuro .filter-buttons button.active {
-    background-color: #d9ff00;
-    color: rgb(0, 0, 0);
-    border-color: #fbff00;
+    background-color: #e83e8c;
+    color: rgb(255, 255, 255);
+    border-color: #cc2f78;
 }
 
 .tema-oscuro .filter-buttons button {
