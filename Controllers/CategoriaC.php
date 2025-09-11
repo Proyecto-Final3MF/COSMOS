@@ -32,7 +32,7 @@ class CategoriaC {
             if ($categoria->guardarC($nombre)) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
-            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $id, $obs);
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $usuarioId, 'guardo la categoria', $nombre, $id, $obs);
             } else {
                 $_SESSION['mensaje'] = "Error al guardar la categoria.";
             }
