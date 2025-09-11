@@ -17,28 +17,31 @@ class CategoriaC {
     }
 
     public function guardarC() {
-        $categoria = new Categoria();
-        $nombre = $_POST['nombre'] ?? '';
+    $categoria = new Categoria();
+    $nombre = $_POST['nombre'] ?? '';
+    // $id is no longer needed at the start, as it will be assigned the new ID
+    $id = 0; 
 
-        if (empty($nombre)) {
-            $_SESSION['mensaje'] = "La categoria no puede tener un nombre vacio.";
-            header("Location: index.php?accion=FormularioC");
-            return;
-        }
+    if (empty($nombre)) {
+        $_SESSION['mensaje'] = "La categoria no puede tener un nombre vacio.";
+        header("Location: index.php?accion=FormularioC");
+        return;
+    }
 
-        if ($categoria->verificarExistencia($nombre)) {
-            $_SESSION['mensaje'] = "La categoria '{$nombre}' ya existe.";
-        } else {
-            if ($categoria->guardarC($nombre)) {
+    if ($categoria->verificarExistencia($nombre)) {
+        $_SESSION['mensaje'] = "La categoria '{$nombre}' ya existe.";
+    } else {
+        $id = $categoria->guardarC($nombre);
+        if ($id !== false) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
-            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $solicitudId, $obs);
-            } else {
-                $_SESSION['mensaje'] = "Error al guardar la categoria.";
-            }
+            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $id, $obs);
+        } else {
+            $_SESSION['mensaje'] = "Error al guardar la categoria.";
         }
-        header("Location: index.php?accion=FormularioC");
     }
+    header("Location: index.php?accion=FormularioC");
+}
 
     public function listarC() {
         $categoria = new Categoria();
