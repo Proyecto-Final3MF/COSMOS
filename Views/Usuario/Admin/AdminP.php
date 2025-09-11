@@ -22,7 +22,7 @@ require_once ("./Views/include/AH.php");
 <div class="btn-container">
 <a href="index.php?accion=FormularioC"><button class="btn btn-boton">Crear Nueva Categoria</button></a>
 <a href="index.php?accion=listarC"><button class="btn btn-boton">Todas Las Categorias</button></a>
-<a href="index.php?accion=mostrarHistorial"><button class="btn btn-boton">Historial</button></a>
+<a href="index.php?accion=mostrarHistorial"><button class="btn btn-boton">Historial de actividades</button></a>
 </div>
 </body>
 </html>
