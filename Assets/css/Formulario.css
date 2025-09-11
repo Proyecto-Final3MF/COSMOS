@@ -24,8 +24,6 @@ h3 {
     font-size: 24px;
 }
 
-
-
 form p {
     color: #495057;
     margin-bottom: 5px;
@@ -55,7 +53,6 @@ select {
 
 }
 
-
 input[type="submit"] {
     background-color: #e83e8c; 
     color: white;
@@ -73,7 +70,6 @@ input[type="submit"] {
     background-color: #972f5f; 
     }
 
-
 a {
     display: block;
     margin-top: 15px;
@@ -82,7 +78,6 @@ a {
     font-size: 14px;
     transition: color 0.3s ease;
 }
-
 
 a:hover {
     color: #266937; 
@@ -103,7 +98,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-
     background-color: #972f5f; 
-
 }

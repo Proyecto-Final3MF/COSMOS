@@ -21,7 +21,6 @@ Actualizar productos
 Eliminar productos
 
 
-
 seguimineto de reparaciones en tiempo real
 
 generacion de metricas para optimizacion operativa
@@ -32,16 +31,18 @@ Usuario:
 	Cerrado de sesion
 
 Rol cliente:
-	Registro de solicitudes de servicios
-	Visualizar reparaciones activas
+	CRUD solicitudes
 	Sistema de notificaciones
 	Comunicacion con rol tecnico
 
 2 tecnico:
 	Asignacion automatica/manual de reparaciones
 	Comunicacion con rol usuario
-	Registro de acciones realizadas
-	
+
+Historial:
+- Registrar y mostrar todas las modificaciones en la base de datos.
+- Un formulario que pide filtros para que no se muestre todos los registros y sobrecargar el servidor.
+- Cada registro contiene el usuario que ejecuto la acción, la acción en si, el item modificado y el momento exacto en que la acción fue efectuada.
 	
 Rol admin:
 	CRUD de categorias
