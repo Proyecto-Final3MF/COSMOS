@@ -1,10 +1,11 @@
 <?php
-//test franco
 session_start();
 require_once("Config/conexion.php");
 require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
+require_once("Controllers/CategoriaC.php");
+require_once("Models/ProductoM.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -17,6 +18,21 @@ if (!in_array($accion, $acciones_publicas)) {
     }
 }
 
+if (isset($_SESSION['mensaje'])) {
+    echo '<link rel="stylesheet" href="Assets/css/popup.css">
+          <div class="modal active">
+              <div class="modal-header">
+                  <div class="title">Mensaje</div>
+                  <a href="index.php?accion='.$_GET['accion'].'" class="close-button">&times;</a>
+              </div>
+              <div class="modal-body">
+                  <p>' . $_SESSION['mensaje'] . '</p>
+              </div>
+          </div>
+          <div id="overlay" class="active"></div>';
+    unset($_SESSION['mensaje']);
+}
+
 const ROL_TECNICO = 1;
 const ROL_CLIENTE = 2;
 const ROL_ADMIN = 3;
@@ -26,11 +42,16 @@ switch ($accion) {
         $controller = new UsuarioC();
         $controller->login();
     break;
-    
-   case 'actualizar':
-    $controller = new UsuarioC();
-    $controller->actualizar();
-break;
+
+    case 'actualizarU':
+        $controller = new UsuarioC();
+        $controller->actualizarU();
+    break;
+
+    case 'eliminarU':
+        $controller = new UsuarioC();
+        $controller->eliminar();
+    break;
 
     case 'autenticar':
         $controller = new UsuarioC();
@@ -81,6 +102,16 @@ break;
         $controller->formularioS();
     break;
 
+    case 'guardarS':
+        $controller = new SolicitudC();
+        $controller->guardarS();
+    break;
+
+    case 'borrarS':
+        $controller = new SolicitudC();
+        $controller->borrarS();
+    break;
+
     case 'formularioP':
         $controller = new ProductoC();
         $controller->formularioP();
@@ -93,13 +124,19 @@ break;
 
     case 'borrarP':
         $controller = new ProductoC();
-        $controller->borrar();
+        $controller->borrarP();
     break;
 
-    case 'crearS':
-        $controller = new SolicitudC();
-        $controller->crearS();
+    case 'editarP':
+        $controller = new ProductoC();
+        $controller->editarP();
     break;
+
+    case 'actualizarP':
+       $controller = new ProductoC();
+       $controller->actualizarP();
+   break;
+  
         
     case 'SolicitudesLibres':
         $controller = new SolicitudC();
@@ -113,17 +150,49 @@ break;
         require_once("Views/Solicitudes/ocupadas.php");
     break;
 
-    case 'SolicitudSelec';
+    case 'SolicitudSelec':
         $controller = new SolicitudC();
         $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
     break;
+
+    case 'FormularioC':
+        $controller = new CategoriaC();
+        $controller->FormularioC();
+        require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
+    break;
+
+    case 'guardarC':
+        $controller = new CategoriaC();
+        $controller->guardarC();
+    break;
+
+    case 'listarC':
+        $controller = new CategoriaC();
+        $controller->listarC();
+    break;
+
+    case 'editarC':
+        $controller = new CategoriaC();
+        $controller->editarC();
+    break;
+
+    case 'actualizarC':
+        $controller = new CategoriaC();
+        $controller->actualizarC();
+    break;
+
+    case 'borrarC':
+        $controller = new CategoriaC();
+        $controller->borrarC();
+    break;
         
     default:
-        if (isset($_SESSION['usuario'])) {
-            header("Location: index.php?accion=redireccion");
+        if (!isset($_SESSION['usuario'])) {
+             header("Location: index.php?accion=login");
         } else {
-            header("Location: index.php?accion=login");
+            http_response_code(404);
+            header("Location: Error.php");
         }
-        exit();
+    exit();
 }
 ?>

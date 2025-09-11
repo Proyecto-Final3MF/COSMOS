@@ -24,11 +24,25 @@ class Solicitud {
         return null;
     }
 
+    public function borrarS($id) {
+        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
+        return $this->conn->query($sql);
+    }
+
     public function getSolicitudesDisponibles() {
-        $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
+        $sql = "SELECT 
+                    solicitud.id, 
+                    solicitud.titulo, 
+                    solicitud.descripcion, 
+                    solicitud.fecha_creacion, 
+                    solicitud.prioridad, 
+                    producto.nombre AS producto_nombre,
+                    producto.imagen AS producto_imagen
                 FROM solicitud
+                JOIN producto ON solicitud.producto_id = producto.id
                 JOIN estado ON solicitud.estado_id = estado.id
                 WHERE solicitud.estado_id = 1";
+
         $resultado = $this->conn->query($sql);
 
         if (!$resultado) {
@@ -57,7 +71,7 @@ class Solicitud {
             $params[] = $Tid;
             $param_types .= 'i';
         } else {
-            error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+            error_log("Error: \$Tid no está configurado en SolicitudM.php para getSolicitudesOcupadas");
             return false;
         }
 
@@ -126,12 +140,11 @@ class Solicitud {
         return $success;
     }
 
-    public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
+    public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
-        $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
-                VALUES ('$titulo', '$descripcion', $categoria_id, $usuario_id, '$prioridad')";
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, 1, '$descripcion')";
         
         return $this->conn->query($sql);
     }
