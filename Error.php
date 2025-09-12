@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="./Assets/css/error.css">
 </head>
 <body>
-    <main class="bsod container">
-  <h1 class="neg title"><span class="bg">Error - 404</span></h1>
-  <p>An error has occured, to continue:</p>
-  <p>* Return to our homepage.<br />
-  * Send us an e-mail about this error and try later.</p>
-  <nav class="nav">
-    <a href="#" class="link">index</a>&nbsp;|&nbsp;<a href="#" class="link">webmaster</a>
-  </nav>
-</main>
+    <div class="noise"></div>
+<div class="overlay"></div>
+<div class="terminal">
+  <h1>Error <span class="errorcode">404</span></h1>
+  <p class="output">Es posible que la página que estás buscando haya sido eliminada, no exista, haya cambiado de nombre o no esté disponible temporalmente.</p>
+  <p class="output">Podes intentar volver a <a href="index.php?index=login">Pagina Inicial</a>.</p>
+  <p class="output">Gracias por la comprensión.</p>
+</div>
 </body>
 </html>
