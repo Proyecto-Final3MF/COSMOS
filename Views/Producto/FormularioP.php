@@ -17,10 +17,8 @@
            <p>Imagen: </p>
             <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required>
                     <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
-                    <span id="nombre-archivo-seleccionado"></span>
+                    <br> <span id="nombre-archivo-seleccionado"></span>
                     <br><br>
-                <script src="imagenformulario.js"></script>
-
             <p>Categoria:</p>
             <select id="categoria" name="categoria" required>
                     <option value=""></option>
@@ -32,5 +30,6 @@
             <button type="submit">Crear</button>
         </form>
 </section>
+<script src="Assets/js/imagenformulario.js"></script>
 </body>
 </html>
