@@ -22,7 +22,7 @@
                 <?php endforeach; ?>
         </select>
 
-        <p>Descripcion</p>
+        <p>Descripcion:</p>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
                         
         <label for="prioridad"><p>Nivel de Prioridad: </p></label>
