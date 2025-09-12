@@ -65,13 +65,13 @@ class UsuarioC {
     
     $usuarioM = new Usuario();
     if ($usuarioM->actualizarU($id, $nombre, $email)) {
-        // Actualiza el nombre en la sesión si es necesario
+        
         $_SESSION['usuario'] = $nombre;
         
-        // Redirige al panel del usuario con un mensaje de éxito
+        
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
-        // Redirige al panel con un mensaje de error
+        
         header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
 exit();
