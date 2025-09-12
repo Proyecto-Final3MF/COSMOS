@@ -10,6 +10,9 @@
 =======
     <link rel="stylesheet" href="./Assets/css/inicio.css">
     <link rel="stylesheet" href="../../Assets/css/prueba.css">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     <nav class="navbar">
           <a href="inicio.php" class="logo-link">
