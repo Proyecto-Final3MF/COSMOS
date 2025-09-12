@@ -145,3 +145,23 @@ select option {
     background-color: #ffffff;
     color: #333;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.btn-boton3-input {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e83e8c;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.btn-boton3-input:hover {
+  background-color: #972f5f;
+}

@@ -15,9 +15,10 @@
             <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>
 
            <p>Imagen: </p>
-           <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required>
-           <label for="imagen" class="boton-personalizado-input"></label>
-           <br><br>
+            <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required>
+                    <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
+                    <br> <span id="nombre-archivo-seleccionado"></span>
+                    <br><br>
             <p>Categoria:</p>
             <select id="categoria" name="categoria" required>
                     <option value=""></option>
@@ -29,5 +30,6 @@
             <button type="submit">Crear</button>
         </form>
 </section>
+<script src="Assets/js/imagenformulario.js"></script>
 </body>
 </html>
