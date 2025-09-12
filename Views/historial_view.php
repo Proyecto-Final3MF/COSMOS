@@ -1,13 +1,3 @@
-<?php
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
-    exit();
-}
-
-require_once ("./Views/include/AH.php");
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

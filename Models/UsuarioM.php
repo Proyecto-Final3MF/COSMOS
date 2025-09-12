@@ -15,7 +15,7 @@ class Usuario {
         return $this->conn->query($sql);
     }
 
-    public function verificarU($usuario, $contrasena) {
+    public function verificar($usuario, $contrasena) {
         $usuario = $this->conn->real_escape_string($usuario);
         $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 5";
         $res = $this->conn->query($sql);
@@ -42,23 +42,12 @@ class Usuario {
         }
         return null;
     }
-   
-  public function actualizarU($id, $nombre, $email) {
+    public function actualizarU($id, $nombre, $email) {
     $id = (int)$id;
     $nombre = $this->conn->real_escape_string($nombre);
     $email = $this->conn->real_escape_string($email);
     $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
     return $this->conn->query($sql);
-}
-
-public function eliminar($id) {
-    
-    $id = (int)$id;
-    
-    $sql = "DELETE FROM usuario WHERE id = ?";
-    $sql = $this->conn->prepare($sql);
-    $sql->bind_param("i", $id);
-   return $this->conn->query($sql);
-}
+    }
 }
 ?>

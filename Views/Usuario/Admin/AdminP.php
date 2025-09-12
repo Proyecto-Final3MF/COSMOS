@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /*if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     header("Location: index.php?accion=redireccion");
@@ -48,3 +49,6 @@ require_once("./Views/include/AH.php");
 </body>
 
 </html>
+=======
+    <a href="Index.php?accion=logout">cerrar sesion</a>
+>>>>>>> parent of 6b4e793 (Merge branch 'main' into Test)
