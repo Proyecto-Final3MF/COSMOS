@@ -25,8 +25,6 @@ $solicitudes = $solicitudController->getLibresData();
 
     <p>Lista de Productos</p><br>
 
-    <button class="button"><a href="index.php?accion=formularioP">+ Agregar Producto</a></button><br><br>
-
     <table>
         <thead>
             <tr>
@@ -105,10 +103,7 @@ $solicitudes = $solicitudController->getLibresData();
     }
     ?>
 </tbody>
-    </table>
-    <a href="index.php?accion=formularioS">
-        <button class="btn btn-boton">Crear Nueva Solicitud</button>
-    </a>
+</table>
 </div>
 
 </body>
