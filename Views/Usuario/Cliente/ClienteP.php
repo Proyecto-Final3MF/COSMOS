@@ -70,7 +70,6 @@ $solicitudes = $solicitudController->getLibresData();
                 <th>Descripcion</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
-                <th>Crear Solicitud</th>
             </tr>
         </thead>
         <tbody>
@@ -89,14 +88,13 @@ $solicitudes = $solicitudController->getLibresData();
                 <td><?= htmlspecialchars($solicitud['fecha_creacion']); ?></td>
                 <td>
                     <a href="index.php?accion=borrarS&id=<?= $solicitud['id']; ?>">
-                        <button class="btn btn-danger">Eliminar</button>
+                        <button class="btn btn-boton2">Eliminar</button>
                     </a>
                 </td>
            
             <?php
         }
         ?> 
-        <td> <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a> </td>
          </tr>
         <?php
     } else {
@@ -109,8 +107,5 @@ $solicitudes = $solicitudController->getLibresData();
     ?>
 </tbody>
 </div>
-
-<a href="index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>
-
 </body>
 </html>
