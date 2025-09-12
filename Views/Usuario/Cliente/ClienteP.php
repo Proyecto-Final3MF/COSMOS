@@ -111,7 +111,5 @@ $solicitudes = $solicitudController->getLibresData();
     </a>
 </div>
 
-<a href="index.php?accion=actualizarU"><button class="btn btn-boton">Actualizar</button></a>
-
 </body>
 </html>
