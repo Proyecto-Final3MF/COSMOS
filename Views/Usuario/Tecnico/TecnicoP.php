@@ -4,7 +4,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     header("Location: index.php?accion=redireccion");
     exit();
 }
-    require_once ("./Views/include/TH.php");
+    require_once ("./Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
