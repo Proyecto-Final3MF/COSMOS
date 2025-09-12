@@ -43,9 +43,16 @@ switch ($accion) {
         $controller->login();
     break;
 
+    case 'editarU':
+    $controller = new UsuarioC();
+    // Esta acción solo busca los datos y muestra el formulario de edición.
+    $controller->editarU();
+    break;
+
     case 'actualizarU':
-        $controller = new UsuarioC();
-        $controller->actualizarU();
+    $controller = new UsuarioC();
+    // Esta nueva acción recibe los datos del formulario y los procesa.
+    $controller->actualizarU();
     break;
 
     case 'eliminarU':

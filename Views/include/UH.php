@@ -10,10 +10,10 @@
         
         <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
 
-        <a href="Index.php?accion=editar&id=<?= htmlspecialchars($_SESSION['id']) ?>"><button class="btn btn-boton">Editar Usuario</button></a><br>
+        <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>"><button class="btn btn-boton">Editar Usuario</button></a><br>
         <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"><button class="btn btn-boton">Eliminar Usuario</button></a>
         <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
 
     </nav>
-
+ 
 </header> 
