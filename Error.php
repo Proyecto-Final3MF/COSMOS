@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="./Assets/css/error.css">
 </head>
 <body>
-    <div class="error">
-        <h1>Ops!</h1>
-        <p>La página que estás buscando no existe o se produjo un error.</p>
-        <a href="index.php?accion=redireccion" class="btn">Regresar a la página de inicio</a>
-    </div>
+    <main class="bsod container">
+  <h1 class="neg title"><span class="bg">Error - 404</span></h1>
+  <p>An error has occured, to continue:</p>
+  <p>* Return to our homepage.<br />
+  * Send us an e-mail about this error and try later.</p>
+  <nav class="nav">
+    <a href="#" class="link">index</a>&nbsp;|&nbsp;<a href="#" class="link">webmaster</a>
+  </nav>
+</main>
 </body>
 </html>
