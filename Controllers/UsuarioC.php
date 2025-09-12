@@ -13,8 +13,28 @@ class UsuarioC {
         include("Views/Usuario/Login.php");
     }
      
-    public function editarU(){
-        include("views/usuario/editarU");
+    public function actualizarU(){
+    // Ahora esta función asume que siempre recibirá datos POST del formulario
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $email = $_POST['email'];
+    
+    // Corrige la instanciación: debes llamar al Modelo (Usuario)
+    $usuarioM = new Usuario(); 
+    
+    if ($usuarioM->editarU($id, $nombre, $email)) {
+        // Actualiza el nombre en la sesión si es necesario
+        $_SESSION['usuario'] = $nombre;
+        
+        // Registrar en el historial
+        $obs = "Usuario " . $nombre . " actualizado.";
+        $this->historialController->registrarModificacion($nombre, $id, 'editó', null, null, $obs);
+        
+        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+    } else {
+        header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+    }
+    exit();
     }
 
     public function crear() {
@@ -29,7 +49,7 @@ class UsuarioC {
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena'];
+        $contrasena = $_POST['contrasena']; 
         
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
             // Get the user's details after creation
@@ -56,26 +76,22 @@ class UsuarioC {
         }
     } 
     
-    public function actualizarU() {
-        $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
-        
-        $usuarioM = new Usuario(); // Correct: Instantiate the Model, not the Controller
-        if ($usuarioM->actualizarU($id, $nombre, $email)) {
-            // Update the name in the session if necessary
-            $_SESSION['usuario'] = $nombre;
-            // The registrarModificacion call is missing some variables. It needs to be reviewed.
-            // For now, let's simplify and make it work.
-            $obs = "Usuario " . $nombre . " actualizado.";
-            $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
+    public function editarU() {
+        // Asegúrate de que el ID del usuario está en la URL
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $usuario = new Usuario();
+            // Asume que tienes un método para buscar un usuario por su ID
+            $datos = $usuario->buscarUserId($id);
             
-         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+            // Incluye la vista de edición, pasándole los datos
+            include("Views/Usuario/EditarU.php");
         } else {
-            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+            header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
+            exit();
         }
-        exit();
     }
+
 
     public function eliminar() {
         if (!isset($_GET['id'])) {

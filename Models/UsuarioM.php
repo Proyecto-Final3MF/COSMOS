@@ -43,33 +43,39 @@ class Usuario {
         return null;
     }
    
-  public function actualizarU($id, $nombre, $email) {
-    $id = (int)$id;
-    $nombre = $this->conn->real_escape_string($nombre);
-    $email = $this->conn->real_escape_string($email);
-    $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
-    return $this->conn->query($sql);
+  public function buscarUserId($id) {
+        // Usa consultas preparadas para mayor seguridad
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function editarU($id, $nombre, $email) {
+        // Usa consultas preparadas para actualizar los datos de manera segura
+        $sql = "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssi", $nombre, $email, $id);
+        return $stmt->execute();
     }
 
     public function eliminar($id) {
-        $id = (int)$id;
-        
-        // Prepare the SQL statement
+        // Tu código para eliminar ya es correcto, usa consultas preparadas
         $sql = "DELETE FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         
-        // Check if the statement was prepared successfully
         if ($stmt === false) {
-            die("Error preparing statement: " . $this->conn->error);
+            // Manejar error en la preparación
+            return false;
         }
 
-        // Bind the parameter and execute
         $stmt->bind_param("i", $id);
         $result = $stmt->execute();
         
-        // Close the statement and return the result
         $stmt->close();
         return $result;
-    }
+    } 
 }
 ?>
