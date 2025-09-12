@@ -21,9 +21,12 @@ $solicitudes = $solicitudController->getLibresData();
 </head>
 <body>
 <div>
-    <h2>¿En qué podemos ayudarte?</h2>
+    <h2>¿En qué podemos ayudarte?</h2> <br>
 
-    <p>Lista de Productos</p><br>
+    <p>Lista de Productos</p>
+    <div class="botones-container">
+        <a href="index.php?accion=formularioP"><button class="btn btn-boton">Crear Nuevo Producto</button></a>
+    </div>
 
     <table>
         <thead>
@@ -32,6 +35,7 @@ $solicitudes = $solicitudController->getLibresData();
                 <th>Imagen</th>
                 <th>Categoria</th>
                 <th>Modificaciones</th>
+                <th>Nuevo</th>
             </tr>
         </thead>
         <tbody>
