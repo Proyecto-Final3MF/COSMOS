@@ -49,16 +49,27 @@ class Usuario {
     $email = $this->conn->real_escape_string($email);
     $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
     return $this->conn->query($sql);
-}
+    }
 
-public function eliminar($id) {
-    
-    $id = (int)$id;
-    
-    $sql = "DELETE FROM usuario WHERE id = ?";
-    $sql = $this->conn->prepare($sql);
-    $sql->bind_param("i", $id);
-   return $this->conn->query($sql);
-}
+    public function eliminar($id) {
+        $id = (int)$id;
+        
+        // Prepare the SQL statement
+        $sql = "DELETE FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        // Check if the statement was prepared successfully
+        if ($stmt === false) {
+            die("Error preparing statement: " . $this->conn->error);
+        }
+
+        // Bind the parameter and execute
+        $stmt->bind_param("i", $id);
+        $result = $stmt->execute();
+        
+        // Close the statement and return the result
+        $stmt->close();
+        return $result;
+    }
 }
 ?>
