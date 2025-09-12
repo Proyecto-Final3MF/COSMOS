@@ -23,7 +23,7 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
 
 
     <h1>Listado de Solicitudes que aceptaste</h1>
-    
+
     <div class="filter-buttons">
     <button id="filter-all" data-filter="all">Todas</button>
     <button id="filter-2" data-filter="2">En Diagnóstico</button>
@@ -53,6 +53,13 @@ $solicitudes = $controller->getOcupadasData($estado_filter);
     </div>
 
     <script src="Assets/js/listado.js"></script></div>
-    <script src="Assets/js/darkmode.js"></script>
+</body>
+</html>
+    </div>
+
+    <div id="paginacion-container">
+    </div>
+
+    <script src="Assets/js/listado.js"></script></div>
 </body>
 </html>

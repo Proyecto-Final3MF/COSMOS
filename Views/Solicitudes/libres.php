@@ -1,10 +1,20 @@
 <?php
 
 require_once('controllers/SolicitudC.php');
- require_once ("./Views/include/TH.php");
 
 $controller = new SolicitudC();
 $solicitudes = $controller->getLibresData();
+
+if (isset($_GET['action']) && $_GET['action'] === 'select' && isset($_GET['id'])) {
+    $solicitudId = (int)$_GET['id'];
+    if ($controller->handleSelectSolicitud($solicitudId)) {
+        header('Location: libres.php?message=Solicitud seleccionada con éxito.');
+        exit();
+    } else {
+        header('Location: libres.php?error=Error al seleccionar la solicitud.');
+        exit();
+    }
+}
 
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
@@ -14,7 +24,8 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitudes disponibles</title>
-    <link rel="stylesheet" href="Assets/css/inicio.css">
+        <link rel="stylesheet" href="Assets/css/Listado.css">
+
 </head>
 <body class="tema-claro">
 
@@ -48,6 +59,5 @@ $error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';?>
     <div id="paginacion-container">
     </div>
 <script src="Assets/js/listado.js"></script>
-<script src="Assets/js/darkmode.js"></script>
 </body>
 </html>
