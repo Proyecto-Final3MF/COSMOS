@@ -15,7 +15,7 @@ class Usuario {
         return $this->conn->query($sql);
     }
 
-    public function verificar($usuario, $contrasena) {
+    public function verificarU($usuario, $contrasena) {
         $usuario = $this->conn->real_escape_string($usuario);
         $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 5";
         $res = $this->conn->query($sql);
@@ -42,12 +42,40 @@ class Usuario {
         }
         return null;
     }
-    public function actualizarU($id, $nombre, $email) {
-    $id = (int)$id;
-    $nombre = $this->conn->real_escape_string($nombre);
-    $email = $this->conn->real_escape_string($email);
-    $sql = "UPDATE usuario SET nombre='$nombre', email='$email' WHERE id=$id";
-    return $this->conn->query($sql);
+   
+  public function buscarUserId($id) {
+        // Usa consultas preparadas para mayor seguridad
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
+
+    public function editarU($id, $nombre, $email) {
+        // Usa consultas preparadas para actualizar los datos de manera segura
+        $sql = "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssi", $nombre, $email, $id);
+        return $stmt->execute();
+    }
+
+    public function eliminar($id) {
+        // Tu código para eliminar ya es correcto, usa consultas preparadas
+        $sql = "DELETE FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        if ($stmt === false) {
+            // Manejar error en la preparación
+            return false;
+        }
+
+        $stmt->bind_param("i", $id);
+        $result = $stmt->execute();
+        
+        $stmt->close();
+        return $result;
+    } 
 }
 ?>

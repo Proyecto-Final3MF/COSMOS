@@ -1,73 +1,72 @@
 <?php
-require_once("Models/UsuarioM.php");
+require_once ("Models/UsuarioM.php");
 require_once("Controllers/HistorialC.php");
 
-class UsuarioC
-{
+class UsuarioC {
     private $historialController;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->historialController = new HistorialController();
     }
-<<<<<<< HEAD
-
-    public function login()
-    {
-        include("Views/Usuario/Login.php");
-    }
-
-    public function editarU()
-    {
-        include("views/usuario/editarU");
-    }
-
-    public function crear()
-    {
-=======
     
     public function login() {
-        include("views/usuario/login.php");
+        include("Views/Usuario/Login.php");
     }
-     public function editar() {
-        include("views/usuario/EditarU.php");
+     
+    public function actualizarU(){
+    // Ahora esta función asume que siempre recibirá datos POST del formulario
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $email = $_POST['email'];
+    
+    // Corrige la instanciación: debes llamar al Modelo (Usuario)
+    $usuarioM = new Usuario(); 
+    
+    if ($usuarioM->editarU($id, $nombre, $email)) {
+        // Actualiza el nombre en la sesión si es necesario
+        $_SESSION['usuario'] = $nombre;
+        
+        // Registrar en el historial
+        $obs = "Usuario " . $nombre . " actualizado.";
+        $this->historialController->registrarModificacion($nombre, $id, 'editó', null, null, $obs);
+        
+        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+    } else {
+        header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
-
+    exit();
+    }
 
     public function crear() {
->>>>>>> parent of 6b4e793 (Merge branch 'main' into Test)
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
         include("views/Usuario/Register.php");
     }
 
-    public function guardarU()
-    {
-
+    public function guardarU() {
+        
         $usuarioM = new Usuario();
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena'];
-
+        $contrasena = $_POST['contrasena']; 
+        
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-            $usuarioN = $usuarioM->verificar($usuario, $contrasena);
+            // Get the user's details after creation
+            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
             if ($usuarioN) {
                 $id_user = $usuarioN['id'];
-                $obs = "Usuario creado atravez del formulario de registro";
-
-<<<<<<< HEAD
+                $obs = "Usuario creado a través del formulario de registro";
                 $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
-=======
-            $this->historialController->registrarModificacion(null, null, 'guardo el usuario', $usuario, $id_user, $obs);
->>>>>>> parent of 6b4e793 (Merge branch 'main' into Test)
 
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
+                $_SESSION['id'] = $usuarioN['id']; // Make sure to save the user ID
                 header("Location: index.php?accion=redireccion");
                 exit();
             } else {
+                // This case should ideally not happen if crearU() was successful
                 header("Location: index.php?accion=login");
                 exit();
             }
@@ -75,62 +74,34 @@ class UsuarioC
             header("Location: index.php?accion=register");
             exit();
         }
-<<<<<<< HEAD
-    }
-
-    public function actualizarU()
-    {
-        $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
-
-        $usuarioM = new Usuario();
-        if ($usuarioM->actualizarU($id, $nombre, $email)) {
-            // Actualiza el nombre en la sesión si es necesario
-            $_SESSION['usuario'] = $nombre;
-            $obs = "Usuario actualizado a través del formulario de edición";
-            $this->historialController->registrarModificacion($nombre, $id, 'fue editado', null, null, $obs);
-
-            header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-        } else {
-
-            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
-        }
-        exit();
-    }
-=======
     } 
-
-    public function actualizar() {
-    $id = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
     
-    $usuarioM = new Usuario();
-    if ($usuarioM->actualizarU($id, $nombre, $email)) {
-        // Actualiza el nombre en la sesión si es necesario
-        $_SESSION['usuario'] = $nombre;
-        
-        // Redirige al panel del usuario con un mensaje de éxito
-        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-    } else {
-        // Redirige al panel con un mensaje de error
-        header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+    public function editarU() {
+        // Asegúrate de que el ID del usuario está en la URL
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $usuario = new Usuario();
+            // Asume que tienes un método para buscar un usuario por su ID
+            $datos = $usuario->buscarUserId($id);
+            
+            // Incluye la vista de edición, pasándole los datos
+            include("Views/Usuario/EditarU.php");
+        } else {
+            header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
+            exit();
+        }
     }
-exit();
-}
->>>>>>> parent of 6b4e793 (Merge branch 'main' into Test)
 
-    public function eliminar()
-    {
+
+    public function eliminar() {
         if (!isset($_GET['id'])) {
             header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
             exit();
         }
-
+        
         $id = $_GET['id'];
-        $usuarioM = new Usuario();
-
+        $usuarioM = new Usuario(); // Correct: Instantiate the Model, not the Controller
+        
         if ($usuarioM->eliminar($id)) {
             header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
         } else {
@@ -138,13 +109,13 @@ exit();
         }
         exit();
     }
+    
 
-    public function autenticar()
-    {
+    public function autenticar() {
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
-        $user = $modelo->verificar($usuario, $contrasena);
+        $user = $modelo->verificarU($usuario, $contrasena);
         if ($user) {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
@@ -158,9 +129,9 @@ exit();
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         session_destroy();
         header("Location: Index.php");
     }
 }
+?>
