@@ -1,4 +1,4 @@
-# Sistema Web de Gestión de Servicio Técnico **_COSMOS_**.
+# Sistema Web de Gestión de Servicio Técnico _COSMOS_.
 Hecho por: 
 * _Thiago Carballo_
 * _Alex González_ 
@@ -16,16 +16,16 @@ Hecho por:
 
 ### Para los Clientes
 
-Si necesitas una reparación urgente, Cosmos te permite:
+Si necesitas una reparación urgente, **Cosmos** te permite:
 
-* Hacer solicitudes personalizadas: Describe el problema de tu equipo informático con todos los detalles necesarios. Puedes especificar el tipo de servicio, el modelo del dispositivo, y cualquier otra información relevante para que los técnicos puedan entender mejor tu necesidad.
-* Comunicación directa: Una vez que un técnico acepta tu solicitud, tendrás la oportunidad de comunicarte directamente con él. Esto te permite resolver dudas, profundizar en el problema, recibir reportes de avance y mantenerte actualizado sobre el estado de tu equipo.
-* Seguimiento en tiempo real: Visualiza el estado y el progreso del trabajo del técnico desde tu panel de control. Sabrás en todo momento en qué etapa se encuentra la reparación, lo que te brinda tranquilidad y confianza.
+* **Hacer solicitudes personalizadas**: Describe el problema de tu equipo informático con todos los detalles necesarios. Puedes especificar el tipo de servicio, el modelo del dispositivo, y cualquier otra información relevante para que los técnicos puedan entender mejor tu necesidad.
+* **Comunicación directa**: Una vez que un técnico acepta tu solicitud, tendrás la oportunidad de comunicarte directamente con él. Esto te permite resolver dudas, profundizar en el problema, recibir reportes de avance y mantenerte actualizado sobre el estado de tu equipo.
+* **Seguimiento en tiempo real**: Visualiza el estado y el progreso del trabajo del técnico desde tu panel de control. Sabrás en todo momento en qué etapa se encuentra la reparación, lo que te brinda tranquilidad y confianza.
 
 ### Para los Técnicos
 
-Cosmos ofrece a los técnicos freelancers una plataforma para:
+**Cosmos** ofrece a los técnicos freelancers una plataforma para:
 
-* Encontrar oportunidades de trabajo: Accede a una lista de solicitudes de clientes cerca de tu área o especialidad.
-* Gestionar tus proyectos: Coordina tus trabajos, comunicate con los clientes y actualiza el estado de cada servicio de manera sencilla.
-* Construir tu reputación: Demuestra tu profesionalismo y habilidad en cada trabajo, lo que te permitirá atraer a más clientes.
+* **Encontrar oportunidades de trabajo**: Accede a una lista de solicitudes de clientes cerca de tu área o especialidad.
+* **Gestionar tus proyectos**: Coordina tus trabajos, comunicate con los clientes y actualiza el estado de cada servicio de manera sencilla.
+* **Construir tu reputación**: Demuestra tu profesionalismo y habilidad en cada trabajo, lo que te permitirá atraer a más clientes.
