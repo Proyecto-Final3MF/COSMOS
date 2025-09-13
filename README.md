@@ -1,4 +1,4 @@
-# Sistema Web de Gestión de Servicio Técnico _COSMOS_.
+# Sistema Web de Gestión de Servicio Técnico **_COSMOS_**.
 Hecho por: 
 * _Thiago Carballo_
 * _Alex González_ 
