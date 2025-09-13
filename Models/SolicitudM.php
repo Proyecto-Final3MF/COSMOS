@@ -31,7 +31,9 @@ class Solicitud {
 
     public function ListarSL($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT * FROM solicitud WHERE cliente_id = $id_usuario AND estado_id = 1";
+        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s
+                inner join producto p on s.producto_id = p.id
+                WHERE s.cliente_id = $id_usuario AND s.estado_id = 1;";
         $resultado = $this->conn->query($sql);
         
         if ($resultado) {

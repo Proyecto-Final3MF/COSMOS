@@ -36,8 +36,8 @@ require_once ("./Views/include/UH.php");
             <tr>
                 <td><?= htmlspecialchars($resultado['titulo']); ?></td>
                 <td>
-                    <img src="<?= htmlspecialchars($resultado['producto_imagen']);?>" alt="Imagen del producto"/><br>
-                    <?= htmlspecialchars($resultado['producto_nombre']) ?>
+                    <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto"/><br>
+                    <?= htmlspecialchars($resultado['nombre']) ?>
                 </td>
                 <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                 <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
