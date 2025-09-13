@@ -1,11 +1,11 @@
 # Sistema Web de Gestión de Servicio Técnico COSMOS.
 Hecho por: 
-* Thiago Carballo 
-* Alex González 
-* Federico Mosegui 
-* Franco Fagundez
-* Lucas Vargas
-* Sergio López
+* _Thiago Carballo_
+* _Alex González_ 
+* _Federico Mosegui_ 
+* _Franco Fagundez_
+* _Lucas Vargas_
+* _Sergio López_
 
 COSMOS es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
