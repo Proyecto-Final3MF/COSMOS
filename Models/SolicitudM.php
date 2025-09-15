@@ -29,33 +29,60 @@ class Solicitud {
         return $this->conn->query($sql);
     }
 
-    public function getSolicitudesDisponibles() {
-        $sql = "SELECT 
-                    solicitud.id, 
-                    solicitud.titulo, 
-                    solicitud.descripcion, 
-                    solicitud.fecha_creacion, 
-                    solicitud.prioridad, 
-                    producto.nombre AS producto_nombre,
-                    producto.imagen AS producto_imagen
-                FROM solicitud
-                JOIN producto ON solicitud.producto_id = producto.id
-                JOIN estado ON solicitud.estado_id = estado.id
-                WHERE solicitud.estado_id = 1";
-
+    public function ListarSL($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s
+                inner join producto p on s.producto_id = p.id
+                WHERE s.cliente_id = $id_usuario AND s.estado_id = 1;";
         $resultado = $this->conn->query($sql);
-
-        if (!$resultado) {
-            error_log("Error en la consulta getSolicitudesDisponibles: " . $this->conn->error);
+        
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
             return [];
         }
-
-        $solicitudes = [];
-        while ($fila = $resultado->fetch_assoc()) {
-            $solicitudes[] = $fila;
-        }
-        return $solicitudes;
     }
+
+    public function getSolicitudesDisponibles($usuarioId) {
+    // La consulta ahora incluye una condición para filtrar por el usuario.
+    // Usamos una consulta preparada para evitar inyecciones SQL.
+    $sql = "SELECT * FROM solicitud 
+            JOIN producto ON solicitud.producto_id = producto.id 
+            JOIN estado ON solicitud.estado_id = estado.id 
+            WHERE solicitud.estado_id = 1 AND solicitud.usuario_id = ?";
+
+    $stmt = $this->conn->prepare($sql);
+
+    // Verificamos si la preparación de la consulta fue exitosa.
+    if (!$stmt) {
+        error_log("Error en la preparación de la consulta: " . $this->conn->error);
+        return [];
+    }
+
+    // Vinculamos el parámetro $usuarioId a la consulta. 'i' significa que es un entero.
+    $stmt->bind_param("i", $usuarioId);
+
+    // Ejecutamos la consulta.
+    $stmt->execute();
+
+    // Obtenemos el resultado de la consulta.
+    $resultado = $stmt->get_result();
+
+    if (!$resultado) {
+        error_log("Error en la consulta getSolicitudesDisponibles: " . $stmt->error);
+        return [];
+    }
+
+    $solicitudes = [];
+    while ($fila = $resultado->fetch_assoc()) {
+        $solicitudes[] = $fila;
+    }
+
+    // Cerramos el statement.
+    $stmt->close();
+    
+    return $solicitudes;
+}   
 
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado

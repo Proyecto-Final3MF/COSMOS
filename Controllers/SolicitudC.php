@@ -40,10 +40,28 @@ class SolicitudC {
         header("Location: index.php?accion=redireccion");
     }
 
-    public function getLibresData() {
-        return $this->solicitudModel->getSolicitudesDisponibles();
+    public function listarSL(){
+        $id_usuario = $_SESSION['id'] ?? null;
+        if ($id_usuario === null) {
+            header("Location: index.php?accion=login");
+            exit();
+        }
+        
+        $solicitud = new Solicitud();
+        $resultados = $solicitud->listarSL($id_usuario);
+        include("./Views/Solicitudes/ListadoS.php");
     }
 
+
+    public function getLibresData() {
+    if (isset($_SESSION['id'])) {
+        $usuarioId = $_SESSION['id'];
+        return $this->solicitudModel->getSolicitudesDisponibles($usuarioId);
+    } else {
+        echo "paso algo mal";
+        return [];
+    }
+    }
     public function getOcupadasData($estado_filter = 'all') {
         return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
