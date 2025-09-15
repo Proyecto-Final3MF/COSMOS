@@ -26,9 +26,11 @@ class UsuarioC {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
         
+        $_SESSION['mensaje'] = "Actualizaste tu perfil con exito.";
+
         // Registrar en el historial
         $obs = "Usuario " . $nombre . " actualizado.";
-        $this->historialController->registrarModificacion($nombre, $id, 'editó', null, null, $obs);
+        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, null, $obs);
         
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
