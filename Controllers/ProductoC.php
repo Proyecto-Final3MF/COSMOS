@@ -40,16 +40,16 @@ class ProductoC {
         }
     }
     
-    public function mostrarPanelCliente() {
+    public function listarP() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario === null) {
             header("Location: index.php?accion=login");
             exit();
         }
-
+        
         $producto = new Producto();
-        $resultados = $producto->listar($id_usuario);
-        include("./Views/Usuario/Cliente/ClienteP.php");
+        $resultados = $producto->listarP($id_usuario);
+        include("./Views/Producto/ListadoP.php");
     }
     
     public function borrarP() {

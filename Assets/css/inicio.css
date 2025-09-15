@@ -17,7 +17,7 @@ body {
     background-image: none;
     color: var(--dark-color);
     line-height: 1.6;
- }
+}
  
 .navbar {
 	background-color: white;
@@ -179,15 +179,15 @@ table {
     width: 95%; 
     background-color: #f873b1;
     text-align: center;
+    border-collapse: collapse;
     margin: 40px;
     height: 40%;
+    border-radius: 10px;
 }
 
 th, td {
-	border: solid 1px;
 	border-collapse: collapse;
 	padding: 5px;
-
 }
 
 img {
@@ -197,7 +197,10 @@ img {
 th {
 	background-color: #b61e65;
 }
+th:first-child {
+  border-top-left-radius: 10px;
+}
 
-tr:hover {
-	background-color: #b43b74;
+th:last-child {
+  border-top-right-radius: 10px;
 }
