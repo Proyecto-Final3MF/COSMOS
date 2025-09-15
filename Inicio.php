@@ -2,7 +2,6 @@
     require_once("Views/include/InicioH.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,6 +17,5 @@
 <div class="btn-container">
   <a href="Index.php?accion=login"><button class="btn btn-boton">Empezar ahora</button></a>
 </div>
-
 </body>
 </html>
