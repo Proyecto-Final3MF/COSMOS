@@ -3,7 +3,7 @@
     exit();
 } 
 
-require_once ("./Views/include/AH.php");
+require_once ("./Views/include/UH.php");
 
 ?>
 
@@ -15,6 +15,7 @@ require_once ("./Views/include/AH.php");
     <title>Editar Categoria</title>
 </head>
 <body>
+    <div class="contenedor-formulario">
     <section>
 <h3>Editar Categoria</h3>
 <link rel="stylesheet" href="./Assets/css/Formulario.css">
@@ -28,5 +29,9 @@ require_once ("./Views/include/AH.php");
     <button type="submit">Actualizar</button>
 </form>
 </section>
+</div>
+<div class="botones-container">
+        <a href="index.php?accion=listarC"><button class="btn btn-boton">Volver</button></a>
+    </div>
 </body>
 </html>
