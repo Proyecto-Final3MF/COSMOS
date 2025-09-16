@@ -16,12 +16,12 @@ class ProductoC {
         $id_usuario = $_SESSION['id'];
 
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
-            echo "Error: Todos los campos son obligatorios.";
+            $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             return;
         }
 
         if ($producto->existeProducto($nombre, $id_usuario)) {
-            echo "Error: Ya has creado un producto con ese nombre.";
+            $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
             return;
         }
 
@@ -33,10 +33,10 @@ class ProductoC {
                 $_SESSION['mensaje'] = "Producto creado exitosamente.";
                 header("Location: index.php?accion=redireccion");
             } else {
-                echo "Error al guardar el producto en la base de datos.";
+                $_SESSION['mensaje'] = "Error al guardar el producto en la base de datos.";
             }
         } else {
-            echo "Error al subir la imagen.";
+            $_SESSION['mensaje'] = "Error al subir la imagen.";
         }
     }
     
@@ -69,7 +69,7 @@ class ProductoC {
         }
         $datosProducto = $producto->obtenerProductoPorId($id);
         if (!$datosProducto) {
-            echo "Producto no encontrado.";
+            $_SESSION['mensaje'] = "Producto no encontrado.";
             return;
         }
         $categorias = $producto->obtenerCategorias();
@@ -84,7 +84,7 @@ class ProductoC {
         $imagenActual = $_POST['imagen_actual'] ?? '';
 
         if (!$id || empty($nombre) || empty($categoria_id)) {
-            echo "Error: Todos los campos son obligatorios.";
+            $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             return;
         }
 
@@ -93,7 +93,7 @@ class ProductoC {
             $rutaTemporal = $_FILES['imagen']['tmp_name'];
             $rutaFinal = "Image/" . $nombreArchivo;
             if (!move_uploaded_file($rutaTemporal, $rutaFinal)) {
-                echo "Error al subir la imagen.";
+                $_SESSION['mensaje'] = "Error al subir la imagen.";
                 return;
             }
         } else {
@@ -104,7 +104,7 @@ class ProductoC {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
             header("Location: index.php?accion=redireccion");
         } else {
-            echo "Error al actualizar el producto.";
+            $_SESSION['mensaje'] = "Error al actualizar el producto.";
         }
     }
 }
