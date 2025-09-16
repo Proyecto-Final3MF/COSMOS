@@ -14,5 +14,4 @@
         <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
 
     </nav>
- 
 </header> 
