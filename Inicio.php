@@ -2,7 +2,6 @@
     require_once("Views/include/InicioH.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
