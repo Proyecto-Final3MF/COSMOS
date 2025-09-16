@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+    <div class="contenedor-formulario">
     <section>
 <h3>Editar Usuario</h3>
 
@@ -22,5 +23,6 @@
 
 </form>
 </section>
+</div>
 </body>
 </html> 

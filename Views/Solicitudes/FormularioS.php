@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+    <div class="contenedor-formulario">
 <section>
     <form method="POST" action="Index.php?accion=guardarS">
         
@@ -37,5 +38,6 @@
         
     </form>
     </section>
+    </div>
 </body>
 </html>

@@ -15,6 +15,7 @@
      <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+<div class="contenedor-formulario">
 <section>
         <form method="POST" action="index.php?accion=guardarU">
 
@@ -48,7 +49,6 @@
         
     </form>
     </section>
+    </div>
 </body>
-
 </html>
-

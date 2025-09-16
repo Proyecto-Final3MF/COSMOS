@@ -1,5 +1,6 @@
 <?php
 require_once('controllers/SolicitudC.php');
+require_once ("./Views/include/UH.php");
 
 $controller = new SolicitudC();
 
