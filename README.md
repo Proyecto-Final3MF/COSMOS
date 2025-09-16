@@ -29,16 +29,3 @@ Si necesitas una reparación urgente, **Cosmos** te permite:
 * **Encontrar oportunidades de trabajo**: Accede a una lista de solicitudes de clientes cerca de tu área o especialidad.
 * **Gestionar tus proyectos**: Coordina tus trabajos, comunicate con los clientes y actualiza el estado de cada servicio de manera sencilla.
 * **Construir tu reputación**: Demuestra tu profesionalismo y habilidad en cada trabajo, lo que te permitirá atraer a más clientes.
-
-**[Instalação](#instalação)** | **[Uso](#uso)** | **[Funcionalidades](#funcionalidades)**
-
-# Título do Projeto
-
-## Instalação
-Aqui estão as instruções de instalação.
-
-## Uso
-Como usar o projeto.
-
-## Funcionalidades
-As principais funcionalidades do projeto.
