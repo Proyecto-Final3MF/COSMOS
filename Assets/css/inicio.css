@@ -236,7 +236,6 @@ th:last-child {
     margin-top: 10px; 
 }
 
-
 .form-group {
     display: flex;
     flex-direction: column;
@@ -291,7 +290,6 @@ th:last-child {
     background-color: #972f5f;
     transform: translateY(-2px);
 }
-
 
 .historial-item {
     background-color: #ffffff;

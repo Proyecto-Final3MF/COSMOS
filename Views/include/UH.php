@@ -1,6 +1,5 @@
 <header>
     <link rel="stylesheet" href="./Assets/css/inicio.css">
-    <link rel="stylesheet" href="../../Assets/css/prueba.css">
 
     <nav class="navbar">
 
@@ -15,5 +14,4 @@
         <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
 
     </nav>
- 
 </header> 
