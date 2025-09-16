@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <div class="contenedor-formulario">
     <section>
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger"><?= $error ?></div>
@@ -34,7 +35,7 @@
             <button class="button" type="submit">Entrar</button>
             <a href="index.php?accion=register">¿No tiene una cuenta? Registrese</a>
         </form>
-
     </section>
+    </div>
 </body>
 </html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Assets/css/Formulario.css">
 </head>
 <body>
+<div class="contenedor-formulario">
 <section>
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
@@ -29,6 +30,7 @@
         <button type="submit">Crear</button>
     </form>
 </section>
+</div>
 <script src="Assets/js/imagenformulario.js"></script>
 </body>
 </html>
