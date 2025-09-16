@@ -4,7 +4,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     exit();
 }
 
-require_once ("./Views/include/AH.php");
+require_once ("./Views/include/UH.php");
 
 ?>
 
