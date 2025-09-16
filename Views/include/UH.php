@@ -1,6 +1,5 @@
 <header>
     <link rel="stylesheet" href="./Assets/css/inicio.css">
-    <link rel="stylesheet" href="../../Assets/css/prueba.css">
 
     <nav class="navbar">
 

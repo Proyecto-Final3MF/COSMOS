@@ -15,6 +15,7 @@ require_once ("./Views/include/AH.php");
     <title>Editar Categoria</title>
 </head>
 <body>
+    <div class="contenedor-formulario">
     <section>
 <h3>Editar Categoria</h3>
 <link rel="stylesheet" href="./Assets/css/Formulario.css">
@@ -28,5 +29,6 @@ require_once ("./Views/include/AH.php");
     <button type="submit">Actualizar</button>
 </form>
 </section>
+</div>
 </body>
 </html>
