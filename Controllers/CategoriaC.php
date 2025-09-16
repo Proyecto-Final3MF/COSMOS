@@ -35,7 +35,7 @@ class CategoriaC {
         if ($id !== false) {
             $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
             $obs="a";
-            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardo la categoria', $nombre, $id, $obs);
+            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardó la categoria', $nombre, $id, $obs);
         } else {
             $_SESSION['mensaje'] = "Error al guardar la categoria.";
         }
@@ -72,7 +72,7 @@ class CategoriaC {
 
                 $obs = "La categoria '{$nombreAntiguo}' fue renombrada para '{$nuevoNombre}'.";
                 $_SESSION['mensaje'] = "Categoria '{$nombreAntiguo}' fue cambiada para '{$nuevoNombre}'.";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'renombro la', 'categoria', $id, $obs);
+                $this->historialController->registrarModificacion($usuario, $usuarioId, 'renombró la', 'categoria', $id, $obs);
             } else {
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
