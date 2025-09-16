@@ -28,6 +28,8 @@ class SolicitudC {
         $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
         if ($solicitud){
+            $_SESSION['mensaje'] = "Solicitud guardada existosamente";
+            $this->historialController->registrarModificacion($user['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
             header("Location: index.php?accion=redireccion");
         };
         
@@ -37,6 +39,8 @@ class SolicitudC {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
         $solicitud->borrarS($id);
+        $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
+        $this->historialController->registrarModificacion($user['nombre'], $usuario_id, 'eliminó la solicitud', $titulo, $id, null);
         header("Location: index.php?accion=redireccion");
     }
 
@@ -72,7 +76,7 @@ class SolicitudC {
 
         if ($success) {
             $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
-            $this->historialController->registrarModificacion($usuario, $usuarioId, 'modificó', 'solicitud', $solicitudId, $obs);
+            $this->historialController->registrarModificacion($usuario, $usuarioId, 'seleccionó', 'solicitud', $solicitudId, $obs);
         }
         return $success;
 }
@@ -85,10 +89,12 @@ class SolicitudC {
             $result_status = $this->requestModel->cancelar($id);
 
             if ($result_status === 'updated') {
+                //actualizar esto:
                 $obs = "Solicitud cancelada por parte del tecnico, retornó a estar disponible.";
                 $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
                 exit();
             } elseif ($result_status === 'deleted') {
+                //actualizar esto:
                 $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
                 $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
                 exit();
