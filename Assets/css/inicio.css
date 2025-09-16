@@ -196,6 +196,7 @@ img {
 
 th {
 	background-color: #b61e65;
+    color: #f0f0f0;
 }
 th:first-child {
   border-top-left-radius: 10px;

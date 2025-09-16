@@ -48,7 +48,7 @@ require_once ("./Views/include/AH.php");
                     <div class="historial-item">
                         <p>
                             <strong>
-                                [<?php echo htmlspecialchars($registro->usuario ? $registro->usuario : 'Sistema'); ?>]
+                                <?php echo htmlspecialchars($registro->usuario ? $registro->usuario : '[Sistema]'); ?>
                             </strong>
                             #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
                             <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
