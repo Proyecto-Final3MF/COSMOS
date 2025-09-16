@@ -21,7 +21,9 @@ class HistorialM {
             return false;
         }
 
-        $stmt->bind_param("sissis", $nombre_usuario, $usuario_id_para_db, $accion, $item, $item_id, $obs);
+        $_SESSION['usuario'] = $usuario;
+
+        $stmt->bind_param("sissis", $usuario, $usuario_id_para_db, $accion, $item, $item_id, $obs);
 
         $success = $stmt->execute();
 
