@@ -4,7 +4,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     exit();
 }
 
-require_once ("./Views/include/AH.php");
+require_once ("./Views/include/UH.php");
 
 ?>
 
@@ -74,5 +74,10 @@ require_once ("./Views/include/AH.php");
             <?php endif; ?>
         <?php endif; ?>
     </div>
+
+ <div class="botones-container">
+        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
+
 </body>
 </html>
