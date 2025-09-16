@@ -7,7 +7,7 @@
         
         <ul class="nav-links" id="nav-links">
             <li><a href="inicio.php">Inicio</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="./Views/Usuario/contacto.php">Contacto</a></li>
         </ul>
         
          <class="action-buttons">
