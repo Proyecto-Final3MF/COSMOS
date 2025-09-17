@@ -21,15 +21,22 @@
         </thead>
 
         <tbody>
-            <?php foreach ($mensajes as $m): ?>
+            <?php if (!empty($mensajes)): ?>
+                <?php foreach ($mensajes as $m): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($m['fecha'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($m['usuario'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($m['receptor'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= nl2br(htmlspecialchars($m['mensaje'] ?? '', ENT_QUOTES, 'UTF-8')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?= htmlspecialchars($m['fecha'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($m['usuario_id'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= htmlspecialchars($m['receptor_id'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= nl2br(htmlspecialchars($m['texto'] ?? '', ENT_QUOTES, 'UTF-8')) ?></td>
+                    <td colspan="4">No hay mensajes para mostrar</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
+    </table>
 </body>
 
 </html>
