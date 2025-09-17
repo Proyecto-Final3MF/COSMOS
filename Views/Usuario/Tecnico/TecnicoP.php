@@ -19,7 +19,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
         <p>Aquí podrás gestionar tus tareas como técnico.</p>
     </main>
     <div class="btn-container">
-    <a href="Index.php?accion=ListarTL"><button class="btn btn-boton">Solicitudes Disponibles</button></a>
+    <a href="Index.php?accion=listarTL"><button class="btn btn-boton">Solicitudes Disponibles</button></a>
     <a href="Index.php?accion=SolicitudesOcupadas"><button class="btn btn-boton">Tus Trabajos Pendientes</button></a><br>
     </div>
 </body>

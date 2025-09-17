@@ -153,7 +153,7 @@ switch ($accion) {
         $controller->listarSLU();
     break;
         
-    case 'ListarTL':
+    case 'listarTL':
         $controller = new SolicitudC();
         $controller->ListarTL();
         require_once("Views/Solicitudes/listadoTL.php");
