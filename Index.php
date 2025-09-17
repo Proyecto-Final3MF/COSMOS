@@ -148,17 +148,20 @@ switch ($accion) {
         $controller->listarP();
     break;
     
-    case 'listarS':
+    case 'listarSLU':
         $controller = new SolicitudC();
-        $controller->listarSL();
+        $controller->listarSLU();
     break;
         
-
-
-    case 'SolicitudesLibres':
+    case 'ListarTL':
         $controller = new SolicitudC();
-        $controller->getLibresData();
-        require_once("Views/Solicitudes/libres.php");
+        $controller->ListarTL();
+        require_once("Views/Solicitudes/listadoTL.php");
+    break;
+
+    case 'asignarS':
+        $controller = new SolicitudC();
+        $controller->asignarS();
     break;
 
     case 'SolicitudesOcupadas':

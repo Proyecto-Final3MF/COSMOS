@@ -44,7 +44,7 @@ class SolicitudC {
         header("Location: index.php?accion=redireccion");
     }
 
-    public function listarSL(){
+    public function listarSLU(){
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario === null) {
             header("Location: index.php?accion=login");
@@ -52,15 +52,15 @@ class SolicitudC {
         }
         
         $solicitud = new Solicitud();
-        $resultados = $solicitud->listarSL($id_usuario);
+        $resultados = $solicitud->listarSLU($id_usuario);
         include("./Views/Solicitudes/ListadoS.php");
     }
 
 
-    public function getLibresData() {
+    public function ListarTL() {
     if (isset($_SESSION['id'])) {
         $usuarioId = $_SESSION['id'];
-        return $this->solicitudModel->getSolicitudesDisponibles($usuarioId);
+        return $this->solicitudModel->ListarTL($usuarioId);
     } else {
         echo "paso algo mal";
         return [];
