@@ -7,7 +7,7 @@ Hecho por:
 * _Lucas Vargas_
 * _Sergio López_
 
-- <a href="readmeEn.md">README in English</a>
+- <a href="readmeEn.md">README in English</a> [a]
 
 _**COSMOS**_ es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
