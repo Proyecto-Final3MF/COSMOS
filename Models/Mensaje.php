@@ -4,11 +4,12 @@ require_once(__DIR__ . '/../Config/conexion.php');
 class Mensaje
 {
     private $conexion;
-
-
     public function __construct()
     {
-        $this->conexion = conectar(); // funcion global que conecta a la DB
+        $this->conexion = new mysqli('localhost', 'usuario', 'contraseña', 'basedatos');
+        if ($this->conexion->connect_error) {
+            die("Error de conexión: " . $this->conexion->connect_error);
+        }
     }
 
     public function obtenerMensajes($receptor_id = null, $esAdmin = false)
@@ -36,6 +37,14 @@ class Mensaje
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function obtenerTodosLosMensajes()
+    {
+        $sql = "SELECT * FROM mensajes ORDER BY fecha ASC";
+        $result = $this->conexion->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
     {
