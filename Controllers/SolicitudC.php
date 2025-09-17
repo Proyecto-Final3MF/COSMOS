@@ -46,7 +46,7 @@ class SolicitudC {
 
     public function listarSLU(){
         $id_usuario = $_SESSION['id'] ?? null;
-        if ($id_usuario === null) {
+        if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
         }
@@ -58,14 +58,32 @@ class SolicitudC {
 
 
     public function ListarTL() {
-    if (isset($_SESSION['id'])) {
-        $usuarioId = $_SESSION['id'];
-        return $this->solicitudModel->ListarTL($usuarioId);
-    } else {
-        echo "paso algo mal";
-        return [];
+        if (isset($_SESSION['id'])) {
+            $usuarioId = $_SESSION['id'];
+            return $this->solicitudModel->ListarTL($usuarioId);
+        } else {
+            echo "paso algo mal";
+            return [];
+        }
     }
+    
+    public function asignarS() {
+        $id_usuario = $_SESSION['id'] ?? null;
+        if ($id_usuario == null) {
+            header("Location: index.php?accion=login");
+            exit();
+        }
+
+        $solicitud = new Solicitud();
+        $solicitud->asignarS($id_usuario);
+
+        if ($solicitud) {
+            $_SESSION['mensaje'] = "Solicitud aceptada existosamente";
+            header("index.php?accion=listarTL");
+        }
     }
+
+    
     public function getOcupadasData($estado_filter = 'all') {
         return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
@@ -79,7 +97,7 @@ class SolicitudC {
             $this->historialController->registrarModificacion($usuario, $usuarioId, 'seleccionó', 'solicitud', $solicitudId, $obs);
         }
         return $success;
-}
+    }
 
     public function cancelarRequest($id) {
             if (!isset($id)) {

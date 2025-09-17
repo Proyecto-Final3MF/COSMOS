@@ -59,6 +59,11 @@ class Solicitud {
         }
     }
 
+    public function asignarS($id_usuario){
+        $sql = "UPDATE solicitud ('tecnico_id, estado_id') VALUES ($id_usuario, 2)";
+        return $this->conn->query($sql);
+    }
+
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
         FROM solicitud
