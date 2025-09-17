@@ -13,7 +13,7 @@ class HistorialM {
         $usuario_id_para_db = ($usuario_id === 0 || $usuario_id === null) ? NULL : $usuario_id;
 
         $query = "INSERT INTO historial (usuario, usuario_id, accion, item, item_id, fecha_hora, obs)
-                 VALUES (?, ?, ?, ?, ?, NOW(), ?)";
+                  VALUES (?, ?, ?, ?, ?, NOW(), ?)";
         $stmt = $this->conexion->prepare($query);
 
         if ($stmt === false) {
