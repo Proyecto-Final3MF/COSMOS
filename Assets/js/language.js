@@ -1,13 +1,21 @@
 const translations = {
     'en': {
-        start: "Start Now",
+        startNow: "Start Now",
         p: "We help you find a technician to fix your device in record time.",
-        h1: "Welcome to COSMOS"
+        h1: "Welcome to COSMOS",
+        signin: "Sign In",
+        signup: "Sign Up",
+        startPage: "Start Page",
+        contact: "Contact"
     },
     'es': {
-        start: "Empezar Ahora",
+        startNow: "Empezar Ahora",
         p: "Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record",
-        h1: "Bienvenido a COSMOS"
+        h1: "Bienvenido a COSMOS",
+        signin: "Iniciar Session",
+        signup: "Registrarse",
+        startPage: "Inicio",
+        contact: "Contacto"
     }
 };
 
