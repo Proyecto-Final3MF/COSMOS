@@ -24,7 +24,7 @@ class Producto {
         return null;
     }
 
-    public function listar($id_usuario) {
+    public function listarP($id_usuario) {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario";
         $resultado = $this->conn->query($sql);
