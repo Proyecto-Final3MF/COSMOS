@@ -18,13 +18,12 @@
             <th>Mensaje</th>
         </tr>
         <?php foreach ($mensajes as $m): ?>
-            <tr>
-                <td><?= $m['fecha'] ?></td>
-                <td><?= $m['usuario'] ?></td>
-                <td><?= $m['receptor'] ?? 'General' ?></td>
-                <td><?= htmlspecialchars($m['mensaje']) ?></td>
-            </tr>
-        <?php endforeach; ?>
+            <div class="mensaje">
+                <strong>Usuario <?= $m['usuario_id'] ?>:</strong>
+                <?= htmlspecialchars($m['texto']) ?>
+                <em>(<?= $m['fecha'] ?>)</em>
+            </div>
+            <?php endforeach; ?>>
     </table>
 </body>
 
