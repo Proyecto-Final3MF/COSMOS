@@ -16,7 +16,8 @@ class Mensaje
     {
         if ($esAdmin) {
             // Si es admin -> ver todos los mensajes
-            $sql = "SELECT m.*, u.nombre as usuario, r.nombre as receptor
+            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                    u.nombre AS usuario, r.nombre AS receptor
                     FROM mensajes m
                     JOIN usuarios u ON m.usuario_id = u.id
                     LEFT JOIN usuarios r ON m.receptor_id = r.id
@@ -24,7 +25,8 @@ class Mensaje
             $stmt = $this->conexion->prepare($sql);
         } else {
             // Usuario normal -> solo ve sus mensajes
-            $sql = "SELECT m.*, u.nombre as usuario
+            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                    u.nombre AS usuario
                     FROM mensajes m
                     JOIN usuarios u ON m.usuario_id = u.id
                     WHERE m.receptor_id = ? OR m.usuario_id = ?
@@ -34,22 +36,39 @@ class Mensaje
             $stmt->bind_param("ii", $receptor_id, $receptor_id);
         }
 
+        if (!$stmt) {
+            return [];
+        }
+
         $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
     public function obtenerTodosLosMensajes()
     {
-        $sql = "SELECT * FROM mensajes ORDER BY fecha ASC";
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, 
+                u.nombre AS usuario, r.nombre AS receptor
+                FROM mensajes m 
+                JOIN usuarios u ON m.usuario_id = u.id 
+                LEFT JOIN usuarios r ON m.receptor_id = r.id
+                ORDER BY m.fecha ASC";
+
         $result = $this->conexion->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
     {
-        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUE (?,?,?)";
+        $sql = "INSERT INTO mensajes (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
         $stmt = $this->conexion->prepare($sql);
+        if (!$stmt) {
+            return false;
+        }
+
         $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         return $stmt->execute();
     }
