@@ -11,20 +11,25 @@
     <h1>Historial de chats</h1>
 
     <table border="1" cellpadding="5">
-        <tr>
-            <th>Fecha</th>
-            <th>Usuario</th>
-            <th>Receptor</th>
-            <th>Mensaje</th>
-        </tr>
-        <?php foreach ($mensajes as $m): ?>
-            <div class="mensaje">
-                <strong>Usuario <?= $m['usuario_id'] ?>:</strong>
-                <?= htmlspecialchars($m['texto']) ?>
-                <em>(<?= $m['fecha'] ?>)</em>
-            </div>
-            <?php endforeach; ?>>
-    </table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Receptor</th>
+                <th>Mensaje</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($mensajes as $m): ?>
+                <tr>
+                    <td><?= htmlspecialchars($m['fecha'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['usuario_id'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($m['receptor_id'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= nl2br(htmlspecialchars($m['texto'] ?? '', ENT_QUOTES, 'UTF-8')) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
 </body>
 
 </html>
