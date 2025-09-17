@@ -28,6 +28,27 @@ class ChatC
         }
     }
 
+    public function listarMensajes()
+    {
+        session_start();
+        $mensaje = new Mensaje();
+        $usuario_id = $_SESSION['id'] ?? null;
+        $rol = $_SESSION['rol'] ?? null;
+        $esAdmin = ($rol === 'admin');
+
+        if (!$usuario_id) {
+            http_response_code(401);
+            exit("No autorizado");
+        }
+
+        $mensajes = $mensaje->obtenerMensajes($usuario_id, $esAdmin);
+
+        foreach ($mensajes as $m) {
+            echo "<p><strong>" . htmlspecialchars($m['usuario']) . ":</strong>" .
+                nl2br(htmlspecialchars($m['mensaje'])) . "</p>";
+        }
+    }
+
     public function enviar()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
