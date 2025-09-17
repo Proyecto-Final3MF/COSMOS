@@ -7,6 +7,7 @@ class ChatC
     public function mostrarChat()
     {
         session_start();
+
         $mensaje = new Mensaje();
         $usuario_id = $_SESSION['id'] ?? null;
         $rol = $_SESSION['rol'] ?? null; //'usuario', 'tecnico' o 'admin'
@@ -18,31 +19,13 @@ class ChatC
         // Si es admin -> ver todo
         $esAdmin = ($rol === 'admin');
 
-        $mensajes = $mensaje->obtenerMensajes($usuario_id, $esAdmin);
-
         if ($esAdmin) {
+            $mensajes = $mensaje->obtenerTodosLosMensajes() ?? [];
             include "Views/chat_admin.php"; //vista especial
         } else {
+            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
             include "Views/chat.php"; // vista normal
         }
-    }
-
-    public function verChatsAdmin()
-    {
-        $mensaje = new Mensaje();
-
-        // Recuperar mensajes desde el modelo
-        $mensajes = $mensaje->obtenerMensajes();
-
-        // Pasar a la vista
-        include("Views/chat_admin.php");
-    }
-
-    public function mostrarChatAdmin()
-    {
-        $mensaje = new Mensaje();
-        $mensajes = $mensaje->obtenerTodosLosMensajes(); // Llama a la función nueva
-        include "Views/chat_admin.php"; // Vista especial para admin
     }
 
     public function enviar()
