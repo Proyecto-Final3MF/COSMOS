@@ -7,7 +7,7 @@ Hecho por:
 * _Lucas Vargas_
 * _Sergio López_
 
-**COSMOS** es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
+_**COSMOS**_ es una plataforma web innovadora diseñada para conectar a clientes que necesitan servicios técnicos de emergencia con técnicos freelancers cualificados. Nuestra misión es simplificar el proceso de encontrar ayuda profesional para la reparación de equipos informáticos, ofreciendo una experiencia transparente y eficiente tanto para clientes como para técnicos.
 
 ## Documentación
 [Documentación Tecnicos y Asociados.odt](https://github.com/user-attachments/files/22164176/Documentacion.Tecnicos.y.Asociados.odt)
@@ -24,7 +24,7 @@ Si necesitas una reparación urgente, _**COSMOS**_ te permite:
 
 ### Para los Técnicos
 
-**COSMOS** ofrece a los técnicos freelancers una plataforma para:
+_**COSMOS**_ ofrece a los técnicos freelancers una plataforma para:
 
 * **Encontrar oportunidades de trabajo**: Accede a una lista de solicitudes de clientes cerca de tu área o especialidad.
 * **Gestionar tus proyectos**: Coordina tus trabajos, comunicate con los clientes y actualiza el estado de cada servicio de manera sencilla.
