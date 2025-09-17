@@ -9,9 +9,16 @@
 
 <body>
     <div id="chat-box">
-        <?php foreach ($mensajes as $m): ?>
-            <p><strong><?= $m['usuario'] ?>:</strong> <?= htmlspecialchars($m['mensaje']) ?></p>
-        <?php endforeach; ?>
+        <?php if (!empty($mensajes)): ?>
+            <?php foreach ($mensajes as $m): ?>
+                <p>
+                    <strong><?= htmlspecialchars($m['usuario'] ?? '???') ?>:</strong>
+                    <?= htmlspecialchars($m['mensaje'] ?? '') ?>
+                </p>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No hay mensajes aún.</p>
+        <?php endif; ?>
     </div>
 
     <form id="form-chat">
@@ -36,7 +43,7 @@
     });
 
     async function cargarMensajes() {
-        let res = await fetch("index.php?c=ChatC&a=mostrarChat&receptor=<?= $receptor_id ?? 'null' ?>");
+        let res = await fetch("./index.php?accion=listarMensajes");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
