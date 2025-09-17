@@ -24,24 +24,65 @@ class Solicitud {
         return null;
     }
 
-    public function getSolicitudesDisponibles() {
-        $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
-                FROM solicitud
-                JOIN estado ON solicitud.estado_id = estado.id
-                WHERE solicitud.estado_id = 1";
-        $resultado = $this->conn->query($sql);
+    public function borrarS($id) {
+        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
+        return $this->conn->query($sql);
+    }
 
-        if (!$resultado) {
-            error_log("Error en la consulta getSolicitudesDisponibles: " . $this->conn->error);
+    public function ListarSL($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s
+                inner join producto p on s.producto_id = p.id
+                WHERE s.cliente_id = $id_usuario AND s.estado_id = 1;";
+        $resultado = $this->conn->query($sql);
+        
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
             return [];
         }
-
-        $solicitudes = [];
-        while ($fila = $resultado->fetch_assoc()) {
-            $solicitudes[] = $fila;
-        }
-        return $solicitudes;
     }
+
+    public function getSolicitudesDisponibles($usuarioId) {
+    // La consulta ahora incluye una condición para filtrar por el usuario.
+    // Usamos una consulta preparada para evitar inyecciones SQL.
+    $sql = "SELECT * FROM solicitud 
+            JOIN producto ON solicitud.producto_id = producto.id 
+            JOIN estado ON solicitud.estado_id = estado.id 
+            WHERE solicitud.estado_id = 1 AND solicitud.usuario_id = ?";
+
+    $stmt = $this->conn->prepare($sql);
+
+    // Verificamos si la preparación de la consulta fue exitosa.
+    if (!$stmt) {
+        error_log("Error en la preparación de la consulta: " . $this->conn->error);
+        return [];
+    }
+
+    // Vinculamos el parámetro $usuarioId a la consulta. 'i' significa que es un entero.
+    $stmt->bind_param("i", $usuarioId);
+
+    // Ejecutamos la consulta.
+    $stmt->execute();
+
+    // Obtenemos el resultado de la consulta.
+    $resultado = $stmt->get_result();
+
+    if (!$resultado) {
+        error_log("Error en la consulta getSolicitudesDisponibles: " . $stmt->error);
+        return [];
+    }
+
+    $solicitudes = [];
+    while ($fila = $resultado->fetch_assoc()) {
+        $solicitudes[] = $fila;
+    }
+
+    // Cerramos el statement.
+    $stmt->close();
+    
+    return $solicitudes;
+}   
 
     public function getSolicitudesOcupadas($estado_filter = 'all') {
         $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
@@ -57,7 +98,7 @@ class Solicitud {
             $params[] = $Tid;
             $param_types .= 'i';
         } else {
-            error_log("Error: \$Tid is not set in SolicitudM.php for getSolicitudesOcupadas");
+            error_log("Error: \$Tid no está configurado en SolicitudM.php para getSolicitudesOcupadas");
             return false;
         }
 
@@ -126,12 +167,11 @@ class Solicitud {
         return $success;
     }
 
-    public function crear($titulo, $descripcion, $categoria_id, $usuario_id, $prioridad = 'media') {
+    public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
         
-        $sql = "INSERT INTO solicitud (titulo, descripcion, categoria_id, usuario_id, prioridad) 
-                VALUES ('$titulo', '$descripcion', $categoria_id, $usuario_id, '$prioridad')";
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, 1, '$descripcion')";
         
         return $this->conn->query($sql);
     }

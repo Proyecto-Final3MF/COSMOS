@@ -83,8 +83,7 @@ switch ($accion) {
     case 'redireccion':
         if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
             if ($_SESSION['rol'] == ROL_CLIENTE) {
-                $controller = new ProductoC();
-                $controller->mostrarPanelCliente();
+                include("./Views/Usuario/Cliente/ClienteP.php");
             } elseif ($_SESSION['rol'] == ROL_TECNICO) {
                 include("./Views/Usuario/Tecnico/TecnicoP.php");
             } elseif ($_SESSION['rol'] == ROL_ADMIN) {
@@ -142,9 +141,20 @@ switch ($accion) {
     case 'actualizarP':
        $controller = new ProductoC();
        $controller->actualizarP();
-   break;
-  
+    break;
+
+    case 'listarP':
+        $controller = new ProductoC();
+        $controller->listarP();
+    break;
+    
+    case 'listarS':
+        $controller = new SolicitudC();
+        $controller->listarSL();
+    break;
         
+
+
     case 'SolicitudesLibres':
         $controller = new SolicitudC();
         $controller->getLibresData();

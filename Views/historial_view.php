@@ -1,13 +1,23 @@
+<?php
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
+    header("Location: index.php?accion=redireccion");
+    exit();
+}
+
+require_once ("./Views/include/UH.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórial de actividades</title>
-    <link rel="stylesheet" href="Assets/css/historial.css">
+    <link rel="stylesheet" href="Assets/css/inicio.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container3">
         <h1>Histórial de actividades</h1>
 
         <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda.</p>
@@ -26,8 +36,12 @@
                 <label required for="end_date">Fecha de fin:</label>
                 <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($_GET['end_date'] ?? ''); ?>">
             </div>
-            <button type="submit">Aplicar Filtros</button>
-            <a href="index.php?accion=mostrarHistorial" class="clear-button">Limpiar Filtros</a>
+
+            <div class="button-container5">
+                <button type="submit">Aplicar Filtros</button>
+                <a href="index.php?accion=mostrarHistorial" class="clear-button">Limpiar Filtros</a>
+            </div>
+    
         </form>
 
         <?php if (!empty($historial) && (empty($search) && empty($start_date) && empty($end_date))): ?>
@@ -38,7 +52,7 @@
                     <div class="historial-item">
                         <p>
                             <strong>
-                                [<?php echo htmlspecialchars($registro->usuario ? $registro->usuario : 'Sistema'); ?>]
+                                <?php echo htmlspecialchars($registro->usuario ? $registro->usuario : '[Sistema]'); ?>
                             </strong>
                             #<?php echo htmlspecialchars($registro->usuario_id ? $registro->usuario_id : 'N/A'); ?>
                             <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
@@ -60,5 +74,10 @@
             <?php endif; ?>
         <?php endif; ?>
     </div>
+
+ <div class="botones-container">
+        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
+
 </body>
 </html>
