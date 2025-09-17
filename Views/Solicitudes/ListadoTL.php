@@ -19,11 +19,11 @@ require_once ("./Views/include/UH.php");
         <thead>
             <tr>
                 <th>Titulo</th>
+                <th>Cliente</th>
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
                 <th>Fecha de Creacion</th>
-                <th>Cliente</th>
                 <th>Acciones</th>
             </tr>
         </thead>
