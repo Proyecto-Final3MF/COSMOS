@@ -31,6 +31,14 @@
 </html>
 
 <script>
+    // Cargar mensajes
+    async function cargarMensajes() {
+        let res = await fetch("index.php?accion=mostrarChat");
+        let html = await res.text();
+        document.getElementById("chat-box").innerHTML = html;
+    }
+
+    // Enviar mensaje
     document.getElementById("form-chat").addEventListener("submit", async function(e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -41,12 +49,6 @@
         this.reset();
         cargarMensajes();
     });
-
-    async function cargarMensajes() {
-        let res = await fetch("index.php?accion=mostrarChat");
-        let html = await res.text();
-        document.getElementById("chat-box").innerHTML = html;
-    }
 
     setInterval(cargarMensajes, 3000);
 </script>
