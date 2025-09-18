@@ -53,7 +53,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No acepto solicitudes todavia <br><a href="index.php?accion=listarTL">Ver solicitudes disponibles</a></td>
+            <td colspan="6">No acepto solicitudes todavia <br> <br><a href="index.php?accion=listarTL"><button class="btn btn-boton">Ver solicitudes disponibles</button></a></td>
         </tr>
         <?php
     }
@@ -63,7 +63,7 @@ require_once ("./Views/include/UH.php");
 </div>
 
 <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+</div>
 </body>
 </html>
