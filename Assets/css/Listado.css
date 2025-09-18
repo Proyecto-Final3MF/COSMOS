@@ -1,5 +1,4 @@
 body {
-    text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0; 
     padding: 20px;
@@ -58,6 +57,7 @@ body {
     background-color: #0056b3;
 }
 
+
 .pagina-btn.activa {
     background-color: #28a745;
     cursor: default;
@@ -72,30 +72,30 @@ body {
 .control-btn {
     min-width: 10px; 
 }
-
 .filter-buttons button {
-    margin-right: 10px;
-    padding: 8px 15px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-    border-radius: 4px;
+margin-right: 10px;
+padding: 8px 15px;
+cursor: pointer;
+border: 1px solid #ccc;
+background-color: #f0f0f0;
+border-radius: 4px;
 }
 
 .filter-buttons button.active {
-    background-color: #e83e8c;
-    color: white;
-    border-color: #cc2f78;
+background-color: #e83e8c;
+color: white;
+border-color: #cc2f78;
 }
 
 /* Dark Mode */
 
-.tema-oscuro {
+.tema-escuro {
     background-color: #282c34;
     color: #f4f4f4;
 }
 
-.tema-oscuro .solicitud {
+
+.tema-escuro .solicitud {
     border: 1px solid #363636;
     padding: 10px;
     margin-bottom: 5px;
@@ -105,36 +105,31 @@ body {
     color: rgb(255, 255, 255);
 }
 
-.tema-oscuro a {
+.tema-escuro a {
     color: green;
 }
-
-.tema-oscuro .filter-buttons button.active {
-    background-color: #e83e8c;
-    color: rgb(255, 255, 255);
-    border-color: #cc2f78;
+.tema-escuro .filter-buttons button.active {
+background-color: #d9ff00;
+color: rgb(0, 0, 0);
+border-color: #fbff00;
 }
-
-.tema-oscuro .filter-buttons button {
-    margin-right: 10px;
-    padding: 8px 15px;
-    cursor: pointer;
-    border: 1px solid #363636;
-    background-color: #181818;
-    border-radius: 4px;
-    color: white;
+.tema-escuro .filter-buttons button {
+margin-right: 10px;
+padding: 8px 15px;
+cursor: pointer;
+border: 1px solid #363636;
+background-color: #181818;
+border-radius: 4px;
+color: white;
 }
-
-.tema-oscuro .pagina-btn.activa {
+.tema-escuro .pagina-btn.activa {
     background-color: #d919ff;
     cursor: default;
 }
-
-.tema-oscuro .pagina-btn:hover:not(:disabled) {
+.tema-escuro .pagina-btn:hover:not(:disabled) {
     background-color: #b3b000;
 }
-
-.tema-oscuro .pagina-btn  {
+.tema-escuro .pagina-btn  {
     background-color: #fbff00;
     color: rgb(0, 0, 0);
     border: none;
@@ -144,12 +139,10 @@ body {
     transition: background-color 0.3s ease, opacity 0.3s ease;
     font-weight: bold;
 }
-
-.tema-oscuro .container {
+.tema-escuro .container {
     background-color: #3b4049;
 }
-
-.tema-oscuro h1 {
+.tema-escuro h1 {
     color: #ffffff;
     background-color: #282c34;
 }

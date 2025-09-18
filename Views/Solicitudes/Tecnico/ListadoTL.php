@@ -37,10 +37,10 @@ require_once ("./Views/include/UH.php");
       ?>
       <tr>
         <td><?= htmlspecialchars($resultado['titulo']); ?></td>
-        <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
+        <td><?= htmlspecialchars($resultado['nombre']); ?></td>
         <td>
           <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto"/><br>
-          <?= htmlspecialchars($resultado['nombre_producto']) ?>
+          <?= htmlspecialchars($resultado['producto']) ?>
         </td>
         <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>

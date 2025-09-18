@@ -1,5 +1,6 @@
 <?php
-function conectar() {
+function conectar()
+{
     $host = 'localhost';
     $usuario = 'root';
     $clave = '';
@@ -13,4 +14,3 @@ function conectar() {
 
     return $conexion;
 }
-?>
