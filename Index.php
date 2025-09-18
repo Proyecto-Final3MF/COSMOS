@@ -24,7 +24,7 @@ if (isset($_SESSION['mensaje'])) {
      <div class="modal active">
        <div class="modal-header">
          <div class="title">Mensaje</div>
-         <a href="index.php?accion=' . $_GET['accion'] . '" class="close-button">&times;</a>
+         <a href="index.php?accion='.$_GET['accion'].'" class="close-button">&times;</a>
        </div>
        <div class="modal-body">
          <p>' . $_SESSION['mensaje'] . '</p>
@@ -39,28 +39,28 @@ const ROL_CLIENTE = 2;
 const ROL_ADMIN = 3;
 
 switch ($accion) {
-
-
-  //acciones publicas
+ 
+  
+//acciones publicas
   case 'login':
     $controller = new UsuarioC();
     $controller->login();
-    break;
+  break;
 
   case 'autenticar':
     $controller = new UsuarioC();
     $controller->autenticar();
-    break;
+  break;
 
   case 'register':
     $controller = new UsuarioC();
     $controller->crear();
-    break;
+  break;
 
   case 'guardarU':
     $controller = new UsuarioC();
     $controller->guardarU();
-    break;
+  break;
 
   case 'redireccion':
     if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
@@ -78,115 +78,114 @@ switch ($accion) {
       header("Location: index.php?accion=login");
       exit();
     }
-    break;
+  break;
 
-  //acciones para todos los roles
+//acciones para todos los roles
   case 'editarU':
     $controller = new UsuarioC();
     $controller->editarU();
-    break;
+  break;
 
   case 'actualizarU':
     $controller = new UsuarioC();
     $controller->actualizarU();
-    break;
+  break;
 
   case 'eliminarU':
     $controller = new UsuarioC();
     $controller->eliminar();
-    break;
+  break;
 
   case 'logout':
     $controller = new UsuarioC();
     $controller->logout();
-    break;
+  break;
 
-  //acciones para el rol cliente
-
+//acciones para el rol cliente
+    
   //acciones para producto
-
+  
   case 'guardarP':
     $controller = new ProductoC();
     $controller->guardarP();
-    break;
+  break;
 
   case 'borrarP':
     $controller = new ProductoC();
     $controller->borrarP();
-    break;
+  break;
 
   case 'editarP':
     $controller = new ProductoC();
     $controller->editarP();
-    break;
+  break;
 
   case 'actualizarP':
-    $controller = new ProductoC();
-    $controller->actualizarP();
-    break;
+   $controller = new ProductoC();
+   $controller->actualizarP();
+  break;
 
   case 'listarP':
     $controller = new ProductoC();
     $controller->listarP();
-    break;
-
+  break;
+ 
   case 'formularioP':
     $controller = new ProductoC();
     $controller->formularioP();
-    break;
+  break;
 
   //acciones para solicitudes
 
   case 'formularioS':
     $controller = new SolicitudC();
     $controller->formularioS();
-    break;
+  break;
 
   case 'guardarS':
     $controller = new SolicitudC();
     $controller->guardarS();
-    break;
+  break;
 
   case 'borrarS':
     $controller = new SolicitudC();
     $controller->borrarS();
-    break;
+  break;
 
   case 'listarSLU':
     $controller = new SolicitudC();
     $controller->listarSLU();
-    break;
-
-  //acciones para el rol tecnico
+  break;
+   
+//acciones para el rol tecnico
 
   //acciones para solicitudes
 
   case 'asignarS':
     $controller = new SolicitudC();
     $controller->asignarS();
-    break;
-
+  break;
+  
   case 'listarSAT':
     $controller = new SolicitudC();
     $controller->ListarSA();
     require_once("Views/Solicitudes/Tecnico/listadoSAT.php");
-    break;
+  break;
 
   case 'listarTL':
     $controller = new SolicitudC();
     $controller->ListarTL();
-    require_once("Views/Solicitudes/listadoTL.php");
-    break;
+    require_once("Views/Solicitudes/Tecnico/listadoTL.php");
+  break;
 
-
-  //acciones para el rol admin
+//acciones para el rol admin
 
   //acciones historial
 
   case 'mostrarHistorial':
     $controller = new HistorialController();
     $controller->mostrarHistorial();
-    break;
+  break;
 
   // acciones categoria
 
@@ -194,52 +193,34 @@ switch ($accion) {
     $controller = new CategoriaC();
     $controller->FormularioC();
     require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
-    break;
+  break;
 
   case 'guardarC':
     $controller = new CategoriaC();
     $controller->guardarC();
-    break;
+  break;
 
   case 'listarC':
     $controller = new CategoriaC();
     $controller->listarC();
-    break;
+  break;
 
   case 'editarC':
     $controller = new CategoriaC();
     $controller->editarC();
-    break;
+  break;
 
   case 'actualizarC':
     $controller = new CategoriaC();
     $controller->actualizarC();
-    break;
+  break;
 
   case 'borrarC':
     $controller = new CategoriaC();
     $controller->borrarC();
-    break;
-
-  case 'mostrarChat':
-    require_once("Controllers/ChatC.php");
-    $controller = new ChatC();
-    $controller->mostrarChat();
-    break;
-
-  case 'enviarMensaje':
-    require_once("Controllers/ChatC.php");
-    $controller = new ChatC();
-    $controller->enviar();
-    break;
-
-  case 'listarMensajes':
-    require_once("Controllers/ChatC.php");
-    $controller = new ChatC();
-    $controller->listarMensajes();
-    break;
-
-  //accion default
+  break;
+   
+//accion default
 
   default:
     if (!isset($_SESSION['usuario'])) {
@@ -248,5 +229,6 @@ switch ($accion) {
       http_response_code(404);
       header("Location: Error.php");
     }
-    exit();
+  exit();
 }
+?>

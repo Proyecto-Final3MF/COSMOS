@@ -44,7 +44,7 @@ class Solicitud {
     }
 
     public function ListarTL() {
-        $sql = "SELECT s.*, p.nombre, p.imagen, u.nombre
+        $sql = "SELECT s.*, p.nombre as producto, p.imagen, u.nombre
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN usuario u ON s.cliente_id = u.id
