@@ -175,9 +175,8 @@ switch ($accion) {
   case 'listarTL':
     $controller = new SolicitudC();
     $controller->ListarTL();
-    require_once("Views/Solicitudes/listadoTL.php");
+    require_once("Views/Solicitudes/Tecnico/listadoTL.php");
   break;
-
 
 //acciones para el rol admin
 
