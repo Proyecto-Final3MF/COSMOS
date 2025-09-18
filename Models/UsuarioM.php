@@ -61,21 +61,33 @@ class Usuario {
         return $stmt->execute();
     }
 
-    public function eliminar($id) {
-        // Tu código para eliminar ya es correcto, usa consultas preparadas
-        $sql = "DELETE FROM usuario WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        
-        if ($stmt === false) {
-            // Manejar error en la preparación
-            return false;
-        }
+   public function eliminar($id) {
+    // Preparar la consulta para eliminar el usuario por id
+    $sql = "DELETE FROM usuario WHERE id = ?";
+    $stmt = $this->conn->prepare($sql);
 
-        $stmt->bind_param("i", $id);
-        $result = $stmt->execute();
-        
-        $stmt->close();
-        return $result;
-    } 
+    if ($stmt === false) {
+        // Error al preparar la consulta
+        error_log("Error en prepare(): " . $this->conn->error);
+        return false;
+    }
+
+    // Vincular el parámetro id (entero)
+    $stmt->bind_param("i", $id);
+
+    // Ejecutar la consulta
+    $result = $stmt->execute();
+
+    if ($result === false) {
+        // Error al ejecutar la consulta
+        error_log("Error en execute(): " . $stmt->error);
+    }
+
+    // Cerrar la sentencia preparada
+    $stmt->close();
+
+    return $result;
+}
+
 }
 ?>
