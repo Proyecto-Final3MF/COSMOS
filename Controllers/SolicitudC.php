@@ -99,7 +99,5 @@ class SolicitudC {
         $resultados = $solicitud->listarSA($id_usuario);
         include("./Views/Solicitudes/ListadoSA.php");
     }
-
-
 }
 ?>
