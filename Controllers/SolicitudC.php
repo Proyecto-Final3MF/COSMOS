@@ -89,6 +89,17 @@ class SolicitudC {
         }
     }
 
+    public function listarSA() {
+        $id_usuario = $_SESSION['id'] ?? null;
+        if ($id_usuario == null) {
+            header("Location: index.php?accion=login");
+            exit();
+        }  
+        $solicitud = new Solicitud();
+        $resultados = $solicitud->listarSA($id_usuario);
+        include("./Views/Solicitudes/ListadoSA.php");
+    }
+
 
 }
 ?>

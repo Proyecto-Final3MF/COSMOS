@@ -165,6 +165,12 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->asignarS();
   break;
+  
+  case 'listarSA':
+    $controller = new SolicitudC();
+    $controller->ListarSA();
+    require_once("Views/Solicitudes/listadoSA.php");
+  break;
 
   case 'FormularioC':
     $controller = new CategoriaC();
