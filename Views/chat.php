@@ -34,7 +34,7 @@
     document.getElementById("form-chat").addEventListener("submit", async function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        await fetch("index.php?c=ChatC&a=enviar", {
+        await fetch("index.php?accion=enviarMensaje", {
             method: "POST",
             body: formData
         });
@@ -43,7 +43,7 @@
     });
 
     async function cargarMensajes() {
-        let res = await fetch("./index.php?accion=listarMensajes");
+        let res = await fetch("index.php?accion=mostrarChat");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
