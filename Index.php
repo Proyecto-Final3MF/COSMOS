@@ -219,6 +219,24 @@ switch ($accion) {
     $controller = new CategoriaC();
     $controller->borrarC();
   break;
+
+  case 'mostrarChat':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->mostrarChat();
+    break;
+
+  case 'enviarMensaje':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->enviar();
+    break;
+
+  case 'listarMensajes':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->listarMensajes();
+    break;
    
 //accion default
 
