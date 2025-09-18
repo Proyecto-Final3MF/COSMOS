@@ -39,6 +39,7 @@ const ROL_CLIENTE = 2;
 const ROL_ADMIN = 3;
 
 switch ($accion) {
+    
   case 'login':
     $controller = new UsuarioC();
     $controller->login();
