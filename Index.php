@@ -329,29 +329,6 @@ switch ($accion) {
   break;
 
 
-
-  case 'SolicitudesOcupadas':
-
-    $controller = new SolicitudC();
-
-    $controller->getOcupadasData($estado_filter = 'all');
-
-    require_once("Views/Solicitudes/ocupadas.php");
-
-  break;
-
-
-
-  case 'SolicitudSelec':
-
-    $controller = new SolicitudC();
-
-    $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
-
-  break;
-
-
-
   case 'FormularioC':
 
     $controller = new CategoriaC();
