@@ -6,7 +6,7 @@ class Mensaje
     private $conexion;
     public function __construct()
     {
-        $this->conexion = new mysqli('localhost', 'root', '', 'tecnicosasociados');
+        $this->conexion = new mysqli('localhost', 'root', '', 'basedatos');
         if ($this->conexion->connect_error) {
             die("Error de conexión: " . $this->conexion->connect_error);
         }
@@ -18,17 +18,17 @@ class Mensaje
             // Si es admin -> ver todos los mensajes
             $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
                     u.nombre AS usuario, r.nombre AS receptor
-                    FROM mensaje m
-                    JOIN usuario u ON m.usuario_id = u.id
-                    LEFT JOIN usuario r ON m.receptor_id = r.id
+                    FROM mensajes m
+                    JOIN usuarios u ON m.usuario_id = u.id
+                    LEFT JOIN usuarios r ON m.receptor_id = r.id
                     ORDER BY m.fecha DESC";
             $stmt = $this->conexion->prepare($sql);
         } else {
             // Usuario normal -> solo ve sus mensajes
             $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
                     u.nombre AS usuario
-                    FROM mensaje m
-                    JOIN usuario u ON m.usuario_id = u.id
+                    FROM mensajes m
+                    JOIN usuarios u ON m.usuario_id = u.id
                     WHERE m.receptor_id = ? OR m.usuario_id = ?
                     ORDER BY m.fecha DESC";
 
