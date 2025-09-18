@@ -29,11 +29,11 @@ require_once ("./Views/include/UH.php");
                 <input type="text" id="search" name="search" placeholder="Buscar por usuario, acción, item..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label for="start_date">Fecha de inicio:</label>
+                <label for="start_date">Fecha de inicial:</label>
                 <input required type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($_GET['start_date'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label required for="end_date">Fecha de fin:</label>
+                <label required for="end_date">Fecha de final:</label>
                 <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($_GET['end_date'] ?? ''); ?>">
             </div>
 
