@@ -3,7 +3,7 @@ require_once ("./Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
                     <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2"><img src="Assets/imagenes/pen.png" alt="editar" width="50px"></button></a>
-                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton2"><img src="Assets/imagenes/trash.png" alt="eliminar" width="50px"></button></a>
+                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton2"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></button></a>
                 </td>
             <?php endforeach; ?>
             </tr>

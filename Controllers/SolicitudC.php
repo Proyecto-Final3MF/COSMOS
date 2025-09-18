@@ -89,33 +89,15 @@ class SolicitudC {
         }
     }
 
-    public function handleSelectSolicitud($solicitudId, $usuarioId = null) {
-        $newEstadoId = 2;
-        $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
-        if ($success) {
-            $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
-            $this->historialController->registrarModificacion($usuario, $usuarioId, 'seleccionó', 'solicitud', $solicitudId, $obs);
-        }
-        return $success;
-    }
-
-    public function cancelarRequest($id) {
-        if (!isset($id)) {
-            echo "Id invalida";
-        }
-        $result_status = $this->requestModel->cancelar($id);
-        if ($result_status === 'updated') {
-            $obs = "Solicitud cancelada por parte del tecnico, retornó a estar disponible.";
-            $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
+    public function listarSA() {
+        $id_usuario = $_SESSION['id'] ?? null;
+        if ($id_usuario == null) {
+            header("Location: index.php?accion=login");
             exit();
-        } elseif ($result_status === 'deleted') {
-            $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
-            $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
-            exit();
-        } else {
-            Echo "Cancelacion fallada";
-            exit();
-        }
+        }  
+        $solicitud = new Solicitud();
+        $resultados = $solicitud->listarSA($id_usuario);
+        include("./Views/Solicitudes/ListadoSA.php");
     }
 }
 ?>
