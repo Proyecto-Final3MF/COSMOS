@@ -52,18 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
             userPreferredLanguage = 'es';
         }
     }
+
     changeLanguage(userPreferredLanguage);
-});
 
-const languageSelect = document.getElementById('language-select');
-    if (languageSelect) {
-        languageSelect.addEventListener('change', (event) => {
-            const selectedLanguage = event.target.value;
-            changeLanguage(selectedLanguage);
-        });
-    }
-
-    let userPreferredLanguage = localStorage.getItem('userLanguage') || 'es';
+    const languageSelect = document.getElementById('language-select');
     if (languageSelect) {
         languageSelect.value = userPreferredLanguage;
     }
+});
+
+const languageSelect = document.getElementById('language-select');
+if (languageSelect) {
+    languageSelect.addEventListener('change', (event) => {
+        const selectedLanguage = event.target.value;
+        changeLanguage(selectedLanguage);
+    });
+}
