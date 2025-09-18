@@ -39,37 +39,17 @@ const ROL_CLIENTE = 2;
 const ROL_ADMIN = 3;
 
 switch ($accion) {
-    
+ 
+  
+//acciones publicas
   case 'login':
     $controller = new UsuarioC();
     $controller->login();
   break;
 
-  case 'editarU':
-    $controller = new UsuarioC();
-    $controller->editarU();
-  break;
-
-
-
-  case 'actualizarU':
-    $controller = new UsuarioC();
-    $controller->actualizarU();
-  break;
-
-  case 'eliminarU':
-    $controller = new UsuarioC();
-    $controller->eliminar();
-  break;
-
   case 'autenticar':
     $controller = new UsuarioC();
     $controller->autenticar();
-  break;
-
-  case 'logout':
-    $controller = new UsuarioC();
-    $controller->logout();
   break;
 
   case 'register':
@@ -100,31 +80,31 @@ switch ($accion) {
     }
   break;
 
-  case 'mostrarHistorial':
-    $controller = new HistorialController();
-    $controller->mostrarHistorial();
+//acciones para todos los roles
+  case 'editarU':
+    $controller = new UsuarioC();
+    $controller->editarU();
   break;
 
-  case 'formularioS':
-    $controller = new SolicitudC();
-    $controller->formularioS();
+  case 'actualizarU':
+    $controller = new UsuarioC();
+    $controller->actualizarU();
   break;
 
-  case 'guardarS':
-    $controller = new SolicitudC();
-    $controller->guardarS();
+  case 'eliminarU':
+    $controller = new UsuarioC();
+    $controller->eliminar();
   break;
 
-  case 'borrarS':
-    $controller = new SolicitudC();
-    $controller->borrarS();
+  case 'logout':
+    $controller = new UsuarioC();
+    $controller->logout();
   break;
 
-  case 'formularioP':
-    $controller = new ProductoC();
-    $controller->formularioP();
-  break;
-
+//acciones para el rol cliente
+    
+  //acciones para producto
+  
   case 'guardarP':
     $controller = new ProductoC();
     $controller->guardarP();
@@ -150,27 +130,65 @@ switch ($accion) {
     $controller->listarP();
   break;
  
+  case 'formularioP':
+    $controller = new ProductoC();
+    $controller->formularioP();
+  break;
+
+  //acciones para solicitudes
+
+  case 'formularioS':
+    $controller = new SolicitudC();
+    $controller->formularioS();
+  break;
+
+  case 'guardarS':
+    $controller = new SolicitudC();
+    $controller->guardarS();
+  break;
+
+  case 'borrarS':
+    $controller = new SolicitudC();
+    $controller->borrarS();
+  break;
+
   case 'listarSLU':
     $controller = new SolicitudC();
     $controller->listarSLU();
   break;
    
-  case 'listarTL':
-    $controller = new SolicitudC();
-    $controller->ListarTL();
-    require_once("Views/Solicitudes/listadoTL.php");
-  break;
+//acciones para el rol tecnico
+
+  //acciones para solicitudes
 
   case 'asignarS':
     $controller = new SolicitudC();
     $controller->asignarS();
   break;
   
-  case 'listarSA':
+  case 'listarSAT':
     $controller = new SolicitudC();
     $controller->ListarSA();
-    require_once("Views/Solicitudes/listadoSA.php");
+    require_once("Views/Solicitudes/Tecnico/listadoSAT.php");
   break;
+
+  case 'listarTL':
+    $controller = new SolicitudC();
+    $controller->ListarTL();
+    require_once("Views/Solicitudes/listadoTL.php");
+  break;
+
+
+//acciones para el rol admin
+
+  //acciones historial
+
+  case 'mostrarHistorial':
+    $controller = new HistorialController();
+    $controller->mostrarHistorial();
+  break;
+
+  // acciones categoria
 
   case 'FormularioC':
     $controller = new CategoriaC();
@@ -203,6 +221,8 @@ switch ($accion) {
     $controller->borrarC();
   break;
    
+//accion default
+
   default:
     if (!isset($_SESSION['usuario'])) {
       header("Location: index.php?accion=login");
