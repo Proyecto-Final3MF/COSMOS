@@ -12,10 +12,9 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/inicio.css" />
 </head>
 <body>
+    <br>
     <div>
-    <p>Solicitudes no asignadas</p>
-    <div class="botones-container">
-    <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
+    <p>Solicitudes aceptadas</p>
 </div>
     <table>
         <thead>
@@ -43,9 +42,7 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
-                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>">
-                        <button class="btn btn-boton2">Eliminar</button>
-                    </a>
+                    
                 </td>
            
             <?php
@@ -56,7 +53,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No hay solicitudes creadas todavia. <br><a href="index.php?accion=formularioS">Crear Nueva Solicitud</a></td>
+            <td colspan="6">No acepto solicitudes todavia <br><a href="index.php?accion=listarTL">Ver solicitudes disponibles</a></td>
         </tr>
         <?php
     }
