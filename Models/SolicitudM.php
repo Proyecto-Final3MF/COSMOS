@@ -44,7 +44,7 @@ class Solicitud {
     }
 
     public function ListarTL() {
-        $sql = "SELECT s.*, p.nombre AS nombre_producto, p.imagen, u.nombre AS nombre_cliente 
+        $sql = "SELECT s.*, p.nombre, p.imagen, u.nombre
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN usuario u ON s.cliente_id = u.id
@@ -82,6 +82,21 @@ class Solicitud {
         
         return $success;
     }
+
+    public function ListarSA($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
+                inner join producto p on s.producto_id = p.id 
+                WHERE s.tecnico_id = $id_usuario AND s.estado_id = 2;
+                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC";
+        $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
+
 
     public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
