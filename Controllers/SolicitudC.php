@@ -11,11 +11,10 @@ class SolicitudC {
         $this->historialController = new HistorialController();
     }
 
-    public function formularioS(){  
+    public function formularioS(){ 
         $solicitud = new Solicitud();
         $productos = $solicitud->obtenerProductos();
         include ("./Views/Solicitudes/FormularioS.php");
-        
     }
 
     public function guardarS() {
@@ -32,7 +31,6 @@ class SolicitudC {
             $this->historialController->registrarModificacion($user['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
             header("Location: index.php?accion=redireccion");
         };
-        
     }
 
     public function borrarS() {
@@ -49,13 +47,11 @@ class SolicitudC {
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
-        }
-        
+        }  
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSLU($id_usuario);
-        include("./Views/Solicitudes/ListadoS.php");
+        include("./Views/Solicitudes/ListadoSLU.php");
     }
-
 
     public function ListarTL() {
         if (isset($_SESSION['id'])) {
@@ -66,32 +62,36 @@ class SolicitudC {
             return [];
         }
     }
-    
+
     public function asignarS() {
         $id_usuario = $_SESSION['id'] ?? null;
-        if ($id_usuario == null) {
-            header("Location: index.php?accion=login");
+        $id_soli = $_GET['id_solicitud'] ?? null;
+
+        if ($id_usuario === null || $id_soli === null) {
+            $_SESSION['mensaje'] = "Error: ID de usuario o solicitud no proporcionado.";
+            header("Location: index.php?accion=listarTL");
             exit();
         }
+        
+        // Llama a la función del modelo, que ahora retorna true o false
+        $success = $this->solicitudModel->asignarS($id_usuario, $id_soli);
 
-        $solicitud = new Solicitud();
-        $solicitud->asignarS($id_usuario);
-
-        if ($solicitud) {
-            $_SESSION['mensaje'] = "Solicitud aceptada existosamente";
-            header("index.php?accion=listarTL");
+        if ($success) {
+            $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
+            // Aquí puedes agregar un registro al historial si es necesario
+            // $this->historialController->registrarModificacion(...);
+            header("Location: index.php?accion=listarTL");
+            exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al aceptar la solicitud.";
+            header("Location: index.php?accion=listarTL");
+            exit();
         }
-    }
-
-    
-    public function getOcupadasData($estado_filter = 'all') {
-        return $this->solicitudModel->getSolicitudesOcupadas($estado_filter);
     }
 
     public function handleSelectSolicitud($solicitudId, $usuarioId = null) {
         $newEstadoId = 2;
         $success = $this->solicitudModel->updateSolicitudEstado($solicitudId, $newEstadoId);
-
         if ($success) {
             $obs = "Estado de la solicitud alterado para el ID " . $newEstadoId;
             $this->historialController->registrarModificacion($usuario, $usuarioId, 'seleccionó', 'solicitud', $solicitudId, $obs);
@@ -100,26 +100,22 @@ class SolicitudC {
     }
 
     public function cancelarRequest($id) {
-            if (!isset($id)) {
-                echo "Id invalida";
-            }
-
-            $result_status = $this->requestModel->cancelar($id);
-
-            if ($result_status === 'updated') {
-                //actualizar esto:
-                $obs = "Solicitud cancelada por parte del tecnico, retornó a estar disponible.";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
-                exit();
-            } elseif ($result_status === 'deleted') {
-                //actualizar esto:
-                $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
-                exit();
-            } else {
-                Echo "Cancelacion fallada";
-                exit();
-            }
+        if (!isset($id)) {
+            echo "Id invalida";
+        }
+        $result_status = $this->requestModel->cancelar($id);
+        if ($result_status === 'updated') {
+            $obs = "Solicitud cancelada por parte del tecnico, retornó a estar disponible.";
+            $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
+            exit();
+        } elseif ($result_status === 'deleted') {
+            $obs = "Solicitud cancelada por parte del cliente, removida completamente.";
+            $this->historialController->registrarModificacion($usuario, $usuarioId, 'solicitud', $solicitudId, $obs);
+            exit();
+        } else {
+            Echo "Cancelacion fallada";
+            exit();
         }
     }
+}
 ?>

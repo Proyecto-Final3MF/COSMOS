@@ -96,22 +96,36 @@ class UsuarioC {
     }
 
 
-    public function eliminar() {
-        if (!isset($_GET['id'])) {
-            header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
-            exit();
-        }
-        
-        $id = $_GET['id'];
-        $usuarioM = new Usuario(); // Correct: Instantiate the Model, not the Controller
-        
-        if ($usuarioM->eliminar($id)) {
-            header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
-        } else {
-            header("Location: index.php?accion=redireccion&error=No se pudo eliminar el usuario.");
-        }
+   public function eliminar() {
+    // Verifica que el ID del usuario esté en la URL
+    if (!isset($_GET['id'])) {
+        header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
         exit();
     }
+    
+    $id = $_GET['id'];
+    $usuarioM = new Usuario(); // Instancia el Modelo Usuario
+    
+    // Verifica si el usuario existe antes de eliminar
+    $usuario = $usuarioM->buscarUserId($id);
+    if (!$usuario) {
+        header("Location: index.php?accion=redireccion&error=Usuario no encontrado.");
+        exit();
+    }
+    
+    // Elimina el usuario
+    if ($usuarioM->eliminar($id)) {
+        // Registrar en el historial
+        $obs = "Usuario " . $usuario['nombre'] . " eliminado.";
+        $this->historialController->registrarModificacion($usuario['nombre'], $id, 'fue eliminado', null, 2, $obs);
+        
+        header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
+    } else {
+        header("Location: index.php?accion=redireccion&error=No se pudo eliminar el usuario.");
+    }
+    exit();
+}
+
     
 
     public function autenticar() {

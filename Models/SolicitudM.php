@@ -2,9 +2,10 @@
 require_once(__DIR__ . '/../Config/conexion.php');
 
 class Solicitud {
+
     private $conn;
 
-    public function __construct() {
+    public function __construct() {  
         $this->conn = conectar();
     }
 
@@ -17,7 +18,7 @@ class Solicitud {
     public function obtenerProductoporId($producto_id) {
         $producto_id = (int)$producto_id;
         $sql = "SELECT nombre FROM producto WHERE id = $producto_id LIMIT 1";
-        $result = $this->conn->query($sql);
+        $result = $this->conn->query($sql);     
         if ($row = $result->fetch_assoc()) {
             return $row['nombre'];
         }
@@ -31,11 +32,10 @@ class Solicitud {
 
     public function ListarSLU($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s
-                inner join producto p on s.producto_id = p.id
+        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
+                inner join producto p on s.producto_id = p.id 
                 WHERE s.cliente_id = $id_usuario AND s.estado_id = 1;";
         $resultado = $this->conn->query($sql);
-        
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
@@ -44,14 +44,14 @@ class Solicitud {
     }
 
     public function ListarTL() {
-        $sql = "SELECT s.*, p.nombre AS nombre_producto, p.imagen, u.nombre AS nombre_cliente
+        $sql = "SELECT s.*, p.nombre AS nombre_producto, p.imagen, u.nombre AS nombre_cliente 
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN usuario u ON s.cliente_id = u.id
                 WHERE s.estado_id = 1
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
         $resultado = $this->conn->query($sql);
-        
+       
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
@@ -59,83 +59,28 @@ class Solicitud {
         }
     }
 
-    public function asignarS($id_usuario){
-        $sql = "UPDATE solicitud ('tecnico_id, estado_id') VALUES ($id_usuario, 2)";
-        return $this->conn->query($sql);
-    }
-
-    public function getSolicitudesOcupadas($estado_filter = 'all') {
-        $sql = "SELECT solicitud.id, solicitud.descripcion AS descripcion, estado.nombre AS estado
-        FROM solicitud
-        JOIN estado ON solicitud.estado_id = estado.id";
-
-        $conditions = [];
-        $params = [];
-        $param_types = '';
-
-        if (isset($Tid)) {
-            $conditions[] = "solicitud.tecnico_id = ?";
-            $params[] = $Tid;
-            $param_types .= 'i';
-        } else {
-            error_log("Error: \$Tid no está configurado en SolicitudM.php para getSolicitudesOcupadas");
+    public function asignarS($id_usuario, $id_soli){
+        // Utiliza una consulta preparada para mayor seguridad
+        $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
+        
+        // Prepara la declaración
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            error_log("Error al preparar la declaración: " . $this->conn->error);
             return false;
         }
-
-
-        if ($estado_filter === 'all') {
-            $conditions[] = "solicitud.estado_id != 1";
-        } else {
-            $filter_id = (int)$estado_filter;
-            $conditions[] = "solicitud.estado_id = ?";
-            $params[] = $filter_id;
-            $param_types .= 'i';
-        }
-
-
-        if (!empty($conditions)) {
-            $sql .= " WHERE " . implode(" AND ", $conditions);
-        }
-
-        error_log("Final SQL Query: " . $sql);
-
-        $stmt = $this->conn->prepare($sql);
-
-        if ($stmt === false) {
-            error_log("MySQLi Prepare Error: " . $this->conn->error . " | SQL: " . $sql);
-            throw new mysqli_sql_exception("Failed to prepare statement: " . $this->conn->error);
-        }
-
-        if (!empty($params)) {
-            call_user_func_array([$stmt, 'bind_param'], array_merge([$param_types], refValues($params)));
-        }
-
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
+        
+        // Vincula los parámetros
+        $stmt->bind_param("ii", $id_usuario, $id_soli);
+        
+        // Ejecuta la consulta
+        $success = $stmt->execute();
+        
+        // Cierra la declaración
         $stmt->close();
-
-        $stmt = $this->conn->prepare($sql);
-
-        if ($estado_filter !== 'all') {
-            $stmt->bind_param("i", $filter_id);
-        }
-
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if (!$resultado) {
-            error_log("Error en la consulta getSolicitudesOcupadas: " . $this->conn->error);
-            return [];
-        }
-
-        $solicitudes = [];
-        while ($fila = $resultado->fetch_assoc()) {
-                $solicitudes[] = $fila;
-            }
-        $stmt->close();
-        return $solicitudes;
+        
+        return $success;
     }
 
     public function updateSolicitudEstado($solicitudId, $newEstadoId) {
@@ -150,9 +95,7 @@ class Solicitud {
     public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
-        
-        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad',  $producto, 1, '$descripcion')";
-        
+        $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad', $producto, 1, '$descripcion')";
         return $this->conn->query($sql);
     }
 
@@ -160,24 +103,22 @@ class Solicitud {
         $sql = "SELECT estado_id FROM solicitud WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
-            error_log("Error al preparar la declaración select al cancelar: " . $this->conn->error);
-            return false;
+        error_log("Error al preparar la declaración select al cancelar: " . $this->conn->error);
+        return false;
         }
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $estado_id_actual = $row['estado_id'];
             $stmt->close();
-
             if ($estado_id_actual !== 1) {
                 $sql = "UPDATE solicitud SET estado_id = 1 WHERE id = ?";
-                $stmt_update = $this->conn->prepare($sql);
+                $stmt_update = $this->conn->prepare($sql);    
                 if (!$stmt_update) {
-                    error_log("Error al preparar la declaración de actualización al cancelar: " . $this->conn->error);
-                    return false;
+                error_log("Error al preparar la declaración de actualización al cancelar: " . $this->conn->error);
+                return false;
                 }
                 $stmt_update->bind_param("i", $id);
                 $success = $stmt_update->execute();
@@ -187,8 +128,8 @@ class Solicitud {
                 $sql = "DELETE FROM solicitud WHERE id = ?";
                 $stmt_delete = $this->conn->prepare($sql);
                 if (!$stmt_delete) {
-                    error_log("Error al preparar la declaración de eliminación en cancelar: " . $this->conn->error);
-                    return false;
+                error_log("Error al preparar la declaración de eliminación en cancelar: " . $this->conn->error);
+                return false;
                 }
                 $stmt_delete->bind_param("i", $id);
                 $success = $stmt_delete->execute();
@@ -202,7 +143,8 @@ class Solicitud {
     }
 
     public function __destruct() {
-       
     }
+
 }
+
 ?>
