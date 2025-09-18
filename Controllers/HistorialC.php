@@ -13,7 +13,7 @@ class HistorialController {
 
     $search = $_GET['search'] ?? null;
     $start_date = $_GET['start_date'] ?? null;
-    $end_date = $_GET['end_date'] ?? null;
+    $end_date = $_GET['end_date'] ?? date('d/m/Y');
 
     $filters_applied = !empty($search) || !empty($start_date) || !empty($end_date);
 
