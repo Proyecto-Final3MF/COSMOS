@@ -6,7 +6,7 @@ class Mensaje
     private $conexion;
     public function __construct()
     {
-        $this->conexion = new mysqli('localhost', 'usuario', 'contraseña', 'basedatos');
+        $this->conexion = new mysqli('localhost', 'root', '', 'basedatos');
         if ($this->conexion->connect_error) {
             die("Error de conexión: " . $this->conexion->connect_error);
         }

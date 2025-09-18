@@ -214,10 +214,16 @@ switch ($accion) {
     $controller->mostrarChat();
     break;
 
-case 'enviarMensaje':
+  case 'enviarMensaje':
     require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->enviar();
+    break;
+
+  case 'listarMensajes':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->listarMensajes();
     break;
 
   default:
