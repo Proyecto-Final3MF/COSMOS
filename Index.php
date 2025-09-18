@@ -31,9 +31,7 @@ if (!in_array($accion, $acciones_publicas)) {
     header("Location: index.php?accion=login");
 
     exit;
-
   }
-
 }
 
 
@@ -48,7 +46,7 @@ if (isset($_SESSION['mensaje'])) {
 
          <div class="title">Mensaje</div>
 
-         <a href="index.php?accion='.$_GET['accion'].'" class="close-button">&times;</a>
+         <a href="index.php?accion=' . $_GET['accion'] . '" class="close-button">&times;</a>
 
        </div>
 
@@ -63,7 +61,6 @@ if (isset($_SESSION['mensaje'])) {
      <div id="overlay" class="active"></div>';
 
   unset($_SESSION['mensaje']);
-
 }
 
 
@@ -84,31 +81,31 @@ switch ($accion) {
 
     $controller->login();
 
-  break;
+    break;
 
 
 
   case 'editarU':
 
-  $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-  // Esta acción solo busca los datos y muestra el formulario de edición.
+    // Esta acción solo busca los datos y muestra el formulario de edición.
 
-  $controller->editarU();
+    $controller->editarU();
 
-  break;
+    break;
 
 
 
   case 'actualizarU':
 
-  $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-  // Esta nueva acción recibe los datos del formulario y los procesa.
+    // Esta nueva acción recibe los datos del formulario y los procesa.
 
-  $controller->actualizarU();
+    $controller->actualizarU();
 
-  break;
+    break;
 
 
 
@@ -118,7 +115,7 @@ switch ($accion) {
 
     $controller->eliminar();
 
-  break;
+    break;
 
 
 
@@ -128,9 +125,9 @@ switch ($accion) {
 
     $controller->autenticar();
 
-  break;
+    break;
 
-   
+
 
   case 'logout':
 
@@ -138,7 +135,7 @@ switch ($accion) {
 
     $controller->logout();
 
-  break;
+    break;
 
 
 
@@ -148,7 +145,7 @@ switch ($accion) {
 
     $controller->crear();
 
-  break;
+    break;
 
 
 
@@ -158,7 +155,7 @@ switch ($accion) {
 
     $controller->guardarU();
 
-  break;
+    break;
 
 
 
@@ -169,34 +166,28 @@ switch ($accion) {
       if ($_SESSION['rol'] == ROL_CLIENTE) {
 
         include("./Views/Usuario/Cliente/ClienteP.php");
-
       } elseif ($_SESSION['rol'] == ROL_TECNICO) {
 
         include("./Views/Usuario/Tecnico/TecnicoP.php");
-
       } elseif ($_SESSION['rol'] == ROL_ADMIN) {
 
         include("./Views/Usuario/Admin/AdminP.php");
-
       } else {
 
         echo "<h1>Error: Rol no reconocido.</h1>";
 
         echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";
-
       }
-
     } else {
 
       header("Location: index.php?accion=login");
 
       exit();
-
     }
 
-  break;
+    break;
 
- 
+
 
   case 'mostrarHistorial':
 
@@ -204,9 +195,9 @@ switch ($accion) {
 
     $controller->mostrarHistorial();
 
-  break;
+    break;
 
- 
+
 
   case 'formularioS':
 
@@ -214,7 +205,7 @@ switch ($accion) {
 
     $controller->formularioS();
 
-  break;
+    break;
 
 
 
@@ -224,7 +215,7 @@ switch ($accion) {
 
     $controller->guardarS();
 
-  break;
+    break;
 
 
 
@@ -234,7 +225,7 @@ switch ($accion) {
 
     $controller->borrarS();
 
-  break;
+    break;
 
 
 
@@ -244,7 +235,7 @@ switch ($accion) {
 
     $controller->formularioP();
 
-  break;
+    break;
 
 
 
@@ -254,7 +245,7 @@ switch ($accion) {
 
     $controller->guardarP();
 
-  break;
+    break;
 
 
 
@@ -264,7 +255,7 @@ switch ($accion) {
 
     $controller->borrarP();
 
-  break;
+    break;
 
 
 
@@ -274,17 +265,17 @@ switch ($accion) {
 
     $controller->editarP();
 
-  break;
+    break;
 
 
 
   case 'actualizarP':
 
-   $controller = new ProductoC();
+    $controller = new ProductoC();
 
-   $controller->actualizarP();
+    $controller->actualizarP();
 
-  break;
+    break;
 
 
 
@@ -294,9 +285,9 @@ switch ($accion) {
 
     $controller->listarP();
 
-  break;
+    break;
 
- 
+
 
   case 'listarSLU':
 
@@ -304,9 +295,9 @@ switch ($accion) {
 
     $controller->listarSLU();
 
-  break;
+    break;
 
-   
+
 
   case 'listarTL':
 
@@ -316,7 +307,7 @@ switch ($accion) {
 
     require_once("Views/Solicitudes/listadoTL.php");
 
-  break;
+    break;
 
 
 
@@ -326,7 +317,7 @@ switch ($accion) {
 
     $controller->asignarS();
 
-  break;
+    break;
 
 
 
@@ -338,7 +329,7 @@ switch ($accion) {
 
     require_once("Views/Solicitudes/ocupadas.php");
 
-  break;
+    break;
 
 
 
@@ -348,7 +339,7 @@ switch ($accion) {
 
     $controller->handleSelectSolicitud($solicitudId, $usuarioId = null);
 
-  break;
+    break;
 
 
 
@@ -360,7 +351,7 @@ switch ($accion) {
 
     require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
 
-  break;
+    break;
 
 
 
@@ -370,7 +361,7 @@ switch ($accion) {
 
     $controller->guardarC();
 
-  break;
+    break;
 
 
 
@@ -380,7 +371,7 @@ switch ($accion) {
 
     $controller->listarC();
 
-  break;
+    break;
 
 
 
@@ -390,7 +381,7 @@ switch ($accion) {
 
     $controller->editarC();
 
-  break;
+    break;
 
 
 
@@ -400,7 +391,7 @@ switch ($accion) {
 
     $controller->actualizarC();
 
-  break;
+    break;
 
 
 
@@ -410,26 +401,25 @@ switch ($accion) {
 
     $controller->borrarC();
 
-  break;
+    break;
 
-   
+  case 'listarMensajes':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->listarMensajes();
+    break;
 
   default:
 
     if (!isset($_SESSION['usuario'])) {
 
       header("Location: index.php?accion=login");
-
     } else {
 
       http_response_code(404);
 
       header("Location: Error.php");
-
     }
 
-  exit();
-
+    exit();
 }
-
-?>
