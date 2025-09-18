@@ -75,9 +75,8 @@ require_once ("./Views/include/UH.php");
         <?php endif; ?>
     </div>
 
- <div class="botones-container">
+    <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
-
 </body>
 </html>
