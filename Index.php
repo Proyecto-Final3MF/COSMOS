@@ -175,9 +175,8 @@ switch ($accion) {
   case 'listarTL':
     $controller = new SolicitudC();
     $controller->ListarTL();
-    require_once("Views/Solicitudes/listadoTL.php");
+    require_once("Views/Solicitudes/Tecnico/listadoTL.php");
   break;
-
 
 //acciones para el rol admin
 
@@ -220,6 +219,24 @@ switch ($accion) {
     $controller = new CategoriaC();
     $controller->borrarC();
   break;
+
+  case 'mostrarChat':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->mostrarChat();
+    break;
+
+  case 'enviarMensaje':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->enviar();
+    break;
+
+  case 'listarMensajes':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->listarMensajes();
+    break;
    
 //accion default
 
