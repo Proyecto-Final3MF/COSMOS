@@ -97,7 +97,7 @@ class SolicitudC {
         }  
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSA($id_usuario);
-        include("./Views/Solicitudes/ListadoSA.php");
+        include("./Views/Solicitudes/Tecnico/ListadoSAT.php");
     }
 }
 ?>
