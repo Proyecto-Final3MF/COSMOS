@@ -1,17 +1,10 @@
-/*
-  Paginação adaptada para divs com a classe 'historial-item'.
-  - Define um número fixo de 10 registros por página.
-  - Adiciona e remove as 'li' de paginação dinamicamente.
-  - Manipula a navegação 'próxima' e 'anterior' e limita a exibição de botões de página.
-*/
-
 document.addEventListener('DOMContentLoaded', function() {
   getPagination('.historial-item');
 });
 
 function getPagination(itemSelector) {
   var lastPage = 1;
-  var maxRows = 2; // Número fixo de registros por página
+  var maxRows = 10;
 
   var paginationList = document.querySelector('.pagination');
   var items = document.querySelectorAll(itemSelector);
@@ -28,7 +21,6 @@ function getPagination(itemSelector) {
     paginationNav.style.display = 'block';
   }
 
-  // Oculta todos os itens e mostra apenas os primeiros 10
   items.forEach(function(item, index) {
     if (index >= maxRows) {
       item.style.display = 'none';
@@ -37,7 +29,6 @@ function getPagination(itemSelector) {
     }
   });
 
-  // Cria os botões de paginação
   var pagenum = Math.ceil(totalRows / maxRows);
   for (var i = 1; i <= pagenum; ) {
     var prevBtn = document.querySelector('.pagination #prev');
