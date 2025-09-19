@@ -389,3 +389,180 @@ th:last-child {
 .sr-only {
     display: none;
 }
+
+.user-menu-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Estilos del Menú Desplegable --- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    background-color: #e83e8c;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-button:hover {
+    background-color: #972f5f;
+}
+
+.dropdown-button:focus {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4f46e5;
+}
+
+.dropdown-text {
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.dropdown-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: currentColor;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transform: translateY(0.5rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.user-email {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: #374151;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* --- Estilos del Modal --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    display: none;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.modal-text {
+    margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-modal-cancel {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-modal-cancel:hover {
+    background-color: #f3f4f6;
+}
+
+.btn-modal-delete {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #dc2626;
+    color: #ffffff;
+    transition: background-color 0.2s ease;
+}
+
+.btn-modal-delete:hover {
+    background-color: #b91c1c;
+}
+
+body {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+
+body.fade-out {
+  opacity: 0;
+}

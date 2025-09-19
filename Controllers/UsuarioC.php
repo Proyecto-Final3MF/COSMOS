@@ -18,6 +18,8 @@ class UsuarioC {
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
+
+    
     
     // Corrige la instanciación: debes llamar al Modelo (Usuario)
     $usuarioM = new Usuario(); 
@@ -25,13 +27,15 @@ class UsuarioC {
     if ($usuarioM->editarU($id, $nombre, $email)) {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
+
+        $_SESSION['email'] = $email;
         
         $_SESSION['mensaje'] = "Actualizaste tu perfil con exito.";
 
         // Registrar en el historial
-        $obs = "Usuario " . $nombre . " actualizado.";
+        $obs = "Usuario " . $nombre . " (" . $email . ") actualizado.";
         
-        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 2, $obs);
+        $this->historialController->registrarModificacion($nombre, $email, $id, 'fue actualizado', null, 2, $obs);
         
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
@@ -54,20 +58,21 @@ class UsuarioC {
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
         
-        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-            // Get the user's details after creation
-            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-            if ($usuarioN) {
-                $id_user = $usuarioN['id'];
-                $obs = "Usuario creado a través del formulario de registro";
-                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
+       if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
+    $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
+    if ($usuarioN) {
+        $id_user = $usuarioN['id'];
+        $obs = "Usuario creado a través del formulario de registro";
+        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
 
-                session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
-                $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $usuarioN['id']; // Make sure to save the user ID
-                header("Location: index.php?accion=redireccion");
-                exit();
+        session_start();
+        $_SESSION['usuario'] = $usuarioN['nombre'];
+        $_SESSION['rol'] = $usuarioN['rol_id'];
+        $_SESSION['id'] = $usuarioN['id'];
+        $_SESSION['email'] = $usuarioN['email'];
+
+        header("Location: index.php?accion=redireccion");
+        exit();
             } else {
                 // This case should ideally not happen if crearU() was successful
                 header("Location: index.php?accion=login");
@@ -105,22 +110,26 @@ class UsuarioC {
     
 
     public function autenticar() {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
-        $modelo = new Usuario();
-        $user = $modelo->verificarU($usuario, $contrasena);
-        if ($user) {
-            session_start();
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
+    $usuario = $_POST['usuario'];
+    $contrasena = $_POST['contrasena'];
+    $modelo = new Usuario();
+    $user = $modelo->verificarU($usuario, $contrasena);
+
+    if ($user) {
+        session_start();
+        $_SESSION['usuario'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol_id'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email']; 
+
+        header("Location: index.php?accion=redireccion");
+        exit();
+    } else {
+        $error = "Usuario o contraseña incorrectos";
+        include("views/Usuario/Login.php");
     }
+}
+
 
     public function logout() {
         session_destroy();

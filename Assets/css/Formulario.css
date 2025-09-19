@@ -168,3 +168,16 @@ input[type="file"] {
 .btn-boton3-input:hover {
   background-color: #972f5f;
 }
+
+body {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+
+body.fade-out {
+  opacity: 0;
+}

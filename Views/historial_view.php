@@ -93,5 +93,6 @@ require_once ("./Views/include/UH.php");
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Assets/js/listado.js"></script>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

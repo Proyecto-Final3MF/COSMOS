@@ -37,6 +37,7 @@
             <?php endif; ?>
         </tbody>
     </table>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 
 </html>

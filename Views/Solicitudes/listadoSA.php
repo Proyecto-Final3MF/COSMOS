@@ -67,5 +67,6 @@ require_once ("./Views/include/UH.php");
 <div class="botones-container">
     <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

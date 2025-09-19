@@ -23,5 +23,6 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     <a href="Index.php?accion=listarSA"><button class="btn btn-boton">Solicitudes Aceptadas</button></a><br>
     <a href="Index.php?accion=listarSTT"><button class="btn btn-boton">Solicitudes Terminadas</button></a><br>
     </div>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
