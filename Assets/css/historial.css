@@ -50,14 +50,14 @@ h1 {
 }
 
 body {
-  opacity: 0;
-  transition: opacity 0.2s ease;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 body.fade-in {
-  opacity: 1;
+    opacity: 1;
 }
 
 body.fade-out {
-  opacity: 0;
+    opacity: 0;
 }
