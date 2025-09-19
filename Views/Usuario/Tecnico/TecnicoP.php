@@ -20,7 +20,8 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     </main>
     <div class="btn-container">
     <a href="Index.php?accion=listarTL"><button class="btn btn-boton">Solicitudes Disponibles</button></a>
-    <a href="Index.php?accion=listarSAT"><button class="btn btn-boton">Tus Trabajos Pendientes</button></a><br>
+    <a href="Index.php?accion=listarSAT"><button class="btn btn-boton">Solicitudes Aceptadas</button></a><br>
+    <a href="Index.php?accion=listarSTT"><button class="btn btn-boton">Solicitudes Terminadas</button></a><br>
     </div>
 </body>
 </html>

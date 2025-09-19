@@ -14,7 +14,7 @@ class SolicitudC {
     public function formularioS(){ 
         $solicitud = new Solicitud();
         $productos = $solicitud->obtenerProductos();
-        include ("./Views/Solicitudes/FormularioS.php");
+        include ("./Views/Solicitudes/Clientes/FormularioS.php");
     }
 
     public function guardarS() {
@@ -28,7 +28,7 @@ class SolicitudC {
 
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
-            $this->historialController->registrarModificacion($user['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
+            //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
             header("Location: index.php?accion=redireccion");
         };
     }
@@ -38,7 +38,7 @@ class SolicitudC {
         $id = $_GET['id'];
         $solicitud->borrarS($id);
         $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
-        $this->historialController->registrarModificacion($user['nombre'], $usuario_id, 'eliminó la solicitud', $titulo, $id, null);
+        //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'eliminó la solicitud', $titulo, $id, null);
         header("Location: index.php?accion=redireccion");
     }
 
@@ -50,7 +50,7 @@ class SolicitudC {
         }  
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSLU($id_usuario);
-        include("./Views/Solicitudes/ListadoSLU.php");
+        include("./Views/Solicitudes/Cliente/ListadoSLU.php");
     }
 
     public function ListarTL() {
