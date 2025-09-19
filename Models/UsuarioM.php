@@ -61,33 +61,10 @@ class Usuario {
         return $stmt->execute();
     }
 
-   public function eliminar($id) {
-    // Preparar la consulta para eliminar el usuario por id
-    $sql = "DELETE FROM usuario WHERE id = ?";
-    $stmt = $this->conn->prepare($sql);
-
-    if ($stmt === false) {
-        // Error al preparar la consulta
-        error_log("Error en prepare(): " . $this->conn->error);
-        return false;
-    }
-
-    // Vincular el parámetro id (entero)
-    $stmt->bind_param("i", $id);
-
-    // Ejecutar la consulta
-    $result = $stmt->execute();
-
-    if ($result === false) {
-        // Error al ejecutar la consulta
-        error_log("Error en execute(): " . $stmt->error);
-    }
-
-    // Cerrar la sentencia preparada
-    $stmt->close();
-
-    return $result;
-}
+  public function borrar($id){
+            $sql = "DELETE FROM usuarios WHERE id=$id";
+            return $this->conn->query($sql);
+        }
 
 }
 ?>

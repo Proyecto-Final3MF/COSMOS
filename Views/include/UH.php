@@ -1,6 +1,6 @@
 <header>
     <link rel="stylesheet" href="./Assets/css/inicio.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <nav class="navbar">
         <a href="inicio.php" class="logo-link">
             <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">

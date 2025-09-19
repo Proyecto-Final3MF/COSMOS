@@ -14,7 +14,6 @@ require_once ("./Views/include/UH.php");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Panel de Cliente</title>
-    <link rel="stylesheet" href="./Assets/css/inicio.css" />
 </head>
 <body>
 <div>
@@ -22,7 +21,7 @@ require_once ("./Views/include/UH.php");
     <div class="btn-container">
     <a href="index.php?accion=listarP"><button class="btn btn-boton">Ver Mis Productos</button></a>
     <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Ver Mis Solicitudes Sin Asignar</button></a>
-    <a href="index.php?accion=listarSAU"><button class="btn btn-boton">Ver Mis Solicitudes Aceptadas</button></a>
+    <a href="index.php?accion=listarSA"><button class="btn btn-boton">Ver Mis Solicitudes Aceptadas</button></a>
     <a href="index.php?accion=listarSFU"><button class="btn btn-boton">Ver Mis Solicitudes Terminadas</button></a>
     </div>
 </div>
