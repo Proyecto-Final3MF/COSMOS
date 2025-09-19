@@ -2,17 +2,52 @@
     <link rel="stylesheet" href="./Assets/css/inicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <nav class="navbar">
-
         <a href="inicio.php" class="logo-link">
-            <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app"> 
+            <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
         </a>
         
         <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
 
-        <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>"><button class="btn btn-boton">Editar Cuenta</button></a><br>
-        <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"><button class="btn btn-boton">Eliminar Cuenta</button></a>
-        <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
-        <i class="fa-solid fa-user fa-lg"></i>
+        <div class="user-menu-container">
+            <div class="dropdown">
+                <button class="dropdown-button" onclick="toggleDropdown()">
+                    <h2>Mi Usuario</h2>
+                    <svg class="dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
 
+                <div id="userDropdown" class="dropdown-menu">
+                    <div class="user-info">
+                        <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
+                        <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
+                    </div>
+                    <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
+                        Editar Cuenta
+                    </a>
+                    <a href="index.php?accion=eliminar&id=<?= htmlspecialchars($_SESSION['id']) ?>"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"
+                        class="dropdown-item">
+                        Eliminar Cuenta
+                    </a>
+                    <a href="Index.php?accion=logout" class="dropdown-item">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
-</header> 
+</header>
+
+<script>
+    function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("visible");
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.closest('.dropdown')) {
+            document.getElementById("userDropdown").classList.remove("visible");
+        }
+    }
+</script>
