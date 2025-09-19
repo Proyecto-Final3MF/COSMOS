@@ -21,9 +21,10 @@
         <?php endif; ?>
     </div>
 
-    <form id="form-chat">
+
+    <form method="post" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="text" name="mensaje" placeholder="Escribe un mensaje..." required>
+        <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
 </body>

@@ -50,9 +50,9 @@ class Mensaje
     {
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, 
                 u.nombre AS usuario, r.nombre AS receptor
-                FROM mensajes m 
-                JOIN usuarios u ON m.usuario_id = u.id 
-                LEFT JOIN usuarios r ON m.receptor_id = r.id
+                FROM mensaje m 
+                JOIN usuario u ON m.usuario_id = u.id 
+                LEFT JOIN usuario r ON m.receptor_id = r.id
                 ORDER BY m.fecha ASC";
 
         $result = $this->conexion->query($sql);
@@ -63,7 +63,7 @@ class Mensaje
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
     {
-        $sql = "INSERT INTO mensajes (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
+        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
         $stmt = $this->conexion->prepare($sql);
         if (!$stmt) {
             return false;
@@ -71,5 +71,14 @@ class Mensaje
 
         $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         return $stmt->execute();
+    }
+
+    public function guardarMensaje($usuario_id, $mensaje)
+    {
+        $sql = "INSERT INTO mensaje (usuario_id, mensaje) VALUES (?, ?)";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("is", $usuario_id, $mensaje);
+        $stmt->execute();
+        $stmt->close();
     }
 }

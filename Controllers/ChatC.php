@@ -48,19 +48,16 @@ class ChatC
     }
 
     // Guardar nuevo mensaje
-    public function enviar()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $usuario_id = $_POST['usuario_id'] ?? null;
-            $receptor_id = $_POST['receptor_id'] ?? null;
-            $texto = $_POST['mensaje'] ?? '';
+     public function enviar() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $usuario_id = $_POST['usuario_id'];
+            $mensaje = $_POST['mensaje'];
 
-            if (!$usuario_id || !$texto) {
-                die("Datos incompletos para enviar el mensaje.");
-            }
-
-            $mensaje = new Mensaje();
-            $mensaje->enviarMensaje($usuario_id, $receptor_id, $texto);
+            $mensajeModel = new Mensaje();
+            $mensajeModel->guardarMensaje($usuario_id, $mensaje);
+        
+            header("Location: index.php?accion=mostrarChat");
+            exit;
         }
     }
 }
