@@ -11,5 +11,6 @@
 </head>
 <body>
     <p>hola</p>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

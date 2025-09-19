@@ -37,5 +37,6 @@
         </form>
     </section>
     </div>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

@@ -26,5 +26,6 @@ require_once ("./Views/include/UH.php");
     <a href="index.php?accion=listarSFU"><button class="btn btn-boton">Ver Mis Solicitudes Terminadas</button></a>
     </div>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
