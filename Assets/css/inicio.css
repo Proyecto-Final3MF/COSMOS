@@ -185,6 +185,10 @@ table {
     border-radius: 10px;
 }
 
+tr:hover {
+    background-color: rgba(232, 62, 140, 0.1);
+}
+
 th, td {
 	border-collapse: collapse;
 	padding: 5px;
@@ -421,7 +425,7 @@ th:last-child {
 }
 
 .dropdown-button:focus {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4f46e5;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #e83e8c;
 }
 
 .dropdown-text {
