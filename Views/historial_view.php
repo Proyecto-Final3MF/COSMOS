@@ -49,7 +49,7 @@ require_once ("./Views/include/UH.php");
         <?php else: ?>
             <?php if (!empty($historial)): ?>
                 <?php foreach ($historial as $registro): ?>
-                    <div class="historial-item">
+                    <div class="list-item">
                         <p>
                             <strong>
                                 <?php echo htmlspecialchars($registro->usuario ? $registro->usuario : '[Sistema]'); ?>

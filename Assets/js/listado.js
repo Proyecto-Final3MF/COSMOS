@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  getPagination('.historial-item');
+  getPagination('.list-item');
 });
 
 function getPagination(itemSelector) {
