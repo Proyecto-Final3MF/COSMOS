@@ -6,7 +6,7 @@
         </a>
         
 
-    <select class="btn btn-boton" id="language-select">
+    <select class="btn btn-boton7" id="language-select">
         <option value="es">Español</option>
         <option value="en">English</option>
     </select>
