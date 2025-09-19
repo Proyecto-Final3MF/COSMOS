@@ -93,7 +93,7 @@ switch ($accion) {
 
   case 'eliminarU':
     $controller = new UsuarioC();
-    $controller->eliminar();
+    $controller->borrar();
   break;
 
   case 'logout':
@@ -166,10 +166,10 @@ switch ($accion) {
     $controller->asignarS();
   break;
   
-  case 'listarSAT':
+  case 'listarSA':
     $controller = new SolicitudC();
-    $controller->ListarSAT();
-    require_once("Views/Solicitudes/Tecnico/listadoSAT.php");
+    $controller->ListarSA();
+    require_once("Views/Solicitudes/listadoSA.php");
   break;
 
   case 'listarTL':
@@ -178,9 +178,9 @@ switch ($accion) {
     require_once("Views/Solicitudes/Tecnico/listadoTL.php");
   break;
 
-  case 'ActualizarSF':
-    $controller = new Solicitud();
-    $controller->ActualizarSF();
+  case 'EditarSF':
+    $controller = new SolicitudC();
+    $controller->EditarSF();
   break;
 //acciones para el rol admin
 
