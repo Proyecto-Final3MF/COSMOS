@@ -26,6 +26,7 @@
         <input type="text" name="mensaje" placeholder="Escribe un mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 
 </html>
