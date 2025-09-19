@@ -4,11 +4,14 @@
     <nav class="navbar">
         <a href="inicio.php" class="logo-link">
             <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
-        </a>  
+        </a>
+        
+        <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
+
         <div class="user-menu-container">
             <div class="dropdown">
                 <button class="dropdown-button" onclick="toggleDropdown()">
-                    <span class="dropdown-text"><?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                    <h2>Mi Usuario</h2>
                     <svg class="dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 9l-7 7-7-7" />

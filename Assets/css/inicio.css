@@ -405,19 +405,19 @@ th:last-child {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #4b5563;
+    color: #ffffff;
     outline: 2px solid transparent;
     outline-offset: 2px;
     border-radius: 9999px;
     padding: 0.5rem 1rem;
-    background-color: #f3f4f6;
+    background-color: #e83e8c;
     transition: background-color 0.2s ease;
     border: none;
     cursor: pointer;
 }
 
 .dropdown-button:hover {
-    background-color: #e5e7eb;
+    background-color: #972f5f;
 }
 
 .dropdown-button:focus {
