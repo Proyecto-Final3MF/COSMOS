@@ -93,7 +93,7 @@ switch ($accion) {
 
   case 'eliminarU':
     $controller = new UsuarioC();
-    $controller->eliminar();
+    $controller->borrar();
   break;
 
   case 'logout':
