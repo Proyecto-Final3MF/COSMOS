@@ -332,3 +332,25 @@ th:last-child {
     border-radius: 8px;
     border: 1px solid #dc3545;
 }
+
+.btn-boton7 {
+  background-color: #e83e8c; 
+  color: #fff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  font-family: Arial, sans-serif; 
+  font-size: 16px; 
+  cursor: pointer;
+}
+
+.btn-boton7 option {
+  background-color: #ffffff; 
+  color: #212529; 
+  padding: 10px 20px; 
+}
+
+.btn-boton7:hover {
+  background-color: #972f5f; 
+}
+
