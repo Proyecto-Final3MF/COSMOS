@@ -1,4 +1,9 @@
 # _COSMOS_ Web System for Technical Service Management.
+
+<h3 align="center">
+<img src="Assets/imagenes/logonueva.png" alt="logo"  width="20%">
+</h3>
+
 Made By: 
 * _Thiago Carballo_
 * _Alex González_ 
