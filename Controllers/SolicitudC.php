@@ -73,13 +73,10 @@ class SolicitudC {
             exit();
         }
         
-        // Llama a la función del modelo, que ahora retorna true o false
         $success = $this->solicitudModel->asignarS($id_usuario, $id_soli);
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
-            // Aquí puedes agregar un registro al historial si es necesario
-            // $this->historialController->registrarModificacion(...);
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
@@ -89,15 +86,20 @@ class SolicitudC {
         }
     }
 
-    public function listarSAT() {
+    public function listarSA() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
         }  
         $solicitud = new Solicitud();
-        $resultados = $solicitud->listarSAT($id_usuario);
-        include("./Views/Solicitudes/Tecnico/ListadoSAT.php");
+        $resultados = $solicitud->listarSA($id_usuario);
+        include("./Views/Solicitudes/listadoSA.php");
+    }
+
+    public function EditarSF(){
+        var_dump ($_GET); die();
+        include("./Views/Solicitudes/Tecnico/EditarSF.php");
     }
 }
 ?>
