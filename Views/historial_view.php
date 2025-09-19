@@ -75,8 +75,23 @@ require_once ("./Views/include/UH.php");
         <?php endif; ?>
     </div>
 
+<div class='pagination-container'>
+        <nav>
+            <ul class="pagination">
+                <li data-page="prev">
+                    <span> &lt; <span class="sr-only">(anterior)</span></span>
+                </li>
+                <li data-page="next" id="prev">
+                    <span> &gt; <span class="sr-only">(próximo)</span></span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Assets/js/listado.js"></script>
 </body>
 </html>
