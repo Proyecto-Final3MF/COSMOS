@@ -83,7 +83,7 @@ class Solicitud {
         return $success;
     }
 
-    public function ListarSA($id_usuario){
+    public function ListarSAT($id_usuario){
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
                 inner join producto p on s.producto_id = p.id 

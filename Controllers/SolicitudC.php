@@ -89,14 +89,14 @@ class SolicitudC {
         }
     }
 
-    public function listarSA() {
+    public function listarSAT() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
         }  
         $solicitud = new Solicitud();
-        $resultados = $solicitud->listarSA($id_usuario);
+        $resultados = $solicitud->listarSAT($id_usuario);
         include("./Views/Solicitudes/Tecnico/ListadoSAT.php");
     }
 }

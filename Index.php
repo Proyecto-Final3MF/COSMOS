@@ -168,7 +168,7 @@ switch ($accion) {
   
   case 'listarSAT':
     $controller = new SolicitudC();
-    $controller->ListarSA();
+    $controller->ListarSAT();
     require_once("Views/Solicitudes/Tecnico/listadoSAT.php");
   break;
 
@@ -178,6 +178,10 @@ switch ($accion) {
     require_once("Views/Solicitudes/Tecnico/listadoTL.php");
   break;
 
+  case 'ActualizarSF':
+    $controller = new Solicitud();
+    $controller->ActualizarSF();
+  break;
 //acciones para el rol admin
 
   //acciones historial
