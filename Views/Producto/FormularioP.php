@@ -32,5 +32,6 @@
 </section>
 </div>
 <script src="Assets/js/imagenformulario.js"></script>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

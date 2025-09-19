@@ -24,5 +24,6 @@ require_once ("./Views/include/UH.php");
 <a href="index.php?accion=listarC"><button class="btn btn-boton">Todas Las Categorias</button></a>
 <a href="index.php?accion=mostrarHistorial"><button class="btn btn-boton">Historial de actividades</button></a>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
