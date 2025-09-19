@@ -121,7 +121,7 @@ body {
 }
 
 .btn-boton2 {
-     margin-right: 10px;
+    margin-right: 10px;
     padding: 8px 15px;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -334,24 +334,24 @@ th:last-child {
 }
 
 .btn-boton7 {
-  background-color: #e83e8c; 
-  color: #fff; 
-  border: none; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
-  font-family: Arial, sans-serif; 
-  font-size: 16px; 
-  cursor: pointer;
+    background-color: #e83e8c; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    cursor: pointer;
 }
 
 .btn-boton7 option {
-  background-color: #ffffff; 
-  color: #212529; 
-  padding: 10px 20px; 
+    background-color: #ffffff; 
+    color: #212529; 
+    padding: 10px 20px; 
 }
 
 .btn-boton7:hover {
-  background-color: #972f5f; 
+    background-color: #972f5f; 
 }
 
 .pagination-container {
@@ -384,7 +384,7 @@ th:last-child {
     background-color: #e83e8c;
     color: white;
     border-color: #972f5f;
-        }
+}
 
 .sr-only {
     display: none;
@@ -555,14 +555,14 @@ th:last-child {
 }
 
 body {
-  opacity: 0;
-  transition: opacity 0.2s ease;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 body.fade-in {
-  opacity: 1;
+    opacity: 1;
 }
 
 body.fade-out {
-  opacity: 0;
+    opacity: 0;
 }
