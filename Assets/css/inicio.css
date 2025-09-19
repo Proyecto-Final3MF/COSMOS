@@ -361,6 +361,7 @@ th:last-child {
 }
 
 .pagination {
+    justify-content: center;
     display: flex;
     list-style: none;
     padding: 0;
@@ -370,19 +371,19 @@ th:last-child {
 .pagination li {
     cursor: pointer;
     padding: 8px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     margin: 0 4px;
     border-radius: 4px;
 }
 
 .pagination li:hover {
-    background-color: #f0f0f0;
+    background-color: #972f5f;
 }
 
 .pagination li.active {
-    background-color: #007bff;
+    background-color: #e83e8c;
     color: white;
-    border-color: #007bff;
+    border-color: #972f5f;
         }
 
 .sr-only {
