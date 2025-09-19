@@ -1,6 +1,6 @@
 <header>
     <link rel="stylesheet" href="./Assets/css/inicio.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <nav class="navbar">
 
         <a href="inicio.php" class="logo-link">
@@ -12,6 +12,7 @@
         <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>"><button class="btn btn-boton">Editar Cuenta</button></a><br>
         <a href="index.php?accion=eliminar&id=<?= $usuario['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"><button class="btn btn-boton">Eliminar Cuenta</button></a>
         <a href="Index.php?accion=logout"><button class="btn btn-boton">Cerrar Sesion</button></a>
+        <i class="fa-solid fa-user fa-lg"></i>
 
     </nav>
 </header> 
