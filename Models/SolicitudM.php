@@ -83,11 +83,11 @@ class Solicitud {
         return $success;
     }
 
-    public function ListarSAT($id_usuario){
+    public function ListarSA($id_usuario){
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
                 inner join producto p on s.producto_id = p.id 
-                WHERE s.tecnico_id = $id_usuario AND s.estado_id = 2
+                WHERE s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario AND s.estado_id = 2
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
