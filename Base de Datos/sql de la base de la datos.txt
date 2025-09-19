@@ -53,6 +53,7 @@ CREATE TABLE historial (
     fecha_hora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     obs VARCHAR(255)
 );
+
 CREATE TABLE mensaje (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -68,3 +69,4 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('4','En reparacion');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
+INSERT INTO `rol`(`id`, `nombre`) VALUES ('3','Admin');
