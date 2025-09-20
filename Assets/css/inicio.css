@@ -203,6 +203,10 @@ th {
     color: #f0f0f0;
 }
 
+td {
+    color: white;
+}
+
 th:first-child {
   border-top-left-radius: 10px;
 }
