@@ -57,36 +57,10 @@ class UsuarioC {
         $mail = $_POST['mail'];
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
-
-        $carpeta = 'Assets/imagenes/perfil/';
-        $archivos = scandir($carpeta);
-
-        $imagenes = [];
-        $extensiones_permitidas = ['jpg', 'jpeg', 'png', 'gif'];
-
-        foreach ($archivos as $archivo) {
-            $extension = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-
-            if (in_array($extension, $extensiones_permitidas)) {
-                $imagenes[] = $archivo;
-            }
-        }
-
-        if (!empty($imagenes)) {
-            $indice_aleatorio = array_rand($imagenes);
-          
-            $nombre_imagen = $imagens[$indice_aleatorio];
-            $caminho_imagem = $pasta . $nombre_imagen;
-            $foto_perfil = $camino_imagen;
-        } else {
-            
-        echo 'Nenhuma imagem encontrada na pasta.';
-        
-        }      
         
        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-           $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-        if ($usuarioN) {
+    $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
+    if ($usuarioN) {
         $id_user = $usuarioN['id'];
         $obs = "Usuario creado a través del formulario de registro";
         $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
