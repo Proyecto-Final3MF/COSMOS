@@ -56,7 +56,7 @@ class UsuarioC {
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena']; 
+        $contrasena = $_POST['contrasena'];
         
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
             $usuarioN = $usuarioM->verificarU($usuario, $contrasena);

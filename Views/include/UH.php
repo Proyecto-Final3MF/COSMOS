@@ -22,6 +22,7 @@
                     <div class="user-info">
                         <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
                         <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
+                        <img src="Assets/imagenes/perfil/kaiser.png" alt="a" width="100px">
                     </div>
                     <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
                         Editar Cuenta
