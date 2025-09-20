@@ -35,7 +35,7 @@ class UsuarioC {
         // Registrar en el historial
         $obs = "Usuario " . $nombre . " (" . $email . ") actualizado.";
         
-        $this->historialController->registrarModificacion($nombre, $email, $id, 'fue actualizado', null, 2, $obs);
+        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
         
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
