@@ -17,19 +17,13 @@ if (session_status() === PHP_SESSION_NONE) {
             <option value="en">English</option>
         </select>
 
-                <div id="userDropdown" class="dropdown-menu">
-                    <div class="user-info">
-                        <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
-                        <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
-                        <img src="Assets/imagenes/perfil/kaiser.png" alt="a" width="100px">
-                        <ul class="nav-links" id="nav-links">
-                            
+        <ul class="nav-links" id="nav-links">
             <li><a href="inicio.php" data-translate="startPage">Inicio</a></li>
             <li><a href="./Views/Usuario/contacto.php" data-translate="contact">Contacto</a></li>
         </ul>
 
         <?php if (!isset($_SESSION['usuario'])): ?>
-           
+            <!-- Si no está logueado -->
             <div class="action-buttons">
                 <a href="Index.php?accion=login">
                     <button class="btn btn-boton" data-translate="signin">Iniciar sesión</button>
@@ -39,7 +33,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </a>
             </div>
         <?php else: ?>
-           
+            <!-- Si está logueado -->
             <div class="user-menu-container">
                 <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
 
@@ -56,6 +50,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="user-info">
                             <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
                             <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
+                            <img src="Assets/imagenes/perfil/kaiser.png" alt="Perfil" width="100px">
                         </div>
                         <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
                             Editar Cuenta
@@ -74,5 +69,4 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
     </nav>
 </header>
-
 <script src="Assets/js/menudeusuario.js"></script>
