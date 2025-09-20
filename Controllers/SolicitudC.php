@@ -14,7 +14,7 @@ class SolicitudC {
     public function formularioS(){ 
         $solicitud = new Solicitud();
         $productos = $solicitud->obtenerProductos();
-        include ("./Views/Solicitudes/Clientes/FormularioS.php");
+        include ("./Views/Solicitudes/Cliente/FormularioS.php");
     }
 
     public function guardarS() {

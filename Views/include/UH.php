@@ -12,18 +12,12 @@ if (session_status() === PHP_SESSION_NONE) {
             <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
         </a>
 
-        <select class="btn btn-boton7" id="language-select">
-            <option value="es">Español</option>
-            <option value="en">English</option>
-        </select>
-
         <ul class="nav-links" id="nav-links">
             <li><a href="inicio.php" data-translate="startPage">Inicio</a></li>
             <li><a href="./Views/Usuario/contacto.php" data-translate="contact">Contacto</a></li>
         </ul>
 
         <?php if (!isset($_SESSION['usuario'])): ?>
-            <!-- Si no está logueado -->
             <div class="action-buttons">
                 <a href="Index.php?accion=login">
                     <button class="btn btn-boton" data-translate="signin">Iniciar sesión</button>
@@ -33,7 +27,6 @@ if (session_status() === PHP_SESSION_NONE) {
                 </a>
             </div>
         <?php else: ?>
-            <!-- Si está logueado -->
             <div class="user-menu-container">
                 <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
 
