@@ -19,30 +19,48 @@ class UsuarioC {
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
 
-    
-    
-    // Corrige la instanciación: debes llamar al Modelo (Usuario)
-    $usuarioM = new Usuario(); 
-    
-    if ($usuarioM->editarU($id, $nombre, $email)) {
-        // Actualiza el nombre en la sesión si es necesario
-        $_SESSION['usuario'] = $nombre;
+    // Variable para almacenar el nombre del archivo de la foto
+    $nombreFoto = null;
 
+    // --- Manejo de la subida de la imagen ---
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $directorioDestino = 'Assets/imagenes/perfil/';
+        $nombreTemporal = $_FILES['foto']['tmp_name'];
+        $nombreArchivo = uniqid() . '_' . basename($_FILES['foto']['name']);
+        $rutaDestino = $directorioDestino . $nombreArchivo;
+
+        // Mover el archivo subido al directorio de destino
+        if (move_uploaded_file($nombreTemporal, $rutaDestino)) {
+            $nombreFoto = $nombreArchivo;
+        } else {
+            // Manejar error si no se pudo mover el archivo
+            $_SESSION['error'] = "Error al subir la imagen.";
+            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
+            exit();
+        }
+    }
+    // ----------------------------------------
+
+    // Corrige la instanciación: debes llamar al Modelo (Usuario)
+    $usuarioM = new Usuario();
+
+    // Llama a la función de editar, pasando el nombre de la foto también
+    if ($usuarioM->editarU($id, $nombre, $email, $nombreFoto)) {
+        // ... (resto del código sin cambios significativos)
+        $_SESSION['usuario'] = $nombre;
         $_SESSION['email'] = $email;
-        
         $_SESSION['mensaje'] = "Actualizaste tu perfil con exito.";
 
         // Registrar en el historial
         $obs = "Usuario " . $nombre . " (" . $email . ") actualizado.";
-        
         $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
-        
+
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
         header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
     }
     exit();
-    }
+}
 
     public function crear() {
         $usuario = new Usuario();
