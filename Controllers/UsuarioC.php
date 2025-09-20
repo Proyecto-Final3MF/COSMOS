@@ -58,21 +58,21 @@ class UsuarioC {
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
         
-       if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-    $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-    if ($usuarioN) {
-        $id_user = $usuarioN['id'];
-        $obs = "Usuario creado a través del formulario de registro";
-        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
+            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
+            if ($usuarioN) {
+                $id_user = $usuarioN['id'];
+                $obs = "Usuario creado a través del formulario de registro";
+                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, $obs);
 
-        session_start();
-        $_SESSION['usuario'] = $usuarioN['nombre'];
-        $_SESSION['rol'] = $usuarioN['rol_id'];
-        $_SESSION['id'] = $usuarioN['id'];
-        $_SESSION['email'] = $usuarioN['email'];
+                session_start();
+                $_SESSION['usuario'] = $usuarioN['nombre'];
+                $_SESSION['rol'] = $usuarioN['rol_id'];
+                $_SESSION['id'] = $usuarioN['id'];
+                $_SESSION['email'] = $usuarioN['email'];
 
-        header("Location: index.php?accion=redireccion");
-        exit();
+                header("Location: index.php?accion=redireccion");
+                exit();
             } else {
                 // This case should ideally not happen if crearU() was successful
                 header("Location: index.php?accion=login");
