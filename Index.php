@@ -104,7 +104,7 @@ switch ($accion) {
   case 'editarSF':
     $controller = new SolicitudC();
     $controller->editarSF();
-    include("./Views/Solicitudes/editarSF.php");
+    include("./Views/Solicitudes/editarSF.php");  
   break;
 
   case 'actualizarSF':
