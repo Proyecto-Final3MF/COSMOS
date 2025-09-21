@@ -35,6 +35,9 @@ require_once ("./Views/include/UH.php");
     </form>
 </section>
 </div>
+<div class="botones-container">
+        <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
+    </div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
