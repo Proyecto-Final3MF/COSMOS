@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No hay solicitudes creadas todavia. <br><a href="index.php?accion=formularioS">Crear Nueva Solicitud</a></td>
+            <td colspan="6">No hay solicitudes creadas todavia</td>
         </tr>
         <?php
     }
