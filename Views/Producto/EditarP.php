@@ -1,6 +1,6 @@
 <?php 
 $titulo = "Editar Producto";
-include('views/includes/header.php'); 
+require_once ("./Views/include/UH.php");
 ?>
 
 <div class="row justify-content-center">
