@@ -1,5 +1,5 @@
 <?php
-    require_once("Views/include/InicioH.php");
+    require_once("Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,5 +19,6 @@
 <a href="Index.php?accion=login"><button class="btn btn-boton" data-translate="startNow">Empezar Ahora</button></a>
 </div>
 <script src="Assets/js/language.js"></script>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

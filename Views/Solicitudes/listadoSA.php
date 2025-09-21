@@ -43,7 +43,7 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
                     <div class="botones-container">
-                        <a href="index.php?accion=ActualizarS&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton">Editar Solicitud</button></a>
+                        <a href="index.php?accion=EditarSF&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
                     </div>
                 </td>
            
@@ -55,7 +55,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No acepto solicitudes todavia <br> <br><a href="index.php?accion=listarTL"><button class="btn btn-boton">Ver solicitudes disponibles</button></a></td>
+            <td colspan="6">No acepto solicitudes todavia <br> <br><a href="index.php?accion=listarTL"><button class="btn btn-boton2">Ver solicitudes disponibles</button></a></td>
         </tr>
         <?php
     }
@@ -67,5 +67,6 @@ require_once ("./Views/include/UH.php");
 <div class="botones-container">
     <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

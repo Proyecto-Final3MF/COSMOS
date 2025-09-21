@@ -1,4 +1,9 @@
 # Sistema Web de Gestión de Servicio Técnico _COSMOS_.
+
+<h3 align="center">
+<img src="Assets/imagenes/logonueva.png" alt="logo"  width="20%">
+</h3>
+
 Hecho por: 
 * _Thiago Carballo_
 * _Alex González_ 

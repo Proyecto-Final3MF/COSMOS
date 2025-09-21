@@ -4,6 +4,9 @@
 
         header("Location: index.php?accion=redireccion");
     } 
+
+require_once ("./Views/include/UH.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -50,5 +53,6 @@
     </form>
     </section>
     </div>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

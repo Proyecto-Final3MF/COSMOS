@@ -1,5 +1,5 @@
 <?php
-   require_once ("Views/include/inicioH.php");
+   require_once ("Views/include/UH.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,5 +11,6 @@
 </head>
 <body>
     <p>hola</p>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

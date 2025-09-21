@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No hay solicitudes creadas todavia. <br><a href="index.php?accion=formularioS">Crear Nueva Solicitud</a></td>
+            <td colspan="6">No hay solicitudes creadas todavia</td>
         </tr>
         <?php
     }
@@ -68,5 +68,6 @@ require_once ("./Views/include/UH.php");
 <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
