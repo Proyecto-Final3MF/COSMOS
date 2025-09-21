@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
   } else {
     ?>
     <tr>
-      <td colspan="7">No hay solicitudes disponibles en este momento.<br><br><a href="index.php?accion=listarSA"><button class="btn btn-boton2">Ver solicitudes aceptadas</button></a></td>
+      <td colspan="7">No hay solicitudes disponibles en este momento<br><br><a href="index.php?accion=listarSA"><button class="btn btn-boton2">Ver solicitudes aceptadas</button></a></td>
     </tr>
     <?php
   }
