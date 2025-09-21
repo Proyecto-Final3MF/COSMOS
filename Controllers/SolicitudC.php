@@ -98,8 +98,90 @@ class SolicitudC {
     }
 
     public function editarSF(){
-        var_dump ($_GET); die();
-        include("./Views/Solicitudes/Tecnico/EditarSF.php");
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
+        $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+        if (!$datosSolicitud) {
+            $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
+        // Obtener la lista de estados para el select
+        $estados = $this->solicitudModel->obtenerEstados();
+
+        // Si todo está bien, simplemente incluye la vista.
+        // No hay necesidad de una redirección aquí.
+        include("./Views/Solicitudes/editarSF.php");
+    }
+    public function actualizarSF() {
+        $id = $_POST['id'] ?? null;
+        $descripcion = $_POST['descripcion'] ?? '';
+        $estado_id = $_POST['estado'] ?? null;
+
+        if (!$id || empty($descripcion) || !$estado_id) {
+            $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
+        if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
+            $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al actualizar la solicitud.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+    }
+
+    public function cancelarS() {
+        $id_soli = $_GET['id_solicitud'] ?? null;
+        $usuarioId = $_SESSION['id'] ?? null;
+
+        if ($id_soli === null || $usuarioId === null) {
+            $_SESSION['mensaje'] = "Error: ID de solicitud o usuario no proporcionado.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+        
+        $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
+        if (!$solicitud) {
+            $_SESSION['mensaje'] = "Error: La solicitud no existe.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+
+        // Asegurarse de que el usuario es el técnico asignado o el cliente que la creó
+        if ($solicitud['tecnico_id'] != $usuarioId && $solicitud['cliente_id'] != $usuarioId) {
+            $_SESSION['mensaje'] = "No tienes permiso para cancelar esta solicitud.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+
+         if ($this->solicitudModel->cancelarS($id_soli)) {
+        $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
+        
+        if ($_SESSION['rol'] == ROL_TECNICO) {
+            header("Location: index.php?accion=listarTL"); // Redirigir a solicitudes disponibles
+        } elseif ($_SESSION['rol'] == ROL_CLIENTE) {
+            header("Location: index.php?accion=listarSLU"); // Redirigir a sus solicitudes
+        } else {
+            // Si el rol no es ni técnico ni cliente, puedes redirigir a una página predeterminada
+            header("Location: index.php?accion=redireccion");
+        }
+        exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al cancelar la solicitud.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
     }
 }
 ?>
