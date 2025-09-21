@@ -1,0 +1,42 @@
+<?php
+ include_once("../include/UH.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Solicitud</title>
+    <link rel="stylesheet" href="./Assets/css/Formulario.css">
+</head>
+<body>
+<div class="contenedor-formulario">
+    <section>
+        <form method="POST" action="index.php?accion=actualizarSF">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
+
+            <p>Título:</p>
+            <input type="text" class="form-control" name="titulo" value="<?= htmlspecialchars($datosSolicitud['titulo']) ?>" disabled>
+
+            <p>Descripción:</p>
+            <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
+
+            <p>Estado:</p>
+            <select name="estado" required>
+                <?php foreach ($estados as $estado): ?>
+                    <option value="<?= htmlspecialchars($estado['id']) ?>" 
+                    <?= ($estado['id'] == $datosSolicitud['estado_id']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($estado['nombre']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br><br>
+
+            <button type="submit">Actualizar Solicitud</button>
+        </form>
+    </section>
+</div>
+<div class="botones-container">
+    <a href="index.php?accion=listarTL"><button class="btn btn-boton">Volver</button></a>
+</div>
+</body>
+</html>
