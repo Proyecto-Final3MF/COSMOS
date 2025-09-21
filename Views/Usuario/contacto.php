@@ -1,5 +1,5 @@
 <?php
-   require_once ("Views/include/UH.php");
+include_once(__DIR__ . "/../include/UH.php");
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/../css/inicio.css">
 </head>
 <body>
     <p>hola</p>
