@@ -8,10 +8,13 @@ include_once(__DIR__ . "/../include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/../css/inicio.css">
+   <!-- UH.php -->
+<link rel="stylesheet" href="/GitHub/Proyecto_Final/Assets/css/inicio.css">
 </head>
 <body>
     <p>hola</p>
-    <script src="Assets/js/trancicion.js"></script>
+
+
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
