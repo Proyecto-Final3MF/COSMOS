@@ -43,15 +43,15 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
                     <div class="botones-container">
-                        <a href="index.php?accion=editarSF&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
+                        <?php if($_SESSION['rol'] == 1){?>
+                            <a href="index.php?accion=editarSF&id=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
+                        <?php }?>
+                        <a href="index.php?accion=cancelarS&id_solicitud=<?php echo $resultado['id'];?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"> <button class="btn btn-boton2">Cancelar Solicitud</button></a>
                     </div>
                 </td>
-           
+            </tr>
             <?php
         }
-        ?> 
-         </tr>
-        <?php
     } else {
         ?>
         <tr>
@@ -68,8 +68,8 @@ require_once ("./Views/include/UH.php");
     <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
 </div>
 <div id="imageModal" class="image-modal">
-  <span class="close">&times;</span>
-  <img class="image-modal-content" id="modalImage">
+    <span class="close">&times;</span>
+    <img class="image-modal-content" id="modalImage">
 </div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/trancicion.js"></script>
