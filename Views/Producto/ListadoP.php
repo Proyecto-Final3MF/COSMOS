@@ -32,7 +32,7 @@ require_once ("./Views/include/UH.php");
             foreach ($resultados as $p): ?>
             <tr>
                 <td><?= htmlspecialchars($p['nombre']) ?></td>
-                <td><img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" style="max-width:100px; max-height:100px;" /></td>
+                <td><img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" class="zoom-img" style="max-width:100px; max-height:100px;" /></td>
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
                     <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2"><img src="Assets/imagenes/pen.png" alt="editar" width="50px"></button></a>
@@ -46,6 +46,11 @@ require_once ("./Views/include/UH.php");
     <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
+    <div id="imageModal" class="image-modal">
+  <span class="close">&times;</span>
+  <img class="image-modal-content" id="modalImage">
+</div>
+    <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
