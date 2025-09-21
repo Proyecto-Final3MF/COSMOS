@@ -101,6 +101,10 @@ switch ($accion) {
     $controller->logout();
   break;
 
+  case 'editarSF':
+    $controller = new SolicitudC();
+    $controller->editarSF();
+  break;
 //acciones para el rol cliente
     
   //acciones para producto
