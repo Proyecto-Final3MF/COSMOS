@@ -1,14 +1,16 @@
 body {
+    margin-top: 80px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f2f5; 
-    margin: 0;
+    
 }
 
 .contenedor-formulario {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    align-items: flex-start; 
+    padding-top: 50px; 
+    min-height: calc(100vh - 100px);
 }
 
 section {
@@ -180,4 +182,11 @@ body.fade-in {
 
 body.fade-out {
     opacity: 0;
+}
+
+.botones-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 20px 0;
 }

@@ -1,64 +1,53 @@
-<?php 
-$titulo = "Editar Producto";
+<?php
 require_once ("./Views/include/UH.php");
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title mb-0">Editar Producto</h3>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="index.php?accion=actualizar">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($datos['idProducto']) ?>">
-                    
-                    <div class="mb-3">
-                        <label for="marca" class="form-label">Marca</label>
-                        <input type="text" class="form-control" id="marca" name="marca" 
-                               value="<?= htmlspecialchars($datos['marca']) ?>" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="modelo" name="modelo" 
-                               value="<?= htmlspecialchars($datos['modelo']) ?>" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" required><?= htmlspecialchars($datos['descripcion']) ?></textarea>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
-                        <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" 
-                               value="<?= htmlspecialchars($datos['fechaIngreso']) ?>" required>
-                    </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="./Assets/css/Formulario.css">
+</head>
+<body>
+<div class="contenedor-formulario">
+<section>
+    <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
+        <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($datosProducto['imagen']) ?>">
 
-                    <div class="mb-3">
-                        <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="estado" required>
-                            <option value="Ingresado" <?= ($datos['estado'] == 'Ingresado') ? 'selected' : '' ?>>Ingresado</option>
-                            <option value="En Reparación" <?= ($datos['estado'] == 'En Reparación') ? 'selected' : '' ?>>En Reparación</option>
-                            <option value="Finalizado" <?= ($datos['estado'] == 'Finalizado') ? 'selected' : '' ?>>Finalizado</option>
-                        </select>
-                    </div>
+        <p>Nombre del Equipo: </p>
+        <label for="nombre" class="form-label"></label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($datosProducto['nombre']) ?>" autocomplete="off" required> <br><br>
 
-                    <div class="mb-3">
-                        <label for="idCliente" class="form-label">ID Cliente</label>
-                        <input type="number" class="form-control" id="idCliente" name="idCliente" 
-                               value="<?= htmlspecialchars($datos['idCliente']) ?>" required>
-                    </div>
-                    
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="index.php" class="btn btn-secondary me-md-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        <p>Imagen actual:</p>
+        <img src="<?= htmlspecialchars($datosProducto['imagen']) ?>" alt="Imagen actual del producto" style="max-width:150px; max-height:150px;">
+        <br><br>
+
+        <p>Seleccionar nueva Imagen (opcional):</p>
+        <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off">
+        <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
+        <br> <span id="nombre-archivo-seleccionado"></span>
+        <br><br>
+
+        <p>Categoria:</p>
+        <select id="categoria" name="categoria" required>
+            <?php foreach ($categorias as $categoria): ?>
+                <option value="<?= $categoria['id'] ?>" <?= ($categoria['id'] == $datosProducto['id_cat']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($categoria['nombre']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select> <br><br>
+
+        <button type="submit">Actualizar</button>
+    </form>
+</section>
 </div>
-
-<?php include('views/includes/footer.php'); ?>
+<div class="botones-container">
+    <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
+</div>
+<script src="Assets/js/imagenformulario.js"></script>
+<script src="Assets/js/trancicion.js"></script>
+</body>
+</html>
