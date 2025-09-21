@@ -170,10 +170,6 @@ p {
     margin: 0 auto 2rem;
 }
 
-thead {
-    align-items: center;
-}
-
 .navbar h1 {
     text-align: center;
     width: 100%; 
