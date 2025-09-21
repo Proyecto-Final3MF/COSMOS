@@ -104,7 +104,23 @@ switch ($accion) {
   case 'editarSF':
     $controller = new SolicitudC();
     $controller->editarSF();
+    include("./Views/Solicitudes/editarSF.php");
   break;
+
+  case 'actualizarSF':
+    $controller = new SolicitudC();
+    $controller->actualizarSF();
+    break;
+
+  case 'listarSA':
+    $controller = new SolicitudC();
+    $controller->listarSA();
+    break;
+
+  case 'cancelarS':
+    $controller = new SolicitudC();
+    $controller->cancelarS();
+    break;
 //acciones para el rol cliente
     
   //acciones para producto
@@ -168,12 +184,6 @@ switch ($accion) {
   case 'asignarS':
     $controller = new SolicitudC();
     $controller->asignarS();
-  break;
-  
-  case 'listarSA':
-    $controller = new SolicitudC();
-    $controller->ListarSA();
-    require_once("Views/Solicitudes/listadoSA.php");
   break;
 
   case 'listarTL':
