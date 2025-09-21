@@ -1,7 +1,8 @@
 body {
+    margin-top: 80px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f2f5; 
-    margin: 0;
+    
 }
 
 .contenedor-formulario {
