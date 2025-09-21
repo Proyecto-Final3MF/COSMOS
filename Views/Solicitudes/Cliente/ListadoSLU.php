@@ -36,7 +36,7 @@ require_once ("./Views/include/UH.php");
             <tr>
                 <td><?= htmlspecialchars($resultado['titulo']); ?></td>
                 <td>
-                    <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto"/><br>
+                    <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto"class="zoom-img"/>
                     <?= htmlspecialchars($resultado['nombre']) ?>
                 </td>
                 <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
@@ -68,6 +68,12 @@ require_once ("./Views/include/UH.php");
 <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
+
+<div id="imageModal" class="image-modal">
+  <span class="close">&times;</span>
+  <img class="image-modal-content" id="modalImage">
+</div>
+    <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

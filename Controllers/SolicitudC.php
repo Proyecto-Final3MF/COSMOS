@@ -97,7 +97,7 @@ class SolicitudC {
         include("./Views/Solicitudes/listadoSA.php");
     }
 
-    public function EditarSF(){
+    public function editarSF(){
         var_dump ($_GET); die();
         include("./Views/Solicitudes/Tecnico/EditarSF.php");
     }
