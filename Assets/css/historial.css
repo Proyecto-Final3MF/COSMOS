@@ -48,3 +48,16 @@ h1 {
     color: #888;
     padding: 20px;
 }
+
+body {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+body.fade-in {
+    opacity: 1;
+}
+
+body.fade-out {
+    opacity: 0;
+}

@@ -15,5 +15,6 @@
   <p class="output">Podes intentar volver a <a href="inicio.php">Pagina Inicial</a>.</p>
   <p class="output">Gracias por la comprensión.</p>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

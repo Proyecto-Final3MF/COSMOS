@@ -18,6 +18,8 @@ class UsuarioC {
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
+
+    
     
     // Corrige la instanciación: debes llamar al Modelo (Usuario)
     $usuarioM = new Usuario(); 
@@ -25,13 +27,15 @@ class UsuarioC {
     if ($usuarioM->editarU($id, $nombre, $email)) {
         // Actualiza el nombre en la sesión si es necesario
         $_SESSION['usuario'] = $nombre;
+
+        $_SESSION['email'] = $email;
         
         $_SESSION['mensaje'] = "Actualizaste tu perfil con exito.";
 
         // Registrar en el historial
-        $obs = "Usuario " . $nombre . " actualizado.";
+        $obs = "Usuario " . $nombre . " (" . $email . ") actualizado.";
         
-        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 2, $obs);
+        $this->historialController->registrarModificacion($nombre, $email, $id, 'fue actualizado', null, 2, $obs);
         
         header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
     } else {
@@ -55,7 +59,6 @@ class UsuarioC {
         $contrasena = $_POST['contrasena']; 
         
         if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena)) {
-            // Get the user's details after creation
             $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
             if ($usuarioN) {
                 $id_user = $usuarioN['id'];
@@ -65,7 +68,9 @@ class UsuarioC {
                 session_start();
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $usuarioN['id']; // Make sure to save the user ID
+                $_SESSION['id'] = $usuarioN['id'];
+                $_SESSION['email'] = $usuarioN['email'];
+
                 header("Location: index.php?accion=redireccion");
                 exit();
             } else {
@@ -96,55 +101,35 @@ class UsuarioC {
     }
 
 
-   public function eliminar() {
-    // Verifica que el ID del usuario esté en la URL
-    if (!isset($_GET['id'])) {
-        header("Location: index.php?accion=redireccion&error=ID de usuario no especificado.");
-        exit();
-    }
-    
-    $id = $_GET['id'];
-    $usuarioM = new Usuario(); // Instancia el Modelo Usuario
-    
-    // Verifica si el usuario existe antes de eliminar
-    $usuario = $usuarioM->buscarUserId($id);
-    if (!$usuario) {
-        header("Location: index.php?accion=redireccion&error=Usuario no encontrado.");
-        exit();
-    }
-    
-    // Elimina el usuario
-    if ($usuarioM->eliminar($id)) {
-        // Registrar en el historial
-        $obs = "Usuario " . $usuario['nombre'] . " eliminado.";
-        $this->historialController->registrarModificacion($usuario['nombre'], $id, 'fue eliminado', null, 2, $obs);
-        
-        header("Location: index.php?accion=redireccion&mensaje=Usuario eliminado con éxito.");
-    } else {
-        header("Location: index.php?accion=redireccion&error=No se pudo eliminar el usuario.");
-    }
-    exit();
-}
-
+    public function borrar(){
+            $usuario = new Usuario();
+            $id = $_GET["id"];
+            $datos = $usuario->borrar($id);
+            header("Location: Index.php");
+        }
     
 
     public function autenticar() {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
-        $modelo = new Usuario();
-        $user = $modelo->verificarU($usuario, $contrasena);
-        if ($user) {
-            session_start();
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
+    $usuario = $_POST['usuario'];
+    $contrasena = $_POST['contrasena'];
+    $modelo = new Usuario();
+    $user = $modelo->verificarU($usuario, $contrasena);
+
+    if ($user) {
+        session_start();
+        $_SESSION['usuario'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol_id'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email']; 
+
+        header("Location: index.php?accion=redireccion");
+        exit();
+    } else {
+        $error = "Usuario o contraseña incorrectos";
+        include("views/Usuario/Login.php");
     }
+}
+
 
     public function logout() {
         session_destroy();
