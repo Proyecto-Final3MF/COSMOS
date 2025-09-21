@@ -38,7 +38,7 @@ require_once ("./Views/include/UH.php");
                 <option value="urgente">Urgente</option>
             </select><br><br>
 
-        <input type="submit" value="guardar">
+        <input type="submit" value="Guardar">
         
     </form>
     </section>
