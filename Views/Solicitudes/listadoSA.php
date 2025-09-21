@@ -43,7 +43,7 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
                     <div class="botones-container">
-                        <a href="index.php?accion=EditarSF&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
+                        <a href="index.php?accion=editarSF&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
                     </div>
                 </td>
            
