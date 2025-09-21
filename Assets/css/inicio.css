@@ -14,6 +14,7 @@
 }
    
 body {
+    margin-top: 80px;
     background-image: none;
     color: var(--dark-color);
     line-height: 1.6;
@@ -23,14 +24,17 @@ body {
 	background-color: rgb(255, 255, 255);
 	box-shadow: var(--box-shadow);
 	padding: 0.8rem 2rem;
-	position: sticky;
+	position: fixed; 
 	top: 0;
+	left: 0;
+	width: 100%; 
 	z-index: 1000;
 	display: flex;
 	justify-content: space-between; 
 	align-items: center;
 	flex-wrap: wrap;
 }
+
 
 .nav-links {
     display: flex;
