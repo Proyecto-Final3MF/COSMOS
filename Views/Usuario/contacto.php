@@ -7,12 +7,13 @@ include_once(__DIR__ . "/../include/UH.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   <!-- UH.php -->
+    <title>Contacto</title>
 <link rel="stylesheet" href="/GitHub/Proyecto_Final/Assets/css/inicio.css">
+
 </head>
 <body>
-    <p>hola</p>
+    
+<p>hola</p>
 
 
 <script src="Assets/js/trancicion.js"></script>

@@ -27,6 +27,7 @@ if (!isset($estados) || $estados === null) {
 <body>
 <div class="contenedor-formulario">
     <section>
+        <h3>Editar Solicitud</h3>
         <form method="POST" action="index.php?accion=actualizarSF">
             <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
 
