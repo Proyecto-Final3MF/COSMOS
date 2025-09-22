@@ -13,17 +13,17 @@ if (session_status() === PHP_SESSION_NONE) {
         </a>
 
         <ul class="nav-links" id="nav-links">
-            <li><a href="inicio.php" data-translate="startPage">Inicio</a></li>
-            <li><a href="./Views/Usuario/contacto.php" data-translate="contact">Contacto</a></li>
+            <li><a href="inicio.php">Inicio</a></li>
+            <li><a href="./Views/Usuario/contacto.php">Contacto</a></li>
         </ul>
 
         <?php if (!isset($_SESSION['usuario'])): ?>
             <div class="action-buttons">
                 <a href="Index.php?accion=login">
-                    <button class="btn btn-boton" data-translate="signin">Iniciar sesión</button>
+                    <button class="btn btn-boton">Iniciar sesión</button>
                 </a>
                 <a href="Index.php?accion=register">
-                    <button class="btn btn-boton" data-translate="signup">Registrarse</button>
+                    <button class="btn btn-boton">Registrarse</button>
                 </a>
             </div>
         <?php else: ?>
