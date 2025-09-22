@@ -32,7 +32,7 @@ require_once("./Views/include/UH.php");
         </thead>
         <tbody>
             <?php foreach ($resultados as $c): ?>
-                <tr>
+                <tr class="list-item">
                     <td><?= $c['id'] ?></td>
                     <td><?= htmlspecialchars($c['nombre']) ?></td>
                     <td>
