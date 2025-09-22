@@ -28,10 +28,10 @@ require_once ("./Views/include/UH.php");
 
 </form>
 </section>
-</div>
 <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
+</div>
 <script src="Assets/js/trancicion.js"></script>
 </body>
 </html> 
