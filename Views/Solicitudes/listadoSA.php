@@ -14,7 +14,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
     <div>
-    <p>Solicitudes aceptadas</p>
+    <h2>Solicitudes aceptadas</h2>
 </div>
     <table>
         <thead>

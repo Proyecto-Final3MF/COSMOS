@@ -25,11 +25,11 @@ require_once ("./Views/include/UH.php");
         <input type="text" id="nombre" name="nombre"/>
         <button type="submit">Agregar Categoria</button>
     </form>
-</div>
-</section>
- <div class="botones-container">
+    </section>
+<div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
-    <script src="Assets/js/trancicion.js"></script>
+</div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

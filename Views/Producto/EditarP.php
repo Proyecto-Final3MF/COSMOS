@@ -13,6 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
 <div class="contenedor-formulario">
 <section>
+    <h3>Editar Producto</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
         <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($datosProducto['imagen']) ?>">
@@ -43,9 +44,9 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Actualizar</button>
     </form>
 </section>
-</div>
 <div class="botones-container">
     <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
+</div>
 </div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
