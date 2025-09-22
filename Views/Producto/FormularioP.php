@@ -13,6 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
 <div class="contenedor-formulario">
 <section>
+    <h3>Nuevo Producto</h3>
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
         <p>Nombre del Equipo: </p>
@@ -34,10 +35,10 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Crear</button>
     </form>
 </section>
-</div>
 <div class="botones-container">
         <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
     </div>
+</div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>

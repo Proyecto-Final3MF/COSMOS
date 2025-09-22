@@ -2,81 +2,115 @@
 require_once("./Config/conexion.php");
 require_once("./Models/CategoriaM.php");
 require_once("./Controllers/HistorialC.php");
-require_once("Controllers/UsuarioC.php");
 
 class CategoriaC {
-    
+
     private $historialController;
 
-    public function __construct(){
+    public function __construct() {
         $this->historialController = new HistorialController();
     }
 
-    public function FormularioC(){
+    public function FormularioC() {
         $categoria = new Categoria();
+        include("./Views/Usuario/Admin/Categoria/agregarC.php");
     }
 
     public function guardarC() {
-    $categoria = new Categoria();
-    $nombre = $_POST['nombre'] ?? '';
-    // $id is no longer needed at the start, as it will be assigned the new ID
-    $id = 0; 
+        $categoria = new Categoria();
+        $nombre = $_POST['nombre'] ?? '';
 
-    if (empty($nombre)) {
-        $_SESSION['mensaje'] = "La categoria no puede tener un nombre vacio.";
-        header("Location: index.php?accion=FormularioC");
-        return;
-    }
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
+        $usuarioId = $_SESSION['id'] ?? 0;
 
-    if ($categoria->verificarExistencia($nombre)) {
-        $_SESSION['mensaje'] = "La categoria '{$nombre}' ya existe.";
-    } else {
-        $id = $categoria->guardarC($nombre);
-        if ($id !== false) {
-            $_SESSION['mensaje'] = "Categoria '{$nombre}' fue guardada.";
-            $obs="a";
-            $this->historialController->registrarModificacion($user['nombre'], $usuarioId, 'guardó la categoria', $nombre, $id, $obs);
-        } else {
-            $_SESSION['mensaje'] = "Error al guardar la categoria.";
+        if (empty($nombre)) {
+            $_SESSION['mensaje'] = "La categoría no puede tener un nombre vacío.";
+            header("Location: index.php?accion=FormularioC");
+            exit();
         }
+
+        if ($categoria->verificarExistencia($nombre)) {
+            $_SESSION['mensaje'] = "La categoría '{$nombre}' ya existe.";
+        } else {
+            $id = $categoria->guardarC($nombre);
+            if ($id !== false) {
+                $_SESSION['mensaje'] = "Categoría '{$nombre}' fue guardada.";
+                $obs = "Categoría creada";
+                $this->historialController->registrarModificacion(
+                    $usuarioNombre,
+                    $usuarioId,
+                    'guardó la categoría',
+                    $nombre,
+                    $id,
+                    $obs
+                );
+            } else {
+                $_SESSION['mensaje'] = "Error al guardar la categoría.";
+            }
+        }
+
+        header("Location: index.php?accion=FormularioC");
+        exit();
     }
-    header("Location: index.php?accion=FormularioC");
-}
 
     public function listarC() {
         $categoria = new Categoria();
         $resultados = $categoria->listarC();
-        include("views/usuario/admin/categoria/listarC.php");
+        include("./Views/Usuario/Admin/Categoria/listarC.php");
     }
 
     public function editarC() {
-    $categoria_modelo = new Categoria();
-    $id = $_GET['id'];
-    
-    $categoria = $categoria_modelo->buscarPorId($id);
+        $categoria_modelo = new Categoria();
+        $id = $_GET['id'] ?? 0;
+        if ($id <= 0) {
+            $_SESSION['mensaje'] = "ID de categoría no válido.";
+            header("Location: index.php?accion=listarC");
+            exit();
+        }
 
-    include("views/usuario/admin/categoria/editarC.php");
-}
+        $categoria = $categoria_modelo->buscarPorId($id);
+        if (!$categoria) {
+            $_SESSION['mensaje'] = "Categoría no encontrada.";
+            header("Location: index.php?accion=listarC");
+            exit();
+        }
+
+        include("./Views/Usuario/Admin/Categoria/editarC.php");
+    }
 
     public function actualizarC() {
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
+        $usuarioId = $_SESSION['id'] ?? 0;
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-            $nuevoNombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+            $nuevoNombre = $_POST['nombre'] ?? '';
 
             if ($id > 0 && !empty($nuevoNombre)) {
                 $categoria_modelo = new Categoria();
                 $categoriaAntigua = $categoria_modelo->buscarPorId($id);
                 $nombreAntiguo = $categoriaAntigua['nombre'] ?? 'Nombre desconocido';
 
-                $categoria_modelo->actualizarC($id, $nuevoNombre);
-
-                $obs = "La categoria '{$nombreAntiguo}' fue renombrada para '{$nuevoNombre}'.";
-                $_SESSION['mensaje'] = "Categoria '{$nombreAntiguo}' fue cambiada para '{$nuevoNombre}'.";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'renombró la', 'categoria', $id, $obs);
+                if ($categoria_modelo->actualizarC($id, $nuevoNombre)) {
+                    $_SESSION['mensaje'] = "Categoría '{$nombreAntiguo}' fue cambiada a '{$nuevoNombre}'.";
+                    $obs = "La categoría '{$nombreAntiguo}' fue renombrada a '{$nuevoNombre}'";
+                    $this->historialController->registrarModificacion(
+                        $usuarioNombre,
+                        $usuarioId,
+                        'renombró la categoría',
+                        $nuevoNombre,
+                        $id,
+                        $obs
+                    );
+                } else {
+                    $_SESSION['mensaje'] = "Error al actualizar la categoría.";
+                }
             } else {
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
+
             header("Location: index.php?accion=listarC");
+            exit();
         } else {
             header("Location: index.php?accion=listarC");
             exit();
@@ -84,25 +118,44 @@ class CategoriaC {
     }
 
     public function borrarC() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-            $categoria = new Categoria();
-            $id = (int) $_GET['id'];
-            $categoria->verificarExistencia($id);
-            $nombre = $categoria['nombre'] ?? 'Nombre desconocido';
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
+        $usuarioId = $_SESSION['id'] ?? 0;
 
-            if ($categoria) {
-                if ($categoria->borrarC($id)) {
-                $_SESSION['mensaje'] = "Categoría eliminada exitosamente.";
-                $obs = "La categoria '{$nombre}' fue eliminada";
-                $this->historialController->registrarModificacion($usuario, $usuarioId, 'eliminó la', 'categoria', $id, $obs);         
-            } else {
-                $_SESSION['mensaje'] = "Error: Categoría no encontrada.";
-            }
-        } else {
-            $_SESSION['mensaje'] = "Error: Solicitud inválida.";
+        $id = $_GET['id'] ?? 0;
+        if ($id <= 0) {
+            $_SESSION['mensaje'] = "ID de categoría no válido.";
+            header("Location: index.php?accion=listarC");
+            exit();
         }
+
+        $categoria_modelo = new Categoria();
+        $categoria = $categoria_modelo->buscarPorId($id);
+
+        if (!$categoria) {
+            $_SESSION['mensaje'] = "Categoría no encontrada.";
+            header("Location: index.php?accion=listarC");
+            exit();
+        }
+
+        $nombre = $categoria['nombre'] ?? 'Nombre desconocido';
+
+        if ($categoria_modelo->borrarC($id)) {
+            $_SESSION['mensaje'] = "Categoría '{$nombre}' eliminada exitosamente.";
+            $obs = "La categoría '{$nombre}' fue eliminada";
+            $this->historialController->registrarModificacion(
+                $usuarioNombre,
+                $usuarioId,
+                'eliminó la categoría',
+                $nombre,
+                $id,
+                $obs
+            );
+        } else {
+            $_SESSION['mensaje'] = "Error: No se pudo eliminar la categoría.";
+        }
+
         header("Location: index.php?accion=listarC");
         exit();
     }
 }
-}
+?>

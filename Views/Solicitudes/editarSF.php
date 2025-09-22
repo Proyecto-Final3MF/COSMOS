@@ -1,6 +1,21 @@
 <?php
- include_once("../include/UH.php");
+require_once ("./Views/include/UH.php");
+// Defensivo: evitar errores si $datosSolicitud no existe
+if (!isset($datosSolicitud) || $datosSolicitud === null) {
+    $datosSolicitud = [
+        'id' => '',
+        'titulo' => '',
+        'descripcion' => '',
+        'estado_id' => ''
+    ];
+}
+
+// Defensivo: evitar errores si $estados no existe
+if (!isset($estados) || $estados === null) {
+    $estados = [];
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +27,7 @@
 <body>
 <div class="contenedor-formulario">
     <section>
+        <h3>Editar Solicitud</h3>
         <form method="POST" action="index.php?accion=actualizarSF">
             <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
 
@@ -34,9 +50,10 @@
             <button type="submit">Actualizar Solicitud</button>
         </form>
     </section>
-</div>
 <div class="botones-container">
-    <a href="index.php?accion=listarTL"><button class="btn btn-boton">Volver</button></a>
+    <a href="index.php?accion=listarSA"><button class="btn btn-boton">Volver</button></a>
+ </div>
 </div>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

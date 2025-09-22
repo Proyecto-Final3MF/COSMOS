@@ -20,7 +20,7 @@ if (!in_array($accion, $acciones_publicas)) {
 }
 
 if (isset($_SESSION['mensaje'])) {
-  echo '<link rel="stylesheet" href="Assets/css/popup.css">
+  echo '<link rel="stylesheet" href="Assets/css/inicio.css">
      <div class="modal active">
        <div class="modal-header">
          <div class="title">Mensaje</div>
@@ -104,7 +104,6 @@ switch ($accion) {
   case 'editarSF':
     $controller = new SolicitudC();
     $controller->editarSF();
-    include("./Views/Solicitudes/editarSF.php");
   break;
 
   case 'actualizarSF':
