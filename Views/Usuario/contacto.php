@@ -8,8 +8,7 @@ include_once(__DIR__ . "/../include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto</title>
-<link rel="stylesheet" href="/GitHub/Proyecto_Final/Assets/css/inicio.css">
-
+    <link rel="stylesheet" href="/GitHub/Proyecto_Final/Assets/css/inicio.css">
 </head>
 <body>
     
