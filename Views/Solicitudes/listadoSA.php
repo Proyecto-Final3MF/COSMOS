@@ -32,7 +32,7 @@ require_once ("./Views/include/UH.php");
     if (!empty($resultados)) {
         foreach ($resultados as $resultado) {
             ?>
-            <tr>
+            <tr class="list-item">
                 <td><?= htmlspecialchars($resultado['titulo']); ?></td>
                 <td>
                     <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto" class="zoom-img"/><br>
@@ -73,5 +73,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/listado.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
