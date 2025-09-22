@@ -13,6 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
 <div class="contenedor-formulario">
 <section>
+    <h3>Editar Producto</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
         <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($datosProducto['imagen']) ?>">

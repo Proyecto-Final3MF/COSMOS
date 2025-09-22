@@ -13,6 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
 <div class="contenedor-formulario">
 <section>
+    <h3>Nuevo Producto</h3>
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
         <p>Nombre del Equipo: </p>

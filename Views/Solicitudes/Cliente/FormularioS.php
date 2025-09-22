@@ -13,6 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <div class="contenedor-formulario">
 <section>
+    <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
         
         <p>Titulo: </p>

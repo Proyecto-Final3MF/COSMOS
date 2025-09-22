@@ -16,7 +16,7 @@ require_once("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/inicio.css">
 </head>
 <body>
-<p>Listado de todas las categorias</p>
+<h2>Listado de todas las categorias</h2>
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
         No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>

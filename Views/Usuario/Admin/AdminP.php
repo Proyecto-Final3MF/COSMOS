@@ -17,7 +17,7 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/inicio.css"> </head>
 <body>
     <main>
-        <p>Aquí podrás gestionar tus tareas como Admin.</p>
+        <h2>Aquí podrás gestionar tus tareas como Admin.</h2>
     </main>
 <div class="btn-container">
 <a href="index.php?accion=FormularioC"><button class="btn btn-boton">Crear Nueva Categoria</button></a>
