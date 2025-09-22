@@ -35,7 +35,7 @@ require_once ("./Views/include/UH.php");
   if (!empty($resultados)) {
     foreach ($resultados as $resultado) {
       ?>
-      <tr>
+      <tr class="list-item">
         <td><?= htmlspecialchars($resultado['titulo']); ?></td>
         <td><?= htmlspecialchars($resultado['nombre']); ?></td>
         <td>
@@ -64,6 +64,18 @@ require_once ("./Views/include/UH.php");
   </tbody>
 </table>
 </div>
+<div class='pagination-container'>
+        <nav>
+            <ul class="pagination">
+                <li data-page="prev">
+                    <span> &lt; <span class="sr-only">(anterior)</span></span>
+                </li>
+                <li data-page="next" id="prev">
+                    <span> &gt; <span class="sr-only">(próximo)</span></span>
+                </li>
+            </ul>
+        </nav>
+    </div>
 <div class="botones-container">
   <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
 </div>
@@ -73,5 +85,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/listado.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
