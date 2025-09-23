@@ -6,7 +6,7 @@
     <title>E R R O R ‎ 4 0 4</title>
     <link rel="stylesheet" href="./Assets/css/error.css">
 </head>
-<body>
+<body class="error">
     <div class="noise"></div>
 <div class="overlay"></div>
 <div class="terminal">
