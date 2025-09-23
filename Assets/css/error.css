@@ -2,10 +2,9 @@
 
 html {
   min-height: 100%;
-  overflow: hidden;
 }
 
-body {
+.error {
   box-sizing: border-box;
   height: 100%;
   background-color: #000000;
@@ -16,6 +15,7 @@ body {
   font-size: 1.5rem;
   color: rgba(255, 128, 202, 0.8);
   text-shadow: 0 0 1ex rgb(255, 51, 146), 0 0 2px rgba(255, 255, 255, 0.8);
+  overflow: hidden;
 }
 
 .noise {
