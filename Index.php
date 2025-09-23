@@ -261,6 +261,11 @@ switch ($accion) {
     $controller->mostrarConversacion($_GET);
     break;
 
+  case "listarConversaciones":
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->listarConversaciones();
+    break;
   //accion default
 
   default:

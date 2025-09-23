@@ -29,20 +29,15 @@ class ChatC
     {
         $mensaje = new Mensaje();
         $usuario_id = $_SESSION['id'] ?? null;
-        $rol = $_SESSION['rol'] ?? null;
+        $otro_usuario_id = $_GET['usuario_id'] ?? null;
 
-        if (!$usuario_id || !$rol) {
-            die("No hay sesión iniciada o faltan datos de usuario.");
+        if (!$otro_usuario_id) {
+            echo "Debes seleccionar un usuario para conversar.";
+            return;
         }
 
-        if ($rol == ROL_ADMIN) {
-            // Admin puede ver todo.
-            $mensajes = $mensaje->obtenerTodosLosMensajes();
-            include __DIR__ . "/../Views/chat_admin.php";
-        } else {
-            $mensajes = $mensaje->obtenerConversacion($usuario_id, $otro_usuario_id);
-            include __DIR__ . "/../Views/chat.php";
-        }
+        $mensajes = $mensaje->obtenerConversacion($usuario_id, $otro_usuario_id);
+        include __DIR__ . "/../Views/chat.php";
     }
 
     // Devolver solo los mensajes (para Ajax)
@@ -66,6 +61,20 @@ class ChatC
         }
     }
 
+    public function listarConversaciones()
+    {
+        $mensaje = new Mensaje();
+        $usuario_id = $_SESSION['id'] ?? null;
+
+        if (!$usuario_id) {
+            header("Location: index.php?accion=login");
+            exit();
+        }
+
+        $conversaciones = $mensaje->obtenerConversaciones($usuario_id);
+        include __DIR__ . "/../Views/conversaciones.php";
+    }
+
     // Guardar nuevo mensaje
     public function enviar()
     {
@@ -76,7 +85,8 @@ class ChatC
         $texto = $_POST['mensaje'];
 
         if ($mensaje->enviarMensaje($usuario_id, $receptor_id, $texto)) {
-            header("Location: index.php?accion=mostrarConversacion&usuario=$receptor_id");
+            header("Location: index.php?accion=mostrarConversacion&usuario_id=$receptor_id");
+            exit();
         } else {
             echo "Error al emviar el mensaje";
         }
