@@ -46,6 +46,28 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
+    public function obtenerConversacion($usuario_id, $otro_usuario_id)
+    {
+        // Si es admin -> ver todos los mensajes
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                u.nombre AS emisor, r.nombre AS receptor
+                FROM mensaje m
+                JOIN usuario u ON m.usuario_id = u.id
+                LEFT JOIN usuario r ON m.receptor_id = r.id
+                WHERE (m.usuario_id= ? AND m.receptor_id = ?)
+                OR (m.usuario_id = ? AND m.receptor_id = ?)
+                ORDER BY m.fecha ASC";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
+
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    }
+
     public function obtenerTodosLosMensajes()
     {
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, 
@@ -63,13 +85,21 @@ class Mensaje
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
     {
-        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
-        $stmt = $this->conexion->prepare($sql);
-        if (!$stmt) {
-            return false;
+        if (empty($receptor_id)) {
+            $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,NULL,?)";
+            $stmt = $this->conexion->prepare($sql);
+            if (!$stmt) {
+                return false;
+            }
+            $stmt->bind_param("is", $usuario_id, $mensaje);
+        } else {
+            $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
+            $stmt = $this->conexion->prepare($sql);
+            if (!$stmt) {
+                return false;
+            }
+            $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         }
-
-        $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         return $stmt->execute();
     }
 
