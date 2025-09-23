@@ -89,32 +89,9 @@ html {
       0 0 2px rgba(255, 255, 255, 0.8);
 }
 
-.output::before {
-  content: "> ";
-}
-
-.input {
-  color: rgba(255, 192, 241, 0.8);
-  text-shadow:
-      0 0 1px rgba(255, 51, 170, 0.4),
-      0 0 2px rgba(255, 255, 255, 0.8);
-}
-
-.input::before {
-  content: "$ ";
-}
-
-a {
+a.errorLink {
   color: #fff;
   text-decoration: none;
-}
-
-a::before {
-  content: "[";
-}
-
-a::after {
-  content: "]";
 }
 
 .errorcode {
