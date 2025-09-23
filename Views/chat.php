@@ -12,7 +12,7 @@
         <?php if (!empty($mensajes)): ?>
             <?php foreach ($mensajes as $m): ?>
                 <p>
-                    <strong><?= htmlspecialchars($m['usuario'] ?? '???') ?>:</strong>
+                    <strong><?= htmlspecialchars($m['emisor'] ?? '???') ?>:</strong>
                     <?= htmlspecialchars($m['mensaje'] ?? '') ?>
                 </p>
             <?php endforeach; ?>
@@ -24,6 +24,7 @@
 
     <form method="post" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
+        <input type="hidden" name="receptor_id" value="<?= htmlspecialchars($otro_usuario_id ?? '') ?>">
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
