@@ -667,8 +667,6 @@ body.fade-out {
 
 /* El css a continuacio afecta a error.php basicamente es el css del error ;) */
 
-@import url('https://fonts.cdnfonts.com/css/superhelio');
-
 html {
   min-height: 100%;
 }
@@ -680,7 +678,6 @@ html {
   background-image: radial-gradient(#581129, #160412);
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'superhelio _regular', sans-serif;
   font-size: 1.5rem;
   color: rgba(255, 128, 202, 0.8);
   text-shadow: 0 0 1ex rgb(255, 51, 146), 0 0 2px rgba(255, 255, 255, 0.8);
