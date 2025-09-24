@@ -893,19 +893,14 @@ input[type="submit"]:hover {
     background-color: #972f5f; 
 }
 
-/* Contenedor del input + label + span */
 .input-archivo {
   display: flex;
-  flex-direction: column; /* los elementos uno debajo del otro */
-  align-items: center; /* alineados a la izquierda */
-  gap: 5px; /* espacio entre botón y texto */
+  flex-direction: column; 
+  align-items: center; 
+  gap: 5px; 
 }
 
-
-
-/* Estilo para el span que muestra el nombre */
 #nombre-archivo-seleccionado {
   font-size: 14px;
   color: #333;
 }
-
