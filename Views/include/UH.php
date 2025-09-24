@@ -52,6 +52,9 @@ if (session_status() === PHP_SESSION_NONE) {
                             class="dropdown-item">
                             Eliminar Cuenta
                         </a>
+                        <a href="index.php?accion=listarConversaciones" class="dropdown-item">
+                            Mis Conversaciones
+                        </a>
                         <a href="Index.php?accion=logout" class="dropdown-item">
                             Cerrar Sesión
                         </a>
