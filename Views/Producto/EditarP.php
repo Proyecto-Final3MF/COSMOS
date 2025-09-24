@@ -8,7 +8,7 @@ require_once ("./Views/include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Producto</title>
-    <link rel="stylesheet" href="./Assets/css/Formulario.css">
+    <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
 <div class="contenedor-formulario">
@@ -27,9 +27,11 @@ require_once ("./Views/include/UH.php");
         <br><br>
 
         <p>Seleccionar nueva Imagen (opcional):</p>
-        <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off">
+        <div class="input-archivo">
+        <input type="file" id="imagen" name="imagen" autocomplete="off" hidden>
         <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
-        <br> <span id="nombre-archivo-seleccionado"></span>
+        <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+        </div>
         <br><br>
 
         <p>Categoria:</p>
