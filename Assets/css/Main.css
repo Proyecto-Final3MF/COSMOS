@@ -343,26 +343,7 @@ th:last-child {
     border: 1px solid #dc3545;
 }
 
-.btn-boton7 {
-    background-color: #e83e8c; 
-    color: #fff; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    font-family: Arial, sans-serif; 
-    font-size: 16px; 
-    cursor: pointer;
-}
-
-.btn-boton7 option {
-    background-color: #ffffff; 
-    color: #212529; 
-    padding: 10px 20px; 
-}
-
-.btn-boton7:hover {
-    background-color: #972f5f; 
-}
+/* aca empieza el css del pagination, el que esta en las tablas */
 
 .pagination-container {
     display: flex;
@@ -399,6 +380,10 @@ th:last-child {
 .sr-only {
     display: none;
 }
+
+/* aca termina el css del pagination */
+
+/*aca empieza el css del menu de usuario */
 
 .user-menu-container {
     display: flex;
@@ -496,6 +481,10 @@ th:last-child {
     background-color: #f3f4f6;
     color: #1f2937;
 }
+
+/* aca termina el css del menu de usuario */
+
+/* aca esta el css que afecta al mensaje que sale cuando actualizas usuario, creas tabla etc. el que era popup */
 
 .modal {
     position: fixed;
@@ -604,6 +593,8 @@ th:last-child {
     pointer-events: all;
 }
 
+/* aca empieza el css del zoom de imagenes */
+
 body {
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -616,6 +607,8 @@ body.fade-in {
 body.fade-out {
     opacity: 0;
 }
+
+/* aca termina el css del mensaje cuando actualizas usuario, etc. el popup */
 
 .image-modal {
   display: none; 
@@ -668,4 +661,246 @@ body.fade-out {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* aca termina el css del zoom de imagenes */
+
+/* El css a continuacio afecta a error.php basicamente es el css del error ;) */
+
+@import url('https://fonts.cdnfonts.com/css/superhelio');
+
+html {
+  min-height: 100%;
+}
+
+.error {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #000000;
+  background-image: radial-gradient(#581129, #160412);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'superhelio _regular', sans-serif;
+  font-size: 1.5rem;
+  color: rgba(255, 128, 202, 0.8);
+  text-shadow: 0 0 1ex rgb(255, 51, 146), 0 0 2px rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+.noise {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: .02;
+}
+
+.overlay1 {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+      repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  background-size: auto 4px;
+  z-index: 1;
+}
+
+.overlay1::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      0deg,
+      transparent 0%,
+      rgba(128, 32, 88, 0.2) 2%,
+      rgba(128, 32, 85, 0.8) 3%,
+      rgba(128, 32, 85, 0.2) 3%,
+      transparent 100%);
+  background-repeat: no-repeat;
+  animation: scan 7.5s linear 0s infinite;
+}
+
+@keyframes scan {
+  0%        { background-position: 0 -100vh; }
+  35%, 100% { background-position: 0 100vh; }
+}
+
+.terminal {
+  box-sizing: inherit;
+  position: absolute;
+  height: 100%;
+  width: 1000px;
+  max-width: 100%;
+  padding: 4rem;
+  text-transform: uppercase;
+}
+
+.output {
+  color: rgba(255, 128, 192, 0.8);
+  text-shadow:
+      0 0 1px rgba(255, 51, 194, 0.4),
+      0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+a.errorLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.errorcode {
+  color: white;
+}
+
+.h1_error {
+    text-align: left;
+}
+
+/* Fin del css de Error.php */
+
+
+/* ----------------------------- */
+/* ESTILOS DE FORMULARIOS        */
+/* ----------------------------- */
+
+.contenedor-formulario {
+    background-color: #f0f2f5; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    padding-top: 50px;
+    min-height: calc(100vh - 100px);
+    gap: 20px; 
+}
+
+section {
+    background-color: #ffffff; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h3 {
+    color: #e83e8c; 
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form p {
+    color: #495057;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="mail"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 16px;
+    margin-bottom: 15px; 
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    appearance: none; 
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: right 12px center; 
+    background-size: 12px; 
+    cursor: pointer; 
+}
+
+select option {
+    background-color: #ffffff;
+    color: #333;
+}
+
+textarea.form-control {
+    width: 80%; 
+    padding: 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    color: #555; 
+    resize: vertical; 
+}
+
+label {
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+    color: #333;
+    font-weight: bold;
+    display: block; 
+    margin-bottom: 0.5rem; 
+}
+
+.btn-boton3-input {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e83e8c;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn-boton3-input:hover {
+    background-color: #972f5f;
+}
+
+button[type="submit"],
+input[type="submit"] {
+    background-color: #e83e8c; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    background-color: #972f5f; 
+}
+
+.input-archivo {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 5px; 
+}
+
+#nombre-archivo-seleccionado {
+  font-size: 14px;
+  color: #333;
 }
