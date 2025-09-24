@@ -101,6 +101,19 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
+    public function obtenerTodasLasConversaciones()
+    {
+        $sql = "SELECT LEAST(usuario_id, receptor_id) AS u1,
+                GREATEST(usuario_id, receptor_id) AS u2,
+                COUNT(*) AS total_mensajes,
+                MAX(fecha) AS ultima_fecha FROM mnesaje WHERE receptor_id IS NOT NULL
+                GROUP BY u1, u2 ORDER BY ultima_fecha DESC;";
+
+        $result = $this->conexion->query($sql);
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    }
+
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
     {
