@@ -20,7 +20,7 @@ if (!in_array($accion, $acciones_publicas)) {
 }
 
 if (isset($_SESSION['mensaje'])) {
-  echo '<link rel="stylesheet" href="Assets/css/inicio.css">
+  echo '<link rel="stylesheet" href="Assets/css/Main.css">
      <div class="modal active">
        <div class="modal-header">
          <div class="title">Mensaje</div>

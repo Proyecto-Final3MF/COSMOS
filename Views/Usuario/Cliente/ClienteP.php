@@ -14,6 +14,7 @@ require_once ("./Views/include/UH.php");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Panel de Cliente</title>
+     <link rel="stylesheet" href="./Assets/css/Main.css"></head>
 </head>
 <body>
 <div>
