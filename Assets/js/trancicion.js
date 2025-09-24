@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Fade in al cargar
+  // Hacemos fade in al cargar la página
   document.body.classList.add("fade-in");
 
   // Seleccionamos todos los enlaces internos
@@ -7,24 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   links.forEach(link => {
     link.addEventListener("click", e => {
-      // Solo enlaces internos
+      // Solo para enlaces que llevan a otra página de tu sitio
       if (link.hostname === window.location.hostname) {
-        e.preventDefault();
-
-        // Fade out
+        e.preventDefault(); // evitamos navegación inmediata
         document.body.classList.remove("fade-in");
         document.body.classList.add("fade-out");
 
-        // Cambia de página después de la transición
+        // Esperamos la duración del fade y luego cambiamos de página
         setTimeout(() => {
           window.location.href = link.href;
-        }, 500); // coincide con transition en CSS
+        }, 500); // coincide con el transition en CSS
       }
     });
   });
+});
 
-  // Seguridad: si no hay enlaces, aseguramos que el body esté visible
-  setTimeout(() => {
+// 🔹 Importante: cuando vuelves atrás/adelante con el navegador
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) { 
+    // Si la página viene de la caché del navegador, forzamos el fade-in
+    document.body.classList.remove("fade-out");
     document.body.classList.add("fade-in");
-  }, 100);
+  }
 });
