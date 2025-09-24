@@ -21,6 +21,8 @@ body {
     line-height: 1.6;
 }
  
+/* Esto afecta al header el UH.php basicamente */
+
 .navbar {
 	background-color: rgb(255, 255, 255);
 	box-shadow: var(--box-shadow);
@@ -95,6 +97,15 @@ body {
     width: 100%;
 }
 
+.navbar h1 {
+    text-align: center;
+    width: 100%; 
+}
+
+/* aca termina el css del Header UH */
+
+/* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
+
 .action-buttons {
     display: flex;
     align-items: center;
@@ -152,6 +163,10 @@ body {
     margin: 20px 0;
 }
 
+/* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
+
+/* aca afecta los h1, h2 y p, osea titulos y parrafos :V */
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
@@ -171,10 +186,9 @@ p {
     margin: 0 auto 2rem;
 }
 
-.navbar h1 {
-    text-align: center;
-    width: 100%; 
-}
+/* aca terminan los h y p */
+
+/* aca afectan las tablas, todo lo relacionado a ellas */
 
 table {
     width: 95%; 
@@ -216,6 +230,8 @@ th:first-child {
 th:last-child {
     border-top-right-radius: 10px;
 }
+
+/* aca terminan las tablas */
 
 .container3 {
     max-width: 900px;
