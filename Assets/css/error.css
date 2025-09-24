@@ -30,7 +30,7 @@ html {
   opacity: .02;
 }
 
-.overlay {
+.overlay1 {
   pointer-events: none;
   position: absolute;
   width: 100%;
@@ -45,7 +45,7 @@ html {
   z-index: 1;
 }
 
-.overlay::before {
+.overlay1::before {
   content: "";
   pointer-events: none;
   position: absolute;
@@ -98,15 +98,3 @@ a.errorLink {
   color: white;
 }
 
-body {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-body.fade-in {
-  opacity: 1;
-}
-
-body.fade-out {
-  opacity: 0;
-}
