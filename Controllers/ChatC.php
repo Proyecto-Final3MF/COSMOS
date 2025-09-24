@@ -75,6 +75,12 @@ class ChatC
         include __DIR__ . "/../Views/conversaciones.php";
     }
 
+    public function registroChats() {
+        $mensaje = new Mensaje();
+        $conversaciones = $mensaje->obtenerTodasLasConversaciones();
+        include __DIR__ . "/../Views/registroChats.php";
+    }
+
     // Guardar nuevo mensaje
     public function enviar()
     {
