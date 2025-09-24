@@ -14,9 +14,6 @@ Made By:
 
 _**COSMOS**_ is an innovative web platform designed to connect clients who need emergency technical services with qualified freelance technicians. Our mission is to simplify the process of finding professional help for computer equipment repairs, offering a transparent and efficient experience for both clients and technicians
 
-## Documentation (in spanish)
-[Documentación Tecnicos y Asociados.odt](https://github.com/user-attachments/files/22164176/Documentacion.Tecnicos.y.Asociados.odt)
-
 ## How it work?
 
 ### For Clients
