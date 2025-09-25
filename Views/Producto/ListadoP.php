@@ -35,7 +35,7 @@ require_once ("./Views/include/UH.php");
                 <td><img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" class="zoom-img" style="max-width:100px; max-height:100px;" /></td>
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
-                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2"><img src="Assets/imagenes/pen.png" alt="editar" width="50px"></button></a>
+                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></button></a>
                     <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton2"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></button></a>
                 </td>
             <?php endforeach; ?>
