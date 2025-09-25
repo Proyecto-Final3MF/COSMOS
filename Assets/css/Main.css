@@ -111,6 +111,12 @@ body {
     align-items: center;
 }
 
+.btn-agregar {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+}
+
 .btn {
     padding: 0.6rem 1.2rem;
     border-radius: var(--border-radius);
