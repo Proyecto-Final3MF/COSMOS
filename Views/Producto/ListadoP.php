@@ -14,7 +14,7 @@ require_once ("./Views/include/UH.php");
     <br>
     <h2>Tus Productos</h2>
 <div class="botones-container">
-    <a href="index.php?accion=formularioP"><button class="btn btn-boton">Crear Nuevo Producto</button></a>
+    <a href="index.php?accion=formularioP"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
 </div>
 
 <table>
