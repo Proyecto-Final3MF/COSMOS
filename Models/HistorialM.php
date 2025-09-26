@@ -52,7 +52,10 @@ class HistorialM {
         $param_types .= 'ssss';
     }
 
-    if (!empty($startDate) && !empty($endDate)) {
+    if (!empty($startDate)) {
+        if (empty($endDate)) {
+            $endDate = date('d-m-y');
+        }
         $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
         $params[] = $startDate . ' 00:00:00';
         $params[] = $endDate . ' 23:59:59';
