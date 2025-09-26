@@ -68,14 +68,21 @@ class Producto {
     }
 
     public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
-        $nombre = $this->conn->real_escape_string($nombre);
-        $imagen = $this->conn->real_escape_string($imagen);
-        $categoria_id = (int)$categoria_id;
-        $id_usuario = (int)$id_usuario;
-
-        $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES ('$nombre', '$imagen', '$categoria_id', '$id_usuario')";
-        return $this->conn->query($sql);
+    $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES (?, ?, ?, ?)";
+    
+    $stmt = $this->conn->prepare($sql);
+    
+    if (!$stmt) {
+        return false;
     }
+    $stmt->bind_param("ssii", $nombre, $imagen, $categoria_id, $id_usuario);
+    
+    if ($stmt->execute()) {
+        return $stmt->insert_id;
+    } else {
+        return false;
+    }
+}
 
     public function borrar($id) {
         $sql = "DELETE FROM producto WHERE id=$id";
