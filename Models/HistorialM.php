@@ -68,7 +68,7 @@ class HistorialM {
     $stmt = $this->conexion->prepare($query);
 
     if ($stmt === false) {
-        error_log("ERROR: Prepared statement failed in getHistorial: " . $this->conexion->error);
+        error_log("ERROR: La declaración preparada falló en getHistorial: " . $this->conexion->error);
         return [];
     }
 
@@ -80,7 +80,7 @@ class HistorialM {
     $resultado = $stmt->get_result();
 
     if ($resultado === false) {
-        error_log("ERROR: get_result failed in getHistorial: " . $stmt->error);
+        error_log("ERROR: get_result fallo en getHistorial: " . $stmt->error);
     } else {
         while ($fila = $resultado->fetch_object()) {
             $historial[] = $fila;
