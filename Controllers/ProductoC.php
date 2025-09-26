@@ -38,32 +38,30 @@ class ProductoC {
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
         $rutaFinal = "Image/" . $nombreArchivo;
-        if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
-    // Modify this line to capture the returned ID
-    $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
-    
-    // Check if the creation was successful (i.e., if an ID was returned)
-    if ($id) {
-        $_SESSION['mensaje'] = "Producto creado exitosamente.";
 
-        $obs = "Producto creado";
-        $this->historialController->registrarModificacion(
-            $usuarioNombre,
-            $id_usuario,
-            'guardó el producto',
-            $nombre,
-            $id, // Now using the captured ID
-            $obs
-        );
-        header("Location: index.php?accion=redireccion");
-    } else {
-        // Handle the case where the product wasn't created successfully
-        $_SESSION['mensaje'] = "Error al crear el producto.";
-    }
-} else {
-    // Handle the case where the file upload failed
-    $_SESSION['mensaje'] = "Error al subir la imagen.";
-}
+        if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
+            $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
+
+            if ($id) {
+                $_SESSION['mensaje'] = "Producto creado exitosamente.";
+
+                $obs = "Producto creado";
+                $this->historialController->registrarModificacion(
+                    $usuarioNombre,
+                    $id_usuario,
+                    'guardó el producto',
+                    $nombre,
+                    $id, // Now using the captured ID
+                    $obs
+                );
+                header("Location: index.php?accion=redireccion");
+            } else {
+                $_SESSION['mensaje'] = "Error al crear el producto.";
+            }
+        } else {
+            // Handle the case where the file upload failed
+            $_SESSION['mensaje'] = "Error al subir la imagen.";
+        }
     }
     
     public function listarP() {
