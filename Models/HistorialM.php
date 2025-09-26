@@ -52,11 +52,19 @@ class HistorialM {
         $param_types .= 'ssss';
     }
 
-    if (!empty($startDate) && !empty($endDate)) {
-        $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
-        $params[] = $startDate . ' 00:00:00';
-        $params[] = $endDate . ' 23:59:59';
-        $param_types .= 'ss';
+    if (!empty($startDate)) {
+        if (!empty($endDate)) {
+            $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
+            $params[] = $startDate . ' 00:00:00';
+            $params[] = $endDate . ' 23:59:59';
+            $param_types .= 'ss';
+        } else {
+            $endDate = date('d-m-y');
+            $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
+            $params[] = $startDate . ' 00:00:00';
+            $params[] = $endDate . ' 23:59:59';
+            $param_types .= 'ss';
+        }
     }
 
     if (!empty($conditions)) {
