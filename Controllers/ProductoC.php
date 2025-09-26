@@ -51,7 +51,7 @@ class ProductoC {
                     $id_usuario,
                     'guardó el producto',
                     $nombre,
-                    $id, // Now using the captured ID
+                    $id,
                     $obs
                 );
                 header("Location: index.php?accion=redireccion");
@@ -59,7 +59,6 @@ class ProductoC {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
             }
         } else {
-            // Handle the case where the file upload failed
             $_SESSION['mensaje'] = "Error al subir la imagen.";
         }
     }
