@@ -37,9 +37,9 @@ require_once("./Views/include/UH.php");
                     <td><?= htmlspecialchars($c['nombre']) ?></td>
                     <td>
                         <div class="btn-group-actions d-flex">
-                            <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="50px"></a>
+                            <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                                <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-danger"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></a>
+                                <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-boton2 danger"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></a>
                             <?php endif; ?>
                         </div>
                     </td>
