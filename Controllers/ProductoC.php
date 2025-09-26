@@ -1,8 +1,16 @@
 <?php
 require_once ("./Config/conexion.php");
 require_once ("./Models/ProductoM.php");
+require_once ("./Controllers/HistorialC.php");
 
 class ProductoC {
+
+    private $historialController;
+
+    public function __construct() {
+        $this->historialController = new HistorialController();
+    }
+
     public function formularioP(){
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
@@ -14,6 +22,8 @@ class ProductoC {
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $id_usuario = $_SESSION['id'];
+
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
@@ -28,12 +38,25 @@ class ProductoC {
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
         $rutaFinal = "Image/" . $nombreArchivo;
+
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
-            if($producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario)){
+            $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
+
+            if ($id) {
                 $_SESSION['mensaje'] = "Producto creado exitosamente.";
+
+                $obs = "Producto creado";
+                $this->historialController->registrarModificacion(
+                    $usuarioNombre,
+                    $id_usuario,
+                    'guardó el producto',
+                    $nombre,
+                    $id,
+                    $obs
+                );
                 header("Location: index.php?accion=redireccion");
             } else {
-                $_SESSION['mensaje'] = "Error al guardar el producto en la base de datos.";
+                $_SESSION['mensaje'] = "Error al crear el producto.";
             }
         } else {
             $_SESSION['mensaje'] = "Error al subir la imagen.";
