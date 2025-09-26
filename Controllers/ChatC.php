@@ -29,7 +29,7 @@ class ChatC
     // Mostrar la vista de chat
     public function mostrarConversacion()
     {
-        $otroUsuarioId = $_GET['usuario'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $usuarioId = $_SESSION['id'] ?? null;
 
         if (!$otroUsuarioId) {
@@ -119,7 +119,7 @@ class ChatC
         }
 
         // Redirigir a la conversacion
-        header("Location: index.php?accion=mostrarConversacion&usuario=" . $otroUsuarioId);
+        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId);
         exit();
     }
 
@@ -135,7 +135,7 @@ class ChatC
         $mensajeModel = new Mensaje();
         $mensajeModel->enviarMensaje($usuario_id, $receptor_id, $mensaje);
 
-        header("Location: index.php?accion=mostrarConversacion&usuario=" . $receptor_id);
+        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
     }
 }
