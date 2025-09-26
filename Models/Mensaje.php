@@ -33,19 +33,20 @@ class Mensaje
                     ORDER BY m.fecha DESC";
 
             $stmt = $this->conexion->prepare($sql);
+            // Se enlaza el ID del usuario dos veces
             $stmt->bind_param("ii", $receptor_id, $receptor_id);
         }
-
+        // Si falla la preparación de la consulta → devuelve array vacío
         if (!$stmt) {
             return [];
         }
-
+        // Ejecuta la consulta
         $stmt->execute();
         $result = $stmt->get_result();
-
+        // Devuelve todos los resultados como array asociativo
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-
+    // Obtener conversación entre dos usuarios específicos
     public function obtenerConversacion($usuario_id, $otro_usuario_id)
     {
         // Si es admin -> ver todos los mensajes
@@ -59,6 +60,7 @@ class Mensaje
                 ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
+        // Se enlazan los dos IDs en ambas posiciones para cubrir emisor y receptor
         $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
 
 
@@ -67,7 +69,7 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-
+    // Obtener lista de conversaciones de un usuario
     public function obtenerConversaciones($usuario_id)
     {
         $sql = "SELECT CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
@@ -80,13 +82,14 @@ class Mensaje
                 GROUP BY otro_usuario_id, u.nombre ORDER BY ultima_fecha DESC";
 
         $stmt = $this->conexion->prepare($sql);
+        // Se enlaza el mismo ID 4 veces porque se usa en varias condiciones
         $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-
+    // Obtener todos los mensajes
     public function obtenerTodosLosMensajes()
     {
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, 
@@ -106,7 +109,7 @@ class Mensaje
         $sql = "SELECT LEAST(usuario_id, receptor_id) AS u1,
                 GREATEST(usuario_id, receptor_id) AS u2,
                 COUNT(*) AS total_mensajes,
-                MAX(fecha) AS ultima_fecha FROM mnesaje WHERE receptor_id IS NOT NULL
+                MAX(fecha) AS ultima_fecha FROM mensaje WHERE receptor_id IS NOT NULL
                 GROUP BY u1, u2 ORDER BY ultima_fecha DESC;";
 
         $result = $this->conexion->query($sql);
@@ -125,6 +128,7 @@ class Mensaje
             }
             $stmt->bind_param("is", $usuario_id, $mensaje);
         } else {
+            // Mensaje dirigido a un receptor
             $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
             $stmt = $this->conexion->prepare($sql);
             if (!$stmt) {
@@ -134,7 +138,7 @@ class Mensaje
         }
         return $stmt->execute();
     }
-
+    // Guardar mensaje sin receptor
     public function guardarMensaje($usuario_id, $mensaje)
     {
         $sql = "INSERT INTO mensaje (usuario_id, mensaje) VALUES (?, ?)";

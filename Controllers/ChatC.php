@@ -12,13 +12,15 @@ class ChatC
         if (!$usuario_id || !$rol) {
             die("No hay sesión iniciada o faltan datos de usuario.");
         }
-
+        // Verifica si el usuario es administrador
         $esAdmin = ($rol == ROL_ADMIN);
 
+        // Si es admin, ve todos los mensajes y carga la vista admin
         if ($esAdmin) {
             $mensajes = $mensaje->obtenerTodosLosMensajes() ?? [];
             include "Views/chat_admin.php";
         } else {
+            // Si es usuario normal, solo ve sus propios mensajes
             $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
             include "Views/chat.php";
         }
@@ -46,7 +48,7 @@ class ChatC
         $mensaje = new Mensaje();
         $usuario_id = $_SESSION['id'] ?? null;
         $rol = $_SESSION['rol'] ?? null;
-
+        // Si no hay sesión, se devuelve error 401
         if (!$usuario_id) {
             http_response_code(401);
             exit("No autorizado");
@@ -54,7 +56,7 @@ class ChatC
 
         $esAdmin = ($rol == ROL_ADMIN);
         $mensajes = $mensaje->obtenerMensajes($usuario_id, $esAdmin);
-
+        // Recorre los mensajes y los imprime en HTML
         foreach ($mensajes as $m) {
             echo "<p><strong>" . htmlspecialchars($m['usuario']) . ":</strong> " .
                 nl2br(htmlspecialchars($m['mensaje'])) . "</p>";
@@ -74,8 +76,9 @@ class ChatC
         $conversaciones = $mensaje->obtenerConversaciones($usuario_id);
         include __DIR__ . "/../Views/conversaciones.php";
     }
-
-    public function registroChats() {
+    // Lista todas las conversaciones de un usuario
+    public function registroChats()
+    {
         $mensaje = new Mensaje();
         $conversaciones = $mensaje->obtenerTodasLasConversaciones();
         include __DIR__ . "/../Views/registroChats.php";
