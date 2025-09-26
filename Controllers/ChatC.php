@@ -27,18 +27,20 @@ class ChatC
     }
 
     // Mostrar la vista de chat
-    public function mostrarConversacion($otro_usuario_id)
+    public function mostrarConversacion()
     {
-        $mensaje = new Mensaje();
-        $usuario_id = $_SESSION['id'] ?? null;
-        $otro_usuario_id = $_GET['usuario_id'] ?? null;
+        $otroUsuarioId = $_GET['usuario'] ?? null;
+        $usuarioId = $_SESSION['id'] ?? null;
 
-        if (!$otro_usuario_id) {
+        if (!$otroUsuarioId) {
             echo "Debes seleccionar un usuario para conversar.";
-            return;
+            exit();
         }
 
-        $mensajes = $mensaje->obtenerConversacion($usuario_id, $otro_usuario_id);
+        $mensajeModel = new Mensaje();
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+
+
         include __DIR__ . "/../Views/chat.php";
     }
 
@@ -117,7 +119,7 @@ class ChatC
         }
 
         // Redirigir a la conversacion
-        header("Location: index.php?accion=mostrarConversacion&usuario" . $otroUsuarioId);
+        header("Location: index.php?accion=mostrarConversacion&usuario=" . $otroUsuarioId);
         exit();
     }
 
@@ -127,14 +129,13 @@ class ChatC
         $mensaje = new Mensaje();
 
         $usuario_id = $_POST['usuario_id'];
-        $receptor_id = $_POST['receptor_id'] ?? null;
-        $texto = $_POST['mensaje'];
+        $receptor_id = $_POST['receptor_id'];
+        $mensaje = $_POST['mensaje'];
 
-        if ($mensaje->enviarMensaje($usuario_id, $receptor_id, $texto)) {
-            header("Location: index.php?accion=mostrarConversacion&usuario_id=$receptor_id");
-            exit();
-        } else {
-            echo "Error al emviar el mensaje";
-        }
+        $mensajeModel = new Mensaje();
+        $mensajeModel->enviarMensaje($usuario_id, $receptor_id, $mensaje);
+
+        header("Location: index.php?accion=mostrarConversacion&usuario=" . $receptor_id);
+        exit();
     }
 }

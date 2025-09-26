@@ -50,7 +50,7 @@ require_once("./Views/include/UH.php");
                                         <button class="btn btn-boton2">Editar Solicitud</button>
                                     </a>
                                 <?php } ?>
-                                <a href="index.php?accion=mostrarConversacion&usuario=<?= $otroUsuarioId ?>">
+                                <a href="index.php?accion=abrirChat&id_solicitud=<?= $resultado['id'] ?>">
                                     <button class="btn btn-boton2">Mensaje</button>
                                 </a>
                                 <a href="index.php?accion=cancelarS&id_solicitud=<?php echo $resultado['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"> <button class="btn btn-boton2">Cancelar Solicitud</button></a>
