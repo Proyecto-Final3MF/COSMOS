@@ -84,6 +84,43 @@ class ChatC
         include __DIR__ . "/../Views/registroChats.php";
     }
 
+    public function abrirChat()
+    {
+        $idSolicitud = $_GET['id_solicitud'] ?? null;
+        $usuarioId = $_SESSION['id'] ?? null;
+
+        if (!$idSolicitud || !$usuarioId) {
+            $_SESSION['mensaje'] = "Error: Solicitud o usuario no especificado.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+
+        // Obtener solicitud
+        $solicitud = new Solicitud();
+        $datosSolicitud = $solicitud->obtenerSolicitudPorId($idSolicitud);
+
+        if (!$datosSolicitud) {
+            $_SESSION['mensaje'] = "Error: Solicitud no econtrada.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+
+        // Calular con quién hablar
+        if ($_SESSION['rol'] == ROL_TECNICO) {
+            $otroUsuarioId = $datosSolicitud['cliente_id'];
+        } elseif ($_SESSION['rol'] == ROL_CLIENTE) {
+            $otroUsuarioId = $datosSolicitud['tecnico_id'];
+        } else {
+            $_SESSION['mensaje'] = "Error: rol no válido.";
+            header("Location: index.php?accion=listarSA");
+            exit();
+        }
+
+        // Redirigir a la conversacion
+        header("Location: index.php?accion=mostrarConversacion&usuario" . $otroUsuarioId);
+        exit();
+    }
+
     // Guardar nuevo mensaje
     public function enviar()
     {
