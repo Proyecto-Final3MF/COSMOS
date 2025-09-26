@@ -13,35 +13,56 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
     <h2>Tus Productos</h2>
-    <div class="botones-container">
-        <a href="index.php?accion=formularioP"><button class="btn btn-boton">Crear Nuevo Producto</button></a>
-    </div>
+<div class="botones-container">
+    <a href="index.php?accion=formularioP"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
+</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Imagen</th>
-                <th>Categoria</th>
-                <th>Modificaciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            $productoModel = new Producto();
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Imagen</th>
+            <th>Categoría</th>
+            <th>Modificaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $productoModel = new Producto();
+
+        if (!empty($resultados)) {
             foreach ($resultados as $p): ?>
             <tr class="list-item">
                 <td><?= htmlspecialchars($p['nombre']) ?></td>
-                <td><img src="<?= htmlspecialchars($p['imagen']) ?>" alt="Imagen de producto" class="zoom-img" style="max-width:100px; max-height:100px;" /></td>
+                <td>
+                    <img src="<?= htmlspecialchars($p['imagen']) ?>" 
+                         alt="Imagen de producto" 
+                         class="zoom-img" 
+                         style="max-width:100px; max-height:100px;" />
+                </td>
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
-                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>"><button class="btn btn-boton2"><img src="Assets/imagenes/pen.png" alt="editar" width="50px"></button></a>
-                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');"><button class="btn btn-boton2"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></button></a>
+                    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>">
+                        <button class="btn btn-boton2">
+                            <img src="Assets/imagenes/pen.png" alt="editar" width="45">
+                        </button>
+                    </a>
+                    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" 
+                       onclick="return confirm('¿Seguro que quieres borrar este producto?');">
+                        <button class="btn btn-boton2">
+                            <img src="Assets/imagenes/trash.png" alt="eliminar" width="40">
+                        </button>
+                    </a>
                 </td>
-            <?php endforeach; ?>
             </tr>
-        </tbody>
-    </table>
+            <?php endforeach; ?>
+        <?php } else { ?>
+            <tr>
+                <td colspan="4">No tienes productos creados todavía</td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
     <div class='pagination-container'>
         <nav>
