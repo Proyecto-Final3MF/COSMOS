@@ -43,13 +43,16 @@ class HistorialM {
     $param_types = '';
 
     if (!empty($search)) {
-        $conditions[] = "(h.usuario LIKE ? OR h.accion LIKE ? OR h.item LIKE ? OR h.obs LIKE ?)";
-        $search_term = "%" . $search . "%";
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $param_types .= 'ssss';
+        $search_terms = explode (" ", $search);
+        foreach ($search_terms as $palabra) {
+            $conditions[] = "(h.usuario LIKE ? OR h.accion LIKE ? OR h.item LIKE ? OR h.obs LIKE ?)";
+            $search_term = "%" . $palabra . "%";
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $param_types .= 'ssss';
+        }
     }
 
     if (!empty($startDate)) {
