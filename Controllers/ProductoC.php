@@ -78,8 +78,22 @@ class ProductoC {
     public function borrarP() {
         $producto = new Producto();
         $id = $_GET['id'];
+
+        $id_usuario = $_SESSION['id'];
+
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
+
         $producto->borrar($id);
         $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
+        $obs = "Producto eliminado";
+        $this->historialController->registrarModificacion(
+            $usuarioNombre,
+            $id_usuario,
+            'eliminó el producto',
+            $nombre,
+            $id,
+            $obs
+        );
         header("Location: index.php?accion=redireccion");
     }
 
@@ -105,6 +119,9 @@ class ProductoC {
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $imagenActual = $_POST['imagen_actual'] ?? '';
+         $id_usuario = $_SESSION['id'];
+
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
         if (!$id || empty($nombre) || empty($categoria_id)) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
@@ -125,6 +142,16 @@ class ProductoC {
 
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
+            $obs = "Producto actulizado";
+            $this->historialController->registrarModificacion(
+                $usuarioNombre,
+                $id_usuario,
+                'actualizó el producto',
+                $nombre,
+                $id,
+                $obs
+            );
+
             header("Location: index.php?accion=redireccion");
         } else {
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
