@@ -130,11 +130,14 @@ class UsuarioC {
         }
     }
 
-    public function listarU($orden = "Más Antiguos") {
-        $usuario = new Usuario();
-        $resultados = $usuario->listarU($orden);
-        include("views/Usuario/Admin/listarU.php");
-    }
+    public function listarU() {
+    // Get the 'orden' value from the URL. If it's not set, default to 'Más Antiguos'.
+    $orden = $_GET['orden'] ?? 'Más Antiguos'; 
+
+    $usuario = new Usuario();
+    $resultados = $usuario->listarU($orden);
+    include("views/Usuario/Admin/listarU.php");
+}
 
     public function logout() {
         session_destroy();
