@@ -62,36 +62,36 @@ class Usuario {
     }
 
     public function listarU($orden) {
-        $sql = "SELECT * FROM usuario ";
+    $sql = "SELECT * FROM usuario ";
 
-        $resultado = $this->conn->query($sql);
-
-        switch ($orden) {
-            case "A-Z":
-                $sql .= "ORDER BY nombre ASC";
-                break;
-            case "Z-A":
-                $sql .= "ORDER BY nombre DESC";
-                break;
-            case "Más Recientes":
-                $sql .= "ORDER BY id DESC";
-                break;
-            case "Más Antiguos":
-                $sql .= "ORDER BY id ASC";
-                break;
-            default:
-                $sql .= "ORDER BY id ASC";
-                break;
-        }
-
-        $usuarios = [];
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $row;
-            }
-        }
-        return $usuarios;
+    switch ($orden) {
+        case "A-Z":
+            $sql .= "ORDER BY nombre ASC";
+            break;
+        case "Z-A":
+            $sql .= "ORDER BY nombre DESC";
+            break;
+        case "recientes":
+            $sql .= "ORDER BY id DESC";
+            break;
+        case "antiguos":
+            $sql .= "ORDER BY id ASC";
+            break;
+        default:
+            $sql .= "ORDER BY id ASC";
+            break;
     }
+
+    $resultado = $this->conn->query($sql);
+
+    $usuarios = [];
+    if ($resultado) {
+        while ($row = $resultado->fetch_assoc()) {
+            $usuarios[] = $row;
+        }
+    }
+    return $usuarios;
+}
 
   public function borrar($id){
             $sql = "DELETE FROM usuarios WHERE id=$id";
