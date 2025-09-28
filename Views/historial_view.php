@@ -58,7 +58,7 @@ require_once ("./Views/include/UH.php");
                             <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
                             <strong><?php echo htmlspecialchars(ucfirst($registro->item)); ?></strong>
                             <?php
-                                if ($registro->item !== null) {
+                                if ($registro->item) {
                                     echo "#".  htmlspecialchars($registro->item_id);
                                 }
                             ?>
