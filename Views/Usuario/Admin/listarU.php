@@ -20,7 +20,7 @@ require_once("./Views/include/UH.php");
 
 <form action="index.php">
     <label for="orden">Ordenar por:</label>
-    <input type="hidden" name="accion" value="listarC">
+    <input type="hidden" name="accion" value="listarU">
     <select name="orden" id="orden" style="max-width: 300px">
     <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
     <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
