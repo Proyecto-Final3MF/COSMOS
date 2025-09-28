@@ -17,6 +17,19 @@ require_once("./Views/include/UH.php");
 </head>
 <body>
 <h2>Listado de todas las categorias</h2>
+
+<form action="index.php">
+    <label for="orden">Ordenar por:</label>
+    <input type="hidden" name="accion" value="listarC">
+    <select name="orden" id="orden" style="max-width: 300px">
+    <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
+    <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
+    <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
+    <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
+</select>
+    <button>Buscar</button>
+</form>
+
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
         No hay categorias registradas. <a href="index.php?accion=crear">Crear la primera</a>
