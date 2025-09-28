@@ -35,8 +35,27 @@ class Categoria {
         return $newId;
     }
 
-    public function listarC() {
-        $sql = "SELECT * FROM categoria ORDER BY nombre ASC";
+    public function listarC($orden) {
+        $sql = "SELECT * FROM categoria "; // Note the space at the end
+
+        switch ($orden) {
+            case "A-Z":
+                $sql .= "ORDER BY nombre ASC";
+                break;
+            case "Z-A":
+                $sql .= "ORDER BY nombre DESC";
+                break;
+            case "Más Recientes":
+                $sql .= "ORDER BY id DESC";
+                break;
+            case "Más Antiguos":
+                $sql .= "ORDER BY id ASC";
+                break;
+            default:
+                $sql .= "ORDER BY id ASC";
+                break;
+        }
+
         $resultado = $this->conn->query($sql);
 
         $categorias = [];
