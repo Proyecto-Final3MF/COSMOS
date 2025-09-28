@@ -130,7 +130,7 @@ class UsuarioC {
         }
     }
 
-    public function listarU($orden) {
+    public function listarU($orden = "Más Antiguos") {
         $usuario = new Usuario();
         $resultados = $usuario->listarU($orden);
         include("views/Usuario/Admin/listarU.php");
