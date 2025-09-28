@@ -36,7 +36,7 @@ class Categoria {
     }
 
     public function listarC($orden) {
-        $sql = "SELECT * FROM categoria "; // Note the space at the end
+        $sql = "SELECT * FROM categoria ";
 
         switch ($orden) {
             case "A-Z":

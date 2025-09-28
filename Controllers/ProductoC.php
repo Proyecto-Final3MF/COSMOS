@@ -71,7 +71,8 @@ class ProductoC {
         }
         
         $producto = new Producto();
-        $resultados = $producto->listarP($id_usuario);
+        $orden = $_GET['orden'] ?? 'Más Recientes';
+        $resultados = $producto->listarP($id_usuario, $orden);
         include("./Views/Producto/ListadoP.php");
     }
     
