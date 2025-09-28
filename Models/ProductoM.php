@@ -24,9 +24,28 @@ class Producto {
         return null;
     }
 
-    public function listarP($id_usuario) {
+    public function listarP($id_usuario, $orden) {
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario";
+        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario ";
+
+        switch ($orden) {
+            case "A-Z":
+                $sql .= "ORDER BY nombre ASC";
+                break;
+            case "Z-A":
+                $sql .= "ORDER BY nombre DESC";
+                break;
+            case "Más Recientes":
+                $sql .= "ORDER BY id DESC";
+                break;
+            case "Más Antiguos":
+                $sql .= "ORDER BY id ASC";
+                break;
+            default:
+                $sql .= "ORDER BY id ASC";
+                break;
+        }
+
         $resultado = $this->conn->query($sql);
         
         if ($resultado) {
