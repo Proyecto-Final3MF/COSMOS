@@ -18,6 +18,18 @@ require_once("./Views/include/UH.php");
 <body>
 <h2>Listado de todas los Usuarios</h2>
 
+<form action="index.php">
+    <label for="orden">Ordenar por:</label>
+    <input type="hidden" name="accion" value="listarC">
+    <select name="orden" id="orden" style="max-width: 300px">
+    <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
+    <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
+    <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
+    <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
+</select>
+    <button>Buscar</button>
+</form>
+
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
         No hay usuarios registrados. <a href="index.php?accion=crear">Crear el primero</a>
@@ -34,15 +46,17 @@ require_once("./Views/include/UH.php");
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($resultados as $c): ?>
+            <?php foreach ($resultados as $u): ?>
                 <tr class="list-item">
-                    <td><?= $c['id'] ?></td>
-                    <td><?= htmlspecialchars($c['nombre']) ?></td>
+                    <td><?= $u['id'] ?></td>
+                    <td><?= htmlspecialchars($u['nombre']) ?></td>
+                    <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td><?= htmlspecialchars($u['rol_id']) ?></td>
                     <td>
                         <div class="btn-group-actions d-flex">
-                            <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
+                            <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                                <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="btn btn-boton2 danger"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></a>
+                                <a href="index.php?accion=borrarU&id=<?= $u['id'] ?>" class="btn btn-boton2 danger"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></a>
                             <?php endif; ?>
                         </div>
                     </td>

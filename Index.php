@@ -197,6 +197,11 @@ switch ($accion) {
   break;
   //acciones para el rol admin
 
+  case  'listarU':
+    $controller = new UsuarioC();
+    $controller->listarU();
+  break;
+
   //acciones historial
 
   case 'mostrarHistorial':

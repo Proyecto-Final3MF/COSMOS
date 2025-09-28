@@ -130,10 +130,9 @@ class UsuarioC {
         }
     }
 
-    public function listarU() {
+    public function listarU($orden) {
         $usuario = new Usuario();
-
-        $resultados = $categoria->listarU();
+        $resultados = $usuario->listarU($orden);
         include("views/Usuario/Admin/listarU.php");
     }
 
