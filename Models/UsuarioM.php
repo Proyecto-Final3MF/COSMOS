@@ -61,6 +61,20 @@ class Usuario {
         return $stmt->execute();
     }
 
+    public function listarU() {
+        $sql = "SELECT * FROM usuario";
+
+        $resultado = $this->conn->query($sql);
+
+        $usuarios = [];
+        if ($resultado) {
+            while ($row = $resultado->fetch_assoc()) {
+                $usuarios[] = $row;
+            }
+        }
+        return $usuarios;
+    }
+
   public function borrar($id){
             $sql = "DELETE FROM usuarios WHERE id=$id";
             return $this->conn->query($sql);

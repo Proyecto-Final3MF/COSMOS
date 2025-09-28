@@ -110,26 +110,32 @@ class UsuarioC {
     
 
     public function autenticar() {
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
-    $modelo = new Usuario();
-    $user = $modelo->verificarU($usuario, $contrasena);
+        $usuario = $_POST['usuario'];
+        $contrasena = $_POST['contrasena'];
+        $modelo = new Usuario();
+        $user = $modelo->verificarU($usuario, $contrasena);
 
-    if ($user) {
-        session_start();
-        $_SESSION['usuario'] = $user['nombre'];
-        $_SESSION['rol'] = $user['rol_id'];
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['email'] = $user['email']; 
+        if ($user) {
+            session_start();
+            $_SESSION['usuario'] = $user['nombre'];
+            $_SESSION['rol'] = $user['rol_id'];
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['email'] = $user['email']; 
 
-        header("Location: index.php?accion=redireccion");
-        exit();
-    } else {
-        $error = "Usuario o contraseña incorrectos";
-        include("views/Usuario/Login.php");
+            header("Location: index.php?accion=redireccion");
+            exit();
+        } else {
+            $error = "Usuario o contraseña incorrectos";
+            include("views/Usuario/Login.php");
+        }
     }
-}
 
+    public function listarU() {
+        $usuario = new Usuario();
+
+        $resultados = $categoria->listarU();
+        include("views/Usuario/Admin/listarU.php");
+    }
 
     public function logout() {
         session_destroy();
