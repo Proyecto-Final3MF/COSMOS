@@ -17,16 +17,16 @@ require_once ("./Views/include/UH.php");
     <a href="index.php?accion=formularioP"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
 </div>
 
-<form action="index.php">
+<form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarP">
-    <select name="orden" id="orden" style="max-width: 300px">
-    <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
-    <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
-    <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
-    <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
-</select>
-    <button>Buscar</button>
+    <select name="orden" id="orden">
+        <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
+        <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
+        <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
+        <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
+    </select>
+    <button type="submit" class="btn-boton">Buscar</button>
 </form>
 
 <table>
