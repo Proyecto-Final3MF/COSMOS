@@ -924,7 +924,8 @@ input[type="submit"]:hover {
   color: #333;
 }
 
-/* Estilos para el formulario de ordenado */
+/* aca empieza el css de filtrado de las tablas */
+
 .ordenar-form {
     display: flex;
     justify-content: center;
@@ -974,3 +975,5 @@ input[type="submit"]:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
 }
+
+/* aca termina el css del filtrado de las tablas */
