@@ -131,13 +131,13 @@ class UsuarioC {
     }
 
     public function listarU() {
-    $orden = $_GET['orden'] ?? ''; 
-    $rol_filter = $_GET['rol_filter'] ?? 'Todos';
+        $orden = $_GET['orden'] ?? ''; 
+        $rol_filter = $_GET['rol_filter'] ?? 'Todos';
 
-    $usuario = new Usuario();
-    $resultados = $usuario->listarU($orden, $rol_filter);
-    include("views/Usuario/Admin/listarU.php");
-}
+        $usuario = new Usuario();
+        $resultados = $usuario->listarU($orden, $rol_filter);
+        include("views/Usuario/Admin/listarU.php");
+    }
 
     public function logout() {
         session_destroy();

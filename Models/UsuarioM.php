@@ -62,51 +62,51 @@ class Usuario {
     }
 
     public function listarU($orden, $rol_filter) {
-    $sql = "SELECT * FROM usuario ";
+        $sql = "SELECT * FROM usuario ";
 
-    switch ($rol_filter) {
-        case 'Todos':
+        switch ($rol_filter) {
+            case 'Todos':
+                break;
+            case 'Clientes':
+                $sql .= "WHERE rol_id = 1 ";
+                break;
+            case 'Tecnicos':
+                $sql .= "WHERE rol_id = 2 ";
+                break;
+            case 'Administradores':
+                $sql .= "WHERE rol_id = 3 ";
+            default:
             break;
-        case 'Clientes':
-            $sql .= "WHERE rol_id = 1 ";
-            break;
-        case 'Tecnicos':
-            $sql .= "WHERE rol_id = 2 ";
-            break;
-        case 'Administradores':
-            $sql .= "WHERE rol_id = 3 ";
-        default:
-        break;
-    }
-
-    switch ($orden) {
-        case "A-Z":
-            $sql .= "ORDER BY nombre ASC";
-            break;
-        case "Z-A":
-            $sql .= "ORDER BY nombre DESC";
-            break;
-        case "recientes":
-            $sql .= "ORDER BY id DESC";
-            break;
-        case "antiguos":
-            $sql .= "ORDER BY id ASC";
-            break;
-        default:
-            $sql .= "ORDER BY id ASC";
-            break;
-    }
-
-    $resultado = $this->conn->query($sql);
-
-    $usuarios = [];
-    if ($resultado) {
-        while ($row = $resultado->fetch_assoc()) {
-            $usuarios[] = $row;
         }
+
+        switch ($orden) {
+            case "A-Z":
+                $sql .= "ORDER BY nombre ASC";
+                break;
+            case "Z-A":
+                $sql .= "ORDER BY nombre DESC";
+                break;
+            case "Más Recientes":
+                $sql .= "ORDER BY id DESC";
+                break;
+            case " Más Antiguos":
+                $sql .= "ORDER BY id ASC";
+                break;
+            default:
+                $sql .= "ORDER BY id ASC";
+                break;
+        }
+
+        $resultado = $this->conn->query($sql);
+
+        $usuarios = [];
+        if ($resultado) {
+            while ($row = $resultado->fetch_assoc()) {
+                $usuarios[] = $row;
+            }
+        }
+        return $usuarios;
     }
-    return $usuarios;
-}
 
   public function borrar($id){
             $sql = "DELETE FROM usuarios WHERE id=$id";
