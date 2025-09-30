@@ -27,6 +27,7 @@ require_once("./Views/include/UH.php");
         <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
         <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
     </select>
+    <label for="rol_filter">Tipo de Usuarios:</label>
     <select name="rol_filter" id="rol_filter">
         <option value="Todos" <?php echo ($_GET['rol_filter'] ?? 'Todos') == 'Todos' ? 'selected' : ''; ?>>Todos</option>
         <option value="Clientes" <?php echo ($_GET['rol_filter'] ?? '') == 'Clientes' ? 'selected' : ''; ?>>Clientes</option>
