@@ -61,8 +61,23 @@ class Usuario {
         return $stmt->execute();
     }
 
-    public function listarU($orden) {
+    public function listarU($orden, $rol_filter) {
     $sql = "SELECT * FROM usuario ";
+
+    switch ($rol_filter) {
+        case 'Todos':
+            break;
+        case 'Clientes':
+            $sql .= "WHERE rol_id = 1 ";
+            break;
+        case 'Tecnicos':
+            $sql .= "WHERE rol_id = 2 ";
+            break;
+        case 'Administradores':
+            $sql .= "WHERE rol_id = 3 ";
+        default:
+        break;
+    }
 
     switch ($orden) {
         case "A-Z":
