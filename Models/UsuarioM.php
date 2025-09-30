@@ -108,7 +108,30 @@ class Usuario {
         return $usuarios;
     }
 
-    public function borrar($id){
+    public function AddReview($nota, $notasTecnico, $cantidadReview) {
+
+        $NotaSuma = array_sum($notasTecnico);
+
+        $NotaPromedio = $NotaSuma / $cantidadReview;
+        $NotaPromedio = round($NotaPromedio * 2) / 2;
+        $NotaPromedio = max(0.5, min(5, $NotaPromedio));
+
+        $sql = "UPDATE usuario SET promedio = :nota_promedio WHERE id = :tecnico_id";
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            
+            // Vincula os valores aos placeholders
+            $stmt->bindParam(':nota_promedio', $NotaPromedio);
+            $stmt->bindParam(':tecnico_id', $id);
+            $stmt->execute();
+            echo "Avaliação atualizada com sucesso para o técnico ID: " . $Tid;
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar avaliação: " . $e->getMessage();
+        }
+    }
+
+    public function borrar($id) {
         $sql = "DELETE FROM usuarios WHERE id=$id";
         return $this->conn->query($sql);
     }

@@ -139,6 +139,15 @@ class UsuarioC {
         include("views/Usuario/Admin/listarU.php");
     }
 
+    public function AddReview() {
+        $cantidadReview += 1;
+        $nota = $_GET['nota'];
+        $NotasTecnico[] = $nota;
+
+        $usuario = New Usuario();
+        $usuario->AddReview($nota, $notasTecnico, $cantidadReview);
+    }
+
     public function logout() {
         session_destroy();
         header("Location: Index.php");

@@ -13,7 +13,9 @@ CREATE TABLE usuario (
     nombre VARCHAR(100) NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id)
+    rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id),
+    cant_review INT,
+    promedio DOUBLE
 );
 
 CREATE TABLE producto (
