@@ -131,13 +131,13 @@ class UsuarioC {
     }
 
     public function listarU() {
-    // Get the 'orden' value from the URL. If it's not set, default to 'Más Antiguos'.
-    $orden = $_GET['orden'] ?? 'Más Antiguos'; 
+        $orden = $_GET['orden'] ?? ''; 
+        $rol_filter = $_GET['rol_filter'] ?? 'Todos';
 
-    $usuario = new Usuario();
-    $resultados = $usuario->listarU($orden);
-    include("views/Usuario/Admin/listarU.php");
-}
+        $usuario = new Usuario();
+        $resultados = $usuario->listarU($orden, $rol_filter);
+        include("views/Usuario/Admin/listarU.php");
+    }
 
     public function logout() {
         session_destroy();

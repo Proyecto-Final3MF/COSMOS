@@ -923,3 +923,57 @@ input[type="submit"]:hover {
   font-size: 14px;
   color: #333;
 }
+
+/* aca empieza el css de filtrado de las tablas */
+
+.ordenar-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: var(--box-shadow);
+}
+
+.ordenar-form label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.ordenar-form select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background-color: white;
+}
+
+.ordenar-form select:hover {
+    border-color: var(--primary-color);
+}
+
+.ordenar-form button {
+    padding: 8px 18px;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    margin-top: -10px;
+}
+
+.ordenar-form button:hover {
+    background-color: #972f5f;
+    transform: translateY(-2px);
+}
+
+/* aca termina el css del filtrado de las tablas */
