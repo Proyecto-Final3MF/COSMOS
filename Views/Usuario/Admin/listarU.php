@@ -16,7 +16,7 @@ require_once("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-<h2>Listado de todas los Usuarios</h2>
+<h2>Listado de todos los Usuarios</h2>
 
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
