@@ -43,7 +43,7 @@ class Usuario {
         return null;
     }
    
-  public function buscarUserId($id) {
+    public function buscarUserId($id) {
         // Usa consultas preparadas para mayor seguridad
         $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
@@ -108,10 +108,10 @@ class Usuario {
         return $usuarios;
     }
 
-  public function borrar($id){
-            $sql = "DELETE FROM usuarios WHERE id=$id";
-            return $this->conn->query($sql);
-        }
+    public function borrar($id){
+        $sql = "DELETE FROM usuarios WHERE id=$id";
+        return $this->conn->query($sql);
+    }
 
 }
 ?>
