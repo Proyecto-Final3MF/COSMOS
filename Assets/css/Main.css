@@ -102,24 +102,6 @@ body {
     width: 100%; 
 }
 
-.logo-link img {
-    animation: float 3s ease-in-out infinite;
-    transition: transform 0.5s ease, filter 0.5s ease;
-    cursor: pointer;
-}
-
-@keyframes float {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-}
-
-.logo-link img:hover {
-    transform: rotate(15deg) scale(1.2);
-    filter: drop-shadow(0 0 8px var(--primary-color));
-}
-
-
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -995,64 +977,3 @@ input[type="submit"]:hover {
 }
 
 /* aca termina el css del filtrado de las tablas */
-
-.inicio55 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-    animation: fadeDown 1s ease forwards;
-}
-
-.inicio44 {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #555;
-    max-width: 890px;
-    margin: 0 auto 2rem;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards;
-    animation-delay: 0.5s;
-}
-
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.btn-boton44 {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    margin-right: 1rem;
-    animation: pulse 2s infinite;
-}
-
-.btn-boton44:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: scale(1.05);
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
