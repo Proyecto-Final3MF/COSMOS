@@ -18,16 +18,22 @@ require_once("./Views/include/UH.php");
 <body>
 <h2>Listado de todas los Usuarios</h2>
 
-<form action="index.php">
+<form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarU">
-    <select name="orden" id="orden" style="max-width: 300px">
-        <option value="recientes" <?php echo ($_GET['orden'] ?? 'antiguos') == 'recientes' ? 'selected' : ''; ?>>Más Recientes</option>
-        <option value="antiguos" <?php echo ($_GET['orden'] ?? 'antiguos') == 'antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
+    <select name="orden" id="orden">
+        <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Recientes') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
+        <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
         <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
         <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
     </select>
-    <button>Buscar</button>
+    <select name="rol_filter" id="rol_filter">
+        <option value="Todos" <?php echo ($_GET['rol_filter'] ?? 'Todos') == 'Todos' ? 'selected' : ''; ?>>Todos</option>
+        <option value="Clientes" <?php echo ($_GET['rol_filter'] ?? '') == 'Clientes' ? 'selected' : ''; ?>>Clientes</option>
+        <option value="Tecnicos" <?php echo ($_GET['rol_filter'] ?? '') == 'Tecnicos' ? 'selected' : ''; ?>>Tecnicos</option>
+        <option value="Administradores" <?php echo ($_GET['rol_filter'] ?? '') == 'Administradores' ? 'selected' : ''; ?>>Administradores</option>
+    </select>
+    <button type="submit" class="btn-boton">Buscar</button>
 </form>
 
 <?php if (empty($resultados)): ?>
