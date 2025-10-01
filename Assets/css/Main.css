@@ -152,11 +152,14 @@ body {
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
     margin-right: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-boton:hover {
     background-color: var(--primary-color);
     color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .btn-group-actions {
@@ -186,6 +189,7 @@ body {
 .btn-boton2:hover {
     background-color: var(--primary-color);
     color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .btn-boton2.danger:hover {
@@ -219,6 +223,7 @@ h1 {
 
 h2 {
     text-align: center;
+    animation: glow 2s ease-in-out infinite alternate;
 }
 
 p {
@@ -306,10 +311,56 @@ tbody tr:hover {
 
 /* aca terminan las tablas */
 
+/* aca empieza el css del historial */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container3 h1,
+.container3 p,
+.filter-form {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+.container3 h1 { animation-delay: 0.1s; }
+.container3 p { animation-delay: 0.3s; }
+.filter-form { animation-delay: 0.5s; }
+
+.list-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.list-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.button-container5 button,
+.button-container5 .clear-button,
+.botones-container button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-container5 button:hover,
+.button-container5 .clear-button:hover,
+.botones-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .container3 {
     max-width: 900px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #f0f2f54f;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -378,6 +429,7 @@ tbody tr:hover {
 .filter-form button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .clear-button {
@@ -388,6 +440,7 @@ tbody tr:hover {
 .clear-button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .historial-item {
@@ -431,6 +484,8 @@ tbody tr:hover {
     border-radius: 8px;
     border: 1px solid #dc3545;
 }
+
+/*aca termina el css del historial */
 
 /* aca empieza el css del pagination, el que esta en las tablas */
 
@@ -509,7 +564,7 @@ tbody tr:hover {
 
 .dropdown-text {
     font-weight: 600;
-    color: #1f2937;
+    color: #361f37;
     margin: 0;
 }
 
@@ -548,12 +603,12 @@ tbody tr:hover {
 
 .user-name {
     font-weight: 600;
-    color: #1f2937;
+    color: #151b24;
 }
 
 .user-email {
     font-size: 0.875rem;
-    color: #6b7280;
+    color: #4c5361;
 }
 
 .dropdown-item {
@@ -562,7 +617,7 @@ tbody tr:hover {
     text-align: left;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
-    color: #374151;
+    color: #171817;
     transition: background-color 0.2s ease;
 }
 
@@ -1106,3 +1161,20 @@ p.inicio44 {
     100% { transform: scale(1); }
 }
 
+.fade-slide {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.8s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-container a:nth-child(1) { animation-delay: 0.2s; }
+.btn-container a:nth-child(2) { animation-delay: 0.4s; }
+.btn-container a:nth-child(3) { animation-delay: 0.6s; }
+.btn-container a:nth-child(4) { animation-delay: 0.8s; }
