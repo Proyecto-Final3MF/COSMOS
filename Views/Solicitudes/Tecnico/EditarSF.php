@@ -19,9 +19,9 @@
     
     <input type="hidden" name="id" value="<?= $datos['id'] ?>">
         
-    <p> Nombre: </p>  <input type="text" name="nombre" value="<?= $datos['nombre'] ?>"><br>
+    <p class="fade-label"> Nombre: </p>  <input type="text" name="nombre" value="<?= $datos['nombre'] ?>"><br>
         
-   <p> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
+   <p class="fade-label"> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
        
     <input type="submit" value="Guardar cambios">
 

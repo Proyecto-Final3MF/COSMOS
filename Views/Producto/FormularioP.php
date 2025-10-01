@@ -16,11 +16,11 @@ require_once ("./Views/include/UH.php");
     <h3>Nuevo Producto</h3>
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
-        <p>Nombre del Equipo: </p>
+        <p class="fade-label">Nombre del Equipo: </p>
         <label for="nombre" class="form-label"></label>
         <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>
 
-        <p>Imagen: </p>
+        <p class="fade-label">Imagen: </p>
     <div class="input-archivo">
     <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required hidden>
     <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
@@ -28,7 +28,7 @@ require_once ("./Views/include/UH.php");
     </div>
 
         <br><br>
-        <p>Categoria:</p>
+        <p class="fade-label">Categoria:</p>
             <select id="categoria" name="categoria" required>
                 <option value=""></option>
                 <?php foreach ($categorias as $categoria): ?>

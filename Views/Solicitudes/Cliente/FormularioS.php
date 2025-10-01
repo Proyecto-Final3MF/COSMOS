@@ -16,11 +16,11 @@ require_once ("./Views/include/UH.php");
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
         
-        <p>Titulo: </p>
+        <p class="fade-label">Titulo: </p>
         <label for="titulo" class="form-label"></label>
         <input type="text" class="form-control" id="titulo" name="titulo" autocomplete="off" required> <br><br>
                
-        <p>Producto:</p>
+        <p class="fade-label">Producto:</p>
         <select id="producto" name="producto" required>
                 <option value=""></option>
                 <?php foreach ($productos as $producto): ?>
@@ -28,10 +28,10 @@ require_once ("./Views/include/UH.php");
                 <?php endforeach; ?>
         </select>
 
-        <p>Descripcion:</p>
+        <p class="fade-label">Descripcion:</p>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
                         
-        <label for="prioridad"><p>Nivel de Prioridad: </p></label>
+        <label for="prioridad"><p class="fade-label">Nivel de Prioridad: </p></label>
             <select name="prioridad" id="prioridad" required>
                 <option value="baja">Baja</option>
                 <option value="media">Media</option>
