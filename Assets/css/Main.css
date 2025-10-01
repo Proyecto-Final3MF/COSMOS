@@ -914,10 +914,7 @@ a.errorLink {
 
 /* Fin del css de Error.php */
 
-
-/* ----------------------------- */
-/* ESTILOS DE FORMULARIOS        */
-/* ----------------------------- */
+/* Aca el CSS de los Formularios */
 
 .contenedor-formulario {
     background-color: #f0f2f5; 
@@ -927,7 +924,67 @@ a.errorLink {
     padding-top: 50px;
     min-height: calc(100vh - 100px);
     gap: 20px; 
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease-out forwards;
 }
+
+.contenedor-formulario h3 {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideDown 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.contenedor-formulario form > * {
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+.contenedor-formulario form > *:nth-child(1) { animation-delay: 0.3s; }
+.contenedor-formulario form > *:nth-child(2) { animation-delay: 0.4s; }
+.contenedor-formulario form > *:nth-child(3) { animation-delay: 0.5s; }
+.contenedor-formulario form > *:nth-child(4) { animation-delay: 0.6s; }
+.contenedor-formulario form > *:nth-child(5) { animation-delay: 0.7s; }
+.contenedor-formulario form > *:nth-child(6) { animation-delay: 0.8s; }
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-label {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-label:nth-of-type(1) { animation-delay: 0.1s; }
+.fade-label:nth-of-type(2) { animation-delay: 0.2s; }
+.fade-label:nth-of-type(3) { animation-delay: 0.3s; }
+.fade-label:nth-of-type(4) { animation-delay: 0.4s; }
 
 section {
     background-color: #ffffff; 
@@ -1046,6 +1103,8 @@ input[type="submit"]:hover {
   color: #333;
 }
 
+/* Aca termina el CSS de los Formularios */
+
 /* aca empieza el css de filtrado de las tablas */
 
 .ordenar-form {
@@ -1099,6 +1158,8 @@ input[type="submit"]:hover {
 }
 
 /* aca termina el css del filtrado de las tablas */
+
+/* Aca hay CSS del inicio con animaciones y eso */
 
 h1.inicio55 {
     text-align: center;
@@ -1178,3 +1239,5 @@ p.inicio44 {
 .btn-container a:nth-child(2) { animation-delay: 0.4s; }
 .btn-container a:nth-child(3) { animation-delay: 0.6s; }
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
+
+/* y aca termina el css de animaciones para inici */
