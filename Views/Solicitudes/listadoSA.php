@@ -2,7 +2,6 @@
 require_once ("./Views/include/UH.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,12 +9,24 @@ require_once ("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
+    <style>
+        .list-item td:last-child .botones-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .list-item td:last-child .botones-container a {
+            display: center;
+        }
+    </style>
 </head>
 <body>
     <br>
     <div>
-    <h2>Solicitudes aceptadas</h2>
-</div>
+        <h2>Solicitudes aceptadas</h2>
+    </div>
     <table>
         <thead>
             <tr>
@@ -28,52 +39,64 @@ require_once ("./Views/include/UH.php");
             </tr>
         </thead>
         <tbody>
-    <?php
-    if (!empty($resultados)) {
-        foreach ($resultados as $resultado) {
+        <?php
+        if (!empty($resultados)) {
+            foreach ($resultados as $resultado) {
+                ?>
+                <tr class="list-item">
+                    <td><?= htmlspecialchars($resultado['titulo']); ?></td>
+                    <td>
+                        <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto" class="zoom-img"/><br>
+                        <?= htmlspecialchars($resultado['nombre']) ?>
+                    </td>
+                    <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
+                    <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
+                    <td>
+                        <div class="botones-container">
+                            <?php if($_SESSION['rol'] == 1){ ?>
+                                <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2" > 
+                                     <img src="Assets/imagenes/pen.png" alt="editar" width="45">
+                                </a>
+                            <?php } ?>
+                            <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');" class="btn btn-boton2" >
+                                <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <?php
+            }
+        } else {
             ?>
-            <tr class="list-item">
-                <td><?= htmlspecialchars($resultado['titulo']); ?></td>
-                <td>
-                    <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto" class="zoom-img"/><br>
-                    <?= htmlspecialchars($resultado['nombre']) ?>
-                </td>
-                <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
-                <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
-                <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
-                <td>
-                    <div class="botones-container">
-                        <?php if($_SESSION['rol'] == 1){?>
-                            <a href="index.php?accion=editarSF&id=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Editar Solicitud</button></a>
-                        <?php }?>
-                        <a href="index.php?accion=cancelarS&id_solicitud=<?php echo $resultado['id'];?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"> <button class="btn btn-boton2">Cancelar Solicitud</button></a>
+            <tr>
+                <td colspan="6">
+                    No acepto solicitudes todavia
+                    <div style="display:flex; justify-content:center; margin-top:15px;">
+                        <a href="index.php?accion=listarTL">
+                            <button class="btn btn-boton2">Ver solicitudes disponibles</button>
+                        </a>
                     </div>
                 </td>
             </tr>
             <?php
         }
-    } else {
         ?>
-        <tr>
-            <td colspan="6">No acepto solicitudes todavia <br> <br><a href="index.php?accion=listarTL"><button class="btn btn-boton2">Ver solicitudes disponibles</button></a></td>
-        </tr>
-        <?php
-    }
-    ?>
-</tbody>
-</table>
-</div>
+        </tbody>
+    </table>
 
-<div class="botones-container">
-    <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-</div>
-<div id="imageModal" class="image-modal">
-    <span class="close">&times;</span>
-    <img class="image-modal-content" id="modalImage">
-</div>
-<script src="Assets/js/zoomimagen.js"></script>
-<script src="Assets/js/trancicion.js"></script>
-<script src="Assets/js/listado.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="botones-container">
+        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
+
+    <div id="imageModal" class="image-modal">
+        <span class="close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <script src="Assets/js/zoomimagen.js"></script>
+    <script src="Assets/js/trancicion.js"></script>
+    <script src="Assets/js/listado.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

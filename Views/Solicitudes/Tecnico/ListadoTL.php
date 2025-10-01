@@ -47,7 +47,7 @@ require_once ("./Views/include/UH.php");
         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
         <td>
           <div class="botones-container">
-            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Aceptar Solicitud</button></a>
+            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="btn btn-boton2" >  <img src="Assets/imagenes/free-check-icon-3278-thumb-removebg-preview.png" alt="editar" width="45"></a>
           </div>
         </td>
       </tr>

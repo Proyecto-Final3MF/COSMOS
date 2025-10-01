@@ -43,8 +43,8 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
-                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>">
-                        <button class="btn btn-boton2">Eliminar</button>
+                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>" class="btn btn-boton2" >
+                        <img src="Assets/imagenes/trash.png" alt="eliminar" width="40">
                     </a>
                 </td>
            
