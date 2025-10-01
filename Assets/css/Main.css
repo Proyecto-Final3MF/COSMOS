@@ -119,6 +119,13 @@ body {
     filter: drop-shadow(0 0 8px var(--primary-color));
 }
 
+.icono-menu {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -1240,4 +1247,4 @@ p.inicio44 {
 .btn-container a:nth-child(3) { animation-delay: 0.6s; }
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
 
-/* y aca termina el css de animaciones para inici */
+/* y aca termina el css de animaciones para inicio */
