@@ -16,9 +16,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     <link rel="stylesheet" href="./Assets/css/Main.css"> </head>
 <body>
     <main>
-        <h2>Aquí podrás gestionar tus tareas como técnico.</h2>
+        <h2 class="fade-slide">Aquí podrás gestionar tus tareas como técnico.</h2>
     </main>
-    <div class="btn-container">
+    <div class="btn-container fade-slide">
     <a href="Index.php?accion=listarTL"><button class="btn btn-boton">Solicitudes Disponibles</button></a>
     <a href="Index.php?accion=listarSA"><button class="btn btn-boton">Solicitudes Aceptadas</button></a><br>
     <a href="Index.php?accion=listarSTT"><button class="btn btn-boton">Solicitudes Terminadas</button></a><br>
