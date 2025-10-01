@@ -26,15 +26,15 @@ require_once ("./Views/include/UH.php");
 
 
     <form method="POST" action="index.php?accion=guardarU">
-        <p>Usuario </p>
+        <p class="fade-label">Usuario </p>
         <label for="usuario" class="form-label"></label>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
-        <p>Email </p>
+        <p class="fade-label">Email </p>
         <label for="mail" class="form-label"></label>
         <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
-        <p>Rol</p>
+        <p class="fade-label">Rol</p>
         <select id="rol" name="rol" required>
                 <option value=""></option>
                 <?php foreach ($roles as $rol): ?>
@@ -42,7 +42,7 @@ require_once ("./Views/include/UH.php");
                 <?php endforeach; ?>
         </select>
                         
-        <p>Contraseña </p>
+        <p class="fade-label">Contraseña </p>
         <label for="contrasena" class="form-label"></label>
         <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 

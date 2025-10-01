@@ -18,15 +18,15 @@ require_once ("./Views/include/UH.php");
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
         <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($datosProducto['imagen']) ?>">
 
-        <p>Nombre del Equipo: </p>
+        <p class="fade-label">Nombre del Equipo: </p>
         <label for="nombre" class="form-label"></label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($datosProducto['nombre']) ?>" autocomplete="off" required> <br><br>
 
-        <p>Imagen actual:</p>
+        <p class="fade-label">Imagen actual:</p>
         <img src="<?= htmlspecialchars($datosProducto['imagen']) ?>" alt="Imagen actual del producto" style="max-width:150px; max-height:150px;">
         <br><br>
 
-        <p>Seleccionar nueva Imagen (opcional):</p>
+        <p class="fade-label">Seleccionar nueva Imagen (opcional):</p>
         <div class="input-archivo">
         <input type="file" id="imagen" name="imagen" autocomplete="off" hidden>
         <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
@@ -34,7 +34,7 @@ require_once ("./Views/include/UH.php");
         </div>
         <br><br>
 
-        <p>Categoria:</p>
+        <p class="fade-label">Categoria:</p>
         <select id="categoria" name="categoria" required>
             <?php foreach ($categorias as $categoria): ?>
                 <option value="<?= $categoria['id'] ?>" <?= ($categoria['id'] == $datosProducto['id_cat']) ? 'selected' : '' ?>>
