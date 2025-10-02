@@ -42,7 +42,8 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="user-info">
                             <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
                             <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
-                            <img src="Assets/imagenes/perfil/kaiser.png" alt="Perfil" width="100px">
+                            <img src="<?= htmlspecialchars($_SESSION['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" alt="Perfil" width="100px">
+
                         </div>
                         <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item"> 
                            <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Cuenta
