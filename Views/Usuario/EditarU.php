@@ -9,15 +9,6 @@ require_once ("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
-    <style>
-        #preview {
-            display: block;
-            margin-top: 10px;
-            max-width: 150px;
-            max-height: 150px;
-            border-radius: 8px;
-        }
-    </style>
 </head>
 <body>
 <div class="contenedor-formulario">
@@ -28,17 +19,17 @@ require_once ("./Views/include/UH.php");
 
             <input type="hidden" name="id" value="<?= $datos['id'] ?>">
             <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($datos['foto_perfil']) ?>">
+            
+            <p class="fade-label">Foto de perfil</p>
+            <p class="fade-label"></p>
+            <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil" class="foto-perfil">
+
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"><br>
 
             <p class="fade-label">Nombre:</p>
             <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
 
              <p class="fade-label"> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
-
-            <p class="fade-label">Foto de perfil (opcional)</p>
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"><br>
-
-            <p class="fade-label">Vista previa:</p>
-            <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil">
 
             <br><br>
             <input type="submit" value="Guardar cambios">
@@ -69,7 +60,6 @@ require_once ("./Views/include/UH.php");
         }
     });
 </script>
-
 <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
