@@ -20,7 +20,7 @@ require_once("./Views/include/UH.php");
 
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
-    <input type="hidden" name="accion" value="listarP">
+    <input type="hidden" name="accion" value="listarC">
     <select name="orden" id="orden">
         <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
         <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
@@ -79,7 +79,7 @@ require_once("./Views/include/UH.php");
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
     <script src="Assets/js/trancicion.js"></script>
-    <script src="Assets/js/listado.js"></script>
+    <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
