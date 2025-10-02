@@ -13,7 +13,7 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
     <div>
-    <h2>Solicitudes no asignadas</h2>
+    <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     <div class="botones-container">
     <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
 </div>
@@ -87,6 +87,7 @@ require_once ("./Views/include/UH.php");
   <img class="image-modal-content" id="modalImage">
 </div>
     <script src="Assets/js/zoomimagen.js"></script>
+    <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

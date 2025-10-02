@@ -12,7 +12,7 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
     <br>
-    <h2>Tus Productos</h2>
+    <h2 class="fade-slide" >Tus Productos</h2>
 <div class="botones-container">
     <a href="index.php?accion=formularioP"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
 </div>
@@ -95,6 +95,7 @@ require_once ("./Views/include/UH.php");
   <img class="image-modal-content" id="modalImage">
 </div>
     <script src="Assets/js/zoomimagen.js"></script>
+    <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
