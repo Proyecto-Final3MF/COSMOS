@@ -45,7 +45,7 @@ class UsuarioC {
                 $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
                 // Historial
-                $this->historialController->registrarModificacion(null, null, $usuarioN['id'], 'fue creado', null, 1, "Usuario creado vía formulario");
+                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, "Usuario creado vía formulario");
 
                 header("Location: index.php?accion=redireccion");
                 exit();
