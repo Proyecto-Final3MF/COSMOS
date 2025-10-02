@@ -21,11 +21,15 @@ require_once ("./Views/include/UH.php");
             <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($datos['foto_perfil']) ?>">
             
             <p class="fade-label">Foto de perfil</p>
-            <p class="fade-label"></p>
             <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil" class="foto-perfil">
 
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"><br>
-
+            <div class="input-archivo">
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
+            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Archivo</label>
+            <span class="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+            </div>
+            <br>
+            
             <p class="fade-label">Nombre:</p>
             <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
 
@@ -60,6 +64,7 @@ require_once ("./Views/include/UH.php");
         }
     });
 </script>
+<script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
