@@ -16,6 +16,7 @@ CREATE TABLE usuario (
     rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id),
     cant_review INT,
     promedio DOUBLE
+    foto_perfil VARCHAR(255) DEFAULT 'Assets/imagenes/perfil/fotodefault.webp'
 );
 
 CREATE TABLE producto (
