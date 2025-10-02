@@ -126,6 +126,22 @@ body {
     vertical-align: middle;
 }
 
+.foto-perfil {
+    display: block;              
+    margin: 0 auto;              
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;          
+    object-fit: cover;           
+    border: 2px solid #ccc;
+    transition: transform 0.3s, border-color 0.3s; 
+}
+
+.foto-perfil:hover {
+    transform: scale(1.05);     
+    border-color: #e83e8c;      
+}
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -139,7 +155,28 @@ body {
     position: fixed;
     bottom: 32px;
     right: 32px;
+    z-index: 9999; /* Siempre encima */
+    border-radius: 50%; /* Botón redondo */
+    background-color: #e83e8c;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
+
+.btn-agregar img {
+    width: 25px;
+    height: 25px;
+}
+
+.btn-agregar:hover {
+    transform: translateY(-5px) scale(1.1); /* Flota hacia arriba y crece un poco */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    background-color: #972f5f; /* Cambio de color al pasar el mouse */
+}
+
 
 .btn {
     padding: 0.6rem 1.2rem;
@@ -253,6 +290,8 @@ table {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
 }
 
 tr:hover {
@@ -343,7 +382,25 @@ tbody tr:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     animation: fadeIn 0.6s ease forwards;
     opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInRow 0.6s ease forwards;
 }
+
+@keyframes fadeInRow {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.list-item:nth-child(1) { animation-delay: 0.1s; }
+.list-item:nth-child(2) { animation-delay: 0.2s; }
+.list-item:nth-child(3) { animation-delay: 0.3s; }
+.list-item:nth-child(4) { animation-delay: 0.4s; }
+.list-item:nth-child(5) { animation-delay: 0.5s; }
+.list-item:nth-child(6) { animation-delay: 0.6s; }
+.list-item:nth-child(7) { animation-delay: 0.7s; }
+.list-item:nth-child(8) { animation-delay: 0.8s; }
+.list-item:nth-child(9) { animation-delay: 0.9s; }
+.list-item:nth-child(10) { animation-delay: 1s; }
 
 .list-item:hover {
     transform: translateY(-3px);
@@ -954,6 +1011,7 @@ a.errorLink {
 .contenedor-formulario form > *:nth-child(4) { animation-delay: 0.6s; }
 .contenedor-formulario form > *:nth-child(5) { animation-delay: 0.7s; }
 .contenedor-formulario form > *:nth-child(6) { animation-delay: 0.8s; }
+.contenedor-formulario form > *:nth-child(7) { animation-delay: 0.9s; }
 
 input:focus, select:focus, textarea:focus {
     outline: none;
@@ -1065,18 +1123,18 @@ label {
 }
 
 .btn-boton3-input {
-    display: inline-block;
-    padding: 10px 20px;
+    padding: 0.3rem 0.6rem;
     background-color: #e83e8c;
-    color: #fff;
-    border-radius: 8px;
+    color: white;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 1rem;
-    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-boton3-input:hover {
     background-color: #972f5f;
+    transform: scale(1.05);
 }
 
 button[type="submit"],
@@ -1099,15 +1157,16 @@ input[type="submit"]:hover {
 }
 
 .input-archivo {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 5px; 
+    display: block;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #nombre-archivo-seleccionado {
-  font-size: 14px;
-  color: #333;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 /* Aca termina el CSS de los Formularios */
@@ -1115,6 +1174,9 @@ input[type="submit"]:hover {
 /* aca empieza el css de filtrado de las tablas */
 
 .ordenar-form {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease forwards;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1126,6 +1188,13 @@ input[type="submit"]:hover {
     border-radius: 8px;
     max-width: 700px;
     box-shadow: var(--box-shadow);
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ordenar-form label {
