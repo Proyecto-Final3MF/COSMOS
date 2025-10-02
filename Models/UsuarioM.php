@@ -62,8 +62,8 @@ class Usuario {
 
         switch ($rol_filter) {
             case 'Todos': break;
-            case 'Clientes': $sql .= "WHERE rol_id = 2 "; break;
-            case 'Tecnicos': $sql .= "WHERE rol_id = 1 "; break;
+            case 'Clientes': $sql .= "WHERE rol_id = 1 "; break;
+            case 'Tecnicos': $sql .= "WHERE rol_id = 2 "; break;
             case 'Administradores': $sql .= "WHERE rol_id = 3 "; break;
             default: break;
         }
