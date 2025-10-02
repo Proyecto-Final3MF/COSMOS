@@ -81,7 +81,7 @@ function getPagination(itemSelector) {
                 item.style.display = displayStyle;
             }
         });
-        
+        animateTable();
         limitPagging();
     });
 
