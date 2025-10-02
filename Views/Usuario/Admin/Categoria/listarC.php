@@ -16,7 +16,7 @@ require_once("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-<h2>Listado de todas las categorias</h2>
+<h2 class="fade-slide" >Listado de todas las categorias</h2>
 
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
@@ -79,6 +79,7 @@ require_once("./Views/include/UH.php");
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
     <script src="Assets/js/trancicion.js"></script>
+    <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
