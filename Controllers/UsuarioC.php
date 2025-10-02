@@ -83,7 +83,7 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
-            $this->historialController->registrarModificacion($nombre, $email, $id, 'fue actualizado', null, 2, "Usuario actualizado");
+            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, "Usuario actualizado");
 
             header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
             exit();
