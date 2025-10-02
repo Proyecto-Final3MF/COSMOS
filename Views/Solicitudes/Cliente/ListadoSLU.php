@@ -43,8 +43,8 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
-                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>">
-                        <button class="btn btn-boton2">Eliminar</button>
+                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>" class="btn btn-boton2" >
+                        <img src="Assets/imagenes/trash.png" alt="eliminar" width="40">
                     </a>
                 </td>
            
@@ -88,7 +88,7 @@ require_once ("./Views/include/UH.php");
 </div>
     <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/trancicion.js"></script>
-    <script src="Assets/js/listado.js"></script>
+    <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

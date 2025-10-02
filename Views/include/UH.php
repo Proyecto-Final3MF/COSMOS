@@ -42,21 +42,22 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="user-info">
                             <p class="user-name"><?= htmlspecialchars($_SESSION['usuario']) ?></p>
                             <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
-                            <img src="Assets/imagenes/perfil/kaiser.png" alt="Perfil" width="100px">
+                            <img src="<?= htmlspecialchars($_SESSION['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" alt="Perfil" width="100px">
+
                         </div>
-                        <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                            Editar Cuenta
+                        <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item"> 
+                           <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Cuenta
                         </a>
                         <a href="index.php?accion=eliminar&id=<?= htmlspecialchars($_SESSION['id']) ?>"
                             onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"
                             class="dropdown-item">
-                            Eliminar Cuenta
+                           <img src="Assets/imagenes/eliminarcuenta123.png" alt="EliminarCuenta" class="icono-menu"> Eliminar Cuenta
                         </a>
                         <a href="index.php?accion=listarConversaciones" class="dropdown-item">
-                            Mis Conversaciones
+                           <img src="Assets/imagenes/99691-removebg-preview.png" alt="MisConversaciones" class="icono-menu"> Mis Conversaciones
                         </a>
                         <a href="Index.php?accion=logout" class="dropdown-item">
-                            Cerrar Sesión
+                            <img src="Assets/imagenes/cerrarlasesion.png" alt="CerrarSesion" class="icono-menu"> Cerrar Sesión
                         </a>
                     </div>
                 </div>

@@ -6,18 +6,20 @@ class Usuario {
         $this->conn = conectar();
     }
 
-    public function crearU($usuario, $mail, $rol_id, $contrasena) {
+    public function crearU($usuario, $mail, $rol_id, $contrasena, $foto_perfil) {
         $usuario = $this->conn->real_escape_string($usuario);
         $mail = $this->conn->real_escape_string($mail);
         $contrasena = $this->conn->real_escape_string($contrasena);
-        
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id) VALUES ('$usuario', '$contrasena', '$mail', '$rol_id')";
+        $foto_perfil = $this->conn->real_escape_string($foto_perfil);
+
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, foto_perfil) 
+                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', '$foto_perfil')";
         return $this->conn->query($sql);
     }
 
     public function verificarU($usuario, $contrasena) {
         $usuario = $this->conn->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 5";
+        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
         $res = $this->conn->query($sql);
         if ($row = $res->fetch_assoc()) {
             if ($row['contrasena'] === $contrasena) {
@@ -33,18 +35,7 @@ class Usuario {
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getRoleNameById($role_id) {
-        $role_id = (int)$role_id;
-        $sql = "SELECT nombre FROM rol WHERE id = $role_id LIMIT 1";
-        $result = $this->conn->query($sql);
-        if ($row = $result->fetch_assoc()) {
-            return $row['nombre'];
-        }
-        return null;
-    }
-   
     public function buscarUserId($id) {
-        // Usa consultas preparadas para mayor seguridad
         $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -53,11 +44,16 @@ class Usuario {
         return $result->fetch_assoc();
     }
 
-    public function editarU($id, $nombre, $email) {
-        // Usa consultas preparadas para actualizar los datos de manera segura
-        $sql = "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssi", $nombre, $email, $id);
+    public function editarU($id, $nombre, $email, $foto_perfil = null) {
+        if ($foto_perfil) {
+            $sql = "UPDATE usuario SET nombre = ?, email = ?, foto_perfil = ? WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssi", $nombre, $email, $foto_perfil, $id);
+        } else {
+            $sql = "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ssi", $nombre, $email, $id);
+        }
         return $stmt->execute();
     }
 
@@ -65,40 +61,22 @@ class Usuario {
         $sql = "SELECT * FROM usuario ";
 
         switch ($rol_filter) {
-            case 'Todos':
-                break;
-            case 'Clientes':
-                $sql .= "WHERE rol_id = 1 ";
-                break;
-            case 'Tecnicos':
-                $sql .= "WHERE rol_id = 2 ";
-                break;
-            case 'Administradores':
-                $sql .= "WHERE rol_id = 3 ";
-            default:
-            break;
+            case 'Todos': break;
+            case 'Clientes': $sql .= "WHERE rol_id = 1 "; break;
+            case 'Tecnicos': $sql .= "WHERE rol_id = 2 "; break;
+            case 'Administradores': $sql .= "WHERE rol_id = 3 "; break;
+            default: break;
         }
 
         switch ($orden) {
-            case "A-Z":
-                $sql .= "ORDER BY nombre ASC";
-                break;
-            case "Z-A":
-                $sql .= "ORDER BY nombre DESC";
-                break;
-            case "Más Recientes":
-                $sql .= "ORDER BY id DESC";
-                break;
-            case " Más Antiguos":
-                $sql .= "ORDER BY id ASC";
-                break;
-            default:
-                $sql .= "ORDER BY id ASC";
-                break;
+            case "A-Z": $sql .= "ORDER BY nombre ASC"; break;
+            case "Z-A": $sql .= "ORDER BY nombre DESC"; break;
+            case "Más Recientes": $sql .= "ORDER BY id DESC"; break;
+            case "Más Antiguos": $sql .= "ORDER BY id ASC"; break;
+            default: $sql .= "ORDER BY id ASC"; break;
         }
 
         $resultado = $this->conn->query($sql);
-
         $usuarios = [];
         if ($resultado) {
             while ($row = $resultado->fetch_assoc()) {
@@ -109,9 +87,13 @@ class Usuario {
     }
 
     public function borrar($id){
-        $sql = "DELETE FROM usuarios WHERE id=$id";
+        // Antes de borrar, eliminar foto si no es default
+        $usuario = $this->buscarUserId($id);
+        if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
+            unlink($usuario['foto_perfil']);
+        }
+        $sql = "DELETE FROM usuario WHERE id = $id";
         return $this->conn->query($sql);
     }
-
 }
 ?>

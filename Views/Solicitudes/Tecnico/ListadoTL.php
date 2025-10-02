@@ -47,7 +47,7 @@ require_once ("./Views/include/UH.php");
         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
         <td>
           <div class="botones-container">
-            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Aceptar Solicitud</button></a>
+            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="btn btn-boton2" >  <img src="Assets/imagenes/free-check-icon-3278-thumb-removebg-preview.png" alt="editar" width="45"></a>
           </div>
         </td>
       </tr>
@@ -85,7 +85,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/trancicion.js"></script>
-<script src="Assets/js/listado.js"></script>
+<script src="Assets/js/paginacion.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
