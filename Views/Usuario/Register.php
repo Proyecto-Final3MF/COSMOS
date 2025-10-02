@@ -13,15 +13,6 @@ require_once ("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
-    <style>
-        #preview {
-            display: block;
-            margin-top: 10px;
-            max-width: 150px;
-            max-height: 150px;
-            border-radius: 8px;
-        }
-    </style>
 </head>
 <body>
 <div class="contenedor-formulario">
@@ -29,6 +20,10 @@ require_once ("./Views/include/UH.php");
         <h3>Registrarse</h3>
 
         <form method="POST" action="index.php?accion=guardarU" enctype="multipart/form-data">
+
+            <p class="fade-label">Foto de perfil (opcional)</p>
+            <img id="preview" src="#" alt="" class="foto-perfil">
+             <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"> <br>
 
             <p class="fade-label">Usuario</p>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
@@ -47,10 +42,6 @@ require_once ("./Views/include/UH.php");
 
             <p class="fade-label">Contraseña</p>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
-
-            <p class="fade-label">Foto de perfil (opcional)</p>
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"> <br>
-            <img id="preview" src="#" alt="Vista previa" style="display:none;"><br>
 
             <input class="button" type="submit" value="Guardar">
             <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie sesión</a>
