@@ -25,7 +25,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
     <div>
-        <h2>Solicitudes aceptadas</h2>
+        <h2 class="fade-slide" >Solicitudes aceptadas</h2>
     </div>
     <table>
         <thead>

@@ -13,7 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
   <br>
     <div>
-      <h2>Solicitudes no asignadas</h2>
+      <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     </div>
   <table>
     <thead>

@@ -1153,6 +1153,9 @@ input[type="submit"]:hover {
 /* aca empieza el css de filtrado de las tablas */
 
 .ordenar-form {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease forwards;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1164,6 +1167,13 @@ input[type="submit"]:hover {
     border-radius: 8px;
     max-width: 700px;
     box-shadow: var(--box-shadow);
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ordenar-form label {

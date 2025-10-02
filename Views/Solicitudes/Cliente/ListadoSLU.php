@@ -13,7 +13,7 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
     <div>
-    <h2>Solicitudes no asignadas</h2>
+    <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     <div class="botones-container">
     <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
 </div>
