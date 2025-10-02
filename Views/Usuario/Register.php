@@ -22,8 +22,14 @@ require_once ("./Views/include/UH.php");
         <form method="POST" action="index.php?accion=guardarU" enctype="multipart/form-data">
 
             <p class="fade-label">Foto de perfil (opcional)</p>
-            <img id="preview" src="#" alt="" class="foto-perfil">
-             <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil"> <br>
+            <img id="preview" src="Assets/imagenes/perfil/fotodefault.webp" alt="" class="foto-perfil">
+
+            <div class="input-archivo">
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
+            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Archivo</label>
+            <span class="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+            </div>
+            <br>
 
             <p class="fade-label">Usuario</p>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
@@ -52,23 +58,24 @@ require_once ("./Views/include/UH.php");
 
 <script>
     const inputFoto = document.getElementById('foto_perfil');
-    const preview = document.getElementById('preview');
+const preview = document.getElementById('preview');
 
-    inputFoto.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.setAttribute('src', e.target.result);
-                preview.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        } else {
-            preview.style.display = 'none';
+inputFoto.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.setAttribute('src', e.target.result);
         }
-    });
-</script>
+        reader.readAsDataURL(file);
+    } else {
+        // Mantener la imagen por defecto
+        preview.setAttribute('src', 'Assets/imagenes/default-user.png');
+    }
+});
 
+</script>
+<script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

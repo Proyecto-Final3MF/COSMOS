@@ -155,7 +155,28 @@ body {
     position: fixed;
     bottom: 32px;
     right: 32px;
+    z-index: 9999; /* Siempre encima */
+    border-radius: 50%; /* Botón redondo */
+    background-color: #e83e8c;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
+
+.btn-agregar img {
+    width: 25px;
+    height: 25px;
+}
+
+.btn-agregar:hover {
+    transform: translateY(-5px) scale(1.1); /* Flota hacia arriba y crece un poco */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    background-color: #972f5f; /* Cambio de color al pasar el mouse */
+}
+
 
 .btn {
     padding: 0.6rem 1.2rem;
@@ -1081,18 +1102,18 @@ label {
 }
 
 .btn-boton3-input {
-    display: inline-block;
-    padding: 10px 20px;
+    padding: 0.3rem 0.6rem;
     background-color: #e83e8c;
-    color: #fff;
-    border-radius: 8px;
+    color: white;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 1rem;
-    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-boton3-input:hover {
     background-color: #972f5f;
+    transform: scale(1.05);
 }
 
 button[type="submit"],
@@ -1115,15 +1136,16 @@ input[type="submit"]:hover {
 }
 
 .input-archivo {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 5px; 
+    display: block;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #nombre-archivo-seleccionado {
-  font-size: 14px;
-  color: #333;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 /* Aca termina el CSS de los Formularios */
