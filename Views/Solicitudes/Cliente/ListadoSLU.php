@@ -16,6 +16,9 @@ require_once ("./Views/include/UH.php");
     <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     <div class="botones-container">
     <a href="index.php?accion=formularioS"><button class="btn btn-boton">Crear Nueva Solicitud</button></a>
+    <div class="botones-container">
+        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
 </div>
     <table>
         <thead>
@@ -76,10 +79,6 @@ require_once ("./Views/include/UH.php");
                 </li>
             </ul>
         </nav>
-    </div>
-
-<div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
 
 <div id="imageModal" class="image-modal">
