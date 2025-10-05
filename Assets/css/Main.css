@@ -256,7 +256,7 @@ body {
     color: white;
 }
 
-.btn-container {
+.btn-container2 {
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -267,6 +267,69 @@ body {
     justify-content: center; 
     align-items: center; 
     margin: 20px 0;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.btn-boton444 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+}
+
+.btn-mis-productos { background-color: #e83e8c; }
+.btn-sin-asignar { background-color: #f4a261; }
+.btn-aceptadas { background-color: #2a9d8f; }
+.btn-terminadas { background-color: #264653; }
+.btn-disponibles { background-color: #f4a261; }
+.btn-crear { background-color: #e83e8c; }
+.btn-listar { background-color: #f3722c; }
+.btn-historial { background-color: #577590; }
+.btn-usuarios { background-color: #43aa8b; }
+
+.btn-boton444:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    filter: brightness(1.1);
+}
+
+.btn-boton i {
+    font-size: 1.1rem;
+}
+
+@keyframes pulseBtn {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.02); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.btn-boton444 {
+    animation: pulseBtn 4s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-boton444 {
+        width: 90%;
+        justify-content: center;
+    }
 }
 
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
