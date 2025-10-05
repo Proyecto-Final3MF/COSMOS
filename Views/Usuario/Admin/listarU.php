@@ -39,7 +39,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay usuarios registrados. <a href="index.php?accion=crear">Crear el primero</a>
+        No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
