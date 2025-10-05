@@ -262,6 +262,28 @@ body {
     margin-top: 20px;
 }
 
+.btn-boton777 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 50px; 
+    background: linear-gradient(90deg, #b61e65, #e83e8c);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(182, 30, 101, 0.3);
+}
+
+.btn-boton777:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(182, 30, 101, 0.4);
+    background: linear-gradient(90deg, #e83e8c, #b61e65);
+}
+
 .botones-container {
     display: flex;
     justify-content: center; 
@@ -284,6 +306,7 @@ body {
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
     font-weight: 500;
+    font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
     border: none;
