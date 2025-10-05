@@ -11,10 +11,15 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
 <div class="contenedor-formulario">
     <section>
         <h3>Editar Usuario</h3>
-
+        
         <form method="POST" action="Index.php?accion=actualizarU" enctype="multipart/form-data">
 
             <input type="hidden" name="id" value="<?= $datos['id'] ?>">
@@ -41,9 +46,7 @@ require_once ("./Views/include/UH.php");
         </form>
     </section>
 
-    <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    <br>
 </div>
 
 <script>
