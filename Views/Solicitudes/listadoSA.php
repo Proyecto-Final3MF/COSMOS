@@ -8,19 +8,7 @@ require_once ("./Views/include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
-    <link rel="stylesheet" href="./Assets/css/Main.css" />
-    <style>
-        .list-item td:last-child .botones-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .list-item td:last-child .botones-container a {
-            display: center;
-        }
-    </style>
+    <link rel="stylesheet" href="./Assets/css/Main.css"/>
 </head>
 <body>
     <br>
@@ -34,6 +22,7 @@ require_once ("./Views/include/UH.php");
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
+                <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
             </tr>
@@ -51,6 +40,7 @@ require_once ("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <td><?= htmlspecialchars($resultado['estado_id']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                     <td>
                         <div class="botones-container">
