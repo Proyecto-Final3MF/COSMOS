@@ -26,7 +26,7 @@ require_once ("./Views/include/UH.php");
             <i class="fa-solid fa-box"></i> Mis Productos
         </button>
     </a>
-    <a href="index.php?accion=FormularioS">
+    <a href="index.php?accion=formularioS">
         <button class="btn btn-boton444 btn-crear">
             <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
         </button>

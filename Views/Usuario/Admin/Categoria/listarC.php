@@ -17,6 +17,9 @@ require_once("./Views/include/UH.php");
 </head>
 <body>
 <h2 class="fade-slide" >Listado de todas las categorias</h2>
+<div class="botones-container">
+    <a href="index.php?accion=FormularioC"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
+</div>
 
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
