@@ -24,9 +24,28 @@ class Producto {
         return null;
     }
 
-    public function listarP($id_usuario) {
+    public function listarP($id_usuario, $orden) {
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario";
+        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario ";
+
+        switch ($orden) {
+            case "A-Z":
+                $sql .= "ORDER BY nombre ASC";
+                break;
+            case "Z-A":
+                $sql .= "ORDER BY nombre DESC";
+                break;
+            case "Más Recientes":
+                $sql .= "ORDER BY id DESC";
+                break;
+            case "Más Antiguos":
+                $sql .= "ORDER BY id ASC";
+                break;
+            default:
+                $sql .= "ORDER BY id ASC";
+                break;
+        }
+
         $resultado = $this->conn->query($sql);
         
         if ($resultado) {
@@ -68,14 +87,21 @@ class Producto {
     }
 
     public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
-        $nombre = $this->conn->real_escape_string($nombre);
-        $imagen = $this->conn->real_escape_string($imagen);
-        $categoria_id = (int)$categoria_id;
-        $id_usuario = (int)$id_usuario;
-
-        $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES ('$nombre', '$imagen', '$categoria_id', '$id_usuario')";
-        return $this->conn->query($sql);
+    $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES (?, ?, ?, ?)";
+    
+    $stmt = $this->conn->prepare($sql);
+    
+    if (!$stmt) {
+        return false;
     }
+    $stmt->bind_param("ssii", $nombre, $imagen, $categoria_id, $id_usuario);
+    
+    if ($stmt->execute()) {
+        return $stmt->insert_id;
+    } else {
+        return false;
+    }
+}
 
     public function borrar($id) {
         $sql = "DELETE FROM producto WHERE id=$id";

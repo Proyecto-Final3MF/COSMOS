@@ -13,8 +13,15 @@ require_once ("./Views/include/UH.php");
 <body>
   <br>
     <div>
-      <h2>Solicitudes no asignadas</h2>
+      <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     </div>
+  <form action="index.php" method="GET" class="filter-form">
+    <input type="hidden" name="accion" value="listarTL">
+      <div class="form-group">
+        <label for="search">Buscar: </label>
+        <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+      </div>
+  </form>
   <table>
     <thead>
       <tr>
@@ -47,7 +54,7 @@ require_once ("./Views/include/UH.php");
         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
         <td>
           <div class="botones-container">
-            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>"> <button class="btn btn-boton2">Aceptar Solicitud</button></a>
+            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="btn btn-boton2" >  <img src="Assets/imagenes/free-check-icon-3278-thumb-removebg-preview.png" alt="editar" width="45"></a>
           </div>
         </td>
       </tr>
@@ -84,8 +91,9 @@ require_once ("./Views/include/UH.php");
   <img class="image-modal-content" id="modalImage">
 </div>
 <script src="Assets/js/zoomimagen.js"></script>
+<script src="Assets/js/animaciondetablas.js"></script>
 <script src="Assets/js/trancicion.js"></script>
-<script src="Assets/js/listado.js"></script>
+<script src="Assets/js/paginacion.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

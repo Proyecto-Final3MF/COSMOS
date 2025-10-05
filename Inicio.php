@@ -12,13 +12,19 @@
 </head>
 <body>
 
-<h1 data-translate="h1">Bienvenido a COSMOS</h1>
-<p data-translate="p">Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
+<h1 class="inicio55" data-translate="h1">Bienvenido a COSMOS</h1>
+<p class="inicio44" data-translate="p">Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
 
 <div class="btn-container">
-<a href="Index.php?accion=login"><button class="btn btn-boton" data-translate="startNow">Empezar Ahora</button></a>
+<a href="Index.php?accion=login"><button class="btn btn-boton44" data-translate="startNow">Empezar Ahora</button></a>
 </div>
 <script src="Assets/js/language.js"></script>
 <script src="Assets/js/trancicion.js"></script>
+<script>
+    window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+    });
+</script>
+
 </body>
 </html>

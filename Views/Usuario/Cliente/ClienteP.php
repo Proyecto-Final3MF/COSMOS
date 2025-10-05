@@ -18,8 +18,8 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
 <div>
-    <h2>¿En qué podemos ayudarte?</h2> <br>
-    <div class="btn-container">
+    <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
+    <div class="btn-container fade-slide">
     <a href="index.php?accion=listarP"><button class="btn btn-boton">Ver Mis Productos</button></a>
     <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Ver Mis Solicitudes Sin Asignar</button></a>
     <a href="index.php?accion=listarSA"><button class="btn btn-boton">Ver Mis Solicitudes Aceptadas</button></a>

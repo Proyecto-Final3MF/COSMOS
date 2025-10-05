@@ -55,7 +55,11 @@ class CategoriaC {
 
     public function listarC() {
         $categoria = new Categoria();
-        $resultados = $categoria->listarC();
+        
+        $orden = $_GET['orden'] ?? 'Más Recientes';
+
+        $resultados = $categoria->listarC($orden);
+
         include("./Views/Usuario/Admin/Categoria/listarC.php");
     }
 
