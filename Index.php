@@ -120,6 +120,11 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->cancelarS();
   break;
+
+  case 'listarST':
+    $controller = new SolicitudC();
+    $controller->listarST();
+  break;
   //acciones para el rol cliente
 
   //acciones para producto

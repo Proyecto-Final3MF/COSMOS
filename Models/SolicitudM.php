@@ -111,23 +111,40 @@ class Solicitud {
     }
 
     public function ListarSA($id_usuario){
-    $id_usuario = (int)$id_usuario;
-    $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
-            FROM solicitud s
-            INNER JOIN producto p ON s.producto_id = p.id
-            INNER JOIN estado e ON s.estado_id = e.id
-            WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
-            AND s.estado_id > 1 AND s.estado_id < 5
-            ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
-    
-        $resultado = $this->conn->query($sql);
-    if ($resultado) {
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    } else {
-        return [];
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+                FROM solicitud s
+                INNER JOIN producto p ON s.producto_id = p.id
+                INNER JOIN estado e ON s.estado_id = e.id
+                WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
+                AND s.estado_id > 1 AND s.estado_id < 5
+                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
+        
+            $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
     }
-}
 
+    public function ListarST($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+                FROM solicitud s
+                INNER JOIN producto p ON s.producto_id = p.id
+                INNER JOIN estado e ON s.estado_id = e.id
+                WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
+                AND s.estado_id = 5
+                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
+        
+            $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
 
     public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);

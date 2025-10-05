@@ -15,6 +15,11 @@ require_once ("./Views/include/UH.php");
     <div>
       <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     </div>
+
+    <div class="botones-container">
+      <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
+
   <form action="index.php" method="GET" class="filter-form">
     <input type="hidden" name="accion" value="listarTL">
       <div class="form-group">
@@ -22,6 +27,8 @@ require_once ("./Views/include/UH.php");
         <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>
   </form>
+
+
   <table>
     <thead>
       <tr>
@@ -83,9 +90,7 @@ require_once ("./Views/include/UH.php");
             </ul>
         </nav>
     </div>
-<div class="botones-container">
-  <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-</div>
+
 <div id="imageModal" class="image-modal">
   <span class="close">&times;</span>
   <img class="image-modal-content" id="modalImage">
