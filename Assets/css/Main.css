@@ -291,7 +291,7 @@ body {
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
 }
 
-.btn-mis-productos { background-color: #e83e8c; }
+.btn-mis-productos { background-color: #be4949; }
 .btn-sin-asignar { background-color: #f4a261; }
 .btn-aceptadas { background-color: #2a9d8f; }
 .btn-terminadas { background-color: #264653; }
