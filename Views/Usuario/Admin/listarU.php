@@ -46,6 +46,7 @@ require_once("./Views/include/UH.php");
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Foto</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
@@ -56,6 +57,11 @@ require_once("./Views/include/UH.php");
             <?php foreach ($resultados as $u): ?>
                 <tr class="list-item">
                     <td><?= $u['id'] ?></td>
+                    <td>
+                    <img src="<?= htmlspecialchars($u['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" 
+                     alt="Foto de <?= htmlspecialchars($u['nombre']) ?>" 
+                     class="foto-mini">
+                    </td>
                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
                     <td><?= htmlspecialchars($u['rol']) ?></td>

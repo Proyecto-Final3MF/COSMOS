@@ -12,6 +12,9 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
 <div class="contenedor-formulario">
+    <div class="botones-container">
+    <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
+</div>
 <section>
     <h3>Editar Producto</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
@@ -46,9 +49,7 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Actualizar</button>
     </form>
 </section>
-<div class="botones-container">
-    <a href="index.php?accion=listarP"><button class="btn btn-boton">Volver</button></a>
-</div>
+
 </div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>

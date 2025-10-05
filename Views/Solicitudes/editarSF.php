@@ -26,33 +26,36 @@ if (!isset($estados) || $estados === null) {
 </head>
 <body>
 <div class="contenedor-formulario">
-    <section>
-        <h3>Editar Solicitud</h3>
-        <form method="POST" action="index.php?accion=actualizarSF">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
 
-            <p class="fade-label">Título:</p>
-            <input type="text" class="form-control" name="titulo" value="<?= htmlspecialchars($datosSolicitud['titulo']) ?>" disabled>
-
-            <p class="fade-label">Descripción:</p>
-            <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
-
-            <p class="fade-label">Estado:</p>
-            <select name="estado" required>
-                <?php foreach ($estados as $estado): ?>
-                    <option value="<?= htmlspecialchars($estado['id']) ?>" 
-                    <?= ($estado['id'] == $datosSolicitud['estado_id']) ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($estado['nombre']) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select><br><br>
-
-            <button type="submit">Actualizar Solicitud</button>
-        </form>
-    </section>
 <div class="botones-container">
     <a href="index.php?accion=listarSA"><button class="btn btn-boton">Volver</button></a>
- </div>
+</div>
+
+<section>
+    <h3>Editar Solicitud</h3>
+    <form method="POST" action="index.php?accion=actualizarSF">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
+
+        <p class="fade-label">Título:</p>
+        <input type="text" class="form-control" name="titulo" value="<?= htmlspecialchars($datosSolicitud['titulo']) ?>" disabled>
+
+        <p class="fade-label">Descripción:</p>
+        <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
+
+        <p class="fade-label">Estado:</p>
+        <select name="estado" required>
+            <?php foreach ($estados as $estado): ?>
+                <option value="<?= htmlspecialchars($estado['id']) ?>" 
+                <?= ($estado['id'] == $datosSolicitud['estado_id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($estado['nombre']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
+
+        <button type="submit">Actualizar Solicitud</button>
+    </form>
+</section>
+
 </div>
 <script src="Assets/js/trancicion.js"></script>
 </body>
