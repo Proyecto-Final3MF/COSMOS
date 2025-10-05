@@ -30,7 +30,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
             <i class="fa-solid fa-check-circle"></i> Solicitudes Aceptadas
         </button>
     </a>
-    <a href="Index.php?accion=listarSTT">
+    <a href="Index.php?accion=listarST">
         <button class="btn btn-boton444 btn-terminadas">
             <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
         </button>
