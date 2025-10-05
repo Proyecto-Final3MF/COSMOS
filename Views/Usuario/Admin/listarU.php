@@ -64,23 +64,7 @@ require_once("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td><?php
-                        switch ($u['rol_id']) {
-                        case 1:
-                        echo "Administrador";
-                        break;
-                        case 2:
-                        echo "Técnico";
-                        break;
-                        case 3:
-                        echo "Cliente";
-                        break;
-                        default:
-                        echo "Desconocido";
-                        break;
-                        }
-                        ?> 
-                        </td>
+                    <td><?= htmlspecialchars($u['rol']) ?></td>
                     <td>
                         <div class="btn-group-actions d-flex">
                             <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
