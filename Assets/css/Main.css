@@ -721,14 +721,15 @@ tbody tr:hover {
     top: 100%;
     right: 0;
     width: 250px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 1rem;
     transform: translateY(0.5rem);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .dropdown-menu.visible {
