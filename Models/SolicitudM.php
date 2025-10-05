@@ -44,46 +44,46 @@ class Solicitud {
     }
 
     public function ListarTL($usuarioId, $search = null) {
-    $sql = "SELECT s.*, p.nombre as producto, p.imagen, u.nombre
-            FROM solicitud s
-            INNER JOIN producto p ON s.producto_id = p.id
-            INNER JOIN usuario u ON s.cliente_id = u.id
-            WHERE s.estado_id = 1 ";
-    $params = [];
-    $param_types = '';
-    $stmt = null;
+        $sql = "SELECT s.*, p.nombre as producto, p.imagen, u.nombre
+                FROM solicitud s
+                INNER JOIN producto p ON s.producto_id = p.id
+                INNER JOIN usuario u ON s.cliente_id = u.id
+                WHERE s.estado_id = 1 ";
+        $params = [];
+        $param_types = '';
+        $stmt = null;
 
-    if (!empty($search)) {
-        $search_terms = explode (" ", $search);
-        foreach ($search_terms as $palabra) {
-            $sql .= "AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?) ";
-            $search_term = "%" . $palabra . "%";
-            $params[] = $search_term;
-            $params[] = $search_term;
-            $params[] = $search_term;
-            $param_types .= 'sss';
+        if (!empty($search)) {
+            $search_terms = explode (" ", $search);
+            foreach ($search_terms as $palabra) {
+                $sql .= "AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?) ";
+                $search_term = "%" . $palabra . "%";
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $param_types .= 'sss';
+            }
         }
-    }
-    $sql .= "ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
+        $sql .= "ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
 
-    if (!empty($search)) {
-        $stmt = $this->conn->prepare($sql);
-        if ($stmt === false) {
+        if (!empty($search)) {
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt === false) {
+                return [];
+            }
+            $stmt->bind_param($param_types, ...$params);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $stmt->close();
+        } else {
+            $resultado = $this->conn->query($sql);
+        }
+
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
             return [];
         }
-        $stmt->bind_param($param_types, ...$params);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        $stmt->close();
-    } else {
-        $resultado = $this->conn->query($sql);
-    }
-
-    if ($resultado) {
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    } else {
-        return [];
-    }
     }
 
     public function asignarS($id_usuario, $id_soli){
