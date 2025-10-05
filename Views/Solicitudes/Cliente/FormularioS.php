@@ -12,6 +12,9 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
     <div class="contenedor-formulario">
+    <div class="botones-container">
+        <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Volver</button></a>
+    </div>
 <section>
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
@@ -43,9 +46,7 @@ require_once ("./Views/include/UH.php");
         
     </form>
     </section>
-    <div class="botones-container">
-        <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    
     </div>
     <script src="Assets/js/trancicion.js"></script>
 </body>

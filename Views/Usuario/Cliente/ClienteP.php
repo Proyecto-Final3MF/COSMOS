@@ -19,12 +19,36 @@ require_once ("./Views/include/UH.php");
 <body>
 <div>
     <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
+    
     <div class="btn-container fade-slide">
-    <a href="index.php?accion=listarP"><button class="btn btn-boton">Ver Mis Productos</button></a>
-    <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Ver Mis Solicitudes Sin Asignar</button></a>
-    <a href="index.php?accion=listarSA"><button class="btn btn-boton">Ver Mis Solicitudes Aceptadas</button></a>
-    <a href="index.php?accion=listarSFU"><button class="btn btn-boton">Ver Mis Solicitudes Terminadas</button></a>
-    </div>
+    <a href="index.php?accion=listarP">
+        <button class="btn btn-boton444 btn-mis-productos">
+            <i class="fa-solid fa-box"></i> Mis Productos
+        </button>
+    </a>
+    <a href="index.php?accion=FormularioS">
+        <button class="btn btn-boton444 btn-crear">
+            <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
+        </button>
+    </a>
+    <a href="index.php?accion=listarSLU">
+        <button class="btn btn-boton444 btn-sin-asignar">
+            <i class="fa-solid fa-hourglass-half"></i> Solicitudes Sin Asignar
+        </button>
+    </a>
+    <a href="index.php?accion=listarSA">
+        <button class="btn btn-boton444 btn-aceptadas">
+            <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
+        </button>
+    </a>
+    <a href="index.php?accion=listarST">
+        <button class="btn btn-boton444 btn-terminadas">
+            <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+        </button>
+    </a>
+
+</div>
+
 </div>
 <script src="Assets/js/trancicion.js"></script>
 </body>

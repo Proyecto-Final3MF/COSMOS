@@ -98,6 +98,17 @@ class SolicitudC {
         include("./Views/Solicitudes/listadoSA.php");
     }
 
+    public function listarST() {
+        $id_usuario = $_SESSION['id'] ?? null;
+        if ($id_usuario == null) {
+            header("Location: index.php?accion=login");
+            exit();
+        }  
+        $solicitud = new Solicitud();
+        $resultados = $solicitud->listarST($id_usuario);
+        include("./Views/Solicitudes/listadoST.php");
+    }
+    
     public function editarSF(){
         $id = $_GET['id'] ?? null;
         if (!$id) {

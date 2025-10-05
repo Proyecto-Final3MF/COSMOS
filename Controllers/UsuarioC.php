@@ -114,7 +114,6 @@ class UsuarioC {
         $modelo = new Usuario();
         $user = $modelo->verificarU($usuario, $contrasena);
 
-        session_start();
         if ($user) {
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];

@@ -142,6 +142,21 @@ body {
     border-color: #e83e8c;      
 }
 
+.foto-mini {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.foto-mini:hover {
+    transform: scale(1.1);
+    border-color: #e83e8c;
+}
+
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -241,7 +256,7 @@ body {
     color: white;
 }
 
-.btn-container {
+.btn-container2 {
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -252,6 +267,69 @@ body {
     justify-content: center; 
     align-items: center; 
     margin: 20px 0;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.btn-boton444 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+}
+
+.btn-mis-productos { background-color: #be4949; }
+.btn-sin-asignar { background-color: #f4a261; }
+.btn-aceptadas { background-color: #2a9d8f; }
+.btn-terminadas { background-color: #264653; }
+.btn-disponibles { background-color: #f4a261; }
+.btn-crear { background-color: #e83e8c; }
+.btn-listar { background-color: #f3722c; }
+.btn-historial { background-color: #577590; }
+.btn-usuarios { background-color: #43aa8b; }
+
+.btn-boton444:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    filter: brightness(1.1);
+}
+
+.btn-boton i {
+    font-size: 1.1rem;
+}
+
+@keyframes pulseBtn {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.02); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.btn-boton444 {
+    animation: pulseBtn 4s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-boton444 {
+        width: 90%;
+        justify-content: center;
+    }
 }
 
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
@@ -643,14 +721,15 @@ tbody tr:hover {
     top: 100%;
     right: 0;
     width: 250px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 1rem;
     transform: translateY(0.5rem);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .dropdown-menu.visible {
@@ -676,18 +755,21 @@ tbody tr:hover {
 }
 
 .dropdown-item {
-    display: block;
+    display: flex;
     width: 100%;
+    align-items: center;
     text-align: left;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     color: #171817;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
+    gap: 10px;
 }
 
 .dropdown-item:hover {
-    background-color: #f3f4f6;
-    color: #1f2937;
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateX(5px);
 }
 
 /* aca termina el css del menu de usuario */
