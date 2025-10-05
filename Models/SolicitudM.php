@@ -112,8 +112,8 @@ class Solicitud {
 
     public function ListarSA($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
-                inner join producto p on s.producto_id = p.id 
+        $sql = "SELECT s.*, p.nombre, p.imagen, e.nombre as estado FROM solicitud s 
+                inner join producto p on s.producto_id = p.id inner join estado e on s.estado_id = e.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario) AND s.estado_id > 1 AND s.estado_id < 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
         $resultado = $this->conn->query($sql);
