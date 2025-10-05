@@ -28,9 +28,9 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 
-    <form method="post" action="index.php?accion=enviarMensaje">
+    <form method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="hidden" name="receptor_id" value="<?= htmlspecialchars($otro_usuario_id ?? '') ?>">
+        <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
