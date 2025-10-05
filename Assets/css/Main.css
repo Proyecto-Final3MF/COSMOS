@@ -1274,6 +1274,19 @@ input[type="submit"]:hover {
     color: #555;
 }
 
+.login9 {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #414141;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login9:hover {
+    color: #727579;
+}
+
 /* Aca termina el CSS de los Formularios */
 
 /* aca empieza el css de filtrado de las tablas */
