@@ -22,9 +22,9 @@ require_once ("./Views/include/UH.php");
     </a>
 </div>
 
-  <form action="index.php" method="GET" class="filter-form">
+  <form action="index.php" method="GET" class="filter-form2">
     <input type="hidden" name="accion" value="listarTL">
-      <div class="form-group">
+      <div class="form-group search-wrapper">
         <label for="search">Buscar: </label>
         <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>
@@ -72,7 +72,7 @@ require_once ("./Views/include/UH.php");
   } else {
     ?>
     <tr>
-      <td colspan="7">No hay solicitudes disponibles en este momento<br><br><a href="index.php?accion=listarSA"><button class="btn btn-boton2">Ver solicitudes aceptadas</button></a></td>
+      <td colspan="7">No hay solicitudes disponibles en este momento<br><br><a href="index.php?accion=listarSA"><button class="btn btn-boton777">Ver solicitudes aceptadas</button></a></td>
     </tr>
     <?php
   }

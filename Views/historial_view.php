@@ -22,6 +22,7 @@ require_once ("./Views/include/UH.php");
         <i class="fa fa-arrow-left"></i> Volver
     </a>
 </div>
+<br>
     <div class="container3">
         <h1>Histórial de actividades</h1>
 
