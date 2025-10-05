@@ -15,6 +15,13 @@ require_once ("./Views/include/UH.php");
     <div>
       <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     </div>
+  <form action="index.php" method="GET" class="filter-form">
+    <input type="hidden" name="accion" value="listarTL">
+      <div class="form-group">
+        <label for="search">Buscar: </label>
+        <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+      </div>
+  </form>
   <table>
     <thead>
       <tr>
