@@ -36,11 +36,18 @@ require_once ("./Views/include/UH.php");
             <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
         </button>
     </a>
-    <a href="index.php?accion=listarSFU">
+    <a href="index.php?accion=listarST">
         <button class="btn btn-boton444 btn-terminadas">
             <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
         </button>
     </a>
+
+    <a href="index.php?accion=formularioS">
+        <button class="btn btn-boton">
+            Crear Nueva Solicitud
+        </button>
+    </a>
+   
 </div>
 
 </div>
