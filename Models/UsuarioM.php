@@ -58,22 +58,22 @@ class Usuario {
     }
 
     public function listarU($orden, $rol_filter) {
-        $sql = "SELECT * FROM usuario ";
+        $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ";
 
         switch ($rol_filter) {
             case 'Todos': break;
-            case 'Clientes': $sql .= "WHERE rol_id = 2 "; break;
-            case 'Tecnicos': $sql .= "WHERE rol_id = 1 "; break;
-            case 'Administradores': $sql .= "WHERE rol_id = 3 "; break;
+            case 'Clientes': $sql .= "WHERE u.rol_id = 2 "; break;
+            case 'Tecnicos': $sql .= "WHERE u.rol_id = 1 "; break;
+            case 'Administradores': $sql .= "WHERE u.rol_id = 3 "; break;
             default: break;
         }
 
         switch ($orden) {
-            case "A-Z": $sql .= "ORDER BY nombre ASC"; break;
-            case "Z-A": $sql .= "ORDER BY nombre DESC"; break;
-            case "Más Recientes": $sql .= "ORDER BY id DESC"; break;
-            case "Más Antiguos": $sql .= "ORDER BY id ASC"; break;
-            default: $sql .= "ORDER BY id ASC"; break;
+            case "A-Z": $sql .= "ORDER BY u.nombre ASC"; break;
+            case "Z-A": $sql .= "ORDER BY u.nombre DESC"; break;
+            case "Más Recientes": $sql .= "ORDER BY u.id DESC"; break;
+            case "Más Antiguos": $sql .= "ORDER BY u.id ASC"; break;
+            default: $sql .= "ORDER BY u.id ASC"; break;
         }
 
         $resultado = $this->conn->query($sql);
