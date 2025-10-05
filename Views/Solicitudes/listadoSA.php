@@ -15,6 +15,11 @@ require_once ("./Views/include/UH.php");
     <div>
         <h2 class="fade-slide" >Solicitudes aceptadas</h2>
     </div>
+
+    <div class="botones-container">
+        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+    </div>
+    
     <table>
         <thead>
             <tr>
@@ -76,9 +81,7 @@ require_once ("./Views/include/UH.php");
         </tbody>
     </table>
 
-    <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    
 
     <div id="imageModal" class="image-modal">
         <span class="close">&times;</span>
