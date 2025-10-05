@@ -20,7 +20,7 @@ require_once ("./Views/include/UH.php");
     <div class="container3">
         <h1>Histórial de actividades</h1>
 
-        <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda.</p>
+        <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda. Por default la fecha final es el dia actual.</p>
 
         <form action="index.php" method="GET" class="filter-form">
             <input type="hidden" name="accion" value="mostrarHistorial">
@@ -29,11 +29,11 @@ require_once ("./Views/include/UH.php");
                 <input type="text" id="search" name="search" placeholder="Buscar por usuario, acción, item..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label for="start_date">Fecha de inicial:</label>
+                <label for="start_date">Fecha Inicial:</label>
                 <input required type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($_GET['start_date'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label required for="end_date">Fecha de final:</label>
+                <label required for="end_date">Fecha Final:</label>
                 <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($_GET['end_date'] ?? ''); ?>">
             </div>
 
@@ -58,7 +58,7 @@ require_once ("./Views/include/UH.php");
                             <?php echo htmlspecialchars(ucfirst($registro->accion)); ?>
                             <strong><?php echo htmlspecialchars(ucfirst($registro->item)); ?></strong>
                             <?php
-                                if ($registro->item !== null) {
+                                if ($registro->item) {
                                     echo "#".  htmlspecialchars($registro->item_id);
                                 }
                             ?>
@@ -92,7 +92,7 @@ require_once ("./Views/include/UH.php");
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="Assets/js/listado.js"></script>
+    <script src="Assets/js/paginacion.js"></script>
     <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

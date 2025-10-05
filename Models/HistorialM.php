@@ -43,16 +43,22 @@ class HistorialM {
     $param_types = '';
 
     if (!empty($search)) {
-        $conditions[] = "(h.usuario LIKE ? OR h.accion LIKE ? OR h.item LIKE ? OR h.obs LIKE ?)";
-        $search_term = "%" . $search . "%";
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $params[] = $search_term;
-        $param_types .= 'ssss';
+        $search_terms = explode (" ", $search);
+        foreach ($search_terms as $palabra) {
+            $conditions[] = "(h.usuario LIKE ? OR h.accion LIKE ? OR h.item LIKE ? OR h.obs LIKE ?)";
+            $search_term = "%" . $palabra . "%";
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $param_types .= 'ssss';
+        }
     }
 
-    if (!empty($startDate) && !empty($endDate)) {
+    if (!empty($startDate)) {
+        if (empty($endDate)) {
+            $endDate = date('d-m-y');
+        }
         $conditions[] = "(h.fecha_hora BETWEEN ? AND ?)";
         $params[] = $startDate . ' 00:00:00';
         $params[] = $endDate . ' 23:59:59';
@@ -68,7 +74,7 @@ class HistorialM {
     $stmt = $this->conexion->prepare($query);
 
     if ($stmt === false) {
-        error_log("ERROR: Prepared statement failed in getHistorial: " . $this->conexion->error);
+        error_log("ERROR: La declaración preparada falló en getHistorial: " . $this->conexion->error);
         return [];
     }
 
@@ -80,7 +86,7 @@ class HistorialM {
     $resultado = $stmt->get_result();
 
     if ($resultado === false) {
-        error_log("ERROR: get_result failed in getHistorial: " . $stmt->error);
+        error_log("ERROR: get_result fallo en getHistorial: " . $stmt->error);
     } else {
         while ($fila = $resultado->fetch_object()) {
             $historial[] = $fila;

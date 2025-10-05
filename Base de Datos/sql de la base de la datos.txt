@@ -13,6 +13,7 @@ CREATE TABLE usuario (
     nombre VARCHAR(100) NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    foto_perfil VARCHAR(255) DEFAULT 'Assets/imagenes/perfil/fotodefault.webp',
     rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id)
 );
 

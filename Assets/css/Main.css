@@ -102,6 +102,46 @@ body {
     width: 100%; 
 }
 
+.logo-link img {
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    cursor: pointer;
+}
+
+@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.logo-link img:hover {
+    transform: rotate(15deg) scale(1.2);
+    filter: drop-shadow(0 0 8px var(--primary-color));
+}
+
+.icono-menu {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.foto-perfil {
+    display: block;              
+    margin: 0 auto;              
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;          
+    object-fit: cover;           
+    border: 2px solid #ccc;
+    transition: transform 0.3s, border-color 0.3s; 
+}
+
+.foto-perfil:hover {
+    transform: scale(1.05);     
+    border-color: #e83e8c;      
+}
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -115,7 +155,28 @@ body {
     position: fixed;
     bottom: 32px;
     right: 32px;
+    z-index: 9999; /* Siempre encima */
+    border-radius: 50%; /* Botón redondo */
+    background-color: #e83e8c;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
+
+.btn-agregar img {
+    width: 25px;
+    height: 25px;
+}
+
+.btn-agregar:hover {
+    transform: translateY(-5px) scale(1.1); /* Flota hacia arriba y crece un poco */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    background-color: #972f5f; /* Cambio de color al pasar el mouse */
+}
+
 
 .btn {
     padding: 0.6rem 1.2rem;
@@ -135,24 +196,48 @@ body {
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
     margin-right: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-boton:hover {
     background-color: var(--primary-color);
     color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-group-actions {
+    display: flex;           
+    justify-content: center; 
+    align-items: center;     
+    gap: 10px;               
 }
 
 .btn-boton2 {
-    margin-right: 10px;
-    padding: 8px 15px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #b61e65;
+    background-color: #f8f9fa;
+    transition: var(--transition);
+}
+
+.btn-boton2 img {
+    width: 20px;
+    height: 20px;
 }
 
 .btn-boton2:hover {
     background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-boton2.danger:hover {
+    background-color: #dc2626;
     color: white;
 }
 
@@ -182,6 +267,7 @@ h1 {
 
 h2 {
     text-align: center;
+    animation: glow 2s ease-in-out infinite alternate;
 }
 
 p {
@@ -197,22 +283,25 @@ p {
 /* aca afectan las tablas, todo lo relacionado a ellas */
 
 table {
-    width: 95%; 
-    background-color: #eb87b5;
-    text-align: center;
+    width: 95%;
+    background-color: #fff;
     border-collapse: collapse;
-    margin: 40px;
-    height: 40%;
+    margin: 40px auto;
     border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
 }
 
 tr:hover {
     background-color: rgba(232, 62, 140, 0.1);
 }
 
-th, td {
-	border-collapse: collapse;
-	padding: 5px;
+table td, table th {
+    vertical-align: middle; 
+    text-align: center;     
+    padding: 12px;           
 }
 
 img {
@@ -221,12 +310,14 @@ img {
 }
 
 th {
-	background-color: #b61e65;
-    color: #f0f0f0;
+    background-color: #b61e65;
+    color: #fff;
+    padding: 12px;
 }
 
 td {
-    color: white;
+    padding: 12px;
+    color: #333;
 }
 
 th:first-child {
@@ -237,12 +328,103 @@ th:last-child {
     border-top-right-radius: 10px;
 }
 
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: rgba(232, 62, 140, 0.08);
+}
+
+.list-item td:last-child {
+    display: flex;
+    gap: 10px; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.list-item td img {
+    display: block; 
+    margin: 0 auto;
+}
+
+.btn-ver-solicitudes123 {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+
 /* aca terminan las tablas */
+
+/* aca empieza el css del historial */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container3 h1,
+.container3 p,
+.filter-form {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+.container3 h1 { animation-delay: 0.1s; }
+.container3 p { animation-delay: 0.3s; }
+.filter-form { animation-delay: 0.5s; }
+
+.list-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInRow 0.6s ease forwards;
+}
+
+@keyframes fadeInRow {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.list-item:nth-child(1) { animation-delay: 0.1s; }
+.list-item:nth-child(2) { animation-delay: 0.2s; }
+.list-item:nth-child(3) { animation-delay: 0.3s; }
+.list-item:nth-child(4) { animation-delay: 0.4s; }
+.list-item:nth-child(5) { animation-delay: 0.5s; }
+.list-item:nth-child(6) { animation-delay: 0.6s; }
+.list-item:nth-child(7) { animation-delay: 0.7s; }
+.list-item:nth-child(8) { animation-delay: 0.8s; }
+.list-item:nth-child(9) { animation-delay: 0.9s; }
+.list-item:nth-child(10) { animation-delay: 1s; }
+
+.list-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.button-container5 button,
+.button-container5 .clear-button,
+.botones-container button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-container5 button:hover,
+.button-container5 .clear-button:hover,
+.botones-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
 .container3 {
     max-width: 900px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #f0f2f54f;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -311,6 +493,7 @@ th:last-child {
 .filter-form button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .clear-button {
@@ -321,6 +504,7 @@ th:last-child {
 .clear-button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .historial-item {
@@ -364,6 +548,8 @@ th:last-child {
     border-radius: 8px;
     border: 1px solid #dc3545;
 }
+
+/*aca termina el css del historial */
 
 /* aca empieza el css del pagination, el que esta en las tablas */
 
@@ -442,7 +628,7 @@ th:last-child {
 
 .dropdown-text {
     font-weight: 600;
-    color: #1f2937;
+    color: #361f37;
     margin: 0;
 }
 
@@ -481,12 +667,12 @@ th:last-child {
 
 .user-name {
     font-weight: 600;
-    color: #1f2937;
+    color: #151b24;
 }
 
 .user-email {
     font-size: 0.875rem;
-    color: #6b7280;
+    color: #4c5361;
 }
 
 .dropdown-item {
@@ -495,7 +681,7 @@ th:last-child {
     text-align: left;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
-    color: #374151;
+    color: #171817;
     transition: background-color 0.2s ease;
 }
 
@@ -792,10 +978,7 @@ a.errorLink {
 
 /* Fin del css de Error.php */
 
-
-/* ----------------------------- */
-/* ESTILOS DE FORMULARIOS        */
-/* ----------------------------- */
+/* Aca el CSS de los Formularios */
 
 .contenedor-formulario {
     background-color: #f0f2f5; 
@@ -805,7 +988,68 @@ a.errorLink {
     padding-top: 50px;
     min-height: calc(100vh - 100px);
     gap: 20px; 
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease-out forwards;
 }
+
+.contenedor-formulario h3 {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideDown 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.contenedor-formulario form > * {
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+.contenedor-formulario form > *:nth-child(1) { animation-delay: 0.3s; }
+.contenedor-formulario form > *:nth-child(2) { animation-delay: 0.4s; }
+.contenedor-formulario form > *:nth-child(3) { animation-delay: 0.5s; }
+.contenedor-formulario form > *:nth-child(4) { animation-delay: 0.6s; }
+.contenedor-formulario form > *:nth-child(5) { animation-delay: 0.7s; }
+.contenedor-formulario form > *:nth-child(6) { animation-delay: 0.8s; }
+.contenedor-formulario form > *:nth-child(7) { animation-delay: 0.9s; }
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-label {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-label:nth-of-type(1) { animation-delay: 0.1s; }
+.fade-label:nth-of-type(2) { animation-delay: 0.2s; }
+.fade-label:nth-of-type(3) { animation-delay: 0.3s; }
+.fade-label:nth-of-type(4) { animation-delay: 0.4s; }
 
 section {
     background-color: #ffffff; 
@@ -879,18 +1123,18 @@ label {
 }
 
 .btn-boton3-input {
-    display: inline-block;
-    padding: 10px 20px;
+    padding: 0.3rem 0.6rem;
     background-color: #e83e8c;
-    color: #fff;
-    border-radius: 8px;
+    color: white;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 1rem;
-    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-boton3-input:hover {
     background-color: #972f5f;
+    transform: scale(1.05);
 }
 
 button[type="submit"],
@@ -913,13 +1157,163 @@ input[type="submit"]:hover {
 }
 
 .input-archivo {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 5px; 
+    display: block;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #nombre-archivo-seleccionado {
-  font-size: 14px;
-  color: #333;
+    font-size: 0.9rem;
+    color: #555;
 }
+
+/* Aca termina el CSS de los Formularios */
+
+/* aca empieza el css de filtrado de las tablas */
+
+.ordenar-form {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    max-width: 700px;
+    box-shadow: var(--box-shadow);
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ordenar-form label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.ordenar-form select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background-color: white;
+}
+
+.ordenar-form select:hover {
+    border-color: var(--primary-color);
+}
+
+.ordenar-form button {
+    padding: 8px 18px;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    margin-top: -10px;
+}
+
+.ordenar-form button:hover {
+    background-color: #972f5f;
+    transform: translateY(-2px);
+}
+
+/* aca termina el css del filtrado de las tablas */
+
+/* Aca hay CSS del inicio con animaciones y eso */
+
+h1.inicio55 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    animation: fadeDown 1s ease forwards;
+}
+
+p.inicio44 {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 890px;
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-boton44 {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    margin-right: 1rem;
+    animation: pulse 2s infinite;
+}
+
+.btn-boton44:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.fade-slide {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.8s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-container a:nth-child(1) { animation-delay: 0.2s; }
+.btn-container a:nth-child(2) { animation-delay: 0.4s; }
+.btn-container a:nth-child(3) { animation-delay: 0.6s; }
+.btn-container a:nth-child(4) { animation-delay: 0.8s; }
+
+/* y aca termina el css de animaciones para inicio */

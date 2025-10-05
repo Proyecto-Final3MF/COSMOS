@@ -2,7 +2,6 @@
 require_once ("./Views/include/UH.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,26 +11,60 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-    <div class="contenedor-formulario">
+<div class="contenedor-formulario">
     <section>
-<h3>Editar Usuario</h3>
+        <h3>Editar Usuario</h3>
 
-<form method="POST" action="Index.php?accion=actualizarU">
-    
-    <input type="hidden" name="id" value="<?= $datos['id'] ?>">
-        
-    <p> Nombre: </p>  <input type="text" name="nombre" value="<?= $datos['nombre'] ?>"><br>
-        
-   <p> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
-       
-    <input type="submit" value="Guardar cambios">
+        <form method="POST" action="Index.php?accion=actualizarU" enctype="multipart/form-data">
 
-</form>
-</section>
-<div class="botones-container">
+            <input type="hidden" name="id" value="<?= $datos['id'] ?>">
+            <input type="hidden" name="foto_actual" value="<?= htmlspecialchars($datos['foto_perfil']) ?>">
+            
+            <p class="fade-label">Foto de perfil</p>
+            <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil" class="foto-perfil">
+
+            <div class="input-archivo">
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
+            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Archivo</label>
+            <span class="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+            </div>
+            <br>
+            
+            <p class="fade-label">Nombre:</p>
+            <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
+
+             <p class="fade-label"> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
+
+            <br><br>
+            <input type="submit" value="Guardar cambios">
+
+        </form>
+    </section>
+
+    <div class="botones-container">
         <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
 </div>
+
+<script>
+    const inputFoto = document.getElementById('foto_perfil');
+    const preview = document.getElementById('preview');
+
+    inputFoto.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.setAttribute('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        } else {
+            // Si no hay archivo seleccionado, volver a mostrar la foto actual
+            preview.setAttribute('src', '<?= htmlspecialchars($datos['foto_perfil']) ?>');
+        }
+    });
+</script>
+<script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
-</html> 
+</html>

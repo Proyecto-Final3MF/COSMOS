@@ -17,7 +17,7 @@ if (!isset($estados) || $estados === null) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,13 +31,13 @@ if (!isset($estados) || $estados === null) {
         <form method="POST" action="index.php?accion=actualizarSF">
             <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
 
-            <p>Título:</p>
+            <p class="fade-label">Título:</p>
             <input type="text" class="form-control" name="titulo" value="<?= htmlspecialchars($datosSolicitud['titulo']) ?>" disabled>
 
-            <p>Descripción:</p>
+            <p class="fade-label">Descripción:</p>
             <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
 
-            <p>Estado:</p>
+            <p class="fade-label">Estado:</p>
             <select name="estado" required>
                 <?php foreach ($estados as $estado): ?>
                     <option value="<?= htmlspecialchars($estado['id']) ?>" 
