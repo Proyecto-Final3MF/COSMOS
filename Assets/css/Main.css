@@ -355,6 +355,38 @@ body {
     }
 }
 
+.btn-volver-container {
+    position: fixed;
+    top: 100px; 
+    left: 20px; 
+    z-index: 1001; 
+}
+
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-volver:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-volver i {
+    font-size: 1rem;
+}
+
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
 
 /* aca afecta los h1, h2 y p, osea titulos y parrafos :V */

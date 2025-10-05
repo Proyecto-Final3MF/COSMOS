@@ -25,12 +25,14 @@ if (!isset($estados) || $estados === null) {
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-<div class="contenedor-formulario">
 
-<div class="botones-container">
-    <a href="index.php?accion=listarSA"><button class="btn btn-boton">Volver</button></a>
+<div class="btn-volver-container">
+    <a href="index.php?accion=listarSA" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
 </div>
 
+<div class="contenedor-formulario">
 <section>
     <h3>Editar Solicitud</h3>
     <form method="POST" action="index.php?accion=actualizarSF">

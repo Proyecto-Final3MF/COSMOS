@@ -17,6 +17,11 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="Assets/css/Main.css">
 </head>
 <body>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     <div class="container3">
         <h1>Histórial de actividades</h1>
 

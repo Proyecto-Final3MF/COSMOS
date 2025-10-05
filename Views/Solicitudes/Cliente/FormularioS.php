@@ -11,10 +11,12 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=listarSLU" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     <div class="contenedor-formulario">
-    <div class="botones-container">
-        <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Volver</button></a>
-    </div>
 <section>
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">

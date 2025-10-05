@@ -16,9 +16,11 @@ require_once ("./Views/include/UH.php");
         <h2 class="fade-slide" >Solicitudes aceptadas</h2>
     </div>
 
-    <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     
     <table>
         <thead>
