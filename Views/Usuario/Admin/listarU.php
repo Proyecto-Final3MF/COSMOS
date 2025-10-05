@@ -46,6 +46,7 @@ require_once("./Views/include/UH.php");
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Foto</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
@@ -56,9 +57,30 @@ require_once("./Views/include/UH.php");
             <?php foreach ($resultados as $u): ?>
                 <tr class="list-item">
                     <td><?= $u['id'] ?></td>
+                    <td>
+                    <img src="<?= htmlspecialchars($u['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" 
+                     alt="Foto de <?= htmlspecialchars($u['nombre']) ?>" 
+                     class="foto-mini">
+                    </td>
                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td><?= htmlspecialchars($u['rol_id']) ?></td>
+                    <td><?php
+                        switch ($u['rol_id']) {
+                        case 1:
+                        echo "Administrador";
+                        break;
+                        case 2:
+                        echo "Técnico";
+                        break;
+                        case 3:
+                        echo "Cliente";
+                        break;
+                        default:
+                        echo "Desconocido";
+                        break;
+                        }
+                        ?> 
+                        </td>
                     <td>
                         <div class="btn-group-actions d-flex">
                             <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
