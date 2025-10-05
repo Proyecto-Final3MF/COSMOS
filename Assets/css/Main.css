@@ -1370,6 +1370,12 @@ input[type="submit"]:hover {
     border-radius: 8px;
     max-width: 700px;
     box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ordenar-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 @keyframes fadeSlideIn {
@@ -1413,6 +1419,71 @@ input[type="submit"]:hover {
 .ordenar-form button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+}
+
+.filter-form2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto 30px auto;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-form2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-form2 label {
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.filter-form2 input[type="text"] {
+    width: 100%;
+    padding: 12px 40px 12px 18px; 
+    font-size: 1rem;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-form2 input[type="text"]::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.filter-form2 input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(232, 62, 140, 0.3);
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .filter-form2 {
+        padding: 12px;
+    }
+
+    .filter-form2 input[type="text"] {
+        padding: 10px 38px 10px 15px;
+        font-size: 0.95rem;
+    }
+
 }
 
 /* aca termina el css del filtrado de las tablas */
