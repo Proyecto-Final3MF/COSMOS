@@ -35,12 +35,13 @@ require_once ("./Views/include/UH.php");
                 <tr class="list-item">
                     <td><?= htmlspecialchars($resultado['titulo']); ?></td>
                     <td>
-                        <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto" class="zoom-img"/><br>
-                        <?= htmlspecialchars($resultado['nombre']) ?>
+                        <img src="<?= htmlspecialchars($resultado['imagen'] ?? 'Assets/imagenes/perfil/fotodefault.webp'); ?>" 
+                        alt="Imagen del producto" class="zoom-img"/><br>
+                        <?= htmlspecialchars($resultado['producto_nombre'] ?? $resultado['nombre'] ?? 'Sin nombre') ?>
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
-                    <td><?= htmlspecialchars($resultado['estado_id']); ?></td>
+                    <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                     <td>
                         <div class="botones-container">
