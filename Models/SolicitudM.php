@@ -43,7 +43,7 @@ class Solicitud {
         }
     }
 
-    public function ListarTL($search = null) {
+    public function ListarTL($usuarioId, $search = null) {
     $sql = "SELECT s.*, p.nombre as producto, p.imagen, u.nombre
             FROM solicitud s
             INNER JOIN producto p ON s.producto_id = p.id
@@ -84,7 +84,7 @@ class Solicitud {
     } else {
         return [];
     }
-}
+    }
 
     public function asignarS($id_usuario, $id_soli){
         // Utiliza una consulta preparada para mayor seguridad
