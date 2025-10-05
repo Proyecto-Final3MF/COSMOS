@@ -38,7 +38,6 @@ body {
 	flex-wrap: wrap;
 }
 
-
 .nav-links {
     display: flex;
     list-style: none;
@@ -124,6 +123,7 @@ body {
     height: 18px;
     margin-right: 8px;
     vertical-align: middle;
+    transition: transform 0.3s ease;
 }
 
 .foto-perfil {
