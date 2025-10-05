@@ -34,6 +34,7 @@ require_once ("./Views/include/UH.php");
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
+                <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
             </tr>
@@ -51,6 +52,7 @@ require_once ("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <td><?= htmlspecialchars($resultado['estado_id']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                     <td>
                         <div class="botones-container">
