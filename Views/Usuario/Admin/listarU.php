@@ -58,7 +58,7 @@ require_once("./Views/include/UH.php");
                     <td><?= $u['id'] ?></td>
                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td><?= htmlspecialchars($u['rol_id']) ?></td>
+                    <td><?= htmlspecialchars($u['rol']) ?></td>
                     <td>
                         <div class="btn-group-actions d-flex">
                             <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
