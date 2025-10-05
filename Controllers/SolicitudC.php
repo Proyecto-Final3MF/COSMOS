@@ -57,7 +57,7 @@ class SolicitudC {
         if (isset($_SESSION['id'])) {
             $usuarioId = $_SESSION['id'];
             $search = $_GET['search'] ?? null;
-            return $this->solicitudModel->ListarTL($usuarioId);
+            return $this->solicitudModel->ListarTL($usuarioId, $search);
         } else {
             echo "paso algo mal";
             return [];
