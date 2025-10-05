@@ -40,7 +40,7 @@ require_once ("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
-                    <td><?= htmlspecialchars($resultado['estado_id']); ?></td>
+                    <td><?= htmlspecialchars($resultado['estado']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                     <td>
                         <div class="botones-container">
