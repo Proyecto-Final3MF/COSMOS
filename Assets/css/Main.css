@@ -1287,6 +1287,38 @@ input[type="submit"]:hover {
     color: #727579;
 }
 
+.producto-con-boton {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.producto-con-boton select {
+    flex: 1;
+    max-width: 300px;
+}
+
+.producto-con-boton .btn-boton2 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e83e8c;
+    background-color: #fff;
+    transition: transform 0.3s, background-color 0.3s;
+    margin-top: -12px;
+}
+
+.producto-con-boton .btn-boton2:hover {
+    background-color: #e83e8c;
+    transform: scale(1.1);
+}
+
+.producto-con-boton .btn-boton2 img {
+    width: 18px;
+    height: 18px;
+}
+
 /* Aca termina el CSS de los Formularios */
 
 /* aca empieza el css de filtrado de las tablas */
