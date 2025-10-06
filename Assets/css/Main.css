@@ -339,21 +339,6 @@ body {
     100% { transform: translateY(0) scale(1); }
 }
 
-.btn-boton444 {
-    animation: pulseBtn 4s ease-in-out infinite;
-}
-
-@media (max-width: 600px) {
-    .btn-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .btn-boton444 {
-        width: 90%;
-        justify-content: center;
-    }
-}
-
 .btn-volver-container {
     position: fixed;
     top: 100px; 
