@@ -11,7 +11,6 @@ require_once("./Views/include/UH.php");
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
-
 <body>
     <br>
     <div>
@@ -96,5 +95,4 @@ require_once("./Views/include/UH.php");
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
 </html>
