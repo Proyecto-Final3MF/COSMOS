@@ -15,6 +15,10 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+    </div>
+
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
