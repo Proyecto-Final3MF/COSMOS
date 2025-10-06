@@ -29,7 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                     <form method="POST" action="index.php?accion=borrarConversacion" style="display:inline" onsubmit="return confirm('¿Seguro que deseas borrar esta conversacion?');">
                         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-                        <input type="hidden" name="receptor_id" value="<? $c['otro_usuario_id'] ?>">
+                        <input type="hidden" name="receptor_id" value="<?= $c['otro_usuario_id'] ?>">
                         <button type="submit">Borrar</button>
                     </form>
                 </li>

@@ -48,17 +48,54 @@ class Mensaje
         // Devuelve todos los resultados como array asociativo
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
+    public function obtenerMensajesConversacion($receptor_id = null, $esAdmin = false)
+    {
+        if ($esAdmin) {
+            // Si es admin -> ver todos los mensajes
+            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                    u.nombre AS usuario, r.nombre AS receptor
+                    FROM mensaje m
+                    JOIN usuario u ON m.usuario_id = u.id
+                    LEFT JOIN usuario r ON m.receptor_id = r.id
+                    ORDER BY m.fecha DESC";
+            $stmt = $this->conexion->prepare($sql);
+        } else {
+            // Usuario normal -> solo ve sus mensajes
+            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                    u.nombre AS emisor,
+                    r.nombre AS receptor
+                    FROM mensaje m
+                    JOIN usuario u ON m.usuario_id = u.id
+                    LEFT JOIN usuario r ON m.receptor_id = r.id
+                    WHERE (m.usuario_id = ? AND m.receptor_id = ?)
+                    OR (m.usuario_id = ? AND m.receptor_id = ?)
+                    ORDER BY m.fecha ASC";
+
+            $stmt = $this->conexion->prepare($sql);
+            // Se enlaza el ID del usuario dos veces
+            $stmt->bind_param("ii", $receptor_id, $receptor_id);
+        }
+        // Si falla la preparación de la consulta → devuelve array vacío
+        if (!$stmt) {
+            return [];
+        }
+        // Ejecuta la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+        // Devuelve todos los resultados como array asociativo
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    }
+
     // Obtener conversación entre dos usuarios específicos
     public function obtenerConversacion($usuario_id, $otro_usuario_id)
     {
-        // Si es admin -> ver todos los mensajes
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
                 u.nombre AS emisor, r.nombre AS receptor
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE (m.usuario_id= ? AND m.receptor_id = ?)
-                OR (m.usuario_id = ? AND m.receptor_id = ?)
+                WHERE (m.usuario_id= ? AND (m.receptor_id = ? OR m.receptor_id IS NULL))
+                OR (m.usuario_id = ? AND (m.receptor_id = ? OR m.receptor_id IS NULL))
                 ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
@@ -147,17 +184,12 @@ class Mensaje
         if (empty($receptor_id)) {
             $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,NULL,?)";
             $stmt = $this->conexion->prepare($sql);
-            if (!$stmt) {
-                return false;
-            }
             $stmt->bind_param("is", $usuario_id, $mensaje);
         } else {
             // Mensaje dirigido a un receptor
             $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
             $stmt = $this->conexion->prepare($sql);
-            if (!$stmt) {
-                return false;
-            }
+        
             $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         }
         return $stmt->execute();

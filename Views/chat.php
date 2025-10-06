@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="hidden" name="receptor_id" value="<?= htmlspecialchars($otroUsuarioId) ?>">
+        <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>

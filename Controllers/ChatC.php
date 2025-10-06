@@ -28,8 +28,9 @@ class ChatC
 
     public function cargarMensajes()
     {
-        $usuarioId = $_SESSION['id'] ?? null;
-        $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $usuarioId = $_SESSION['id'];
+        $otroUsuarioId = $_GET['usuario_id'];
+        $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
 
         if (!$usuarioId || !$otroUsuarioId) {
             http_response_code(400);
@@ -45,8 +46,10 @@ class ChatC
     // Mostrar la vista de chat
     public function mostrarConversacion()
     {
-        $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'];
+        $usuarioId = $_SESSION['id'];
+        $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
+
 
         if (!$otroUsuarioId) {
             echo "Debes seleccionar un usuario para conversar.";
@@ -147,10 +150,10 @@ class ChatC
 
         $usuario_id = $_POST['usuario_id'];
         $receptor_id = $_POST['receptor_id'];
-        $mensaje = $_POST['mensaje'];
+        $mensajeTexto = $_POST['mensaje'];
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->enviarMensaje($usuario_id, $receptor_id, $mensaje);
+        $mensajeModel->enviarMensaje($usuario_id, $receptor_id, $mensajeTexto);
 
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
@@ -158,15 +161,26 @@ class ChatC
 
     public function borrarConversacion()
     {
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?accion=login");
+            exit();
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario_id = $_POST['usuario_id'];
-            $receptor_id = $_POST['receptor_id'];
+            $usuario_id = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT); 
+            $receptor_id = filter_input(INPUT_POST, 'receptor_id', FILTER_VALIDATE_INT);
+
+            if(!$usuario_id || !$receptor_id) {
+                $_SESSION['mensaje'] = "Error: Datos de usuario invalidos.";
+                header("Location: index.php?accion=mostrarConversaciones");
+                exit();
+            }
 
             require_once "Models/Mensaje.php";
             $mensajeModel = new Mensaje();
             $mensajeModel->borrarConversacion($usuario_id, $receptor_id);
 
-            header("Location: index.php?accion=mostrarConversaciones");
+            $_SESSION['mensaje'] = "Conversacion borrada correctamente.";
+            header("Location: index.php?accion=listarConversaciones");
             exit();
         }
     }

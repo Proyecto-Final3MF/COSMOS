@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <?php if (!empty($mensajes)): ?>
     <?php foreach ($mensajes as $m): ?>
         <?php
-            $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tú' : ($m['receptor'] ?? '???');
+            $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tú' : ($m['emisor'] ?? $m['receptor'] ?? '???');
         ?>
         <div class="mensaje">
             <p class="texto">
