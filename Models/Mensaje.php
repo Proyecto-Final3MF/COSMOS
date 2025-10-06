@@ -12,34 +12,34 @@ class Mensaje
         }
     }
 
-    public function obtenerMensajes($usuarioId, $otroUsuarioId)
+    public function obtenerMensajes($receptor_id = null, $esAdmin = false)
     {
-        if ($otroUsuarioId === null) {
-            // solo traer mensajes del usuario
+        if ($esAdmin) {
+            // Si es admin -> ver todos los mensajes
+            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                    u.nombre AS usuario, r.nombre AS receptor
+                    FROM mensaje m
+                    JOIN usuario u ON m.usuario_id = u.id
+                    LEFT JOIN usuario r ON m.receptor_id = r.id
+                    ORDER BY m.fecha DESC";
+            $stmt = $this->conexion->prepare($sql);
+        } else {
+            // Usuario normal -> solo ve sus mensajes
             $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
                     u.nombre AS usuario
                     FROM mensaje m
                     JOIN usuario u ON m.usuario_id = u.id
-                    WHERE m.usuario_id = ?
+                    WHERE m.receptor_id = ? OR m.usuario_id = ?
                     ORDER BY m.fecha DESC";
 
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("i", $usuarioId);
-        } else {
-            // Mensajes entre usuario y otroUsuario
-            $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
-                    u.nombre AS usuario
-                    FROM mensaje m
-                    JOIN usuario u ON m.usuario_id = u.id
-                    WHERE (m.usuario_id = ? AND m.receptor_id = ?)
-                    OR (m.usuario_id = ? AND m.receptor_id = ?)
-                    ORDER BY m.fecha ASC";
-
-            $stmt = $this->conexion->prepare($sql);
             // Se enlaza el ID del usuario dos veces
-            $stmt->bind_param("iiii", $usuarioId, $otroUsuarioId, $otroUsuarioId, $usuarioId);
+            $stmt->bind_param("ii", $receptor_id, $receptor_id);
         }
-
+        // Si falla la preparación de la consulta → devuelve array vacío
+        if (!$stmt) {
+            return [];
+        }
         // Ejecuta la consulta
         $stmt->execute();
         $result = $stmt->get_result();
