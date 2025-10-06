@@ -56,26 +56,7 @@ require_once ("./Views/include/UH.php");
     </section>
     <br>
 </div>
-
-<script>
-    const inputFoto = document.getElementById('foto_perfil');
-const preview = document.getElementById('preview');
-
-inputFoto.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.setAttribute('src', e.target.result);
-        }
-        reader.readAsDataURL(file);
-    } else {
-        // Mantener la imagen por defecto
-        preview.setAttribute('src', 'Assets/imagenes/default-user.png');
-    }
-});
-
-</script>
+<script src="Assets/js/fotoperfilregistro.js"></script>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
