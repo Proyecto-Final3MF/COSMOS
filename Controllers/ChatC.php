@@ -24,8 +24,7 @@ class ChatC
             include "Views/chat_admin.php";
         } else {
             // Si es usuario normal, solo ve sus propios mensajes
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             $mensajes = $mensaje->obtenerMensajes($usuario_id, null) ?? [];
             include "Views/mensajes.php";
         }
@@ -37,14 +36,13 @@ class ChatC
             $otroUsuarioId = $_GET['usuario_id'];
             $mensajes = (new Mensaje())->obtenerMensajes($_SESSION['id'], $otroUsuarioId);
             require "Views/mensajes.php";
-=======
+
             $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
             include "Views/chat.php";
->>>>>>> parent of 976502c (Merge branch 'Test')
-=======
+ 
+
             $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
             include "Views/chat.php";
->>>>>>> parent of 976502c (Merge branch 'Test')
         }
     }
 

@@ -72,8 +72,6 @@ class Mensaje
     // Obtener lista de conversaciones de un usuario
     public function obtenerConversaciones($usuario_id)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $sql = "SELECT 
                 CASE 
                     WHEN m.usuario_id = ? THEN m.receptor_id 
@@ -128,7 +126,6 @@ class Mensaje
             $stmt->execute();
         }
     }
-=======
         $sql = "SELECT CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
                 u.nombre AS otro_usuario,
                 MAX(m.fecha) AS ultima_fecha,
@@ -146,8 +143,6 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
->>>>>>> parent of 976502c (Merge branch 'Test')
-=======
         $sql = "SELECT CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
                 u.nombre AS otro_usuario,
                 MAX(m.fecha) AS ultima_fecha,
@@ -165,7 +160,6 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
->>>>>>> parent of 976502c (Merge branch 'Test')
     // Obtener todos los mensajes
     public function obtenerTodosLosMensajes()
     {
@@ -178,17 +172,10 @@ class Mensaje
 
         $result = $this->conexion->query($sql);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (!$result) {
             echo "Error en query: " . $this->conexion->error;
             return [];
         }
-
-=======
->>>>>>> parent of 976502c (Merge branch 'Test')
-=======
->>>>>>> parent of 976502c (Merge branch 'Test')
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
