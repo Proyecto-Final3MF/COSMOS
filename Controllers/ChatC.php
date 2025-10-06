@@ -24,7 +24,7 @@ class ChatC
             include "Views/chat_admin.php";
         } else {
             // Si es usuario normal, solo ve sus propios mensajes
-            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
+            $mensajes = $mensaje->obtenerMensajes($usuario_id, null) ?? [];
             include "Views/mensajes.php";
         }
     }
