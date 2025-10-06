@@ -9,12 +9,13 @@ require_once("./Views/include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
-    <link rel="stylesheet" href="./Assets/css/Main.css" />
+    <link rel="stylesheet" href="./Assets/css/Main.css"/>
 </head>
 
 <body>
     <br>
     <div>
+<<<<<<< HEAD
         <h2 class="fade-slide">Solicitudes aceptadas</h2>
     </div>
 
@@ -23,7 +24,17 @@ require_once("./Views/include/UH.php");
     <i class="fa fa-arrow-left"></i> Volver
 </button>
 </div>
+=======
+        <h2 class="fade-slide" >Solicitudes aceptadas</h2>
+    </div>
+>>>>>>> parent of 976502c (Merge branch 'Test')
 
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
+    
     <table>
         <thead>
             <tr>
@@ -37,6 +48,7 @@ require_once("./Views/include/UH.php");
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             <?php
             if (!empty($resultados)) {
                 foreach ($resultados as $resultado) {
@@ -73,24 +85,57 @@ require_once("./Views/include/UH.php");
                 <?php
                 }
             } else {
+=======
+        <?php
+        if (!empty($resultados)) {
+            foreach ($resultados as $resultado) {
+>>>>>>> parent of 976502c (Merge branch 'Test')
                 ?>
-                <tr>
-                    <td colspan="6">
-                        No acepto solicitudes todavia
-                        <div style="display:flex; justify-content:center; margin-top:15px;">
-                            <a href="index.php?accion=listarTL">
-                                <button class="btn btn-boton2">Ver solicitudes disponibles</button>
+                <tr class="list-item">
+                    <td><?= htmlspecialchars($resultado['titulo']); ?></td>
+                    <td>
+                        <img src="<?= htmlspecialchars($resultado['imagen'] ?? 'Assets/imagenes/perfil/fotodefault.webp'); ?>" 
+                        alt="Imagen del producto" class="zoom-img"/><br>
+                        <?= htmlspecialchars($resultado['producto_nombre'] ?? $resultado['nombre'] ?? 'Sin nombre') ?>
+                    </td>
+                    <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
+                    <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
+                    <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
+                    <td>
+                        <div class="botones-container">
+                            <?php if($_SESSION['rol'] == 1){ ?>
+                                <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2" > 
+                                     <img src="Assets/imagenes/pen.png" alt="editar" width="45">
+                                </a>
+                            <?php } ?>
+                            <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');" class="btn btn-boton2" >
+                                <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
                             </a>
                         </div>
                     </td>
                 </tr>
-            <?php
+                <?php
             }
+        } else {
             ?>
+            <tr>
+                <td colspan="7">
+                    No acepto solicitudes todavia
+                    <div style="display:flex; justify-content:center; margin-top:15px;">
+                        <a href="index.php?accion=listarTL">
+                            <button class="btn btn-boton777">Ver solicitudes disponibles</button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
         </tbody>
     </table>
 
-
+    
 
     <div id="imageModal" class="image-modal">
         <span class="close">&times;</span>
@@ -103,5 +148,4 @@ require_once("./Views/include/UH.php");
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
 </html>

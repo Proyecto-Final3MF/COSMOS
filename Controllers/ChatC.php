@@ -24,6 +24,7 @@ class ChatC
             include "Views/chat_admin.php";
         } else {
             // Si es usuario normal, solo ve sus propios mensajes
+<<<<<<< HEAD
             $mensajes = $mensaje->obtenerMensajes($usuario_id, null) ?? [];
             include "Views/mensajes.php";
         }
@@ -35,6 +36,10 @@ class ChatC
             $otroUsuarioId = $_GET['usuario_id'];
             $mensajes = (new Mensaje())->obtenerMensajes($_SESSION['id'], $otroUsuarioId);
             require "Views/mensajes.php";
+=======
+            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
+            include "Views/chat.php";
+>>>>>>> parent of 976502c (Merge branch 'Test')
         }
     }
 
@@ -157,20 +162,5 @@ class ChatC
 
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
-    }
-
-    public function borrarConversacion()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario_id = $_POST['usuario_id'];
-            $receptor_id = $_POST['receptor_id'];
-
-            require_once "Models/Mensaje.php";
-            $mensajeModel = new Mensaje();
-            $mensajeModel->borrarConversacion($usuario_id, $receptor_id);
-
-            header("Location: index.php?accion=mostrarConversaciones");
-            exit();
-        }
     }
 }
