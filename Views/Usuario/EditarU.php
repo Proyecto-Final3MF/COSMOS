@@ -18,7 +18,6 @@ require_once ("./Views/include/UH.php");
 </button>
 </div>
 
-
 <div class="contenedor-formulario">
     <section>
         <h3>Editar Usuario</h3>
