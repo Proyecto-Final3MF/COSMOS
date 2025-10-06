@@ -19,9 +19,9 @@ require_once("./Views/include/UH.php");
     </div>
 
     <div class="btn-volver-container">
-        <a href="index.php?accion=redireccion" class="btn-volver">
+        <button class="btn-volver" id="btnVolver">
             <i class="fa fa-arrow-left"></i> Volver
-        </a>
+        </button>
     </div>
 
     <table>
@@ -72,8 +72,8 @@ require_once("./Views/include/UH.php");
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="7" style="text-align:center;">
-                        No aceptaste solicitudes todavía
+                    <td colspan="6">
+                        No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
                             <a href="index.php?accion=listarTL">
                                 <button class="btn btn-boton777">Ver solicitudes disponibles</button>

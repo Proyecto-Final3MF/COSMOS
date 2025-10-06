@@ -26,7 +26,7 @@ if (!isset($estados) || $estados === null) {
 </head>
 <body>
 
-<div class="btn-volver-container">
+<div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>
@@ -57,7 +57,7 @@ if (!isset($estados) || $estados === null) {
         <button type="submit">Actualizar Solicitud</button>
     </form>
 </section>
-
+<br>
 </div>
 <script src="Assets/js/trancicion.js"></script>
 </body>

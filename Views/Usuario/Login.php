@@ -39,6 +39,7 @@ require_once ("./Views/include/UH.php");
             <a href="index.php?accion=register" class="login9" >¿No tiene una cuenta? Registrese</a>
         </form>
     </section>
+    <br>
     </div>
     <script src="Assets/js/trancicion.js"></script>
 </body>
