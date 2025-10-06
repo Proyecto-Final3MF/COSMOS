@@ -21,8 +21,12 @@ class ChatC
             include "Views/chat_admin.php";
         } else {
             // Si es usuario normal, solo ve sus propios mensajes
+<<<<<<< HEAD
 
             $mensajes = $mensaje->obtenerMensajes($usuario_id, null) ?? [];
+=======
+            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
+>>>>>>> parent of 9d78ced (arreglos)
             include "Views/mensajes.php";
         }
     }
