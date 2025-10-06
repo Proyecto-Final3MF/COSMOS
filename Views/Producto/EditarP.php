@@ -11,7 +11,7 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-<div class="btn-volver-container">
+<div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>

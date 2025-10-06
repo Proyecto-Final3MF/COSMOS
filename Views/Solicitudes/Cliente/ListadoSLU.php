@@ -12,14 +12,14 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
 <body>
-    <div class="btn-volver-container">
+    <div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>
 </div>
     <div>
     <h2 class="fade-slide" >Solicitudes no asignadas</h2>
-    <div class="botones-container">
+    <div class="botones-container fade-slide">
     <a href="index.php?accion=formularioS"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Solicitud </button></a>
 </div>
     <table>
