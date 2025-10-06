@@ -277,7 +277,7 @@ switch ($accion) {
   case 'mostrarConversacion':
     require_once("Controllers/ChatC.php");
     $controller = new ChatC();
-    $controller->mostrarConversacion($_GET);
+    $controller->mostrarConversacion();
     break;
 
   case 'registroChats':
@@ -286,10 +286,22 @@ switch ($accion) {
     $controller->registroChats();
     break;
 
-  case "listarConversaciones":
+  case 'listarConversaciones':
     require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->listarConversaciones();
+    break;
+
+  case 'cargarMensajes':
+    require_once("Controllers/ChatC.php");
+    $controller = new ChatC();
+    $controller->cargarMensajes();
+    break;
+
+  case 'borrarConversacion':
+    require_once "Controllers/ChatC.php";
+    $controller = new ChatC();
+    $controller->borrarConversacion();
     break;
 
   //accion default
