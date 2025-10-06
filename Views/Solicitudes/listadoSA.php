@@ -53,9 +53,9 @@ require_once("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                         <td>
-                            <div class="botones-container">
+                            <div class="btn-group-actions d-flex">
                                 <?php if ($_SESSION['rol'] == 1) { ?>
-                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2">
+                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2 btn-outline-primary">
                                         <img src="Assets/imagenes/pen.png" alt="editar" width="45">
                                     </a>
                                 <?php } ?>
@@ -64,7 +64,7 @@ require_once("./Views/include/UH.php");
                                     <img src="Assets/imagenes/chat.png" alt="chat" width="40">
                                 </a>
 
-                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');" class="btn btn-boton2">
+                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');" class="btn btn-boton2 danger">
                                     <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
                                 </a>
                             </div>
