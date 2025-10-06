@@ -119,31 +119,13 @@ switch ($accion) {
   case 'cancelarS':
     $controller = new SolicitudC();
     $controller->cancelarS();
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // <<<<<<< HEAD
     break;
-    // =======
-    break;
-=======
-=======
->>>>>>> parent of 976502c (Merge branch 'Test')
-  break;
->>>>>>> parent of 976502c (Merge branch 'Test')
 
   case 'listarST':
     $controller = new SolicitudC();
     $controller->listarST();
-<<<<<<< HEAD
     break;
-  // >>>>>>> main
-=======
-  break;
 
-<<<<<<< HEAD
->>>>>>> parent of 976502c (Merge branch 'Test')
-=======
->>>>>>> parent of 976502c (Merge branch 'Test')
   //acciones para el rol cliente
 
   //acciones para producto
@@ -225,7 +207,7 @@ switch ($accion) {
   case 'listarU':
     $controller = new UsuarioC();
     $controller->listarU();
-  break;
+    break;
 
   //acciones historial
 
@@ -309,8 +291,8 @@ switch ($accion) {
     require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->listarConversaciones();
-  break;
-  
+    break;
+
   //accion default
 
   default:
