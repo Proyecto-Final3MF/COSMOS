@@ -15,17 +15,22 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
-    <?php if (!empty($mensajes)): ?>
-        <?php foreach ($mensajes as $m): ?>
-            <di class="mensaje">
-                <p class="texto">
-                    <strong><?= htmlspecialchars($m['emisor'] ?? '???') ?>:</strong>
-                    <?= htmlspecialchars($m['mensaje'] ?? '') ?>
-                </p>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="sin-mensajes">No hay mensajes aún.</p>
-        <?php endif; ?>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <?php if (!empty($mensajes)): ?>
+                <?php foreach ($mensajes as $m): ?>
+                    <div class="mensaje">
+                        <p class="texto">
+                            <strong><?= htmlspecialchars($m['usuario'] ?? '???') ?>:</strong>
+                            <?= htmlspecialchars($m['mensaje'] ?? '') ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="sin-mensajes">No hay mensajes aún.</p>
+            <?php endif; ?>
+        </div>
+    </div>
 </body>
 
 </html>
