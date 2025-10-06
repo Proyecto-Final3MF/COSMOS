@@ -26,12 +26,14 @@ require_once ("./Views/include/UH.php");
         <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>
 
         <p class="fade-label">Imagen: </p>
-    <div class="input-archivo">
-    <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required hidden>
-    <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
-    <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+        <div id="vista-previa-contenedor" style="margin-top: 15px;">
+        <img id="vista-previa" src="./Assets/imagenes/sincargas4.png" alt="Vista previa" style="max-width:150px; max-height:150px; display:center;">
     </div>
-
+        <div class="input-archivo">
+        <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required hidden>
+        <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
+        <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+    </div>
         <br><br>
         <p class="fade-label">Categoria:</p>
             <select id="categoria" name="categoria" required>
@@ -43,7 +45,9 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Crear</button>
     </form>
 </section>
+<br>
 </div>
+<script src="Assets/js/vistapreviafoto.js"></script>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 </body>
