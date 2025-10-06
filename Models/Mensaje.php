@@ -71,8 +71,8 @@ class Mensaje
     }
     // Obtener lista de conversaciones de un usuario
     public function obtenerConversaciones($usuario_id)
-    {
-        $sql = "SELECT 
+{
+    $sql = "SELECT 
                 CASE 
                     WHEN m.usuario_id = ? THEN m.receptor_id 
                     ELSE m.usuario_id 
@@ -90,33 +90,20 @@ class Mensaje
             GROUP BY otro_usuario_id
             ORDER BY ultima_fecha DESC";
 
-        $stmt = $this->conexion->prepare($sql);
-        if (!$stmt) {
-            echo "Error en prepare: " . $this->conexion->error;
-            return [];
-        }
-
-        // Enlazamos 4 veces el mismo ID porque se usa en todas las condiciones
-        $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-        $stmt->close();
-
-        return $data;
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) {
+        echo "Error en prepare: " . $this->conexion->error;
+        return [];
     }
 
-    public function asegurarConversacion($usuario_id, $receptor_id)
-    {
-        // Verificar si ya existe algun mensaje entre ambos.
-        $sql = "SELECT COUNT (*) AS total FROM mensaje
-                WHERE (usuario_id = ? AND receptor_id = ?)
-                OR (usuario_id = ? AND receptor_id = ?)";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $receptor_id, $receptor_id, $usuario_id);
-        $stmt->execute();
-        $result = $stmt->get_result()->fetch_assoc();
+    // Enlazamos 4 veces el mismo ID porque se usa en todas las condiciones
+    $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    $stmt->close();
 
+<<<<<<< HEAD
         // Si no hay mensajes, crear un mensaje inicial vacio.
         if ($result['total'] === 0) {
             $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, fecha)
@@ -160,6 +147,10 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
+=======
+    return $data;
+}
+>>>>>>> parent of c326018 (arreglo)
     // Obtener todos los mensajes
     public function obtenerTodosLosMensajes()
     {
@@ -173,7 +164,7 @@ class Mensaje
         $result = $this->conexion->query($sql);
 
         if (!$result) {
-            echo "Error en query: " . $this->conexion->error;
+            echo "Error en query: " .$this->conexion->error;
             return [];
         }
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];

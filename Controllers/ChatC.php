@@ -1,7 +1,4 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 require_once "Models/Mensaje.php";
 
 class ChatC
@@ -51,11 +48,6 @@ class ChatC
     {
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $usuarioId = $_SESSION['id'] ?? null;
-
-        if (!$usuarioId) {
-            echo "No hay sesion activa.";
-            exit();
-        }
 
         if (!$otroUsuarioId) {
             echo "Debes seleccionar un usuario para conversar.";
@@ -142,9 +134,6 @@ class ChatC
             header("Location: index.php?accion=listarSA");
             exit();
         }
-
-        $mensajeModel = new Mensaje();
-        $mensajeModel->asegurarConversacion($usuarioId, $otroUsuarioId);
 
         // Redirigir a la conversacion
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId);
