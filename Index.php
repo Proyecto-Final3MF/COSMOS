@@ -120,11 +120,14 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->cancelarS();
 <<<<<<< HEAD
+<<<<<<< HEAD
     // <<<<<<< HEAD
     break;
     // =======
     break;
 =======
+=======
+>>>>>>> parent of 976502c (Merge branch 'Test')
   break;
 >>>>>>> parent of 976502c (Merge branch 'Test')
 
@@ -137,6 +140,9 @@ switch ($accion) {
 =======
   break;
 
+<<<<<<< HEAD
+>>>>>>> parent of 976502c (Merge branch 'Test')
+=======
 >>>>>>> parent of 976502c (Merge branch 'Test')
   //acciones para el rol cliente
 

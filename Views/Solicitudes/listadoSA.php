@@ -16,6 +16,7 @@ require_once("./Views/include/UH.php");
     <br>
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <h2 class="fade-slide">Solicitudes aceptadas</h2>
     </div>
 
@@ -25,6 +26,8 @@ require_once("./Views/include/UH.php");
 </button>
 </div>
 =======
+=======
+>>>>>>> parent of 976502c (Merge branch 'Test')
         <h2 class="fade-slide" >Solicitudes aceptadas</h2>
     </div>
 >>>>>>> parent of 976502c (Merge branch 'Test')
@@ -48,6 +51,7 @@ require_once("./Views/include/UH.php");
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <?php
             if (!empty($resultados)) {
@@ -85,6 +89,11 @@ require_once("./Views/include/UH.php");
                 <?php
                 }
             } else {
+=======
+        <?php
+        if (!empty($resultados)) {
+            foreach ($resultados as $resultado) {
+>>>>>>> parent of 976502c (Merge branch 'Test')
 =======
         <?php
         if (!empty($resultados)) {
