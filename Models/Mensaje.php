@@ -147,4 +147,15 @@ class Mensaje
         $stmt->execute();
         $stmt->close();
     }
+
+    public function borrarConversacion($usuario_id, $receptor_id)
+    {
+        $sql = "DELETE FROM mensaje
+                WHERE (usuario_id = ? AND receptor_id = ?)
+                OR (usuario_id = ? AND receptor_id = ?)";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("iiii", $usuario_id, $receptor_id, $receptor_id, $usuario_id);
+        $stmt->execute();
+    }
 }
