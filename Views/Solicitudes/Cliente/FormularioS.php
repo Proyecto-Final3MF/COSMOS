@@ -11,10 +11,12 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=listarSLU" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     <div class="contenedor-formulario">
-    <div class="botones-container">
-        <a href="index.php?accion=listarSLU"><button class="btn btn-boton">Volver</button></a>
-    </div>
 <section>
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
@@ -24,12 +26,20 @@ require_once ("./Views/include/UH.php");
         <input type="text" class="form-control" id="titulo" name="titulo" autocomplete="off" required> <br><br>
                
         <p class="fade-label">Producto:</p>
-        <select id="producto" name="producto" required>
-                <option value=""></option>
-                <?php foreach ($productos as $producto): ?>
-                    <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre'])?></option>
-                <?php endforeach; ?>
-        </select>
+        <div class="producto-con-boton">
+            <select id="producto" name="producto" required>
+            <option value=""></option>
+            <?php foreach ($productos as $producto): ?>
+            <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre'])?></option>
+            <?php endforeach; ?>
+            </select>
+
+        <a href="index.php?accion=formularioP" class="btn-crear-producto">
+            <button type="button" class="btn btn-boton2">
+            <img src="Assets/imagenes/plus.png" alt="agregar" width="20">
+            </button>
+            </a>
+        </div>
 
         <p class="fade-label">Descripcion:</p>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>

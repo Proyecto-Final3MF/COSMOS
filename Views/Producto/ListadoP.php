@@ -17,8 +17,10 @@ require_once ("./Views/include/UH.php");
     <a href="index.php?accion=formularioP"><button class="btn-agregar btn btn-boton2"><img src="Assets/imagenes/plus.png" alt="agregar" width="45"></button></a>
 </div>
 
-<div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
+<div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
 </div>
 
 <form action="index.php" class="ordenar-form">

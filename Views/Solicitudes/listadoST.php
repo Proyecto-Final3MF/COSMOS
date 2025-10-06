@@ -16,9 +16,11 @@ require_once ("./Views/include/UH.php");
         <h2 class="fade-slide" >Solicitudes Terminadas</h2>
     </div>
 
-    <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     
     <table>
         <thead>
@@ -57,7 +59,7 @@ require_once ("./Views/include/UH.php");
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="index.php?accion=listarTL">
-                            <button class="btn btn-boton2">Ver solicitudes disponibles</button>
+                            <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                         </a>
                     </div>
                 </td>

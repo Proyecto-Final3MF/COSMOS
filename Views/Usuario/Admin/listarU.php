@@ -18,6 +18,12 @@ require_once("./Views/include/UH.php");
 <body>
 <h2 class="fade-slide" >Listado de todos los Usuarios</h2>
 
+<div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
+
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarU">
@@ -39,7 +45,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay usuarios registrados. <a href="index.php?accion=crear">Crear el primero</a>
+        No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
@@ -90,10 +96,6 @@ require_once("./Views/include/UH.php");
                 </li>
             </ul>
         </nav>
-    </div>
-
- <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
     </div>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/trancicion.js"></script>

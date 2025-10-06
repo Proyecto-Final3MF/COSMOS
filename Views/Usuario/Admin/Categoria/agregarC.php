@@ -17,6 +17,11 @@ require_once ("./Views/include/UH.php");
 </head>
 
 <body>
+    <div class="btn-volver-container">
+    <a href="index.php?accion=redireccion" class="btn-volver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </a>
+</div>
     <div class="contenedor-formulario">
     <section>
     <h3>Crear Nueva Categoria</h3>
@@ -26,9 +31,6 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Agregar Categoria</button>
     </form>
     </section>
-<div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
 </div>
 <script src="Assets/js/trancicion.js"></script>
 </body>

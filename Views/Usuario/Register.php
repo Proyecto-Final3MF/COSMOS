@@ -50,7 +50,7 @@ require_once ("./Views/include/UH.php");
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 
             <input class="button" type="submit" value="Guardar">
-            <a href="Index.php?accion=login">¿Ya tiene una cuenta? Inicie sesión</a>
+            <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>
 
         </form>
     </section>
