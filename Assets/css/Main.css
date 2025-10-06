@@ -192,7 +192,6 @@ body {
     background-color: #972f5f; /* Cambio de color al pasar el mouse */
 }
 
-
 .btn {
     padding: 0.6rem 1.2rem;
     border-radius: var(--border-radius);
@@ -486,7 +485,6 @@ tbody tr:hover {
     justify-content: center;
     margin: 20px 0;
 }
-
 
 /* aca terminan las tablas */
 
