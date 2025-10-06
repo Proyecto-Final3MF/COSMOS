@@ -11,34 +11,38 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <link rel="stylesheet" href="./Assets/css/chatCSS.css">
 </head>
 
 <body>
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box"></div>
+    <div id="chat-box">
+        <?php if (!empty($mensajes)): ?>
+            <?php foreach ($mensajes as $m): ?>
+                <p>
+                    <strong><?= htmlspecialchars($m['emisor'] ?? '???') ?>:</strong>
+                    <?= htmlspecialchars($m['mensaje'] ?? '') ?>
+                </p>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No hay mensajes aún.</p>
+        <?php endif; ?>
     </div>
 
-    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
+
+    <form method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
-
     <script src="Assets/js/trancicion.js"></script>
-    </div>
-
 </body>
-
 
 </html>
 
 <script>
     // Cargar mensajes
     async function cargarMensajes() {
-        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>");
+        let res = await fetch("index.php?accion=mostrarChat");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }

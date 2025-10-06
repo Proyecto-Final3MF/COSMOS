@@ -72,6 +72,7 @@ class Mensaje
     // Obtener lista de conversaciones de un usuario
     public function obtenerConversaciones($usuario_id)
     {
+<<<<<<< HEAD
         $sql = "SELECT 
                 CASE 
                     WHEN m.usuario_id = ? THEN m.receptor_id 
@@ -126,24 +127,45 @@ class Mensaje
             $stmt->execute();
         }
     }
+=======
+        $sql = "SELECT CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
+                u.nombre AS otro_usuario,
+                MAX(m.fecha) AS ultima_fecha,
+                SUBSTRING_INDEX(GROUP_CONCAT(m.mensaje ORDER BY m.fecha DESC SEPARATOR '|||'), '|||', 1) AS ultimo_mensaje
+                FROM mensaje m JOIN usuario u
+                ON u.id = CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END
+                WHERE m.usuario_id = ? OR m.receptor_id = ?
+                GROUP BY otro_usuario_id, u.nombre ORDER BY ultima_fecha DESC";
+
+        $stmt = $this->conexion->prepare($sql);
+        // Se enlaza el mismo ID 4 veces porque se usa en varias condiciones
+        $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    }
+>>>>>>> parent of 976502c (Merge branch 'Test')
     // Obtener todos los mensajes
     public function obtenerTodosLosMensajes()
     {
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, 
-                       u.nombre AS usuario, 
-                       r.nombre AS receptor
-                FROM mensaje AS m 
-                JOIN usuario AS u ON m.usuario_id = u.id 
-                LEFT JOIN usuario AS r ON m.receptor_id = r.id
+                u.nombre AS usuario, r.nombre AS receptor
+                FROM mensaje m 
+                JOIN usuario u ON m.usuario_id = u.id 
+                LEFT JOIN usuario r ON m.receptor_id = r.id
                 ORDER BY m.fecha ASC";
 
         $result = $this->conexion->query($sql);
 
+<<<<<<< HEAD
         if (!$result) {
             echo "Error en query: " . $this->conexion->error;
             return [];
         }
 
+=======
+>>>>>>> parent of 976502c (Merge branch 'Test')
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
@@ -189,16 +211,5 @@ class Mensaje
         $stmt->bind_param("is", $usuario_id, $mensaje);
         $stmt->execute();
         $stmt->close();
-    }
-
-    public function borrarConversacion($usuario_id, $receptor_id)
-    {
-        $sql = "DELETE FROM mensaje
-                WHERE (usuario_id = ? AND receptor_id = ?)
-                OR (usuario_id = ? AND receptor_id = ?)";
-
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $receptor_id, $receptor_id, $usuario_id);
-        $stmt->execute();
     }
 }

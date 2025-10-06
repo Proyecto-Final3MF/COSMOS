@@ -7,7 +7,6 @@ require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
 require_once("Controllers/CategoriaC.php");
 require_once("Models/ProductoM.php");
-require_once("Controllers/ChatC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -120,16 +119,25 @@ switch ($accion) {
   case 'cancelarS':
     $controller = new SolicitudC();
     $controller->cancelarS();
+<<<<<<< HEAD
     // <<<<<<< HEAD
     break;
     // =======
     break;
+=======
+  break;
+>>>>>>> parent of 976502c (Merge branch 'Test')
 
   case 'listarST':
     $controller = new SolicitudC();
     $controller->listarST();
+<<<<<<< HEAD
     break;
   // >>>>>>> main
+=======
+  break;
+
+>>>>>>> parent of 976502c (Merge branch 'Test')
   //acciones para el rol cliente
 
   //acciones para producto
@@ -211,7 +219,7 @@ switch ($accion) {
   case 'listarU':
     $controller = new UsuarioC();
     $controller->listarU();
-    break;
+  break;
 
   //acciones historial
 
@@ -256,39 +264,47 @@ switch ($accion) {
   // case de Chat
 
   case 'mostrarChat':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->mostrarChat();
     break;
 
   case 'abrirChat':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->abrirChat();
     break;
 
   case 'enviarMensaje':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->enviar();
     break;
 
   case 'listarMensajes':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->listarMensajes();
     break;
 
   case 'mostrarConversacion':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->mostrarConversacion();
     break;
 
   case 'registroChats':
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->registroChats();
     break;
 
   case "listarConversaciones":
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
     $controller->listarConversaciones();
-    break;
+  break;
+  
   //accion default
 
   default:
