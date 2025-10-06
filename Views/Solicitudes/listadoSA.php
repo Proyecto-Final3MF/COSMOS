@@ -18,7 +18,7 @@ require_once("./Views/include/UH.php");
         <h2 class="fade-slide">Solicitudes aceptadas</h2>
     </div>
 
-    <div class="btn-volver-container">
+    <div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>
@@ -75,11 +75,11 @@ require_once("./Views/include/UH.php");
             } else {
                 ?>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
                             <a href="index.php?accion=listarTL">
-                                <button class="btn btn-boton2">Ver solicitudes disponibles</button>
+                                <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                             </a>
                         </div>
                     </td>
