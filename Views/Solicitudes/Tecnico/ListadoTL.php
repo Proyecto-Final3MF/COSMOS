@@ -16,15 +16,15 @@ require_once ("./Views/include/UH.php");
       <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     </div>
 
-    <div class="btn-volver-container">
+    <div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>
 </div>
 
-  <form action="index.php" method="GET" class="filter-form2">
+  <form action="index.php" method="GET" class="filter-form2 fade-slide">
     <input type="hidden" name="accion" value="listarTL">
-      <div class="form-group search-wrapper">
+      <div class="form-group search-wrapper fade-slide">
         <label for="search">Buscar: </label>
         <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>

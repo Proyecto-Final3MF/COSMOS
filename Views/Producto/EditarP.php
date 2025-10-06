@@ -11,11 +11,13 @@ require_once ("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-<div class="btn-volver-container">
+<div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
 </button>
 </div>
+
+<div class="contenedor-formulario">
 <section>
     <h3>Editar Producto</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
@@ -50,7 +52,7 @@ require_once ("./Views/include/UH.php");
         <button type="submit">Actualizar</button>
     </form>
 </section>
-
+<br>
 </div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
