@@ -54,6 +54,7 @@ require_once ("./Views/include/UH.php");
 
         </form>
     </section>
+    <br>
 </div>
 
 <script>
