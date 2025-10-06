@@ -18,32 +18,28 @@ class ChatC
         // Si es admin, ve todos los mensajes y carga la vista admin
         if ($esAdmin) {
             $mensajes = $mensaje->obtenerTodosLosMensajes() ?? [];
-            include "Views/chat_admin.php";
+            include "/../Views/chat_admin.php";
         } else {
             // Si es usuario normal, solo ve sus propios mensajes
-
-            $mensajes = $mensaje->obtenerMensajes($usuario_id, null) ?? [];
-
             $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
-
-            include "Views/mensajes.php";
+            include "/../Views/mensajes.php";
         }
     }
 
     public function cargarMensajes()
     {
-        if (isset($_GET['usuario_id'])) {
-            $otroUsuarioId = $_GET['usuario_id'];
-            $mensajes = (new Mensaje())->obtenerMensajes($_SESSION['id'], $otroUsuarioId);
-            require "Views/mensajes.php";
+        $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
 
-            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
-            include "Views/chat.php";
- 
-
-            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
-            include "Views/chat.php";
+        if (!$usuarioId || !$otroUsuarioId) {
+            http_response_code(400);
+            exit("Faltan paramentros.");
         }
+
+        $mensajeModel = new Mensaje();
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+
+        include __DIR__ . "/../Views/mensajes.php";
     }
 
     // Mostrar la vista de chat
@@ -54,6 +50,7 @@ class ChatC
 
         if (!$otroUsuarioId) {
             echo "Debes seleccionar un usuario para conversar.";
+            var_dump($_GET);
             exit();
         }
 
@@ -157,5 +154,20 @@ class ChatC
 
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
+    }
+
+    public function borrarConversacion()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario_id = $_POST['usuario_id'];
+            $receptor_id = $_POST['receptor_id'];
+
+            require_once "Models/Mensaje.php";
+            $mensajeModel = new Mensaje();
+            $mensajeModel->borrarConversacion($usuario_id, $receptor_id);
+
+            header("Location: index.php?accion=mostrarConversaciones");
+            exit();
+        }
     }
 }
