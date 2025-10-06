@@ -93,10 +93,7 @@ require_once ("./Views/include/UH.php");
             </ul>
         </nav>
     </div>
-
-    <div class="botones-container">
-        <a href="index.php?accion=redireccion"><button class="btn btn-boton">Volver</button></a>
-    </div>
+    <br>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="Assets/js/trancicion.js"></script>
