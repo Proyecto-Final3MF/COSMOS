@@ -36,7 +36,7 @@ require_once ("./Views/include/UH.php");
             <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required> <br><br>
                         
             <button class="button" type="submit">Entrar</button>
-            <a href="index.php?accion=register">¿No tiene una cuenta? Registrese</a>
+            <a href="index.php?accion=register" class="login9" >¿No tiene una cuenta? Registrese</a>
         </form>
     </section>
     </div>

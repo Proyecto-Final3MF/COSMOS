@@ -14,8 +14,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </a>
 
         <ul class="nav-links" id="nav-links">
-            <li><a href="inicio.php">Inicio</a></li>
-            <li><a href="./Views/Usuario/contacto.php">Contacto</a></li>
+            <li><a href="inicio.php"> <img src="Assets/imagenes/25694.png" alt="Inicio" class="icono-menu"> Inicio</a></li>
+            <li><a href="./Views/Usuario/contacto.php"> <img src="Assets/imagenes/png-transparent-computer-icons-mobile-phones-telephone-call-text-telephone-call-phone-icon-removebg-preview.png" alt="contacto" class="icono-menu"> Contacto</a></li>
         </ul>
 
         <?php if (!isset($_SESSION['usuario'])): ?>

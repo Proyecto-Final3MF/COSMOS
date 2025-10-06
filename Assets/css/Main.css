@@ -38,7 +38,6 @@ body {
 	flex-wrap: wrap;
 }
 
-
 .nav-links {
     display: flex;
     list-style: none;
@@ -124,6 +123,7 @@ body {
     height: 18px;
     margin-right: 8px;
     vertical-align: middle;
+    transition: transform 0.3s ease;
 }
 
 .foto-perfil {
@@ -262,6 +262,28 @@ body {
     margin-top: 20px;
 }
 
+.btn-boton777 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 50px; 
+    background: linear-gradient(90deg, #b61e65, #e83e8c);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(182, 30, 101, 0.3);
+}
+
+.btn-boton777:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(182, 30, 101, 0.4);
+    background: linear-gradient(90deg, #e83e8c, #b61e65);
+}
+
 .botones-container {
     display: flex;
     justify-content: center; 
@@ -284,6 +306,7 @@ body {
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
     font-weight: 500;
+    font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
     border: none;
@@ -330,6 +353,38 @@ body {
         width: 90%;
         justify-content: center;
     }
+}
+
+.btn-volver-container {
+    position: fixed;
+    top: 100px; 
+    left: 20px; 
+    z-index: 1001; 
+}
+
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-volver:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-volver i {
+    font-size: 1rem;
 }
 
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
@@ -1251,6 +1306,51 @@ input[type="submit"]:hover {
     color: #555;
 }
 
+.login9 {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #414141;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login9:hover {
+    color: #727579;
+}
+
+.producto-con-boton {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.producto-con-boton select {
+    flex: 1;
+    max-width: 300px;
+}
+
+.producto-con-boton .btn-boton2 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e83e8c;
+    background-color: #fff;
+    transition: transform 0.3s, background-color 0.3s;
+    margin-top: -12px;
+}
+
+.producto-con-boton .btn-boton2:hover {
+    background-color: #e83e8c;
+    transform: scale(1.1);
+}
+
+.producto-con-boton .btn-boton2 img {
+    width: 18px;
+    height: 18px;
+}
+
 /* Aca termina el CSS de los Formularios */
 
 /* aca empieza el css de filtrado de las tablas */
@@ -1270,6 +1370,12 @@ input[type="submit"]:hover {
     border-radius: 8px;
     max-width: 700px;
     box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ordenar-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 @keyframes fadeSlideIn {
@@ -1313,6 +1419,71 @@ input[type="submit"]:hover {
 .ordenar-form button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+}
+
+.filter-form2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto 30px auto;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-form2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-form2 label {
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.filter-form2 input[type="text"] {
+    width: 100%;
+    padding: 12px 40px 12px 18px; 
+    font-size: 1rem;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-form2 input[type="text"]::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.filter-form2 input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(232, 62, 140, 0.3);
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .filter-form2 {
+        padding: 12px;
+    }
+
+    .filter-form2 input[type="text"] {
+        padding: 10px 38px 10px 15px;
+        font-size: 0.95rem;
+    }
+
 }
 
 /* aca termina el css del filtrado de las tablas */
