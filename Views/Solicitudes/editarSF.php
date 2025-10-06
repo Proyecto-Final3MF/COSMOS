@@ -57,7 +57,7 @@ if (!isset($estados) || $estados === null) {
         <button type="submit">Actualizar Solicitud</button>
     </form>
 </section>
-
+<br>
 </div>
 <script src="Assets/js/trancicion.js"></script>
 </body>
