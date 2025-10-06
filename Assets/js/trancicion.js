@@ -30,3 +30,18 @@ window.addEventListener("pageshow", (event) => {
     document.body.classList.add("fade-in");
   }
 });
+
+// 🔹 NUEVO: Animación al volver con el botón personalizado
+const btnVolver = document.getElementById("btnVolver");
+
+if (btnVolver) { // comprobamos que exista en la página
+  btnVolver.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.classList.remove("fade-in");
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      history.back();
+    }, 500); // debe coincidir con la duración de tu transición CSS
+  });
+}
