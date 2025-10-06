@@ -19,9 +19,9 @@ require_once("./Views/include/UH.php");
     </div>
 
     <div class="btn-volver-container">
-    <a href="index.php?accion=redireccion" class="btn-volver">
-        <i class="fa fa-arrow-left"></i> Volver
-    </a>
+    <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+</button>
 </div>
 
     <table>

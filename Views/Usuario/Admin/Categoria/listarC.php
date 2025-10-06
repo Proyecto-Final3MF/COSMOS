@@ -21,9 +21,9 @@ require_once("./Views/include/UH.php");
     <a href="index.php?accion=FormularioC"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Categoria </button></a>
 </div>
 <div class="btn-volver-container">
-    <a href="index.php?accion=redireccion" class="btn-volver">
-        <i class="fa fa-arrow-left"></i> Volver
-    </a>
+    <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+</button>
 </div>
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
