@@ -2,6 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,11 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
     </div>
-
+    <div class="btn-volver-container">
+        <button class="btn-volver" id="btnVolver">
+            <i class="fa fa-arrow-left"></i> Volver
+        </button>
+    </div>
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
@@ -26,6 +32,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
+    
 
     <script src="Assets/js/trancicion.js"></script>
     </div>

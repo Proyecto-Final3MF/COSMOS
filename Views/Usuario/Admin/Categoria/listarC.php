@@ -21,15 +21,15 @@ require_once("./Views/include/UH.php");
     <a href="index.php?accion=FormularioC"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Categoria </button></a>
 </div>
 <div class="btn-volver-container fade-slide">
-    <button class="btn-volver" id="btnVolver">
+  <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
-</button>
+  </button>
 </div>
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarC">
     <select name="orden" id="orden">
-        <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
+        <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Recientes') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
         <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
         <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
         <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
@@ -81,6 +81,7 @@ require_once("./Views/include/UH.php");
             </ul>
         </nav>
     </div>
+    <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/paginacion.js"></script>
