@@ -16,11 +16,10 @@ require_once ("./Views/include/UH.php");
     <title>Histórial de actividades</title>
     <link rel="stylesheet" href="Assets/css/Main.css">
 </head>
-<body>
-    <div class="btn-volver-container fade-slide">
-    <button class="btn-volver" id="btnVolver">
+<div class="btn-volver-container fade-slide">
+  <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
-</button>
+  </button>
 </div>
 <br>
     <div class="container3">
@@ -97,5 +96,6 @@ require_once ("./Views/include/UH.php");
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="Assets/js/trancicion.js"></script>
+    <script src="Assets/js/botonvolver.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <body>
     <h2>Mis conversaciones</h2>
-
+    <div class="btn-volver-container">
+        <button class="btn-volver" id="btnVolver">
+            <i class="fa fa-arrow-left"></i> Volver
+        </button>
+    </div>
     <?php if (!empty($conversaciones)): ?>
         <ul>
             <?php foreach ($conversaciones as $c): ?>

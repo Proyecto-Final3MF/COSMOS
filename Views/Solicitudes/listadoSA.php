@@ -11,18 +11,17 @@ require_once("./Views/include/UH.php");
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
-
 <body>
     <br>
     <div>
         <h2 class="fade-slide">Solicitudes aceptadas</h2>
     </div>
 
-    <div class="btn-volver-container">
-        <button class="btn-volver" id="btnVolver">
-            <i class="fa fa-arrow-left"></i> Volver
-        </button>
-    </div>
+    <div class="btn-volver-container fade-slide">
+  <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+  </button>
+</div>
 
     <table>
         <thead>
@@ -72,7 +71,7 @@ require_once("./Views/include/UH.php");
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
                             <a href="index.php?accion=listarTL">
@@ -91,10 +90,10 @@ require_once("./Views/include/UH.php");
     </div>
 
     <script src="Assets/js/zoomimagen.js"></script>
+    <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/paginacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
 </html>
