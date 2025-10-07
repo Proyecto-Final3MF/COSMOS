@@ -33,7 +33,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="toggleDropdown()">
-                        <h2><i class="fa-solid fa-user fa-lg"></i></h2>
+                        
+                        <img src="<?= htmlspecialchars($_SESSION['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" alt="Perfil" class="foto-mini2" >
+                        
                         <svg class="dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
