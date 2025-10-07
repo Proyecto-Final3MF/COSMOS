@@ -2,6 +2,7 @@
 require_once ("./Config/conexion.php");
 require_once ("./Models/ProductoM.php");
 require_once ("./Controllers/HistorialC.php");
+require_once ("./Views/include/popup.php");
 
 class ProductoC {
 
