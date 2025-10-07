@@ -107,12 +107,6 @@ body {
     cursor: pointer;
 }
 
-@keyframes float {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-}
-
 .logo-link img:hover {
     transform: rotate(15deg) scale(1.2);
     filter: drop-shadow(0 0 8px var(--primary-color));
@@ -156,6 +150,14 @@ body {
     border-color: #e83e8c;
 }
 
+.foto-mini2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    transition: transform 0.2s, border-color 0.2s;
+}
 
 /* aca termina el css del Header UH */
 
