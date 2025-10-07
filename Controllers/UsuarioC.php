@@ -1,5 +1,6 @@
 <?php
 require_once("Models/UsuarioM.php");
+require_once ("./Views/include/popup.php");
 require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
