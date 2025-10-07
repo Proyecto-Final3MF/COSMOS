@@ -1341,6 +1341,37 @@ input[type="submit"]:hover {
     height: 18px;
 }
 
+.rol-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.rol-option {
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f5f5f5;
+    color: #666;
+    font-weight: 500;
+    user-select: none;
+}
+
+.rol-option:hover {
+    transform: scale(1.05);
+}
+
+.rol-option.active {
+    border-color: #e83e8c; /* Borde rosado */
+    background-color: #ffe6f0;
+    color: #e83e8c;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(232, 62, 140, 0.3);
+}
+
 /* Aca termina el CSS de los Formularios */
 
 /* aca empieza el css de filtrado de las tablas */
