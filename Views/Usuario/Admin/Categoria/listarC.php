@@ -21,9 +21,9 @@ require_once("./Views/include/UH.php");
     <a href="index.php?accion=FormularioC"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Categoria </button></a>
 </div>
 <div class="btn-volver-container fade-slide">
-    <button class="btn-volver" id="btnVolver">
+  <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
-</button>
+  </button>
 </div>
 <form action="index.php" class="ordenar-form">
     <label for="orden">Ordenar por:</label>
@@ -81,6 +81,7 @@ require_once("./Views/include/UH.php");
             </ul>
         </nav>
     </div>
+    <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/paginacion.js"></script>

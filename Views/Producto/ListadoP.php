@@ -18,9 +18,9 @@ require_once ("./Views/include/UH.php");
 </div>
 
 <div class="btn-volver-container fade-slide">
-    <button class="btn-volver" id="btnVolver">
+  <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
-</button>
+  </button>
 </div>
 
 <form action="index.php" class="ordenar-form">
@@ -98,6 +98,7 @@ require_once ("./Views/include/UH.php");
   <span class="close">&times;</span>
   <img class="image-modal-content" id="modalImage">
 </div>
+    <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/trancicion.js"></script>
