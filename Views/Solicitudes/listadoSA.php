@@ -71,7 +71,7 @@ require_once("./Views/include/UH.php");
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
                             <a href="index.php?accion=listarTL">
