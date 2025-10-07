@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/HistorialC.php');
+require_once ("./Views/include/popup.php");
 
 class SolicitudC {
     private $solicitudModel;
