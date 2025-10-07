@@ -19,21 +19,6 @@ if (!in_array($accion, $acciones_publicas)) {
   }
 }
 
-if (isset($_SESSION['mensaje'])) {
-  echo '<link rel="stylesheet" href="Assets/css/Main.css">
-     <div class="modal active">
-       <div class="modal-header">
-         <div class="title">Mensaje</div>
-         <a href="index.php?accion=' . $_GET['accion'] . '" class="close-button">&times;</a>
-       </div>
-       <div class="modal-body">
-         <p>' . $_SESSION['mensaje'] . '</p>
-       </div>
-     </div>
-     <div id="overlay" class="active"></div>';
-  unset($_SESSION['mensaje']);
-}
-
 const ROL_TECNICO = 1;
 const ROL_CLIENTE = 2;
 const ROL_ADMIN = 3;
