@@ -24,33 +24,62 @@ class Producto {
         return null;
     }
 
-    public function listarP($id_usuario, $orden) {
+    public function listarP($id_usuario, $orden, $search) {
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT * FROM producto WHERE id_usuario = $id_usuario ";
+        $sql = "SELECT p.*, c.nombre AS categoria_nombre FROM producto p INNER JOIN categoria c ON p.id_cat = c.id WHERE p.id_usuario = ? ";
 
+        $params = [$id_usuario];
+        $param_types = 'i';
+        if (!empty($search)) {
+        $sql .= "AND ";
+        $search_terms = explode(" ", $search);
+        $conditions = [];
+
+        foreach ($search_terms as $palabra) {
+            $conditions[] = "(p.nombre LIKE ? OR c.nombre LIKE ?)";
+            $search_term = "%" . $palabra . "%";
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $param_types .= 'ss';
+        }
+        $sql .= implode(" AND ", $conditions);
+        }
         switch ($orden) {
             case "A-Z":
-                $sql .= "ORDER BY nombre ASC";
+                $sql .= "ORDER BY p.nombre ASC";
                 break;
             case "Z-A":
-                $sql .= "ORDER BY nombre DESC";
+                $sql .= "ORDER BY p.nombre DESC";
                 break;
             case "Más Recientes":
-                $sql .= "ORDER BY id DESC";
+                $sql .= "ORDER BY p.id DESC";
                 break;
             case "Más Antiguos":
-                $sql .= "ORDER BY id ASC";
+                $sql .= "ORDER BY p.id ASC";
                 break;
             default:
-                $sql .= "ORDER BY id ASC";
+                $sql .= "ORDER BY p.id ASC";
                 break;
         }
-
-        $resultado = $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
         
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
+        $stmt->bind_param($param_types, ...$params);
+        $success = $stmt->execute();
+        
+        if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            
+            return $data;
         } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
             return [];
         }
     }
