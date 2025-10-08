@@ -38,7 +38,7 @@ require_once ("./Views/include/UH.php");
             <label for="mail" class="form-label"></label>
             <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
-            <p class="fade-label">Rol</p>
+            <p class="fade-label">¿Eres Un?</p>
 
             <div class="rol-container">
             <?php foreach ($roles as $rol): ?>
@@ -47,8 +47,8 @@ require_once ("./Views/include/UH.php");
             </div>
             <?php endforeach; ?>
             </div>
-            <input type="hidden" id="rol" name="rol" required>
-
+            <input type="hidden" id="rol" name="rol" required>  <br><br>
+            
             <p class="fade-label">Contraseña</p>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
 
