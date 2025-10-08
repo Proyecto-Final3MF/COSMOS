@@ -724,6 +724,7 @@ tbody tr:hover {
 
 .dropdown {
     position: relative;
+    z-index: 2000; 
 }
 
 .dropdown-button {
@@ -765,16 +766,17 @@ tbody tr:hover {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 250px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    border-radius: 12px;
-    padding: 1rem;
-    transform: translateY(0.5rem);
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 250px;
+    padding: 10px;
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-10px);
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    z-index: 3000; 
 }
 
 .dropdown-menu.visible {
@@ -815,6 +817,15 @@ tbody tr:hover {
     background-color: var(--primary-color);
     color: white;
     transform: translateX(5px);
+}
+
+.dropdown-menu {
+    max-height: 50vh; 
+    overflow-y: auto;
+}
+
+.navbar {
+    overflow: visible !important;
 }
 
 /* aca termina el css del menu de usuario */
