@@ -820,7 +820,7 @@ tbody tr:hover {
 }
 
 .dropdown-menu {
-    max-height: 50vh; 
+    max-height: 60vh; 
     overflow-y: auto;
 }
 
