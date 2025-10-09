@@ -31,19 +31,20 @@ class Producto {
         $params = [$id_usuario];
         $param_types = 'i';
         if (!empty($search)) {
-        $sql .= "AND ";
-        $search_terms = explode(" ", $search);
-        $conditions = [];
+            $sql .= "AND ";
+            $search_terms = explode(" ", $search);
+            $conditions = [];
 
-        foreach ($search_terms as $palabra) {
-            $conditions[] = "(p.nombre LIKE ? OR c.nombre LIKE ?)";
-            $search_term = "%" . $palabra . "%";
-            $params[] = $search_term;
-            $params[] = $search_term;
-            $param_types .= 'ss';
+            foreach ($search_terms as $palabra) {
+                $conditions[] = "(p.nombre LIKE ? OR c.nombre LIKE ?)";
+                $search_term = "%" . $palabra . "%";
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $param_types .= 'ss';
+            }
+            $sql .= implode(" AND ", $conditions);
         }
-        $sql .= implode(" AND ", $conditions);
-        }
+        
         switch ($orden) {
             case "A-Z":
                 $sql .= "ORDER BY p.nombre ASC";
