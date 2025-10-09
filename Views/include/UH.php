@@ -47,7 +47,6 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
         <?php else: ?>
             <div class="user-menu-container">
-                <h2>Bienvenido <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
 
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="toggleDropdown()">
