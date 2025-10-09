@@ -57,33 +57,77 @@ class Usuario {
         return $stmt->execute();
     }
 
-    public function listarU($orden, $rol_filter) {
+    public function listarU($orden, $rol_filter, $search) {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ";
 
+        $conditions = [];
+        $params = [];
+        $param_types = '';
+
+
+        if (!empty($search)) {
+            $search_terms = explode(" ", $search);
+
+            foreach ($search_terms as $palabra) {
+
+                $conditions[] = "(u.nombre LIKE ? OR u.email LIKE ?)"; 
+                            
+                $search_term = "%" . $palabra . "%";
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $param_types .= 'ss';
+            } 
+        }
+
+            // 2. Handle Role Filter
         switch ($rol_filter) {
-            case 'Todos': break;
-            case 'Clientes': $sql .= "WHERE u.rol_id = 2 "; break;
-            case 'Tecnicos': $sql .= "WHERE u.rol_id = 1 "; break;
-            case 'Administradores': $sql .= "WHERE u.rol_id = 3 "; break;
+            case 'Clientes': $conditions[] = "u.rol_id = 2 "; break;
+            case 'Tecnicos': $conditions[] = "u.rol_id = 1 "; break;
+            case 'Administradores': $conditions[] = "u.rol_id = 3 "; break;
+            case 'Todos': // No condition needed for 'Todos'
             default: break;
         }
 
-        switch ($orden) {
-            case "A-Z": $sql .= "ORDER BY u.nombre ASC"; break;
-            case "Z-A": $sql .= "ORDER BY u.nombre DESC"; break;
-            case "Más Recientes": $sql .= "ORDER BY u.id DESC"; break;
-            case "Más Antiguos": $sql .= "ORDER BY u.id ASC"; break;
-            default: $sql .= "ORDER BY u.id ASC"; break;
+            // 3. Add WHERE clause if there are any conditions
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $resultado = $this->conn->query($sql);
-        $usuarios = [];
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $usuarios[] = $row;
-            }
+            // 4. Handle Ordering
+        switch ($orden) {
+            case "A-Z": $sql .= " ORDER BY u.nombre ASC"; break;
+            case "Z-A": $sql .= " ORDER BY u.nombre DESC"; break;
+            case "Más Recientes": $sql .= " ORDER BY u.id DESC"; break;
+            case "Más Antiguos": $sql .= " ORDER BY u.id ASC"; break;
+            default: $sql .= " ORDER BY u.id ASC"; break;
         }
-        return $usuarios;
+
+        $stmt = $this->conn->prepare($sql);
+            
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
+            // 5. Conditional bind_param call (The Fix)
+        if (!empty($param_types)) {
+            $stmt->bind_param($param_types, ...$params);
+        }
+            
+        $success = $stmt->execute();
+            
+        if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+                    
+            return $data;
+        } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return [];
+        }
+
     }
 
     public function borrar($id){
