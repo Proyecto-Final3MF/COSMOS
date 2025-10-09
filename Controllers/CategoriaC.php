@@ -61,7 +61,7 @@ class CategoriaC {
 
         $search = $_GET['search'] ?? '';
 
-        $resultados = $categoria->listarC($orden);
+        $resultados = $categoria->listarC($orden, $search);
 
         include("./Views/Usuario/Admin/Categoria/listarC.php");
     }
