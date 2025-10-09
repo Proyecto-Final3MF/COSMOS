@@ -34,7 +34,7 @@ require_once ("./Views/include/UH.php");
 
         <p class="fade-label">Seleccionar nueva Imagen (opcional):</p>
         <div class="input-archivo">
-        <input type="file" id="imagen" name="imagen" autocomplete="off" hidden>
+        <input type="file" id="imagen" name="imagen" accept="image/*" autocomplete="off" hidden>
         <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
         <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
         </div>

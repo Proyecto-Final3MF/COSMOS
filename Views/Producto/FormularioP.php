@@ -30,7 +30,7 @@ require_once ("./Views/include/UH.php");
         <img id="vista-previa" src="./Assets/imagenes/sincargas4.png" alt="Vista previa" style="max-width:150px; max-height:150px; display:center;">
     </div>
         <div class="input-archivo">
-        <input type="file" class="form-control" id="imagen" name="imagen" autocomplete="off" required hidden>
+        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" autocomplete="off" required hidden>
         <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
         <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
     </div>
