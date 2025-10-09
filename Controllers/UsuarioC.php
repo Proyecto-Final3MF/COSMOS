@@ -133,9 +133,10 @@ class UsuarioC {
     public function listarU() {
         $orden = $_GET['orden'] ?? ''; 
         $rol_filter = $_GET['rol_filter'] ?? 'Todos';
+        $search = $_GET['search'] ?? '';
 
         $usuario = new Usuario();
-        $resultados = $usuario->listarU($orden, $rol_filter);
+        $resultados = $usuario->listarU($orden, $rol_filter, $search);
         include("views/Usuario/Admin/listarU.php");
     }
 
