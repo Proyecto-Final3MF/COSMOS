@@ -79,21 +79,18 @@ class Usuario {
             } 
         }
 
-            // 2. Handle Role Filter
         switch ($rol_filter) {
             case 'Clientes': $conditions[] = "u.rol_id = 2 "; break;
             case 'Tecnicos': $conditions[] = "u.rol_id = 1 "; break;
             case 'Administradores': $conditions[] = "u.rol_id = 3 "; break;
-            case 'Todos': // No condition needed for 'Todos'
+            case 'Todos':
             default: break;
         }
 
-            // 3. Add WHERE clause if there are any conditions
         if (!empty($conditions)) {
             $sql .= " WHERE " . implode(" AND ", $conditions);
         }
 
-            // 4. Handle Ordering
         switch ($orden) {
             case "A-Z": $sql .= " ORDER BY u.nombre ASC"; break;
             case "Z-A": $sql .= " ORDER BY u.nombre DESC"; break;
@@ -109,7 +106,6 @@ class Usuario {
             return [];
         }
 
-            // 5. Conditional bind_param call (The Fix)
         if (!empty($param_types)) {
             $stmt->bind_param($param_types, ...$params);
         }

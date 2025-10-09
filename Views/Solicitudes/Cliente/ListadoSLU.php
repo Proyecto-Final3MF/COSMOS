@@ -20,7 +20,7 @@ require_once ("./Views/include/UH.php");
     <div>
     <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     <div class="botones-container fade-slide">
-    <a href="index.php?accion=formularioS"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Solicitud </button></a>
+    <a href="index.php?accion=formularioS"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
     <table>
         <thead>
