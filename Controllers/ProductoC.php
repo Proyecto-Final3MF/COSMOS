@@ -2,6 +2,7 @@
 require_once ("./Config/conexion.php");
 require_once ("./Models/ProductoM.php");
 require_once ("./Controllers/HistorialC.php");
+require_once ("./Views/include/popup.php");
 
 class ProductoC {
 
@@ -72,7 +73,8 @@ class ProductoC {
         
         $producto = new Producto();
         $orden = $_GET['orden'] ?? 'Más Recientes';
-        $resultados = $producto->listarP($id_usuario, $orden);
+        $search = $_GET['search'] ?? null;
+        $resultados = $producto->listarP($id_usuario, $orden, $search);
         include("./Views/Producto/ListadoP.php");
     }
     

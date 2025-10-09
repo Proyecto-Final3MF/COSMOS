@@ -1,6 +1,7 @@
 <?php
 require_once("./Config/conexion.php");
 require_once("./Models/CategoriaM.php");
+require_once ("./Views/include/popup.php");
 require_once("./Controllers/HistorialC.php");
 
 class CategoriaC {
