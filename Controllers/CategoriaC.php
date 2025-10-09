@@ -59,6 +59,8 @@ class CategoriaC {
         
         $orden = $_GET['orden'] ?? 'Más Antiguos';
 
+        $search = $_GET['search'] ?? '';
+
         $resultados = $categoria->listarC($orden);
 
         include("./Views/Usuario/Admin/Categoria/listarC.php");
