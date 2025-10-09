@@ -35,8 +35,29 @@ class Categoria {
         return $newId;
     }
 
-    public function listarC($orden) {
-        $sql = "SELECT * FROM categoria ";
+    public function listarC($orden, $search) {
+        $sql = "SELECT * FROM categoria c ";
+
+        $conditions = [];
+        $params = [];
+        $param_types = ''; 
+
+        if (!empty($search)) {
+            $search_terms = explode(" ", $search);
+
+            foreach ($search_terms as $palabra) {
+
+                $conditions[] = "(c.nombre LIKE ?) "; 
+                            
+                $search_term = "%" . $palabra . "%";
+                $params[] = $search_term;
+                $param_types = 's';
+            } 
+        }
+
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
 
         switch ($orden) {
             case "A-Z":
@@ -56,15 +77,30 @@ class Categoria {
                 break;
         }
 
-        $resultado = $this->conn->query($sql);
-
-        $categorias = [];
-        if ($resultado) {
-            while ($row = $resultado->fetch_assoc()) {
-                $categorias[] = $row;
-            }
+        $stmt = $this->conn->prepare($sql);
+            
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
         }
-        return $categorias;
+
+        if (!empty($param_types)) {
+            $stmt->bind_param($param_types, ...$params);
+        }
+            
+        $success = $stmt->execute();
+            
+        if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+                    
+            return $data;
+        } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return [];
+        }
     }
 
     public function buscarPorId($id) {
