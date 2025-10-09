@@ -26,6 +26,8 @@ require_once("./Views/include/UH.php");
   </button>
 </div>
 <form action="index.php" class="ordenar-form">
+    <label for="search">Buscar: </label>
+    <input type="text" id="search" name="search" placeholder="Buscar Producto" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarC">
     <select name="orden" id="orden">
