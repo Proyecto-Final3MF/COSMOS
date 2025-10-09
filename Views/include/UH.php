@@ -28,12 +28,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     </a>
                 </li>
             <?php endif; ?>
-
-            <li>
-                <a href="./Views/Usuario/contacto.php">
-                    <img src="Assets/imagenes/png-transparent-computer-icons-mobile-phones-telephone-call-text-telephone-call-phone-icon-removebg-preview.png" alt="contacto" class="icono-menu"> Contacto
-                </a>
-            </li>
         </ul>
 
         <?php if (!isset($_SESSION['usuario'])): ?>
