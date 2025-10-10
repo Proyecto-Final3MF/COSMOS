@@ -1385,7 +1385,7 @@ input[type="submit"]:hover {
 }
 
 .rol-container {
-    display: flex;
+    display: grid;
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 10px;
