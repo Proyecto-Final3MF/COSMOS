@@ -30,7 +30,7 @@ class Usuario {
     }
 
     public function obtenerRol() {
-        $sql = "SELECT * FROM rol";
+        $sql = "SELECT * FROM rol where id < 3";
         $resultado = $this->conn->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
