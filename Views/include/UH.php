@@ -69,11 +69,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <img src="Assets/imagenes/99691-removebg-preview.png" alt="MisConversaciones" class="icono-menu"> Mis Conversaciones
                         </a>
 
-                        <a href="index.php?accion=eliminar&id=<?= htmlspecialchars($_SESSION['id']) ?>"
-                            onclick="return confirm('¿Estás seguro de que deseas eliminar a este usuario?');"
-                            class="dropdown-item">
-                            <img src="Assets/imagenes/eliminarcuenta123.png" alt="EliminarCuenta" class="icono-menu"> Eliminar Cuenta
-                        </a>
+                        
                     </div>
                 </div>
             </div>

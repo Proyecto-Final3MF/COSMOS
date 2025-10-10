@@ -41,7 +41,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay categorias registradas. <a href="index.php?accion=crear" class="btn btn-boton777">Crear la primera</a>
+        No hay categorias registradas. <a href="index.php?accion=FormularioC" class="btn btn-boton777">Crear la primera</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
