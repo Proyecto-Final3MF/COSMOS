@@ -189,8 +189,10 @@ switch ($accion) {
   //acciones para el rol admin
 
   case 'panelA':
-    $controller = new UsuarioC();
-    $resultados = $controller->PreviewU(); 
+    $PreviewUsuarios = new UsuarioC();
+    $PreviewHistorial = new HistorialController();
+    $usuarios = $PreviewUsuarios->PreviewU();
+    $historial = $PreviewHistorial->PreviewH();
     include("Views/Usuario/Admin/Adminp.php");
     break;
 

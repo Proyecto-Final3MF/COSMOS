@@ -22,8 +22,9 @@ require_once ("./Views/include/UH.php");
     <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
 </main>
 
-<div class="tabla" style="width = 10%;">
-    <?php if (empty($resultados)): ?>
+<h3>Ultimos Usuarios registrados</h3>
+
+<?php if (empty($usuarios)): ?>
     <div class="alert alert-info">
         No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
     </div>
@@ -32,39 +33,51 @@ require_once ("./Views/include/UH.php");
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Foto</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($resultados as $u): ?>
+            <?php foreach ($usuarios as $u): ?>
                 <tr class="list-item">
                     <td><?= $u['id'] ?></td>
-                    <td>
-                    <img src="<?= htmlspecialchars($u['foto_perfil'] ?? 'Assets/imagenes/perfil/fotodefault.webp') ?>" 
-                     alt="Foto de <?= htmlspecialchars($u['nombre']) ?>" 
-                     class="foto-mini">
-                    </td>
                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
                     <td><?= htmlspecialchars($u['rol']) ?></td>
-                    <td>
-                        <div class="btn-group-actions d-flex">
-                            <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="btn btn-boton2 btn-outline-primary"><img src="Assets/imagenes/pen.png" alt="editar" width="45px"></a>
-                            <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                                <a href="index.php?accion=borrarU&id=<?= $u['id'] ?>" class="btn btn-boton2 danger"><img src="Assets/imagenes/trash.png" alt="eliminar" width="40px"></a>
-                            <?php endif; ?>
-                        </div>
-                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 <?php endif; ?>
-</div>
+
+<h3>Ultimos registros en el Historial</h3>
+
+<?php if (!empty($historial)): ?>
+    <?php foreach ($historial as $registro): ?>
+        <div class="list-item">
+            <p>
+                <strong>
+                    <?php echo htmlspecialchars($registro['usuario'] ? $registro['usuario'] : '[Sistema]'); ?>
+                </strong>
+                #<?php echo htmlspecialchars($registro['usuario_id'] ? $registro['usuario_id'] : 'N/A'); ?>
+                <?php echo htmlspecialchars(ucfirst($registro['accion'])); ?>
+                <strong><?php echo htmlspecialchars(ucfirst($registro['item'])); ?></strong>
+                <?php
+                    if ($registro['item']) {
+                        echo "#".  htmlspecialchars($registro['item_id']);
+                    }
+                ?>
+                a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro['fecha_hora'])); ?>.</span>
+            </p>
+            <?php if (!empty($registro['obs'])): ?>
+                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro['obs']); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="no-records">No hay registro en el historial.</p>
+<?php endif; ?>
 
 <script src="Assets/js/trancicion.js"></script>
 </body>
