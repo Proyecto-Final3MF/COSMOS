@@ -36,7 +36,7 @@ require_once ("./Views/include/UH.php");
 
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
-            <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
+            <input type="email" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
             <p class="fade-label">¿Eres Un?</p>
 
