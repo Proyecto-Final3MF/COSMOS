@@ -46,11 +46,12 @@ require_once ("./Views/include/UH.php");
             <br><br>
             <p class="fade-label">Cambiar Rol:</p>
             <select name="rol" class="input-rol">
-            <option value="cliente" <?= $datos['rol'] == 'cliente' ? 'selected' : '' ?>>Cliente</option>
-            <option value="tecnico" <?= $datos['rol'] == 'tecnico' ? 'selected' : '' ?>>Técnico</option>
-            <option value="admin" <?= $datos['rol'] == 'admin' ? 'selected' : '' ?>>Administrador</option>
+            <option value="2" <?= $datos['rol_id'] == 2 ? 'selected' : '' ?>>Cliente</option>
+            <option value="1" <?= $datos['rol_id'] == 1 ? 'selected' : '' ?>>Técnico</option>
+            <option value="3" <?= $datos['rol_id'] == 3 ? 'selected' : '' ?>>Administrador</option>
             </select>
             <?php endif; ?>
+
 
 
             <br><br>

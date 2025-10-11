@@ -66,26 +66,13 @@ class UsuarioC {
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
         // 🔹 Manejo de roles (solo admin y no puede cambiarse a sí mismo)
-        if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
-            $rol_nombre = $_POST['rol'] ?? null;
-            // Convertir nombre a ID numérico
-            switch ($rol_nombre) {
-                case 'cliente':
-                    $rol_id = 2;
-                    break;
-                case 'tecnico':
-                    $rol_id = 1;
-                    break;
-                case 'admin':
-                    $rol_id = 3;
-                    break;
-                default:
-                    $rol_id = $usuarioM->obtenerRolPorId($id);
-                    break;
-            }
-        } else {
-            $rol_id = $usuarioM->obtenerRolPorId($id);
-        }
+        // Después:
+if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
+    $rol_id = $_POST['rol'] ?? $usuarioM->obtenerRolPorId($id);
+} else {
+    $rol_id = $usuarioM->obtenerRolPorId($id);
+}
+
 
         // 🔹 Manejo de foto
         $foto_perfil = $foto_actual;
