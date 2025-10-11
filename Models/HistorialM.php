@@ -98,7 +98,7 @@ class HistorialM {
         return $historial;
     }
 
-    public function Preview() {
+    public function PreviewH() {
         $sql = "SELECT * FROM historial ORDER BY fecha_hora DESC LIMIT 10";
         $resultado = $this->conexion->query($sql);
         if ($resultado) {
