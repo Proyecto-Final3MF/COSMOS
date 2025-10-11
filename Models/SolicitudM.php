@@ -9,10 +9,16 @@ class Solicitud {
         $this->conn = conectar();
     }
 
-    public function obtenerProductos(){
-        $sql = "SELECT * FROM producto";
+    public function obtenerProductos($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario";
         $resultado = $this->conn->query($sql);
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
     }
 
     public function obtenerProductoporId($producto_id) {
