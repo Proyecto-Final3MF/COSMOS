@@ -19,12 +19,14 @@ body {
     background-image: none;
     color: var(--dark-color);
     line-height: 1.6;
+    background-color: rgb(0, 0, 0);
 }
  
 /* Esto afecta al header el UH.php basicamente */
 
 .navbar {
-	background-color: rgb(255, 255, 255);
+    color: #fff;
+	background-color: rgb(39, 39, 39);
 	box-shadow: var(--box-shadow);
 	padding: 0.4rem 2rem;
 	position: fixed; 
@@ -36,6 +38,7 @@ body {
 	justify-content: space-between; 
 	align-items: center;
 	flex-wrap: wrap;
+    box-shadow: #fff;
 }
 
 .navbar-left {
@@ -467,18 +470,20 @@ h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--dark-color);
+    color: #fff;
 }
 
 h2 {
+    color: #fff;
     text-align: center;
     animation: glow 2s ease-in-out infinite alternate;
 }
 
 p {
+    
     text-align: center;
     font-size: 1.1rem;
-    color: #555;
+    color: #ffffff;
     max-width: 890px;
     margin: 0 auto 2rem;
 }
@@ -1612,14 +1617,14 @@ h1.inicio55 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--dark-color);
+    color: #fff;
     animation: fadeDown 1s ease forwards;
 }
 
 p.inicio44 {
     text-align: center;
     font-size: 1.1rem;
-    color: #555;
+    color: #ffffff;
     max-width: 890px;
     margin: 0 auto 2rem;
     opacity: 0;

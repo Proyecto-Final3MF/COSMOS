@@ -18,14 +18,14 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="nav-links" id="nav-links">
                 <li>
                     <a href="inicio.php">
-                        <img src="Assets/imagenes/25694.png" alt="Inicio" class="icono-menu"> Inicio
+                        <img src="Assets/imagenes/casablanca1.png" alt="Inicio" class="icono-menu"> Inicio
                     </a>
                 </li>
 
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <li>
                         <a href="Index.php?accion=redireccion">
-                            <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
+                            <img src="Assets/imagenes/algo2.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
                         </a>
                     </li>
                 <?php endif; ?>
