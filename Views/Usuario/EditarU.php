@@ -40,7 +40,19 @@ require_once ("./Views/include/UH.php");
             <p class="fade-label">Nombre:</p>
             <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
 
-             <p class="fade-label"> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
+             <p class="fade-label"> Email: </p> <input type="email" name="email" value="<?= $datos['email'] ?>"><br>
+
+            <?php if ($_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $datos['id']): ?>
+            <br><br>
+            <p class="fade-label">Cambiar Rol:</p>
+            <select name="rol" class="input-rol">
+            <option value="2" <?= $datos['rol_id'] == 2 ? 'selected' : '' ?>>Cliente</option>
+            <option value="1" <?= $datos['rol_id'] == 1 ? 'selected' : '' ?>>Técnico</option>
+            <option value="3" <?= $datos['rol_id'] == 3 ? 'selected' : '' ?>>Administrador</option>
+            </select>
+            <?php endif; ?>
+
+
 
             <br><br>
             <input type="submit" value="Guardar cambios">

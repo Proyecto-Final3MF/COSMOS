@@ -18,7 +18,7 @@ require_once("./Views/include/UH.php");
 <body>
 <h2 class="fade-slide" >Listado de todas las categorias</h2>
 <div class="botones-container fade-slide">
-    <a href="index.php?accion=FormularioC"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i> Crear Categoria </button></a>
+    <a href="index.php?accion=FormularioC"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
 <div class="btn-volver-container fade-slide">
   <button class="btn-volver" id="btnVolver">
@@ -41,7 +41,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay categorias registradas. <a href="index.php?accion=crear" class="btn btn-boton777">Crear la primera</a>
+        No hay categorias registradas. <a href="index.php?accion=FormularioC" class="btn btn-boton777">Crear la primera</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
