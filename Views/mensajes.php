@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 ?>
+<link rel="stylesheet" href="Assets/css/chatCSS.css">
 <?php if (!empty($mensajes)): ?>
     <?php foreach ($mensajes as $m): ?>
         <?php
