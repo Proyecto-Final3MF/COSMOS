@@ -15,16 +15,14 @@ class UsuarioC {
     }
 
     public function crear() {
-        $usuario = new Usuario();
-        $roles = $usuario->obtenerRol();
-        include("views/Usuario/Register.php");
-    }
+    include("views/Usuario/Register.php");
+}
 
     public function guardarU() {
         $usuarioM = new Usuario();
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
-        $rol_id = $_POST['rol'];
+        $rol_id = ROL_CLIENTE; 
         $contrasena = $_POST['contrasena']; 
 
         // Manejo de foto
