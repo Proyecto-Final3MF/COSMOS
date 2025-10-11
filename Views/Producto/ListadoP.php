@@ -14,7 +14,7 @@ require_once ("./Views/include/UH.php");
     <br>
     <h2 class="fade-slide" >Tus Productos</h2>
 <div class="botones-container fade-slide">
-    <a href="index.php?accion=formularioP"><button class="btn btn-boton444 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
+    <a href="index.php?accion=formularioP"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
 
 <div class="btn-volver-container fade-slide">
