@@ -802,6 +802,68 @@ tbody tr:hover {
 
 /*aca empieza el css del menu de usuario */
 
+.menu-rol-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.menu-rol-container .dropdown-button {
+    background-color: var(--color-primario, #e83e8c);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s;
+}
+
+.menu-rol-container .dropdown-button:hover {
+    background-color: var(--color-hover, #972f5f);
+}
+
+.menu-rol-container .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-color: #fff;
+    min-width: 220px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 99;
+}
+
+.menu-rol-container .dropdown-menu.show {
+    display: block;
+}
+
+.menu-rol-container .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+}
+
+.menu-rol-container .dropdown-item:hover {
+    background-color: #e83e8c;
+    color: var(--color-primario, #ffffff);
+}
+
+.menu-rol-container .dropdown-item i {
+    font-size: 1rem;
+    color: var(--color-primario, #5c5c5c);
+}
+
 .user-menu-container {
     display: flex;
     align-items: center;
@@ -912,6 +974,25 @@ tbody tr:hover {
 
 .navbar {
     overflow: visible !important;
+}
+
+.dropdown-menu {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+
+.dropdown-menu.show {
+  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu {
+  z-index: 9999;
 }
 
 /* aca termina el css del menu de usuario */
