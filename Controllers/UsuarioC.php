@@ -140,6 +140,11 @@ class UsuarioC {
         include("views/Usuario/Admin/listarU.php");
     }
 
+    public function PreviewU() {
+    $usuario = new Usuario();
+    return $usuario->PreviewU();
+    }
+
     public function logout() {
         session_start();
         session_unset();
