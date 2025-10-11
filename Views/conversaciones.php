@@ -12,15 +12,17 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversaciones</title>
+    <link rel="stylesheet" href="Assets/css/chatCSS.css">
 </head>
 
 <body>
+    <div class="conversaciones-container">
     <h2>Mis conversaciones</h2>
-    <div class="btn-volver-container">
-        <button class="btn-volver" id="btnVolver">
-            <i class="fa fa-arrow-left"></i> Volver
-        </button>
-    </div>
+    <div class="btn-volver-container fade-slide">
+  <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+  </button>
+</div>
     <?php if (!empty($conversaciones)): ?>
         <ul>
             <?php foreach ($conversaciones as $c): ?>
@@ -45,6 +47,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php else: ?>
         <p>No tienes conversaciones aun.</p>
     <?php endif; ?>
+    </div>
+    <script src="Assets/js/botonvolver.js"></script>
 </body>
-
 </html>
