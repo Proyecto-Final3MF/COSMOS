@@ -6,10 +6,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <header>
     <link rel="stylesheet" href="./Assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <nav class="navbar">
-        <!-- IZQUIERDA: logo + enlaces -->
         <div class="navbar-left">
             <a href="inicio.php" class="logo-link">
                 <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
@@ -32,7 +30,6 @@ if (session_status() === PHP_SESSION_NONE) {
             </ul>
         </div>
 
-        <!-- DERECHA: login/registro o menú usuario -->
         <div class="navbar-right">
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <div class="action-buttons">
@@ -43,7 +40,64 @@ if (session_status() === PHP_SESSION_NONE) {
                         <button class="btn btn-boton">Registrarse</button>
                     </a>
                 </div>
+
             <?php else: ?>
+            
+                <div class="menu-rol-container">
+                    <button class="dropdown-button" onclick="toggleRolMenu()">
+                        <i class="fa-solid fa-bars"></i> Menú
+                    </button>
+
+                    <div id="rolDropdown" class="dropdown-menu">
+                        <?php if ($_SESSION['rol'] == 2): ?> 
+                            <!-- CLIENTE -->
+                            <a href="index.php?accion=listarP" class="dropdown-item">
+                                <i class="fa-solid fa-box"></i> Mis Productos
+                            </a>
+                            <a href="index.php?accion=formularioS" class="dropdown-item">
+                                <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
+                            </a>
+                            <a href="index.php?accion=listarSLU" class="dropdown-item">
+                                <i class="fa-solid fa-hourglass-half"></i> Solicitudes Sin Asignar
+                            </a>
+                            <a href="index.php?accion=listarSA" class="dropdown-item">
+                                <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
+                            </a>
+                            <a href="index.php?accion=listarST" class="dropdown-item">
+                                <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+                            </a>
+
+                        <?php elseif ($_SESSION['rol'] == 1): ?> 
+                            <!-- TÉCNICO -->
+                            <a href="Index.php?accion=listarTL" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Solicitudes Disponibles
+                            </a>
+                            <a href="Index.php?accion=listarSA" class="dropdown-item">
+                                <i class="fa-solid fa-check-circle"></i> Solicitudes Aceptadas
+                            </a>
+                            <a href="Index.php?accion=listarST" class="dropdown-item">
+                                <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+                            </a>
+
+                        <?php elseif ($_SESSION['rol'] == 3): ?> 
+                            <!-- ADMIN -->
+                            <a href="index.php?accion=FormularioC" class="dropdown-item">
+                                <i class="fa-solid fa-plus-circle"></i> Crear Nueva Categoría
+                            </a>
+                            <a href="index.php?accion=listarC" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Todas Las Categorías
+                            </a>
+                            <a href="index.php?accion=mostrarHistorial" class="dropdown-item">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Historial de Actividades
+                            </a>
+                            <a href="index.php?accion=listarU" class="dropdown-item">
+                                <i class="fa-solid fa-users"></i> Lista de Usuarios
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- MENÚ DE USUARIO -->
                 <div class="user-menu-container">
                     <div class="dropdown">
                         <button class="dropdown-button" onclick="toggleDropdown()">
@@ -78,5 +132,4 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </nav>
 </header>
-
 <script src="Assets/js/menudeusuario.js"></script>
