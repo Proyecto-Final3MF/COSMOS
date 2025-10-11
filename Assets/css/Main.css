@@ -1298,7 +1298,7 @@ form p {
 }
 
 input[type="text"],
-input[type="mail"],
+input[type="email"],
 input[type="password"],
 select {
     width: 100%;
