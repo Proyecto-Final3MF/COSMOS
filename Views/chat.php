@@ -41,7 +41,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 </html>
-
+<script src="Assets/js/trancicion.js"></script>
 <script>
     // Cargar mensajes
     async function cargarMensajes() {

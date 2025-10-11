@@ -20,3 +20,5 @@ if (session_status() === PHP_SESSION_NONE) {
 <?php else: ?>
     <p class="sin-mensajes">No hay mensajes aún.</p>
 <?php endif; ?>
+
+<script src="Assets/js/trancicion.js"></script>
