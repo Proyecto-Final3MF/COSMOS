@@ -42,6 +42,17 @@ require_once ("./Views/include/UH.php");
 
              <p class="fade-label"> Email: </p> <input type="email" name="email" value="<?= $datos['email'] ?>"><br>
 
+            <?php if ($_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $datos['id']): ?>
+            <br><br>
+            <p class="fade-label">Cambiar Rol:</p>
+            <select name="rol" class="input-rol">
+            <option value="cliente" <?= $datos['rol'] == 'cliente' ? 'selected' : '' ?>>Cliente</option>
+            <option value="tecnico" <?= $datos['rol'] == 'tecnico' ? 'selected' : '' ?>>Técnico</option>
+            <option value="admin" <?= $datos['rol'] == 'admin' ? 'selected' : '' ?>>Administrador</option>
+            </select>
+            <?php endif; ?>
+
+
             <br><br>
             <input type="submit" value="Guardar cambios">
 
