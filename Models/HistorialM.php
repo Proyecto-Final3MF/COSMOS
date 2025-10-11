@@ -103,5 +103,9 @@ class HistorialM {
             $this->conexion->close();
         }
     }
+
+public function Preview {
+$sql = "SELECT * FROM historial"
+}
 }
 ?>
