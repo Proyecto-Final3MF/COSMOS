@@ -26,7 +26,7 @@ require_once ("./Views/include/UH.php");
     <input type="hidden" name="accion" value="listarTL">
       <div class="form-group search-wrapper fade-slide">
         <label for="search">Buscar: </label>
-        <input type="text" id="search" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+        <input type="text" id="search" autocomplete="off" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>
   </form>
 
