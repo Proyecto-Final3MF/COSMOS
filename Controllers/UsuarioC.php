@@ -141,8 +141,8 @@ class UsuarioC {
     }
 
     public function PreviewU() {
-    $usuario = new Usuario();
-    return $usuario->PreviewU();
+        $usuario = new Usuario();
+        return $usuario->PreviewU();
     }
 
     public function logout() {
