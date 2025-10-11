@@ -38,6 +38,19 @@ body {
 	flex-wrap: wrap;
 }
 
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Todo lo de la derecha: login/registro o menú usuario */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
