@@ -16,7 +16,9 @@ require_once ("./Views/include/UH.php");
     <title>Panel de Admin</title>
     <link rel="stylesheet" href="./Assets/css/Main.css"> </head>
 <body>
+    <br>
     <main>
+        
     <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
 </main>
 
