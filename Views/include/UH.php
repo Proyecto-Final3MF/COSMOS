@@ -61,15 +61,15 @@ if (session_status() === PHP_SESSION_NONE) {
                             </div>
 
                             <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                                <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Cuenta
-                            </a>
-
-                            <a href="Index.php?accion=logout" class="dropdown-item">
-                                <img src="Assets/imagenes/cerrarlasesion.png" alt="CerrarSesion" class="icono-menu"> Cerrar Sesión
+                                <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Perfil
                             </a>
 
                             <a href="index.php?accion=listarConversaciones" class="dropdown-item">
                                 <img src="Assets/imagenes/99691-removebg-preview.png" alt="MisConversaciones" class="icono-menu"> Mis Conversaciones
+                            </a>
+
+                            <a href="Index.php?accion=logout" class="dropdown-item">
+                                <img src="Assets/imagenes/cerrarlasesion.png" alt="CerrarSesion" class="icono-menu"> Cerrar Sesión
                             </a>
                         </div>
                     </div>
