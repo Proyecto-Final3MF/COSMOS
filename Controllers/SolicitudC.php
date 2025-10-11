@@ -13,8 +13,19 @@ class SolicitudC {
     }
 
     public function formularioS(){ 
+        // Obtener el ID del usuario de la sesión
+        $id_usuario = $_SESSION['id'] ?? null;
+        
+        // Comprobación de login, similar a tus otros métodos
+        if ($id_usuario == null) {
+            header("Location: index.php?accion=login");
+            exit();
+        } 
+        
         $solicitud = new Solicitud();
-        $productos = $solicitud->obtenerProductos();
+        // Llamar al método modificado, pasando el ID del usuario
+        $productos = $solicitud->obtenerProductos($id_usuario);
+        
         include ("./Views/Solicitudes/Cliente/FormularioS.php");
     }
 
@@ -48,7 +59,7 @@ class SolicitudC {
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
-        }  
+        }   
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSLU($id_usuario);
         include("./Views/Solicitudes/Cliente/ListadoSLU.php");
@@ -93,7 +104,7 @@ class SolicitudC {
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
-        }  
+        }   
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSA($id_usuario);
         include("./Views/Solicitudes/listadoSA.php");
@@ -104,7 +115,7 @@ class SolicitudC {
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
-        }  
+        }   
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarST($id_usuario);
         include("./Views/Solicitudes/listadoST.php");
@@ -179,17 +190,21 @@ class SolicitudC {
         }
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
-        $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
-        
-        if ($_SESSION['rol'] == ROL_TECNICO) {
-            header("Location: index.php?accion=listarTL"); // Redirigir a solicitudes disponibles
-        } elseif ($_SESSION['rol'] == ROL_CLIENTE) {
-            header("Location: index.php?accion=listarSLU"); // Redirigir a sus solicitudes
-        } else {
-            // Si el rol no es ni técnico ni cliente, puedes redirigir a una página predeterminada
-            header("Location: index.php?accion=redireccion");
-        }
-        exit();
+            $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
+            
+            // Asumo que tienes definidas estas constantes
+            define('ROL_TECNICO', 1);
+            define('ROL_CLIENTE', 2);
+            
+            if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_TECNICO) {
+                header("Location: index.php?accion=listarTL"); // Redirigir a solicitudes disponibles
+            } elseif (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_CLIENTE) {
+                header("Location: index.php?accion=listarSLU"); // Redirigir a sus solicitudes
+            } else {
+                // Si el rol no es ni técnico ni cliente, puedes redirigir a una página predeterminada
+                header("Location: index.php?accion=redireccion");
+            }
+            exit();
         } else {
             $_SESSION['mensaje'] = "Error al cancelar la solicitud.";
             header("Location: index.php?accion=listarSA");

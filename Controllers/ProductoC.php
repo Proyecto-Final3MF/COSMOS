@@ -12,33 +12,49 @@ class ProductoC {
         $this->historialController = new HistorialController();
     }
 
-    public function formularioP(){
+    public function formularioP() {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
         include("./Views/Producto/FormularioP.php");
     }
 
-    public function guardarP(){
+    public function guardarP() {
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $id_usuario = $_SESSION['id'];
-
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            return;
+            header("Location: index.php?accion=formularioP");
+            exit();
         }
 
         if ($producto->existeProducto($nombre, $id_usuario)) {
             $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
-            return;
+            header("Location: index.php?accion=formularioP");
+            exit();
         }
 
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
-        $rutaFinal = "Image/" . $nombreArchivo;
+
+        // ✅ Validar tipo MIME del archivo
+        $tipoArchivo = mime_content_type($rutaTemporal);
+        $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        if (!in_array($tipoArchivo, $tiposPermitidos)) {
+            $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
+        // ✅ Generar nombre único
+        $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+        $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
+
+        $rutaFinal = "Image/" . $nombreArchivoSeguro;
 
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
             $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
@@ -56,6 +72,7 @@ class ProductoC {
                     $obs
                 );
                 header("Location: index.php?accion=redireccion");
+                exit();
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
             }
@@ -63,55 +80,58 @@ class ProductoC {
             $_SESSION['mensaje'] = "Error al subir la imagen.";
         }
     }
-    
+
     public function listarP() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario === null) {
             header("Location: index.php?accion=login");
             exit();
         }
-        
+
         $producto = new Producto();
         $orden = $_GET['orden'] ?? 'Más Recientes';
         $search = $_GET['search'] ?? null;
         $resultados = $producto->listarP($id_usuario, $orden, $search);
         include("./Views/Producto/ListadoP.php");
     }
-    
+
     public function borrarP() {
         $producto = new Producto();
         $id = $_GET['id'];
-
         $id_usuario = $_SESSION['id'];
-
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
         $producto->borrar($id);
         $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
+
         $obs = "Producto eliminado";
         $this->historialController->registrarModificacion(
             $usuarioNombre,
             $id_usuario,
             'eliminó el producto',
-            $nombre,
+            $nombre ?? '',
             $id,
             $obs
         );
+
         header("Location: index.php?accion=redireccion");
     }
 
     public function editarP() {
         $producto = new Producto();
         $id = $_GET['id'] ?? null;
+
         if (!$id) {
             echo "ID de producto no especificado.";
             return;
         }
+
         $datosProducto = $producto->obtenerProductoPorId($id);
         if (!$datosProducto) {
             $_SESSION['mensaje'] = "Producto no encontrado.";
             return;
         }
+
         $categorias = $producto->obtenerCategorias();
         include("./Views/Producto/EditarP.php");
     }
@@ -122,22 +142,39 @@ class ProductoC {
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $imagenActual = $_POST['imagen_actual'] ?? '';
-         $id_usuario = $_SESSION['id'];
-
+        $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
         if (!$id || empty($nombre) || empty($categoria_id)) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            return;
+            header("Location: index.php?accion=editarP&id=" . $id);
+            exit();
         }
 
         if (!empty($_FILES['imagen']['name'])) {
             $nombreArchivo = $_FILES['imagen']['name'];
             $rutaTemporal = $_FILES['imagen']['tmp_name'];
-            $rutaFinal = "Image/" . $nombreArchivo;
+
+            // ✅ Validar tipo MIME
+            $tipoArchivo = mime_content_type($rutaTemporal);
+            $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+            if (!in_array($tipoArchivo, $tiposPermitidos)) {
+                $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
+                header("Location: index.php?accion=editarP&id=" . $id);
+                exit();
+            }
+
+            // ✅ Generar nombre único
+            $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+            $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
+
+            $rutaFinal = "Image/" . $nombreArchivoSeguro;
+
             if (!move_uploaded_file($rutaTemporal, $rutaFinal)) {
                 $_SESSION['mensaje'] = "Error al subir la imagen.";
-                return;
+                header("Location: index.php?accion=editarP&id=" . $id);
+                exit();
             }
         } else {
             $rutaFinal = $imagenActual;
@@ -145,7 +182,8 @@ class ProductoC {
 
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
-            $obs = "Producto actulizado";
+
+            $obs = "Producto actualizado";
             $this->historialController->registrarModificacion(
                 $usuarioNombre,
                 $id_usuario,
@@ -156,8 +194,11 @@ class ProductoC {
             );
 
             header("Location: index.php?accion=redireccion");
+            exit();
         } else {
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
+            header("Location: index.php?accion=editarP&id=" . $id);
+            exit();
         }
     }
 }

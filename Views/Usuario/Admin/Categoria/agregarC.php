@@ -18,9 +18,9 @@ require_once ("./Views/include/UH.php");
 
 <body>
    <div class="btn-volver-container fade-slide">
-    <button class="btn-volver" id="btnVolver">
+  <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
-</button>
+  </button>
 </div>
     <div class="contenedor-formulario">
     <section>
@@ -33,5 +33,6 @@ require_once ("./Views/include/UH.php");
     </section>
 </div>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/botonvolver.js"></script>
 </body>
 </html>

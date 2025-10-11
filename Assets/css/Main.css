@@ -15,7 +15,7 @@
    
 body {
     opacity: 0;
-    margin-top: 80px;
+    margin-top: 50px;
     background-image: none;
     color: var(--dark-color);
     line-height: 1.6;
@@ -36,6 +36,19 @@ body {
 	justify-content: space-between; 
 	align-items: center;
 	flex-wrap: wrap;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Todo lo de la derecha: login/registro o menú usuario */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .nav-links {
@@ -305,8 +318,8 @@ body {
     flex-direction: column;      
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 1.2rem;
+    gap: 50%;
+    padding: 50%;
     width: 160px;
     height: 130px;
     border-radius: 14px;
@@ -318,6 +331,11 @@ body {
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    text-decoration: none;
+}
+
+a:has(> .btn-boton444) {
+    text-decoration: none;
 }
 
 .btn-mis-productos { background-color: #be4949; }
@@ -347,6 +365,43 @@ body {
     text-decoration: none;       
 }
 
+.btn-boton4442 {
+    display: flex;
+    flex-direction: column;      
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    padding: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;       
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    text-decoration: none;
+}
+
+a:has(> .btn-boton4442) {
+    text-decoration: none;
+}
+
+.btn-boton4442 i {
+    font-size: 1.6rem;          
+    margin-bottom: 0.2rem;
+    text-decoration: none;
+}
+
+.btn-boton4442:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
 @keyframes pulseBtn {
     0% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-2px) scale(1.02); }
@@ -371,7 +426,6 @@ body {
         margin-bottom: 0.4rem;
     }
 }
-
 
 .btn-volver-container {
     position: fixed;
@@ -748,6 +802,68 @@ tbody tr:hover {
 
 /*aca empieza el css del menu de usuario */
 
+.menu-rol-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.menu-rol-container .dropdown-button {
+    background-color: var(--color-primario, #e83e8c);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s;
+}
+
+.menu-rol-container .dropdown-button:hover {
+    background-color: var(--color-hover, #972f5f);
+}
+
+.menu-rol-container .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-color: #fff;
+    min-width: 220px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 99;
+}
+
+.menu-rol-container .dropdown-menu.show {
+    display: block;
+}
+
+.menu-rol-container .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+}
+
+.menu-rol-container .dropdown-item:hover {
+    background-color: #e83e8c;
+    color: var(--color-primario, #ffffff);
+}
+
+.menu-rol-container .dropdown-item i {
+    font-size: 1rem;
+    color: var(--color-primario, #5c5c5c);
+}
+
 .user-menu-container {
     display: flex;
     align-items: center;
@@ -858,6 +974,25 @@ tbody tr:hover {
 
 .navbar {
     overflow: visible !important;
+}
+
+.dropdown-menu {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+
+.dropdown-menu.show {
+  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu {
+  z-index: 9999;
 }
 
 /* aca termina el css del menu de usuario */
@@ -1244,7 +1379,7 @@ form p {
 }
 
 input[type="text"],
-input[type="mail"],
+input[type="email"],
 input[type="password"],
 select {
     width: 100%;
@@ -1385,7 +1520,7 @@ input[type="submit"]:hover {
 }
 
 .rol-container {
-    display: flex;
+    display: grid;
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 10px;

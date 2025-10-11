@@ -36,18 +36,9 @@ require_once ("./Views/include/UH.php");
 
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
-            <input type="mail" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
+            <input type="email" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
-            <p class="fade-label">¿Eres Un?</p>
-
-            <div class="rol-container">
-            <?php foreach ($roles as $rol): ?>
-            <div class="rol-option" data-value="<?= $rol['id'] ?>">
-            <?= htmlspecialchars($rol['nombre']) ?>
-            </div>
-            <?php endforeach; ?>
-            </div>
-            <input type="hidden" id="rol" name="rol" required>  <br><br>
+            <input type="hidden" id="rol" name="rol" value="2">
             
             <p class="fade-label">Contraseña</p>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required> <br><br>
@@ -59,7 +50,6 @@ require_once ("./Views/include/UH.php");
     </section>
     <br>
 </div>
-<script src="Assets/js/botonrol.js"></script>
 <script src="Assets/js/fotoperfilregistro.js"></script>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
