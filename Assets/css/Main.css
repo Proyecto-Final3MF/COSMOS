@@ -38,6 +38,19 @@ body {
 	flex-wrap: wrap;
 }
 
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Todo lo de la derecha: login/registro o menú usuario */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
@@ -318,6 +331,11 @@ body {
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    text-decoration: none;
+}
+
+a:has(> .btn-boton444) {
+    text-decoration: none;
 }
 
 .btn-mis-productos { background-color: #be4949; }
@@ -371,7 +389,6 @@ body {
         margin-bottom: 0.4rem;
     }
 }
-
 
 .btn-volver-container {
     position: fixed;
@@ -1385,7 +1402,7 @@ input[type="submit"]:hover {
 }
 
 .rol-container {
-    display: flex;
+    display: grid;
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 10px;
