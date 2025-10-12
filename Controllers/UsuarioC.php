@@ -22,8 +22,20 @@ class UsuarioC {
         $usuarioM = new Usuario();
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
-        $rol_id = ROL_CLIENTE; // Todos los nuevos usuarios son clientes
+        $rol_id = ROL_CLIENTE;
         $contrasena = $_POST['contrasena'];
+
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+        $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+        header("Location: index.php?accion=register"); 
+        exit();
+    }
+
+    if (empty($usuario)) {
+        $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+        header("Location: index.php?accion=register"); 
+        exit();
+    }
 
         // 🔹 Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
@@ -67,11 +79,11 @@ class UsuarioC {
 
         // 🔹 Manejo de roles (solo admin y no puede cambiarse a sí mismo)
         // Después:
-if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
-    $rol_id = $_POST['rol'] ?? $usuarioM->obtenerRolPorId($id);
-} else {
-    $rol_id = $usuarioM->obtenerRolPorId($id);
-}
+        if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
+            $rol_id = $_POST['rol'] ?? $usuarioM->obtenerRolPorId($id);
+        } else {
+            $rol_id = $usuarioM->obtenerRolPorId($id);
+        }
 
 
         // 🔹 Manejo de foto
