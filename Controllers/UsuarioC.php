@@ -26,16 +26,16 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
 
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
-        $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-        header("Location: index.php?accion=register"); 
-        exit();
-    }
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
 
-    if (empty($usuario)) {
-        $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
-        header("Location: index.php?accion=register"); 
-        exit();
-    }
+        if (empty($usuario)) {
+            $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
 
         // 🔹 Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
