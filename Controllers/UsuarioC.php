@@ -37,6 +37,12 @@ class UsuarioC {
             exit();
         }
 
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
         // 🔹 Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
             $rutaDestino = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
