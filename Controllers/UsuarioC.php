@@ -25,6 +25,7 @@ class UsuarioC {
         $rol_id = ROL_CLIENTE;
         $contrasena = $_POST['contrasena'];
 
+        //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
         $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
         header("Location: index.php?accion=register"); 
