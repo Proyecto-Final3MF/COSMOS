@@ -108,7 +108,18 @@ class Usuario {
         return $data;
     }
 
-    public function borrar($id) {
+    public function PreviewU() {
+        $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ORDER BY id DESC LIMIT 10";
+        $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC); // Correctly returns an array of users
+        } else {
+            return [];
+        }
+    }
+
+    public function borrar($id){
+        // Antes de borrar, eliminar foto si no es default
         $usuario = $this->buscarUserId($id);
         if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
             unlink($usuario['foto_perfil']);
