@@ -29,29 +29,14 @@ class Usuario {
         return false;
     }
 
-    public function obtenerRolPorId($id) {
-        $sql = "SELECT rol_id FROM usuario WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultado = $stmt->get_result()->fetch_assoc();
-        return $resultado['rol_id'] ?? null;
-    }
-
-    public function actualizarUsuario($id, $nombre, $email, $foto_perfil, $rol_id) {
-        $sql = "UPDATE usuario 
-                SET nombre = ?, email = ?, foto_perfil = ?, rol_id = ? 
-                WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssii", $nombre, $email, $foto_perfil, $rol_id, $id);
-        return $stmt->execute();
+    public function obtenerRol() {
+        $sql = "SELECT * FROM rol where id < 3";
+        $resultado = $this->conn->query($sql);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
     public function buscarUserId($id) {
-        $sql = "SELECT u.*, r.nombre AS rol 
-                FROM usuario u 
-                INNER JOIN rol r ON u.rol_id = r.id 
-                WHERE u.id = ?";
+        $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -59,29 +44,47 @@ class Usuario {
         return $result->fetch_assoc();
     }
 
+    public function editarU($id, $nombre, $email, $foto_perfil = null) {
+        if ($foto_perfil) {
+            $sql = "UPDATE usuario SET nombre = ?, email = ?, foto_perfil = ? WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssi", $nombre, $email, $foto_perfil, $id);
+        } else {
+            $sql = "UPDATE usuario SET nombre = ?, email = ? WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ssi", $nombre, $email, $id);
+        }
+        return $stmt->execute();
+    }
+
     public function listarU($orden, $rol_filter, $search) {
-        $sql = "SELECT u.*, r.nombre as rol FROM usuario u 
-                INNER JOIN rol r ON u.rol_id = r.id ";
+        $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ";
 
         $conditions = [];
         $params = [];
         $param_types = '';
 
+
         if (!empty($search)) {
             $search_terms = explode(" ", $search);
+
             foreach ($search_terms as $palabra) {
-                $conditions[] = "(u.nombre LIKE ? OR u.email LIKE ?)";
+
+                $conditions[] = "(u.nombre LIKE ? OR u.email LIKE ?)"; 
+                            
                 $search_term = "%" . $palabra . "%";
                 $params[] = $search_term;
                 $params[] = $search_term;
                 $param_types .= 'ss';
-            }
+            } 
         }
 
         switch ($rol_filter) {
-            case 'Clientes': $conditions[] = "u.rol_id = 2"; break;
-            case 'Tecnicos': $conditions[] = "u.rol_id = 1"; break;
-            case 'Administradores': $conditions[] = "u.rol_id = 3"; break;
+            case 'Clientes': $conditions[] = "u.rol_id = 2 "; break;
+            case 'Tecnicos': $conditions[] = "u.rol_id = 1 "; break;
+            case 'Administradores': $conditions[] = "u.rol_id = 3 "; break;
+            case 'Todos':
+            default: break;
         }
 
         if (!empty($conditions)) {
@@ -97,15 +100,30 @@ class Usuario {
         }
 
         $stmt = $this->conn->prepare($sql);
+            
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
         if (!empty($param_types)) {
             $stmt->bind_param($param_types, ...$params);
         }
+            
+        $success = $stmt->execute();
+            
+        if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+                    
+            return $data;
+        } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return [];
+        }
 
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        $data = $resultado->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
-        return $data;
     }
 
     public function PreviewU() {

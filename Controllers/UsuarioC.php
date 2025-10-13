@@ -1,12 +1,12 @@
 <?php
 require_once("Models/UsuarioM.php");
-require_once("./Views/include/popup.php");
+require_once ("./Views/include/popup.php");
 require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
     private $historialController;
 
-    public function __construct() {
+    public function __construct(){
         $this->historialController = new HistorialController();
     }
 
@@ -15,6 +15,8 @@ class UsuarioC {
     }
 
     public function crear() {
+        $usuario = new Usuario();
+        $roles = $usuario->obtenerRol();
         include("views/Usuario/Register.php");
     }
 
@@ -22,29 +24,10 @@ class UsuarioC {
         $usuarioM = new Usuario();
         $usuario = $_POST['usuario'];
         $mail = $_POST['mail'];
-        $rol_id = ROL_CLIENTE;
-        $contrasena = $_POST['contrasena'];
+        $rol_id = $_POST['rol'];
+        $contrasena = $_POST['contrasena']; 
 
-        //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
-        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
-            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-            header("Location: index.php?accion=register"); 
-            exit();
-        }
-
-        if (empty($usuario)) {
-            $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
-            header("Location: index.php?accion=register"); 
-            exit();
-        }
-
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
-            header("Location: index.php?accion=register"); 
-            exit();
-        }
-
-        // 🔹 Manejo de foto
+        // Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
             $rutaDestino = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
             move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaDestino);
@@ -62,9 +45,8 @@ class UsuarioC {
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
-                $this->historialController->registrarModificacion(
-                    null, null, 'creó un usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario"
-                );
+                // Historial
+                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $id_user, "Usuario creado vía formulario");
 
                 header("Location: index.php?accion=redireccion");
                 exit();
@@ -77,48 +59,37 @@ class UsuarioC {
 
     public function actualizarU() {
         session_start();
-        $usuarioM = new Usuario();
-
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $email = $_POST['email'];
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-        // 🔹 Manejo de roles (solo admin y no puede cambiarse a sí mismo)
-        // Después:
-        if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
-            $rol_id = $_POST['rol'] ?? $usuarioM->obtenerRolPorId($id);
-        } else {
-            $rol_id = $usuarioM->obtenerRolPorId($id);
-        }
+        $usuarioM = new Usuario();
 
-
-        // 🔹 Manejo de foto
+        // Manejo de nueva foto
         $foto_perfil = $foto_actual;
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
             $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
             move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
 
+            // Borrar foto anterior si no es default
             if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
                 unlink($foto_actual);
             }
         }
 
-        // 🔹 Actualizar en BD
-        if ($usuarioM->actualizarUsuario($id, $nombre, $email, $foto_perfil, $rol_id)) {
-            // Si el usuario edita su propio perfil, actualizar sesión
-            if ($_SESSION['id'] == $id) {
-                $_SESSION['usuario'] = $nombre;
-                $_SESSION['email'] = $email;
-                $_SESSION['foto_perfil'] = $foto_perfil;
-            }
+        if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
+            $_SESSION['usuario'] = $nombre;
+            $_SESSION['email'] = $email;
+            $_SESSION['foto_perfil'] = $foto_perfil;
+            $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
-            $this->historialController->registrarModificacion($nombre, $id, 'actualizó un usuario', null, $_SESSION['id'], "Usuario actualizado");
+            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, "Usuario actualizado");
 
-            header("Location: index.php?accion=listarU&mensaje=Usuario actualizado con éxito.");
+            header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
             exit();
         } else {
-            header("Location: index.php?accion=listarU&error=Error al actualizar usuario.");
+            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
             exit();
         }
     }
@@ -127,7 +98,7 @@ class UsuarioC {
         $usuario = new Usuario();
         $id = $_GET["id"];
         $usuario->borrar($id);
-        header("Location: index.php?accion=listarU");
+        header("Location: index.php");
         exit();
     }
 
@@ -145,7 +116,6 @@ class UsuarioC {
         $user = $modelo->verificarU($usuario, $contrasena);
 
         if ($user) {
-            session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
             $_SESSION['id'] = $user['id'];
@@ -161,7 +131,7 @@ class UsuarioC {
     }
 
     public function listarU() {
-        $orden = $_GET['orden'] ?? '';
+        $orden = $_GET['orden'] ?? ''; 
         $rol_filter = $_GET['rol_filter'] ?? 'Todos';
         $search = $_GET['search'] ?? '';
 
