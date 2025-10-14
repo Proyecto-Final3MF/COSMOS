@@ -242,34 +242,6 @@ body {
     gap: 10px;               
 }
 
-.btn-boton2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 1px solid #b61e65;
-    background-color: #f8f9fa;
-    transition: var(--transition);
-}
-
-.btn-boton2 img {
-    width: 20px;
-    height: 20px;
-}
-
-.btn-boton2:hover {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-.btn-boton2.danger:hover {
-    background-color: #dc2626;
-    color: white;
-}
-
 .btn-container2 {
     display: flex;
     justify-content: center;
@@ -1614,11 +1586,52 @@ input[type="submit"]:hover {
     color: #727579;
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #000000;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  font-size: 18px;
+  position: relative;
+  top: 5px; 
+}
+
+.btn-boton2 {
+    display: flex;
+    border-radius: 50%;
+    border-color: #fff;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.25s ease;
+    font-size: 18px;
+    position: relative;
+    top: 5px; 
+}
+
+.btn-boton2:hover {
+  background-color: #b61e65;
+  color: white;
+  transform: scale(1.1);
+}
+
 .producto-con-boton {
     display: flex;
     align-items: center;
     gap: 10px; 
-    justify-content: center;
+    justify-content: flex-end;
     margin-bottom: 15px;
 }
 
@@ -1628,22 +1641,17 @@ input[type="submit"]:hover {
 }
 
 .producto-con-boton .btn-boton2 {
+    border-color: #fff;
     width: 40px;
     height: 40px;
-    border: 1px solid #e83e8c;
     background-color: #fff;
     transition: transform 0.3s, background-color 0.3s;
-    margin-top: -12px;
+    margin-top: -20px;
 }
 
 .producto-con-boton .btn-boton2:hover {
     background-color: #e83e8c;
     transform: scale(1.1);
-}
-
-.producto-con-boton .btn-boton2 img {
-    width: 18px;
-    height: 18px;
 }
 
 .rol-container {

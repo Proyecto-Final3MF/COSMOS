@@ -34,9 +34,9 @@ require_once ("./Views/include/UH.php");
             <?php endforeach; ?>
             </select>
 
-        <a href="index.php?accion=formularioP" class="btn-crear-producto">
-            <button type="button" class="btn btn-boton2">
-            <img src="Assets/imagenes/plus.png" alt="agregar" width="20">
+        <a href="index.php?accion=formularioP">
+            <button type="button" class="btn-boton2">
+            <i class="fa fa-plus-circle"></i>
             </button>
             </a>
         </div>
