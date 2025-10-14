@@ -54,7 +54,7 @@ switch ($accion) {
       } elseif ($_SESSION['rol'] == ROL_TECNICO) {
         include("./Views/Usuario/Tecnico/TecnicoP.php");
       } elseif ($_SESSION['rol'] == ROL_ADMIN) {
-        include("./Views/Usuario/Admin/AdminP.php");
+        header("Location:index.php?accion=panelA");
       } else {
         echo "<h1>Error: Rol no reconocido.</h1>";
         echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";
@@ -64,6 +64,7 @@ switch ($accion) {
       exit();
     }
     break;
+    
 
   //acciones para todos los roles
   case 'editarU':
@@ -144,7 +145,23 @@ switch ($accion) {
     $controller->formularioP();
     break;
 
+
+  case 'urgenteP':
+    $controller = new ProductoC();
+    $controller->urgentePF();
+    break;
+
+  case 'urgenteGP':
+    $controller = new ProductoC();
+    $controller->urgenteGP();
+    break;
+
   //acciones para solicitudes
+
+  case 'urgenteS':
+    $controller = new SolicitudC();
+    $controller->formularioUS();
+     break;
 
   case 'formularioS':
     $controller = new SolicitudC();
@@ -187,6 +204,14 @@ switch ($accion) {
     break;
 
   //acciones para el rol admin
+
+  case 'panelA':
+    $PreviewUsuarios = new UsuarioC();
+    $PreviewHistorial = new HistorialController();
+    $usuarios = $PreviewUsuarios->PreviewU();
+    $historial = $PreviewHistorial->PreviewH();
+    include("Views/Usuario/Admin/Adminp.php");
+    break;
 
   case 'listarU':
     $controller = new UsuarioC();

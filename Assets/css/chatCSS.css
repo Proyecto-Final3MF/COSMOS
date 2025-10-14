@@ -93,28 +93,35 @@
 }
 
 .btn-volver-container {
-  position: fixed;
+    position: fixed;
     top: 100px; 
     left: 20px; 
     z-index: 1001; 
 }
 
 .btn-volver {
-  background: #e83e8c;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .btn-volver:hover {
-  background: #d7367d;
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-volver i {
+    font-size: 1rem;
 }
 
 .conversaciones-container {
