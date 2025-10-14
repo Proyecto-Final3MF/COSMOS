@@ -19,6 +19,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
 <div>
+    <br>
     <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
     
     <div class="btn-container fade-slide">
