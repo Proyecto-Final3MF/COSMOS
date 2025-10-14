@@ -98,7 +98,7 @@ class Producto {
 
     public function obtenerProductoPorId($id) {
         $id = (int)$id;
-        $sql = "SELECT * FROM producto WHERE id = $id LIMIT 1";
+        $sql = "SELECT p.*, c.nombre as categoria, c.id as id_cat FROM producto p INNER JOIN CATEGORIA c ON p.id_cat = c.id WHERE p.id = $id LIMIT 1";
         $result = $this->conn->query($sql);
         if ($result && $row = $result->fetch_assoc()) {
             return $row;
