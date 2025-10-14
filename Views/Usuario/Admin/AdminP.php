@@ -67,9 +67,6 @@ require_once ("./Views/include/UH.php");
                                 <?php echo htmlspecialchars(ucfirst($registro['accion'])); ?> <strong><?php echo htmlspecialchars(ucfirst($registro['item'])); ?></strong>
                                 <?php if ($registro['item']) { echo "#". htmlspecialchars($registro['item_id']); } ?> a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro['fecha_hora'])); ?>.</span>
                             </p>
-                            <?php if (!empty($registro['obs'])): ?>
-                                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro['obs']); ?></p>
-                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
