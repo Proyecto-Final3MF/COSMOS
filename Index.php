@@ -49,22 +49,6 @@ switch ($accion) {
 
   case 'redireccion':
     if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
-      if ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == ROL_TECNICO) {
-        header("Location:index.php?accion=listarSA");
-      } elseif ($_SESSION['rol'] == ROL_ADMIN) {
-        header("Location:index.php?accion=panelA");
-      } else {
-        echo "<h1>Error: Rol no reconocido.</h1>";
-        echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";
-      }
-    } else {
-      header("Location: index.php?accion=login");
-      exit();
-    }
-    break;
-
-  case 'paginaP':
-    if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
       if ($_SESSION['rol'] == ROL_CLIENTE) {
         include("./Views/Usuario/Cliente/ClienteP.php");
       } elseif ($_SESSION['rol'] == ROL_TECNICO) {
@@ -80,6 +64,7 @@ switch ($accion) {
       exit();
     }
     break;
+    
 
   //acciones para todos los roles
   case 'editarU':
