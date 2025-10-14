@@ -193,12 +193,12 @@ class ProductoC {
                 $obs = "Ningun cambio detectado";
             } else {
                 if ($nombre !== $nombreAntiguo) {
-                    $obs1 = $nombreAntiguo." ---> ".$nombre."   ";
+                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre."   ";
                     $obs = $obs1;
                 }
 
                 if ($id_catAntiguo !== $categoria_id) {
-                    $obs2 = $categoriaAntigua. " ---> ".$nuevaCat;
+                    $obs2 = "Categoria: ".$categoriaAntigua. " ---> ".$nuevaCat;
                     $obs = $obs2;
                 }
 
