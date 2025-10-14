@@ -1,18 +1,17 @@
 <?php
 require_once(__DIR__ . '/../Models/SolicitudM.php');
-require_once(__DIR__ . '/HistorialC.php');
+require_once(__DIR__ . '/solicitud_historiaC.php');
 require_once ("./Views/include/popup.php");
 
 class SolicitudC {
     private $solicitudModel;
-    private $historialController;
+    private $historiaC;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
-        $this->historialController = new HistorialController();
+        $this->historiaC = new HistoriaC();
     }
 
-   // En SolicitudC.php
     public function formularioS(){ 
         $id_usuario = $_SESSION['id'] ?? null;
         
@@ -23,12 +22,8 @@ class SolicitudC {
         
         $solicitud = new Solicitud();
         
-        // Solo obtiene la lista de productos
         $productos = $solicitud->obtenerProductos($id_usuario);
-        
-        // NO definimos $producto_preseleccionado_id ni $ultimo_producto_creado, 
-        // o los definimos como null, para que la vista no preseleccione nada.
-        $producto_preseleccionado_id = null; // <- Asegura que no haya preselección automática
+        $producto_preseleccionado_id = null;
         
         include ("./Views/Solicitudes/Cliente/FormularioS.php");
     }
@@ -40,13 +35,19 @@ class SolicitudC {
         $descripcion = $_POST['descripcion'] ?? '';
         $prioridad = $_POST['prioridad'] ?? '';
         $usuario_id = $_SESSION['id'] ?? '';
-        $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
-        if ($solicitud){
+        $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
+
+        if ($id_solicitud) {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
-            //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
+
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+            
             header("Location: index.php?accion=redireccion");
-        };
+        } else {
+            $_SESSION['error'] = "Error al guardar la solicitud.";
+            header("Location: index.php?accion=redireccion");
+        }
     }
 
     public function guardarSU() {
@@ -69,6 +70,7 @@ class SolicitudC {
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
             header("Location: index.php?accion=listarSLU");
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
@@ -81,7 +83,6 @@ class SolicitudC {
         $id = $_GET['id'];
         $solicitud->borrarS($id);
         $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
-        //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'eliminó la solicitud', $titulo, $id, null);
         header("Location: index.php?accion=redireccion");
     }
 
@@ -121,6 +122,7 @@ class SolicitudC {
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
+            $this->historiaC->registrarEvento($id_soli, "Solicitud asignada");
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
@@ -222,6 +224,7 @@ class SolicitudC {
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
             
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);

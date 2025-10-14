@@ -66,6 +66,10 @@ require_once("./Views/include/UH.php");
                         class="icon-btn delete">
                         <i class="fa fa-times"></i>
                         </a>
+                        
+                        <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>">
+                            Historia
+                        </a>
                         </div>
                         </td>
 

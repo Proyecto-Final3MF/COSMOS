@@ -111,6 +111,12 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->listarST();
     break;
+
+  case 'solicitud_historia':
+    $controller = new HistoriaC();
+    $controller->mostrarHistoria();
+    break;
+
   //acciones para el rol cliente
 
   //acciones para producto
