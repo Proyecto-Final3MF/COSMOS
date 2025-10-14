@@ -65,6 +65,9 @@ require_once("./Views/include/UH.php");
                                     class="btn btn-boton2 danger">
                                     <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
                                 </a>
+                                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>">
+                                    Historia
+                                </a>
                             </div>
                         </td>
                     </tr>
