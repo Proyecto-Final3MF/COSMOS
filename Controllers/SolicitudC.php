@@ -1,15 +1,15 @@
 <?php
 require_once(__DIR__ . '/../Models/SolicitudM.php');
-require_once(__DIR__ . '/HistorialC.php');
+require_once(__DIR__ . '/solicitud_historiaC.php');
 require_once ("./Views/include/popup.php");
 
 class SolicitudC {
     private $solicitudModel;
-    private $historialController;
+    private $historiaC;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
-        $this->historialController = new HistorialController();
+        $this->historiaC = new HistoriaC();
     }
 
    // En SolicitudC.php
@@ -40,13 +40,22 @@ class SolicitudC {
         $descripcion = $_POST['descripcion'] ?? '';
         $prioridad = $_POST['prioridad'] ?? '';
         $usuario_id = $_SESSION['id'] ?? '';
-        $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
-        if ($solicitud){
+        $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
+
+    // Verifica si se obtuvo un ID válido (la solicitud fue guardada exitosamente)
+        if ($id_solicitud) {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
-            //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'creó la solicitud', $titulo, $id, null);
+            
+            // Usa el ID recién obtenido ($nuevo_id_solicitud) para registrar el evento
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+            
             header("Location: index.php?accion=redireccion");
-        };
+        } else {
+            // Opcional: Manejo de error si la solicitud no se pudo guardar
+            $_SESSION['error'] = "Error al guardar la solicitud.";
+            header("Location: index.php?accion=redireccion"); // o a otra página de error
+        }
     }
 
     public function borrarS() {
