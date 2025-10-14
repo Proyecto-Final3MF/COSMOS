@@ -168,6 +168,11 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->formularioUS();
      break;
+     
+  case 'guardarSU':
+    $controller = new SolicitudC();
+    $controller->guardarSU();
+    break;
 
   case 'formularioS':
     $controller = new SolicitudC();

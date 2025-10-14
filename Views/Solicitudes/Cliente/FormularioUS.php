@@ -1,5 +1,7 @@
 <?php
 require_once ("./Views/include/UH.php");
+// Assume $productos and $producto_preseleccionado_id are set by the controller.
+// We'll rely on $producto_preseleccionado_id for the product ID.
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,7 @@ require_once ("./Views/include/UH.php");
     <div class="contenedor-formulario">
 <section class="formularios99">
     <h3>Nueva Solicitud</h3>
-    <form method="POST" action="Index.php?accion=guardarS">
+    <form method="POST" action="Index.php?accion=guardarSU">
         
         <p class="fade-label">Titulo: </p>
         <label for="titulo" class="form-label"></label>
@@ -27,31 +29,35 @@ require_once ("./Views/include/UH.php");
                
         <p class="fade-label">Producto:</p>
         <div class="producto-con-boton">
-            <select id="producto" name="producto" required>
-                <option value="">-- Seleccione un Producto --</option>
-                <?php
-                $producto_a_seleccionar = $producto_preseleccionado_id ?? null; // Asume null si no se envió nada.
-                ?>
-
-                <?php foreach ($productos as $producto): ?>
-                    <?php 
-                        $selected = ($producto['id'] == $producto_a_seleccionar) ? 'selected' : '';
-                    ?>
-                    <option value="<?= $producto['id'] ?>" <?= $selected ?>>
-                        <?= htmlspecialchars($producto['nombre'])?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
             
-        </div>
+            <?php 
+                $nombre_producto = 'No disponible'; // Default value
+                $producto_id_valido = $producto_preseleccionado_id ?? null;
+                
+                // Find the product name based on the pre-selected ID
+                if ($producto_id_valido && isset($productos) && is_array($productos)) {
+                    foreach ($productos as $p) {
+                        if ($p['id'] == $producto_id_valido) {
+                            $nombre_producto = htmlspecialchars($p['nombre']);
+                            break;
+                        }
+                    }
+                }
+            ?>
+            
+            <input type="text" class="form-control" value="<?= $nombre_producto ?>" disabled>
+            
+            <input type="hidden" name="producto" value="<?= $producto_id_valido ?>" required>
+            
+            </div>
 
         <p class="fade-label">Descripcion:</p>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
                         
         <label for="prioridad"><p class="fade-label">Nivel de Prioridad: </p></label>
-            <select name="prioridad" id="prioridad" required>
-                <option value="urgente">Urgente</option>
-            </select><br><br>
+            <input type="text" class="form-control" value="Urgente" disabled>
+            <input type="hidden" name="prioridad" value="urgente">
+            <br><br>
 
         <input type="submit" value="Guardar">
         

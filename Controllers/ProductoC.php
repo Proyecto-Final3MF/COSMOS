@@ -244,8 +244,6 @@ class ProductoC {
             $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
 
             if ($id) {
-                $_SESSION['mensaje'] = "Producto creado exitosamente.";
-
                 $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
                     $usuarioNombre,
