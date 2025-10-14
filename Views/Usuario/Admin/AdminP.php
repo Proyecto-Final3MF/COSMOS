@@ -24,7 +24,7 @@ require_once ("./Views/include/UH.php");
     <div class="admin-dashboard">
 
         <section class="admin-panel-column">
-            <h3>Ultimos Usuarios registrados</h3>
+            <h3><a href="index.php?accion=listarU" class="titulo3" >Ultimos Usuarios registrados</a></h3>
             <?php if (empty($usuarios)): ?>
                 <div class="alert alert-info">
                     No hay usuarios registrados.
@@ -57,7 +57,7 @@ require_once ("./Views/include/UH.php");
         </section>
 
         <section class="admin-panel-column">
-            <h3>Ultimos registros en el Historial</h3>
+            <h3><a href="index.php?accion=mostrarHistorial" class="titulo3" >Ultimos registros en el Historial</a></h3>
             <div class="historial-panel">
                 <?php if (!empty($historial)): ?>
                     <?php foreach ($historial as $registro): ?>
