@@ -28,24 +28,34 @@ require_once ("./Views/include/UH.php");
             <i class="fa-solid fa-box"></i> Mis Productos
         </button>
     </a>
+
     <a href="index.php?accion=formularioS">
         <button class="btn btn-boton444 btn-crear">
             <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
         </button>
     </a>
+
     <a href="index.php?accion=listarSLU">
         <button class="btn btn-boton444 btn-sin-asignar">
             <i class="fa-solid fa-hourglass-half"></i> Solicitudes Sin Asignar
         </button>
     </a>
+
     <a href="index.php?accion=listarSA">
         <button class="btn btn-boton444 btn-aceptadas">
             <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
         </button>
     </a>
+
     <a href="index.php?accion=listarST">
         <button class="btn btn-boton444 btn-terminadas">
             <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+        </button>
+    </a>
+
+    <a href="index.php?accion=urgenteP">
+        <button class="btn btn-boton444 btn-crear">
+            <i class="fa-solid fa-plus-circle"></i>Nueva Solicitud Urgente
         </button>
     </a>
 
