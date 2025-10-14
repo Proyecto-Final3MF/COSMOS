@@ -64,7 +64,7 @@ switch ($accion) {
       exit();
     }
     break;
-    
+
 
   //acciones para todos los roles
   case 'editarU':
@@ -161,11 +161,6 @@ switch ($accion) {
   case 'urgenteS':
     $controller = new SolicitudC();
     $controller->formularioUS();
-     break;
-     
-  case 'guardarSU':
-    $controller = new SolicitudC();
-    $controller->guardarSU();
     break;
 
   case 'formularioS':
@@ -314,9 +309,9 @@ switch ($accion) {
     break;
 
   case 'borrarConversacion':
-    require_once "Controllers/ChatC.php";
+    require_once("Controllers/ChatC.php");
     $controller = new ChatC();
-    $controller->borrarConversacion();
+    $controller->borrar();
     break;
 
   //accion default

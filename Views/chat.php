@@ -25,14 +25,14 @@ if (session_status() === PHP_SESSION_NONE) {
             <i class="fa fa-arrow-left"></i> Volver
         </button>
     </div>
-    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
+    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviar">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="hidden" name="receptor_id" value="<?= htmlspecialchars($otroUsuarioId) ?>">
+        <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
-    
+
 
     <script src="Assets/js/trancicion.js"></script>
     </div>
@@ -54,7 +54,7 @@ if (session_status() === PHP_SESSION_NONE) {
     document.getElementById("form-chat").addEventListener("submit", async function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        await fetch("index.php?accion=enviarMensaje", {
+        await fetch("index.php?accion=enviar", {
             method: "POST",
             body: formData
         });
@@ -63,4 +63,6 @@ if (session_status() === PHP_SESSION_NONE) {
     });
 
     setInterval(cargarMensajes, 3000);
+
+    cargarMensajes();
 </script>
