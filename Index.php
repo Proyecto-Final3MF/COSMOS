@@ -160,7 +160,23 @@ switch ($accion) {
     $controller->formularioP();
     break;
 
+
+  case 'urgenteP':
+    $controller = new ProductoC();
+    $controller->urgentePF();
+    break;
+
+  case 'urgenteGP':
+    $controller = new ProductoC();
+    $controller->urgenteGP();
+    break;
+
   //acciones para solicitudes
+
+  case 'urgenteS':
+    $controller = new SolicitudC();
+    $controller->formularioUS();
+     break;
 
   case 'formularioS':
     $controller = new SolicitudC();
