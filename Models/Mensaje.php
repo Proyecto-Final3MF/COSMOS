@@ -31,12 +31,12 @@ class Mensaje
                     FROM mensaje m
                     JOIN usuario u ON m.usuario_id = u.id
                     LEFT JOIN usuario r ON m.receptor_id = r.id
-                    WHERE m.receptor_id = ? OR m.usuario_id = ?
+                    WHERE m.usuario_id = ? OR m.receptor_id = ?
                     ORDER BY m.fecha DESC";
 
             $stmt = $this->conexion->prepare($sql);
             // Se enlaza el ID del usuario dos veces
-            $stmt->bind_param("ii", $receptor_id, $receptor_id);
+            $stmt->bind_param("ii", $usuario_id, $usuario_id);
         }
         // Si falla la preparación de la consulta → devuelve array vacío
         if (!$stmt) {
@@ -94,15 +94,13 @@ class Mensaje
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE (m.usuario_id= ? AND (m.receptor_id = ? OR m.receptor_id IS NULL))
-                OR (m.usuario_id = ? AND (m.receptor_id = ? OR m.receptor_id IS NULL))
+                WHERE (m.usuario_id= ? AND m.receptor_id = ?)
+                OR (m.usuario_id = ? AND m.receptor_id = ?)
                 ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
         // Se enlazan los dos IDs en ambas posiciones para cubrir emisor y receptor
         $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
-
-
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -110,8 +108,8 @@ class Mensaje
     }
     // Obtener lista de conversaciones de un usuario
     public function obtenerConversaciones($usuario_id)
-{
-    $sql = "SELECT 
+    {
+        $sql = "SELECT 
                 CASE 
                     WHEN m.usuario_id = ? THEN m.receptor_id 
                     ELSE m.usuario_id 
@@ -129,21 +127,21 @@ class Mensaje
             GROUP BY otro_usuario_id
             ORDER BY ultima_fecha DESC";
 
-    $stmt = $this->conexion->prepare($sql);
-    if (!$stmt) {
-        echo "Error en prepare: " . $this->conexion->error;
-        return [];
+        $stmt = $this->conexion->prepare($sql);
+        if (!$stmt) {
+            echo "Error en prepare: " . $this->conexion->error;
+            return [];
+        }
+
+        // Enlazamos 4 veces el mismo ID porque se usa en todas las condiciones
+        $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+        $stmt->close();
+
+        return $data;
     }
-
-    // Enlazamos 4 veces el mismo ID porque se usa en todas las condiciones
-    $stmt->bind_param("iiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-    $stmt->close();
-
-    return $data;
-}
     // Obtener todos los mensajes
     public function obtenerTodosLosMensajes()
     {
@@ -158,7 +156,7 @@ class Mensaje
         $result = $this->conexion->query($sql);
 
         if (!$result) {
-            echo "Error en query: " .$this->conexion->error;
+            echo "Error en query: " . $this->conexion->error;
             return [];
         }
 
@@ -189,7 +187,7 @@ class Mensaje
             // Mensaje dirigido a un receptor
             $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje) VALUES (?,?,?)";
             $stmt = $this->conexion->prepare($sql);
-        
+
             $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
         }
         return $stmt->execute();

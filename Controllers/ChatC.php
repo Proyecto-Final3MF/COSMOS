@@ -144,7 +144,7 @@ class ChatC
     }
 
     // Guardar nuevo mensaje
-    public function enviar()
+    public function enviarMensaje()
     {
         $mensaje = new Mensaje();
 
@@ -166,10 +166,10 @@ class ChatC
             exit();
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario_id = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT); 
+            $usuario_id = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT);
             $receptor_id = filter_input(INPUT_POST, 'receptor_id', FILTER_VALIDATE_INT);
 
-            if(!$usuario_id || !$receptor_id) {
+            if (!$usuario_id || !$receptor_id) {
                 $_SESSION['mensaje'] = "Error: Datos de usuario invalidos.";
                 header("Location: index.php?accion=mostrarConversaciones");
                 exit();
