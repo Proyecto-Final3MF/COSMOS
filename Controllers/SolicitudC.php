@@ -70,6 +70,7 @@ class SolicitudC {
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
             header("Location: index.php?accion=listarSLU");
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
@@ -82,7 +83,6 @@ class SolicitudC {
         $id = $_GET['id'];
         $solicitud->borrarS($id);
         $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
-        //$this->historialController->registrarModificacion($_SESSION['nombre'], $usuario_id, 'eliminó la solicitud', $titulo, $id, null);
         header("Location: index.php?accion=redireccion");
     }
 
@@ -122,6 +122,7 @@ class SolicitudC {
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud asignada");
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
@@ -223,6 +224,7 @@ class SolicitudC {
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
             
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);
