@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <li>
-                        <a href="Index.php?accion=paginaP">
+                        <a href="Index.php?accion=redireccion">
                             <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
                         </a>
                     </li>
