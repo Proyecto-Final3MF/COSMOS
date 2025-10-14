@@ -49,27 +49,30 @@ require_once("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                         <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
-                        <td>
-                            <div class="btn-group-actions d-flex">
-                                <?php if ($_SESSION['rol'] == 1): ?>
-                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2 btn-outline-primary">
-                                        <img src="Assets/imagenes/pen.png" alt="editar" width="45">
-                                    </a>
-                                <?php endif; ?>
-                                <a href="index.php?accion=mostrarConversacion&usuario_id=<?= $resultado['tecnico_id'] ?? $resultado['cliente_id'] ?? $resultado['usuario_id']; ?>"
-                                    class="btn btn-boton2">
-                                    <img src="Assets/imagenes/chat.png" alt="chat" width="40">
-                                </a>
-                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
-                                    onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
-                                    class="btn btn-boton2 danger">
-                                    <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
-                                </a>
-                                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>">
-                                    Historia
-                                </a>
-                            </div>
+                       <td>
+                        <div class="btn-group-actions">
+                        <?php if ($_SESSION['rol'] == 1): ?>
+                        <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="icon-btn edit">
+                        <i class="fa fa-edit"></i>
+                        </a>
+                        <?php endif; ?>
+
+                        <a href="index.php?accion=mostrarConversacion&usuario_id=<?= $resultado['tecnico_id'] ?? $resultado['cliente_id'] ?? $resultado['usuario_id']; ?>" class="icon-btn chat">
+                        <i class="fa fa-comments"></i>
+                        </a>
+
+                        <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
+                        onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
+                        class="icon-btn delete">
+                        <i class="fa fa-times"></i>
+                        </a>
+                        
+                        <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>">
+                            Historia
+                        </a>
+                        </div>
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
