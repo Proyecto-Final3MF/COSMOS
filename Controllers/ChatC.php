@@ -5,25 +5,20 @@ class ChatC
 {
     public function mostrarChat()
     {
-        $mensaje = new Mensaje();
-        $usuario_id = $_SESSION['id'] ?? null;
-        $rol = $_SESSION['rol'] ?? null;
-
-        if (!$usuario_id || !$rol) {
-            die("No hay sesión iniciada o faltan datos de usuario.");
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-        // Verifica si el usuario es administrador
-        $esAdmin = ($rol == ROL_ADMIN);
 
-        // Si es admin, ve todos los mensajes y carga la vista admin
-        if ($esAdmin) {
-            $mensajes = $mensaje->obtenerTodosLosMensajes() ?? [];
-            include "/../Views/chat_admin.php";
-        } else {
-            // Si es usuario normal, solo ve sus propios mensajes
-            $mensajes = $mensaje->obtenerMensajes($usuario_id) ?? [];
-            include "/../Views/mensajes.php";
+        if (!isset($_GET['usuario_id'])) {
+            echo "Usuario no especificado.";
+            return;
         }
+
+        $otroUsuario = $_GET['usuario_id'];
+
+        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+
+        require_once "Views/chat.php";
     }
 
     public function cargarMensajes()
@@ -46,22 +41,22 @@ class ChatC
     // Mostrar la vista de chat
     public function mostrarConversacion()
     {
-        $otroUsuarioId = $_GET['usuario_id'];
-        $usuarioId = $_SESSION['id'];
-        $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
-
-
-        if (!$otroUsuarioId) {
-            echo "Debes seleccionar un usuario para conversar.";
-            var_dump($_GET);
-            exit();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
+
+        if (!isset($_GET['usuario_id'])) {
+            echo "Error: no se especificó el usuario receptor.";
+            return;
+        }
+
+        $otroUsuarioId = intval($_GET['usuario_id']);
+        $usuarioId = $_SESSION['id'];
 
         $mensajeModel = new Mensaje();
         $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
 
-
-        include __DIR__ . "/../Views/chat.php";
+        include "Views/chat/conversacion.php";
     }
 
     // Devolver solo los mensajes (para Ajax)
@@ -144,44 +139,43 @@ class ChatC
     }
 
     // Guardar nuevo mensaje
-    public function enviarMensaje()
+    public function enviar()
     {
-        $mensaje = new Mensaje();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        $usuario_id = $_POST['usuario_id'];
-        $receptor_id = $_POST['receptor_id'];
-        $mensajeTexto = $_POST['mensaje'];
+        $receptor_id = $_POST['receptor_id'] ?? null;
+        $mensajeTexto = trim($_POST['mensaje'] ?? '');
+
+        if (!$receptor_id || $mensajeTexto === '') {
+            header("Location: index.php?accion=mostrarConversacion");
+            exit();
+        }
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->enviarMensaje($usuario_id, $receptor_id, $mensajeTexto);
+        $mensajeModel->enviarMensaje($_SESSION['id'], $receptor_id, $mensajeTexto);
 
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
     }
 
-    public function borrarConversacion()
+    public function borrar()
     {
-        if (!isset($_SESSION['id'])) {
-            header("Location: index.php?accion=login");
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $receptor_id = $_GET['usuario_id'] ?? null;
+        if (!$receptor_id) {
+            header("Location: index.php?accion=index");
             exit();
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario_id = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT);
-            $receptor_id = filter_input(INPUT_POST, 'receptor_id', FILTER_VALIDATE_INT);
 
-            if (!$usuario_id || !$receptor_id) {
-                $_SESSION['mensaje'] = "Error: Datos de usuario invalidos.";
-                header("Location: index.php?accion=mostrarConversaciones");
-                exit();
-            }
+        $mensajeModel = new Mensaje();
+        $mensajeModel->borrarConversacion($_SESSION['id'], $receptor_id);
 
-            require_once "Models/Mensaje.php";
-            $mensajeModel = new Mensaje();
-            $mensajeModel->borrarConversacion($usuario_id, $receptor_id);
-
-            $_SESSION['mensaje'] = "Conversacion borrada correctamente.";
-            header("Location: index.php?accion=listarConversaciones");
-            exit();
-        }
+        header("Location: index.php?accion=index");
+        exit();
     }
 }
