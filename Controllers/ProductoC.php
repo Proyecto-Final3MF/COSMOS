@@ -179,11 +179,34 @@ class ProductoC {
         $productoModel = new Producto();
         $ProductoAntiguo = $productoModel->obtenerProductoPorId($id);
         $nombreAntiguo = $ProductoAntiguo['nombre'] ?? 'Nombre desconocido';
+        $id_catAntiguo = $ProductoAntiguo['id_cat'] ?? 'Id desconocido';
+        $categoriaAntigua = $ProductoAntiguo['categoria'] ?? 'Categoria desconocida';
+
+        
+        $categoria = $productoModel->obtenerCategoriaporId($categoria_id);
+        $nuevaCat = $categoria['nombre'] ?? "categoria desconocida";
 
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
 
-            $obs = "Producto actualizado";
+            if ($nombre == $nombreAntiguo && $id_catAntiguo == $categoria_id) {
+                $obs = "Ningun cambio detectado";
+            } else {
+                if ($nombre !== $nombreAntiguo) {
+                    $obs1 = $nombreAntiguo."-->".$nombre." ";
+                    $obs = $obs1;
+                }
+
+                if ($id_catAntiguo !== $categoria_id) {
+                    $obs2 = $categoriaAntigua. "-->".$nuevaCat;
+                    $obs = $obs2;
+                }
+
+                if ($nombre !== $nombreAntiguo && $id_catAntiguo !== $categoria_id) {
+                    $obs = $obs1.$obs2;
+                }
+            }
+
             $this->historialController->registrarModificacion(
                 $usuarioNombre,
                 $id_usuario,
