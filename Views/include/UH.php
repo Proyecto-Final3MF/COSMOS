@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <li>
-                        <a href="Index.php?accion=redireccion">
+                        <a href="Index.php?accion=paginaP">
                             <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
                         </a>
                     </li>
@@ -45,7 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
             
                 <div class="menu-rol-container">
                     <button class="dropdown-button" onclick="toggleRolMenu()">
-                        <i class="fa-solid fa-bars"></i> Menú
+                      <i class="fa-solid fa-bars"></i>  Menú  
                     </button>
 
                     <div id="rolDropdown" class="dropdown-menu">

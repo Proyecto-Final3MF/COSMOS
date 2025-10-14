@@ -40,7 +40,6 @@ class ProductoC {
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
 
-        // ✅ Validar tipo MIME del archivo
         $tipoArchivo = mime_content_type($rutaTemporal);
         $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
@@ -50,7 +49,6 @@ class ProductoC {
             exit();
         }
 
-        // ✅ Generar nombre único
         $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
         $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
 
@@ -155,7 +153,6 @@ class ProductoC {
             $nombreArchivo = $_FILES['imagen']['name'];
             $rutaTemporal = $_FILES['imagen']['tmp_name'];
 
-            // ✅ Validar tipo MIME
             $tipoArchivo = mime_content_type($rutaTemporal);
             $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
@@ -165,7 +162,6 @@ class ProductoC {
                 exit();
             }
 
-            // ✅ Generar nombre único
             $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
             $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
 
@@ -199,6 +195,73 @@ class ProductoC {
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
             header("Location: index.php?accion=editarP&id=" . $id);
             exit();
+        }
+    }
+
+    public function urgentePF(){
+        $producto = new Producto();
+        $categorias = $producto->obtenerCategorias();
+        include("./Views/Producto/FormularioUP.php");
+    }
+
+    public function urgenteGP(){
+        $producto = new Producto();
+        $nombre = $_POST['nombre'] ?? '';
+        $categoria_id = $_POST['categoria'] ?? '';
+        $id_usuario = $_SESSION['id'];
+        $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
+
+        if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
+            $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
+        if ($producto->existeProducto($nombre, $id_usuario)) {
+            $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $rutaTemporal = $_FILES['imagen']['tmp_name'];
+
+        $tipoArchivo = mime_content_type($rutaTemporal);
+        $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        if (!in_array($tipoArchivo, $tiposPermitidos)) {
+            $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
+        $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+        $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
+
+        $rutaFinal = "Image/" . $nombreArchivoSeguro;
+
+        if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
+            $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
+
+            if ($id) {
+                $_SESSION['mensaje'] = "Producto creado exitosamente.";
+
+                $obs = "Producto creado";
+                $this->historialController->registrarModificacion(
+                    $usuarioNombre,
+                    $id_usuario,
+                    'guardó el producto de manera urgente',
+                    $nombre,
+                    $id,
+                    $obs
+                );
+                header("Location: index.php?accion=urgenteS");
+                exit();
+            } else {
+                $_SESSION['mensaje'] = "Error al crear el producto.";
+            }
+        } else {
+            $_SESSION['mensaje'] = "Error al subir la imagen.";
         }
     }
 }
