@@ -22,28 +22,62 @@ require_once ("./Views/include/UH.php");
     <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
 </main>
 
-<div class="btn-container fade-slide">
-    <a href="index.php?accion=FormularioC">
-        <button class="btn btn-boton444 btn-crear">
-            <i class="fa-solid fa-plus-circle"></i> Crear Nueva Categoría
-        </button>
-    </a>
-    <a href="index.php?accion=listarC">
-        <button class="btn btn-boton444 btn-listar">
-            <i class="fa-solid fa-list"></i> Todas Las Categorías
-        </button>
-    </a>
-    <a href="index.php?accion=mostrarHistorial">
-        <button class="btn btn-boton444 btn-historial">
-            <i class="fa-solid fa-clock-rotate-left"></i> Historial de Actividades
-        </button>
-    </a>
-    <a href="index.php?accion=listarU">
-        <button class="btn btn-boton444 btn-usuarios">
-            <i class="fa-solid fa-users"></i> Lista de Usuarios
-        </button>
-    </a>
-</div>
+<h3>Ultimos Usuarios registrados</h3>
+
+<?php if (empty($usuarios)): ?>
+    <div class="alert alert-info">
+        No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
+    </div>
+<?php else: ?>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($usuarios as $u): ?>
+                <tr class="list-item">
+                    <td><?= $u['id'] ?></td>
+                    <td><?= htmlspecialchars($u['nombre']) ?></td>
+                    <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td><?= htmlspecialchars($u['rol']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+<h3>Ultimos registros en el Historial</h3>
+
+<?php if (!empty($historial)): ?>
+    <?php foreach ($historial as $registro): ?>
+        <div class="list-item">
+            <p>
+                <strong>
+                    <?php echo htmlspecialchars($registro['usuario'] ? $registro['usuario'] : '[Sistema]'); ?>
+                </strong>
+                #<?php echo htmlspecialchars($registro['usuario_id'] ? $registro['usuario_id'] : 'N/A'); ?>
+                <?php echo htmlspecialchars(ucfirst($registro['accion'])); ?>
+                <strong><?php echo htmlspecialchars(ucfirst($registro['item'])); ?></strong>
+                <?php
+                    if ($registro['item']) {
+                        echo "#".  htmlspecialchars($registro['item_id']);
+                    }
+                ?>
+                a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro['fecha_hora'])); ?>.</span>
+            </p>
+            <?php if (!empty($registro['obs'])): ?>
+                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro['obs']); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="no-records">No hay registro en el historial.</p>
+<?php endif; ?>
 
 <script src="Assets/js/trancicion.js"></script>
 </body>

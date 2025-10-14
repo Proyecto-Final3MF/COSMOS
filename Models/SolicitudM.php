@@ -31,6 +31,19 @@ class Solicitud {
         return null;
     }
 
+    public function obtenerProductoUrgente($id_usuario){
+        $id_usuario = (int)$id_usuario;
+        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario ORDER BY id DESC LIMIT 1";
+       
+        $resultado = $this->conn->query($sql);
+        
+        if ($resultado && $resultado->num_rows > 0) {
+            return $resultado->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
     public function borrarS($id) {
         $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
         return $this->conn->query($sql);

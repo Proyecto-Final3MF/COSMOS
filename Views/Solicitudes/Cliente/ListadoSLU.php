@@ -17,6 +17,7 @@ require_once ("./Views/include/UH.php");
     <i class="fa fa-arrow-left"></i> Volver
   </button>
 </div>
+<br>
     <div>
     <h2 class="fade-slide" >Solicitudes no asignadas</h2>
     <div class="botones-container fade-slide">
