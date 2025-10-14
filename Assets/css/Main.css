@@ -506,7 +506,7 @@ tr:hover {
 table td, table th {
     vertical-align: middle; 
     text-align: center;     
-    padding: 12px;           
+    padding: 12px;     
 }
 
 img {
@@ -619,6 +619,60 @@ tbody tr:hover {
         flex: none; 
         width: 100%; 
     }
+}
+
+.btn-group-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #000000;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  font-size: 18px;
+  position: relative;
+  top: 5px; 
+}
+
+.icon-btn:hover {
+  background-color: #b61e65;
+  color: white;
+  transform: scale(1.1);
+}
+
+.icon-btn.edit:hover {
+  background-color: #007bff;
+}
+
+.icon-btn.chat:hover {
+  background-color: #169459;
+}
+
+.icon-btn.delete:hover {
+  background-color: #dc3545;
+}
+
+.icon-btn.aceptar:hover {
+  background-color: #0a7429;
+}
+
+@media (max-width: 600px) {
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
 }
 
 /* aca terminan las tablas */
