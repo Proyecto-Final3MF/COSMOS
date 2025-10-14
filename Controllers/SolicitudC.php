@@ -12,7 +12,6 @@ class SolicitudC {
         $this->historiaC = new HistoriaC();
     }
 
-   // En SolicitudC.php
     public function formularioS(){ 
         $id_usuario = $_SESSION['id'] ?? null;
         
@@ -23,12 +22,8 @@ class SolicitudC {
         
         $solicitud = new Solicitud();
         
-        // Solo obtiene la lista de productos
         $productos = $solicitud->obtenerProductos($id_usuario);
-        
-        // NO definimos $producto_preseleccionado_id ni $ultimo_producto_creado, 
-        // o los definimos como null, para que la vista no preseleccione nada.
-        $producto_preseleccionado_id = null; // <- Asegura que no haya preselección automática
+        $producto_preseleccionado_id = null;
         
         include ("./Views/Solicitudes/Cliente/FormularioS.php");
     }
@@ -43,18 +38,15 @@ class SolicitudC {
 
         $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
-    // Verifica si se obtuvo un ID válido (la solicitud fue guardada exitosamente)
         if ($id_solicitud) {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
-            
-            // Usa el ID recién obtenido ($nuevo_id_solicitud) para registrar el evento
+
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
             
             header("Location: index.php?accion=redireccion");
         } else {
-            // Opcional: Manejo de error si la solicitud no se pudo guardar
             $_SESSION['error'] = "Error al guardar la solicitud.";
-            header("Location: index.php?accion=redireccion"); // o a otra página de error
+            header("Location: index.php?accion=redireccion");
         }
     }
 

@@ -169,10 +169,8 @@ class Solicitud {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
 
-    // Consulta SQL para insertar la solicitud
         $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad', $producto, 1, '$descripcion')";
 
-    // Ejecuta la consulta
         if ($this->conn->query($sql) === TRUE) {
             return $this->conn->insert_id;
         } else {
