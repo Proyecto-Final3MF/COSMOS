@@ -16,6 +16,7 @@ require_once("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <br>
 <h2 class="fade-slide" >Listado de todas las categorias</h2>
 <div class="botones-container fade-slide">
     <a href="index.php?accion=FormularioC"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>

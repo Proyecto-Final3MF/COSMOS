@@ -40,7 +40,7 @@ require_once ("./Views/include/UH.php");
             <p class="fade-label">Nombre:</p>
             <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
 
-             <p class="fade-label"> Email: </p> <input type="mail" name="email" value="<?= $datos['email'] ?>"><br>
+             <p class="fade-label"> Email: </p> <input type="email" name="email" value="<?= $datos['email'] ?>"><br>
 
             <br><br>
             <input type="submit" value="Guardar cambios">

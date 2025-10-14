@@ -11,9 +11,11 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Chats</title>
+    <link rel="stylesheet" href="Assets/css/chatCSS.css">
 </head>
 
 <body>
+    <div class="chat-admin-container">
     <h1>Historial de chats</h1>
 
     <table border="1" cellpadding="5">
@@ -43,6 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
     <script src="Assets/js/trancicion.js"></script>
 </body>
 

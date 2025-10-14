@@ -16,6 +16,7 @@ require_once("./Views/include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <br>
 <h2 class="fade-slide" >Listado de todos los Usuarios</h2>
 
 <div class="btn-volver-container fade-slide">
