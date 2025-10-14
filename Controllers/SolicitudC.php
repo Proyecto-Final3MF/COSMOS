@@ -122,7 +122,7 @@ class SolicitudC {
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
-            $this->historiaC->registrarEvento($id_solicitud, "Solicitud asignada");
+            $this->historiaC->registrarEvento($id_soli, "Solicitud asignada");
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
