@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
 
         <p class="fade-label">Tipo de Equipo:</p>
        
-        <select id="categoria" name="categoria" required>
+        <select id="categoria" name="categoria" class="js-example-basic-single" name="state" required>
 
             <option value="">-- Seleccione el tipo de equipo --</option>
 
