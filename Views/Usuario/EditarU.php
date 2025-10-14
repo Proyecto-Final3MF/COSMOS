@@ -19,7 +19,7 @@ require_once ("./Views/include/UH.php");
 </div>
 
 <div class="contenedor-formulario">
-    <section>
+    <section class="formularios99">
         <h3>Editar Usuario</h3>
         
         <form method="POST" action="Index.php?accion=actualizarU" enctype="multipart/form-data">

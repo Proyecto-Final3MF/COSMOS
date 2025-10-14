@@ -19,7 +19,7 @@ require_once ("./Views/include/UH.php");
 
 <body>
     <div class="contenedor-formulario">
-    <section>
+    <section class="formularios99">
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>

@@ -1,11 +1,10 @@
-<?php
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
-    exit();
-}
+<?php 
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) { 
+    header("Location: index.php?accion=redireccion"); 
+    exit(); 
+} 
 
-require_once ("./Views/include/UH.php");
-
+require_once ("./Views/include/UH.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -14,71 +13,72 @@ require_once ("./Views/include/UH.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Admin</title>
-    <link rel="stylesheet" href="./Assets/css/Main.css"> </head>
+    <link rel="stylesheet" href="./Assets/css/Main.css">
+</head>
 <body>
     <br>
     <main>
-        
-    <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
-</main>
+        <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
+    </main>
 
-<h3>Ultimos Usuarios registrados</h3>
+    <div class="admin-dashboard">
 
-<?php if (empty($usuarios)): ?>
-    <div class="alert alert-info">
-        No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
-    </div>
-<?php else: ?>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Rol</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($usuarios as $u): ?>
-                <tr class="list-item">
-                    <td><?= $u['id'] ?></td>
-                    <td><?= htmlspecialchars($u['nombre']) ?></td>
-                    <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td><?= htmlspecialchars($u['rol']) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php endif; ?>
-
-<h3>Ultimos registros en el Historial</h3>
-
-<?php if (!empty($historial)): ?>
-    <?php foreach ($historial as $registro): ?>
-        <div class="list-item">
-            <p>
-                <strong>
-                    <?php echo htmlspecialchars($registro['usuario'] ? $registro['usuario'] : '[Sistema]'); ?>
-                </strong>
-                #<?php echo htmlspecialchars($registro['usuario_id'] ? $registro['usuario_id'] : 'N/A'); ?>
-                <?php echo htmlspecialchars(ucfirst($registro['accion'])); ?>
-                <strong><?php echo htmlspecialchars(ucfirst($registro['item'])); ?></strong>
-                <?php
-                    if ($registro['item']) {
-                        echo "#".  htmlspecialchars($registro['item_id']);
-                    }
-                ?>
-                a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro['fecha_hora'])); ?>.</span>
-            </p>
-            <?php if (!empty($registro['obs'])): ?>
-                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro['obs']); ?></p>
+        <section class="admin-panel-column">
+            <h3>Ultimos Usuarios registrados</h3>
+            <?php if (empty($usuarios)): ?>
+                <div class="alert alert-info">
+                    No hay usuarios registrados.
+                    <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
+                </div>
+            <?php else: ?>
+                <div class="table-responsive-panel">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($usuarios as $u): ?>
+                                <tr class="list-item">
+                                    <td><?= $u['id'] ?></td>
+                                    <td><?= htmlspecialchars($u['nombre']) ?></td>
+                                    <td><?= htmlspecialchars($u['email']) ?></td>
+                                    <td><?= htmlspecialchars($u['rol']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif; ?>
-        </div>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p class="no-records">No hay registro en el historial.</p>
-<?php endif; ?>
+        </section>
 
-<script src="Assets/js/trancicion.js"></script>
+        <section class="admin-panel-column">
+            <h3>Ultimos registros en el Historial</h3>
+            <div class="historial-panel">
+                <?php if (!empty($historial)): ?>
+                    <?php foreach ($historial as $registro): ?>
+                        <div class="list-item">
+                            <p>
+                                <strong> <?php echo htmlspecialchars($registro['usuario'] ? $registro['usuario'] : '[Sistema]'); ?> </strong> #<?php echo htmlspecialchars($registro['usuario_id'] ? $registro['usuario_id'] : 'N/A'); ?>
+                                <?php echo htmlspecialchars(ucfirst($registro['accion'])); ?> <strong><?php echo htmlspecialchars(ucfirst($registro['item'])); ?></strong>
+                                <?php if ($registro['item']) { echo "#". htmlspecialchars($registro['item_id']); } ?> a las <span class="fecha-hora"><?php echo date('H:i:s d/m/Y', strtotime($registro['fecha_hora'])); ?>.</span>
+                            </p>
+                            <?php if (!empty($registro['obs'])): ?>
+                                <p><strong>Observación:</strong> <?php echo htmlspecialchars($registro['obs']); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="no-records">No hay registro en el historial.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+    </div>
+    <script src="Assets/js/trancicion.js"></script>
 </body>
 </html>

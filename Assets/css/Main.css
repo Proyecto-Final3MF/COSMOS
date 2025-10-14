@@ -558,7 +558,69 @@ tbody tr:hover {
     justify-content: center;
     margin: 20px 0;
 }
- 
+
+.admin-dashboard {
+    display: flex; 
+    gap: 20px; 
+    width: 95%; 
+    margin: 20px auto; 
+}
+
+.admin-panel-column {
+    flex: 1 1 50%; 
+    min-width: 0; 
+    padding: 15px;
+    background-color: #ffffff; 
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.admin-panel-column h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #e83e8c;
+}
+
+.table-responsive-panel {
+    max-height: 400px; 
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.historial-panel {
+    max-height: 400px; 
+    overflow-y: auto; 
+    overflow-x: auto;
+}
+
+.historial-panel .list-item p {
+    text-align: left;
+    max-width: fit-content; 
+    margin: 0;
+    padding: 0 5px;
+    white-space: nowrap; 
+}
+
+.admin-panel-column .table {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    table-layout: auto; 
+    min-width: 350px;
+}
+
+@media (max-width: 992px) {
+    .admin-dashboard {
+        flex-direction: column; 
+        gap: 40px; 
+        width: 90%;
+    }
+
+    .admin-panel-column {
+        flex: none; 
+        width: 100%; 
+    }
+}
+
 /* aca terminan las tablas */
 
 /* aca empieza el css del historial */
@@ -1290,7 +1352,7 @@ a.errorLink {
     flex-direction: column; 
     align-items: center;    
     padding-top: 50px;
-    min-height: calc(100vh - 100px);
+    min-height: 100vh;
     gap: 20px; 
     opacity: 0;
     transform: translateY(30px);
@@ -1355,7 +1417,7 @@ input:focus, select:focus, textarea:focus {
 .fade-label:nth-of-type(3) { animation-delay: 0.3s; }
 .fade-label:nth-of-type(4) { animation-delay: 0.4s; }
 
-section {
+.formularios99 {
     background-color: #ffffff; 
     padding: 30px 40px;
     border-radius: 10px;
