@@ -809,8 +809,7 @@ tbody tr:hover {
 }
 
 .menu-rol-container .dropdown-button {
-    background-color: var(--color-primario, #e83e8c);
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 8px;
     padding: 10px 14px;
