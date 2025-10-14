@@ -176,6 +176,10 @@ class ProductoC {
             $rutaFinal = $imagenActual;
         }
 
+        $productoModel = new Producto();
+        $ProductoAntiguo = $productoModel->obtenerProductoPorId($id);
+        $nombreAntiguo = $ProductoAntiguo['nombre'] ?? 'Nombre desconocido';
+
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
 
