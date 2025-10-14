@@ -25,7 +25,7 @@ require_once ("./Views/include/UH.php");
 
 <div class="contenedor-formulario">
 
-<section>
+<section class="formularios99">
 
     <h3>Nuevo Producto Urgente</h3>
 

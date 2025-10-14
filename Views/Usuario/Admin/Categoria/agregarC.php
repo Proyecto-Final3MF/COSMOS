@@ -23,7 +23,7 @@ require_once ("./Views/include/UH.php");
   </button>
 </div>
     <div class="contenedor-formulario">
-    <section>
+    <section class="formularios99">
     <h3>Crear Nueva Categoria</h3>
     <form action="index.php?accion=guardarC" method="post">
         <label for="nombre">Nueva Categoria: </label>

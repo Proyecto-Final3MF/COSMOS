@@ -17,7 +17,7 @@ require_once ("./Views/include/UH.php");
 </button>
 </div>
     <div class="contenedor-formulario">
-<section>
+<section class="formularios99">
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
         
