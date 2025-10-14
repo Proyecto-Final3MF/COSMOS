@@ -1,8 +1,18 @@
 <?php
 require_once "Models/Mensaje.php";
+require_once "Models/SolicitudM.php";
 
 class ChatC
 {
+    private $mensajeModel;
+
+    public function __construct()
+    {
+        $this->mensajeModel = new Mensaje();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
     public function mostrarChat()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -14,7 +24,8 @@ class ChatC
             return;
         }
 
-        $otroUsuario = $_GET['usuario_id'];
+        $usuarioId = $_SESSION['id'];
+        $otroUsuarioId = $_GET['usuario_id'];
 
         $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
 
@@ -50,13 +61,16 @@ class ChatC
             return;
         }
 
-        $otroUsuarioId = intval($_GET['usuario_id']);
         $usuarioId = $_SESSION['id'];
+        $otroUsuarioId = intval($_GET['usuario_id']);
 
+        // Crear instancia de Mensaje
         $mensajeModel = new Mensaje();
+
+        // Obtener todos los mensajes entre los dos usuarios
         $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
 
-        include "Views/chat/conversacion.php";
+        include __DIR__ . "/../Views/conversaciones.php";
     }
 
     // Devolver solo los mensajes (para Ajax)
@@ -82,15 +96,19 @@ class ChatC
 
     public function listarConversaciones()
     {
-        $mensaje = new Mensaje();
-        $usuario_id = $_SESSION['id'] ?? null;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
+        $usuario_id = $_SESSION['id'] ?? null;
         if (!$usuario_id) {
             header("Location: index.php?accion=login");
             exit();
         }
 
-        $conversaciones = $mensaje->obtenerConversaciones($usuario_id);
+        $mensajeModel = new Mensaje();
+        $conversaciones = $mensajeModel->obtenerConversaciones($usuario_id);
+
         include __DIR__ . "/../Views/conversaciones.php";
     }
     // Lista todas las conversaciones de un usuario
@@ -103,6 +121,10 @@ class ChatC
 
     public function abrirChat()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $idSolicitud = $_GET['id_solicitud'] ?? null;
         $usuarioId = $_SESSION['id'] ?? null;
 
@@ -112,17 +134,18 @@ class ChatC
             exit();
         }
 
-        // Obtener solicitud
+        // Obtener datos de la solicitud
+        require_once "Models/Solicitud.php";
         $solicitud = new Solicitud();
         $datosSolicitud = $solicitud->obtenerSolicitudPorId($idSolicitud);
 
         if (!$datosSolicitud) {
-            $_SESSION['mensaje'] = "Error: Solicitud no econtrada.";
+            $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
             header("Location: index.php?accion=listarSA");
             exit();
         }
 
-        // Calular con quién hablar
+        // Determinar con quién hablar según rol
         if ($_SESSION['rol'] == ROL_TECNICO) {
             $otroUsuarioId = $datosSolicitud['cliente_id'];
         } elseif ($_SESSION['rol'] == ROL_CLIENTE) {
@@ -133,7 +156,7 @@ class ChatC
             exit();
         }
 
-        // Redirigir a la conversacion
+        // Redirigir a la conversación
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId);
         exit();
     }
@@ -145,6 +168,7 @@ class ChatC
             session_start();
         }
 
+        $usuarioId = $_SESSION['id'];
         $receptor_id = $_POST['receptor_id'] ?? null;
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
@@ -154,7 +178,7 @@ class ChatC
         }
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->enviarMensaje($_SESSION['id'], $receptor_id, $mensajeTexto);
+        $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
 
         header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
@@ -166,16 +190,18 @@ class ChatC
             session_start();
         }
 
-        $receptor_id = $_GET['usuario_id'] ?? null;
+        $receptor_id = $_POST['receptor_id'] ?? null;
+        $usuario_Id = $_POST['usuario_id'] ?? $_SESSION['id'];
+
         if (!$receptor_id) {
-            header("Location: index.php?accion=index");
+            header("Location: index.php?accion=listarConversaciones");
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->borrarConversacion($_SESSION['id'], $receptor_id);
+        $mensajeModel->borrarConversacion($usuario_Id, $receptor_id);
 
-        header("Location: index.php?accion=index");
+        header("Location: index.php?accion=listarConversaciones");
         exit();
     }
 }
