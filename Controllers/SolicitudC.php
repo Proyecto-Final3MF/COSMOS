@@ -58,6 +58,33 @@ class SolicitudC {
         }
     }
 
+    public function guardarSU() {
+        $solicitud = new Solicitud();
+        $titulo = $_POST['titulo'] ?? '';
+        $producto = $_POST['producto'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
+        $prioridad = 'urgente'; 
+        
+        $usuario_id = $_SESSION['id'] ?? '';
+        
+        if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id)) {
+             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
+             header("Location: index.php?accion=redireccion");
+             exit();
+        }
+
+        $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
+
+        if ($solicitud){
+            $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
+            // Lógica adicional (historial, etc.)
+            header("Location: index.php?accion=listarSLU");
+        } else {
+             $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
+             header("Location: index.php?accion=redireccion");
+        }
+    }
+
     public function borrarS() {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
@@ -225,7 +252,6 @@ class SolicitudC {
         }
     }
 
-    // En SolicitudC.php
     public function formularioUS(){ 
         // Obtener el ID del usuario de la sesión
         $id_usuario = $_SESSION['id'] ?? null;
@@ -237,18 +263,17 @@ class SolicitudC {
         
         $solicitud = new Solicitud();
         
-        // 1. Obtener TODOS los productos (para llenar el <select>)
+        // 1. Obtener TODOS los productos (para llenar el <select> en la vista original, 
+        //    or just to get the name for the restricted view)
         $productos = $solicitud->obtenerProductos($id_usuario);
         
         // 2. Obtener el ÚLTIMO producto creado (devuelve un array o null)
         $ultimo_producto = $solicitud->obtenerProductoUrgente($id_usuario);
         
         // 3. Establecer el ID a preseleccionar. 
-        // Usaremos esta variable en la vista para seleccionar el producto.
-        // Si $ultimo_producto existe, obtenemos su 'id', si no, es null.
         $producto_preseleccionado_id = $ultimo_producto['id'] ?? null; 
 
-        // Incluye la vista que contendrá el formulario (FormularioUS.php o FormularioS.php si usas la misma vista)
+        // Incluye la vista que contendrá el formulario (use the FormularioUS.php name)
         include ("./Views/Solicitudes/Cliente/FormularioUS.php");
     }
 }
