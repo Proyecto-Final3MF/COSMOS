@@ -183,8 +183,8 @@ class ProductoC {
         $categoriaAntigua = $ProductoAntiguo['categoria'] ?? 'Categoria desconocida';
 
         
-        $categoria = $productoModel->obtenerCategoriaporId($categoria_id);
-        $nuevaCat = $categoria['nombre'] ?? "categoria desconocida";
+        $categoria_nombre = $productoModel->obtenerCategoriaporId($categoria_id);
+        $nuevaCat = $categoria_nombre ?? "categoria desconocida";
 
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
