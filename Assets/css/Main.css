@@ -652,11 +652,11 @@ tbody tr:hover {
 }
 
 .icon-btn.edit:hover {
-  background-color: #007bff;
+  background-color: #014c9b;
 }
 
 .icon-btn.chat:hover {
-  background-color: #169459;
+  background-color: #22b1aa;
 }
 
 .icon-btn.delete:hover {
@@ -1540,6 +1540,18 @@ label {
     font-weight: bold;
     display: block; 
     margin-bottom: 0.5rem; 
+}
+
+.titulo3 {
+    color: #e83e8c; 
+    margin-bottom: 20px;
+    font-size: 24px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.titulo3:hover {
+    color: #972f5f;
 }
 
 .btn-boton3-input {
