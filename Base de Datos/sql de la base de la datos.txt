@@ -63,6 +63,13 @@ CREATE TABLE mensaje (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE historia_solicitud (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT, FOREIGN KEY (id_solicitud) REFERENCES solicitud(id),
+    evento VARCHAR (255),
+    fecha_hora TIMESTAMP
+);
+
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
