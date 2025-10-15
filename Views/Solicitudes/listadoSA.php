@@ -61,15 +61,16 @@ require_once("./Views/include/UH.php");
                         <i class="fa fa-comments"></i>
                         </a>
 
+                        <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial" >
+                        <i class="fa fa-file-alt"></i>
+                        </a>
+
                         <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
                         onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
                         class="icon-btn delete">
                         <i class="fa fa-times"></i>
                         </a>
                         
-                        <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>">
-                            Historia
-                        </a>
                         </div>
                         </td>
 
