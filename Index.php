@@ -320,6 +320,14 @@ switch ($accion) {
     $controller->borrar();
     break;
 
+  case 'marcarNotificacionesLeidas':
+    require_once("Controllers/NotificacionC.php");
+    $controller = new NotificacionC();
+    $controller->marcarTodasLeidas();
+    echo json_encode(['success' => true]);
+    exit();
+
+
   //accion default
 
   default:
@@ -331,3 +339,4 @@ switch ($accion) {
     }
     exit();
 }
+

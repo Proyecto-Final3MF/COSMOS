@@ -42,6 +42,16 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+
+            require_once(__DIR__ . '/NotificacionC.php');
+            $notificacion = new NotificacionC();
+
+            // Notificar a todos los técnicos (rol_id = 1)
+            $conn = conectar();
+            $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
+            while ($row = $result->fetch_assoc()) {
+            $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
+            }
             
             header("Location: index.php?accion=redireccion");
         } else {
@@ -123,6 +133,12 @@ class SolicitudC {
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
             $this->historiaC->registrarEvento($id_soli, "Solicitud asignada");
+            require_once(__DIR__ . '/NotificacionC.php');
+            $notificacion = new NotificacionC();
+
+            $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
+            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' fue aceptada por un técnico.");
+
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
@@ -189,6 +205,12 @@ class SolicitudC {
 
         if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
+            require_once(__DIR__ . '/NotificacionC.php');
+            $notificacion = new NotificacionC();
+
+            $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' cambió de estado.");
+
             header("Location: index.php?accion=redireccion");
             exit();
         } else {
