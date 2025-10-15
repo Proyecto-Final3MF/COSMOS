@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
     <div class="btn-volver-container">
         <button class="btn-volver" id="btnVolver">
-            <i class="fa fa-arrow-left"></i> Volver
+            <i class="fa fa-arrow-left">Volver</i>
         </button>
     </div>
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
