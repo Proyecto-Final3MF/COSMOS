@@ -84,6 +84,9 @@ class UsuarioC {
         $email = $_POST['email'];
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
+        $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
+        $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
+
         $usuarioM = new Usuario();
 
         // Manejo de nueva foto
@@ -104,7 +107,24 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
-            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, "Usuario actualizado");
+            if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
+                $obs = "Ningun cambio detectado";
+            } else {
+                if ($nombreAntiguo !== $nombre) {
+                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre."   ";
+                    $obs = $obs1;
+                }
+
+                if ($emailAntiguo !== $email) {
+                    $obs2 = "Email: ".$emailAntiguo. " ---> ".$email;
+                }
+
+                if ($nombreAntiguo !== $nombre && $emailAntiguo !== $email) {
+                    $obs = $obs1.$obs2;
+                }
+            }
+
+            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
 
             header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
             exit();
