@@ -78,3 +78,14 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('3','Admin');
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Laptop'),
+(2, 'Celular'),
+(3, 'Televisión'),
+(4, 'Monitor'),
+(5, 'Impresora'),
+(6, 'Consola de Videojuegos'),
+(7, 'Router/Módem'),
+(8, 'Smartwatch'),
+(9, 'Cámara Digital'),
+(10, 'Disco Duro Externo');
