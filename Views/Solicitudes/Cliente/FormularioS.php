@@ -17,13 +17,13 @@ require_once ("./Views/include/UH.php");
 </button>
 </div>
     <div class="contenedor-formulario">
-<section>
+<section class="formularios99">
     <h3>Nueva Solicitud</h3>
     <form method="POST" action="Index.php?accion=guardarS">
         
         <p class="fade-label">Titulo: </p>
         <label for="titulo" class="form-label"></label>
-        <input type="text" class="form-control" id="titulo" name="titulo" autocomplete="off" required> <br><br>
+        <input type="text" placeholder="Escribi aca el problema del dispositivo" class="form-control" id="titulo" name="titulo" autocomplete="off" required> <br><br>
                
         <p class="fade-label">Producto:</p>
         <div class="producto-con-boton">
@@ -34,15 +34,15 @@ require_once ("./Views/include/UH.php");
             <?php endforeach; ?>
             </select>
 
-        <a href="index.php?accion=formularioP" class="btn-crear-producto">
-            <button type="button" class="btn btn-boton2">
-            <img src="Assets/imagenes/plus.png" alt="agregar" width="20">
+        <a href="index.php?accion=formularioP">
+            <button type="button" class="btn-boton2">
+            <i class="fa fa-plus-circle"></i>
             </button>
             </a>
         </div>
 
         <p class="fade-label">Descripcion:</p>
-        <textarea class="form-control" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
+        <textarea class="form-control" placeholder="Detalles del problema" name="descripcion" id="descripcion" rows="5" required></textarea> <br><br>
                         
         <label for="prioridad"><p class="fade-label">Nivel de Prioridad: </p></label>
             <select name="prioridad" id="prioridad" required>

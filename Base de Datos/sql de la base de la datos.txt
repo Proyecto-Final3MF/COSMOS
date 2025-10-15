@@ -63,6 +63,22 @@ CREATE TABLE mensaje (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE historia_solicitud (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT, FOREIGN KEY (id_solicitud) REFERENCES solicitud(id),
+    evento VARCHAR (255),
+    fecha_hora TIMESTAMP
+);
+
+CREATE TABLE notificacion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL, 
+    mensaje TEXT NOT NULL,
+    leida TINYINT(1) DEFAULT 0, 
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
@@ -71,3 +87,14 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('3','Admin');
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Laptop'),
+(2, 'Celular'),
+(3, 'Televisión'),
+(4, 'Monitor'),
+(5, 'Impresora'),
+(6, 'Consola de Videojuegos'),
+(7, 'Router/Módem'),
+(8, 'Smartwatch'),
+(9, 'Cámara Digital'),
+(10, 'Disco Duro Externo');

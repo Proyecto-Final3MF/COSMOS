@@ -157,7 +157,7 @@ class Solicitud {
                 AND s.estado_id = 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
         
-            $resultado = $this->conn->query($sql);
+        $resultado = $this->conn->query($sql);
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
@@ -168,11 +168,17 @@ class Solicitud {
     public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
         $titulo = $this->conn->real_escape_string($titulo);
         $descripcion = $this->conn->real_escape_string($descripcion);
+
         $sql = "INSERT INTO solicitud (titulo, cliente_id, fecha_creacion, prioridad, producto_id, estado_id, descripcion) VALUES ('$titulo', $usuario_id, NOW(), '$prioridad', $producto, 1, '$descripcion')";
-        return $this->conn->query($sql);
+
+        if ($this->conn->query($sql) === TRUE) {
+            return $this->conn->insert_id;
+        } else {
+            return false;
+        }
     }
 
-     public function obtenerSolicitudPorId($id) {
+    public function obtenerSolicitudPorId($id) {
         $id = (int)$id;
         $sql = "SELECT * FROM solicitud WHERE id = $id LIMIT 1";
         $resultado = $this->conn->query($sql);

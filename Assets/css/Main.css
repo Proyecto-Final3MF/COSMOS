@@ -172,6 +172,58 @@ body {
     transition: transform 0.2s, border-color 0.2s;
 }
 
+.notificaciones {
+    position: relative;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.notificaciones .contador {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.notificaciones .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 0.5rem 0;
+    z-index: 100;
+}
+
+.notificaciones .dropdown.show {
+    display: block;
+}
+
+.notificaciones .dropdown .notif-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.notificaciones .dropdown .notif-item:last-child {
+    border-bottom: none;
+}
+
+.notificaciones .dropdown .notif-item:hover {
+    background-color: #f8f8f8;
+}
+
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */
@@ -240,34 +292,6 @@ body {
     justify-content: center; 
     align-items: center;     
     gap: 10px;               
-}
-
-.btn-boton2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 1px solid #b61e65;
-    background-color: #f8f9fa;
-    transition: var(--transition);
-}
-
-.btn-boton2 img {
-    width: 20px;
-    height: 20px;
-}
-
-.btn-boton2:hover {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-.btn-boton2.danger:hover {
-    background-color: #dc2626;
-    color: white;
 }
 
 .btn-container2 {
@@ -347,6 +371,7 @@ a:has(> .btn-boton444) {
 .btn-listar { background-color: #f3722c; }
 .btn-historial { background-color: #577590; }
 .btn-usuarios { background-color: #43aa8b; }
+.btn-crearU { background-color: #f80707; }
 
 .btn-boton444 i {
     font-size: 2.6rem;          
@@ -360,10 +385,47 @@ a:has(> .btn-boton444) {
     filter: brightness(1.1);
 }
 
+.btn-boton4445 {
+    display: flex;
+    flex-direction: column;      
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    padding: 10%;
+    width: 400px;
+    height: 70px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;       
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    text-decoration: none;
+}
+
+a:has(> .btn-boton4445) {
+    text-decoration: none;
+}
+
+.btn-boton4445 i {
+    font-size: 2.6rem;          
+    margin-bottom: 0.3rem;
+    text-decoration: none;
+}
+
+.btn-boton4445:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
 
 .btn-container a {
     text-decoration: none;       
 }
+
 
 .btn-boton4442 {
     display: flex;
@@ -506,7 +568,7 @@ tr:hover {
 table td, table th {
     vertical-align: middle; 
     text-align: center;     
-    padding: 12px;           
+    padding: 12px;     
 }
 
 img {
@@ -558,7 +620,127 @@ tbody tr:hover {
     justify-content: center;
     margin: 20px 0;
 }
- 
+
+.admin-dashboard {
+    display: flex; 
+    gap: 20px; 
+    width: 95%; 
+    margin: 20px auto; 
+}
+
+.admin-panel-column {
+    flex: 1 1 50%; 
+    min-width: 0; 
+    padding: 15px;
+    background-color: #ffffff; 
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.admin-panel-column h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #e83e8c;
+}
+
+.table-responsive-panel {
+    max-height: 400px; 
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.historial-panel {
+    max-height: 400px; 
+    overflow-y: auto; 
+    overflow-x: auto;
+}
+
+.historial-panel .list-item p {
+    text-align: left;
+    max-width: fit-content; 
+    margin: 0;
+    padding: 0 5px;
+    white-space: nowrap; 
+}
+
+.admin-panel-column .table {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    table-layout: auto; 
+    min-width: 350px;
+}
+
+@media (max-width: 992px) {
+    .admin-dashboard {
+        flex-direction: column; 
+        gap: 40px; 
+        width: 90%;
+    }
+
+    .admin-panel-column {
+        flex: none; 
+        width: 100%; 
+    }
+}
+
+.btn-group-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #000000;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  font-size: 18px;
+  position: relative;
+  top: 5px; 
+}
+
+.icon-btn:hover {
+  background-color: #b61e65;
+  color: white;
+  transform: scale(1.1);
+}
+
+.icon-btn.edit:hover {
+  background-color: #014c9b;
+}
+
+.icon-btn.chat:hover {
+  background-color: #22b1aa;
+}
+
+.icon-btn.delete:hover {
+  background-color: #dc3545;
+}
+
+.icon-btn.aceptar:hover {
+  background-color: #0a7429;
+}
+
+.icon-btn.historial:hover {
+  background-color: #b2b41f;
+}
+
+@media (max-width: 600px) {
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
 /* aca terminan las tablas */
 
 /* aca empieza el css del historial */
@@ -1103,6 +1285,7 @@ tbody tr:hover {
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+    z-index: 9;
 }
 
 /* aca empieza el css del zoom de imagenes */
@@ -1290,7 +1473,7 @@ a.errorLink {
     flex-direction: column; 
     align-items: center;    
     padding-top: 50px;
-    min-height: calc(100vh - 100px);
+    min-height: 100vh;
     gap: 20px; 
     opacity: 0;
     transform: translateY(30px);
@@ -1355,7 +1538,7 @@ input:focus, select:focus, textarea:focus {
 .fade-label:nth-of-type(3) { animation-delay: 0.3s; }
 .fade-label:nth-of-type(4) { animation-delay: 0.4s; }
 
-section {
+.formularios99 {
     background-color: #ffffff; 
     padding: 30px 40px;
     border-radius: 10px;
@@ -1426,6 +1609,18 @@ label {
     margin-bottom: 0.5rem; 
 }
 
+.titulo3 {
+    color: #e83e8c; 
+    margin-bottom: 20px;
+    font-size: 24px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.titulo3:hover {
+    color: #972f5f;
+}
+
 .btn-boton3-input {
     padding: 0.3rem 0.6rem;
     background-color: #e83e8c;
@@ -1486,11 +1681,52 @@ input[type="submit"]:hover {
     color: #727579;
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #000000;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  font-size: 18px;
+  position: relative;
+  top: 5px; 
+}
+
+.btn-boton2 {
+    display: flex;
+    border-radius: 50%;
+    border-color: #fff;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.25s ease;
+    font-size: 18px;
+    position: relative;
+    top: 5px; 
+}
+
+.btn-boton2:hover {
+  background-color: #b61e65;
+  color: white;
+  transform: scale(1.1);
+}
+
 .producto-con-boton {
     display: flex;
     align-items: center;
     gap: 10px; 
-    justify-content: center;
+    justify-content: flex-end;
     margin-bottom: 15px;
 }
 
@@ -1500,22 +1736,17 @@ input[type="submit"]:hover {
 }
 
 .producto-con-boton .btn-boton2 {
+    border-color: #fff;
     width: 40px;
     height: 40px;
-    border: 1px solid #e83e8c;
     background-color: #fff;
     transition: transform 0.3s, background-color 0.3s;
-    margin-top: -12px;
+    margin-top: -20px;
 }
 
 .producto-con-boton .btn-boton2:hover {
     background-color: #e83e8c;
     transform: scale(1.1);
-}
-
-.producto-con-boton .btn-boton2 img {
-    width: 18px;
-    height: 18px;
 }
 
 .rol-container {

@@ -111,6 +111,12 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->listarST();
     break;
+
+  case 'solicitud_historia':
+    $controller = new HistoriaC();
+    $controller->mostrarHistoria();
+    break;
+
   //acciones para el rol cliente
 
   //acciones para producto
@@ -314,6 +320,14 @@ switch ($accion) {
     $controller->borrar();
     break;
 
+  case 'marcarNotificacionesLeidas':
+    require_once("Controllers/NotificacionC.php");
+    $controller = new NotificacionC();
+    $controller->marcarTodasLeidas();
+    echo json_encode(['success' => true]);
+    exit();
+
+
   //accion default
 
   default:
@@ -325,3 +339,4 @@ switch ($accion) {
     }
     exit();
 }
+

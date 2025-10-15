@@ -2,7 +2,13 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
+
+$notifC = new NotificacionC();
+$notificaciones = $notifC->listarNoLeidas();
 ?>
+
 <header>
     <link rel="stylesheet" href="./Assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -25,6 +31,27 @@ if (session_status() === PHP_SESSION_NONE) {
                         <a href="Index.php?accion=redireccion">
                             <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
                         </a>
+                    </li>
+
+
+                    <li>
+                        <div class="notificaciones" id="notificaciones">
+    <i class="fa fa-bell"></i>
+    <?php if (count($notificaciones) > 0): ?>
+        <span class="contador" id="notifContador"><?= count($notificaciones) ?></span>
+    <?php endif; ?>
+
+    <div class="dropdown">
+        <?php if (count($notificaciones) > 0): ?>
+            <?php foreach ($notificaciones as $n): ?>
+                <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="notif-item">Sin notificaciones nuevas</p>
+        <?php endif; ?>
+    </div>
+</div>
+
                     </li>
                 <?php endif; ?>
             </ul>
@@ -133,3 +160,4 @@ if (session_status() === PHP_SESSION_NONE) {
     </nav>
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
+<script src="Assets/js/notificacion.js"></script>

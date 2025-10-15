@@ -31,6 +31,7 @@ require_once ("./Views/include/UH.php");
                 <th>Descripcion</th>
                 <th>Estado</th>
                 <th>Fecha de Creacion</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -49,13 +50,21 @@ require_once ("./Views/include/UH.php");
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
+                
+                <td>
+                <div class="btn-group-actions">
+                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial" >
+                <i class="fa fa-file-alt"></i>
+                </a>
+                </div>
+                </td>
                 </tr>
                 <?php
             }
         } else {
             ?>
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="index.php?accion=listarTL">

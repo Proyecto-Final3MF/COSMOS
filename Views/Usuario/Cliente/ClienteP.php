@@ -19,7 +19,16 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
 <div>
-    <br>
+    
+
+<div class="btn-container fade-slide">
+<a href="index.php?accion=urgenteP">
+        <button class="btn btn-boton4445 btn-crearU">
+            <i class="fa-solid fa-plus-circle"></i>Nueva Solicitud Urgente
+        </button>
+    </a>
+</div>
+
     <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
     
     <div class="btn-container fade-slide">
@@ -50,12 +59,6 @@ require_once ("./Views/include/UH.php");
     <a href="index.php?accion=listarST">
         <button class="btn btn-boton444 btn-terminadas">
             <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
-        </button>
-    </a>
-
-    <a href="index.php?accion=urgenteP">
-        <button class="btn btn-boton444 btn-crear">
-            <i class="fa-solid fa-plus-circle"></i>Nueva Solicitud Urgente
         </button>
     </a>
 
