@@ -111,7 +111,7 @@ class UsuarioC {
                 $obs = "Ningun cambio detectado";
             } else {
                 if ($nombreAntiguo !== $nombre) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre."   ";
+                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
                     $obs = $obs1;
                 }
 

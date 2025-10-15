@@ -193,7 +193,7 @@ class ProductoC {
                 $obs = "Ningun cambio detectado";
             } else {
                 if ($nombre !== $nombreAntiguo) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre."   ";
+                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
                     $obs = $obs1;
                 }
 
