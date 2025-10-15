@@ -117,6 +117,7 @@ class UsuarioC {
 
                 if ($emailAntiguo !== $email) {
                     $obs2 = "Email: ".$emailAntiguo. " ---> ".$email;
+                    $obs = $obs2;
                 }
 
                 if ($nombreAntiguo !== $nombre && $emailAntiguo !== $email) {
