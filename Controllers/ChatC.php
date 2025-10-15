@@ -19,13 +19,8 @@ class ChatC
             session_start();
         }
 
-        if (!isset($_GET['usuario_id'])) {
-            echo "Usuario no especificado.";
-            return;
-        }
-
-        $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
 
         if (!$usuarioId || $otroUsuarioId) {
             echo "Usuario no especificado";
