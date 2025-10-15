@@ -22,7 +22,7 @@ require_once ("./Views/include/UH.php");
 </button>
 </div>
     <div class="contenedor-formulario">
-    <section>
+    <section class="formularios99">
 <h3>Editar Categoria</h3>
 <form action="index.php?accion=actualizarC" method="POST">
     <input type="hidden" name="id" value="<?= htmlspecialchars($categoria['id']) ?>">

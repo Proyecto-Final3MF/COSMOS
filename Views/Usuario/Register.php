@@ -16,7 +16,7 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
 <div class="contenedor-formulario">
-    <section>
+    <section class="formularios99">
         <h3>Registrarse</h3>
 
         <form method="POST" action="index.php?accion=guardarU" enctype="multipart/form-data">

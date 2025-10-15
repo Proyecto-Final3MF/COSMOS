@@ -62,14 +62,16 @@ require_once ("./Views/include/UH.php");
                 </td>
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
-    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>" class="btn btn-boton2">
-        <img src="Assets/imagenes/pen.png" alt="editar" width="45">
+    <div class="btn-group-actions">                
+    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>" class="icon-btn edit">
+    <i class="fa fa-edit"></i>
     </a>
     <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" 
        onclick="return confirm('¿Seguro que quieres borrar este producto?');" 
-       class="btn btn-boton2">
-        <img src="Assets/imagenes/trash.png" alt="eliminar" width="40">
+       class="icon-btn delete">
+        <i class="fa fa-trash"></i>
     </a>
+</div>
 </td>
 
             </tr>

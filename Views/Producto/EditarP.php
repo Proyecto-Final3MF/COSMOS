@@ -18,7 +18,7 @@ require_once ("./Views/include/UH.php");
 </div>
 
 <div class="contenedor-formulario">
-<section>
+<section class="formularios99">
     <h3>Editar Producto</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
