@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <i class="fa fa-arrow-left"></i> Volver
         </button>
     </div>
-    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviar">
+    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
 
@@ -54,7 +54,7 @@ if (session_status() === PHP_SESSION_NONE) {
     document.getElementById("form-chat").addEventListener("submit", async function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        await fetch("index.php?accion=enviar", {
+        await fetch("index.php?accion=enviarMensaje", {
             method: "POST",
             body: formData
         });
