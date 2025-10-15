@@ -70,6 +70,15 @@ CREATE TABLE historia_solicitud (
     fecha_hora TIMESTAMP
 );
 
+CREATE TABLE notificacion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL, 
+    mensaje TEXT NOT NULL,
+    leida TINYINT(1) DEFAULT 0, 
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
