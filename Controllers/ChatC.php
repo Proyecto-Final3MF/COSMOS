@@ -63,7 +63,7 @@ class ChatC
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = intval($_GET['usuario_id'] ?? null);
 
-        if (!$usuarioId || $otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId) {
             echo "Error: no se especificoel usuario receptor.";
             return;
         }
