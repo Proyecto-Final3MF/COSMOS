@@ -27,6 +27,26 @@ class UsuarioC {
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
 
+         //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (empty($usuario)) {
+            $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+
         // Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
             $rutaDestino = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
