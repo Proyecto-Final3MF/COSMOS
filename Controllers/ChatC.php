@@ -22,7 +22,7 @@ class ChatC
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
 
-        if (!$usuarioId || $otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId) {
             echo "Usuario no especificado";
             return;
         }
@@ -177,14 +177,14 @@ class ChatC
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
         if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
-            header("Location: index.php?accion=mostrarConversacion&usuario_id" . ($receptor_id ?? ''));
+            http_response_code(400);
+            echo "Fatal parámetros";
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $this->$mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
+        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
 
-        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
     }
 
