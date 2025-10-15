@@ -319,6 +319,7 @@ a:has(> .btn-boton444) {
 .btn-listar { background-color: #f3722c; }
 .btn-historial { background-color: #577590; }
 .btn-usuarios { background-color: #43aa8b; }
+.btn-crearU { background-color: #f80707; }
 
 .btn-boton444 i {
     font-size: 2.6rem;          
@@ -332,10 +333,47 @@ a:has(> .btn-boton444) {
     filter: brightness(1.1);
 }
 
+.btn-boton4445 {
+    display: flex;
+    flex-direction: column;      
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    padding: 10%;
+    width: 400px;
+    height: 70px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;       
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    text-decoration: none;
+}
+
+a:has(> .btn-boton4445) {
+    text-decoration: none;
+}
+
+.btn-boton4445 i {
+    font-size: 2.6rem;          
+    margin-bottom: 0.3rem;
+    text-decoration: none;
+}
+
+.btn-boton4445:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
 
 .btn-container a {
     text-decoration: none;       
 }
+
 
 .btn-boton4442 {
     display: flex;
@@ -637,6 +675,10 @@ tbody tr:hover {
 
 .icon-btn.aceptar:hover {
   background-color: #0a7429;
+}
+
+.icon-btn.historial:hover {
+  background-color: #b2b41f;
 }
 
 @media (max-width: 600px) {
