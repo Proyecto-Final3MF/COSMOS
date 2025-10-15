@@ -58,10 +58,19 @@ require_once("./Views/include/UH.php");
                                         <img src="Assets/imagenes/pen.png" alt="editar" width="45">
                                     </a>
                                 <?php endif; ?>
-                                <a href="index.php?accion=mostrarConversacion&usuario_id=<?= $resultado['tecnico_id'] ?? $resultado['cliente_id'] ?? $resultado['usuario_id']; ?>"
-                                    class="btn btn-boton2">
-                                    <img src="Assets/imagenes/chat.png" alt="chat" width="40">
-                                </a>
+
+                                <?php foreach ($resultados as $resultado): ?>
+                                    <?php
+                                    $usuarioDestino = ($_SESSION['rol'] == 'tecnico')
+                                        ? $resultado['cliente_id']
+                                        : $resultado['tecnico_id'];
+                                    ?>
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                        class="btn btn-boton2">
+                                        <img src="Assets/imagenes/chat.png" alt="chat" width="40">
+                                    </a>
+                                <?php endforeach; ?>
+
                                 <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
                                     onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
                                     class="btn btn-boton2 danger">
