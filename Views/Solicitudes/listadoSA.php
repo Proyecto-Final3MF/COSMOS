@@ -59,28 +59,27 @@ require_once("./Views/include/UH.php");
                                     </a>
                                 <?php endif; ?>
 
-                                <?php foreach ($resultados as $resultado): ?>
-                                    <?php
-                                    $usuarioDestino = ($_SESSION['rol'] == 'tecnico')
-                                        ? $resultado['cliente_id']
-                                        : $resultado['tecnico_id'];
-                                    ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
-                                        class="icon-btn chat">
-                                        <i class="fa fa-comments"></i>
-                                    </a>
-                                <?php endforeach; ?>
+                                <?php
+                                $usuarioDestino = ($_SESSION['rol'] == ROL_TECNICO)
+                                    ? $resultado['cliente_id']
+                                    : $resultado['tecnico_id'];
+                                ?>
 
-                        <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial" >
-                        <i class="fa fa-file-alt"></i>
-                        </a>
+                                <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                    class="btn btn-boton2">
+                                    <img src="Assets/imagenes/chat.png" alt="chat" width="40">
+                                </a>
 
-                        <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
-                        onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
-                        class="icon-btn delete">
-                        <i class="fa fa-times"></i>
-                        </a>
-                        </div>
+                                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                                    <i class="fa fa-file-alt"></i>
+                                </a>
+
+                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
+                                    onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
+                                    class="icon-btn delete">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
                         </td>
 
                     </tr>

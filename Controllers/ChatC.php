@@ -19,23 +19,22 @@ class ChatC
             session_start();
         }
 
-        if (!isset($_GET['usuario_id'])) {
-            echo "Usuario no especificado.";
+        $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
+
+        if (!$usuarioId || !$otroUsuarioId) {
+            echo "Usuario no especificado";
             return;
         }
 
-        $usuarioId = $_SESSION['id'];
-        $otroUsuarioId = $_GET['usuario_id'];
-
         $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
-
         require_once "Views/chat.php";
     }
 
     public function cargarMensajes()
     {
-        $usuarioId = $_SESSION['id'];
-        $otroUsuarioId = $_GET['usuario_id'];
+        $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
 
         if (!$usuarioId || !$otroUsuarioId) {
@@ -61,8 +60,13 @@ class ChatC
             return;
         }
 
-        $usuarioId = $_SESSION['id'];
-        $otroUsuarioId = intval($_GET['usuario_id']);
+        $usuarioId = $_SESSION['id'] ?? null;
+        $otroUsuarioId = intval($_GET['usuario_id'] ?? null);
+
+        if (!$usuarioId || !$otroUsuarioId) {
+            echo "Error: no se especificoel usuario receptor.";
+            return;
+        }
 
         // Crear instancia de Mensaje
         $mensajeModel = new Mensaje();
@@ -168,19 +172,19 @@ class ChatC
             session_start();
         }
 
-        $usuarioId = $_SESSION['id'];
+        $usuarioId = $_SESSION['id'] ?? null;
         $receptor_id = $_POST['receptor_id'] ?? null;
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
-        if (!$receptor_id || $mensajeTexto === '') {
-            header("Location: index.php?accion=mostrarConversacion");
+        if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
+            http_response_code(400);
+            echo "Fatal parámetros";
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
+        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
 
-        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $receptor_id);
         exit();
     }
 
