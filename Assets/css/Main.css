@@ -172,6 +172,58 @@ body {
     transition: transform 0.2s, border-color 0.2s;
 }
 
+.notificaciones {
+    position: relative;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.notificaciones .contador {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.notificaciones .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 0.5rem 0;
+    z-index: 100;
+}
+
+.notificaciones .dropdown.show {
+    display: block;
+}
+
+.notificaciones .dropdown .notif-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.notificaciones .dropdown .notif-item:last-child {
+    border-bottom: none;
+}
+
+.notificaciones .dropdown .notif-item:hover {
+    background-color: #f8f8f8;
+}
+
+
 /* aca termina el css del Header UH */
 
 /* aca afecta a la mayoria de botos, btn-boton es para los botones normales, btn-boton 2 para botones en tablas y asi */

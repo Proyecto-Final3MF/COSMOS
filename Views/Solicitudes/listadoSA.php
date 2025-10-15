@@ -54,8 +54,8 @@ require_once("./Views/include/UH.php");
                         <td>
                             <div class="btn-group-actions d-flex">
                                 <?php if ($_SESSION['rol'] == 1): ?>
-                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="btn btn-boton2 btn-outline-primary">
-                                        <img src="Assets/imagenes/pen.png" alt="editar" width="45">
+                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="icon-btn edit">
+                                        <i class="fa fa-edit"></i>
                                     </a>
                                 <?php endif; ?>
 
@@ -66,8 +66,8 @@ require_once("./Views/include/UH.php");
                                         : $resultado['tecnico_id'];
                                     ?>
                                     <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
-                                        class="btn btn-boton2">
-                                        <img src="Assets/imagenes/chat.png" alt="chat" width="40">
+                                        class="icon-btn chat">
+                                        <i class="fa fa-comments"></i>
                                     </a>
                                 <?php endforeach; ?>
 
@@ -80,14 +80,7 @@ require_once("./Views/include/UH.php");
                         class="icon-btn delete">
                         <i class="fa fa-times"></i>
                         </a>
-                        
                         </div>
-                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
-                                    onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
-                                    class="btn btn-boton2 danger">
-                                    <img src="Assets/imagenes/png-clipart-red-x-jet-boat-interlaken-lake-brienz-green-tick-mark-angle-text-thumbnail-removebg-preview.png" alt="eliminar" width="40">
-                                </a>
-                            </div>
                         </td>
 
                     </tr>
