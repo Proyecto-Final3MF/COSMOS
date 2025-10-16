@@ -325,8 +325,7 @@ switch ($accion) {
     $controller = new NotificacionC();
     $controller->marcarTodasLeidas();
     echo json_encode(['success' => true]);
-    exit();
-
+    break;
 
   //accion default
 
