@@ -22,10 +22,30 @@ class UsuarioC {
 
     public function guardarU() {
         $usuarioM = new Usuario();
-        $usuario = $_POST['usuario'];
-        $mail = $_POST['mail'];
+        $usuario = trim($_POST['usuario']);
+        $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
+
+         //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (empty($usuario)) {
+            $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
 
         // Manejo de foto
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
@@ -60,9 +80,12 @@ class UsuarioC {
     public function actualizarU() {
         session_start();
         $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
+        $nombre = trim($_POST['nombre']);
+        $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+
+        $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
+        $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
         $usuarioM = new Usuario();
 
@@ -84,7 +107,25 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
-            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, "Usuario actualizado");
+            if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
+                $obs = "Ningun cambio detectado";
+            } else {
+                if ($nombreAntiguo !== $nombre) {
+                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
+                    $obs = $obs1;
+                }
+
+                if ($emailAntiguo !== $email) {
+                    $obs2 = "Email: ".$emailAntiguo. " ---> ".$email;
+                    $obs = $obs2;
+                }
+
+                if ($nombreAntiguo !== $nombre && $emailAntiguo !== $email) {
+                    $obs = $obs1.$obs2;
+                }
+            }
+
+            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
 
             header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
             exit();
