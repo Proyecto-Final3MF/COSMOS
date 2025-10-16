@@ -22,8 +22,8 @@ class UsuarioC {
 
     public function guardarU() {
         $usuarioM = new Usuario();
-        $usuario = $_POST['usuario'];
-        $mail = $_POST['mail'];
+        $usuario = trim($_POST['usuario']);
+        $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena']; 
 
@@ -80,8 +80,8 @@ class UsuarioC {
     public function actualizarU() {
         session_start();
         $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
+        $nombre = trim($_POST['nombre']);
+        $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
