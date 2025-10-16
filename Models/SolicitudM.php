@@ -191,6 +191,17 @@ class Solicitud {
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function obtenerNombreEstadoPorId($estado_id) {
+        $sql = "SELECT nombre FROM estado WHERE id = ?";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $estado_id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        return $resultado->fetch_assoc(); 
+    }
+
     public function actualizarS($id, $descripcion, $estado_id) {
         $id = (int)$id;
         $descripcion = $this->conn->real_escape_string($descripcion);

@@ -179,6 +179,9 @@ class SolicitudC {
         }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+        $estadoAntiguo = $datosSolicitud['estado_id'];
+        $descAntigua = $datosSolicitud['descripcion'];
+
         if (!$datosSolicitud) {
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
             header("Location: index.php?accion=redireccion");
@@ -192,6 +195,7 @@ class SolicitudC {
         // No hay necesidad de una redirección aquí.
         include("./Views/Solicitudes/editarSF.php");
     }
+    
     public function actualizarSF() {
         $id = $_POST['id'] ?? null;
         $descripcion = trim($_POST['descripcion']) ?? '';
@@ -203,8 +207,22 @@ class SolicitudC {
             exit();
         }
 
+        $nuevoEstado = $this->solicitudModel->obtenerNombreEstadoPorId($estado_id);
+
         if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
+
+        // REGISTRAR CAMBIO DE ESTADO
+            if ($estadoAntiguo !== $estado_id) {
+                // Se usa $nuevoEstado['nombre'] que viene de la nueva función
+                $evento = "Estado cambiado a " . $nuevoEstado['nombre']; 
+                $this->historiaC->registrarEvento($id, $evento);
+            }
+
+            if ($descAntigua !== $descripcion) {
+                $this->historiaC->registrarEvento($id, "Descripción modificada");
+            }
+
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
 
