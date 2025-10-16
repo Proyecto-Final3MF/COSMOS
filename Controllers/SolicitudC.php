@@ -81,6 +81,17 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+
+            require_once(__DIR__ . '/NotificacionC.php');
+            $notificacion = new NotificacionC();
+
+            // Notificar a todos los técnicos (rol_id = 1)
+            $conn = conectar();
+            $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
+            while ($row = $result->fetch_assoc()) {
+            $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo");
+            }
+
             header("Location: index.php?accion=listarSLU");
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
