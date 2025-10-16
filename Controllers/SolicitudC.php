@@ -217,7 +217,7 @@ class SolicitudC {
         // REGISTRAR CAMBIO DE ESTADO
             if ($estadoAntiguo !== $estado_id) {
                 // Se usa $nuevoEstado['nombre'] que viene de la nueva función
-                $evento = "Estado cambiado a " . $nuevoEstado['nombre']; 
+                $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']); 
                 $this->historiaC->registrarEvento($id, $evento);
             }
 
