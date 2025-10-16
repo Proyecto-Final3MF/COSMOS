@@ -33,26 +33,6 @@ $notificaciones = $notifC->listarNoLeidas();
                         </a>
                     </li>
 
-
-                    <li>
-                        <div class="notificaciones" id="notificaciones">
-    <i class="fa fa-bell"></i>
-    <?php if (count($notificaciones) > 0): ?>
-        <span class="contador" id="notifContador"><?= count($notificaciones) ?></span>
-    <?php endif; ?>
-
-    <div class="dropdown">
-        <?php if (count($notificaciones) > 0): ?>
-            <?php foreach ($notificaciones as $n): ?>
-                <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="notif-item">Sin notificaciones nuevas</p>
-        <?php endif; ?>
-    </div>
-</div>
-
-                    </li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -69,6 +49,23 @@ $notificaciones = $notifC->listarNoLeidas();
                 </div>
 
             <?php else: ?>
+
+                <div class="notificaciones" id="notificaciones">
+                    <i class="fa fa-bell"></i>
+                    <?php if (count($notificaciones) > 0): ?>
+                    <span class="contador" id="notifContador"><?= count($notificaciones) ?></span>
+                    <?php endif; ?>
+
+                    <div class="dropdown">
+                    <?php if (count($notificaciones) > 0): ?>
+                    <?php foreach ($notificaciones as $n): ?>
+                    <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <p class="notif-item">Sin notificaciones nuevas</p>
+                    <?php endif; ?>
+                    </div>
+                    </div>
             
                 <div class="menu-rol-container">
                     <button class="dropdown-button" onclick="toggleRolMenu()">
@@ -160,4 +157,3 @@ $notificaciones = $notifC->listarNoLeidas();
     </nav>
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
-<script src="Assets/js/notificacion.js"></script>
