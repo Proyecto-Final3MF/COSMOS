@@ -30,9 +30,9 @@ class SolicitudC {
 
     public function guardarS() {
         $solicitud = new Solicitud();
-        $titulo = $_POST['titulo'] ?? '';
+        $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $prioridad = $_POST['prioridad'] ?? '';
         $usuario_id = $_SESSION['id'] ?? '';
 
@@ -62,9 +62,9 @@ class SolicitudC {
 
     public function guardarSU() {
         $solicitud = new Solicitud();
-        $titulo = $_POST['titulo'] ?? '';
+        $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $prioridad = 'urgente'; 
         
         $usuario_id = $_SESSION['id'] ?? '';
@@ -179,6 +179,7 @@ class SolicitudC {
         }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+
         if (!$datosSolicitud) {
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
             header("Location: index.php?accion=redireccion");
@@ -192,10 +193,15 @@ class SolicitudC {
         // No hay necesidad de una redirección aquí.
         include("./Views/Solicitudes/editarSF.php");
     }
+    
     public function actualizarSF() {
         $id = $_POST['id'] ?? null;
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
+
+        $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+        $estadoAntiguo = $datosSolicitud['estado_id'];
+        $descAntigua = $datosSolicitud['descripcion'];
 
         if (!$id || empty($descripcion) || !$estado_id) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
@@ -203,8 +209,22 @@ class SolicitudC {
             exit();
         }
 
+        $nuevoEstado = $this->solicitudModel->obtenerNombreEstadoPorId($estado_id);
+
         if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
+
+        // REGISTRAR CAMBIO DE ESTADO
+            if ($estadoAntiguo !== $estado_id) {
+                // Se usa $nuevoEstado['nombre'] que viene de la nueva función
+                $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']); 
+                $this->historiaC->registrarEvento($id, $evento);
+            }
+
+            if ($descAntigua !== $descripcion) {
+                $this->historiaC->registrarEvento($id, "Descripción modificada");
+            }
+
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
 

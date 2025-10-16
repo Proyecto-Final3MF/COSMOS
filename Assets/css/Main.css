@@ -1797,7 +1797,7 @@ input[type="submit"]:hover {
     background-color: #f8f9fa;
     border: 1px solid #e9ecef;
     border-radius: 8px;
-    max-width: 700px;
+    max-width: 1000px;
     box-shadow: var(--box-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
