@@ -30,9 +30,9 @@ class SolicitudC {
 
     public function guardarS() {
         $solicitud = new Solicitud();
-        $titulo = $_POST['titulo'] ?? '';
+        $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $prioridad = $_POST['prioridad'] ?? '';
         $usuario_id = $_SESSION['id'] ?? '';
 
@@ -62,9 +62,9 @@ class SolicitudC {
 
     public function guardarSU() {
         $solicitud = new Solicitud();
-        $titulo = $_POST['titulo'] ?? '';
+        $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $prioridad = 'urgente'; 
         
         $usuario_id = $_SESSION['id'] ?? '';
@@ -194,7 +194,7 @@ class SolicitudC {
     }
     public function actualizarSF() {
         $id = $_POST['id'] ?? null;
-        $descripcion = $_POST['descripcion'] ?? '';
+        $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
 
         if (!$id || empty($descripcion) || !$estado_id) {

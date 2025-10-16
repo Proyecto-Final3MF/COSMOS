@@ -20,7 +20,7 @@ class ProductoC {
 
     public function guardarP() {
         $producto = new Producto();
-        $nombre = $_POST['nombre'] ?? '';
+        $nombre = trim($_POST['nombre']) ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
@@ -137,7 +137,7 @@ class ProductoC {
     public function actualizarP() {
         $producto = new Producto();
         $id = $_POST['id'] ?? null;
-        $nombre = $_POST['nombre'] ?? '';
+        $nombre = trim($_POST['nombre']) ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
         $imagenActual = $_POST['imagen_actual'] ?? '';
         $id_usuario = $_SESSION['id'];
