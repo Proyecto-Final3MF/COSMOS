@@ -179,8 +179,6 @@ class SolicitudC {
         }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
-        $estadoAntiguo = $datosSolicitud['estado_id'];
-        $descAntigua = $datosSolicitud['descripcion'];
 
         if (!$datosSolicitud) {
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
@@ -200,6 +198,10 @@ class SolicitudC {
         $id = $_POST['id'] ?? null;
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
+
+        $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+        $estadoAntiguo = $datosSolicitud['estado_id'];
+        $descAntigua = $datosSolicitud['descripcion'];
 
         if (!$id || empty($descripcion) || !$estado_id) {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
