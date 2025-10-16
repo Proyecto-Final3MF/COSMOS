@@ -178,6 +178,11 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->guardarS();
     break;
+  
+  case 'guardarSU':
+    $controller = new SolicitudC();
+    $controller->guardarSU();
+    break;
 
   case 'borrarS':
     $controller = new SolicitudC();

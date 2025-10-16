@@ -80,7 +80,7 @@ class SolicitudC {
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
-            $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+           $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
             header("Location: index.php?accion=listarSLU");
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";

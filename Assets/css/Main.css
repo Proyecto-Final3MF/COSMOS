@@ -443,7 +443,6 @@ a:has(> .btn-boton444) {
     flex-direction: column;      
     align-items: center;
     justify-content: center;
-    gap: 50%;
     padding: 10%;
     width: 400px;
     height: 70px;
