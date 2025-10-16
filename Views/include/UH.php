@@ -35,22 +35,22 @@ $notificaciones = $notifC->listarNoLeidas();
 
 
                     <li>
-                        <div class="notificaciones" id="notificaciones">
-    <i class="fa fa-bell"></i>
-    <?php if (count($notificaciones) > 0): ?>
-        <span class="contador" id="notifContador"><?= count($notificaciones) ?></span>
-    <?php endif; ?>
+                    <div class="notificaciones" id="notificaciones">
+                    <i class="fa fa-bell"></i>
+                    <?php if (count($notificaciones) > 0): ?>
+                    <span class="contador" id="notifContador"><?= count($notificaciones) ?></span>
+                    <?php endif; ?>
 
-    <div class="dropdown">
-        <?php if (count($notificaciones) > 0): ?>
-            <?php foreach ($notificaciones as $n): ?>
-                <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="notif-item">Sin notificaciones nuevas</p>
-        <?php endif; ?>
-    </div>
-</div>
+                    <div class="dropdown">
+                    <?php if (count($notificaciones) > 0): ?>
+                    <?php foreach ($notificaciones as $n): ?>
+                    <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <p class="notif-item">Sin notificaciones nuevas</p>
+                    <?php endif; ?>
+                    </div>
+                    </div>
 
                     </li>
                 <?php endif; ?>
