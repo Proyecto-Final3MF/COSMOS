@@ -1,3 +1,5 @@
+ @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+ 
  :root {
     --primary-color: #e83e8c;
     --secondary-color: #e83e8c;
@@ -2051,3 +2053,42 @@ p.inicio44 {
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
 
 /* y aca termina el css de animaciones para inicio */
+
+
+/* Review.php */
+
+.rate {
+    display: inline-block;
+    border: 0;
+}
+
+.rate > input {
+    display: none;
+}
+
+.rate > label {
+    float: right;
+}
+
+.rate > label:before {
+    display: inline-block;
+    font-size: 2rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 ";
+}
+
+.rate .half:before {
+    content: "\f089 ";
+    position: absolute;
+    padding-right: 0;
+}
+
+input:checked ~ label,
+label:hover, label:hover ~ label { color: #ffee00ff;  }
+
+input:checked + label:hover, input:checked ~ label:hover,
+input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label { color: #ffee00ff;  } 

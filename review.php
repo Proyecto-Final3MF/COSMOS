@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./Assets/css/Main.css">
 <fieldset class="rate">
     <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
     <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
@@ -11,49 +12,12 @@
     <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
 
 </fieldset>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Assets/js/paginacion.js"></script>
+    <script src="Assets/js/trancicion.js"></script>
+    <script src="Assets/js/botonvolver.js"></script>
 
 <style>
     /* Base setup */
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    border: 0;
-}
-/* Hide radio */
-.rate > input {
-    display: none;
-}
-/* Order correctly by floating highest to the right */
-.rate > label {
-    float: right;
-}
-/* The star of the show */
-.rate > label:before {
-    display: inline-block;
-    font-size: 2rem;
-    padding: .3rem .2rem;
-    margin: 0;
-    cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005 "; /* full star */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-/* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: #ffee00ff;  } /* color previous stars on hover */
-
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #ffee00ff;  } 
 
 </style>
