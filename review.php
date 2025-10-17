@@ -13,11 +13,6 @@
 
 </fieldset>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="Assets/js/paginacion.js"></script>
-    <script src="Assets/js/trancicion.js"></script>
-    <script src="Assets/js/botonvolver.js"></script>
-
-<style>
-    /* Base setup */
-
-</style>
+<script src="Assets/js/paginacion.js"></script>
+<script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/botonvolver.js"></script>
