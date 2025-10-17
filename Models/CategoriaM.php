@@ -40,9 +40,11 @@ class Categoria {
 
         $conditions = [];
         $params = [];
-        $param_types = ''; 
+        $param_types = '';
 
-        if (!empty($search)) {
+        $search = trim($search);
+
+        if (!empty($search) || $search ==='') {
             $search_terms = explode(" ", $search);
 
             foreach ($search_terms as $palabra) {

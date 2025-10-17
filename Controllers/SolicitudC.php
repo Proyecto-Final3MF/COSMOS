@@ -36,6 +36,12 @@ class SolicitudC {
         $prioridad = $_POST['prioridad'] ?? '';
         $usuario_id = $_SESSION['id'] ?? '';
 
+        if (empty($titulo) || $titulo === '' || empty($descripcion) || $descripcion === '') {
+            $_SESSION['mensaje'] = "La solicitud debe tener un titulo y una descripcion";
+            header("Location:index.php?accion=formularioS");
+            exit();
+        }
+
         $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
         if ($id_solicitud) {
@@ -50,7 +56,7 @@ class SolicitudC {
             $conn = conectar();
             $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
             while ($row = $result->fetch_assoc()) {
-            $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
+                $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
             }
             
             header("Location: index.php?accion=redireccion");
@@ -69,7 +75,7 @@ class SolicitudC {
         
         $usuario_id = $_SESSION['id'] ?? '';
         
-        if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id)) {
+        if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '') {
              $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
              header("Location: index.php?accion=redireccion");
              exit();
@@ -219,7 +225,7 @@ class SolicitudC {
         $estadoAntiguo = $datosSolicitud['estado_id'];
         $descAntigua = $datosSolicitud['descripcion'];
 
-        if (!$id || empty($descripcion) || !$estado_id) {
+        if (!$id || empty($descripcion) || !$estado_id || $descripcion === '') {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             header("Location: index.php?accion=redireccion");
             exit();

@@ -45,8 +45,19 @@ class Solicitud {
     }
 
     public function borrarS($id) {
-        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
-        return $this->conn->query($sql);
+        try {
+            $sql1 = "DELETE FROM historia_solicitud WHERE id_solicitud = $id";
+            $this->conn->query($sql1);
+
+            $sql2 = "DELETE FROM solicitud WHERE id=$id AND tecnico_id IS NULL";
+            $result = $this->conn->query($sql2); 
+
+            $this->conn->commit();
+            return $result;
+
+        } catch (mysqli_sql_exception $e) {
+            throw $e; 
+        }
     }
 
     public function ListarSLU($id_usuario){
