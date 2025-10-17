@@ -385,6 +385,7 @@ body {
 .btn-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 20px;
@@ -405,7 +406,7 @@ body {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    color: #fff;
+    color: #000000;
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
@@ -447,8 +448,8 @@ a:has(> .btn-boton444) {
     align-items: center;
     justify-content: center;
     padding: 15%;
-    width: 400px;
-    height: 70px;
+    width: 200%;
+    height: 70%;
     border-radius: 14px;
     font-weight: bold;
     font-size: 1rem;
@@ -460,6 +461,7 @@ a:has(> .btn-boton444) {
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
     text-decoration: none;
     box-shadow: 0 2px  rgba(0, 0, 0, 0.3);
+    margin: 0;
 }
 
 a:has(> .btn-boton4445) {
