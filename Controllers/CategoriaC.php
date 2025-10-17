@@ -19,12 +19,12 @@ class CategoriaC {
 
     public function guardarC() {
         $categoria = new Categoria();
-        $nombre = $_POST['nombre'] ?? '';
+        $nombre = trim($_POST['nombre']) ?? '';
 
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
         $usuarioId = $_SESSION['id'] ?? 0;
 
-        if (empty($nombre)) {
+        if (empty($nombre) || $nombre === '') {
             $_SESSION['mensaje'] = "La categoría no puede tener un nombre vacío.";
             header("Location: index.php?accion=FormularioC");
             exit();
@@ -91,9 +91,9 @@ class CategoriaC {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-            $nuevoNombre = $_POST['nombre'] ?? '';
+            $nuevoNombre = trim($_POST['nombre']) ?? '';
 
-            if ($id > 0 && !empty($nuevoNombre)) {
+            if ($id > 0 && !empty($nuevoNombre) && $nuevoNombre !== '') {
                 $categoria_modelo = new Categoria();
                 $categoriaAntigua = $categoria_modelo->buscarPorId($id);
                 $nombreAntiguo = $categoriaAntigua['nombre'] ?? 'Nombre desconocido';

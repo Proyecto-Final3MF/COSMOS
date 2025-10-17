@@ -25,7 +25,7 @@ class ProductoC {
         $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
-        if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
+        if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name']) || $nombre === '') {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             header("Location: index.php?accion=formularioP");
             exit();
@@ -143,7 +143,7 @@ class ProductoC {
         $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
-        if (!$id || empty($nombre) || empty($categoria_id)) {
+        if (!$id || empty($nombre) || empty($categoria_id) || $nombre === '') {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             header("Location: index.php?accion=editarP&id=" . $id);
             exit();
