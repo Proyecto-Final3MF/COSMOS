@@ -84,6 +84,24 @@ class UsuarioC {
         $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (empty($usuario)) {
+            $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
         $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
