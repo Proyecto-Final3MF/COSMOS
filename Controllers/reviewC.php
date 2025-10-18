@@ -3,7 +3,7 @@ require_once ("./Views/include/popup.php");
 
 class ReviewC {
     public function formularioR() {
-        
+        include();
     }
 
     public function AddReview() {
