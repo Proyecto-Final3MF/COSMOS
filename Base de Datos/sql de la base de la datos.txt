@@ -79,6 +79,13 @@ CREATE TABLE notificacion (
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT, FOREIGN KEY (id_solicitud) REFERENCES  solicitud(id),
+    id_tecnico INT, FOREIGN KEY (id_tecnico) REFERENCES  usuario(id),
+    id_cliente INT, FOREIGN KEY (id_cliente) REFERENCES  usuario(id),
+)
+
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
