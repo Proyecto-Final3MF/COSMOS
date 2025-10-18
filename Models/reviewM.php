@@ -14,14 +14,14 @@ class Usuario {
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc(); 
     }
-public function agarrarPromedio() {
-    $sql = "SELECT promedio FROM usuario WHERE id = $id_tecnico";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $estado_id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    return $resultado->fetch_assoc();
-}
+    public function agarrarPromedio() {
+        $sql = "SELECT promedio FROM usuario WHERE id = $id_tecnico";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $estado_id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        return $resultado->fetch_assoc();
+    }
 // Asumiendo que esta función es parte de una clase que tiene acceso a la conexión a la base de datos.
     public function AddReview($CantReview, $NotaPromedio, $Nota, $id_tecnico, $id_cliente) {
         // 1. Obtener la conexión a la base de datos (adaptar según tu clase)
