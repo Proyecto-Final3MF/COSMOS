@@ -1000,6 +1000,63 @@ tbody tr:hover {
     border: 1px solid #dc3545;
 }
 
+.container4 {
+    max-width: 800px;
+    margin: 80px auto 60px auto;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #979797;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tiempo {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.container4::before {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary-color), #ccc);
+    border-radius: 2px;
+}
+
+.linea {
+    color: #000000;
+}
+
+@media (max-width: 600px) {
+    .container4 {
+        margin: 100px 10px 40px 10px;
+        padding: 15px;
+    }
+
+    .container4::before {
+        left: 10px;
+    }
+
+    .list-item {
+        margin-left: 40px;
+        padding: 12px 15px;
+    }
+
+    .list-item::before {
+        left: -25px;
+    }
+
+    .tiempo {
+        font-size: 1.5rem;
+    }
+}
+
 /*aca termina el css del historial */
 
 /* aca empieza el css del pagination, el que esta en las tablas */

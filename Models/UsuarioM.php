@@ -18,16 +18,18 @@ class Usuario {
     }
 
     public function verificarU($usuario, $contrasena) {
-        $usuario = $this->conn->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
-        $res = $this->conn->query($sql);
-        if ($row = $res->fetch_assoc()) {
-            if ($row['contrasena'] === $contrasena) {
-                return $row;
-            }
+    $usuario = $this->conn->real_escape_string($usuario);
+    $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
+    $res = $this->conn->query($sql);
+
+    if ($row = $res->fetch_assoc()) {
+        if (password_verify($contrasena, $row['contrasena'])) {
+            return $row;
         }
-        return false;
     }
+    return false;
+    }
+
 
     public function obtenerPorNombre($usuario) {
     $usuario = $this->conn->real_escape_string($usuario);
