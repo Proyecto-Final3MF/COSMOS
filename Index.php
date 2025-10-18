@@ -194,6 +194,11 @@ switch ($accion) {
     $controller->listarSLU();
     break;
 
+  case 'AddReview':
+    $controller = new ReviewC();
+    $controller->AddReview();
+    break;
+
   //acciones para el rol tecnico
 
   //acciones para solicitudes

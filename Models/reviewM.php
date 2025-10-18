@@ -1,5 +1,5 @@
 <?php
-class Usuario {
+class Review {
     private $conn;
 
     public function __construct() {
@@ -23,14 +23,14 @@ class Usuario {
         return $resultado->fetch_assoc();
     }
 // Asumiendo que esta función es parte de una clase que tiene acceso a la conexión a la base de datos.
-    public function AddReview($CantReview, $NotaPromedio, $Nota, $id_tecnico, $id_cliente) {
+    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $comentario) {
         // 1. Obtener la conexión a la base de datos (adaptar según tu clase)
 
         $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
         
         // Preparar la sentencia
         if ($stmt1 = $conn->prepare($sql1)) {
-            $stmt1->bind_param("idi", $CantReview, $NotaPromedio, $id_tecnico); 
+            $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
             
             // Ejecutar
             if (!$stmt1->execute()) {
@@ -45,11 +45,11 @@ class Usuario {
             return false;
         }
 
-        $sql2 = "INSERT INTO reviews (id_tecnico, id_cliente, nota) VALUES (?, ?, ?)";
+        $sql2 = "INSERT INTO reviews (id_tecnico, id_cliente, rating, comentario) VALUES (?, ?, ?, ?)";
         
         // Preparar la sentencia
         if ($stmt2 = $conn->prepare($sql2)) {
-            $stmt2->bind_param("iid", $id_tecnico, $id_cliente, $Nota);
+            $stmt2->bind_param("iids", $id_tecnico, $id_cliente, $rating, $Comentario);
         
             if (!$stmt2->execute()) {
                 error_log("Error al ejecutar INSERT en reviews: " . $stmt2->error);
