@@ -1,7 +1,9 @@
 <?php
 if (isset($_SESSION['mensaje'])) {
+    $tipo = isset($_SESSION['tipo_mensaje']) ? $_SESSION['tipo_mensaje'] : 'info';
+
     echo '<link rel="stylesheet" href="Assets/css/popup.css">
-           <div class="popup-modal active" id="popupMsg"> 
+           <div class="popup-modal popup-' . htmlspecialchars($tipo) . ' active" id="popupMsg"> 
              <div class="popup-header">
                <div class="popup-title">Mensaje</div>
                <button class="popup-close" id="cerrarButton">&times;</button>
@@ -11,7 +13,9 @@ if (isset($_SESSION['mensaje'])) {
              </div>
            </div>
            <div class="popup-overlay active" id="popupOverlay"></div>';
+    
     unset($_SESSION['mensaje']);
+    unset($_SESSION['tipo_mensaje']);
 }
 ?>
 <script>

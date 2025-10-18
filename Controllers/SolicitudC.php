@@ -46,6 +46,7 @@ class SolicitudC {
 
         if ($id_solicitud) {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
+            $_SESSION['tipo_mensaje'] = "success";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
 
@@ -62,6 +63,7 @@ class SolicitudC {
             header("Location: index.php?accion=redireccion");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
         }
     }
@@ -85,6 +87,7 @@ class SolicitudC {
 
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
+            $_SESSION['tipo_mensaje'] = "success";
             // Lógica adicional (historial, etc.)
            //$this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
 
@@ -101,6 +104,7 @@ class SolicitudC {
             header("Location: index.php?accion=listarSLU");
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
+             $_SESSION['tipo_mensaje'] = "error";
              header("Location: index.php?accion=redireccion");
         }
     }
@@ -111,9 +115,11 @@ class SolicitudC {
         $solicitud->borrarS($id);
         if($solicitud){
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
+            $_SESSION['tipo_mensaje'] = "success";
             header("Location: index.php?accion=redireccion");
         } else {
             $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
         }
     }
@@ -146,6 +152,7 @@ class SolicitudC {
 
         if ($id_usuario === null || $id_soli === null) {
             $_SESSION['mensaje'] = "Error: ID de usuario o solicitud no proporcionado.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarTL");
             exit();
         }
@@ -154,6 +161,7 @@ class SolicitudC {
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
+            $_SESSION['tipo_mensaje'] = "success";
             $this->historiaC->registrarEvento($id_soli, "Solicitud asignada");
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -165,6 +173,7 @@ class SolicitudC {
             exit();
         } else {
             $_SESSION['mensaje'] = "Error al aceptar la solicitud.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarTL");
             exit();
         }
@@ -196,6 +205,7 @@ class SolicitudC {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
             exit();
         }
@@ -204,6 +214,7 @@ class SolicitudC {
 
         if (!$datosSolicitud) {
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
             exit();
         }
@@ -227,6 +238,7 @@ class SolicitudC {
 
         if (!$id || empty($descripcion) || !$estado_id || $descripcion === '') {
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
             exit();
         }
@@ -235,6 +247,7 @@ class SolicitudC {
 
         if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
+            $_SESSION['tipo_mensaje'] = "success";
 
         // REGISTRAR CAMBIO DE ESTADO
             if ($estadoAntiguo !== $estado_id) {
@@ -257,6 +270,7 @@ class SolicitudC {
             exit();
         } else {
             $_SESSION['mensaje'] = "Error al actualizar la solicitud.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
             exit();
         }
@@ -268,6 +282,7 @@ class SolicitudC {
 
         if ($id_soli === null || $usuarioId === null) {
             $_SESSION['mensaje'] = "Error: ID de solicitud o usuario no proporcionado.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarSA");
             exit();
         }
@@ -275,6 +290,7 @@ class SolicitudC {
         $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
         if (!$solicitud) {
             $_SESSION['mensaje'] = "Error: La solicitud no existe.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarSA");
             exit();
         }
@@ -282,12 +298,14 @@ class SolicitudC {
         // Asegurarse de que el usuario es el técnico asignado o el cliente que la creó
         if ($solicitud['tecnico_id'] != $usuarioId && $solicitud['cliente_id'] != $usuarioId) {
             $_SESSION['mensaje'] = "No tienes permiso para cancelar esta solicitud.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarSA");
             exit();
         }
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
+            $_SESSION['tipo_mensaje'] = "success";
             //$this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
             
             // Asumo que tienes definidas estas constantes
@@ -305,6 +323,7 @@ class SolicitudC {
             exit();
         } else {
             $_SESSION['mensaje'] = "Error al cancelar la solicitud.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarSA");
             exit();
         }
