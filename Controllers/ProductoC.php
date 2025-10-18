@@ -59,6 +59,7 @@ class ProductoC {
 
             if ($id) {
                 $_SESSION['mensaje'] = "Producto creado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
 
                 $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
@@ -73,9 +74,11 @@ class ProductoC {
                 exit();
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
+                $_SESSION['tipo_mensaje'] = "error";
             }
         } else {
             $_SESSION['mensaje'] = "Error al subir la imagen.";
+            $_SESSION['tipo_mensaje'] = "error";
         }
     }
 
@@ -101,6 +104,7 @@ class ProductoC {
 
         $producto->borrar($id);
         $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
+        $_SESSION['tipo_mensaje'] = "success";
 
         $obs = "Producto eliminado";
         $this->historialController->registrarModificacion(
@@ -188,6 +192,7 @@ class ProductoC {
 
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
+            $_SESSION['tipo_mensaje'] = "success";
 
             if ($nombre == $nombreAntiguo && $id_catAntiguo == $categoria_id) {
                 $obs = "Ningun cambio detectado";
@@ -220,6 +225,7 @@ class ProductoC {
             exit();
         } else {
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
+            $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=editarP&id=" . $id);
             exit();
         }
@@ -284,9 +290,11 @@ class ProductoC {
                 exit();
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
+                $_SESSION['tipo_mensaje'] = "error";
             }
         } else {
             $_SESSION['mensaje'] = "Error al subir la imagen.";
+            $_SESSION['tipo_mensaje'] = "error";
         }
     }
 }

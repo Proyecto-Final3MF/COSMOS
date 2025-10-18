@@ -448,8 +448,8 @@ a:has(> .btn-boton444) {
     align-items: center;
     justify-content: center;
     padding: 15%;
-    width: 200%;
-    height: 70%;
+    width: 400px;
+    height: 70px;
     border-radius: 14px;
     font-weight: bold;
     font-size: 1rem;
