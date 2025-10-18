@@ -5,6 +5,7 @@ class UsuarioC {
     public function AddReview() {
         $review = new Review();
         $Nota = $_POST['Nota'] ?? 0;
+        $id_cliente = $_SESSION['id'];
         
         if ($Nota == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
