@@ -25,7 +25,17 @@ class UsuarioC {
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena']; 
+        $contrasena = $_POST['contrasena'];
+
+        // Validar longitud mínima
+        if (strlen($contrasena) < 8) {
+        $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
+        // Encriptar la contraseña antes de guardarla
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
          //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
@@ -55,22 +65,23 @@ class UsuarioC {
             $rutaDestino = "Assets/imagenes/perfil/fotodefault.webp";
         }
 
-        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena, $rutaDestino)) {
-            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-            if ($usuarioN) {
-                session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
-                $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $usuarioN['id'];
-                $_SESSION['email'] = $usuarioN['email'];
-                $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena_hash, $rutaDestino)) {
+    // Obtener el usuario recién creado
+        $usuarioN = $usuarioM->obtenerPorNombre($usuario);
+        if ($usuarioN) {
+        session_start();
+        $_SESSION['usuario'] = $usuarioN['nombre'];
+        $_SESSION['rol'] = $usuarioN['rol_id'];
+        $_SESSION['id'] = $usuarioN['id'];
+        $_SESSION['email'] = $usuarioN['email'];
+        $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
-                // Historial
-                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+        // Historial
+        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
-                header("Location: index.php?accion=redireccion");
-                exit();
-            }
+        header("Location: index.php?accion=redireccion");
+        exit();
+    }
         } else {
             header("Location: index.php?accion=register&error=Error al crear usuario");
             exit();
@@ -168,26 +179,29 @@ class UsuarioC {
         include("views/Usuario/editarU.php");
     }
 
-    public function autenticar() {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
-        $modelo = new Usuario();
-        $user = $modelo->verificarU($usuario, $contrasena);
+   public function autenticar() {
+    $usuario = $_POST['usuario'];
+    $contrasena = $_POST['contrasena'];
+    $modelo = new Usuario();
 
-        if ($user) {
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+    // Trae el usuario por nombre (sin verificar contraseña todavía)
+    $user = $modelo->obtenerPorNombre($usuario);
 
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
+    if ($user && password_verify($contrasena, $user['contrasena'])) {
+        // Login correcto
+        $_SESSION['usuario'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol_id'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+
+        header("Location: index.php?accion=redireccion");
+        exit();
+    } else {
+        $error = "Usuario o contraseña incorrectos";
+        include("views/Usuario/Login.php");
     }
+}
 
     public function listarU() {
         $orden = $_GET['orden'] ?? ''; 
