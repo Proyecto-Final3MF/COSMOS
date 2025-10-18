@@ -7,17 +7,17 @@ class Review {
     }
 
     public function agarrarCantReview () {
-        $sql = "SELECT cant_review FROM usuario WHERE id = $id_tecnico";
+        $sql = "SELECT cant_review FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $estado_id);
+        $stmt->bind_param("i", $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc(); 
     }
     public function agarrarPromedio() {
-        $sql = "SELECT promedio FROM usuario WHERE id = $id_tecnico";
+        $sql = "SELECT promedio FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $estado_id);
+        $stmt->bind_param("i", $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();

@@ -2,6 +2,10 @@
 require_once ("./Views/include/popup.php");
 
 class ReviewC {
+    public function formularioR() {
+        
+    }
+
     public function AddReview() {
         $review = new Review();
         $rating = $_POST['rating'] ?? 0;
