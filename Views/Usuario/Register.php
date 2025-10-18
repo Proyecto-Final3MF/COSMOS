@@ -26,8 +26,8 @@ require_once ("./Views/include/UH.php");
 
             <div class="input-archivo">
             <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
-            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Archivo</label>
-            <span class="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Foto</label>
+            <span class="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
             </div>
             <br>
 
