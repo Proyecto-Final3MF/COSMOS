@@ -15,6 +15,7 @@
     <p> <?php echo $evento['evento']. " (". date('H:i:s d/m/Y', strtotime($evento['fecha_hora'])). ")"; ?>
     </p>
     </div>
+
     <?php endforeach; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
