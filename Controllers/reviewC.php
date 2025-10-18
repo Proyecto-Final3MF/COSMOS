@@ -1,13 +1,14 @@
 <?php
 require_once ("./Views/include/popup.php");
 
-class UsuarioC {
+class ReviewC {
     public function AddReview() {
         $review = new Review();
-        $Nota = $_POST['Nota'] ?? 0;
+        $rating = $_POST['rating'] ?? 0;
+        $Comentario = $_POST['Comentario'] ?? '';
         $id_cliente = $_SESSION['id'];
         
-        if ($Nota == 0) {
+        if ($rating == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
             header("Location:index.php?accion=Review.php");
             exit();
@@ -27,12 +28,12 @@ class UsuarioC {
             exit(); 
         }
         
-        $NotaPromedio = $HayPromedio;
+        $ratingPromedio = $HayPromedio;
         $CantReview = $HayReview;
-        $NotaPromedio = (($NotaPromedio * $CantReview) + $Nota)/($CantReview + 1);
+        $ratingPromedio = (($ratingPromedio * $CantReview) + $rating)/($CantReview + 1);
         
-        $NotaPromedio = round($NotaPromedio * 2) / 2;
-        $NotaPromedio = max(0.5, min(5, $NotaPromedio));
-        $review->AddReview($CantReview, $NotaPromedio, $Nota, $id_tecnico, $id_cliente);
+        $ratingPromedio = round($ratingPromedio * 2) / 2;
+        $ratingPromedio = max(0.5, min(5, $ratingPromedio));
+        $review->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $comentario);
     }
 }
