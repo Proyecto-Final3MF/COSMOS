@@ -70,6 +70,8 @@ class UsuarioC {
                 // Historial
                 $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
+                $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
+
                 header("Location: index.php?accion=redireccion");
                 exit();
             }
