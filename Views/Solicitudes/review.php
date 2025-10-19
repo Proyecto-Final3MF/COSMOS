@@ -16,7 +16,7 @@
         <input type="radio" id="rating1" name="rating" value="1" <?= ($rating == 1) ? 'checked' : '' ?> /><label class="half" for="rating1" title="1/2 star"></label>
     </fieldset>
     <input type="text" name="Comentario" id="Comentario" value="<?= htmlspecialchars($Comentario) ?>"/>
-    <button>Enviar</button>
+    <button type="submit">Enviar</button>
 </form>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
