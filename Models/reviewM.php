@@ -67,7 +67,7 @@ class Review {
     }
 
     public function getTecnico($id) {
-        $sql = "SELECT id_tecnico FROM solicitud WHERE id = ?";
+        $sql = "SELECT tecnico_id FROM solicitud WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();

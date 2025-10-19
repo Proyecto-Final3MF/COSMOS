@@ -8,17 +8,26 @@ class ReviewC {
 
     public function __construct() {
         $this->ReviewModel = new Review();
+        $this->solicitudModel = new Solicitud();
     }
 
     public function formularioR() {
-        $id = $_GET['id'] ?? null;
+        $id = $_GET['id_solicitud'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
-            header("Location: index.php?accion=listarST");
+            header("Location: index.php?accion=redireccion");
             exit();
         }
 
-        $id_tecnico = $this->ReviewModel->getTecnico($id);
+        $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
+
+        if (!$datosSolicitud) {
+            $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
+        $id_tecnico = $datosSolicitud['tecnico_id'];
 
         include("Views/Solicitudes/review.php");
     }
@@ -31,21 +40,21 @@ class ReviewC {
         
         if ($rating == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
-            header("Location:index.php?accion=Review.php");
+            header("Location:index.php?accion=Review");
             exit();
         }
         
         $HayReview = $this->ReviewModel->agarrarCantReview();
         if ($HayReview == false) {
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=Review.php");
+            header("Location:index.php?accion=Review");
             exit();
         }
         
         $HayPromedio = $this->ReviewModel->agarrarPromedio();
         if ($HayPromedio == false) {
             $_SESSION['mensaje'] = "No se puede avaliar en este momento.";
-            header("Location:index.php?accion=Review.php");
+            header("Location:index.php?accion=Review");
             exit(); 
         }
         
