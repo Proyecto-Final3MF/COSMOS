@@ -14,10 +14,9 @@ class ReviewC {
     public function FormularioR() {
         $id = $_GET['id_solicitud'] ?? null;
         
-        // Initialize variables for the view
-        $rating = 0; // Default rating for an unreviewed form (0 is safe since 1-10 are used)
+        $rating = 0;
         $Comentario = '';
-        $id_solicitud = $id; // Set this to the current solicitud ID
+        $id_solicitud = $id;
 
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
@@ -28,12 +27,9 @@ class ReviewC {
         $YaExiste = $this->ReviewModel->YaAvaliado($id);
 
         if ($YaExiste) {
-            // Since the model now returns a single associative array, we can use it directly
-            // The rating comes from the DB (e.g., 1 to 5) and is multiplied by 2 in the controller 
-            // to match the 1 to 10 scale in the HTML form.
             $rating = ($YaExiste['rating'] ?? 0) * 2; 
-            $Comentario = $YaExiste['Comentario'] ?? '';
-            $id_solicitud = $YaExiste['id_solicitud'] ?? $id; // Use existing ID, or fallback to the current $id
+            $Comentario = $YaExiste['comentario'] ?? '';
+            $id_solicitud = $YaExiste['id_solicitud'] ?? $id;
         }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
@@ -46,7 +42,6 @@ class ReviewC {
 
         $id_tecnico = $datosSolicitud['tecnico_id'];
 
-        // All necessary variables ($id_tecnico, $rating, $Comentario, $id) are now available in the view
         include("Views/Solicitudes/review.php");
     }
 
@@ -86,7 +81,7 @@ class ReviewC {
             $ratingAntiguo = $YaExiste['rating'];
             $ComentarioAntiguo = $YaExiste['comentario'];
 
-            $ratingPromedio = ((($ratingPromedio * $CantReview) - $ratingAntiguo) + $rating) / $cantReview;
+            $ratingPromedio = ((($ratingPromedio * $CantReview) - $ratingAntiguo) + $rating) / $CantReview;
 
             $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
             header("Location:index.php?accion=listarST");
