@@ -2099,4 +2099,4 @@ label:hover, label:hover ~ label { color: #ffee00ff;  }
 
 input:checked + label:hover, input:checked ~ label:hover,
 input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label { color: #ffee00ff;  } 
+label:hover ~ input:checked ~ label { color: #ffee00ff;  }
