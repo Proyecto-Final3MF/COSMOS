@@ -206,7 +206,8 @@ class UsuarioC {
 
     public function PerfilTecnico() {
         $Tecnico = new Usuario();
-        $DatosTecnico->$Tecnico->getDatosTecnico();
+        $id_tecnico = $_GET['id'];
+        $DatosTecnico = $Tecnico->getDatosTecnico($id_tecnico);
         include("Views/Usuario/Tecnico/Perfil.php");
     }
 

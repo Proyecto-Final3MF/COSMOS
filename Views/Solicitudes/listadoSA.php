@@ -54,7 +54,7 @@ require_once("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                         <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
-                            <td><?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?></td>
+                            <td><a href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>"><?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?></a></td>
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
