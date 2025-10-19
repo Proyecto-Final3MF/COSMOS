@@ -5,9 +5,11 @@ require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
     private $historialController;
+    private $reviewController;
 
     public function __construct(){
         $this->historialController = new HistorialController();
+        $this->reviewController = new ReviewC();
     }
 
     public function login() {
@@ -206,8 +208,10 @@ class UsuarioC {
 
     public function PerfilTecnico() {
         $Tecnico = new Usuario();
+        $Reviews = new Review();
         $id_tecnico = $_GET['id'];
         $DatosTecnico = $Tecnico->getDatosTecnico($id_tecnico);
+        $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
         include("Views/Usuario/Tecnico/Perfil.php");
     }
 
