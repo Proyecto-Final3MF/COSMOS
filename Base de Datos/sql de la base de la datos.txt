@@ -14,7 +14,9 @@ CREATE TABLE usuario (
     contrasena VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     foto_perfil VARCHAR(255) DEFAULT 'Assets/imagenes/perfil/fotodefault.webp',
-    rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id)
+    rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id),
+    cant_review INT,
+    promedio DOUBLE
 );
 
 CREATE TABLE producto (
@@ -84,7 +86,10 @@ CREATE TABLE reviews (
     id_solicitud INT, FOREIGN KEY (id_solicitud) REFERENCES  solicitud(id),
     id_tecnico INT, FOREIGN KEY (id_tecnico) REFERENCES  usuario(id),
     id_cliente INT, FOREIGN KEY (id_cliente) REFERENCES  usuario(id),
-    comentario VARCHAR(255)
+    rating DOUBLE,
+    comentario VARCHAR(255),
+    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_edicion DATETIME ON UPDATE CURRENT_TIMESTAMP;
 );
 
 INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
