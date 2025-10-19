@@ -29,6 +29,11 @@ require_once ("./Views/include/UH.php");
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
+                <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                    <th>Técnico</th>
+                <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                    <th>Cliente</th>
+                <?php endif; ?>
                 <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
@@ -48,6 +53,11 @@ require_once ("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                            <td><?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?></td>
+                        <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                            <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
+                        <?php endif; ?>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 
