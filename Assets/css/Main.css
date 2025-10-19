@@ -2063,7 +2063,7 @@ p.inicio44 {
 /* y aca termina el css de animaciones para inicio */
 
 
-/* Review.php */
+/* Estrellas */
 
 .rate {
     display: inline-block;
@@ -2094,19 +2094,15 @@ p.inicio44 {
     padding-right: 0;
 }
 
-/* 1. Rule to make the SELECTED star and all stars before it YELLOW on BOTH pages */
-/* This is the rule you need to keep, and it doesn't involve :hover */
 input:checked ~ label {
     color: #ffee00ff;
 }
 
-/* 2. Rules to ONLY apply the HOVER effect on the interactive form */
 #interactive-rating label:hover,
 #interactive-rating label:hover ~ label {
-    color: #ffee00ff; /* Stars turn yellow when hovered (on the interactive form) */
+    color: #ffee00ff;
 }
 
-/* 3. Rules for hover on the interactive form when a star is already checked */
 #interactive-rating input:checked + label:hover,
 #interactive-rating input:checked ~ label:hover,
 #interactive-rating input:checked ~ label:hover ~ label,
