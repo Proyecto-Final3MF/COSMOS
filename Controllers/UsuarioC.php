@@ -196,12 +196,18 @@ class UsuarioC {
 
         $usuario = new Usuario();
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
-        include("views/Usuario/Admin/listarU.php");
+        include("Views/Usuario/Admin/listarU.php");
     }
 
     public function PreviewU() {
         $usuario = new Usuario();
         return $usuario->PreviewU();
+    }
+
+    public function PerfilTecnico() {
+        $Tecnico = new Usuario();
+        $DatosTecnico->$Tecnico->getDatosTecnico();
+        include("Views/Usuario/Tecnico/Perfil.php");
     }
 
     public function logout() {
