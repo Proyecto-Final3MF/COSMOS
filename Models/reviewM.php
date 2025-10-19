@@ -14,6 +14,7 @@ class Review {
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc(); 
     }
+
     public function agarrarPromedio() {
         $sql = "SELECT promedio FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
@@ -63,5 +64,14 @@ class Review {
         }
 
         return true;
+    }
+
+    public function getTecnico($id) {
+        $sql = "SELECT id_tecnico FROM solicitud WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        return $resultado->fetch_assoc();
     }
 }

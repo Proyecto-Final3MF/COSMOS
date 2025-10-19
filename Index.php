@@ -194,6 +194,11 @@ switch ($accion) {
     $controller->listarSLU();
     break;
 
+  case 'FormularioReview':
+    $controller = new ReviewC();
+    $controller->FormularioR();
+    break;
+
   case 'AddReview':
     $controller = new ReviewC();
     $controller->AddReview();
