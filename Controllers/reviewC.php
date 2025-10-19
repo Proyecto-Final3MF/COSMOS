@@ -13,9 +13,10 @@ class ReviewC {
 
     public function FormularioR() {
         $id = $_GET['id_solicitud'] ?? null;
+        
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=listarST");
             exit();
         }
 
@@ -37,24 +38,25 @@ class ReviewC {
         $Comentario = $_POST['Comentario'] ?? '';
         $id_tecnico = $_POST['id_tecnico'];
         $id_cliente = $_SESSION['id'];
+        $id_solicitud = $_POST['id_solicitud'] ?? null;
         
         if ($rating == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
-            header("Location:index.php?accion=FormularioReview");
+            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
         
-        $HayReview = $this->ReviewModel->agarrarCantReview();
-        if ($HayReview == false) {
-            $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=FormularioReview");
+        $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
+        if ($HayReview === null) {
+            $_SESSION['mensaje'] = "No se puede evaluar en este momento porfalta de cant_review.";
+            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
         
-        $HayPromedio = $this->ReviewModel->agarrarPromedio();
-        if ($HayPromedio == false) {
-            $_SESSION['mensaje'] = "No se puede avaliar en este momento.";
-            header("Location:index.php?accion=FormularioReview");
+        $HayPromedio = $this->ReviewModel->agarrarPromedio($id_tecnico);
+        if ($HayPromedio === null) {
+            $_SESSION['mensaje'] = "No se puede avaliar en este momento por falta de promedio.";
+            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
         
@@ -64,7 +66,7 @@ class ReviewC {
         
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
-        $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $comentario);
+        $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario);
         header("Location:index.php?accion=listarST");
         exit();
     }

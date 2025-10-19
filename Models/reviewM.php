@@ -6,31 +6,33 @@ class Review {
         $this->conn = conectar();
     }
 
-    public function agarrarCantReview () {
+   public function agarrarCantReview ($id_tecnico) {
         $sql = "SELECT cant_review FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc(); 
+        $fila = $resultado->fetch_assoc(); 
+        return $fila['cant_review']; 
     }
 
-    public function agarrarPromedio() {
+    public function agarrarPromedio($id_tecnico) {
         $sql = "SELECT promedio FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc();
+        $fila = $resultado->fetch_assoc();
+        return $fila['promedio'];
     }
 // Asumiendo que esta función es parte de una clase que tiene acceso a la conexión a la base de datos.
-    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $comentario) {
+    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario) {
         // 1. Obtener la conexión a la base de datos (adaptar según tu clase)
 
         $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
         
         // Preparar la sentencia
-        if ($stmt1 = $conn->prepare($sql1)) {
+        if ($stmt1 = $this->$conn->prepare($sql1)) {
             $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
             
             // Ejecutar
