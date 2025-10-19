@@ -8,7 +8,7 @@ foreach ($ReviewsTecnico as $review):
 echo $review['comentario']." ".$review['fecha_creacion']." ".$review['fecha_edicion'];
 
 ?>
-<fieldset class="rate ratings-list">
+<fieldset class="rate ratings-list" id="static-rating">
     <input type="radio" id="rating10" name="rating" value="10" <?= ($review['rating']*2 == 10) ? 'checked' : '' ?> /><label for="rating10" title="5 stars"></label>
     <input disabled type="radio" id="rating9" name="rating" value="9" <?= ($review['rating']*2 == 9) ? 'checked' : '' ?> /><label class="half" for="rating9" title="4 1/2 stars"></label>
     <input disabled type="radio" id="rating8" name="rating" value="8" <?= ($review['rating']*2 == 8) ? 'checked' : '' ?> /><label for="rating8" title="4 stars"></label>
