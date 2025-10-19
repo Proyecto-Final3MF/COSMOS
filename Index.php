@@ -6,6 +6,7 @@ require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
 require_once("Controllers/CategoriaC.php");
+require_once("Controllers/ReviewC.php");
 require_once("Models/ProductoM.php");
 
 $accion = $_GET['accion'] ?? 'index';
