@@ -129,7 +129,7 @@ class Usuario {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ORDER BY id DESC LIMIT 10";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC); // Correctly returns an array of users
+            return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
             return [];
         }
@@ -149,7 +149,7 @@ class Usuario {
 
         if ($success) {
             $resultado = $stmt->get_result();
-            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $data = $resultado->fetch_assoc();
             $stmt->close();
                     
             return $data;
