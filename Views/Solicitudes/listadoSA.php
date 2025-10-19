@@ -1,6 +1,13 @@
 <?php
 require_once("./Views/include/UH.php");
 
+// Definiciones de ROL_CLIENTE y ROL_TECNICO (asumiendo que están definidas en UH.php o en otro lugar)
+// Si no están definidas, debes definirlas aquí o donde se cargue el controlador.
+// Ejemplo:
+// define('ROL_CLIENTE', 2);
+// define('ROL_TECNICO', 3);
+// Asumiré que 1 es Administrador, 2 Cliente, 3 Técnico.
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +18,7 @@ require_once("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
-</head>
+    </head>
 
 <body>
     <br>
@@ -32,6 +39,11 @@ require_once("./Views/include/UH.php");
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
+                <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                    <th>Técnico</th>
+                <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                    <th>Cliente</th>
+                <?php endif; ?>
                 <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
@@ -49,26 +61,38 @@ require_once("./Views/include/UH.php");
                         </td>
                         <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                        <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                            <td><?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?></td>
+                        <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                            <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
+                        <?php endif; ?>
                         <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                         <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                         <td>
                             <div class="btn-group-actions d-flex">
-                                <?php if ($_SESSION['rol'] == 1): ?>
+                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                                     <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="icon-btn edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php
-                                $usuarioDestino = ($_SESSION['rol'] == ROL_TECNICO)
-                                    ? $resultado['cliente_id']
-                                    : $resultado['tecnico_id'];
+                                $usuarioDestino = 0;
+                                if (isset($_SESSION['rol'])) {
+                                    if ($_SESSION['rol'] == ROL_TECNICO) {
+                                        $usuarioDestino = $resultado['cliente_id'];
+                                    } elseif ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == 1) { // Asumiendo rol 1 es Admin
+                                        $usuarioDestino = $resultado['tecnico_id'];
+                                    }
+                                }
                                 ?>
 
-                                <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
-                                    class="btn btn-boton2">
-                                    <img src="Assets/imagenes/chat.png" alt="chat" width="40">
-                                </a>
+                                <?php if ($usuarioDestino): ?>
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                        class="btn btn-boton2">
+                                        <img src="Assets/imagenes/chat.png" alt="chat" width="40">
+                                    </a>
+                                <?php endif; ?>
 
                                 <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                                     <i class="fa fa-file-alt"></i>
@@ -86,7 +110,7 @@ require_once("./Views/include/UH.php");
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="7">
+                    <td colspan="<?= (isset($_SESSION['rol']) && ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == ROL_TECNICO)) ? 8 : 7; ?>">
                         No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
                             <a href="index.php?accion=listarTL">
