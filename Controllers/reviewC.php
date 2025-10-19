@@ -35,6 +35,7 @@ class ReviewC {
 
     public function AddReview() {
         $rating = $_POST['rating'] ?? 0;
+        $rating = $rating/2;
         $Comentario = $_POST['Comentario'] ?? '';
         $id_tecnico = $_POST['id_tecnico'];
         $id_cliente = $_SESSION['id'];
@@ -63,10 +64,11 @@ class ReviewC {
         $ratingPromedio = $HayPromedio;
         $CantReview = $HayReview;
         $ratingPromedio = (($ratingPromedio * $CantReview) + $rating)/($CantReview + 1);
+        $CantReview += 1;
         
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
-        $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario);
+        $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
         header("Location:index.php?accion=listarST");
         exit();
     }

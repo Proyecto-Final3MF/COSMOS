@@ -26,13 +26,13 @@ class Review {
         return $fila['promedio'];
     }
 // Asumiendo que esta función es parte de una clase que tiene acceso a la conexión a la base de datos.
-    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario) {
+    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
         // 1. Obtener la conexión a la base de datos (adaptar según tu clase)
 
         $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
         
         // Preparar la sentencia
-        if ($stmt1 = $this->$conn->prepare($sql1)) {
+        if ($stmt1 = $this->conn->prepare($sql1)) {
             $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
             
             // Ejecutar
@@ -48,11 +48,11 @@ class Review {
             return false;
         }
 
-        $sql2 = "INSERT INTO reviews (id_tecnico, id_cliente, rating, comentario) VALUES (?, ?, ?, ?)";
+        $sql2 = "INSERT INTO reviews (id_solicitud, id_tecnico, id_cliente, rating, comentario) VALUES (?, ?, ?, ?, ?)";
         
         // Preparar la sentencia
-        if ($stmt2 = $conn->prepare($sql2)) {
-            $stmt2->bind_param("iids", $id_tecnico, $id_cliente, $rating, $Comentario);
+        if ($stmt2 = $this->conn->prepare($sql2)) {
+            $stmt2->bind_param("iiids", $id_solicitud, $id_tecnico, $id_cliente, $rating, $Comentario);
         
             if (!$stmt2->execute()) {
                 error_log("Error al ejecutar INSERT en reviews: " . $stmt2->error);
@@ -66,14 +66,5 @@ class Review {
         }
 
         return true;
-    }
-
-    public function getTecnico($id) {
-        $sql = "SELECT tecnico_id FROM solicitud WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc();
     }
 }
