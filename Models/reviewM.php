@@ -65,4 +65,14 @@ class Review {
 
         return true;
     }
+
+    public function YaAvaliado($id) {
+        $sql = "SELECT * FROM review WHERE id_solicitud = ?";
+        $resultado = $this->conexion->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
 }

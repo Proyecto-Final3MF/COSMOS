@@ -20,6 +20,15 @@ class ReviewC {
             exit();
         }
 
+        $YaExiste = $this->ReviewModel->YaAvaliado($id);
+
+        if ($YaExiste) {
+            $rating = $YaExiste['rating'] ?? 0;
+            $rating = $rating * 2;
+            $Comentario = $YaExiste['Comentario'] ?? '';
+            $id_solicitud = $YaExiste['id_solicitud'] ?? null;
+        }
+
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
 
         if (!$datosSolicitud) {
@@ -44,6 +53,12 @@ class ReviewC {
         if ($rating == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            exit();
+        }
+
+        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
+        if ($YaExiste) {
+            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud);
             exit();
         }
         
