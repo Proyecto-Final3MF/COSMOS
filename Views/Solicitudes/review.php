@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="./Assets/css/Main.css">
 <form action="" method="get">
+    <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
+    <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
+    <input type="hidden" name="id_solicitud" value="<?=$id ?>">
     <fieldset class="rate">
         <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
         <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>

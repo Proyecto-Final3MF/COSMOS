@@ -11,7 +11,7 @@ class ReviewC {
         $this->solicitudModel = new Solicitud();
     }
 
-    public function formularioR() {
+    public function FormularioR() {
         $id = $_GET['id_solicitud'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
@@ -40,21 +40,21 @@ class ReviewC {
         
         if ($rating == 0) {
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
-            header("Location:index.php?accion=Review");
+            header("Location:index.php?accion=FormularioReview");
             exit();
         }
         
         $HayReview = $this->ReviewModel->agarrarCantReview();
         if ($HayReview == false) {
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=Review");
+            header("Location:index.php?accion=FormularioReview");
             exit();
         }
         
         $HayPromedio = $this->ReviewModel->agarrarPromedio();
         if ($HayPromedio == false) {
             $_SESSION['mensaje'] = "No se puede avaliar en este momento.";
-            header("Location:index.php?accion=Review");
+            header("Location:index.php?accion=FormularioReview");
             exit(); 
         }
         
