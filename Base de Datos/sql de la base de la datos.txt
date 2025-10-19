@@ -15,8 +15,8 @@ CREATE TABLE usuario (
     email VARCHAR(255) NOT NULL,
     foto_perfil VARCHAR(255) DEFAULT 'Assets/imagenes/perfil/fotodefault.webp',
     rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id),
-    cant_review INT,
-    promedio DOUBLE
+    cant_review INT DEFAULT 0,
+    promedio DOUBLE DEFAULT 0.0
 );
 
 CREATE TABLE producto (
@@ -100,7 +100,8 @@ INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
 INSERT INTO `rol`(`id`, `nombre`) VALUES ('3','Admin');
-INSERT INTO `categoria` (`id`, `nombre`) VALUES
+INSERT INTO `usuario`(`id`, `nombre`) VALUES ('3','Admin');
+INSERT INTO `usuario`(`id`, `nombre`, `contrasena`, `email`, `foto_perfil`, `rol_id`, `cant_review`, `promedio`) VALUES ('1','Admin','12345678','admin@gmail.com','Assets/imagenes/perfil/fotodefault.webp','3','0','0');
 (1, 'Laptop'),
 (2, 'Celular'),
 (3, 'Televisión'),
