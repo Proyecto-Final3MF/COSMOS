@@ -22,18 +22,18 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
 
 <div class="btn-container fade-slide">
     <a href="Index.php?accion=listarTL">
-        <button class="btn btn-boton444 btn-disponibles">
-            <i class="fa-solid fa-list"></i> Solicitudes Disponibles
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-list btn-disponibles"></i> Solicitudes Disponibles
         </button>
     </a>
     <a href="Index.php?accion=listarSA">
-        <button class="btn btn-boton444 btn-aceptadas">
-            <i class="fa-solid fa-check-circle"></i> Solicitudes Aceptadas
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-check-circle btn-aceptadas"></i> Solicitudes Aceptadas
         </button>
     </a>
     <a href="Index.php?accion=listarST">
-        <button class="btn btn-boton444 btn-terminadas">
-            <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> Solicitudes Terminadas
         </button>
     </a>
 </div>

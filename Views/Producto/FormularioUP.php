@@ -47,8 +47,8 @@ require_once ("./Views/include/UH.php");
         <div class="input-archivo">
 
             <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" autocomplete="off" required hidden>
-            <label for="imagen" class="btn-boton3-input">Seleccionar Archivo</label>
-            <span id="nombre-archivo-seleccionado">Ningún archivo seleccionado</span>
+            <label for="imagen" class="btn-boton3-input">Seleccionar Foto</label>
+            <span id="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
     
         </div>
 
