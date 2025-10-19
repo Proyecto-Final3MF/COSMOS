@@ -67,12 +67,28 @@ class Review {
     }
 
     public function YaAvaliado($id) {
-        $sql = "SELECT * FROM review WHERE id_solicitud = ?";
-        $resultado = $this->conexion->query($sql);
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
+        $sql = "SELECT * FROM reviews WHERE id_solicitud = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        if ($stmt === false) {
+            error_log("Prepare failed: " . $this->conn->error);
+            return null; // Return null on failure
+        }
+        
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            $resultado = $stmt->get_result(); 
+
+            // Change from fetch_all to fetch_assoc to get a single row
+            if ($resultado && $resultado->num_rows > 0) {
+                return $resultado->fetch_assoc(); // Returns a single associative array (the review)
+            } else {
+                return null; // Return null if no review is found
+            }
         } else {
-            return [];
+            error_log("Execute failed: " . $stmt->error);
+            return null; // Return null on execution failure
         }
     }
 
