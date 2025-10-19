@@ -2094,9 +2094,22 @@ p.inicio44 {
     padding-right: 0;
 }
 
-input:checked ~ label,
-label:hover, label:hover ~ label { color: #ffee00ff;  }
+/* 1. Rule to make the SELECTED star and all stars before it YELLOW on BOTH pages */
+/* This is the rule you need to keep, and it doesn't involve :hover */
+input:checked ~ label {
+    color: #ffee00ff;
+}
 
-input:checked + label:hover, input:checked ~ label:hover,
-input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label { color: #ffee00ff;  }
+/* 2. Rules to ONLY apply the HOVER effect on the interactive form */
+#interactive-rating label:hover,
+#interactive-rating label:hover ~ label {
+    color: #ffee00ff; /* Stars turn yellow when hovered (on the interactive form) */
+}
+
+/* 3. Rules for hover on the interactive form when a star is already checked */
+#interactive-rating input:checked + label:hover,
+#interactive-rating input:checked ~ label:hover,
+#interactive-rating input:checked ~ label:hover ~ label,
+#interactive-rating label:hover ~ input:checked ~ label {
+    color: #ffee00ff;
+}
