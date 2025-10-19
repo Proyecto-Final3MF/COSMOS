@@ -343,4 +343,3 @@ switch ($accion) {
     }
     exit();
 }
-
