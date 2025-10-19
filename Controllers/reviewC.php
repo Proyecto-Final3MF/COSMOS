@@ -69,15 +69,22 @@ class ReviewC {
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
-
-        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
-        if ($YaExiste) {
-            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud);
-            exit();
-        }
         
         $ratingPromedio = $HayPromedio;
         $CantReview = $HayReview;
+
+        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
+        if ($YaExiste) {
+            $ratingAntiguo = $YaExiste['rating'];
+            $ComentarioAntiguo = $YaExiste['comentario'];
+
+            $ratingPromedio = ((($ratingPromedio * $CantReview) - $ratingAntiguo) + $rating) / $cantReview;
+
+            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
+            header("Location:index.php?accion=listarST");
+            exit();
+        }
+
         $ratingPromedio = (($ratingPromedio * $CantReview) + $rating)/($CantReview + 1);
         $CantReview += 1;
         
