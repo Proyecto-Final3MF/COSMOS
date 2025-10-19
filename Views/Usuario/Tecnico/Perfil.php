@@ -1,8 +1,24 @@
+<?php require_once ("./Views/include/UH.php"); ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?=$DatosTecnico['nombre']?></title>
+</head>
+<body>
 <link rel="stylesheet" href="Assets/css/main.css">
-<img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt=""/>
-<?php
-echo $DatosTecnico['nombre']." ". $DatosTecnico['email']." Cantidad de Reviews: ".$DatosTecnico['cant_review']." Promedio: ".$DatosTecnico['promedio'];
-?><br>
+<div class="profile-info">
+    <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
+    <div class="profile-details">
+        <?php
+        echo '<p>'.$DatosTecnico['nombre'].' '. $DatosTecnico['email'].'</p>';
+        echo '<p>Cantidad de Reviews: '.$DatosTecnico['cant_review'].' Promedio: '.$DatosTecnico['promedio'].'</p>';
+        ?>
+    </div>
+</div>
+<br>
 <?php
 $i = 0; 
 foreach ($ReviewsTecnico as $review): 
@@ -30,3 +46,5 @@ echo " Editado en: ".$review['fecha_edicion'];
 <?php endforeach; ?>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
+</body>
+</html>
