@@ -1,5 +1,7 @@
 <?php
 require_once ("./Views/include/popup.php");
+require_once(__DIR__ . '/../Models/SolicitudM.php');
+require_once(__DIR__ . '/../Models/ReviewM.php');
 
 class ReviewC {
     private $ReviewModel;
