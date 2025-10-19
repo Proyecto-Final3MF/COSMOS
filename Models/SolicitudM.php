@@ -78,7 +78,8 @@ class Solicitud {
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN usuario u ON s.cliente_id = u.id
-                WHERE s.estado_id = 1 ";
+                WHERE s.estado_id = 1 
+                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
         $params = [];
         $param_types = '';
         $stmt = null;

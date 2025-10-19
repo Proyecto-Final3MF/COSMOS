@@ -86,7 +86,7 @@ class SolicitudC {
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
-           $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+           //$this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -109,8 +109,13 @@ class SolicitudC {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
         $solicitud->borrarS($id);
-        $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
-        header("Location: index.php?accion=redireccion");
+        if($solicitud){
+            $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
+            header("Location: index.php?accion=redireccion");
+        } else {
+            $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
+            header("Location: index.php?accion=redireccion");
+        }
     }
 
     public function listarSLU(){
@@ -281,7 +286,7 @@ class SolicitudC {
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
-            $this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
+            //$this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
             
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);

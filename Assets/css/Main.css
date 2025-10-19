@@ -387,12 +387,14 @@ body {
 .btn-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 20px;
 }
 
 .btn-boton444 {
+    background-color: #fff;
     display: flex;
     flex-direction: column;      
     align-items: center;
@@ -402,31 +404,32 @@ body {
     width: 160px;
     height: 130px;
     border-radius: 14px;
+    border: 1px solid #979797;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    border: none;
-    color: #fff;
+    color: #000000;
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
     text-decoration: none;
+    box-shadow: 0 2px  rgba(0, 0, 0, 0.3);
 }
 
 a:has(> .btn-boton444) {
     text-decoration: none;
 }
 
-.btn-mis-productos { background-color: #be4949; }
-.btn-sin-asignar { background-color: #f4a261; }
-.btn-aceptadas { background-color: #2a9d8f; }
-.btn-terminadas { background-color: #264653; }
-.btn-disponibles { background-color: #f4a261; }
-.btn-crear { background-color: #e83e8c; }
-.btn-listar { background-color: #f3722c; }
-.btn-historial { background-color: #577590; }
-.btn-usuarios { background-color: #43aa8b; }
-.btn-crearU { background-color: #f80707; }
+.btn-mis-productos { color: #be4949; }
+.btn-sin-asignar { color: #f4a261; }
+.btn-aceptadas { color: #2a9d8f; }
+.btn-terminadas { color: #264653; }
+.btn-disponibles { color: #f4a261; }
+.btn-crear { color: #e83e8c; }
+.btn-listar { color: #f3722c; }
+.btn-historial { color: #577590; }
+.btn-usuarios { color: #43aa8b; }
+.btn-crearU { color: #f80707; }
 
 .btn-boton444 i {
     font-size: 2.6rem;          
@@ -441,23 +444,26 @@ a:has(> .btn-boton444) {
 }
 
 .btn-boton4445 {
+    background-color: #fff;
     display: flex;
     flex-direction: column;      
     align-items: center;
     justify-content: center;
     padding: 15%;
-    width: 400px;
-    height: 70px;
+    width: 200%;
+    height: 70%;
     border-radius: 14px;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    border: none;
-    color: #fff;
+    border: 1px solid #979797;
+    color: #ff0505;
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
     text-decoration: none;
+    box-shadow: 0 2px  rgba(0, 0, 0, 0.3);
+    margin: 0;
 }
 
 a:has(> .btn-boton4445) {
@@ -482,6 +488,7 @@ a:has(> .btn-boton4445) {
 
 
 .btn-boton4442 {
+    background-color: #fff;
     display: flex;
     flex-direction: column;      
     align-items: center;
@@ -494,12 +501,13 @@ a:has(> .btn-boton4445) {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    border: none;
-    color: #fff;
+    border: 1px solid #979797;
+    color: #e83e8c;
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
     text-decoration: none;
+    box-shadow: 0 2px  rgba(0, 0, 0, 0.3);
 }
 
 a:has(> .btn-boton4442) {
