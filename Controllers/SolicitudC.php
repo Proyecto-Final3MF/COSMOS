@@ -206,8 +206,6 @@ class SolicitudC {
         // Obtener la lista de estados para el select
         $estados = $this->solicitudModel->obtenerEstados();
 
-        // Si todo está bien, simplemente incluye la vista.
-        // No hay necesidad de una redirección aquí.
         include("./Views/Solicitudes/editarSF.php");
     }
     
