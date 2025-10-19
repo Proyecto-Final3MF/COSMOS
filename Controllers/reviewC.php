@@ -55,12 +55,6 @@ class ReviewC {
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
-
-        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
-        if ($YaExiste) {
-            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud);
-            exit();
-        }
         
         $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
         if ($HayReview === null) {
@@ -74,6 +68,12 @@ class ReviewC {
             $_SESSION['mensaje'] = "No se puede avaliar en este momento por falta de promedio.";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
+        }
+
+        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
+        if ($YaExiste) {
+            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud);
+            exit();
         }
         
         $ratingPromedio = $HayPromedio;
