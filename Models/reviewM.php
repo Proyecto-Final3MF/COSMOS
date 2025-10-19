@@ -129,4 +129,29 @@ class Review {
 
         return true;
     }
+
+    public function listarReviewsTecnico($id_tecnico) {
+        $sql = "SELECT * FROM reviews WHERE id_tecnico = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_tecnico);
+
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
+        $success = $stmt->execute();
+
+         if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+                    
+            return $data;
+        } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return [];
+        }
+    }
 }
