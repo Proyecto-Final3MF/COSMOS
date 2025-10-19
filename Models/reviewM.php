@@ -25,10 +25,8 @@ class Review {
         $fila = $resultado->fetch_assoc();
         return $fila['promedio'];
     }
-// Asumiendo que esta función es parte de una clase que tiene acceso a la conexión a la base de datos.
-    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
-        // 1. Obtener la conexión a la base de datos (adaptar según tu clase)
 
+    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
         $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
         
         // Preparar la sentencia
