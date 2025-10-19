@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./Assets/css/Main.css">
-<form action="" method="get">
+<form action="index.php?accion=AddReview" method="post">
     <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
     <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
     <input type="hidden" name="id_solicitud" value="<?=$id ?>">

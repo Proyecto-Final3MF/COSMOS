@@ -65,5 +65,7 @@ class ReviewC {
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
         $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $comentario);
+        header("Location:index.php?accion=listarST");
+        exit();
     }
 }
