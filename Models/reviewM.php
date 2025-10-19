@@ -75,4 +75,43 @@ class Review {
             return [];
         }
     }
+
+    public function updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview) {
+        $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
+        
+        // Preparar la sentencia
+        if ($stmt1 = $this->conn->prepare($sql1)) {
+            $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
+            
+            // Ejecutar
+            if (!$stmt1->execute()) {
+                // Manejo de error
+                error_log("Error al ejecutar UPDATE en usuario: " . $stmt1->error);
+                $stmt1->close();
+                return false;
+            }
+            $stmt1->close();
+        } else {
+            error_log("Error al preparar la sentencia SQL1: " . $conn->error);
+            return false;
+        }
+
+        $sql2 = "UPDATE reviews SET rating = ?, comentario = ? WHERE id_solicitud = ?";
+
+        if ($stmt2 = $this->conn->prepare($sql2)) {
+            $stmt2->bind_param("isi", $rating, $Comentario, $id_solicitud);
+        
+            if (!$stmt2->execute()) {
+                error_log("Error al ejecutar INSERT en reviews: " . $stmt2->error);
+                $stmt2->close();
+                return false;
+            }
+            $stmt2->close();
+        } else {
+            error_log("Error al preparar la sentencia SQL2: " . $conn->error);
+            return false;
+        }
+
+        return true;
+    }
 }
