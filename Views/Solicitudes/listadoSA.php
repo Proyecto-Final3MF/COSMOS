@@ -1,13 +1,5 @@
 <?php
 require_once("./Views/include/UH.php");
-
-// Definiciones de ROL_CLIENTE y ROL_TECNICO (asumiendo que están definidas en UH.php o en otro lugar)
-// Si no están definidas, debes definirlas aquí o donde se cargue el controlador.
-// Ejemplo:
-// define('ROL_CLIENTE', 2);
-// define('ROL_TECNICO', 3);
-// Asumiré que 1 es Administrador, 2 Cliente, 3 Técnico.
-
 ?>
 
 <!DOCTYPE html>
