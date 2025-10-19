@@ -53,8 +53,11 @@ require_once ("./Views/include/UH.php");
                 
                 <td>
                 <div class="btn-group-actions">
-                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial" >
+                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                 <i class="fa fa-file-alt"></i>
+                </a>
+                <a href="index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                <i class="fa-solid fa-star"></i>
                 </a>
                 </div>
                 </td>
