@@ -1,4 +1,7 @@
+<?php require_once ("./Views/include/UH.php"); ?>
 <link rel="stylesheet" href="./Assets/css/Main.css">
+<div class="contenedor-formulario">
+<section class="formularios99">
 <form action="index.php?accion=AddReview" method="post">
     <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
     <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
@@ -18,5 +21,7 @@
     <input type="text" name="Comentario" id="Comentario" value="<?= htmlspecialchars($Comentario) ?>"/>
     <button type="submit">Enviar</button>
 </form>
+</section>
+</div>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
