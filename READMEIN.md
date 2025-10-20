@@ -23,3 +23,11 @@ The first step is to access our site from your preferred browser. Once there, cl
 <p align="center">
 <img src="Assets/imagenes/CAP1.png" alt="cap1" width="50%">
 </p>
+
+## Now you must register with your details, choose the Client role and a photo, but the latter is optional.
+
+### Once the fields are completed, click on save and continue.
+
+<p align="center">
+<img src="Assets/imagenes/CAP2.png" alt="cap1" width="50%">
+</p>
