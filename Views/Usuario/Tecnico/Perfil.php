@@ -24,7 +24,7 @@ $i = 0;
 foreach ($ReviewsTecnico as $review): 
     $i++;
 ?>
-<div class="reviews">
+<div class="reviews list-item">
 <fieldset class="rate ratings-list" id="static-rating-<?= $i ?>">
     <input disabled type="radio" id="rating10-<?= $i ?>" name="rating-<?= $i ?>" value="10" <?= ($review['rating']*2 == 10) ? 'checked' : '' ?> /><label for="rating10-<?= $i ?>" title="5 stars"></label>
     <input disabled type="radio" id="rating9-<?= $i ?>" name="rating-<?= $i ?>" value="9" <?= ($review['rating']*2 == 9) ? 'checked' : '' ?> /><label class="half" for="rating9-<?= $i ?>" title="4 1/2 stars"></label>
@@ -38,7 +38,9 @@ foreach ($ReviewsTecnico as $review):
     <input disabled type="radio" id="rating1-<?= $i ?>" name="rating-<?= $i ?>" value="1" <?= ($review['rating']*2 == 1) ? 'checked' : '' ?> /><label class="half" for="rating1-<?= $i ?>" title="1/2 star"></label>
 </fieldset>
 
-<?php echo $review['comentario']." ".$review['fecha_creacion'];
+<?php 
+echo $review['cliente']. "<br>"; 
+echo $review['comentario']." ".$review['fecha_creacion'];
 if ($review['fecha_edicion']) {
 echo " Editado en: ".$review['fecha_edicion'];
 }  ?>
