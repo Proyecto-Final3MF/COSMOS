@@ -38,12 +38,14 @@ class UsuarioC {
         }
 
         if (empty($usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
             header("Location: index.php?accion=register"); 
             exit();
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
             header("Location: index.php?accion=register"); 
             exit();
@@ -71,6 +73,7 @@ class UsuarioC {
                 // Historial
                 $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
+                $_SESSION['tipo_mensaje'] = "success";
                 $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
 
                 header("Location: index.php?accion=redireccion");
@@ -90,18 +93,21 @@ class UsuarioC {
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
             header("Location: index.php?accion=register"); 
             exit();
         }
 
         if (empty($usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
             header("Location: index.php?accion=register"); 
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$email' es invalido";
             header("Location: index.php?accion=register"); 
             exit();
@@ -128,6 +134,7 @@ class UsuarioC {
             $_SESSION['usuario'] = $nombre;
             $_SESSION['email'] = $email;
             $_SESSION['foto_perfil'] = $foto_perfil;
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {

@@ -37,6 +37,7 @@ class SolicitudC {
         $usuario_id = $_SESSION['id'] ?? '';
 
         if (empty($titulo) || $titulo === '' || empty($descripcion) || $descripcion === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "La solicitud debe tener un titulo y una descripcion";
             header("Location:index.php?accion=formularioS");
             exit();
@@ -45,6 +46,7 @@ class SolicitudC {
         $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
         if ($id_solicitud) {
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
@@ -76,14 +78,16 @@ class SolicitudC {
         $usuario_id = $_SESSION['id'] ?? '';
         
         if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '') {
-             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
-             header("Location: index.php?accion=redireccion");
-             exit();
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
+            header("Location: index.php?accion=redireccion");
+            exit();
         }
 
         $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
         if ($solicitud){
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             // Lógica adicional (historial, etc.)
            //$this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
@@ -100,8 +104,9 @@ class SolicitudC {
 
             header("Location: index.php?accion=listarSLU");
         } else {
-             $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
-             header("Location: index.php?accion=redireccion");
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
+            header("Location: index.php?accion=redireccion");
         }
     }
 
@@ -110,9 +115,11 @@ class SolicitudC {
         $id = $_GET['id'];
         $solicitud->borrarS($id);
         if($solicitud){
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
             header("Location: index.php?accion=redireccion");
         } else {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
             header("Location: index.php?accion=redireccion");
         }
@@ -145,6 +152,7 @@ class SolicitudC {
         $id_soli = $_GET['id_solicitud'] ?? null;
 
         if ($id_usuario === null || $id_soli === null) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de usuario o solicitud no proporcionado.";
             header("Location: index.php?accion=listarTL");
             exit();
@@ -153,6 +161,7 @@ class SolicitudC {
         $success = $this->solicitudModel->asignarS($id_usuario, $id_soli);
 
         if ($success) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
             $this->historiaC->registrarEvento($id_soli, "Solicitud asignada");
             require_once(__DIR__ . '/NotificacionC.php');
@@ -164,6 +173,7 @@ class SolicitudC {
             header("Location: index.php?accion=listarTL");
             exit();
         } else {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al aceptar la solicitud.";
             header("Location: index.php?accion=listarTL");
             exit();
@@ -195,6 +205,7 @@ class SolicitudC {
     public function editarSF(){
         $id = $_GET['id'] ?? null;
         if (!$id) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
             header("Location: index.php?accion=redireccion");
             exit();
@@ -203,6 +214,7 @@ class SolicitudC {
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
 
         if (!$datosSolicitud) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
             header("Location: index.php?accion=redireccion");
             exit();
@@ -224,6 +236,7 @@ class SolicitudC {
         $descAntigua = $datosSolicitud['descripcion'];
 
         if (!$id || empty($descripcion) || !$estado_id || $descripcion === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             header("Location: index.php?accion=redireccion");
             exit();
@@ -232,6 +245,7 @@ class SolicitudC {
         $nuevoEstado = $this->solicitudModel->obtenerNombreEstadoPorId($estado_id);
 
         if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
 
         // REGISTRAR CAMBIO DE ESTADO
@@ -254,6 +268,7 @@ class SolicitudC {
             header("Location: index.php?accion=redireccion");
             exit();
         } else {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al actualizar la solicitud.";
             header("Location: index.php?accion=redireccion");
             exit();
@@ -265,6 +280,7 @@ class SolicitudC {
         $usuarioId = $_SESSION['id'] ?? null;
 
         if ($id_soli === null || $usuarioId === null) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de solicitud o usuario no proporcionado.";
             header("Location: index.php?accion=listarSA");
             exit();
@@ -272,6 +288,7 @@ class SolicitudC {
         
         $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
         if (!$solicitud) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: La solicitud no existe.";
             header("Location: index.php?accion=listarSA");
             exit();
@@ -279,12 +296,14 @@ class SolicitudC {
 
         // Asegurarse de que el usuario es el técnico asignado o el cliente que la creó
         if ($solicitud['tecnico_id'] != $usuarioId && $solicitud['cliente_id'] != $usuarioId) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "No tienes permiso para cancelar esta solicitud.";
             header("Location: index.php?accion=listarSA");
             exit();
         }
 
          if ($this->solicitudModel->cancelarS($id_soli)) {
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
             //$this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
             
@@ -302,6 +321,7 @@ class SolicitudC {
             }
             exit();
         } else {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al cancelar la solicitud.";
             header("Location: index.php?accion=listarSA");
             exit();
