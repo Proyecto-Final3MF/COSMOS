@@ -1,3 +1,5 @@
+ @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+ 
  :root {
     --primary-color: #e83e8c;
     --secondary-color: #e83e8c;
@@ -2116,3 +2118,133 @@ p.inicio44 {
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
 
 /* y aca termina el css de animaciones para inicio */
+
+
+/* Estrellas */
+
+.rate {
+    display: inline-block;
+    border: 0;
+}
+
+.rate > input {
+    display: none;
+}
+
+.rate > label {
+    float: right;
+}
+
+.rate > label:before {
+    display: inline-block;
+    font-size: 2rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 ";
+}
+
+.rate .half:before {
+    content: "\f089 ";
+    position: absolute;
+    padding-right: 0;
+}
+
+input:checked ~ label {
+    color: #ffee00ff;
+}
+
+#interactive-rating label:hover,
+#interactive-rating label:hover ~ label {
+    color: #ffee00ff;
+}
+
+#interactive-rating input:checked + label:hover,
+#interactive-rating input:checked ~ label:hover,
+#interactive-rating input:checked ~ label:hover ~ label,
+#interactive-rating label:hover ~ input:checked ~ label {
+    color: #ffee00ff;
+}
+/* Fin de los estilos para estrellas */
+
+/* Perfil del Tecnico */
+
+.profile-info {
+    width: 280px;
+    margin: 20px;
+    float: left;
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger, nicer shadow */
+    background-color: #fff;
+    padding: 20px; /* Increased padding */
+    text-align: center;
+    /* Optional: Add a subtle transition for hover effects if you add them later */
+    transition: transform 0.3s ease;
+    position: fixed;
+}
+
+.profile-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #af4c91; /* Slightly thicker border for emphasis */
+    margin-bottom: 15px;
+    box-shadow: 0 0 0 3px #fff; /* White outline for contrast */
+}
+
+.profile-details {
+    width: 100%;
+    margin-top: 0;
+}
+
+.profile-details p {
+    margin: 8px 0; /* Increased margin for better spacing */
+    color: #555;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.profile-details p:first-child {
+    font-weight: bold;
+    font-size: 20px; /* Larger font */
+    color: #f700ff; /* Primary color */
+}
+
+.profile-details p:last-child {
+    font-style: italic;
+    color: #6c757d;
+    font-size: 14px; /* Slightly smaller for secondary info */
+}
+
+/* --- Reviews Section --- */
+.reviews {
+    /* To position reviews next to the profile-info, you'd adjust this area.
+       For now, let's keep it simple to ensure it flows nicely after the float is cleared, or start them to the right. */
+    margin: 20px 20px 20px 320px; /* Pushes the review section to the right of the profile box (280px wide + margins) */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.reviews:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Subtle hover effect */
+}
+
+.reviews p {
+    margin: 5px 0;
+}
+
+/* Style for client name */
+.reviews > :nth-child(2) { /* Targeting the element immediately after the fieldset (which is the client name echo) */
+    font-weight: bold;
+    color: #af4c91;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
