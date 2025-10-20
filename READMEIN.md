@@ -71,3 +71,31 @@ The first step is to access our site from your preferred browser. Once there, cl
 <p align="center">
 <img src="Assets/imagenes/CAP7.png" alt="cap1" width="50%">
 </p>
+
+## in accepted applications
+
+### Here you can see data such as the technician who accepted the request, its status, and you can start a conversation with the technician
+
+<p align="center">
+<img src="Assets/imagenes/CAP8.png" alt="cap1" width="50%">
+</p>
+
+## in the chat
+
+### In the chat you will have a conversation with the technician to agree on the price, delivery time, etc.
+
+<p align="center">
+<img src="Assets/imagenes/CAP9.png" alt="cap1" width="50%">
+</p>
+
+## your request is complete
+
+### Once your request is completed, in addition to receiving the notification, it will also be displayed under: Completed Requests. And through the previously viewed chat, you will arrange with the technician for the recovery of your device and payment to the technician.
+
+<p align="center">
+<img src="Assets/imagenes/CAP7.png" alt="cap1" width="50%">
+</p>
+
+<p align="center">
+<img src="Assets/imagenes/CAP10.png" alt="cap1" width="50%">
+</p>
