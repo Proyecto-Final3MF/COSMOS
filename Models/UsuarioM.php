@@ -135,15 +135,39 @@ class Usuario {
             $stmt->close();
             return [];
         }
-
     }
 
     public function PreviewU() {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ORDER BY id DESC LIMIT 10";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC); // Correctly returns an array of users
+            return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
+            return [];
+        }
+    }
+
+    public function getDatosTecnico($id_tecnico) {
+        $sql = "SELECT* FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
+        $stmt->bind_param("i", $id_tecnico);
+        $success = $stmt->execute();
+
+        if ($success) {
+            $resultado = $stmt->get_result();
+            $data = $resultado->fetch_assoc();
+            $stmt->close();
+                    
+            return $data;
+        } else {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
             return [];
         }
     }
