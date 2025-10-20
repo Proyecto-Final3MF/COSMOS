@@ -225,6 +225,11 @@ switch ($accion) {
     $controller->EditarSF();
     break;
 
+  case 'PerfilTecnico':
+    $controller = new UsuarioC();
+    $controller->PerfilTecnico();
+    break;
+
   //acciones para el rol admin
 
   case 'panelA':

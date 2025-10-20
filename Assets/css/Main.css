@@ -2063,7 +2063,7 @@ p.inicio44 {
 /* y aca termina el css de animaciones para inicio */
 
 
-/* Review.php */
+/* Estrellas */
 
 .rate {
     display: inline-block;
@@ -2094,9 +2094,65 @@ p.inicio44 {
     padding-right: 0;
 }
 
-input:checked ~ label,
-label:hover, label:hover ~ label { color: #ffee00ff;  }
+input:checked ~ label {
+    color: #ffee00ff;
+}
 
-input:checked + label:hover, input:checked ~ label:hover,
-input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label { color: #ffee00ff;  } 
+#interactive-rating label:hover,
+#interactive-rating label:hover ~ label {
+    color: #ffee00ff;
+}
+
+#interactive-rating input:checked + label:hover,
+#interactive-rating input:checked ~ label:hover,
+#interactive-rating input:checked ~ label:hover ~ label,
+#interactive-rating label:hover ~ input:checked ~ label {
+    color: #ffee00ff;
+}
+
+/* Perfil del Tecnico */
+
+.profile-info {
+    width: 280px;
+    margin: 20px;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #af4c91;
+    margin-bottom: 15px;
+}
+
+.profile-details {
+    width: 100%;
+    margin-top: 0;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.profile-details p:first-child {
+    font-weight: bold;
+    font-size: 18px;
+    color: #f700ff;
+}
+
+.profile-details p:last-child {
+    font-style: italic;
+    color: #6c757d;
+}

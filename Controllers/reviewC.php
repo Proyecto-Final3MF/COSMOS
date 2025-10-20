@@ -82,6 +82,7 @@ class ReviewC {
             $ComentarioAntiguo = $YaExiste['comentario'];
 
             $ratingPromedio = ((($ratingPromedio * $CantReview) - $ratingAntiguo) + $rating) / $CantReview;
+            $ratingPromedio = round($ratingPromedio * 2) / 2;
 
             $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
             header("Location:index.php?accion=listarST");

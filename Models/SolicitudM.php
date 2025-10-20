@@ -78,8 +78,7 @@ class Solicitud {
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN usuario u ON s.cliente_id = u.id
-                WHERE s.estado_id = 1 
-                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
+                WHERE s.estado_id = 1 ";
         $params = [];
         $param_types = '';
         $stmt = null;
@@ -118,10 +117,8 @@ class Solicitud {
     }
 
     public function asignarS($id_usuario, $id_soli){
-        // Utiliza una consulta preparada para mayor seguridad
         $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
-        
-        // Prepara la declaración
+
         $stmt = $this->conn->prepare($sql);
         
         if (!$stmt) {
@@ -129,13 +126,8 @@ class Solicitud {
             return false;
         }
         
-        // Vincula los parámetros
         $stmt->bind_param("ii", $id_usuario, $id_soli);
-        
-        // Ejecuta la consulta
         $success = $stmt->execute();
-        
-        // Cierra la declaración
         $stmt->close();
         
         return $success;
@@ -143,15 +135,18 @@ class Solicitud {
 
     public function ListarSA($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
+                    u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
+                INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
+                LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
                 AND s.estado_id > 1 AND s.estado_id < 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
-        
-            $resultado = $this->conn->query($sql);
+
+        $resultado = $this->conn->query($sql);
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
@@ -161,10 +156,13 @@ class Solicitud {
 
     public function ListarST($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
+                    u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
+                INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
+                LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
                 AND s.estado_id = 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
