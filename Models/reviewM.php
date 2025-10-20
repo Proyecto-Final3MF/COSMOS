@@ -131,7 +131,7 @@ class Review {
     }
 
     public function listarReviewsTecnico($id_tecnico) {
-        $sql = "SELECT * FROM reviews WHERE id_tecnico = ?";
+        $sql = "SELECT r.*, u.nombre as cliente FROM reviews r INNER JOIN usuario u ON r.id_cliente = u.id WHERE id_tecnico = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_tecnico);
 
