@@ -27,19 +27,41 @@ class UsuarioC {
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena']; 
+        $contrasena = $_POST['contrasena'];
+
+        // Validar longitud mínima
+        if (strlen($contrasena) < 8) {
+        $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
+        // Encriptar la contraseña antes de guardarla
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
          //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
+        }
+
+        // Verificar si el correo ya existe
+        $existe = $usuarioM->obtenerPorEmail($mail);
+        if ($existe) {
+        $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
         }
 
         if (empty($usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -47,6 +69,7 @@ class UsuarioC {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -60,25 +83,25 @@ class UsuarioC {
             $rutaDestino = "Assets/imagenes/perfil/fotodefault.webp";
         }
 
-        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena, $rutaDestino)) {
-            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-            if ($usuarioN) {
-                session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
-                $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $usuarioN['id'];
-                $_SESSION['email'] = $usuarioN['email'];
-                $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena_hash, $rutaDestino)) {
+    // Obtener el usuario recién creado
+        $usuarioN = $usuarioM->obtenerPorNombre($usuario);
+        if ($usuarioN) {
+        session_start();
+        $_SESSION['usuario'] = $usuarioN['nombre'];
+        $_SESSION['rol'] = $usuarioN['rol_id'];
+        $_SESSION['id'] = $usuarioN['id'];
+        $_SESSION['email'] = $usuarioN['email'];
+        $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
-                // Historial
-                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+        // Historial
+        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
-                $_SESSION['tipo_mensaje'] = "success";
-                $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
-
-                header("Location: index.php?accion=redireccion");
-                exit();
-            }
+        $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
+        $_SESSION['tipo_mensaje'] = "success";
+        header("Location: index.php?accion=redireccion");
+        exit();
+    }
         } else {
             header("Location: index.php?accion=register&error=Error al crear usuario");
             exit();
@@ -95,6 +118,7 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -102,6 +126,7 @@ class UsuarioC {
         if (empty($usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -109,6 +134,7 @@ class UsuarioC {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$email' es invalido";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -136,6 +162,7 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+            $_SESSION['tipo_mensaje'] = "success";
 
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
                 $obs = "Ningun cambio detectado";
@@ -180,26 +207,29 @@ class UsuarioC {
         include("views/Usuario/editarU.php");
     }
 
-    public function autenticar() {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
-        $modelo = new Usuario();
-        $user = $modelo->verificarU($usuario, $contrasena);
+   public function autenticar() {
+    $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
+    $contrasena = $_POST['contrasena'];
+    $modelo = new Usuario();
 
-        if ($user) {
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+    // Trae el usuario por email
+    $user = $modelo->obtenerPorEmail($email);
 
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
+    if ($user && password_verify($contrasena, $user['contrasena'])) {
+        // Login correcto
+        $_SESSION['usuario'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol_id'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+
+        header("Location: index.php?accion=redireccion");
+        exit();
+    } else {
+        $error = "Correo o contraseña incorrectos";
+        include("views/Usuario/Login.php");
     }
+}
 
     public function listarU() {
         $orden = $_GET['orden'] ?? ''; 

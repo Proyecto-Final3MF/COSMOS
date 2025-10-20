@@ -18,16 +18,38 @@ class Usuario {
     }
 
     public function verificarU($usuario, $contrasena) {
-        $usuario = $this->conn->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
-        $res = $this->conn->query($sql);
-        if ($row = $res->fetch_assoc()) {
-            if ($row['contrasena'] === $contrasena) {
-                return $row;
-            }
+    $usuario = $this->conn->real_escape_string($usuario);
+    $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
+    $res = $this->conn->query($sql);
+
+    if ($row = $res->fetch_assoc()) {
+        if (password_verify($contrasena, $row['contrasena'])) {
+            return $row;
         }
-        return false;
     }
+    return false;
+    }
+
+
+    public function obtenerPorNombre($usuario) {
+    $usuario = $this->conn->real_escape_string($usuario);
+    $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
+    $res = $this->conn->query($sql);
+    if ($res && $res->num_rows > 0) {
+        return $res->fetch_assoc();
+    }
+    return false;
+}
+
+public function obtenerPorEmail($email) {
+    $email = $this->conn->real_escape_string($email);
+    $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
+    $res = $this->conn->query($sql);
+    if ($res && $res->num_rows > 0) {
+        return $res->fetch_assoc();
+    }
+    return false;
+}
 
     public function obtenerRol() {
         $sql = "SELECT * FROM rol where id < 3";
@@ -56,6 +78,13 @@ class Usuario {
         }
         return $stmt->execute();
     }
+
+    public function actualizarContrasena($id, $nuevoHash) {
+    $sql = "UPDATE usuario SET contrasena = ? WHERE id = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("si", $nuevoHash, $id);
+    return $stmt->execute();
+}
 
     public function listarU($orden, $rol_filter, $search) {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ";
@@ -123,16 +152,29 @@ class Usuario {
             $stmt->close();
             return [];
         }
+
     }
 
     public function PreviewU() {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ORDER BY id DESC LIMIT 10";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
+            return $resultado->fetch_all(MYSQLI_ASSOC); // Correctly returns an array of users
         } else {
             return [];
         }
+    }
+
+    public function borrar($id){
+        // Antes de borrar, eliminar foto si no es default
+        $usuario = $this->buscarUserId($id);
+        if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
+            unlink($usuario['foto_perfil']);
+        }
+        $sql = "DELETE FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 
     public function getDatosTecnico($id_tecnico) {
@@ -158,18 +200,6 @@ class Usuario {
             $stmt->close();
             return [];
         }
-    }
-
-    public function borrar($id){
-        // Antes de borrar, eliminar foto si no es default
-        $usuario = $this->buscarUserId($id);
-        if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
-            unlink($usuario['foto_perfil']);
-        }
-        $sql = "DELETE FROM usuario WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        return $stmt->execute();
     }
 }
 ?>

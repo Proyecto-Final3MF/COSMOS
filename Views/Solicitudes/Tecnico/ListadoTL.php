@@ -54,7 +54,7 @@ require_once ("./Views/include/UH.php");
       ?>
       <tr class="list-item">
         <td><?= htmlspecialchars($resultado['titulo']); ?></td>
-        <td><?= htmlspecialchars($resultado['nombre']); ?></td>
+        <td><?= htmlspecialchars($resultado['cliente_nombre']); ?></td>
         <td>
           <img src="<?= htmlspecialchars($resultado['imagen']);?>" alt="Imagen del producto" class="zoom-img" /><br>
           <?= htmlspecialchars($resultado['producto']) ?>

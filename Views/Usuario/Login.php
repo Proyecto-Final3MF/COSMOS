@@ -27,9 +27,9 @@ require_once ("./Views/include/UH.php");
         <h3>Iniciar Sesion</h3>
         <form method="POST" action="Index.php?accion=autenticar">
 
-            <p class="fade-label">Usuario </p>
+            <p class="fade-label">Correo electrónico</p>
             <label for="usuario" class="form-label"></label>
-            <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
+            <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
             <p class="fade-label">Contraseña </p>
             <label for="contrasena" class="form-label"></label>
