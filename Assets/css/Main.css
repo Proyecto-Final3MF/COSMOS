@@ -2109,6 +2109,7 @@ input:checked ~ label {
 #interactive-rating label:hover ~ input:checked ~ label {
     color: #ffee00ff;
 }
+/* Fin de los estilos para estrellas */
 
 /* Perfil del Tecnico */
 

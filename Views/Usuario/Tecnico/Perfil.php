@@ -14,7 +14,7 @@
     <div class="profile-details">
         <?php
         echo '<p>'.$DatosTecnico['nombre'].' '. $DatosTecnico['email'].'</p>';
-        echo '<p>Cantidad de Reviews: '.$DatosTecnico['cant_review'].' Promedio: '.$DatosTecnico['promedio'].'</p>';
+        echo '<p>Cantidad de Reviews: '.$DatosTecnico['cant_review'].' Promedio: '.$DatosTecnico['promedio'].'★'.'</p>';
         ?>
     </div>
 </div>
@@ -40,13 +40,14 @@ foreach ($ReviewsTecnico as $review):
 
 <?php 
 echo $review['cliente']. "<br>"; 
-echo $review['comentario']." ".$review['fecha_creacion'];
+echo $review['comentario']." ".date('d/m/Y', strtotime($review['fecha_creacion']));
 if ($review['fecha_edicion']) {
-echo " Editado en: ".$review['fecha_edicion'];
+echo " Editado en: ".date('d/m/Y', strtotime($review['fecha_edicion']));
 }  ?>
 </div>
 <?php endforeach; ?>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
+<script src="Assets/js/paginacion.js"></script>
 </body>
 </html>
