@@ -41,6 +41,16 @@ class Usuario {
     return false;
 }
 
+public function obtenerPorEmail($email) {
+    $email = $this->conn->real_escape_string($email);
+    $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
+    $res = $this->conn->query($sql);
+    if ($res && $res->num_rows > 0) {
+        return $res->fetch_assoc();
+    }
+    return false;
+}
+
     public function obtenerRol() {
         $sql = "SELECT * FROM rol where id < 3";
         $resultado = $this->conn->query($sql);

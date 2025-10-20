@@ -48,6 +48,15 @@ class UsuarioC {
             exit();
         }
 
+        // Verificar si el correo ya existe
+        $existe = $usuarioM->obtenerPorEmail($mail);
+        if ($existe) {
+        $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
         if (empty($usuario)) {
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
             $_SESSION['tipo_mensaje'] = "warning";
@@ -192,12 +201,12 @@ class UsuarioC {
     }
 
    public function autenticar() {
-    $usuario = $_POST['usuario'];
+    $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
     $contrasena = $_POST['contrasena'];
     $modelo = new Usuario();
 
-    // Trae el usuario por nombre (sin verificar contraseña todavía)
-    $user = $modelo->obtenerPorNombre($usuario);
+    // Trae el usuario por email
+    $user = $modelo->obtenerPorEmail($email);
 
     if ($user && password_verify($contrasena, $user['contrasena'])) {
         // Login correcto
@@ -210,7 +219,7 @@ class UsuarioC {
         header("Location: index.php?accion=redireccion");
         exit();
     } else {
-        $error = "Usuario o contraseña incorrectos";
+        $error = "Correo o contraseña incorrectos";
         include("views/Usuario/Login.php");
     }
 }
