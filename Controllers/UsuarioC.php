@@ -42,6 +42,7 @@ class UsuarioC {
 
          //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -58,6 +59,7 @@ class UsuarioC {
         }
 
         if (empty($usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -65,6 +67,7 @@ class UsuarioC {
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -113,6 +116,7 @@ class UsuarioC {
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -120,6 +124,7 @@ class UsuarioC {
         }
 
         if (empty($usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -127,6 +132,7 @@ class UsuarioC {
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$email' es invalido";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
@@ -154,6 +160,7 @@ class UsuarioC {
             $_SESSION['usuario'] = $nombre;
             $_SESSION['email'] = $email;
             $_SESSION['foto_perfil'] = $foto_perfil;
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
             $_SESSION['tipo_mensaje'] = "success";
 
