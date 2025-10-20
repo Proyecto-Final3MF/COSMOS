@@ -39,3 +39,35 @@ The first step is to access our site from your preferred browser. Once there, cl
 <p align="center">
 <img src="Assets/imagenes/CAP3.png" alt="cap1" width="50%">
 </p>
+
+## In urgent request you must create a product
+
+### This product will be associated with the request, your product is your damaged device, make sure to complete all fields and choose the appropriate category for your device.
+
+<p align="center">
+<img src="Assets/imagenes/CAP4.png" alt="cap1" width="50%">
+</p>
+
+## Now the request
+
+### Now you should give it a title and a description that explains in more detail the problem with your device, your device (newly created product) and urgency level will be chosen automatically.
+
+<p align="center">
+<img src="Assets/imagenes/CAP5.png" alt="cap1" width="50%">
+</p>
+
+## Request created
+
+### Now your request has been published and is waiting for a technician to accept it and start contacting you for the arrangement.
+
+<p align="center">
+<img src="Assets/imagenes/CAP6.png" alt="cap1" width="50%">
+</p>
+
+## Your application was accepted
+
+### Once your application is accepted, you will receive a notification of your acceptance and you can learn more about it at: accepted applications
+
+<p align="center">
+<img src="Assets/imagenes/CAP7.png" alt="cap1" width="50%">
+</p>
