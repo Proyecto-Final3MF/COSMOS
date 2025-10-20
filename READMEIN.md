@@ -93,11 +93,11 @@ The first step is to access our site from your preferred browser. Once there, cl
 ### Once your request is completed, in addition to receiving the notification, it will also be displayed under: Completed Requests. And through the previously viewed chat, you will arrange with the technician for the recovery of your device and payment to the technician.
 
 <p align="center">
-<img src="Assets/imagenes/CAP7.png" alt="cap1" width="50%">
+<img src="Assets/imagenes/CAP10.png" alt="cap1" width="50%">
 </p>
 
 <p align="center">
-<img src="Assets/imagenes/CAP10.png" alt="cap1" width="50%">
+<img src="Assets/imagenes/CAP11.png" alt="cap1" width="50%">
 </p>
 
 ## Thanks for reading
