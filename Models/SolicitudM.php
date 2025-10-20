@@ -83,38 +83,50 @@ class Solicitud {
         $param_types = '';
         $stmt = null;
 
-        if (!empty($search)) {
-            $search_terms = explode (" ", $search);
-            foreach ($search_terms as $palabra) {
-                $sql .= "AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?) ";
-                $search_term = "%" . $palabra . "%";
-                $params[] = $search_term;
-                $params[] = $search_term;
-                $params[] = $search_term;
-                $param_types .= 'sss';
-            }
-        }
-        $sql .= "ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
+    $sql = "SELECT 
+                s.*, 
+                p.nombre AS producto, 
+                p.imagen, 
+                u.nombre AS cliente_nombre
+            FROM solicitud s
+            INNER JOIN producto p ON s.producto_id = p.id
+            INNER JOIN usuario u ON s.cliente_id = u.id
+            WHERE s.estado_id = 1 
+              AND s.tecnico_id IS NULL
+              AND s.cliente_id != ?";
 
-        if (!empty($search)) {
-            $stmt = $this->conn->prepare($sql);
-            if ($stmt === false) {
-                return [];
-            }
-            $stmt->bind_param($param_types, ...$params);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-            $stmt->close();
-        } else {
-            $resultado = $this->conn->query($sql);
-        }
+    $params = [$usuarioId];
+    $param_types = 'i';
 
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return [];
+    if (!empty($search)) {
+        $search_terms = explode(" ", $search);
+        foreach ($search_terms as $palabra) {
+            $sql .= " AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?)";
+            $search_term = "%" . $palabra . "%";
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $param_types .= 'sss';
         }
     }
+
+    $sql .= " ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        error_log("Error en prepare: " . $this->conn->error);
+        return [];
+    }
+
+    $stmt->bind_param($param_types, ...$params);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $data = $resultado->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $data;
+}
+
 
     public function asignarS($id_usuario, $id_soli){
         $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
