@@ -25,16 +25,19 @@ class CategoriaC {
         $usuarioId = $_SESSION['id'] ?? 0;
 
         if (empty($nombre) || $nombre === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "La categoría no puede tener un nombre vacío.";
             header("Location: index.php?accion=FormularioC");
             exit();
         }
 
         if ($categoria->verificarExistencia($nombre)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "La categoría '{$nombre}' ya existe.";
         } else {
             $id = $categoria->guardarC($nombre);
             if ($id !== false) {
+                $_SESSION['tipo_mensaje'] = "success";
                 $_SESSION['mensaje'] = "Categoría '{$nombre}' fue guardada.";
                 $obs = "Categoría creada";
                 $this->historialController->registrarModificacion(
@@ -46,6 +49,7 @@ class CategoriaC {
                     $obs
                 );
             } else {
+                $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error al guardar la categoría.";
             }
         }
@@ -70,6 +74,7 @@ class CategoriaC {
         $categoria_modelo = new Categoria();
         $id = $_GET['id'] ?? 0;
         if ($id <= 0) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "ID de categoría no válido.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -77,6 +82,7 @@ class CategoriaC {
 
         $categoria = $categoria_modelo->buscarPorId($id);
         if (!$categoria) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Categoría no encontrada.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -99,6 +105,7 @@ class CategoriaC {
                 $nombreAntiguo = $categoriaAntigua['nombre'] ?? 'Nombre desconocido';
 
                 if ($categoria_modelo->actualizarC($id, $nuevoNombre)) {
+                    $_SESSION['tipo_mensaje'] = "success";
                     $_SESSION['mensaje'] = "Categoría '{$nombreAntiguo}' fue cambiada a '{$nuevoNombre}'.";
                     $obs = "La categoría '{$nombreAntiguo}' fue renombrada a '{$nuevoNombre}'";
                     $this->historialController->registrarModificacion(
@@ -110,9 +117,11 @@ class CategoriaC {
                         $obs
                     );
                 } else {
+                    $_SESSION['tipo_mensaje'] = "warning";
                     $_SESSION['mensaje'] = "Error al actualizar la categoría.";
                 }
             } else {
+                $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
 
@@ -130,6 +139,7 @@ class CategoriaC {
 
         $id = $_GET['id'] ?? 0;
         if ($id <= 0) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "ID de categoría no válido.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -139,6 +149,7 @@ class CategoriaC {
         $categoria = $categoria_modelo->buscarPorId($id);
 
         if (!$categoria) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Categoría no encontrada.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -147,6 +158,7 @@ class CategoriaC {
         $nombre = $categoria['nombre'] ?? 'Nombre desconocido';
 
         if ($categoria_modelo->borrarC($id)) {
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Categoría '{$nombre}' eliminada exitosamente.";
             $obs = "La categoría '{$nombre}' fue eliminada";
             $this->historialController->registrarModificacion(
@@ -158,6 +170,7 @@ class CategoriaC {
                 $obs
             );
         } else {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: No se pudo eliminar la categoría.";
         }
 
