@@ -31,3 +31,11 @@ The first step is to access our site from your preferred browser. Once there, cl
 <p align="center">
 <img src="Assets/imagenes/CAP2.png" alt="cap1" width="50%">
 </p>
+
+## Once logged in
+
+### click the red button to create a new urgent request.
+
+<p align="center">
+<img src="Assets/imagenes/CAP3.png" alt="cap1" width="50%">
+</p>
