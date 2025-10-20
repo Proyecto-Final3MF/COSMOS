@@ -19,6 +19,7 @@ class ReviewC {
         $id_solicitud = $id;
 
         if (!$id) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
             header("Location: index.php?accion=listarST");
             exit();
@@ -35,6 +36,7 @@ class ReviewC {
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
 
         if (!$datosSolicitud) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
             header("Location: index.php?accion=redireccion");
             exit();
@@ -54,6 +56,7 @@ class ReviewC {
         $id_solicitud = $_POST['id_solicitud'] ?? null;
         
         if ($rating == 0) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
@@ -61,14 +64,16 @@ class ReviewC {
         
         $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
         if ($HayReview === null) {
-            $_SESSION['mensaje'] = "No se puede evaluar en este momento porfalta de cant_review.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
         
         $HayPromedio = $this->ReviewModel->agarrarPromedio($id_tecnico);
         if ($HayPromedio === null) {
-            $_SESSION['mensaje'] = "No se puede avaliar en este momento por falta de promedio.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
@@ -85,6 +90,7 @@ class ReviewC {
             $ratingPromedio = round($ratingPromedio * 2) / 2;
 
             $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
+            $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
             header("Location:index.php?accion=listarST");
             exit();
@@ -96,6 +102,7 @@ class ReviewC {
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
         $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
+        $_SESSION['tipo_mensaje'] = "success";
         $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
         header("Location:index.php?accion=listarST");
         exit();
