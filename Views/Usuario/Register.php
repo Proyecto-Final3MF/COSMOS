@@ -32,7 +32,7 @@ require_once ("./Views/include/UH.php");
             <br>
 
             <p class="fade-label">Usuario</p>
-            <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
+            <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
 
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
@@ -52,8 +52,7 @@ require_once ("./Views/include/UH.php");
             <br><br>
             
             <p class="fade-label">Contraseña</p>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" required> <br><br>
-
+            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" placeholder="minimo 8 caracteres" required> <br><br>
 
             <input class="button" type="submit" value="Guardar">
             <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>

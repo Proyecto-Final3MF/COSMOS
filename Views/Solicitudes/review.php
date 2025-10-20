@@ -1,7 +1,8 @@
 <?php require_once ("./Views/include/UH.php"); ?>
 <link rel="stylesheet" href="./Assets/css/Main.css">
 <div class="contenedor-formulario">
-    <section class="formularios99">
+    <section class="formularios99">    
+        <h2>Review de Solicitud</h2>
         <form action="index.php?accion=AddReview" method="post">
             <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
             <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
@@ -18,7 +19,7 @@
                 <input type="radio" id="rating2" name="rating" value="2" <?= ($rating == 2) ? 'checked' : '' ?> /><label for="rating2" title="1 star"></label>
                 <input type="radio" id="rating1" name="rating" value="1" <?= ($rating == 1) ? 'checked' : '' ?> /><label class="half" for="rating1" title="1/2 star"></label>
             </fieldset>
-            <input type="text" name="Comentario" id="Comentario" value="<?= htmlspecialchars($Comentario) ?>"/>
+            <input type="text" name="Comentario" placeholder="Describi tu experiencia." id="Comentario" value="<?= htmlspecialchars($Comentario) ?>"/>
             <button type="submit">Enviar</button>
         </form>
     </section>
