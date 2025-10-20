@@ -20,5 +20,5 @@ _**COSMOS**_ is an innovative web platform designed to connect customers in need
 
 The first step is to access our site from your preferred browser. Once there, click "Start Now" or the Register button.​
 
-<img src="Assets/imagenes/CAP1.png" alt="logo" width="20%">
+<img src="Assets/imagenes/CAP1.png" alt="cap1" width="50%" align-items: center>
 
