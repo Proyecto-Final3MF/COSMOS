@@ -48,7 +48,7 @@ class ReviewC {
     public function AddReview() {
         $rating = $_POST['rating'] ?? 0;
         $rating = $rating/2;
-        $Comentario = $_POST['Comentario'] ?? '';
+        $Comentario = trim($_POST['Comentario']) ?? '';
         $id_tecnico = $_POST['id_tecnico'];
         $id_cliente = $_SESSION['id'];
         $id_solicitud = $_POST['id_solicitud'] ?? null;
@@ -85,6 +85,7 @@ class ReviewC {
             $ratingPromedio = round($ratingPromedio * 2) / 2;
 
             $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
+            $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
             header("Location:index.php?accion=listarST");
             exit();
         }
@@ -95,6 +96,7 @@ class ReviewC {
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
         $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
+        $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
         header("Location:index.php?accion=listarST");
         exit();
     }
