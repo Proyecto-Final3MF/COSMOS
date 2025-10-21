@@ -23,7 +23,7 @@ class HistorialController {
             $historial = $this->historialModel->getHistorial();
         }
 
-        include __DIR__ . '/../views/historial_view.php';
+        include __DIR__ . '/../Views/Usuario/Admin/historial.php';
     }
 
     public function registrarModificacion($usuario, $usuario_id, $accion, $item, $item_id, $obs) {

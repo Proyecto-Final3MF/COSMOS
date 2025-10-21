@@ -45,8 +45,19 @@ class Solicitud {
     }
 
     public function borrarS($id) {
-        $sql = "DELETE FROM solicitud WHERE id=$id AND tecnico_id=NULL";
-        return $this->conn->query($sql);
+        try {
+            $sql1 = "DELETE FROM historia_solicitud WHERE id_solicitud = $id";
+            $this->conn->query($sql1);
+
+            $sql2 = "DELETE FROM solicitud WHERE id=$id AND tecnico_id IS NULL";
+            $result = $this->conn->query($sql2); 
+
+            $this->conn->commit();
+            return $result;
+
+        } catch (mysqli_sql_exception $e) {
+            throw $e; 
+        }
     }
 
     public function ListarSLU($id_usuario){
@@ -72,44 +83,54 @@ class Solicitud {
         $param_types = '';
         $stmt = null;
 
-        if (!empty($search)) {
-            $search_terms = explode (" ", $search);
-            foreach ($search_terms as $palabra) {
-                $sql .= "AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?) ";
-                $search_term = "%" . $palabra . "%";
-                $params[] = $search_term;
-                $params[] = $search_term;
-                $params[] = $search_term;
-                $param_types .= 'sss';
-            }
-        }
-        $sql .= "ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
+    $sql = "SELECT 
+                s.*, 
+                p.nombre AS producto, 
+                p.imagen, 
+                u.nombre AS cliente_nombre
+            FROM solicitud s
+            INNER JOIN producto p ON s.producto_id = p.id
+            INNER JOIN usuario u ON s.cliente_id = u.id
+            WHERE s.estado_id = 1 
+              AND s.tecnico_id IS NULL
+              AND s.cliente_id != ?";
 
-        if (!empty($search)) {
-            $stmt = $this->conn->prepare($sql);
-            if ($stmt === false) {
-                return [];
-            }
-            $stmt->bind_param($param_types, ...$params);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-            $stmt->close();
-        } else {
-            $resultado = $this->conn->query($sql);
-        }
+    $params = [$usuarioId];
+    $param_types = 'i';
 
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return [];
+    if (!empty($search)) {
+        $search_terms = explode(" ", $search);
+        foreach ($search_terms as $palabra) {
+            $sql .= " AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?)";
+            $search_term = "%" . $palabra . "%";
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $params[] = $search_term;
+            $param_types .= 'sss';
         }
     }
 
+    $sql .= " ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        error_log("Error en prepare: " . $this->conn->error);
+        return [];
+    }
+
+    $stmt->bind_param($param_types, ...$params);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $data = $resultado->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $data;
+}
+
+
     public function asignarS($id_usuario, $id_soli){
-        // Utiliza una consulta preparada para mayor seguridad
         $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
-        
-        // Prepara la declaración
+
         $stmt = $this->conn->prepare($sql);
         
         if (!$stmt) {
@@ -117,13 +138,8 @@ class Solicitud {
             return false;
         }
         
-        // Vincula los parámetros
         $stmt->bind_param("ii", $id_usuario, $id_soli);
-        
-        // Ejecuta la consulta
         $success = $stmt->execute();
-        
-        // Cierra la declaración
         $stmt->close();
         
         return $success;
@@ -131,15 +147,18 @@ class Solicitud {
 
     public function ListarSA($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
+                    u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
+                INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
+                LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
                 AND s.estado_id > 1 AND s.estado_id < 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
-        
-            $resultado = $this->conn->query($sql);
+
+        $resultado = $this->conn->query($sql);
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
@@ -149,10 +168,13 @@ class Solicitud {
 
     public function ListarST($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
+                    u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
+                INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
+                LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
                 AND s.estado_id = 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";

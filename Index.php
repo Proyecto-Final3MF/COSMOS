@@ -1,3 +1,5 @@
+<link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
+
 <?php
 session_start();
 
@@ -6,6 +8,7 @@ require_once("Controllers/UsuarioC.php");
 require_once("Controllers/SolicitudC.php");
 require_once("Controllers/ProductoC.php");
 require_once("Controllers/CategoriaC.php");
+require_once("Controllers/ReviewC.php");
 require_once("Models/ProductoM.php");
 
 $accion = $_GET['accion'] ?? 'index';
@@ -178,6 +181,11 @@ switch ($accion) {
     $controller = new SolicitudC();
     $controller->guardarS();
     break;
+  
+  case 'guardarSU':
+    $controller = new SolicitudC();
+    $controller->guardarSU();
+    break;
 
   case 'borrarS':
     $controller = new SolicitudC();
@@ -187,6 +195,16 @@ switch ($accion) {
   case 'listarSLU':
     $controller = new SolicitudC();
     $controller->listarSLU();
+    break;
+
+  case 'FormularioReview':
+    $controller = new ReviewC();
+    $controller->FormularioR();
+    break;
+
+  case 'AddReview':
+    $controller = new ReviewC();
+    $controller->AddReview();
     break;
 
   //acciones para el rol tecnico
@@ -207,6 +225,11 @@ switch ($accion) {
   case 'EditarSF':
     $controller = new SolicitudC();
     $controller->EditarSF();
+    break;
+
+  case 'PerfilTecnico':
+    $controller = new UsuarioC();
+    $controller->PerfilTecnico();
     break;
 
   //acciones para el rol admin
@@ -338,4 +361,3 @@ switch ($accion) {
     }
     exit();
 }
-

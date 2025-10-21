@@ -29,6 +29,11 @@ require_once ("./Views/include/UH.php");
                 <th>Producto</th>
                 <th>Prioridad</th>
                 <th>Descripcion</th>
+                <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                    <th>Técnico</th>
+                <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                    <th>Cliente</th>
+                <?php endif; ?>
                 <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
@@ -48,13 +53,23 @@ require_once ("./Views/include/UH.php");
                     </td>
                     <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
+                    <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                            <td><a href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>"><?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?></a></td>
+                        <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
+                            <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
+                        <?php endif; ?>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 
                 <td>
                 <div class="btn-group-actions">
-                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial" >
+                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                 <i class="fa fa-file-alt"></i>
+                </a>
+                <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
+                <a href="index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn review">
+                <i class="fa-solid fa-star"></i>
+                <?php endif; ?>
                 </a>
                 </div>
                 </td>
@@ -64,7 +79,7 @@ require_once ("./Views/include/UH.php");
         } else {
             ?>
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="index.php?accion=listarTL">
