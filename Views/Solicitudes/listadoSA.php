@@ -65,7 +65,7 @@ require_once("./Views/include/UH.php");
                                     : $resultado['tecnico_id'];
                                 ?>
 
-                                <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
                                     class="btn btn-boton2">
                                     <img src="Assets/imagenes/chat.png" alt="chat" width="40">
                                 </a>

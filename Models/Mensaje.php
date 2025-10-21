@@ -69,19 +69,20 @@ class Mensaje
     }
 
     // Obtener conversación entre dos usuarios específicos
-    public function obtenerConversacion($usuario_id, $otro_usuario_id)
+    public function obtenerConversacion($usuario_id, $otro_usuario_id, $solicitud_id)
     {
-        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                        u.nombre AS emisor, r.nombre AS receptor
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
                 WHERE (m.usuario_id = ? AND m.receptor_id = ?)
                    OR (m.usuario_id = ? AND m.receptor_id = ?)
+                AND m.solicitud_id = ?
                 ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
+        $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -146,12 +147,12 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
     // Enviar mensaje
-    public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
+    public function enviarMensaje($usuario_id, $receptor_id, $mensaje, $solicitud_id)
     {
-        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, fecha)
-                VALUES (?, ?, ?, NOW())";
+        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, solicitud_id, fecha)
+                VALUES (?, ?, ?, ?, NOW())";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
+        $stmt->bind_param("iisi", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
         return $stmt->execute();
     }
 
