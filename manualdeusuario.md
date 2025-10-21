@@ -118,3 +118,56 @@ _**COSMOS**_ es una plataforma web innovadora diseñada para conectar a clientes
 ## Gracias por leer
 
 ### Esperamos que esta guía le haya sido útil al usar nuestro sitio web. Si tiene alguna otra pregunta, comuníquese con nuestro equipo de soporte técnico al +598 98 431 475 o a nuestra dirección de Gmail: tecnicosasociados0@gmail.com
+
+
+## Para los tecnicos
+
+### Hola Tecnico nos alegra que uses nuestra web para tu trabajo, Aquí tienes una guía paso a paso para mantenerte conectado.
+
+### El primer paso es acceder a nuestro sitio desde tu navegador preferido. Una vez allí, haz clic en "Comenzar ahora" o en el botón "Registrarse".
+
+<p align="center">
+<img src="Assets/imagenes/CAP1.png" alt="cap1" width="50%">
+</p>
+
+## Ahora debes registrarte con tus datos, elegir el rol de Tecnico y una foto (esta última es opcional).
+
+### Una vez completados los campos, haz clic en "Guardar y continuar".
+
+<p align="center">
+<img src="Assets/imagenes/CAP2.png" alt="cap1" width="50%">
+</p>
+
+## Una vez iniciada la sesión
+
+### ahora en su Unidad tendra las opciones para manejar el tema de las solicitudes, podra ver solicitudes en el boton de solicitudes disponibles.
+
+<p align="center">
+<img src="Assets/imagenes/TEC1.png" alt="cap1" width="50%">
+</p>
+
+## En solicitudes disponibles
+
+### aqui podra ver todas las solicitudes que no fueron asignadas aun, cada una con un titulo, una imagen, el nombre del cliente, y una descripcion con el problema del dispositivo, tambien tendra una barra de busqueda para filtrar por solicitudes especificas si asi lo desea, y dandole al boton del tick a la derecha podra aceptar la solicitud.
+
+<p align="center">
+<img src="Assets/imagenes/TEC2.png" alt="cap1" width="50%">
+</p>
+
+## ver sus solicitudes aceptadas
+
+### dandole al boton de volver o el que dice "mi unidad" podra volver a la seccion anterior y en el boton de solicitudes aceptadas podra ver todas las solicitudes que usted acepto y podra ponerse a trabajar con ellas.
+
+<p align="center">
+<img src="Assets/imagenes/TEC3.png" alt="cap1" width="50%">
+</p>
+
+## En Solicitudes aceptadas
+
+### aqui no solo vera las solicitudes aceptadas, en cada solicitud tendra distintos botones para interactuar y trabajar con cada solicitud, a continuacion que hace cada una.
+
+<p align="center">
+<img src="Assets/imagenes/TEC4.png" alt="cap1" width="50%">
+</p>
+
+## Editar solicitud <i class="fa fa-comments"></i>
