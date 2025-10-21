@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C O S M O S</title>
+    <link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
