@@ -109,14 +109,14 @@ class UsuarioC {
     }
 
     public function actualizarU() {
-    session_start();
-    $id = $_POST['id'];
-    $nombre = trim($_POST['nombre']);
-    $email = trim($_POST['email']);
-    $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+        session_start();
+        $id = $_POST['id'];
+        $nombre = trim($_POST['nombre']);
+        $email = trim($_POST['email']);
+        $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
     // Validaciones
-    if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
+        if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
         $_SESSION['tipo_mensaje'] = "warning";
         $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
         header("Location: index.php?accion=editarU&id=$id"); 
