@@ -792,7 +792,11 @@ tbody tr:hover {
 }
 
 .icon-btn.historial:hover {
-  background-color: #b2b41f;
+  background-color: #e83e8c;
+}
+
+.icon-btn.review:hover {
+  background-color: #fded0d;
 }
 
 @media (max-width: 600px) {
@@ -2190,7 +2194,7 @@ input:checked ~ label {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #af4c91; /* Slightly thicker border for emphasis */
+    border: 5px solid #e83e8c; /* Slightly thicker border for emphasis */
     margin-bottom: 15px;
     box-shadow: 0 0 0 3px #fff; /* White outline for contrast */
 }
@@ -2210,7 +2214,7 @@ input:checked ~ label {
 .profile-details p:first-child {
     font-weight: bold;
     font-size: 20px; /* Larger font */
-    color: #f700ff; /* Primary color */
+    color: #e83e8c; /* Primary color */
 }
 
 .profile-details p:last-child {
@@ -2244,7 +2248,7 @@ input:checked ~ label {
 /* Style for client name */
 .reviews > :nth-child(2) { /* Targeting the element immediately after the fieldset (which is the client name echo) */
     font-weight: bold;
-    color: #af4c91;
+    color: #e83e8c;
     font-size: 1.1em;
     margin-bottom: 10px;
 }

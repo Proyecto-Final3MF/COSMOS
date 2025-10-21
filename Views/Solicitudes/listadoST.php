@@ -67,7 +67,7 @@ require_once ("./Views/include/UH.php");
                 <i class="fa fa-file-alt"></i>
                 </a>
                 <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
-                <a href="index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                <a href="index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn review">
                 <i class="fa-solid fa-star"></i>
                 <?php endif; ?>
                 </a>

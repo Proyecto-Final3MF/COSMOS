@@ -9,7 +9,7 @@
 </head>
 <body>
 <link rel="stylesheet" href="Assets/css/main.css">
-<div class="profile-info">
+<div class="profile-info fade-slide">
     <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
     <div class="profile-details">
         <?php
