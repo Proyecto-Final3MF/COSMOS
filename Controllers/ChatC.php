@@ -46,9 +46,13 @@ class ChatC
         }
 
         $mensajeModel = new Mensaje();
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
+        $mensajes = $this->$mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
 
-        include __DIR__ . "/../Views/mensajes.php";
+        foreach ($mensajes as $m) {
+            $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tu' : ($m['emisor'] ?? '???');
+            echo "<p><strong>" . htmlspecialchars($nombre) . ":</strong> " .
+                nl2br(htmlspecialchars($m['mensaje'])) . "</p>";
+        }
     }
 
     // Mostrar la vista de chat

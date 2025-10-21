@@ -153,7 +153,13 @@ class Mensaje
         $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, solicitud_id, fecha)
                 VALUES (?, ?, ?, ?, NOW())";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iisi", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
+
+        if (!$stmt) {
+            error_log("Error prepare enviarMensaje: " . $this->conexion->error);
+            return false;
+        }
+
+        $stmt->bind_param("iiii", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
         return $stmt->execute();
     }
 
