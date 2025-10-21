@@ -18,6 +18,7 @@
 
 <div class="btn-container2">
 <a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
+<a href="Index.php?accion=manual"><button class="btn btn-boton44">Manual de Usuario</button></a>
 </div>
 <script src="Assets/js/trancicion.js"></script>
 <script>

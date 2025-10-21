@@ -15,7 +15,7 @@ class UsuarioC {
     public function login() {
         include("Views/Usuario/Login.php");
     }
-
+    
     public function crear() {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
