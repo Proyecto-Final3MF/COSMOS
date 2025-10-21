@@ -15,7 +15,7 @@ class UsuarioC {
     public function login() {
         include("Views/Usuario/Login.php");
     }
-
+    
     public function crear() {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
@@ -109,82 +109,82 @@ class UsuarioC {
     }
 
     public function actualizarU() {
-    session_start();
-    $id = $_POST['id'];
-    $nombre = trim($_POST['nombre']);
-    $email = trim($_POST['email']);
-    $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+        session_start();
+        $id = $_POST['id'];
+        $nombre = trim($_POST['nombre']);
+        $email = trim($_POST['email']);
+        $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
     // Validaciones
-    if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
-        $_SESSION['tipo_mensaje'] = "warning";
-        $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
-        header("Location: index.php?accion=editarU&id=$id"); 
-        exit();
-    }
+        if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
+            header("Location: index.php?accion=editarU&id=$id"); 
+            exit();
+        }
 
-    if (empty($nombre)) {
-        $_SESSION['tipo_mensaje'] = "warning";
-        $_SESSION['mensaje'] = "El nombre no puede estar vacío.";
-        header("Location: index.php?accion=editarU&id=$id"); 
-        exit();
-    }
+        if (empty($nombre)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El nombre no puede estar vacío.";
+            header("Location: index.php?accion=editarU&id=$id"); 
+            exit();
+        }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['tipo_mensaje'] = "warning";
-        $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
-        header("Location: index.php?accion=editarU&id=$id"); 
-        exit();
-    }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
+            header("Location: index.php?accion=editarU&id=$id"); 
+            exit();
+        }
 
-    $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
-    $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
+        $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
+        $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
-    $usuarioM = new Usuario();
+        $usuarioM = new Usuario();
 
     // Manejo de nueva foto
-    $foto_perfil = $foto_actual;
-    if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
-        $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
-        move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
+        $foto_perfil = $foto_actual;
+        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
+            $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
+            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
 
         // Borrar foto anterior si no es default
-        if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
-            unlink($foto_actual);
+            if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
+                unlink($foto_actual);
+            }
         }
-    }
 
-    if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
-        $_SESSION['usuario'] = $nombre;
-        $_SESSION['email'] = $email;
-        $_SESSION['foto_perfil'] = $foto_perfil;
-        $_SESSION['tipo_mensaje'] = "success";
-        $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+        if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
+            $_SESSION['usuario'] = $nombre;
+            $_SESSION['email'] = $email;
+            $_SESSION['foto_perfil'] = $foto_perfil;
+            $_SESSION['tipo_mensaje'] = "success";
+            $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
 
         // Historial de cambios
-        if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
-            $obs = "Ningún cambio detectado";
+            if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
+                $obs = "Ningún cambio detectado";
+            } else {
+                $obs = "";
+                if ($nombreAntiguo !== $nombre) {
+                    $obs .= "Nombre: $nombreAntiguo → $nombre. ";
+                }
+                if ($emailAntiguo !== $email) {
+                    $obs .= "Email: $emailAntiguo → $email.";
+                }
+            }
+
+            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
+
+            header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+            exit();
         } else {
-            $obs = "";
-            if ($nombreAntiguo !== $nombre) {
-                $obs .= "Nombre: $nombreAntiguo → $nombre. ";
-            }
-            if ($emailAntiguo !== $email) {
-                $obs .= "Email: $emailAntiguo → $email.";
-            }
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "Error al actualizar el usuario.";
+            header("Location: index.php?accion=editarU&id=$id");
+            exit();
         }
-
-        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
-
-        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-        exit();
-    } else {
-        $_SESSION['tipo_mensaje'] = "danger";
-        $_SESSION['mensaje'] = "Error al actualizar el usuario.";
-        header("Location: index.php?accion=editarU&id=$id");
-        exit();
     }
-}
 
 
     public function borrar() {
@@ -202,29 +202,29 @@ class UsuarioC {
         include("views/Usuario/editarU.php");
     }
 
-   public function autenticar() {
-    $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
-    $contrasena = $_POST['contrasena'];
-    $modelo = new Usuario();
+    public function autenticar() {
+        $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
+        $contrasena = $_POST['contrasena'];
+        $modelo = new Usuario();
 
     // Trae el usuario por email
-    $user = $modelo->obtenerPorEmail($email);
+        $user = $modelo->obtenerPorEmail($email);
 
-    if ($user && password_verify($contrasena, $user['contrasena'])) {
+        if ($user && password_verify($contrasena, $user['contrasena'])) {
         // Login correcto
-        $_SESSION['usuario'] = $user['nombre'];
-        $_SESSION['rol'] = $user['rol_id'];
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+            $_SESSION['usuario'] = $user['nombre'];
+            $_SESSION['rol'] = $user['rol_id'];
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-        header("Location: index.php?accion=redireccion");
-        exit();
-    } else {
-        $error = "Correo o contraseña incorrectos";
-        include("views/Usuario/Login.php");
+            header("Location: index.php?accion=redireccion");
+            exit();
+        } else {
+            $error = "Correo o contraseña incorrectos";
+            include("views/Usuario/Login.php");
+        }
     }
-}
 
     public function listarU() {
         $orden = $_GET['orden'] ?? ''; 

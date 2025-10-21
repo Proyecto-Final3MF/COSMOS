@@ -13,7 +13,8 @@
 </head>
 <body>
 <br>
-<h1 class="inicio55">Bienvenido a COSMOS</h1>
+<h1 class="inicio55">Bienvenido a</h1>
+<h1 class="inicio55">C<img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">SMOS</h1>
 <p class="inicio44">Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
 
 <div class="btn-container2">

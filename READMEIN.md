@@ -1,4 +1,4 @@
-# Technical Service Management Web System _COSMOS_.
+# Technical Service Management Web System _**COSMOS**_.
 
 <h3 align="center">
 <img src="Assets/imagenes/logonueva.png" alt="logo" width="20%">
