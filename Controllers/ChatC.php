@@ -20,10 +20,8 @@ class ChatC
         }
 
         $usuarioId = $_SESSION['id'] ?? null;
-        $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $solicitud_id = $_GET['solicitud_id'] ?? null;
-
-        $solicitud_id = $_GET['solicitud_id'] ?? null;
+        $otroUsuarioId = intval($_GET['usuario_id'] ?? 0);
+        $solicitud_id = intval($_GET['solicitud_id'] ?? 0);
 
         if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
             echo "Usuario no especificado";
@@ -37,8 +35,8 @@ class ChatC
     public function cargarMensajes()
     {
         $usuarioId = $_SESSION['id'] ?? null;
-        $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $solicitudId = $_GET['solicitud_id'] ?? null;
+        $otroUsuarioId = intval($_GET['usuario_id'] ?? 0);
+        $solicitudId = intval($_GET['solicitud_id'] ?? 0);
 
         if (!$usuarioId || !$otroUsuarioId || !$solicitudId) {
             http_response_code(400);
@@ -137,7 +135,7 @@ class ChatC
             session_start();
         }
 
-        $idSolicitud = $_GET['id_solicitud'] ?? null;
+        $idSolicitud = intval($_GET['id_solicitud'] ?? 0);
         $usuarioId = $_SESSION['id'] ?? null;
 
         if (!$idSolicitud || !$usuarioId) {
@@ -157,19 +155,12 @@ class ChatC
             exit();
         }
 
-        // Determinar con quién hablar según rol
-        if ($_SESSION['rol'] == ROL_TECNICO) {
-            $otroUsuarioId = $datosSolicitud['cliente_id'];
-        } elseif ($_SESSION['rol'] == ROL_CLIENTE) {
-            $otroUsuarioId = $datosSolicitud['tecnico_id'];
-        } else {
-            $_SESSION['mensaje'] = "Error: rol no válido.";
-            header("Location: index.php?accion=listarSA");
-            exit();
-        }
+        $otroUsuarioid = ($_SESSION['rol'] == ROL_TECNICO)
+            ? $datosSolicitud['cliente_id']
+            : $datosSolicitud['tecnico_id'];
 
         // Redirigir a la conversación
-        header("Location: index.php?accion=mostrarConversacion&usuario_id={$otroUsuarioId}&solicitud_id={$idSolicitud}");
+        header("Location: index.php?accion=mostrarChat&usuario_id={$otroUsuarioId}&solicitud_id={$idSolicitud}");
         exit();
     }
 
@@ -181,8 +172,8 @@ class ChatC
         }
 
         $usuarioId = $_SESSION['id'] ?? null;
-        $receptor_id = $_POST['receptor_id'] ?? null;
-        $solicitud_id = $_POST['solicitud_id'] ?? null;
+        $receptor_id = intval($_POST['receptor_id'] ?? 0);
+        $solicitud_id = intval($_POST['solicitud_id'] ?? 0);
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
         if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
