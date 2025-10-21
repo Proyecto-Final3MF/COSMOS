@@ -1,3 +1,5 @@
+<link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
+
 <?php
 session_start();
 
