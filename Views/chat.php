@@ -4,9 +4,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $otroUsuarioId = intval($_GET['usuario_id'] ?? 0);
-$solicitudId = intval($_GET['solicitud_id'] ?? 0);
+$solicitud_id = intval($_GET['solicitud_id'] ?? 0);
 
-if (!$otroUsuarioId || !$solicitudId) {
+if (!$otroUsuarioId || !$solicitud_id) {
     echo "Error: Faltan datos del chat.";
     exit();
 }
@@ -26,57 +26,40 @@ if (!$otroUsuarioId || !$solicitudId) {
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
     </div>
+
     <div class="btn-volver-container">
-        <button class="btn-volver" id="btnVolver">
-            <i class="fa fa-arrow-left">Volver</i>
-        </button>
+        <button class="btn-volver" id="btnVolver"><i class="fa fa-arrow-left"></i> Volver</button>
     </div>
-    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
+
+    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviar">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-        <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
-
+        <input type="hidden" name="solicitud_id" value="<?= $solicitud_id ?>">
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
     </form>
 
-
-    <script src="Assets/js/trancicion.js"></script>
-    </div>
-
-</body>
-
-
-</html>
-<script src="Assets/js/trancicion.js"></script>
-<script>
-    // Cargar mensajes
-    async function cargarMensajes() {
-        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>&solicitud_id=<?= $solicitudId ?>");
-        let html = await res.text();
-        document.getElementById("chat-box").innerHTML = html;
-    }
-
-    // Enviar mensaje
-    document.getElementById("form-chat").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        let formData = new FormData(this);
-        await fetch("index.php?accion=enviarMensaje", {
-            method: "POST",
-            body: formData
-        });
-
-        if (!res.ok) {
-            let text = await res.text();
-            alert("Error al enviar mensaje: " + text);
-            return;
+    <script>
+        async function cargarMensajes() {
+            let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>&solicitud_id=<?= $solicitud_id ?>");
+            let html = await res.text();
+            document.getElementById("chat-box").innerHTML = html;
         }
 
-        this.reset();
+        document.getElementById("form-chat").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            await fetch("index.php?accion=enviar", {
+                method: "POST",
+                body: formData
+            });
+            this.reset();
+            cargarMensajes();
+        });
+
+        setInterval(cargarMensajes, 3000);
         cargarMensajes();
-    });
+    </script>
+</body>
 
-    setInterval(cargarMensajes, 3000);
-
-    cargarMensajes();
-</script>
+</html>
