@@ -76,8 +76,8 @@ class Mensaje
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE (m.usuario_id = ? AND m.receptor_id = ?)
-                   OR (m.usuario_id = ? AND m.receptor_id = ?)
+                WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
+                   OR (m.usuario_id = ? AND m.receptor_id = ?))
                 AND m.solicitud_id = ?
                 ORDER BY m.fecha ASC";
 
