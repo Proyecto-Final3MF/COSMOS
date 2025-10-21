@@ -23,7 +23,7 @@ class ChatC
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $solicitud_id = $_GET['solicitud_id'] ?? null;
 
-        +$solicitud_id = $_GET['solicitud_id'] ?? null;
+        $solicitud_id = $_GET['solicitud_id'] ?? null;
 
         if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
             echo "Usuario no especificado";
@@ -46,7 +46,7 @@ class ChatC
         }
 
         $mensajeModel = new Mensaje();
-        $mensajes = $this->$mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
 
         foreach ($mensajes as $m) {
             $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tu' : ($m['emisor'] ?? '???');
@@ -121,7 +121,7 @@ class ChatC
         $mensajeModel = new Mensaje();
         $conversaciones = $mensajeModel->obtenerConversaciones($usuario_id);
 
-        include __DIR__ . "/../Views/conversaciones.php";
+        include __DIR__ . "Views/conversaciones.php";
     }
     // Lista todas las conversaciones de un usuario
     public function registroChats()
@@ -169,7 +169,7 @@ class ChatC
         }
 
         // Redirigir a la conversación
-        header("Location: index.php?accion=mostrarConversacion&usuario_id={$otroUsuarioId}$solicitud_id={$idSolicitud}");
+        header("Location: index.php?accion=mostrarConversacion&usuario_id={$otroUsuarioId}&solicitud_id={$idSolicitud}");
         exit();
     }
 
@@ -190,7 +190,6 @@ class ChatC
             exit("Error: faltan paramentros o mensaje vacio.");
         }
 
-        $mensajeModel = new Mensaje();
         $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
 
         exit();
