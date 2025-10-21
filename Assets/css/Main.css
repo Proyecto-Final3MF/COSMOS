@@ -526,6 +526,41 @@ a:has(> .btn-boton4442) {
     filter: brightness(1.1);
 }
 
+
+.btn-boton4443 {
+    display: flex; /* Flex para centrar icono */
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid #979797;
+    color: #e83e8c;
+    background-color: white;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+}
+
+.btn-boton4443 i {
+    font-size: 1.6rem;
+}
+
+.btn-boton4443:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+/* Si usas <a> en lugar de <button> */
+.producto-con-boton a.btn-boton4443 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @keyframes pulseBtn {
     0% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-2px) scale(1.02); }
@@ -627,6 +662,10 @@ tr:hover {
     background-color: rgba(232, 62, 140, 0.1);
 }
 
+table tr {
+  height: 50px;
+}
+
 table td, table th {
     vertical-align: middle; 
     text-align: center;     
@@ -647,6 +686,16 @@ th {
 td {
     padding: 12px;
     color: #333;
+}
+
+table td img,
+table th img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover; 
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
 }
 
 th:first-child {
@@ -750,6 +799,7 @@ tbody tr:hover {
   justify-content: center;
   align-items: center;
   gap: 12px;
+  height: 75px;
 }
 
 .icon-btn {
@@ -804,6 +854,23 @@ tbody tr:hover {
     width: 32px;
     height: 32px;
     font-size: 16px;
+  }
+}
+
+table td, table th {
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  table td img {
+    width: 70px;
+    height: 70px;
+  }
+  table tr {
+    height: auto;
   }
 }
 
@@ -1847,31 +1914,17 @@ input[type="submit"]:hover {
 
 .producto-con-boton {
     display: flex;
-    align-items: center;
+    align-items: center; /* Alinea verticalmente select y botón */
     gap: 10px; 
-    justify-content: flex-end;
     margin-bottom: 15px;
 }
 
 .producto-con-boton select {
     flex: 1;
     max-width: 300px;
+    padding: 8px 10px;
+    font-size: 1rem;
 }
-
-.producto-con-boton .btn-boton2 {
-    border-color: #fff;
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
-    transition: transform 0.3s, background-color 0.3s;
-    margin-top: -20px;
-}
-
-.producto-con-boton .btn-boton2:hover {
-    background-color: #e83e8c;
-    transform: scale(1.1);
-}
-
 .rol-container {
     display: grid;
     gap: 15px;

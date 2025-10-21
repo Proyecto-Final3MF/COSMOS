@@ -27,18 +27,16 @@ require_once ("./Views/include/UH.php");
                
         <p class="fade-label">Producto:</p>
         <div class="producto-con-boton">
-            <select id="producto" name="producto" required>
-            <option value=""></option>
-            <?php foreach ($productos as $producto): ?>
-            <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre'])?></option>
-            <?php endforeach; ?>
-            </select>
+        <select id="producto" name="producto" required>
+        <option value=""></option>
+        <?php foreach ($productos as $producto): ?>
+        <option value="<?= $producto['id'] ?>"><?= htmlspecialchars($producto['nombre'])?></option>
+        <?php endforeach; ?>
+        </select>
 
-        <a href="index.php?accion=formularioP">
-            <button type="button" class="btn-boton2">
-            <i class="fa fa-plus-circle"></i>
-            </button>
-            </a>
+        <a href="index.php?accion=formularioP" class="btn-boton4443">
+        <i class="fa-solid fa-plus-circle"></i>
+        </a>
         </div>
 
         <p class="fade-label">Descripcion:</p>
