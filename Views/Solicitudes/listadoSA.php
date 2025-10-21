@@ -69,7 +69,7 @@ require_once("./Views/include/UH.php");
                                 <?php endif; ?>
 
                                 <?php
-                                $usuarioDestino = null;
+                                $usuarioDestino = 0;
                                 if (isset($_SESSION['rol'])) {
                                     if ($_SESSION['rol'] == ROL_TECNICO) {
                                         $usuarioDestino = $resultado['cliente_id'];
@@ -78,8 +78,9 @@ require_once("./Views/include/UH.php");
                                     }
                                 }
                                 ?>
+
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
                                         class="btn btn-boton2">
                                         <img src="Assets/imagenes/chat.png" alt="chat" width="40">
                                     </a>
