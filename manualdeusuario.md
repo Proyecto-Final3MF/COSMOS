@@ -170,5 +170,56 @@ _**COSMOS**_ es una plataforma web innovadora diseñada para conectar a clientes
 <img src="Assets/imagenes/TEC4.png" alt="cap1" width="50%">
 </p>
 
-## Editar solicitud 
-<i class="fa fa-comments"></i>
+## Editar solicitud (El Lapiz)
+
+### aqui podra cambiar la descripcion de la solicitud caso sea necesario, por ejemplo el cliente se equivoco a la hora de describir el problema, y podra cambiar el estado de la solicitud para mantener informado al cliente en que fase de reparacion esta su dispositivo.
+
+<p align="center">
+<img src="Assets/imagenes/TEC5.png" alt="cap1" width="50%">
+</p>
+
+## El Chat (los globos de texto)
+
+### aqui es donde tendra la conversacion con el cliente para llegar a un acuerdo ya sea por el costo de la reparacion, como para saber donde encotrarse o donde el cliente le enviara el dispositivo y luego usted a el.
+
+<p align="center">
+<img src="Assets/imagenes/CAP9.png" alt="cap1" width="50%">
+</p>
+
+## Linea de tiempo de la solicitud (El Panfleto)
+
+### aqui podra ver por todo el proceso que paso la solicitud caso lo necesite
+
+<p align="center">
+<img src="Assets/imagenes/TEC6.png" alt="cap1" width="50%">
+</p>
+
+## Cancelar la solicitud (la X)
+
+### con este boton podra cancelar la solicitud caso sea necesario ya sea porque nose puso de acuerdo con el cliente, porque no pudo repararlo, etc. y esta volvera a solicitudes disponibles.
+
+<p align="center">
+<img src="Assets/imagenes/TEC4.png" alt="cap1" width="50%">
+</p>
+
+## Reparacion completada
+
+### una vez termine de reparar la solicitud y se puso en contacto con el cliente para la entrega del dispositivo y el pago correspondiente, debera cambiar el estado de la solicitud a finalizado, cerrando asi el proceso de la solicitud.
+
+<p align="center">
+<img src="Assets/imagenes/TEC7.png" alt="cap1" width="50%">
+</p>
+
+## Solicitud finalizada
+
+### podra ver sus solicitudes finalizadas en el boton con el mismo nombre
+
+<p align="center">
+<img src="Assets/imagenes/TEC8.png" alt="cap1" width="50%">
+</p>
+
+## Gracias por leer
+
+### Esperamos que esta guía le haya sido útil al usar nuestro sitio web. Si tiene alguna otra pregunta, comuníquese con nuestro equipo de soporte técnico al +598 98 431 475 o a nuestra dirección de Gmail: tecnicosasociados0@gmail.com
+
+
