@@ -170,4 +170,5 @@ _**COSMOS**_ es una plataforma web innovadora diseñada para conectar a clientes
 <img src="Assets/imagenes/TEC4.png" alt="cap1" width="50%">
 </p>
 
-## Editar solicitud <i class="fa fa-comments"></i>
+## Editar solicitud 
+<i class="fa fa-comments"></i>
