@@ -81,8 +81,8 @@ require_once("./Views/include/UH.php");
 
                                 <?php if ($usuarioDestino): ?>
                                     <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
-                                        class="btn btn-boton2">
-                                        <img src="Assets/imagenes/chat.png" alt="chat" width="40">
+                                        class="icon-btn chat">
+                                        <i class="fa fa-comments"></i>
                                     </a>
                                 <?php endif; ?>
 
