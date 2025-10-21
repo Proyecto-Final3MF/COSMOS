@@ -102,4 +102,4 @@ The first step is to access our site from your preferred browser. Once there, cl
 
 ## Thanks for reading
 
-### We hope this guide has been helpful in using our website. For any other questions, please contact our technical support team at +598 98 431 475 or at our Gmail address: tecnicosasociados@gmail.com
+### We hope this guide has been helpful in using our website. For any other questions, please contact our technical support team at +598 98 431 475 or at our Gmail address: tecnicosasociados0@gmail.com
