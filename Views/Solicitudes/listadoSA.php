@@ -69,7 +69,7 @@ require_once("./Views/include/UH.php");
                                 <?php endif; ?>
 
                                 <?php
-                                $usuarioDestino = 0;
+                                $usuarioDestino = null;
                                 if (isset($_SESSION['rol'])) {
                                     if ($_SESSION['rol'] == ROL_TECNICO) {
                                         $usuarioDestino = $resultado['cliente_id'];

@@ -13,18 +13,14 @@ class ChatC
             session_start();
         }
     }
-    public function mostrarChat()
+   public function mostrarChat()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $usuarioId = $_SESSION['id'] ?? null;
-        $otroUsuarioId = intval($_GET['usuario_id'] ?? 0);
-        $solicitud_id = intval($_GET['solicitud_id'] ?? 0);
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $solicitud_id = $_GET['solicitud_id'] ?? null;
 
         if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
-            echo "Usuario no especificado";
+            echo "Error: faltan datos del chat.";
             return;
         }
 
@@ -35,21 +31,20 @@ class ChatC
     public function cargarMensajes()
     {
         $usuarioId = $_SESSION['id'] ?? null;
-        $otroUsuarioId = intval($_GET['usuario_id'] ?? 0);
-        $solicitudId = intval($_GET['solicitud_id'] ?? 0);
+        $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $solicitud_id = $_GET['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId || !$solicitudId) {
+        if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
             http_response_code(400);
-            exit("Faltan paramentros.");
+            exit("Faltan parámetros.");
         }
 
-        $mensajeModel = new Mensaje();
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
+        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitud_id);
 
         foreach ($mensajes as $m) {
-            $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tu' : ($m['emisor'] ?? '???');
+            $nombre = ($m['usuario_id'] == $usuarioId) ? 'Tú' : ($m['emisor'] ?? '???');
             echo "<p><strong>" . htmlspecialchars($nombre) . ":</strong> " .
-                nl2br(htmlspecialchars($m['mensaje'])) . "</p>";
+                 nl2br(htmlspecialchars($m['mensaje'])) . "</p>";
         }
     }
 
@@ -106,20 +101,14 @@ class ChatC
 
     public function listarConversaciones()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $usuario_id = $_SESSION['id'] ?? null;
         if (!$usuario_id) {
             header("Location: index.php?accion=login");
             exit();
         }
 
-        $mensajeModel = new Mensaje();
-        $conversaciones = $mensajeModel->obtenerConversaciones($usuario_id);
-
-        include __DIR__ . "Views/conversaciones.php";
+        $conversaciones = $this->mensajeModel->obtenerConversaciones($usuario_id);
+        include __DIR__ . "/../Views/conversaciones.php";
     }
     // Lista todas las conversaciones de un usuario
     public function registroChats()
@@ -167,22 +156,20 @@ class ChatC
     // Guardar nuevo mensaje
     public function enviar()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $usuarioId = $_SESSION['id'] ?? null;
-        $receptor_id = intval($_POST['receptor_id'] ?? 0);
-        $solicitud_id = intval($_POST['solicitud_id'] ?? 0);
+        $receptor_id = $_POST['receptor_id'] ?? null;
+        $solicitud_id = $_POST['solicitud_id'] ?? null;
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
         if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
             http_response_code(400);
-            exit("Error: faltan paramentros o mensaje vacio.");
+            exit("Error: faltan parámetros o mensaje vacío.");
         }
 
         $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
 
+        // Devolver éxito
+        http_response_code(200);
         exit();
     }
 

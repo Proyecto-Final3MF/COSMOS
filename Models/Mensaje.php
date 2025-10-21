@@ -127,10 +127,7 @@ class Mensaje
         $sql = "SELECT 
                     CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
                     m.solicitud_id,
-                    COALESCE(
-                        CASE WHEN m.usuario_id = ? THEN r.nombre ELSE u.nombre END,
-                        'Usuario desconocido'
-                    ) AS otro_usuario,
+                    COALESCE(CASE WHEN m.usuario_id = ? THEN r.nombre ELSE u.nombre END, 'Usuario desconocido') AS otro_usuario,
                     SUBSTRING_INDEX(GROUP_CONCAT(m.mensaje ORDER BY m.fecha DESC SEPARATOR '||'), '||', 1) AS ultimo_mensaje,
                     MAX(m.fecha) AS ultima_fecha
                 FROM mensaje m
@@ -147,19 +144,18 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
+
     // Enviar mensaje
     public function enviarMensaje($usuario_id, $receptor_id, $mensaje, $solicitud_id)
     {
         $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, solicitud_id, fecha)
                 VALUES (?, ?, ?, ?, NOW())";
         $stmt = $this->conexion->prepare($sql);
-
         if (!$stmt) {
             error_log("Error prepare enviarMensaje: " . $this->conexion->error);
             return false;
         }
-
-        $stmt->bind_param("iisi", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
+        $stmt->bind_param("iiis", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
         return $stmt->execute();
     }
 
