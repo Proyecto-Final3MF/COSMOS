@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $otroUsuarioId = $_GET['usuario_id'] ?? null;
-$solicitudID = $_GET['solicitud_id'] ?? null;
+$solicitudId = $_GET['solicitud_id'] ?? null;
 
 if (!$otroUsuarioId || !$solicitudId) {
     echo "Error: Faltan datos del chat.";
