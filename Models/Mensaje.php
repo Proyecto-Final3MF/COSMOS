@@ -126,6 +126,7 @@ class Mensaje
     {
         $sql = "SELECT 
                     CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
+                    m.solicitud_id,
                     COALESCE(
                         CASE WHEN m.usuario_id = ? THEN r.nombre ELSE u.nombre END,
                         'Usuario desconocido'
@@ -136,7 +137,7 @@ class Mensaje
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
                 WHERE m.usuario_id = ? OR m.receptor_id = ?
-                GROUP BY otro_usuario_id
+                GROUP BY otro_usuario_id, m.solicitud_id
                 ORDER BY ultima_fecha DESC";
 
         $stmt = $this->conexion->prepare($sql);

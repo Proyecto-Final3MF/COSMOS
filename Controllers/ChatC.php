@@ -39,7 +39,6 @@ class ChatC
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $solicitudId = $_GET['solicitud_id'] ?? null;
-        $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
 
         if (!$usuarioId || !$otroUsuarioId || !$solicitudId) {
             http_response_code(400);
@@ -184,8 +183,7 @@ class ChatC
 
         if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
             http_response_code(400);
-            echo "Fatal parámetros";
-            exit();
+            exit("Error: faltan paramentros o mensaje vacio.");
         }
 
         $mensajeModel = new Mensaje();
