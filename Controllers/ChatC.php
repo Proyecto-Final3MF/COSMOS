@@ -21,13 +21,16 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $solicitud_id = $_GET['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId) {
+        +$solicitud_id = $_GET['solicitud_id'] ?? null;
+
+        if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
             echo "Usuario no especificado";
             return;
         }
 
-        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitud_id);
         require_once "Views/chat.php";
     }
 
@@ -35,15 +38,16 @@ class ChatC
     {
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $solicitudId = $_GET['solicitud_id'] ?? null;
         $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
 
-        if (!$usuarioId || !$otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId || !$solicitudId) {
             http_response_code(400);
             exit("Faltan paramentros.");
         }
 
         $mensajeModel = new Mensaje();
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
 
         include __DIR__ . "/../Views/mensajes.php";
     }
@@ -62,8 +66,9 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = intval($_GET['usuario_id'] ?? null);
+        $solicitud_id = $_GET['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId || !$solicitud_id) {
             echo "Error: no se especificoel usuario receptor.";
             return;
         }
@@ -72,7 +77,7 @@ class ChatC
         $mensajeModel = new Mensaje();
 
         // Obtener todos los mensajes entre los dos usuarios
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitud_id);
 
         include __DIR__ . "/../Views/conversaciones.php";
     }
@@ -161,7 +166,7 @@ class ChatC
         }
 
         // Redirigir a la conversación
-        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId);
+        header("Location: index.php?accion=mostrarConversacion&usuario_id={$otroUsuarioId}$solicitud_id={$idSolicitud}");
         exit();
     }
 
@@ -174,16 +179,17 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $receptor_id = $_POST['receptor_id'] ?? null;
+        $solicitud_id = $_POST['solicitud_id'] ?? null;
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
-        if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
+        if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
             http_response_code(400);
             echo "Fatal parámetros";
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
+        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
 
         exit();
     }

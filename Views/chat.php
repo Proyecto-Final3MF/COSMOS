@@ -3,7 +3,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+$otroUsuarioId = $_GET['usuario_id'] ?? null;
+$solicitudID = $_GET['solicitud_id'] ?? null;
 
+if (!$otroUsuarioId || !$solicitudId) {
+    echo "Error: Faltan datos del chat.";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +34,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
+        <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
@@ -45,7 +52,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <script>
     // Cargar mensajes
     async function cargarMensajes() {
-        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>");
+        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>&solicitud_id=<?= $solicitudId ?>");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
