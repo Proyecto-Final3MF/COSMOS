@@ -19,7 +19,6 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
 <div>
-    
 
 <div class="btn-container fade-slide">
 <a href="index.php?accion=urgenteP">
@@ -33,32 +32,32 @@ require_once ("./Views/include/UH.php");
     
     <div class="btn-container fade-slide">
     <a href="index.php?accion=listarP">
-        <button class="btn btn-boton444 btn-mis-productos">
-            <i class="fa-solid fa-box"></i> Mis Productos
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-box btn-mis-productos"></i> Mis Productos
         </button>
     </a>
 
     <a href="index.php?accion=formularioS">
-        <button class="btn btn-boton444 btn-crear">
-            <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-plus-circle btn-crear"></i> Crear Nueva Solicitud
         </button>
     </a>
 
     <a href="index.php?accion=listarSLU">
-        <button class="btn btn-boton444 btn-sin-asignar">
-            <i class="fa-solid fa-hourglass-half"></i> Solicitudes Sin Asignar
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> Solicitudes Sin Asignar
         </button>
     </a>
 
     <a href="index.php?accion=listarSA">
-        <button class="btn btn-boton444 btn-aceptadas">
-            <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-check btn-aceptadas"></i> Solicitudes Aceptadas
         </button>
     </a>
 
     <a href="index.php?accion=listarST">
-        <button class="btn btn-boton444 btn-terminadas">
-            <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
+        <button class="btn btn-boton444">
+            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> Solicitudes Terminadas
         </button>
     </a>
 

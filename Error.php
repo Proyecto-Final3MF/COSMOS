@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E R R O R ‎ 4 0 4</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
+    <link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
 </head>
 <body class="error">
     <div class="noise"></div>

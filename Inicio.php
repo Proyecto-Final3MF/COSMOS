@@ -1,3 +1,4 @@
+<link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
 <?php
     require_once("Views/include/UH.php");
 ?>
@@ -18,7 +19,6 @@
 <div class="btn-container2">
 <a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
 </div>
-<script src="Assets/js/language.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script>
     window.addEventListener("load", () => {

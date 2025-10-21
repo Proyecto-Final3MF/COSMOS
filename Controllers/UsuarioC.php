@@ -5,9 +5,11 @@ require_once("Controllers/HistorialC.php");
 
 class UsuarioC {
     private $historialController;
+    private $reviewController;
 
     public function __construct(){
         $this->historialController = new HistorialController();
+        $this->reviewController = new ReviewC();
     }
 
     public function login() {
@@ -25,23 +27,49 @@ class UsuarioC {
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
-        $contrasena = $_POST['contrasena']; 
+        $contrasena = $_POST['contrasena'];
+
+        // Validar longitud mínima
+        if (strlen($contrasena) < 8) {
+        $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
+        // Encriptar la contraseña antes de guardarla
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
          //Si el nombre de Usuario tiene caracteres q no son letras o espacios no deja registrarse
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
 
+        // Verificar si el correo ya existe
+        $existe = $usuarioM->obtenerPorEmail($mail);
+        if ($existe) {
+        $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
         if (empty($usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -55,22 +83,25 @@ class UsuarioC {
             $rutaDestino = "Assets/imagenes/perfil/fotodefault.webp";
         }
 
-        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena, $rutaDestino)) {
-            $usuarioN = $usuarioM->verificarU($usuario, $contrasena);
-            if ($usuarioN) {
-                session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
-                $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $usuarioN['id'];
-                $_SESSION['email'] = $usuarioN['email'];
-                $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena_hash, $rutaDestino)) {
+    // Obtener el usuario recién creado
+        $usuarioN = $usuarioM->obtenerPorNombre($usuario);
+        if ($usuarioN) {
+        session_start();
+        $_SESSION['usuario'] = $usuarioN['nombre'];
+        $_SESSION['rol'] = $usuarioN['rol_id'];
+        $_SESSION['id'] = $usuarioN['id'];
+        $_SESSION['email'] = $usuarioN['email'];
+        $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
-                // Historial
-                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+        // Historial
+        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
-                header("Location: index.php?accion=redireccion");
-                exit();
-            }
+        $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
+        $_SESSION['tipo_mensaje'] = "success";
+        header("Location: index.php?accion=redireccion");
+        exit();
+    }
         } else {
             header("Location: index.php?accion=register&error=Error al crear usuario");
             exit();
@@ -78,62 +109,83 @@ class UsuarioC {
     }
 
     public function actualizarU() {
-        session_start();
-        $id = $_POST['id'];
-        $nombre = trim($_POST['nombre']);
-        $email = trim($_POST['email']);
-        $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+    session_start();
+    $id = $_POST['id'];
+    $nombre = trim($_POST['nombre']);
+    $email = trim($_POST['email']);
+    $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-        $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
-        $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
+    // Validaciones
+    if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
+        header("Location: index.php?accion=editarU&id=$id"); 
+        exit();
+    }
 
-        $usuarioM = new Usuario();
+    if (empty($nombre)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "El nombre no puede estar vacío.";
+        header("Location: index.php?accion=editarU&id=$id"); 
+        exit();
+    }
 
-        // Manejo de nueva foto
-        $foto_perfil = $foto_actual;
-        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
-            $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
-            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
+        header("Location: index.php?accion=editarU&id=$id"); 
+        exit();
+    }
 
-            // Borrar foto anterior si no es default
-            if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
-                unlink($foto_actual);
-            }
-        }
+    $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
+    $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
-        if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
-            $_SESSION['usuario'] = $nombre;
-            $_SESSION['email'] = $email;
-            $_SESSION['foto_perfil'] = $foto_perfil;
-            $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+    $usuarioM = new Usuario();
 
-            if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
-                $obs = "Ningun cambio detectado";
-            } else {
-                if ($nombreAntiguo !== $nombre) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
-                    $obs = $obs1;
-                }
+    // Manejo de nueva foto
+    $foto_perfil = $foto_actual;
+    if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
+        $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
+        move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
 
-                if ($emailAntiguo !== $email) {
-                    $obs2 = "Email: ".$emailAntiguo. " ---> ".$email;
-                    $obs = $obs2;
-                }
-
-                if ($nombreAntiguo !== $nombre && $emailAntiguo !== $email) {
-                    $obs = $obs1.$obs2;
-                }
-            }
-
-            $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
-
-            header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-            exit();
-        } else {
-            header("Location: index.php?accion=redireccion&error=Error al actualizar el usuario.");
-            exit();
+        // Borrar foto anterior si no es default
+        if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
+            unlink($foto_actual);
         }
     }
+
+    if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
+        $_SESSION['usuario'] = $nombre;
+        $_SESSION['email'] = $email;
+        $_SESSION['foto_perfil'] = $foto_perfil;
+        $_SESSION['tipo_mensaje'] = "success";
+        $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+
+        // Historial de cambios
+        if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
+            $obs = "Ningún cambio detectado";
+        } else {
+            $obs = "";
+            if ($nombreAntiguo !== $nombre) {
+                $obs .= "Nombre: $nombreAntiguo → $nombre. ";
+            }
+            if ($emailAntiguo !== $email) {
+                $obs .= "Email: $emailAntiguo → $email.";
+            }
+        }
+
+        $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
+
+        header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+        exit();
+    } else {
+        $_SESSION['tipo_mensaje'] = "danger";
+        $_SESSION['mensaje'] = "Error al actualizar el usuario.";
+        header("Location: index.php?accion=editarU&id=$id");
+        exit();
+    }
+}
+
 
     public function borrar() {
         $usuario = new Usuario();
@@ -150,26 +202,29 @@ class UsuarioC {
         include("views/Usuario/editarU.php");
     }
 
-    public function autenticar() {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
-        $modelo = new Usuario();
-        $user = $modelo->verificarU($usuario, $contrasena);
+   public function autenticar() {
+    $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
+    $contrasena = $_POST['contrasena'];
+    $modelo = new Usuario();
 
-        if ($user) {
-            $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['rol'] = $user['rol_id'];
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+    // Trae el usuario por email
+    $user = $modelo->obtenerPorEmail($email);
 
-            header("Location: index.php?accion=redireccion");
-            exit();
-        } else {
-            $error = "Usuario o contraseña incorrectos";
-            include("views/Usuario/Login.php");
-        }
+    if ($user && password_verify($contrasena, $user['contrasena'])) {
+        // Login correcto
+        $_SESSION['usuario'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol_id'];
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+
+        header("Location: index.php?accion=redireccion");
+        exit();
+    } else {
+        $error = "Correo o contraseña incorrectos";
+        include("views/Usuario/Login.php");
     }
+}
 
     public function listarU() {
         $orden = $_GET['orden'] ?? ''; 
@@ -178,12 +233,21 @@ class UsuarioC {
 
         $usuario = new Usuario();
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
-        include("views/Usuario/Admin/listarU.php");
+        include("Views/Usuario/Admin/listarU.php");
     }
 
     public function PreviewU() {
         $usuario = new Usuario();
         return $usuario->PreviewU();
+    }
+
+    public function PerfilTecnico() {
+        $Tecnico = new Usuario();
+        $Reviews = new Review();
+        $id_tecnico = $_GET['id'];
+        $DatosTecnico = $Tecnico->getDatosTecnico($id_tecnico);
+        $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
+        include("Views/Usuario/Tecnico/Perfil.php");
     }
 
     public function logout() {
