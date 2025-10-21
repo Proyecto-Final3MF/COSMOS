@@ -159,7 +159,7 @@ class Mensaje
             return false;
         }
 
-        $stmt->bind_param("iiii", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
+        $stmt->bind_param("iisi", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
         return $stmt->execute();
     }
 

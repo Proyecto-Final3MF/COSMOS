@@ -65,6 +65,13 @@ if (!$otroUsuarioId || !$solicitudId) {
             method: "POST",
             body: formData
         });
+
+        if (!res.ok) {
+            let text = await res.text();
+            alert("Error al enviar mensaje: " + text);
+            return;
+        }
+
         this.reset();
         cargarMensajes();
     });
