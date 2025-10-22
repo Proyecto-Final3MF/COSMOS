@@ -7,19 +7,11 @@ if ($_SESSION['rol'] != 3) {
     exit();
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificación de Técnicos</title>
-    <link rel="stylesheet" href="./Assets/css/Main.css">
 
-</head>
 <body>
     <br>
-    <div class="container-admin">
+
         <h1 class="titulo-admin">Solicitudes de Verificación de Técnicos</h1>
 
         <?php if (empty($tecnicosPendientes)): ?>
@@ -27,7 +19,7 @@ if ($_SESSION['rol'] != 3) {
                 No hay técnicos pendientes de verificación.
             </div>
         <?php else: ?>
-            <table class="table-verification" style="width: 100%;">
+            <table class="table table-striped" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -65,8 +57,7 @@ if ($_SESSION['rol'] != 3) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        <?php endif; ?>
-    </div>
+        <?php endif; ?> 
 
     <div id="modalEvidencia" class="modal-evidencia">
         <div class="modal-content">
