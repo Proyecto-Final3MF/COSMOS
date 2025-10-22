@@ -114,7 +114,7 @@ class Review {
         $sql2 = "UPDATE reviews SET rating = ?, comentario = ? WHERE id_solicitud = ?";
 
         if ($stmt2 = $this->conn->prepare($sql2)) {
-            $stmt2->bind_param("isi", $rating, $Comentario, $id_solicitud);
+            $stmt2->bind_param("dsi", $rating, $Comentario, $id_solicitud);
         
             if (!$stmt2->execute()) {
                 error_log("Error al ejecutar INSERT en reviews: " . $stmt2->error);
