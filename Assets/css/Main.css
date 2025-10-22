@@ -618,11 +618,14 @@ a:has(> .btn-boton4442) {
     filter: brightness(1.1);
 }
 
-/* Si usas <a> en lugar de <button> */
 .producto-con-boton a.btn-boton4443 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.producto-con-boton .btn-boton4443 {
+    margin-top: -12px; 
 }
 
 @keyframes pulseBtn {
