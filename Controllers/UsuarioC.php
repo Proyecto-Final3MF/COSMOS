@@ -156,15 +156,15 @@ class UsuarioC {
 
                     $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
                     $_SESSION['tipo_mensaje'] = "success";
-
-                    if($rol_id=1){
-                        header("Location: index.php?accion=espera");
-                        exit();
-                    }else{
-                        header("Location: index.php?accion=redireccion");
-                        exit();
-                    }
                     
+                    if($rol_id == 1){ 
+                        header("Location: index.php?accion=espera"); 
+                    exit(); 
+                    }else{ 
+                    header("Location: index.php?accion=redireccion"); 
+                    exit(); 
+                    }
+
                 }
             }
         } else {
