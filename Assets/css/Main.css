@@ -104,7 +104,7 @@ body {
 .logo-icon {
 	margin-right: 0.5rem;
 }
-    
+
 .nav-links li {
     margin-left: 1.5rem;
     display: flex; 
@@ -2241,6 +2241,11 @@ h1.inicio55 {
     margin-bottom: 1rem;
     color: var(--dark-color);
     animation: fadeDown 1s ease forwards;
+}
+
+.logoeninicio {
+    vertical-align: -7px;
+    height: 45px;
 }
 
 p.inicio44 {
