@@ -107,14 +107,14 @@ class ReviewC {
                 $obs = "Ningun cambio detectado";
             } else {
                 if ($ratingAntiguo !== $rating) {
-                    $obs1 = "Rating: ".$ratingAntiguo."★" ." → ". $rating."★"." ‎ ";
+                    $obs1 = "Rating: ".$ratingAntiguo."★" ." ⟶ ". $rating."★"." ‎ ";
                     $obs = $obs1;
                 }
 
                 if ($Comentario !== $ComentarioAntiguo) {
                     if ($ComentarioAntiguo == ''): $ComentarioAntiguo = "' '"; endif;
                     if ($Comentario == ''): $ComentarioAntiguo = "' '"; endif;
-                    $obs2 = "Comentario: "."'". $ComentarioAntiguo."'"." → "."'".$Comentario."'";
+                    $obs2 = "Comentario: "."'". $ComentarioAntiguo."'"." ⟶ "."'".$Comentario."'";
                     $obs = $obs2;
                 }
                 $obs = $obs1.$obs2;
