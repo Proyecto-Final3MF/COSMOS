@@ -2298,8 +2298,7 @@ input:checked ~ label {
     margin: 5px 0;
 }
 
-/* Style for client name */
-.reviews > :nth-child(2) { /* Targeting the element immediately after the fieldset (which is the client name echo) */
+.reviews > :nth-child(2) {
     font-weight: bold;
     color: #e83e8c;
     font-size: 1.1em;
@@ -2325,29 +2324,32 @@ input:checked ~ label {
     cursor: pointer;
     font-weight: bold;
 }
-
-/* Estilos para que Select2 ocupe el 100% del ancho del contenedor del formulario */
-
-/* Contenedor principal de Select2 (Select2-container) */
 #tecnico-fields .select2-container {
-    width: 100% !important; /* Fuerza a que ocupe todo el ancho disponible */
-    box-sizing: border-box; /* Asegura que el padding y border no aumenten el ancho total */
+    width: 100% !important;
+    box-sizing: border-box;
 }
 
-/* Estilo para la caja donde se introducen los tags/valores seleccionados */
 #tecnico-fields .select2-container--default .select2-selection--multiple {
-    /* Puedes ajustar la altura (height) si tus otros inputs tienen una altura fija */
-    min-height: 40px; /* Altura mínima para que se vea similar a otros inputs */
+    min-height: 40px;
     line-height: 1.5;
-    border: 1px solid #ccc; /* Ajusta este color al que uses en tus otros inputs */
-    border-radius: 4px; /* Ajusta el radio si tus otros inputs son redondeados */
-    padding: 5px 10px; /* Espaciado interno para que se vea bien */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
 }
 
-/* Estilo para los elementos individuales (tags) que aparecen después de la selección */
 #tecnico-fields .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #e4e4e4; /* Color de fondo del tag */
+    background-color: #e4e4e4;
     border: 1px solid #aaa;
     border-radius: 4px;
     padding: 0 5px;
+}
+
+.foto-evidencia {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    display: block;
+    margin: 10px auto;
 }
