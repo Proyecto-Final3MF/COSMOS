@@ -33,7 +33,7 @@ require_once("./Views/include/UH.php");
     <input type="hidden" name="accion" value="listarC">
     <select name="orden" id="orden">
         <option value="Más Recientes" <?php echo ($_GET['orden'] ?? 'Más Recientes') == 'Más Recientes' ? 'selected' : ''; ?>>Más Recientes</option>
-        <option value="Más Antiguos" <?php echo ($_GET['orden'] ?? 'Más Antiguos') == 'Más Antiguos' ? 'selected' : ''; ?>>Más Antiguos</option>
+        <option value="Más Antiguas" <?php echo ($_GET['orden'] ?? 'Más Antiguas') == 'Más Antiguas' ? 'selected' : ''; ?>>Más Antiguas</option>
         <option value="A-Z" <?php echo ($_GET['orden'] ?? '') == 'A-Z' ? 'selected' : ''; ?>>A-Z</option>
         <option value="Z-A" <?php echo ($_GET['orden'] ?? '') == 'Z-A' ? 'selected' : ''; ?>>Z-A</option>
     </select>
