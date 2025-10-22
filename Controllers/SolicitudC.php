@@ -83,13 +83,13 @@ class SolicitudC {
             exit();
         }
 
-        $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
+        $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
-        if ($solicitud){
+        if ($id_solicitud){
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             $_SESSION['tipo_mensaje'] = "success";
-            // Lógica adicional (historial, etc.)
-           //$this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+
+            $this->historiaC->registrarEvento($id_solicitud, "Solicitud Urgente creada");
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
