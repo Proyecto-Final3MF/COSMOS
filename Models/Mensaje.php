@@ -68,31 +68,28 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
     
-    public function obtenerConversacionPorSolicitud($usuario_id, $otro_usuario_id, $solicitud_id)
-{
-    $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
-                   u.nombre AS emisor, r.nombre AS receptor
-            FROM mensaje m
-            JOIN usuario u ON m.usuario_id = u.id
-            LEFT JOIN usuario r ON m.receptor_id = r.id
-            WHERE ((m.usuario_id = ? AND m.receptor_id = ?) 
-               OR (m.usuario_id = ? AND m.receptor_id = ?))
-              AND m.solicitud_id = ?
-            ORDER BY m.fecha ASC";
+   public function obtenerConversacionesPorSolicitud($usuario_id, $idSolicitud) {
+    $sql = "SELECT 
+                CASE WHEN usuario_id = ? THEN receptor_id ELSE usuario_id END AS otro_usuario_id,
+                COALESCE(
+                    CASE WHEN usuario_id = ? THEN r.nombre ELSE u.nombre END,
+                    'Usuario desconocido'
+                ) AS otro_usuario,
+                SUBSTRING_INDEX(GROUP_CONCAT(mensaje ORDER BY fecha DESC SEPARATOR '||'), '||', 1) AS ultimo_mensaje,
+                MAX(fecha) AS ultima_fecha
+            FROM mensaje
+            LEFT JOIN usuario u ON mensaje.usuario_id = u.id
+            LEFT JOIN usuario r ON mensaje.receptor_id = r.id
+            WHERE (usuario_id = ? OR receptor_id = ?) 
+              AND solicitud_id = ?
+            GROUP BY otro_usuario_id
+            ORDER BY ultima_fecha DESC";
 
     $stmt = $this->conexion->prepare($sql);
-
-    if (!$stmt) {
-        die("Error en prepare: " . $this->conexion->error);
-    }
-
-    $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
-
-    if (!$stmt->execute()) {
-        die("Error al ejecutar query: " . $stmt->error);
-    }
-
+    $stmt->bind_param("iiiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id, $idSolicitud);
+    $stmt->execute();
     $result = $stmt->get_result();
+
     return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 }
     // Obtener conversación entre dos usuarios específicos
