@@ -229,7 +229,7 @@ class UsuarioC {
             } else {
                 $obs = "";
                 if ($nombreAntiguo !== $nombre) {
-                    $obs .= "Nombre: $nombreAntiguo → $nombre. ";
+                    $obs .= "Nombre: $nombreAntiguo → $nombre. ‎ ";
                 }
                 if ($emailAntiguo !== $email) {
                     $obs .= "Email: $emailAntiguo → $email.";
