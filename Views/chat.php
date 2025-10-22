@@ -29,8 +29,8 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
 
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-        <input type="hidden" name="solicitud_id" value="<?= $_GET['id_solicitud'] ?? '' ?>">
+        <input type="hidden" name="receptor_id" value="<?= htmlspecialchars($otroUsuarioId) ?>">
+        <input type="hidden" name="solicitud_id" value="<?= htmlspecialchars($_GET['id_solicitud'] ?? '') ?>">
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
@@ -39,9 +39,9 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
     <script src="Assets/js/trancicion.js"></script>
     <script>
         async function cargarMensajes() {
-            const usuarioId = "<?= $_SESSION['id'] ?>";
-            const receptorId = "<?= $otroUsuarioId ?>";
-            const solicitudId = "<?= $_GET['id_solicitud'] ?? '' ?>";
+            const usuarioId = <?= $_SESSION['id'] ?>;
+            const receptorId = <?= json_encode($otroUsuarioId) ?>;
+            const solicitudId = <?= json_encode($_GET['id_solicitud'] ?? '') ?>;
 
             if (!solicitudId) {
                 console.warn("Falta id_solicitud en la URL");
