@@ -6,11 +6,13 @@ require_once(__DIR__ . '/../Models/ReviewM.php');
 class ReviewC {
     private $ReviewModel;
     private $HistorialModel;
+    private $historiaC;
 
     public function __construct() {
         $this->ReviewModel = new Review();
         $this->solicitudModel = new Solicitud();
         $this->HistorialModel = new HistorialController();
+        $this->historiaC = new HistoriaC();
     }
 
     public function FormularioR() {
@@ -119,7 +121,9 @@ class ReviewC {
                 }
                 $obs = $obs1.$obs2;
             }
-            $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $obs);
+            $evento = "La calificación fue cambiada para ".$rating."★";
+            $this->historiaC->registrarEvento($id_solicitud, $evento);
+            $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $evento);
 
             header("Location:index.php?accion=listarST");
             exit();
@@ -131,6 +135,10 @@ class ReviewC {
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
         $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
+
+        $evento = "La Solicitud fue calificada con ".$rating."★";
+        $this->historiaC->registrarEvento($id_solicitud, $evento);
+        $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "calificó la solicitud", $titulo_solicitud, $id_solicitud, $evento);
         $_SESSION['tipo_mensaje'] = "success";
         $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
         header("Location:index.php?accion=listarST");
