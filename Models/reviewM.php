@@ -26,12 +26,12 @@ class Review {
         return $fila['promedio'];
     }
 
-    public function AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
-        $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
+    public function AddReview($suma_rating, $CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
+        $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ?, suma_rating = ? WHERE id = ?";
         
         // Preparar la sentencia
         if ($stmt1 = $this->conn->prepare($sql1)) {
-            $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
+            $stmt1->bind_param("iddi", $CantReview, $ratingPromedio, $suma_rating, $id_tecnico); 
             
             // Ejecutar
             if (!$stmt1->execute()) {
@@ -91,12 +91,12 @@ class Review {
         }
     }
 
-    public function updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview) {
-        $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ? WHERE id = ?";
+    public function updateReview($suma_rating, $ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview) {
+        $sql1 = "UPDATE usuario SET cant_review = ?, promedio = ?, suma_rating = ? WHERE id = ?";
         
         // Preparar la sentencia
         if ($stmt1 = $this->conn->prepare($sql1)) {
-            $stmt1->bind_param("idi", $CantReview, $ratingPromedio, $id_tecnico); 
+            $stmt1->bind_param("iddi", $CantReview, $ratingPromedio, $suma_rating, $id_tecnico); 
             
             // Ejecutar
             if (!$stmt1->execute()) {
@@ -153,5 +153,15 @@ class Review {
             $stmt->close();
             return [];
         }
+    }
+
+    public function agarrarSuma($id_tecnico) {
+        $sql = "SELECT suma_rating FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_tecnico);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $fila = $resultado->fetch_assoc(); 
+        return $fila['suma_rating']; 
     }
 }
