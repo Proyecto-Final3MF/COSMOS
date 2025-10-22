@@ -77,6 +77,7 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -92,6 +93,7 @@ class UsuarioC {
         if (empty($usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -99,6 +101,7 @@ class UsuarioC {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -219,6 +222,7 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+            $_SESSION['tipo_mensaje'] = "success";
 
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
                 $obs = "Ningún cambio detectado";

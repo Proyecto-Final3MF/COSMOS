@@ -37,7 +37,6 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
         </button>
     </a>
 </div>
-
-    <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/trancicion.js"></script>
 </body>
 </html>
