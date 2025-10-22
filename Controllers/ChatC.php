@@ -38,9 +38,9 @@ class ChatC
     {
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $mensajes = (new Mensaje())->obtenerMensajesConversacion($usuarioId, $otroUsuarioId);
+        $idSolicitud = $_GET['id_solicitud'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId || !$idSolicitud) {
             http_response_code(400);
             exit("Faltan paramentros.");
         }
