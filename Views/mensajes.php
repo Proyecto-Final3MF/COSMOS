@@ -1,10 +1,3 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-?>
-<link rel="stylesheet" href="Assets/css/chatCSS.css">
 <?php if (!empty($mensajes)): ?>
     <?php foreach ($mensajes as $m): ?>
         <?php
@@ -20,5 +13,3 @@ if (session_status() === PHP_SESSION_NONE) {
 <?php else: ?>
     <p class="sin-mensajes">No hay mensajes aún.</p>
 <?php endif; ?>
-
-<script src="Assets/js/trancicion.js"></script>

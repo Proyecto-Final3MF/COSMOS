@@ -146,13 +146,19 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
     // Enviar mensaje
-    public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
+    public function enviarMensaje($usuario_id, $receptor_id, $mensaje, $solicitud_id)
     {
-        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, fecha)
-                VALUES (?, ?, ?, NOW())";
+        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, fecha, solicitud_id)
+                VALUES (?, ?, ?, NOW(), ?)";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
-        return $stmt->execute();
+        if (!$stmt) {
+            die("Error en prepare: " . $this->conexion->error);
+        }
+        $stmt->bind_param("iisi", $usuario_id, $receptor_id, $mensaje, $solicitud_id);
+        if (!$stmt->execute()) {
+            die("Error al ejecutar query: " . $stmt->error);
+        }
+        return true;
     }
 
     // Guardar mensaje sin receptor

@@ -44,6 +44,7 @@ class ChatC
 
         $mensajeModel = new Mensaje();
         $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        exit();
 
         include __DIR__ . "/../Views/mensajes.php";
     }
@@ -167,26 +168,29 @@ class ChatC
 
     // Guardar nuevo mensaje
     public function enviar()
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-        $usuarioId = $_SESSION['id'] ?? null;
-        $receptor_id = $_POST['receptor_id'] ?? null;
-        $mensajeTexto = trim($_POST['mensaje'] ?? '');
+    $usuarioId = $_SESSION['id'] ?? null;
+    $receptor_id = $_POST['receptor_id'] ?? null;
+    $solicitud_id = $_POST['solicitud_id'] ?? 0;
+    $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
-        if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
-            http_response_code(400);
-            echo "Fatal parámetros";
-            exit();
-        }
-
-        $mensajeModel = new Mensaje();
-        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto);
-
+    if (!$usuarioId || !$receptor_id || $solicitud_id || $mensajeTexto === '') {
+        http_response_code(400);
+        echo "Error: parámetros inválidos";
         exit();
     }
+
+    $mensajeModel = new Mensaje();
+    $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
+    
+    // Devuelve un simple OK para JS
+    echo "OK";
+    exit();
+}
 
     public function borrar()
     {
