@@ -6,19 +6,24 @@ class Usuario {
         $this->conn = conectar();
     }
 
-    public function crearU($usuario, $mail, $rol_id, $contrasena, $foto_perfil, $ruta_evidencia = null, $otra_especialidad = null) {
+    public function crearU($usuario, $mail, $rol_id, $contrasena, $ruta_evidencia = null, $otra_especialidad = null) {
+      
+        $ROL_TECNICO_ID = '1';
+        
+        $estado_verificacion = ($rol_id == $ROL_TECNICO_ID) ? 'pendiente' : 'aprobado';
+        
         $usuario = $this->conn->real_escape_string($usuario);
         $mail = $this->conn->real_escape_string($mail);
         $contrasena = $this->conn->real_escape_string($contrasena);
-        $foto_perfil = $this->conn->real_escape_string($foto_perfil);
         
-        // Preparar el valor de la evidencia y especialidad específica, escapándolos
-        $ruta_evidencia_escaped = $ruta_evidencia ? $this->conn->real_escape_string($ruta_evidencia) : 'NULL';
+        $ruta_evidencia_escaped = $ruta_evidencia ? "'" . $this->conn->real_escape_string($ruta_evidencia) . "'" : 'NULL';
         $otra_especialidad_escaped = $otra_especialidad ? "'" . $this->conn->real_escape_string($otra_especialidad) . "'" : 'NULL';
+        $estado_verificacion_escaped = "'" . $estado_verificacion . "'";
 
-        // Modificar la consulta SQL para incluir los nuevos campos (evidencia_tecnica_ruta y otra_especialidad)
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, foto_perfil, evidencia_tecnica_ruta, otra_especialidad) 
-                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', '$foto_perfil', $ruta_evidencia_escaped, $otra_especialidad_escaped)";
+        $foto_perfil_default = "'Assets/imagenes/perfil/fotodefault.webp'"; 
+
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
+                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', $ruta_evidencia_escaped, $otra_especialidad_escaped, $foto_perfil_default, $estado_verificacion_escaped)";
                 
         return $this->conn->query($sql);
     }
@@ -34,10 +39,9 @@ class Usuario {
 
     public function guardarEspecializaciones($usuario_id, $ids_array) {
         if (empty($ids_array)) {
-            return true; // No hay nada que guardar
+            return true;
         }
         
-        // Usamos prepared statements para mayor seguridad, aunque sean múltiples inserts
         $sql = "INSERT INTO usuario_especializacion (usuario_id, especializacion_id) VALUES (?, ?)";
         $stmt = $this->conn->prepare($sql);
         
@@ -49,15 +53,13 @@ class Usuario {
         $success = true;
         
         foreach ($ids_array as $especializacion_id) {
-            $especializacion_id = (int) $especializacion_id; // Aseguramos que sea entero
+            $especializacion_id = (int) $especializacion_id;
             
-            // El usuario_id y el especializacion_id son obligatorios para el bind
             if ($usuario_id > 0 && $especializacion_id > 0) {
                 $stmt->bind_param("ii", $usuario_id, $especializacion_id);
                 if (!$stmt->execute()) {
                     error_log("MySQLi Execute Error (guardarEspecializaciones): " . $stmt->error);
                     $success = false;
-                    // Podrías decidir si quieres detener todo o continuar
                 }
             }
         }
@@ -90,38 +92,38 @@ public function obtenerPorEmail($email) {
 }
 
     public function verificarU($usuario, $contrasena) {
-    $usuario = $this->conn->real_escape_string($usuario);
-    $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
-    $res = $this->conn->query($sql);
+        $usuario = $this->conn->real_escape_string($usuario);
+        $sql = "SELECT * FROM usuario WHERE nombre='$usuario' LIMIT 1";
+        $res = $this->conn->query($sql);
 
-    if ($row = $res->fetch_assoc()) {
-        if (password_verify($contrasena, $row['contrasena'])) {
-            return $row;
+        if ($row = $res->fetch_assoc()) {
+            if (password_verify($contrasena, $row['contrasena'])) {
+                return $row;
+            }
         }
-    }
-    return false;
+        return false;
     }
 
 
     public function obtenerPorNombre($usuario) {
-    $usuario = $this->conn->real_escape_string($usuario);
-    $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
-    $res = $this->conn->query($sql);
-    if ($res && $res->num_rows > 0) {
-        return $res->fetch_assoc();
+        $usuario = $this->conn->real_escape_string($usuario);
+        $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
+        $res = $this->conn->query($sql);
+        if ($res && $res->num_rows > 0) {
+            return $res->fetch_assoc();
+        }
+        return false;
     }
-    return false;
-}
 
-public function obtenerPorEmail($email) {
-    $email = $this->conn->real_escape_string($email);
-    $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
-    $res = $this->conn->query($sql);
-    if ($res && $res->num_rows > 0) {
-        return $res->fetch_assoc();
+    public function obtenerPorEmail($email) {
+        $email = $this->conn->real_escape_string($email);
+        $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
+        $res = $this->conn->query($sql);
+        if ($res && $res->num_rows > 0) {
+            return $res->fetch_assoc();
+        }
+        return false;
     }
-    return false;
-}
 
     public function obtenerRol() {
         $sql = "SELECT * FROM rol where id < 3";
@@ -152,11 +154,11 @@ public function obtenerPorEmail($email) {
     }
 
     public function actualizarContrasena($id, $nuevoHash) {
-    $sql = "UPDATE usuario SET contrasena = ? WHERE id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("si", $nuevoHash, $id);
-    return $stmt->execute();
-}
+        $sql = "UPDATE usuario SET contrasena = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("si", $nuevoHash, $id);
+        return $stmt->execute();
+    }
 
     public function listarU($orden, $rol_filter, $search) {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ";
@@ -231,14 +233,13 @@ public function obtenerPorEmail($email) {
         $sql = "SELECT u.*, r.nombre as rol FROM usuario u INNER JOIN rol r ON u.rol_id = r.id ORDER BY id DESC LIMIT 10";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC); // Correctly returns an array of users
+            return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
             return [];
         }
     }
 
     public function borrar($id){
-        // Antes de borrar, eliminar foto si no es default
         $usuario = $this->buscarUserId($id);
         if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
             unlink($usuario['foto_perfil']);
@@ -272,6 +273,26 @@ public function obtenerPorEmail($email) {
             $stmt->close();
             return [];
         }
+    }
+    
+    // --- NUEVOS MÉTODOS DE VERIFICACIÓN ---
+
+    public function actualizarEstadoVerificacion($id, $estado) {
+        $sql = "UPDATE usuario SET estado_verificacion = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("si", $estado, $id);
+        return $stmt->execute();
+    }
+
+    public function obtenerTecnicosPendientes() {
+        $sql = "SELECT id, nombre, email, evidencia_tecnica_ruta, foto_perfil FROM usuario 
+                WHERE rol_id = 1 AND estado_verificacion = 'pendiente'"; 
+        $resultado = $this->conn->query($sql);
+        
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
     }
 }
 ?>
