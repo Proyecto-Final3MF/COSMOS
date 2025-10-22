@@ -76,12 +76,13 @@ class Mensaje
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE (m.usuario_id = ? AND m.receptor_id = ?)
-                   OR (m.usuario_id = ? AND m.receptor_id = ?)
+                WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
+                   OR (m.usuario_id = ? AND m.receptor_id = ?))
+                   AND m.solicitud_id = ?
                 ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
+        $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
