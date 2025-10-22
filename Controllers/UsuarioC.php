@@ -18,7 +18,6 @@ class UsuarioC {
     public function login() {
         include("Views/Usuario/Login.php");
     }
-// ... dentro de class UsuarioC { ...
 
     public function espera() {
         // 1. Obtener el email de la URL
@@ -65,7 +64,7 @@ class UsuarioC {
 
         $ruta_evidencia = null;
 
-        if (strlen($contrasena) < 8) {
+        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '') {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register");
@@ -90,9 +89,17 @@ class UsuarioC {
             exit();
         }
 
-        if (empty($usuario)) {
+        if (empty($usuario) || $usuario == '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            header("Location: index.php?accion=register"); 
+            exit();
+        }
+
+         if (empty($mail) || $mail == '') {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El Email de Usuario no puede estar vacío.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
@@ -152,7 +159,7 @@ class UsuarioC {
                     $_SESSION['email'] = $usuarioN['email'];
                     $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
                     
-                    $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+                    $this->historialController->registrarModificacion($usuario, $_SESSION['id'], 'fue registrado', null, 0, "Usuario creado vía formulario");
 
                     $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
                     $_SESSION['tipo_mensaje'] = "success";
@@ -229,10 +236,10 @@ class UsuarioC {
             } else {
                 $obs = "";
                 if ($nombreAntiguo !== $nombre) {
-                    $obs .= "Nombre: $nombreAntiguo → $nombre. ";
+                    $obs .= "Nombre: $nombreAntiguo ⟶ $nombre. ‎ ";
                 }
                 if ($emailAntiguo !== $email) {
-                    $obs .= "Email: $emailAntiguo → $email.";
+                    $obs .= "Email: $emailAntiguo ⟶ $email.";
                 }
             }
 
@@ -252,8 +259,11 @@ class UsuarioC {
     public function borrar() {
         $usuario = new Usuario();
         $id = $_GET["id"];
+        $usuarioBorrado = $usuario->buscarUserId($id);
+        $nombre = $usuarioBorrado['nombre'];
         $usuario->borrar($id);
-        header("Location: index.php");
+        $this->historialController->registrarModificacion($nombre, $id, 'fue eliminado', null, 0, null);
+        header("Location: index.php?accion=redireccion");
         exit();
     }
 
