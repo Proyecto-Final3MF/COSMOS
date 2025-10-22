@@ -508,7 +508,7 @@ a:has(> .btn-boton444) {
 }
 
 .btn-boton4445 {
-    background-color: #fff;
+    background-color: var(--otros-botones);
     display: flex;
     flex-direction: column;      
     align-items: center;
@@ -552,7 +552,7 @@ a:has(> .btn-boton4445) {
 
 
 .btn-boton4442 {
-    background-color: #fff;
+    background-color: var(--otros-botones);
     display: flex;
     flex-direction: column;      
     align-items: center;
@@ -603,7 +603,7 @@ a:has(> .btn-boton4442) {
     cursor: pointer;
     border: 1px solid #979797;
     color: #e83e8c;
-    background-color: white;
+    background-color: var(--otros-botones);
     text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
 }
@@ -1112,6 +1112,20 @@ table td, table th {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.5); /* cambia color del ícono */
   cursor: pointer;
+}
+
+input[type="text"] {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  padding: 10px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-color);
+  opacity: 0.7; 
 }
 
 .filter-form button,
@@ -1885,21 +1899,27 @@ select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--color-borde); 
     border-radius: 5px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     font-size: 16px;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-    appearance: none; 
-    background-color: var(--color-fondo);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23aaa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center; 
-    background-size: 12px; 
-    cursor: pointer; 
+    background-position: right 12px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+body.dark-mode select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23f7f6f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
 }
 
 select option {
@@ -1915,7 +1935,8 @@ textarea.form-control {
     font-size: 1rem; 
     line-height: 1.5; 
     color: var(--text-color); 
-    resize: vertical; 
+    resize: vertical;
+    background-color: var(--color-fondo);
 }
 
 label {
