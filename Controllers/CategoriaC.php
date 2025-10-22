@@ -117,11 +117,11 @@ class CategoriaC {
                         $obs
                     );
                 } else {
-                    $_SESSION['tipo_mensaje'] = "warning";
+                    $_SESSION['tipo_mensaje'] = "error";
                     $_SESSION['mensaje'] = "Error al actualizar la categoría.";
                 }
             } else {
-                $_SESSION['tipo_mensaje'] = "warning";
+                $_SESSION['tipo_mensaje'] = "error";
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
 
@@ -139,7 +139,7 @@ class CategoriaC {
 
         $id = $_GET['id'] ?? 0;
         if ($id <= 0) {
-            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "ID de categoría no válido.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -149,7 +149,7 @@ class CategoriaC {
         $categoria = $categoria_modelo->buscarPorId($id);
 
         if (!$categoria) {
-            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Categoría no encontrada.";
             header("Location: index.php?accion=listarC");
             exit();
@@ -170,7 +170,7 @@ class CategoriaC {
                 $obs
             );
         } else {
-            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Error: No se pudo eliminar la categoría.";
         }
 
