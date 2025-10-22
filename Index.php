@@ -347,6 +347,31 @@ switch ($accion) {
 
   //accion default
 
+  case 'panelA':
+    // Esta acción debe redirigir a la vista del panel de administración
+    if ($_SESSION['rol'] == ROL_ADMIN) {
+        // Asumiendo que hay una vista principal para el admin
+        include("./Views/Usuario/Admin/PanelA.php"); 
+    } else {
+        header("Location: index.php?accion=redireccion");
+    }
+    break;
+
+case 'verificarTecnicos':
+    $controller = new UsuarioC();
+    $controller->verificarTecnicos(); // Llama a la función del controlador
+    break;
+
+case 'aprobarTecnico':
+    $controller = new UsuarioC();
+    $controller->aprobarTecnico(); // Llama a la función del controlador
+    break;
+
+case 'rechazarTecnico':
+    $controller = new UsuarioC();
+    $controller->rechazarTecnico(); // Llama a la función del controlador
+    break;
+
   default:
     if (!isset($_SESSION['usuario'])) {
       header("Location: index.php?accion=login");

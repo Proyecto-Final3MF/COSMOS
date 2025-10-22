@@ -18,11 +18,31 @@ class UsuarioC {
     public function login() {
         include("Views/Usuario/Login.php");
     }
-    
+// ... dentro de class UsuarioC { ...
+
     public function espera() {
-        include("Views/Usuario/Tecnico/Espera.php"); 
+        // 1. Obtener el email de la URL
+        $email = $_GET['email'] ?? '';
+        
+        // 2. Instanciar el modelo (necesario para obtenerPorEmail)
+        $usuarioM = new Usuario(); 
+        
+        // 3. Obtener los datos del usuario. $datos_usuario debe ser definido AQUÍ.
+        $datos_usuario = $usuarioM->obtenerPorEmail($email); 
+        
+        // 4. Verificación de seguridad: si no encuentra al usuario, redirige
+        if (!$datos_usuario) {
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "No se pudo encontrar la información del técnico.";
+            header("Location: index.php?accion=login");
+            exit();
+        }
+        
+        // 5. Incluir la vista. La vista espera que $datos_usuario exista.
+        include("views/Usuario/Tecnico/Espera.php"); 
     }
 
+// ...
     public function crear() {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
@@ -118,7 +138,7 @@ class UsuarioC {
                         
                     $_SESSION['tipo_mensaje'] = "success";
                     $_SESSION['mensaje'] = "Registro completado. Tu evidencia será verificada pronto.";
-                    header("Location: index.php?accion=espera&email=" . urlencode($mail));
+                    header("Location: index.php?accion=espera");
                     exit();
                 } else {
                     // Login automático para Clientes/Admins
@@ -301,7 +321,7 @@ class UsuarioC {
         }
         $usuarioM = new Usuario();
         $tecnicosPendientes = $usuarioM->obtenerTecnicosPendientes();
-        include("Views/Usuario/Admin/VerificarTecnicos.php");
+        include("Views/Usuario/Admin/VerificarT.php");
     }
 
     public function aprobarTecnico() {
