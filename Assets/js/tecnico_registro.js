@@ -71,47 +71,60 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Función para actualizar el HTML de las tags y el input oculto
-    function updateEspecialidadesView() {
-        especialidadesTagsContainer.innerHTML = '';
-        const ids = [];
+    // Asumiendo que esta es la función que maneja la vista de especialidades
+    function updateEspecialidadesView(selectedRolId) {
+        const tecnicoFields = document.getElementById('tecnico-fields');
+        const especialidadSelector = document.getElementById('especialidad_selector');
+        const fotoEvidencia = document.getElementById('foto_evidencia');
+        
+        // Asumimos que ROL_TECNICO es 1
+        const ROL_TECNICO = '1'; 
 
-        selectedEspecialidades.forEach((nombre, id) => {
-            ids.push(id);
-            const tag = document.createElement('span');
-            // Nota: Aquí se añaden clases para que tu CSS pueda darles estilo
-            tag.className = 'especializacion-tag'; 
-            tag.innerHTML = `${nombre} <span class="close" data-id="${id}">&times;</span>`;
+        if (selectedRolId === ROL_TECNICO) {
+            // 1. Mostrar campos de Técnico
+            if (tecnicoFields) tecnicoFields.classList.remove('hidden-fields');
             
-            // Lógica para remover la tag
-            tag.querySelector('.close').addEventListener('click', function() {
-                const removeId = this.getAttribute('data-id');
-                selectedEspecialidades.delete(removeId);
-                updateEspecialidadesView();
-            });
-
-            especialidadesTagsContainer.appendChild(tag);
-        });
-
-        // Actualiza el campo oculto que se enviará al servidor
-        especializacionesIdsInput.value = ids.join(',');
-    }
-    
-    // ----------------------------------------------------
-    // Lógica para previsualización de la foto de Evidencia
-    // ----------------------------------------------------
-    evidenciaInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                evidenciaPreview.src = e.target.result;
-            }
-            reader.readAsDataURL(this.files[0]);
-            evidenciaLabelSpan.textContent = this.files[0].name;
+            // 2. Aplicar 'required'
+            if (especialidadSelector) especialidadSelector.required = true;
+            if (fotoEvidencia) fotoEvidencia.required = true;
+            
         } else {
-            evidenciaPreview.src = 'Assets/imagenes/perfil/fotodefault.webp'; // Restablece la imagen por defecto
-            evidenciaLabelSpan.textContent = 'Ningún archivo seleccionado';
+            // 1. Ocultar campos de Técnico
+            if (tecnicoFields) tecnicoFields.classList.add('hidden-fields');
+            
+            // 2. Remover 'required' y limpiar
+            if (especialidadSelector) {
+                especialidadSelector.required = false;
+                // Deseleccionar todas las opciones si usa Select2
+                // Usar jQuery si estás usando Select2: $('#especialidad_selector').val(null).trigger('change');
+                // Si solo es HTML:
+                for (let i = 0; i < especialidadSelector.options.length; i++) {
+                    especialidadSelector.options[i].selected = false;
+                }
+            }
+            
+            if (fotoEvidencia) {
+                fotoEvidencia.required = false;
+                // Limpiar el campo de archivo (estableciendo su valor a null)
+                fotoEvidencia.value = null; 
+            }
+            
+            // 3. Limpiar el texto de 'Otra Especialidad'
+            const otraEspecialidad = document.getElementById('otra_especialidad');
+            if (otraEspecialidad) otraEspecialidad.value = '';
+            
+            // 4. Limpiar la vista de tags (si la tienes implementada)
+            const especialidadesTags = document.getElementById('especialidades_tags');
+            if (especialidadesTags) especialidadesTags.innerHTML = ''; 
         }
-    });
+        
+        // Asegúrate de que esta línea exista y sea la que lanza el error:
+        // La línea 96 probablemente es la que actualiza el campo oculto #rol
+        const rolInput = document.getElementById('rol');
+        if (rolInput) {
+            rolInput.value = selectedRolId; // Línea que debe ser segura
+        }
+    }
 
     // Lógica para el nombre del archivo de perfil (para el input de perfil)
     const perfilInput = document.getElementById('foto_perfil');
