@@ -18,6 +18,7 @@ if ($_SESSION['rol'] != 3) {
 
 </head>
 <body>
+    <br>
     <div class="container-admin">
         <h1 class="titulo-admin">Solicitudes de Verificación de Técnicos</h1>
 

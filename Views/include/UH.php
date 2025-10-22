@@ -3,12 +3,13 @@ require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
 
 $notifC = new NotificacionC();
 $notificaciones = $notifC->listarNoLeidas();
+
 ?>
 
 <header>
+    
     <link rel="stylesheet" href="./Assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <nav class="navbar">
         <div class="navbar-left">
             <a href="inicio.php" class="logo-link">
@@ -153,3 +154,4 @@ $notificaciones = $notifC->listarNoLeidas();
     </nav>
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
+<script src="Assets/js/trancicion.js"></script>
