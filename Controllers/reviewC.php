@@ -16,7 +16,6 @@ class ReviewC {
         
         $rating = 0;
         $Comentario = '';
-        $id_solicitud = $id;
 
         if (!$id) {
             $_SESSION['tipo_mensaje'] = "warning";
