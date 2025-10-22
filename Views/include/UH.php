@@ -19,14 +19,14 @@ $notificaciones = $notifC->listarNoLeidas();
             <ul class="nav-links" id="nav-links">
                 <li>
                     <a href="inicio.php">
-                        <img src="Assets/imagenes/25694.png" alt="Inicio" class="icono-menu"> Inicio
+                       <i class="fa fa-home"></i> Inicio
                     </a>
                 </li>
 
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <li>
                         <a href="Index.php?accion=redireccion">
-                            <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
+                            <i class="fa fa-tools"></i> Mi Unidad
                         </a>
                     </li>
 
@@ -35,6 +35,11 @@ $notificaciones = $notifC->listarNoLeidas();
         </div>
 
         <div class="navbar-right">
+
+                     <button id="togglethemeBtn" class="btn-modo">
+                    <i class="fa-solid fa-moon"></i>
+                    </button>
+
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <div class="action-buttons">
 
@@ -48,10 +53,6 @@ $notificaciones = $notifC->listarNoLeidas();
                 </div>
 
             <?php else: ?>
-
-                <button id="togglethemeBtn" class="btn-modo">
-                    <i class="fa-solid fa-moon"></i>
-                    </button>
 
                 <div class="notificaciones" id="notificaciones">
                     <i class="fa fa-bell"></i>
@@ -142,15 +143,15 @@ $notificaciones = $notifC->listarNoLeidas();
                             </div>
 
                             <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                                <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Perfil
+                                <i class="fa fa-edit"></i> Editar Perfil
                             </a>
 
                             <a href="index.php?accion=listarConversaciones" class="dropdown-item">
-                                <img src="Assets/imagenes/99691-removebg-preview.png" alt="MisConversaciones" class="icono-menu"> Mis Conversaciones
+                                <i class="fa fa-comments"></i> Mis Conversaciones
                             </a>
 
                             <a href="Index.php?accion=logout" class="dropdown-item">
-                                <img src="Assets/imagenes/cerrarlasesion.png" alt="CerrarSesion" class="icono-menu"> Cerrar Sesión
+                                <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
                             </a>
                         </div>
                     </div>
