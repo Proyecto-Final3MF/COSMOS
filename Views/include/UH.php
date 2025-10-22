@@ -37,15 +37,21 @@ $notificaciones = $notifC->listarNoLeidas();
         <div class="navbar-right">
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <div class="action-buttons">
+
                     <a href="Index.php?accion=login">
                         <button class="btn btn-boton">Iniciar sesión</button>
                     </a>
                     <a href="Index.php?accion=register">
                         <button class="btn btn-boton">Registrarse</button>
                     </a>
+
                 </div>
 
             <?php else: ?>
+
+                <button id="togglethemeBtn" class="btn-modo">
+                    <i class="fa-solid fa-moon"></i>
+                    </button>
 
                 <div class="notificaciones" id="notificaciones">
                     <i class="fa fa-bell"></i>
@@ -155,3 +161,4 @@ $notificaciones = $notifC->listarNoLeidas();
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/modoOscuro.js"></script>
