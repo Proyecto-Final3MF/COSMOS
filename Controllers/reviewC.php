@@ -5,10 +5,12 @@ require_once(__DIR__ . '/../Models/ReviewM.php');
 
 class ReviewC {
     private $ReviewModel;
+    private $HistorialModel;
 
     public function __construct() {
         $this->ReviewModel = new Review();
         $this->solicitudModel = new Solicitud();
+        $this->HistorialModel = new HistorialController();
     }
 
     public function FormularioR() {
@@ -41,6 +43,7 @@ class ReviewC {
             exit();
         }
 
+        $titulo_solicitud = $datosSolicitud['titulo'];
         $id_tecnico = $datosSolicitud['tecnico_id'];
 
         include("Views/Solicitudes/review.php");
@@ -53,6 +56,7 @@ class ReviewC {
         $id_tecnico = $_POST['id_tecnico'];
         $id_cliente = $_SESSION['id'];
         $id_solicitud = $_POST['id_solicitud'] ?? null;
+        $titulo_solicitud = $_POST['titulo_solicitud'] ?? '';
         
         if ($rating == 0) {
             $_SESSION['tipo_mensaje'] = "warning";
@@ -60,10 +64,17 @@ class ReviewC {
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
+
+        if (empty($titulo_solicitud) || $titulo_solicitud === '') {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
+            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            exit();
+        }
         
         $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
         if ($HayReview === null) {
-            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
@@ -71,7 +82,7 @@ class ReviewC {
         
         $HayPromedio = $this->ReviewModel->agarrarPromedio($id_tecnico);
         if ($HayPromedio === null) {
-            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
@@ -91,6 +102,25 @@ class ReviewC {
             $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
+
+            if ($Comentario == $ComentarioAntiguo && $ratingAntiguo == $rating) {
+                $obs = "Ningun cambio detectado";
+            } else {
+                if ($ratingAntiguo !== $rating) {
+                    $obs1 = "Rating: ".$ratingAntiguo."★" ." → ". $rating."★"." ‎ ";
+                    $obs = $obs1;
+                }
+
+                if ($Comentario !== $ComentarioAntiguo) {
+                    if ($ComentarioAntiguo == ''): $ComentarioAntiguo = "' '"; endif;
+                    if ($Comentario == ''): $ComentarioAntiguo = "' '"; endif;
+                    $obs2 = "Comentario: "."'". $ComentarioAntiguo."'"." → "."'".$Comentario."'";
+                    $obs = $obs2;
+                }
+                $obs = $obs1.$obs2;
+            }
+            $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $obs);
+
             header("Location:index.php?accion=listarST");
             exit();
         }

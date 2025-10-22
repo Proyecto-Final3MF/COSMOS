@@ -2,9 +2,10 @@
 <link rel="stylesheet" href="./Assets/css/Main.css">
 <div class="contenedor-formulario">
     <section class="formularios99">    
-        <h2>Review de Solicitud</h2>
+        <h2>Review de la Solicitud <?=$titulo_solicitud?></h2>
         <form action="index.php?accion=AddReview" method="post">
             <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
+            <input type="hidden" name="titulo_solicitud" value="<?=$titulo_solicitud ?>">
             <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
             <input type="hidden" name="id_solicitud" value="<?=$id ?>">
             <fieldset class="rate" id="interactive-rating">
