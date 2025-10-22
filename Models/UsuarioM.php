@@ -6,15 +6,64 @@ class Usuario {
         $this->conn = conectar();
     }
 
-    public function crearU($usuario, $mail, $rol_id, $contrasena, $foto_perfil) {
+    public function crearU($usuario, $mail, $rol_id, $contrasena, $foto_perfil, $ruta_evidencia = null, $otra_especialidad = null) {
         $usuario = $this->conn->real_escape_string($usuario);
         $mail = $this->conn->real_escape_string($mail);
         $contrasena = $this->conn->real_escape_string($contrasena);
         $foto_perfil = $this->conn->real_escape_string($foto_perfil);
+        
+        // Preparar el valor de la evidencia y especialidad específica, escapándolos
+        $ruta_evidencia_escaped = $ruta_evidencia ? $this->conn->real_escape_string($ruta_evidencia) : 'NULL';
+        $otra_especialidad_escaped = $otra_especialidad ? "'" . $this->conn->real_escape_string($otra_especialidad) . "'" : 'NULL';
 
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, foto_perfil) 
-                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', '$foto_perfil')";
+        // Modificar la consulta SQL para incluir los nuevos campos (evidencia_tecnica_ruta y otra_especialidad)
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, foto_perfil, evidencia_tecnica_ruta, otra_especialidad) 
+                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', '$foto_perfil', $ruta_evidencia_escaped, $otra_especialidad_escaped)";
+                
         return $this->conn->query($sql);
+    }
+
+    public function obtenerEspecializaciones() {
+        $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
+        $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
+    }
+
+    public function guardarEspecializaciones($usuario_id, $ids_array) {
+        if (empty($ids_array)) {
+            return true; // No hay nada que guardar
+        }
+        
+        // Usamos prepared statements para mayor seguridad, aunque sean múltiples inserts
+        $sql = "INSERT INTO usuario_especializacion (usuario_id, especializacion_id) VALUES (?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error (guardarEspecializaciones): " . $this->conn->error);
+            return false;
+        }
+
+        $success = true;
+        
+        foreach ($ids_array as $especializacion_id) {
+            $especializacion_id = (int) $especializacion_id; // Aseguramos que sea entero
+            
+            // El usuario_id y el especializacion_id son obligatorios para el bind
+            if ($usuario_id > 0 && $especializacion_id > 0) {
+                $stmt->bind_param("ii", $usuario_id, $especializacion_id);
+                if (!$stmt->execute()) {
+                    error_log("MySQLi Execute Error (guardarEspecializaciones): " . $stmt->error);
+                    $success = false;
+                    // Podrías decidir si quieres detener todo o continuar
+                }
+            }
+        }
+        
+        $stmt->close();
+        return $success;
     }
 
     public function verificarU($usuario, $contrasena) {

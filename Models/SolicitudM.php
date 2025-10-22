@@ -11,12 +11,15 @@ class Solicitud {
 
     public function obtenerProductos($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario";
+        $productos_ocupados_sql = " SELECT DISTINCT producto_id FROM solicitud WHERE estado_id BETWEEN 1 AND 4"; 
+        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario AND id NOT IN ($productos_ocupados_sql) ORDER BY nombre ASC";
+        
         $resultado = $this->conn->query($sql);
         
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
         } else {
+            error_log("Error al obtener productos disponibles: " . $this->conn->error);
             return [];
         }
     }
@@ -235,7 +238,7 @@ class Solicitud {
 
     public function cancelarS($id_soli) {
         $id_soli = (int)$id_soli;
-        $sql = "UPDATE solicitud SET tecnico_id = NULL, estado_id = 1 WHERE id = ?";
+        $sql = "UPDATE solicitud SET tecnico_id = NULL, estado_id = 6 WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             error_log("Error al preparar la cancelación de la solicitud: " . $this->conn->error);
