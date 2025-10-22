@@ -89,7 +89,7 @@ require_once ("./Views/include/UH.php");
     <br>
 </div>
 <script src="Assets/js/botonrol.js"></script>
-<script src="Assets/js/fotoperfilregistro.js"></script>
+<!-- <script src="Assets/js/fotoperfilregistro.js"></script> -->
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/tecnico_registro.js"></script>
