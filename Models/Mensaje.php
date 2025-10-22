@@ -67,7 +67,34 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
+    
+    public function obtenerConversacionPorSolicitud($usuario_id, $otro_usuario_id, $solicitud_id)
+{
+    $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+                   u.nombre AS emisor, r.nombre AS receptor
+            FROM mensaje m
+            JOIN usuario u ON m.usuario_id = u.id
+            LEFT JOIN usuario r ON m.receptor_id = r.id
+            WHERE ((m.usuario_id = ? AND m.receptor_id = ?) 
+               OR (m.usuario_id = ? AND m.receptor_id = ?))
+              AND m.solicitud_id = ?
+            ORDER BY m.fecha ASC";
 
+    $stmt = $this->conexion->prepare($sql);
+
+    if (!$stmt) {
+        die("Error en prepare: " . $this->conexion->error);
+    }
+
+    $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
+
+    if (!$stmt->execute()) {
+        die("Error al ejecutar query: " . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+}
     // Obtener conversación entre dos usuarios específicos
     public function obtenerConversacion($usuario_id, $otro_usuario_id)
     {
