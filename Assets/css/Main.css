@@ -989,6 +989,26 @@ table td, table th {
     padding: 20px;
 }
 
+.btn-perfil-tecnico {
+    display: inline-block; 
+    background-color: #28a745; 
+    color: white;
+    text-decoration: none; 
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s; 
+    border: none;
+    cursor: pointer;
+}
+.btn-perfil-tecnico:hover {
+    background-color: #218838; 
+    transform: scale(1.05); 
+}
+.btn-perfil-tecnico i {
+    margin-right: 5px; 
+}
+
 /* aca terminan las tablas */
 
 /* aca empieza el css del historial */
@@ -2397,13 +2417,14 @@ input:checked ~ label {
 /* Perfil del Tecnico */
 
 .profile-info {
+    top: 100px;
     width: 280px;
     margin: 20px;
     float: left;
     border: 1px solid #ddd; /* Lighter border */
     border-radius: 12px; /* Slightly more rounded corners */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger, nicer shadow */
-    background-color: #fff;
+    background-color: var(--color-navbar);
     padding: 20px; /* Increased padding */
     text-align: center;
     /* Optional: Add a subtle transition for hover effects if you add them later */
@@ -2428,7 +2449,7 @@ input:checked ~ label {
 
 .profile-details p {
     margin: 8px 0; /* Increased margin for better spacing */
-    color: #555;
+    color: var(--text-color);
     font-size: 16px;
     line-height: 1.4;
 }
@@ -2441,7 +2462,7 @@ input:checked ~ label {
 
 .profile-details p:last-child {
     font-style: italic;
-    color: #6c757d;
+    color: var(--text-color);
     font-size: 14px; /* Slightly smaller for secondary info */
 }
 
@@ -2449,7 +2470,7 @@ input:checked ~ label {
 .reviews {
     /* To position reviews next to the profile-info, you'd adjust this area.
        For now, let's keep it simple to ensure it flows nicely after the float is cleared, or start them to the right. */
-    margin: 20px 20px 20px 320px; /* Pushes the review section to the right of the profile box (280px wide + margins) */
+    margin: 50px 20px 20px 320px; /* Pushes the review section to the right of the profile box (280px wide + margins) */
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
