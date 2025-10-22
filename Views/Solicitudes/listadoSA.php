@@ -10,7 +10,7 @@ require_once("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
-    </head>
+</head>
 
 <body>
     <br>
@@ -80,7 +80,7 @@ require_once("./Views/include/UH.php");
                                 ?>
 
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuario_id ?>&id_solicitud=<?= $solicitud_id ?>"
                                         class="icon-btn chat">
                                         <i class="fa fa-comments"></i>
                                     </a>

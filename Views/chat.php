@@ -30,7 +30,7 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-        <input type="hidden" name="solictud_id" value="<?= $_GET['id_solicitud'] ?? '' ?>">
+        <input type="hidden" name="solicitud_id" value="<?= $_GET['id_solicitud'] ?? '' ?>">
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
@@ -43,9 +43,19 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
             const receptorId = "<?= $otroUsuarioId ?>";
             const solicitudId = "<?= $_GET['id_solicitud'] ?? '' ?>";
 
-            let res = fetch('index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>&id_solicitud=<?= $idSolicitud ?>');
-            let html = await res.text();
-            document.getElementById("chat-box").innerHTML = html;
+            if (!solicitudId) {
+                console.warn("Falta id_solicitud en la URL");
+                return;
+            }
+
+            try {
+                const res = await fetch('index.php?accion=cargarMensajes&usuario_id=${usuarioId}&id_solicitud=${solicitudId}');
+                if (!res.ok) throw new Error('Error ${res.status}');
+                const html = await res.text();
+                document.getElementById("chat-box").innerHTML = html;
+            } catch (err) {
+                console.error("Error al cargar mensajes: ", err)
+            }
         }
 
         // Enviar mensaje
@@ -53,7 +63,7 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
             e.preventDefault();
             let formData = new FormData(this);
 
-            const res = await fetch("index.php?accion=enviar", {
+            const res = await fetch("index.php?accion=enviarMensaje", {
                 method: "POST",
                 body: formData
             });
