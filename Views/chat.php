@@ -43,7 +43,7 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
             const receptorId = "<?= $otroUsuarioId ?>";
             const solicitudId = "<?= $_GET['id_solicitud'] ?? '' ?>";
 
-            let res = fetch('index.php?accion=cargarMensajes&usuario_id=${receptorId}&id_solicitud=${solicitudId}');
+            let res = fetch('index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>&id_solicitud=<?= $idSolicitud ?>');
             let html = await res.text();
             document.getElementById("chat-box").innerHTML = html;
         }
@@ -51,26 +51,21 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
         // Enviar mensaje
         document.getElementById("form-chat").addEventListener("submit", async function(e) {
             e.preventDefault();
-            const formData = new FormData(this);
+            let formData = new FormData(this);
 
-            // Validar mensaje no vacío
-            const mensaje = formData.get('mensaje').trim();
-            if (!mensaje) return;
-
-            const res = await fetch("index.php?accion=enviarMensaje", {
+            const res = await fetch("index.php?accion=enviar", {
                 method: "POST",
                 body: formData
             });
 
-            // Mostrar el mensaje inmediatamente
-            document.getElementById("chat-box").innerHTML += `
-        <div class="mensaje">
-            <p class="texto"><strong>Tú:</strong> ${mensaje}</p>
-        </div>
-    `;
+            const text = await res.text()
 
-            this.reset();
-            cargarMensajes();
+            if (text.trim() === "OK") {
+                this.reset();
+                cargarMensajes();
+            } else {
+                alert("Error al enviar mensaje: " + text);
+            }
         });
 
         // Actualizar mensajes cada 3s
