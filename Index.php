@@ -15,7 +15,7 @@ require_once("Controllers/NotificacionC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'espera'];
 
 if (!in_array($accion, $acciones_publicas)) {
   if (!isset($_SESSION['usuario'])) {
@@ -90,6 +90,11 @@ switch ($accion) {
   case 'logout':
     $controller = new UsuarioC();
     $controller->logout();
+  break;
+
+  case 'espera':
+    $controller = new UsuarioC();
+    $controller->espera();
   break;
 
   case 'editarSF':

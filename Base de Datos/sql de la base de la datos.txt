@@ -16,7 +16,10 @@ CREATE TABLE usuario (
     foto_perfil VARCHAR(255) DEFAULT 'Assets/imagenes/perfil/fotodefault.webp',
     rol_id INT, FOREIGN KEY (rol_id) REFERENCES rol(id),
     cant_review INT DEFAULT 0,
-    promedio DOUBLE DEFAULT 0.0
+    promedio DOUBLE DEFAULT 0.0,
+    estado_verificacion ENUM('pendiente', 'aprobado', 'rechazado') NOT NULL DEFAULT 'aprobado',
+    otra_especialidad VARCHAR(255) NULL,
+    evidencia_tecnica_ruta VARCHAR(255) NULL
 );
 
 CREATE TABLE producto (

@@ -6,14 +6,21 @@ require_once("Controllers/HistorialC.php");
 class UsuarioC {
     private $historialController;
     private $reviewController;
+    private $conn; // Propiedad para la conexión, necesaria para insert_id
 
     public function __construct(){
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
+        // Asumo que tienes una función global conectar() o la inicializas aquí
+        $this->conn = conectar(); 
     }
 
     public function login() {
         include("Views/Usuario/Login.php");
+    }
+    
+    public function espera() {
+        include("Views/Usuario/Tecnico/Espera.php"); 
     }
 
     public function crear() {
@@ -29,27 +36,15 @@ class UsuarioC {
         $mail = trim($_POST['mail']);
         $rol_id = $_POST['rol'];
         $contrasena = $_POST['contrasena'];
-        
-        // Asignamos el ID del rol Técnico (ajusta si es diferente en tu BD)
-        $ROL_TECNICO_ID = '1'; 
 
-        // Validar longitud mínima
-        if (strlen($contrasena) < 8) {
-        $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
-        $_SESSION['tipo_mensaje'] = "warning";
-        header("Location: index.php?accion=register");
-        exit();
-        }
-
-        // Encriptar la contraseña antes de guardarla
-        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
-
-        // 1. Manejo de campos exclusivos para Técnico
-        $especializaciones_ids = $_POST['especializaciones_ids'] ?? '';
+        // Si existe y es un array (viene del select multiple), lo usa. Si no, usa un array vacío.
+        $especializaciones_ids_array = (isset($_POST['especializaciones_ids']) && is_array($_POST['especializaciones_ids'])) 
+                                      ? $_POST['especializaciones_ids'] 
+                                      : [];
         $otra_especialidad = trim($_POST['otra_especialidad']) ?? null;
-        $ruta_evidencia = null; // Inicializar ruta de evidencia
 
-        // Validar longitud mínima
+        $ruta_evidencia = null;
+
         if (strlen($contrasena) < 8) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
             $_SESSION['tipo_mensaje'] = "warning";
@@ -57,10 +52,8 @@ class UsuarioC {
             exit();
         }
 
-        // Encriptar la contraseña antes de guardarla
         $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
-        // Validar caracteres en Usuario
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
@@ -69,7 +62,6 @@ class UsuarioC {
             exit();
         }
 
-        // Verificar si el correo ya existe
         $existe = $usuarioM->obtenerPorEmail($mail);
         if ($existe) {
             $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
@@ -94,10 +86,8 @@ class UsuarioC {
             exit();
         }
         
-        // 2. Lógica y Manejo de archivos para ROL TÉCNICO
-        if ($rol_id == $ROL_TECNICO_ID) {
+        if ($rol_id == 1) {
             
-            // Validar que se haya subido la evidencia (es requerido por la lógica de frontend)
             if (!isset($_FILES['foto_evidencia']) || $_FILES['foto_evidencia']['error'] !== 0) {
                 $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Debe subir una foto de evidencia para registrarse como Técnico.";
@@ -105,7 +95,6 @@ class UsuarioC {
                 exit();
             }
 
-            // Manejar subida de foto de evidencia
             $ruta_evidencia = "Assets/imagenes/evidencia_tecnica/" . uniqid() . "_" . basename($_FILES['foto_evidencia']['name']);
             if (!move_uploaded_file($_FILES['foto_evidencia']['tmp_name'], $ruta_evidencia)) {
                 $_SESSION['tipo_mensaje'] = "danger";
@@ -115,50 +104,50 @@ class UsuarioC {
             }
         }
 
-        // 3. Manejo de foto de PERFIL (Común a todos los roles)
-        $rutaDestino = "Assets/imagenes/perfil/fotodefault.webp";
-        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
-            $rutaDestino = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
-            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaDestino);
-        }
-
-        // 4. Crear el usuario
-        // Nota: Asegúrate de que tu método crearU en el modelo acepte la evidencia y especialidad extra si lo guardas en la tabla usuario
-        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena_hash, $rutaDestino, $ruta_evidencia, $otra_especialidad)) {
+        if ($usuarioM->crearU($usuario, $mail, $rol_id, $contrasena_hash, $ruta_evidencia, $otra_especialidad)) {
             
-            // Obtener el usuario recién creado para el ID
-            $usuarioN = $usuarioM->obtenerPorNombre($usuario);
-            
+            $usuarioN = $usuarioM->obtenerPorEmail($mail);
+                
             if ($usuarioN) {
                 $nuevo_usuario_id = $usuarioN['id'];
-
-                // 5. Guardar las especializaciones seleccionadas (Solo si es Técnico)
-                if ($rol_id == $ROL_TECNICO_ID && !empty($especializaciones_ids)) {
-                    // Convertir la cadena de IDs a un array
-                    $ids_array = explode(',', $especializaciones_ids);
-                    
-                    // Asegúrate de que este método exista en tu UsuarioM.php
-                    $usuarioM->guardarEspecializaciones($nuevo_usuario_id, $ids_array);
-                }
                 
-                // Iniciar sesión y redirigir
-                session_start();
-                $_SESSION['usuario'] = $usuarioN['nombre'];
-                $_SESSION['rol'] = $usuarioN['rol_id'];
-                $_SESSION['id'] = $nuevo_usuario_id;
-                $_SESSION['email'] = $usuarioN['email'];
-                $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
+                if ($rol_id == 1) {
+                        
+                    // Ahora la variable ya es un array de IDs si el usuario seleccionó algo
+                    if (!empty($especializaciones_ids_array)) {
+                        // Pasamos el array de IDs directamente a la función del modelo
+                        $usuarioM->guardarEspecializaciones($nuevo_usuario_id, $especializaciones_ids_array); 
+                    }
+                        
+                    $_SESSION['tipo_mensaje'] = "success";
+                    $_SESSION['mensaje'] = "Registro completado. Tu evidencia será verificada pronto.";
+                    header("Location: index.php?accion=espera&email=" . urlencode($mail));
+                    exit();
+                } else {
+                    // Login automático para Clientes/Admins
+                    session_start();
+                    $_SESSION['usuario'] = $usuarioN['nombre'];
+                    $_SESSION['rol'] = $usuarioN['rol_id'];
+                    $_SESSION['id'] = $nuevo_usuario_id;
+                    $_SESSION['email'] = $usuarioN['email'];
+                    $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+                    
+                    $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
-        // Historial
-        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+                    $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
+                    $_SESSION['tipo_mensaje'] = "success";
 
-                $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
-                $_SESSION['tipo_mensaje'] = "success";
-                header("Location: index.php?accion=redireccion");
-                exit();
+                    if($rol_id=1){
+                        header("Location: index.php?accion=espera");
+                        exit();
+                    }else{
+                        header("Location: index.php?accion=redireccion");
+                        exit();
+                    }
+                    
+                }
             }
         } else {
-            // Manejar error de creación de usuario en la BD
             header("Location: index.php?accion=register&error=Error al crear usuario");
             exit();
         }
@@ -171,7 +160,6 @@ class UsuarioC {
         $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-    // Validaciones
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
@@ -198,13 +186,11 @@ class UsuarioC {
 
         $usuarioM = new Usuario();
 
-    // Manejo de nueva foto
         $foto_perfil = $foto_actual;
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
             $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
             move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
 
-        // Borrar foto anterior si no es default
             if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
                 unlink($foto_actual);
             }
@@ -218,7 +204,6 @@ class UsuarioC {
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
             $_SESSION['tipo_mensaje'] = "success";
 
-        // Historial de cambios
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
                 $obs = "Ningún cambio detectado";
             } else {
@@ -260,15 +245,33 @@ class UsuarioC {
     }
 
     public function autenticar() {
-        $email = trim($_POST['usuario']); // ahora el input "usuario" será el email
+        $email = trim($_POST['usuario']); 
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
 
-    // Trae el usuario por email
         $user = $modelo->obtenerPorEmail($email);
-
+        $ROL_TECNICO_ID = 1; 
+        
         if ($user && password_verify($contrasena, $user['contrasena'])) {
-        // Login correcto
+            
+            if ($user['rol_id'] == $ROL_TECNICO_ID) {
+                switch ($user['estado_verificacion']) {
+                    case 'pendiente':
+                        $_SESSION['tipo_mensaje'] = "warning";
+                        $_SESSION['mensaje'] = "Tu cuenta de técnico está pendiente de verificación.";
+                        header("Location: index.php?accion=espera&email=" . urlencode($user['email']));
+                        exit();
+                    case 'rechazado':
+                        $_SESSION['tipo_mensaje'] = "danger";
+                        $_SESSION['mensaje'] = "Tu solicitud como técnico fue rechazada. Contacta al administrador.";
+                        header("Location: index.php?accion=login");
+                        exit();
+                    case 'aprobado':
+                        break;
+                }
+            }
+
+            session_start();
             $_SESSION['usuario'] = $user['nombre'];
             $_SESSION['rol'] = $user['rol_id'];
             $_SESSION['id'] = $user['id'];
@@ -292,6 +295,63 @@ class UsuarioC {
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
         include("Views/Usuario/Admin/listarU.php");
     }
+    
+    // --- NUEVAS ACCIONES DE ADMINISTRACIÓN ---
+
+    public function verificarTecnicos() {
+        if ($_SESSION['rol'] != ROL_ADMIN) {
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+        $usuarioM = new Usuario();
+        $tecnicosPendientes = $usuarioM->obtenerTecnicosPendientes();
+        include("Views/Usuario/Admin/VerificarTecnicos.php");
+    }
+
+    public function aprobarTecnico() {
+        if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+        $id = (int)$_GET['id'];
+        $usuarioM = new Usuario();
+        
+        if ($usuarioM->actualizarEstadoVerificacion($id, 'aprobado')) {
+            $_SESSION['mensaje'] = "El técnico ha sido APROBADO y ahora puede iniciar sesión.";
+            $_SESSION['tipo_mensaje'] = "success";
+        } else {
+            $_SESSION['mensaje'] = "Error al aprobar al técnico.";
+            $_SESSION['tipo_mensaje'] = "danger";
+        }
+        header("Location: index.php?accion=verificarTecnicos");
+        exit();
+    }
+
+    public function rechazarTecnico() {
+        if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+        $id = (int)$_GET['id'];
+        $usuarioM = new Usuario();
+        $tecnico = $usuarioM->buscarUserId($id);
+        
+        if ($tecnico && $usuarioM->borrar($id)) {
+            // Opcional: Eliminar archivo de evidencia
+            if ($tecnico['evidencia_tecnica_ruta'] && file_exists($tecnico['evidencia_tecnica_ruta'])) {
+                unlink($tecnico['evidencia_tecnica_ruta']);
+            }
+            $_SESSION['mensaje'] = "El técnico fue RECHAZADO y su cuenta fue eliminada.";
+            $_SESSION['tipo_mensaje'] = "success";
+        } else {
+            $_SESSION['mensaje'] = "Error al rechazar y eliminar al técnico.";
+            $_SESSION['tipo_mensaje'] = "danger";
+        }
+        header("Location: index.php?accion=verificarTecnicos");
+        exit();
+    }
+
+    // --- FIN NUEVAS ACCIONES DE ADMINISTRACIÓN ---
 
     public function PreviewU() {
         $usuario = new Usuario();
