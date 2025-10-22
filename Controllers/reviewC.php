@@ -89,7 +89,16 @@ class ReviewC {
             header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
+
+        $HaySuma = $this->ReviewModel->agarrarSuma($id_tecnico);
+        if ($HaySuma === null) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
+            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            exit(); 
+        }
         
+        $suma_rating = $HaySuma;
         $ratingPromedio = $HayPromedio;
         $CantReview = $HayReview;
 
@@ -98,10 +107,11 @@ class ReviewC {
             $ratingAntiguo = $YaExiste['rating'];
             $ComentarioAntiguo = $YaExiste['comentario'];
 
-            $ratingPromedio = ((($ratingPromedio * $CantReview) - $ratingAntiguo) + $rating) / $CantReview;
+            $suma_rating = ((($suma_rating) - $ratingAntiguo) + $rating);
+            $ratingPromedio =  $suma_rating / $CantReview;
             $ratingPromedio = round($ratingPromedio * 2) / 2;
 
-            $this->ReviewModel->updateReview($ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
+            $this->ReviewModel->updateReview($suma_rating, $ratingPromedio, $rating, $Comentario, $id_solicitud, $id_tecnico, $CantReview);
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
 
@@ -129,12 +139,13 @@ class ReviewC {
             exit();
         }
 
-        $ratingPromedio = (($ratingPromedio * $CantReview) + $rating)/($CantReview + 1);
+        $suma_rating = $suma_rating + $rating;
+        $ratingPromedio = $suma_rating/($CantReview + 1);
         $CantReview += 1;
         
         $ratingPromedio = round($ratingPromedio * 2) / 2;
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
-        $this->ReviewModel->AddReview($CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
+        $this->ReviewModel->AddReview($suma_rating, $CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
 
         $evento = "La Solicitud fue calificada con ".$rating."★";
         $this->historiaC->registrarEvento($id_solicitud, $evento);
