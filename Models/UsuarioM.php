@@ -67,6 +67,29 @@ class Usuario {
         $stmt->close();
         return $success;
     }
+    return false;
+    }
+
+
+    public function obtenerPorNombre($usuario) {
+    $usuario = $this->conn->real_escape_string($usuario);
+    $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
+    $res = $this->conn->query($sql);
+    if ($res && $res->num_rows > 0) {
+        return $res->fetch_assoc();
+    }
+    return false;
+}
+
+public function obtenerPorEmail($email) {
+    $email = $this->conn->real_escape_string($email);
+    $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
+    $res = $this->conn->query($sql);
+    if ($res && $res->num_rows > 0) {
+        return $res->fetch_assoc();
+    }
+    return false;
+}
 
     public function verificarU($usuario, $contrasena) {
         $usuario = $this->conn->real_escape_string($usuario);
