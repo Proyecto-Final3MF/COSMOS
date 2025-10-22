@@ -16,7 +16,7 @@ $notificaciones = $notifC->listarNoLeidas();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="inicio.php" class="logo-link">
+            <a href="inicio.php" class="logo-link" title="Inicio">
                 <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
             </a>
 
@@ -40,7 +40,7 @@ $notificaciones = $notifC->listarNoLeidas();
 
         <div class="navbar-right">
 
-                     <button id="togglethemeBtn" class="btn-modo">
+                     <button id="togglethemeBtn" class="btn-modo" title="Cambiar tema">
                     <i class="fa-solid fa-moon"></i>
                     </button>
 
