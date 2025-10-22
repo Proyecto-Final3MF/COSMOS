@@ -157,3 +157,4 @@ $notificaciones = $notifC->listarNoLeidas();
     </nav>
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
+<script src="Assets/js/trancicion.js"></script>
