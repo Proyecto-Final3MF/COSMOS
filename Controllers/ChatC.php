@@ -47,7 +47,7 @@ class ChatC
 
         $mensajeModel = new Mensaje();
         if ($idSolicitud) {
-            $mensajes = $mensajeModel->obtenerConversacionPorSolicitud($usuarioId, $otroUsuarioId, $idSolicitud);
+            $mensajes = $mensajeModel->obtenerConversacionesPorSolicitud($usuarioId, $otroUsuarioId, $idSolicitud);
         } else {
             $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
         }
@@ -114,13 +114,15 @@ class ChatC
         }
 
         $usuario_id = $_SESSION['id'] ?? null;
-        if (!$usuario_id) {
+        $idSolicitud = $_GET['id_solicitud'] ?? null;
+
+        if (!$usuario_id || !$idSolicitud) {
             header("Location: index.php?accion=login");
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $conversaciones = $mensajeModel->obtenerConversaciones($usuario_id);
+        $conversaciones = $mensajeModel->obtenerConversacionesPorSolicitud($usuario_id, $idSolicitud);
 
         include __DIR__ . "/../Views/conversaciones.php";
     }
@@ -179,6 +181,13 @@ class ChatC
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo '<pre>';
+            var_dump($_POST);
+            echo '</pre>';
+            exit;
         }
 
         $usuarioId = $_SESSION['id'] ?? null;
