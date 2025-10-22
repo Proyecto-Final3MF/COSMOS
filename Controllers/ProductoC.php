@@ -39,6 +39,13 @@ class ProductoC {
             exit();
         }
 
+        if ($categoria_id === null || $categoria_id === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error: Producto sin categoria.";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
 
@@ -159,6 +166,13 @@ class ProductoC {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
             header("Location: index.php?accion=editarP&id=" . $id);
+            exit();
+        }
+
+        if ($categoria_id === null || $categoria_id === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error: Producto sin categoria.";
+            header("Location: index.php?accion=formularioP");
             exit();
         }
 
