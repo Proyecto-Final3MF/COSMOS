@@ -71,7 +71,7 @@ class Categoria {
             case "Más Recientes":
                 $sql .= "ORDER BY id DESC";
                 break;
-            case "Más Antiguos":
+            case "Más Antiguas":
                 $sql .= "ORDER BY id ASC";
                 break;
             default:
