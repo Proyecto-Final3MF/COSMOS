@@ -76,7 +76,6 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
