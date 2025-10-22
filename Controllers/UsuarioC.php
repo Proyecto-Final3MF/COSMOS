@@ -15,8 +15,6 @@ class UsuarioC {
     public function login() {
         include("Views/Usuario/Login.php");
     }
-    
-    
 
     public function crear() {
         $usuario = new Usuario();
@@ -34,6 +32,17 @@ class UsuarioC {
         
         // Asignamos el ID del rol Técnico (ajusta si es diferente en tu BD)
         $ROL_TECNICO_ID = '1'; 
+
+        // Validar longitud mínima
+        if (strlen($contrasena) < 8) {
+        $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: index.php?accion=register");
+        exit();
+        }
+
+        // Encriptar la contraseña antes de guardarla
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
         // 1. Manejo de campos exclusivos para Técnico
         $especializaciones_ids = $_POST['especializaciones_ids'] ?? '';
@@ -55,6 +64,7 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -68,10 +78,10 @@ class UsuarioC {
             exit();
         }
 
-        // Validar campos vacíos
         if (empty($usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre de Usuario no puede estar vacío.";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -79,6 +89,7 @@ class UsuarioC {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register"); 
             exit();
         }
@@ -138,8 +149,8 @@ class UsuarioC {
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['foto_perfil'] = $usuarioN['foto_perfil'];
 
-                // Historial
-                $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
+        // Historial
+        $this->historialController->registrarModificacion(null, null, 'guardó el usuario', $usuario, $_SESSION['id'], "Usuario creado vía formulario");
 
                 $_SESSION['mensaje'] = "Tu cuenta fue creada Exitosamente. ¡Bienvenido, " . htmlspecialchars($usuario) . "!";
                 $_SESSION['tipo_mensaje'] = "success";
@@ -205,6 +216,7 @@ class UsuarioC {
             $_SESSION['foto_perfil'] = $foto_perfil;
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+            $_SESSION['tipo_mensaje'] = "success";
 
         // Historial de cambios
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
