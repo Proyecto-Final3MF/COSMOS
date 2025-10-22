@@ -23,17 +23,7 @@ require_once ("./Views/include/UH.php");
 
         <form method="POST" action="index.php?accion=guardarU" enctype="multipart/form-data">
 
-            <p class="fade-label">Foto de perfil (opcional)</p>
-            <img id="preview" src="Assets/imagenes/perfil/fotodefault.webp" alt="" class="foto-perfil">
-
-            <div class="input-archivo">
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
-            <label for="foto_perfil" class="btn-boton3-input">Seleccionar Foto</label>
-            <span class="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
-            </div>
-            <br>
-
-            <p class="fade-label">Usuario</p>
+            <p class="fade-label">Nombre de Usuario</p>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
 
             <p class="fade-label">Email </p>
@@ -56,9 +46,10 @@ require_once ("./Views/include/UH.php");
             <div id="tecnico-fields" class="hidden-fields">
                 
                 <p class="fade-label">Selecciona tus Especialidades</p>
+                <p class="fade-label">maximo 2</p>
 
                 <select id="especialidad_selector" name="especializaciones_ids[]" class="js-example-basic-multiple" multiple="multiple" required> 
-                    <option value="" disabled>Selecciona una o más especialidades</option>
+                    <option value="" disabled></option>
                     <?php 
                     if (isset($especializaciones) && is_array($especializaciones)):
                         foreach ($especializaciones as $especialidad): ?>
@@ -76,9 +67,9 @@ require_once ("./Views/include/UH.php");
                 <input type="text" class="form-control" id="otra_especialidad" name="otra_especialidad" placeholder="Ej: Micro soldadura de placa base">
                 <br><br>
                 
-                <p class="fade-label">Evidencia Técnica (Foto de trabajo realizado o certificación)</p>
-                <img id="preview-evidencia" src="Assets/imagenes/perfil/fotodefault.webp" alt="Previsualización de Evidencia" class="foto-perfil">
-                
+                <p class="fade-label">Evidencia Técnica (Preferiblemente certificación)</p>
+                <img id="preview-evidencia" class="foto-evidencia">
+
                 <div class="input-archivo">
                     <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
                     <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
