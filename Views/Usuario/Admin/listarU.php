@@ -79,7 +79,7 @@ require_once("./Views/include/UH.php");
                             <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                            <a href="index.php?accion=borrarU&id=<?= $u['id'] ?>" class="icon-btn delete">
+                            <a href="index.php?accion=eliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
                             <i class="fa fa-trash"></i></a>
                             <?php endif; ?>
                         </div>

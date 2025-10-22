@@ -223,18 +223,15 @@ class ProductoC {
             if ($nombre == $nombreAntiguo && $id_catAntiguo == $categoria_id) {
                 $obs = "Ningun cambio detectado";
             } else {
+                $obs = "";
                 if ($nombre !== $nombreAntiguo) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
-                    $obs = $obs1;
+                    $obs1 = "Nombre: ".$nombreAntiguo." ⟶ ".$nombre." ‎ ";
+                    $obs .= $obs1;
                 }
 
                 if ($id_catAntiguo !== $categoria_id) {
-                    $obs2 = "Categoria: ".$categoriaAntigua. " ---> ".$nuevaCat;
-                    $obs = $obs2;
-                }
-
-                if ($nombre !== $nombreAntiguo && $id_catAntiguo !== $categoria_id) {
-                    $obs = $obs1.$obs2;
+                    $obs2 = "Categoria: ".$categoriaAntigua. " ⟶ ".$nuevaCat;
+                    $obs .= $obs2;
                 }
             }
 
