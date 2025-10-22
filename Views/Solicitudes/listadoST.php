@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
                     <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
                             <td>
                             <a href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
-                            <i class="fa fa-user"></i> Ver Perfil de <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
+                            <i class="fa fa-user"></i> <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
                             </a>
                             </td>
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
