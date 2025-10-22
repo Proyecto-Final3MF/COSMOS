@@ -13,6 +13,7 @@
 /* === Tema claro (por defecto) === */
 .light-mode {
   --color-fondo: #ffffff;
+  --color-fondo-formulario: #f0f2f5;
   --text-color: #333;
   --primary-color: #e83e8c;
   --secondary-color: #f8f9fa;
@@ -21,19 +22,22 @@
   --color-tabla-fondo: #ffffff;
   --color-tabla-texto: #333333;
   --color-hover: rgba(232, 62, 140, 0.1);
+  --otros-botones: #ffffff;
 }
 
 /* === Tema oscuro === */
 .dark-mode {
   --color-fondo: #1e1e1e;
-  --text-color: #e0e0e0;
+  --color-fondo-formulario: #131313;
+  --text-color: #f7f6f6;
   --primary-color: #ff70c0;
   --secondary-color: #2c2c2c;
-  --color-navbar: #2a2a2a;
+  --color-navbar: #383838;
   --color-borde: #444444;
   --color-tabla-fondo: #2e2e2e;
   --color-tabla-texto: #f2f2f2;
   --color-hover: rgba(232, 62, 140, 0.1);
+  --otros-botones: #5c5c5c;
 }
 
 * {
@@ -208,7 +212,7 @@ body {
     cursor: pointer;
     margin-left: 1rem;
     font-size: 1.2rem;
-    color: #333;
+    color: var(--text-color);
     transition: color 0.3s;
 }
 
@@ -238,7 +242,7 @@ body {
     width: 320px;
     max-height: 400px;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: var(--color-navbar);
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     padding: 0.5rem 0;
@@ -255,7 +259,7 @@ body {
 .notificaciones .dropdown .notif-item {
     padding: 0.7rem 1rem;
     font-size: 0.95rem;
-    color: #333;
+    color: var(--text-color);
     border-bottom: 1px solid #eee;
     transition: background 0.2s, transform 0.2s;
     display: flex;
@@ -269,7 +273,7 @@ body {
 
 /* Hover en cada notificación */
 .notificaciones .dropdown .notif-item:hover {
-    background-color: #f0f8ff;
+    background-color: #4e63753a;
     transform: translateX(3px);
 }
 
@@ -406,7 +410,7 @@ body {
     display: flex;           
     justify-content: center; 
     align-items: center;     
-    gap: 10px;               
+    gap: 10px;             
 }
 
 .btn-container2 {
@@ -454,7 +458,7 @@ body {
 }
 
 .btn-boton444 {
-    background-color: #fff;
+    background-color: var(--otros-botones);
     display: flex;
     flex-direction: column;      
     align-items: center;
@@ -468,7 +472,7 @@ body {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    color: #000000;
+    color: var(--text-color);
     text-align: center;
     text-decoration: none;       
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
@@ -748,7 +752,7 @@ th {
 
 td {
     padding: 12px;
-    color: #333;
+    color: var(--text-color);
     border-color: var(--color-borde);
 }
 
@@ -771,7 +775,11 @@ th:last-child {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: var(--color-navbar);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--color-navbar);
 }
 
 tbody tr:hover {
@@ -807,7 +815,7 @@ tbody tr:hover {
     flex: 1 1 50%; 
     min-width: 0; 
     padding: 15px;
-    background-color: #ffffff; 
+    background-color: var(--otros-botones); 
     border-radius: 10px;
     box-shadow: var(--box-shadow);
 }
@@ -889,6 +897,36 @@ tbody tr:hover {
   transform: scale(1.1);
 }
 
+.icon-btn.edit {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
+.icon-btn.chat {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
+.icon-btn.delete {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
+.icon-btn.aceptar {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
+.icon-btn.historial {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
+.icon-btn.review {
+  background-color: var(--color-fondo);
+  color: var(--text-color);
+}
+
 .icon-btn.edit:hover {
   background-color: #014c9b;
 }
@@ -968,7 +1006,7 @@ table td, table th {
 .filter-form { animation-delay: 0.5s; }
 
 .list-item {
-    background: #f9f9f9;
+    background: var(--color-fondo);
     border-radius: 8px;
     padding: 12px;
     margin: 10px 0;
@@ -1022,7 +1060,7 @@ table td, table th {
 .container3 {
     max-width: 900px;
     margin: 0 auto;
-    background-color: #f0f2f54f;
+    background-color: var(--otros-botones);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -1035,8 +1073,8 @@ table td, table th {
     align-items: center;
     margin-bottom: 30px;
     padding: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
+    background-color: var(--color-navbar);
+    border: 1px solid var(--text-color);
     border-radius: 8px;
 }
 
@@ -1055,7 +1093,7 @@ table td, table th {
 
 .filter-form label {
     font-weight: bold;
-    color: #495057;
+    color: var(--text-color);
     margin-bottom: 5px;
 }
 
@@ -1067,7 +1105,15 @@ table td, table th {
     border-radius: 6px;
     box-sizing: border-box;
     font-size: 1em;
+    background-color: var(--color-fondo);
+    color: var(--text-color);;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5); /* cambia color del ícono */
+  cursor: pointer;
+}
+
 
 .filter-form button,
 .clear-button {
@@ -1255,7 +1301,7 @@ table td, table th {
 }
 
 .menu-rol-container .dropdown-button {
-    color: rgb(0, 0, 0);
+    color: var(--text-color);
     border: none;
     border-radius: 8px;
     padding: 10px 14px;
@@ -1268,7 +1314,7 @@ table td, table th {
 }
 
 .menu-rol-container .dropdown-button:hover {
-    background-color: var(--color-hover, #972f5f);
+    background-color: #972f5f;
 }
 
 .menu-rol-container .dropdown-menu {
@@ -1276,7 +1322,7 @@ table td, table th {
     position: absolute;
     right: 0;
     top: 45px;
-    background-color: #fff;
+    background-color: var(--color-navbar);
     min-width: 220px;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
     border-radius: 10px;
@@ -1294,7 +1340,7 @@ table td, table th {
     gap: 10px;
     padding: 10px 15px;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
     transition: background 0.2s;
     font-size: 0.95rem;
 }
@@ -1306,7 +1352,7 @@ table td, table th {
 
 .menu-rol-container .dropdown-item i {
     font-size: 1rem;
-    color: var(--color-primario, #5c5c5c);
+    color: var(--text-color);
 }
 
 .user-menu-container {
@@ -1345,7 +1391,7 @@ table td, table th {
 
 .dropdown-text {
     font-weight: 600;
-    color: #361f37;
+    color: #000000;
     margin: 0;
 }
 
@@ -1359,7 +1405,7 @@ table td, table th {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
+    background-color: var(--color-navbar);
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -1386,12 +1432,12 @@ table td, table th {
 
 .user-name {
     font-weight: 600;
-    color: #151b24;
+    color: var(--text-color); 
 }
 
 .user-email {
     font-size: 0.875rem;
-    color: #4c5361;
+    color: var(--text-color); 
 }
 
 .dropdown-item {
@@ -1401,9 +1447,10 @@ table td, table th {
     text-align: left;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
-    color: #171817;
+    color: var(--text-color); 
     transition: all 0.3s ease;
     gap: 10px;
+    text-decoration: none;
 }
 
 .dropdown-item:hover {
@@ -1732,7 +1779,7 @@ a.errorLink {
 /* Aca el CSS de los Formularios */
 
 .contenedor-formulario {
-    background-color: #f0f2f5; 
+    background-color: var(--color-fondo-formulario);  
     display: flex;
     flex-direction: column; 
     align-items: center;    
@@ -1803,7 +1850,7 @@ input:focus, select:focus, textarea:focus {
 .fade-label:nth-of-type(4) { animation-delay: 0.4s; }
 
 .formularios99 {
-    background-color: #ffffff; 
+    background-color: var(--color-fondo); 
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1819,9 +1866,17 @@ h3 {
 }
 
 form p {
-    color: #495057;
+    color: var(--text-color);
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.formularios99 input[type="text"],
+.formularios99 input[type="email"],
+.formularios99 input[type="password"],
+.formularios99 select {
+  background-color: var(----color-fondo);
+  color: var(--text-color);
 }
 
 input[type="text"],
@@ -1841,7 +1896,7 @@ select {
 select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
     appearance: none; 
-    background-color: white;
+    background-color: var(--color-fondo);
     background-repeat: no-repeat;
     background-position: right 12px center; 
     background-size: 12px; 
@@ -1849,8 +1904,8 @@ select {
 }
 
 select option {
-    background-color: #ffffff;
-    color: #333;
+    background-color: var(--color-fondo);
+    color: var(--text-color);
 }
 
 textarea.form-control {
@@ -1860,14 +1915,14 @@ textarea.form-control {
     border-radius: 8px; 
     font-size: 1rem; 
     line-height: 1.5; 
-    color: #555; 
+    color: var(--text-color); 
     resize: vertical; 
 }
 
 label {
     font-family: Arial, sans-serif;
     font-size: 1.1em;
-    color: #333;
+    color: var(--text-color);
     font-weight: bold;
     display: block; 
     margin-bottom: 0.5rem; 
@@ -1936,7 +1991,7 @@ input[type="submit"]:hover {
     display: block;
     margin-top: 20px;
     text-decoration: none;
-    color: #414141;
+    color: var(--text-color);
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -2044,7 +2099,7 @@ input[type="submit"]:hover {
     gap: 15px;
     margin: 20px auto;
     padding: 15px 20px;
-    background-color: #f8f9fa;
+    background-color: var(--color-navbar);
     border: 1px solid #e9ecef;
     border-radius: 8px;
     max-width: 1000px;
@@ -2064,9 +2119,18 @@ input[type="submit"]:hover {
   }
 }
 
+.milanesa {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+}
+
+input::placeholder {
+    color: var(--text-color);
+}
+
 .ordenar-form label {
     font-weight: bold;
-    color: #495057;
+    color: var(--text-color);
 }
 
 .ordenar-form select {
@@ -2076,7 +2140,8 @@ input[type="submit"]:hover {
     font-size: 1rem;
     cursor: pointer;
     transition: var(--transition);
-    background-color: white;
+    background-color: var(--color-fondo);
+    color: var(--text-color);
 }
 
 .ordenar-form select:hover {
@@ -2098,6 +2163,7 @@ input[type="submit"]:hover {
 .ordenar-form button:hover {
     background-color: #972f5f;
     transform: translateY(-2px);
+    color: var(--text-color);
 }
 
 .filter-form2 {
@@ -2106,7 +2172,7 @@ input[type="submit"]:hover {
     align-items: center;
     margin: 20px auto 30px auto;
     padding: 15px 20px;
-    background-color: #ffffff;
+    background-color: var(--color-navbar);
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     max-width: 600px;
@@ -2127,7 +2193,7 @@ input[type="submit"]:hover {
 
 .filter-form2 label {
     font-weight: bold;
-    color: #495057;
+    color: var(--text-color);
     margin-bottom: 5px;
     font-size: 0.95rem;
 }
@@ -2140,10 +2206,11 @@ input[type="submit"]:hover {
     border-radius: 8px;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--color-fondo);
 }
 
 .filter-form2 input[type="text"]::placeholder {
-    color: #999;
+    color: var(--text-color);
     font-style: italic;
 }
 
@@ -2180,7 +2247,7 @@ h1.inicio55 {
 p.inicio44 {
     text-align: center;
     font-size: 1.1rem;
-    color: #555;
+    color: var(--text-color);
     max-width: 890px;
     margin: 0 auto 2rem;
     opacity: 0;

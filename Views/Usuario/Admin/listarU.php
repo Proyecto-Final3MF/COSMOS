@@ -27,7 +27,7 @@ require_once("./Views/include/UH.php");
 
 <form action="index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
-    <input type="text" id="search" name="search" placeholder="Buscar Usuario" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+    <input type="text" id="search" name="search" placeholder="Buscar Usuario" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>" class="milanesa">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarU">
     <select name="orden" id="orden">

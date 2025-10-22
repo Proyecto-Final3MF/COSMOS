@@ -60,6 +60,7 @@ require_once ("./Views/include/UH.php");
         <section class="admin-panel-column fade-slide">
         <div class="option-card">
                 <h2>Verificación de Cuentas</h2>
+                
                 <p>Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
                 <a href="index.php?accion=verificarTecnicos" class="btn btn-boton12">Ver Técnicos Pendientes</a>
         </div>
