@@ -24,7 +24,8 @@ CREATE TABLE producto (
     nombre VARCHAR(255) NOT NULL,
     imagen VARCHAR(255) NOT NULL,
     id_cat INT NOT NULL, FOREIGN KEY (id_cat) REFERENCES categoria(id),
-    id_usuario INT NOT NULL, FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    id_usuario INT NOT NULL, FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    disponible TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE estado(
@@ -91,15 +92,34 @@ CREATE TABLE reviews (
     fecha_edicion DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('1','Disponible');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('2','En diagonostico');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('3','En espera de repuestos');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('4','En reparacion');
-INSERT INTO `estado`(`id`, `nombre`) VALUES ('5','Finalizado');
-INSERT INTO `rol`(`id`, `nombre`) VALUES ('1','Tecnico');
-INSERT INTO `rol`(`id`, `nombre`) VALUES ('2','Cliente');
-INSERT INTO `rol`(`id`, `nombre`) VALUES ('3','Admin');
-INSERT INTO `usuario`(`id`, `nombre`, `contrasena`, `email`, `foto_perfil`, `rol_id`, `cant_review`, `promedio`) VALUES ('1','Admin','$2y$10$JiS.f45VhIlHDq/jxfcz.e3wuA8nHGy2ok3cXC3vYzTgb5/Kmjp6W','admin@gmail.com','Assets/imagenes/perfil/fotodefault.webp','3','0','0');
+CREATE TABLE especializacion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE usuario_especializacion (
+    usuario_id INT NOT NULL,
+    especializacion_id INT NOT NULL,
+    PRIMARY KEY (usuario_id, especializacion_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (especializacion_id) REFERENCES especializacion(id) ON DELETE CASCADE
+);
+
+INSERT INTO `estado` (`id`, `nombre`) VALUES
+(1, 'Disponible'), 
+(2, 'En diagnostico'), 
+(3, 'En espera de repuestos'), 
+(4, 'En reparacion'), 
+(5, 'Finalizado');
+
+INSERT INTO `rol` (`id`, `nombre`) VALUES 
+(1, 'Tecnico'), 
+(2, 'Cliente'), 
+(3, 'Admin');
+
+INSERT INTO `usuario` (`id`, `nombre`, `contrasena`, `email`, `foto_perfil`, `rol_id`, `cant_review`, `promedio`) VALUES 
+(1, 'Admin', '$2y$10$JiS.f45VhIlHDq/jxfcz.e3wuA8nHGy2ok3cXC3vYzTgb5/Kmjp6W', 'admin@gmail.com', 'Assets/imagenes/perfil/fotodefault.webp', 3, 0, 0);
+
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (1, 'Laptop'),
 (2, 'Celular'),
@@ -111,3 +131,15 @@ INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (8, 'Smartwatch'),
 (9, 'Cámara Digital'),
 (10, 'Disco Duro Externo');
+
+INSERT INTO `especializacion` (`id`, `nombre`) VALUES
+(1, 'Reparación de Laptops'),
+(2, 'Servicio Técnico de Celulares'),
+(3, 'Diagnóstico de Televisores'),
+(4, 'Mantenimiento de Monitores'),
+(5, 'Reparación de Impresoras'),
+(6, 'Consolas y Gaming'),
+(7, 'Redes y Conectividad (Router/Módem)'),
+(8, 'Dispositivos Wearable (Smartwatch)'),
+(9, 'Equipos de Fotografía Digital'),
+(10, 'Recuperación y Almacenamiento de Datos (HDD/SSD)');

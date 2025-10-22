@@ -14,17 +14,15 @@ class SolicitudC {
 
     public function formularioS(){ 
         $id_usuario = $_SESSION['id'] ?? null;
-        
+
         if ($id_usuario == null) {
             header("Location: index.php?accion=login");
             exit();
         } 
-        
+
         $solicitud = new Solicitud();
-        
-        $productos = $solicitud->obtenerProductos($id_usuario);
+        $productos = $solicitud->obtenerProductos($id_usuario); 
         $producto_preseleccionado_id = null;
-        
         include ("./Views/Solicitudes/Cliente/FormularioS.php");
     }
 
@@ -62,7 +60,7 @@ class SolicitudC {
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
             }
             
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=ListarSLU");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
             $_SESSION['tipo_mensaje'] = "error";
@@ -82,7 +80,7 @@ class SolicitudC {
         if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=ListarSLU");
             exit();
         }
 
@@ -347,7 +345,6 @@ class SolicitudC {
     }
 
     public function formularioUS(){ 
-        // Obtener el ID del usuario de la sesión
         $id_usuario = $_SESSION['id'] ?? null;
         
         if ($id_usuario == null) {
@@ -356,18 +353,9 @@ class SolicitudC {
         } 
         
         $solicitud = new Solicitud();
-        
-        // 1. Obtener TODOS los productos (para llenar el <select> en la vista original, 
-        //    or just to get the name for the restricted view)
         $productos = $solicitud->obtenerProductos($id_usuario);
-        
-        // 2. Obtener el ÚLTIMO producto creado (devuelve un array o null)
         $ultimo_producto = $solicitud->obtenerProductoUrgente($id_usuario);
-        
-        // 3. Establecer el ID a preseleccionar. 
         $producto_preseleccionado_id = $ultimo_producto['id'] ?? null; 
-
-        // Incluye la vista que contendrá el formulario (use the FormularioUS.php name)
         include ("./Views/Solicitudes/Cliente/FormularioUS.php");
     }
 }

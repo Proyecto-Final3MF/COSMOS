@@ -2305,3 +2305,49 @@ input:checked ~ label {
     font-size: 1.1em;
     margin-bottom: 10px;
 }
+
+.hidden-fields {
+    display: none;
+}
+
+.especializacion-tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+.especializacion-tag .close {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Estilos para que Select2 ocupe el 100% del ancho del contenedor del formulario */
+
+/* Contenedor principal de Select2 (Select2-container) */
+#tecnico-fields .select2-container {
+    width: 100% !important; /* Fuerza a que ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Asegura que el padding y border no aumenten el ancho total */
+}
+
+/* Estilo para la caja donde se introducen los tags/valores seleccionados */
+#tecnico-fields .select2-container--default .select2-selection--multiple {
+    /* Puedes ajustar la altura (height) si tus otros inputs tienen una altura fija */
+    min-height: 40px; /* Altura mínima para que se vea similar a otros inputs */
+    line-height: 1.5;
+    border: 1px solid #ccc; /* Ajusta este color al que uses en tus otros inputs */
+    border-radius: 4px; /* Ajusta el radio si tus otros inputs son redondeados */
+    padding: 5px 10px; /* Espaciado interno para que se vea bien */
+}
+
+/* Estilo para los elementos individuales (tags) que aparecen después de la selección */
+#tecnico-fields .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e4e4e4; /* Color de fondo del tag */
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 0 5px;
+}
