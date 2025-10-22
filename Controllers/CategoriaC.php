@@ -61,7 +61,7 @@ class CategoriaC {
     public function listarC() {
         $categoria = new Categoria();
         
-        $orden = $_GET['orden'] ?? 'Más Antiguos';
+        $orden = $_GET['orden'] ?? 'Más Antiguas';
 
         $search = $_GET['search'] ?? '';
 
