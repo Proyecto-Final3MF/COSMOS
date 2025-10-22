@@ -46,6 +46,11 @@ class ChatC
         }
 
         $mensajeModel = new Mensaje();
+        if ($idSolicitud) {
+            $mensajes = $mensajeModel->obtenerConversacionPorSolicitud($usuarioId, $otroUsuarioId, $idSolicitud);
+        } else {
+            $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        }
         $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
 
         include __DIR__ . "/../Views/mensajes.php";

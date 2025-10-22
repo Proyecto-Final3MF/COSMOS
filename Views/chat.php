@@ -39,12 +39,13 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
     <script src="Assets/js/trancicion.js"></script>
     <script>
         async function cargarMensajes() {
-            const res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>");
-            const html = await res.text();
+            const usuarioId = "<?= $_SESSION['id'] ?>";
+            const receptorId = "<?= $otroUsuarioId ?>";
+            const solicitudId = "<?= $_GET['id_solicitud'] ?? '' ?>";
+
+            let res = fetch('index.php?accion=cargarMensajes&usuario_id=${receptorId}&id_solicitud=${solicitudId}');
+            let html = await res.text();
             document.getElementById("chat-box").innerHTML = html;
-            // Desplazarse al último mensaje
-            const chatBox = document.getElementById("chat-box");
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         // Enviar mensaje
