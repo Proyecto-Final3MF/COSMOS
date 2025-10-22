@@ -58,6 +58,14 @@ require_once ("./Views/include/UH.php");
         </section>
 
         <section class="admin-panel-column fade-slide">
+        <div class="option-card">
+                <h2>Verificación de Cuentas</h2>
+                <p>Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
+                <a href="index.php?accion=verificarTecnicos" class="btn btn-boton12">Ver Técnicos Pendientes</a>
+        </div>
+        </section>
+
+        <section class="admin-panel-column fade-slide">
             <h3><a href="index.php?accion=mostrarHistorial" class="titulo3 fade-slide" >Ultimos registros en el Historial</a></h3>
             <div class="historial-panel">
                 <?php if (!empty($historial)): ?>
@@ -75,12 +83,6 @@ require_once ("./Views/include/UH.php");
                 <?php endif; ?>
             </div>
         </section>
-
-        <div class="option-card">
-                <h2>Verificación de Cuentas</h2>
-                <p>Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
-                <a href="index.php?accion=verificarTecnicos" class="btn btn-boton">Ver Técnicos Pendientes</a>
-        </div>
 
     </div>
     <script src="Assets/js/trancicion.js"></script>
