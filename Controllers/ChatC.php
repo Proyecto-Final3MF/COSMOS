@@ -23,10 +23,12 @@ class ChatC
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
         $idSolicitud = $_GET['id_solicitud'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId || !$idSolicitud) {
+        if (!$usuarioId || !$otroUsuarioId) {
             echo "Usuario no especificado";
             return;
         }
+
+        $idSolicitud = $idSolicitud ?? null;
 
         $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
         require_once "Views/chat.php";
@@ -45,9 +47,9 @@ class ChatC
 
         $mensajeModel = new Mensaje();
         $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
-        exit();
 
         include __DIR__ . "/../Views/mensajes.php";
+        exit();
     }
 
     // Mostrar la vista de chat
