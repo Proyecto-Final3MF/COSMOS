@@ -21,8 +21,9 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
+        $idSolicitud = $_GET['id_solicitud'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId) {
+        if (!$usuarioId || !$otroUsuarioId || !$idSolicitud) {
             echo "Usuario no especificado";
             return;
         }
@@ -162,35 +163,35 @@ class ChatC
         }
 
         // Redirigir a la conversación
-        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId);
+        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId . "&id_solicitud=" . $idSolicitud);
         exit();
     }
 
     // Guardar nuevo mensaje
     public function enviar()
-{
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    $usuarioId = $_SESSION['id'] ?? null;
-    $receptor_id = $_POST['receptor_id'] ?? null;
-    $solicitud_id = $_POST['solicitud_id'] ?? 0;
-    $mensajeTexto = trim($_POST['mensaje'] ?? '');
+        $usuarioId = $_SESSION['id'] ?? null;
+        $receptor_id = $_POST['receptor_id'] ?? null;
+        $solicitud_id = $_POST['solicitud_id'] ?? null;
+        $mensajeTexto = trim($_POST['mensaje'] ?? '');
 
-    if (!$usuarioId || !$receptor_id || $solicitud_id || $mensajeTexto === '') {
-        http_response_code(400);
-        echo "Error: parámetros inválidos";
+        if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
+            http_response_code(400);
+            echo "Error: parámetros inválidos";
+            exit();
+        }
+
+        $mensajeModel = new Mensaje();
+        $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
+
+        // Devuelve un simple OK para JS
+        echo "OK";
         exit();
     }
-
-    $mensajeModel = new Mensaje();
-    $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
-    
-    // Devuelve un simple OK para JS
-    echo "OK";
-    exit();
-}
 
     public function borrar()
     {

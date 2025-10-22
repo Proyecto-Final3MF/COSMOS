@@ -28,7 +28,8 @@ $otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
 <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
     <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
     <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-    <input type="hidden" name="solictud_id" value="<?= $idSolicitud ?? 0 ?>">
+    <input type="hidden" name="solictud_id" value="<?= $idSolicitud ?>">
+
     <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
     <button type="submit">Enviar</button>
 </form>
