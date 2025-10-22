@@ -86,7 +86,6 @@ class SolicitudC {
         $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
         if ($solicitud){
-            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             $_SESSION['tipo_mensaje'] = "success";
             // Lógica adicional (historial, etc.)
