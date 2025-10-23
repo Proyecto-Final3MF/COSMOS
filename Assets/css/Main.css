@@ -2054,7 +2054,7 @@ input[type="submit"]:hover {
 
 #nombre-archivo-seleccionado {
     font-size: 0.9rem;
-    color: #555;
+    color: var(--text-color);
 }
 
 .login9 {

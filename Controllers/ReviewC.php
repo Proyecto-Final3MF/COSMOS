@@ -24,7 +24,7 @@ class ReviewC {
         if (!$id) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
-            header("Location: index.php?accion=listarST");
+            header("Location: index.php?accion=listarST"); 
             exit();
         }
 
