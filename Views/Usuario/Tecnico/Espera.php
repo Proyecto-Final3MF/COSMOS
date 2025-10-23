@@ -5,7 +5,7 @@ $nombre_usuario = is_array($datos_usuario) ? htmlspecialchars($datos_usuario['no
 require_once ("./Views/include/UH.php");
 ?>
 
-
+<meta http-equiv="refresh" content="600">
 <title>Espera de Verificación</title>
 <body>
     <br>
