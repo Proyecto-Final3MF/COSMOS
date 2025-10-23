@@ -83,7 +83,7 @@ require_once("./Views/include/UH.php");
                                 ?>
 
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&receptor_id=<?= $usuarioDestino ?>&id_solicitud=<?= $solicitudId ?>"
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&id_solicitud=<?= $solicitudId ?>"
                                         class="icon-btn chat">
                                         <i class="fa fa-comments"></i>
                                     </a>

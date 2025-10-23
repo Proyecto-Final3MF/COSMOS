@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Asegurarnos de que $otroUsuarioId exista
-$otroUsuarioId = $_GET['receptor_id'] ?? 0;
+$otroUsuarioId = $otroUsuarioId ?? ($_GET['usuario_id'] ?? 0);
 ?>
 
 <!DOCTYPE html>
