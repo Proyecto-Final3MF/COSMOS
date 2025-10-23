@@ -131,7 +131,7 @@ class Solicitud {
 }
 
 
-    public function asignarS($id_usuario, $id_soli){
+    public function asignarS($id_tecnico, $id_soli){
         $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
 
         $stmt = $this->conn->prepare($sql);
@@ -141,7 +141,7 @@ class Solicitud {
             return false;
         }
         
-        $stmt->bind_param("ii", $id_usuario, $id_soli);
+        $stmt->bind_param("ii", $id_tecnico, $id_soli);
         $success = $stmt->execute();
         $stmt->close();
         
