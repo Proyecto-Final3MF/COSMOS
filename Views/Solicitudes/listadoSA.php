@@ -63,7 +63,7 @@ require_once("./Views/include/UH.php");
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
                         <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
-                        <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
+                        <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
                         <td>
                             <div class="btn-group-actions d-flex">
                                 <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
