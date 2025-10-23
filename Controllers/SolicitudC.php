@@ -63,11 +63,11 @@ class SolicitudC {
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
             }
             
-            header("Location: index.php?accion=listarSLU");
+            header("Location: index.php?accion=formularioS");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
             $_SESSION['tipo_mensaje'] = "error";
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=formularioS");
         }
     }
 
@@ -83,7 +83,7 @@ class SolicitudC {
         if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '' || $producto === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
-            header("Location: index.php?accion=ListarSLU");
+            header("Location: index.php?accion=urgenteS");
             exit();
         }
 
@@ -110,7 +110,7 @@ class SolicitudC {
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
              $_SESSION['tipo_mensaje'] = "error";
-             header("Location: index.php?accion=redireccion");
+             header("Location: index.php?accion=urgenteS");
         }
     }
 
