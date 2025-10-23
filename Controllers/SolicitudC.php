@@ -15,7 +15,7 @@ class SolicitudC {
         $this->historialController = new HistorialController();
     }
 
-    public function formularioS(){ 
+    public function formularioS() {
         $id_usuario = $_SESSION['id'] ?? null;
 
         if ($id_usuario == null) {
@@ -94,7 +94,7 @@ class SolicitudC {
             $_SESSION['tipo_mensaje'] = "success";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud Urgente creada");
-            $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud urgente", $titulo, $id_solicitud, null);
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Creo la solicitud urgente", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -152,17 +152,17 @@ class SolicitudC {
     }
 
     public function asignarS() {
-        $id_usuario = $_SESSION['id'] ?? null;
+        $id_tecnico = $_SESSION['id'] ?? null;
         $id_soli = $_GET['id_solicitud'] ?? null;
 
-        if ($id_usuario === null || $id_soli === null) {
+        if ($id_tecnico === null || $id_soli === null) {
             $_SESSION['mensaje'] = "Error: ID de usuario o solicitud no proporcionado.";
             $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarTL");
             exit();
         }
         
-        $success = $this->solicitudModel->asignarS($id_usuario, $id_soli);
+        $success = $this->solicitudModel->asignarS($id_tecnico, $id_soli);
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
@@ -173,6 +173,8 @@ class SolicitudC {
 
             $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
             $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' fue aceptada por un técnico.");
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $id_tecnico, "seleccionó a la solicitud", $solicitud['titulo'], $id_soli, null);
 
             header("Location: index.php?accion=listarTL");
             exit();
