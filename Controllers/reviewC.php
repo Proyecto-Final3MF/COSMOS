@@ -31,7 +31,7 @@ class ReviewC {
         //Busca si la solicitud ya tiene calificacion
         $YaExiste = $this->ReviewModel->YaCalificado($id);
         if ($YaExiste) {
-            $rating = ($YaExiste['rating'] ?? 0) * 2; 
+            $rating = ($YaExiste['rating'] ?? 0) * 2; //Pasa de 0.5 a 5 para 1 a 10.
             $Comentario = $YaExiste['comentario'] ?? '';
             $id_solicitud = $YaExiste['id_solicitud'] ?? $id;
         }
