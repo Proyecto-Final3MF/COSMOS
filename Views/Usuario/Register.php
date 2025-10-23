@@ -79,7 +79,19 @@ require_once ("./Views/include/UH.php");
             </div>
             
             <p class="fade-label">Contraseña</p>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" placeholder="minimo 8 caracteres" required> <br><br>
+            <div class="password-container">
+            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" placeholder="mínimo 8 caracteres" required>
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('contrasena', this)"></i>
+            </div>
+            <br>
+
+            <p class="fade-label">Confirmar Contraseña</p>
+            <div class="password-container">
+            <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena" minlength="8" required>
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirmar_contrasena', this)"></i>
+            </div>
+            <p id="error-password" class="error-text"></p>
+            <br>
 
             <input class="button" type="submit" value="Guardar">
             <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>
@@ -93,6 +105,7 @@ require_once ("./Views/include/UH.php");
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/tecnico_registro.js"></script>
+<script src="Assets/js/vercontrasena.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

@@ -26,21 +26,24 @@ require_once ("./Views/include/UH.php");
 
         <h3>Iniciar Sesion</h3>
         <form method="POST" action="Index.php?accion=autenticar">
+        <p class="fade-label">Correo electrónico</p>
+        <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
-            <p class="fade-label">Correo electrónico</p>
-            <label for="usuario" class="form-label"></label>
-            <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
+        <p class="fade-label">Contraseña</p>
+        <div class="password-container">
+        <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required>
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('contrasena', this)"></i>
+        </div>
+        <br>
 
-            <p class="fade-label">Contraseña </p>
-            <label for="contrasena" class="form-label"></label>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required> <br><br>
-                        
-            <button class="button" type="submit">Entrar</button>
-            <a href="index.php?accion=register" class="login9" >¿No tiene una cuenta? Registrese</a>
-        </form>
+    <button class="button" type="submit">Entrar</button>
+    <a href="index.php?accion=register" class="login9">¿No tiene una cuenta? Regístrese</a>
+</form>
+
     </section>
     <br>
     </div>
     <script src="Assets/js/trancicion.js"></script>
+    <script src="Assets/js/vercontrasena.js"></script>
 </body>
 </html>
