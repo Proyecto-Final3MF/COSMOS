@@ -63,10 +63,14 @@ CREATE TABLE historial (
 
 CREATE TABLE mensaje (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    receptor_id INT NULL,
-    mensaje TEXT NOT NULL,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    usuario_id INT NOT NULL, 
+    receptor_id INT,
+    mensaje TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    solicitud_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (receptor_id) REFERENCES usuario(id) ON DELETE SET NULL,
+    FOREIGN KEY (solicitud_id) REFERENCES solicitud(id) ON DELETE CASCADE
 );
 
 CREATE TABLE historia_solicitud (
