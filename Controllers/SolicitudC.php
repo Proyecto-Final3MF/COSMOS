@@ -118,7 +118,7 @@ class SolicitudC {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
         $solicitud->borrarS($id);
-        if($solicitud){
+        if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
             $_SESSION['tipo_mensaje'] = "success";
             header("Location: index.php?accion=redireccion");
