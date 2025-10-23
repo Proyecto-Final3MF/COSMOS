@@ -1,132 +1,82 @@
-// Archivo: Assets/js/tecnico_registro.js
-
 document.addEventListener('DOMContentLoaded', function() {
+    // DECLARACIONES DE CONSTANTES Y ELEMENTOS (Una sola vez)
+    const rolOptions = document.querySelectorAll('.rol-option');
     const rolInput = document.getElementById('rol');
     const tecnicoFields = document.getElementById('tecnico-fields');
-    const rolOptions = document.querySelectorAll('.rol-option');
-    
     const especialidadSelector = document.getElementById('especialidad_selector');
-    const especialidadesTagsContainer = document.getElementById('especialidades_tags');
-    const especializacionesIdsInput = document.getElementById('especializaciones_seleccionadas');
-    const evidenciaInput = document.getElementById('foto_evidencia');
+    const fotoEvidenciaInput = document.getElementById('foto_evidencia');
     const evidenciaPreview = document.getElementById('preview-evidencia');
     const evidenciaLabelSpan = document.querySelector('.nombre-archivo-seleccionado-evidencia');
+    const otraEspecialidadInput = document.getElementById('otra_especialidad');
+    const especialidadesTagsContainer = document.getElementById('especialidades_tags'); // Asumiendo que existe
     
-    // El ID del rol 'Tecnico' (asumiendo que es 1 según tu INSERT INTO)
+    // Asumiendo que ROL_TECNICO es 1 y ROL_CLIENTE es 2
     const ROL_TECNICO_ID = '1'; 
-
-    let selectedEspecialidades = new Map(); // Map(id => nombre) para gestionar especializaciones
+    
+    let selectedEspecialidades = new Map();
 
     // ----------------------------------------------------
-    // Lógica para mostrar/ocultar campos de Técnico al seleccionar el rol
+    // LÓGICA PRINCIPAL DE SELECCIÓN DE ROL (Asegurando la Asignación de rolInput.value)
     // ----------------------------------------------------
     rolOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function() { // Usamos 'function' para usar 'this'
+            // 1. Manejo visual y de ID
+            rolOptions.forEach(o => o.classList.remove('active'));
+            this.classList.add('active'); // Usa 'this' para la opción clicada
             const selectedRolId = this.getAttribute('data-value');
 
+            // 2. 🎯 CRUCIAL: ASIGNAR EL VALOR AL INPUT OCULTO
+            rolInput.value = selectedRolId; 
+
+            // 3. Manejar campos específicos del Técnico
             if (selectedRolId === ROL_TECNICO_ID) {
-                // Muestra los campos, el estilo 'display: none' se cambia a 'display: block'
-                tecnicoFields.style.display = 'block';
-                // Hace que el campo de evidencia sea requerido
-                evidenciaInput.setAttribute('required', 'required');
+                // Muestra y aplica 'required'
+                tecnicoFields.classList.remove('hidden-fields');
+                tecnicoFields.style.display = 'block'; // Usar block si estás usando style.display
+                especialidadSelector.setAttribute('required', 'required');
+                fotoEvidenciaInput.setAttribute('required', 'required');
             } else {
-                // Oculta los campos
-                tecnicoFields.style.display = 'none';
-                // Elimina el requisito de la evidencia
-                evidenciaInput.removeAttribute('required');
+                // Oculta y remueve 'required' para el Cliente (ID 2)
+                tecnicoFields.classList.add('hidden-fields');
+                tecnicoFields.style.display = 'none'; // Usa none para ocultar
+                especialidadSelector.removeAttribute('required');
+                fotoEvidenciaInput.removeAttribute('required');
                 
-                // Opcional: limpiar selecciones y previews
+                // Limpieza de campos del Técnico para evitar enviar datos basura con el Cliente
+                if (otraEspecialidadInput) otraEspecialidadInput.value = '';
+                if (evidenciaPreview) evidenciaPreview.src = 'Assets/imagenes/perfil/fotodefault.webp'; 
+                if (evidenciaLabelSpan) evidenciaLabelSpan.textContent = 'Ningún archivo seleccionado';
+                if (fotoEvidenciaInput) fotoEvidenciaInput.value = '';
+                
+                // Limpiar la vista y selecciones del Select2
+                if (typeof jQuery !== 'undefined' && $('#especialidad_selector').data('select2')) {
+                    $('#especialidad_selector').val(null).trigger('change');
+                }
                 selectedEspecialidades.clear();
-                updateEspecialidadesView();
-                // Limpiar preview de evidencia si el usuario cambia a Cliente
-                evidenciaPreview.src = 'Assets/imagenes/perfil/fotodefault.webp'; 
-                evidenciaLabelSpan.textContent = 'Ningún archivo seleccionado';
-                evidenciaInput.value = ''; // Limpiar el archivo seleccionado
+                if (especialidadesTagsContainer) especialidadesTagsContainer.innerHTML = '';
             }
         });
     });
 
-
-    $('#especialidad_selector').select2({
-        // ACORTAR ESTE TEXTO si es demasiado largo
-        placeholder: "Selecciona especialidades", 
-        allowClear: true 
-    });
-
     // ----------------------------------------------------
-    // Lógica para la selección de especialidades como tags (etiquetas)
+    // Lógica de Select2 y Tags
     // ----------------------------------------------------
-
-    especialidadSelector.addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        const id = selectedOption.value;
-        const nombre = selectedOption.textContent;
-
-        if (id && !selectedEspecialidades.has(id)) {
-            selectedEspecialidades.set(id, nombre);
-            updateEspecialidadesView();
-        }
-        // Restablece el selector para permitir seleccionar de nuevo la misma opción si se desea
-        this.value = ""; 
-    });
-
-    // Función para actualizar el HTML de las tags y el input oculto
-    // Asumiendo que esta es la función que maneja la vista de especialidades
-    function updateEspecialidadesView(selectedRolId) {
-        const tecnicoFields = document.getElementById('tecnico-fields');
-        const especialidadSelector = document.getElementById('especialidad_selector');
-        const fotoEvidencia = document.getElementById('foto_evidencia');
-        
-        // Asumimos que ROL_TECNICO es 1
-        const ROL_TECNICO = '1'; 
-
-        if (selectedRolId === ROL_TECNICO) {
-            // 1. Mostrar campos de Técnico
-            if (tecnicoFields) tecnicoFields.classList.remove('hidden-fields');
-            
-            // 2. Aplicar 'required'
-            if (especialidadSelector) especialidadSelector.required = true;
-            if (fotoEvidencia) fotoEvidencia.required = true;
-            
-        } else {
-            // 1. Ocultar campos de Técnico
-            if (tecnicoFields) tecnicoFields.classList.add('hidden-fields');
-            
-            // 2. Remover 'required' y limpiar
-            if (especialidadSelector) {
-                especialidadSelector.required = false;
-                // Deseleccionar todas las opciones si usa Select2
-                // Usar jQuery si estás usando Select2: $('#especialidad_selector').val(null).trigger('change');
-                // Si solo es HTML:
-                for (let i = 0; i < especialidadSelector.options.length; i++) {
-                    especialidadSelector.options[i].selected = false;
-                }
-            }
-            
-            if (fotoEvidencia) {
-                fotoEvidencia.required = false;
-                // Limpiar el campo de archivo (estableciendo su valor a null)
-                fotoEvidencia.value = null; 
-            }
-            
-            // 3. Limpiar el texto de 'Otra Especialidad'
-            const otraEspecialidad = document.getElementById('otra_especialidad');
-            if (otraEspecialidad) otraEspecialidad.value = '';
-            
-            // 4. Limpiar la vista de tags (si la tienes implementada)
-            const especialidadesTags = document.getElementById('especialidades_tags');
-            if (especialidadesTags) especialidadesTags.innerHTML = ''; 
-        }
-        
-        // Asegúrate de que esta línea exista y sea la que lanza el error:
-        // La línea 96 probablemente es la que actualiza el campo oculto #rol
-        const rolInput = document.getElementById('rol');
-        if (rolInput) {
-            rolInput.value = selectedRolId; // Línea que debe ser segura
-        }
+    if (typeof jQuery !== 'undefined') {
+        $('#especialidad_selector').select2({
+            placeholder: "Selecciona especialidades", 
+            allowClear: true 
+        });
     }
 
-    // Lógica para el nombre del archivo de perfil (para el input de perfil)
+    // El resto de tu lógica de especialidadesTags, actualización de vista, y foto de perfil.
+    // ... (El código aquí abajo debería ser el resto de tu segundo bloque) ...
+
+    // Lógica para la selección de especialidades como tags (etiquetas)
+    especialidadSelector.addEventListener('change', function() {
+        // ... tu lógica de manejo de tags ...
+    });
+
+    // Lógica para el nombre del archivo de perfil
     const perfilInput = document.getElementById('foto_perfil');
     const perfilLabelSpan = document.querySelector('.nombre-archivo-seleccionado');
 
@@ -137,6 +87,40 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 perfilLabelSpan.textContent = 'Ningúna Foto seleccionada';
             }
+        });
+    }
+
+    if (rolInput.value === '') {
+        tecnicoFields.classList.add('hidden-fields');
+        tecnicoFields.style.display = 'none';
+    }
+
+    const form = document.querySelector('form'); // Asume que solo hay un formulario en la página
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            // Verifica si el campo de rol está vacío o es 0
+            if (rolInput.value === '' || rolInput.value === '0') {
+                
+                // Intenta encontrar la opción seleccionada (solo por si acaso la variable rolInput.value falló)
+                const selectedOption = document.querySelector('.rol-option.active');
+                
+                if (selectedOption) {
+                    // Si se encontró una opción activa, fuerza su valor al input oculto
+                    rolInput.value = selectedOption.dataset.value;
+                    
+                    // Doble verificación: si es Cliente, fuerza el 2
+                    if (rolInput.value !== ROL_TECNICO_ID) {
+                        rolInput.value = '2'; // Forzar a '2' si no es Técnico
+                    }
+                } else {
+                    // Si no hay rol seleccionado, cancela el envío del formulario
+                    event.preventDefault(); 
+                    alert("Por favor, selecciona si eres Técnico o Cliente.");
+                    return false; // Evita el envío
+                }
+            }
+            // Si rolInput.value ya tiene '1' o '2', el formulario continúa.
         });
     }
 });
