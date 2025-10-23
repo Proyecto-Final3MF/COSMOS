@@ -238,7 +238,7 @@ class Solicitud {
 
     public function cancelarS($id_soli) {
         $id_soli = (int)$id_soli;
-        $sql = "UPDATE solicitud SET tecnico_id = NULL, estado_id = 6 WHERE id = ?";
+        $sql = "UPDATE solicitud SET tecnico_id = NULL, estado_id = 1 WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             error_log("Error al preparar la cancelación de la solicitud: " . $this->conn->error);
