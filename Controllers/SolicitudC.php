@@ -117,15 +117,28 @@ class SolicitudC {
     public function borrarS() {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
+
+        $datosSolicitud = $solicitud->obtenerSolicitudPorId($id);
+        if (!$datosSolicitud) {
+            $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
+            $_SESSION['tipo_mensaje'] = "error";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
         $solicitud->borrarS($id);
         if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
             $_SESSION['tipo_mensaje'] = "success";
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "eliminó la solicitud", $datosSolicitud['titulo'], $datosSolicitud['id'], null);
             header("Location: index.php?accion=redireccion");
+            exit();
         } else {
             $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
             $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
+            exit();
         }
     }
 
@@ -255,15 +268,20 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
 
         // REGISTRAR CAMBIO DE ESTADO
+            $obs = "";
             if ($estadoAntiguo !== $estado_id) {
                 // Se usa $nuevoEstado['nombre'] que viene de la nueva función
                 $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']); 
                 $this->historiaC->registrarEvento($id, $evento);
+                $obs .=$evento.". ‎ ";
             }
 
             if ($descAntigua !== $descripcion) {
                 $this->historiaC->registrarEvento($id, "Descripción modificada");
+                $obs .= "Desc: '$descAntigua' ⟶ '$descripcion'.";
             }
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Editó la solicitud", $datosSolicitud['titulo'], $id, $obs);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
