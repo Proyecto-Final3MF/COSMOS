@@ -20,6 +20,10 @@ $notificaciones = $notifC->listarNoLeidas();
                 <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
             </a>
 
+            <button id="togglethemeBtn" class="btn-modo" title="Cambiar tema">
+            <i class="fa-solid fa-moon"></i>
+            </button>
+
             <ul class="nav-links" id="nav-links">
                 <li>
                     <a href="inicio.php">
@@ -39,10 +43,6 @@ $notificaciones = $notifC->listarNoLeidas();
         </div>
 
         <div class="navbar-right">
-
-                     <button id="togglethemeBtn" class="btn-modo" title="Cambiar tema">
-                    <i class="fa-solid fa-moon"></i>
-                    </button>
 
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <div class="action-buttons">
