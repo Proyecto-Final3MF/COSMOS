@@ -61,7 +61,7 @@ require_once ("./Views/include/UH.php");
         </td>
         <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
-        <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
+        <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
         <td>
           <div class="btn-group-actions">
             <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="icon-btn aceptar" >  
