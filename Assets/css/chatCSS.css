@@ -18,6 +18,8 @@
   overflow-y: auto;
   background: #f9f9f9;
   scroll-behavior: smooth;
+  border: 2px solid #1b1b1b;
+  border-radius: 10px;
 }
 
 .chat-box .mensaje {
@@ -105,9 +107,9 @@
     gap: 6px;
     padding: 8px 14px;
     background-color: transparent;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: var(--border-radius);
+    color: #e83e8c;
+    border: 1px solid #e83e8c;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -115,7 +117,7 @@
 
 .btn-volver:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: #972f5f;
     transform: scale(1.08);
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
@@ -311,4 +313,44 @@
   .registro-container th {
     font-size: 13px;
   }
+}
+
+.chat-input {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 12px 15px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  gap: 10px; 
+}
+
+.chat-input input[type="text"] {
+  width: 70%; 
+  max-width: 500px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.chat-input input[type="text"]:focus {
+  border-color: #e83e8c;
+  box-shadow: 0 0 5px rgba(232, 62, 140, 0.4);
+}
+
+.chat-input button {
+  background: #e83e8c;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.chat-input button:hover {
+  background: #972f5f;
 }
