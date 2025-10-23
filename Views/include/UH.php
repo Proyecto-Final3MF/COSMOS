@@ -1,31 +1,40 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
 
 $notifC = new NotificacionC();
 $notificaciones = $notifC->listarNoLeidas();
+
 ?>
 
 <header>
+    
     <link rel="stylesheet" href="./Assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="inicio.php" class="logo-link">
+            <a href="inicio.php" class="logo-link" title="Inicio">
                 <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
             </a>
+
+            <button id="togglethemeBtn" class="btn-modo" title="Cambiar tema">
+            <i class="fa-solid fa-moon"></i>
+            </button>
 
             <ul class="nav-links" id="nav-links">
                 <li>
                     <a href="inicio.php">
-                        <img src="Assets/imagenes/25694.png" alt="Inicio" class="icono-menu"> Inicio
+                       <i class="fa fa-home"></i> Inicio
                     </a>
                 </li>
 
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <li>
                         <a href="Index.php?accion=redireccion">
-                            <img src="Assets/imagenes/unidad.png" alt="Mi Unidad" class="icono-menu"> Mi Unidad
+                            <i class="fa fa-tools"></i> Mi Unidad
                         </a>
                     </li>
 
@@ -34,14 +43,17 @@ $notificaciones = $notifC->listarNoLeidas();
         </div>
 
         <div class="navbar-right">
+
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <div class="action-buttons">
+
                     <a href="Index.php?accion=login">
                         <button class="btn btn-boton">Iniciar sesión</button>
                     </a>
                     <a href="Index.php?accion=register">
                         <button class="btn btn-boton">Registrarse</button>
                     </a>
+
                 </div>
 
             <?php else: ?>
@@ -135,15 +147,15 @@ $notificaciones = $notifC->listarNoLeidas();
                             </div>
 
                             <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                                <img src="Assets/imagenes/4277132-removebg-preview.png" alt="EditarCuenta" class="icono-menu"> Editar Perfil
+                                <i class="fa fa-edit"></i> Editar Perfil
                             </a>
 
                             <a href="index.php?accion=listarConversaciones" class="dropdown-item">
-                                <img src="Assets/imagenes/99691-removebg-preview.png" alt="MisConversaciones" class="icono-menu"> Mis Conversaciones
+                                <i class="fa fa-comments"></i> Mis Conversaciones
                             </a>
 
                             <a href="Index.php?accion=logout" class="dropdown-item">
-                                <img src="Assets/imagenes/cerrarlasesion.png" alt="CerrarSesion" class="icono-menu"> Cerrar Sesión
+                                <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
                             </a>
                         </div>
                     </div>
@@ -153,3 +165,5 @@ $notificaciones = $notifC->listarNoLeidas();
     </nav>
 </header>
 <script src="Assets/js/menudeusuario.js"></script>
+<script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/modoOscuro.js"></script>

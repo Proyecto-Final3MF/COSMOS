@@ -20,8 +20,8 @@ require_once ("./Views/include/UH.php");
     </div>
 
     <br>
-    <h2 class="tiempo">Linea del Tiempo</h2>
-    <div class="container4">
+    <h2 class="tiempo fade-slide">Linea del Tiempo</h2>
+    <div class="container4 fade-slide">
     <?php foreach ($resultados as $evento): ?>
     <div class="list-item">
     <p class="linea"> <?php echo $evento['evento']. " (". date('H:i:s d/m/Y', strtotime($evento['fecha_hora'])). ")"; ?>

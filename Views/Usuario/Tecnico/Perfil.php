@@ -9,6 +9,13 @@
 </head>
 <body>
 <link rel="stylesheet" href="Assets/css/main.css">
+
+<div class="btn-volver-container fade-slide">
+    <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+</button>
+</div>
+
 <div class="profile-info fade-slide">
     <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
     <div class="profile-details">
@@ -25,6 +32,9 @@ foreach ($ReviewsTecnico as $review):
     $i++;
 ?>
 <div class="reviews list-item">
+<?php
+echo $review['cliente']. "<br>"; 
+?>
 <fieldset class="rate ratings-list" id="static-rating-<?= $i ?>">
     <input disabled type="radio" id="rating10-<?= $i ?>" name="rating-<?= $i ?>" value="10" <?= ($review['rating']*2 == 10) ? 'checked' : '' ?> /><label for="rating10-<?= $i ?>" title="5 stars"></label>
     <input disabled type="radio" id="rating9-<?= $i ?>" name="rating-<?= $i ?>" value="9" <?= ($review['rating']*2 == 9) ? 'checked' : '' ?> /><label class="half" for="rating9-<?= $i ?>" title="4 1/2 stars"></label>
@@ -38,12 +48,15 @@ foreach ($ReviewsTecnico as $review):
     <input disabled type="radio" id="rating1-<?= $i ?>" name="rating-<?= $i ?>" value="1" <?= ($review['rating']*2 == 1) ? 'checked' : '' ?> /><label class="half" for="rating1-<?= $i ?>" title="1/2 star"></label>
 </fieldset>
 
-<?php 
-echo $review['cliente']. "<br>"; 
-echo $review['comentario']." ".date('d/m/Y', strtotime($review['fecha_creacion']));
+<?php
+echo '<div class="comentario">'.htmlspecialchars($review['comentario']).'</div>';
+echo '<div class="fecha-review">';
+echo '<span class="fecha-creacion">📅 '.date('d/m/Y', strtotime($review['fecha_creacion'])).'</span>';
 if ($review['fecha_edicion']) {
-echo " Editado en: ".date('d/m/Y', strtotime($review['fecha_edicion']));
-}  ?>
+    echo '<span class="fecha-edicion"> (Editado: '.date('d/m/Y', strtotime($review['fecha_edicion'])).')</span>';
+}
+echo '</div>';
+?>
 </div>
 <?php endforeach; ?>
 <script src="Assets/js/trancicion.js"></script>
