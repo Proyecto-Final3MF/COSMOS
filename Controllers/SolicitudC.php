@@ -2,14 +2,17 @@
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/solicitud_historiaC.php');
 require_once ("./Views/include/popup.php");
+require_once("Controllers/HistorialC.php");
 
 class SolicitudC {
     private $solicitudModel;
     private $historiaC;
+    private $historialController;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
+        $this->historialController = new HistorialController();
     }
 
     public function formularioS(){ 
@@ -48,6 +51,7 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+            $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
