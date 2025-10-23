@@ -329,8 +329,10 @@ class SolicitudC {
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
-            //$this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
-            
+
+            $this->historiaC->registrarEvento($id_soli, "Solicitud cancelada");
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "canceló la solicitud", $solicitud['titulo'], $id_soli, null);
+
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);
             define('ROL_CLIENTE', 2);
