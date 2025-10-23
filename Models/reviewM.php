@@ -66,7 +66,7 @@ class Review {
         return true;
     }
 
-    public function YaAvaliado($id) {
+    public function YaCalificado($id) {
         $sql = "SELECT * FROM reviews WHERE id_solicitud = ?";
         $stmt = $this->conn->prepare($sql);
         
