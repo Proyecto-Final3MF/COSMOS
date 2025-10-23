@@ -68,12 +68,12 @@ require_once ("./Views/include/UH.php");
                 <br><br>
                 
                 <p class="fade-label">Evidencia Técnica (Preferiblemente certificación)</p>
-                <img id="preview-evidencia" class="foto-evidencia">
+                <img id="preview-evidencia" class="foto-evidencia" src="./Assets/imagenes/sincargas4.png">
 
                 <div class="input-archivo">
-                    <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
-                    <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
-                    <span class="nombre-archivo-seleccionado-evidencia">Ningún archivo seleccionado</span>
+                <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
+                <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
+                <span class="nombre-archivo-seleccionado-evidencia">Ningún archivo seleccionado</span>
                 </div>
                 <br>
             </div>

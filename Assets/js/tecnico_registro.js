@@ -140,3 +140,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputEvidencia = document.getElementById('foto_evidencia');
+    const nombreArchivoEvidencia = document.querySelector('.nombre-archivo-seleccionado-evidencia');
+    const previewEvidencia = document.getElementById('preview-evidencia');
+
+    if (inputEvidencia) {
+        inputEvidencia.addEventListener('change', function() {
+            const archivo = this.files[0];
+
+            if (archivo) {
+                nombreArchivoEvidencia.textContent = archivo.name;
+
+                const lector = new FileReader();
+                lector.onload = function(e) {
+                    previewEvidencia.src = e.target.result;
+                };
+                lector.readAsDataURL(archivo);
+            } else {
+                nombreArchivoEvidencia.textContent = 'Ningún archivo seleccionado';
+                previewEvidencia.src = './Assets/imagenes/sincargas4.png';
+            }
+        });
+    }
+});
