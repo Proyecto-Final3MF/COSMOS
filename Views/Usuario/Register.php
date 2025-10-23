@@ -33,14 +33,14 @@ require_once ("./Views/include/UH.php");
              <p class="fade-label">¿Eres Un?</p>
 
             <div class="rol-container">
-            <?php foreach ($roles as $rol): ?>
-            <div class="rol-option" data-value="<?= $rol['id'] ?>">
-            <?= htmlspecialchars($rol['nombre']) ?>
-            </div>
-            <?php endforeach; ?>
+                <?php foreach ($roles as $rol): ?>
+                <div class="rol-option" data-value="<?= $rol['id'] ?>">
+                    <?= htmlspecialchars($rol['nombre']) ?>
+                </div>
+                <?php endforeach; ?>
             </div>
             <input type="hidden" id="rol" name="rol" required>  
-            
+
             <br><br>
 
             <div id="tecnico-fields" class="hidden-fields">
@@ -100,10 +100,7 @@ require_once ("./Views/include/UH.php");
     </section>
     <br>
 </div>
-<script src="Assets/js/botonrol.js"></script>
-<!-- <script src="Assets/js/fotoperfilregistro.js"></script> -->
 <script src="Assets/js/imagenformulario.js"></script>
-<script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/tecnico_registro.js"></script>
 <script src="Assets/js/vercontrasena.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 

@@ -1,30 +1,91 @@
 <?php
 class Usuario {
     private $conn;
+    private $rolId;
 
     public function __construct() {
         $this->conn = conectar();
     }
 
-    // Crear usuario
-
-    public function crearU($usuario, $mail, $rol_id, $contrasena, $ruta_evidencia = null, $otra_especialidad = null) {
-        $ROL_TECNICO_ID = '1';
-        $estado_verificacion = ($rol_id == $ROL_TECNICO_ID) ? 'pendiente' : 'aprobado';
+    // En la clase Usuario (UsuarioM.php)
+    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $ruta_evidencia, $otra_especialidad) {
+        $estado_verificacion = 'pendiente'; // Específico para Técnicos
+        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
-        $usuario = $this->conn->real_escape_string($usuario);
-        $mail = $this->conn->real_escape_string($mail);
-        $contrasena = $this->conn->real_escape_string($contrasena);
-        
-        $ruta_evidencia_escaped = $ruta_evidencia ? "'" . $this->conn->real_escape_string($ruta_evidencia) . "'" : 'NULL';
-        $otra_especialidad_escaped = $otra_especialidad ? "'" . $this->conn->real_escape_string($otra_especialidad) . "'" : 'NULL';
-        $estado_verificacion_escaped = "'" . $estado_verificacion . "'";
-        $foto_perfil_default = "'Assets/imagenes/perfil/fotodefault.webp'"; 
-
         $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
-                VALUES ('$usuario', '$contrasena', '$mail', '$rol_id', $ruta_evidencia_escaped, $otra_especialidad_escaped, $foto_perfil_default, $estado_verificacion_escaped)";
-                
-        return $this->conn->query($sql);
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error (crearT): " . $this->conn->error);
+            return false;
+        }
+
+        // Tipos de parámetros: s s s i s s s s
+        $stmt->bind_param("sssissss", 
+            $usuario, 
+            $contrasena_hash, // Usar el hash
+            $mail, 
+            $rol_id,
+            $ruta_evidencia, 
+            $otra_especialidad, 
+            $foto_perfil_default, 
+            $estado_verificacion
+        );
+        
+        $success = $stmt->execute();
+        
+        if (!$success) {
+            error_log("MySQLi Execute Error (crearT): " . $stmt->error);
+        }
+        
+        $stmt->close();
+        return $success;
+    }
+
+    public function crearC($usuario, $mail, $rol_id, $contrasena_hash) {
+        $estado_verificacion = 'aprobado'; 
+        $ruta_evidencia = null; 
+        $otra_especialidad = null; 
+        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
+        
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            // 🛑 PUNTO DE FALLO 1: Error al preparar la consulta
+            // Esto indica un problema con la sintaxis SQL, nombre de tabla/columna, o la conexión.
+            die("❌ ERROR AL PREPARAR LA CONSULTA (PREPARE): " . $this->conn->error . " | SQL: " . $sql);
+            // Quita la línea 'die' una vez resuelto el problema.
+            return false;
+        }
+
+        // Tipos de parámetros: s s s i s s s s
+        $stmt->bind_param("sssissss", 
+            $usuario, 
+            $contrasena_hash, 
+            $mail, 
+            $rol_id, 
+            $ruta_evidencia, 
+            $otra_especialidad, 
+            $foto_perfil_default, 
+            $estado_verificacion
+        );
+        
+        $success = $stmt->execute();
+        
+        if (!$success) {
+            // 🛑 PUNTO DE FALLO 2: Error al ejecutar la consulta
+            // Esto indica una violación de restricción (ej. 'email' duplicado, 'rol_id' inválido, longitud de datos).
+            die("❌ ERROR AL EJECUTAR LA CONSULTA (EXECUTE): " . $stmt->error);
+            // Quita la línea 'die' una vez resuelto el problema.
+        }
+        
+        $stmt->close();
+        return $success;
     }
 
     // Especializaciones
@@ -102,6 +163,14 @@ class Usuario {
     }
 
     // Roles
+
+    public function setRolId($rolId) {
+        $this->rolId = $rolId;
+    }
+
+    public function getRolId() {
+        return $this->rolId;
+    }
     
     public function obtenerRol() {
         $sql = "SELECT * FROM rol WHERE id < 3";
