@@ -844,10 +844,15 @@ tbody tr:hover {
 
 .historial-panel .list-item p {
     text-align: left;
-    max-width: fit-content; 
+
+    text-align: left;
+    max-width: 100%;
     margin: 0;
     padding: 0 5px;
-    white-space: nowrap; 
+    white-space: normal;      
+    word-wrap: break-word;    
+    overflow-wrap: break-word;
+    line-height: 1.4; 
 }
 
 .admin-panel-column .table {
