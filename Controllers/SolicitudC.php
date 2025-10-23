@@ -59,7 +59,7 @@ class SolicitudC {
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
             }
             
-            header("Location: index.php?accion=ListarSLU");
+            header("Location: index.php?accion=listarSLU");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
             $_SESSION['tipo_mensaje'] = "error";
