@@ -10,6 +10,13 @@ if ($_SESSION['rol'] != 3) {
     <title>Verificación de Técnicos</title>
 
 <body>
+
+    <div class="btn-volver-container fade-slide">
+    <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+    </button>
+    </div>
+
     <br>
 
         <h1 class="titulo-admin">Solicitudes de Verificación de Técnicos</h1>
@@ -38,7 +45,7 @@ if ($_SESSION['rol'] != 3) {
                             <td>
                                 <img src="<?= htmlspecialchars($tecnico['evidencia_tecnica_ruta']) ?>" 
                                      alt="Evidencia" 
-                                     class="evidencia-img"
+                                     class="evidencia-img zoom-img"
                                      onclick="mostrarEvidencia('<?= htmlspecialchars($tecnico['evidencia_tecnica_ruta']) ?>')">
                             </td>
                             <td>
@@ -62,10 +69,16 @@ if ($_SESSION['rol'] != 3) {
     <div id="modalEvidencia" class="modal-evidencia">
         <div class="modal-content">
             <span class="close-btn" onclick="cerrarEvidencia()">&times;</span>
-            <img id="imgEvidenciaAmpliada" src="" alt="Evidencia Ampliada">
         </div>
     </div>
 
+    <div id="imageModal" class="image-modal">
+        <span class="close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
     <script src="Assets/js/verificar_tecnicos.js"></script>
+    <script src="Assets/js/botonvolver.js"></script>
+    <script src="Assets/js/zoomimagen.js"></script>
 </body>
 </html>

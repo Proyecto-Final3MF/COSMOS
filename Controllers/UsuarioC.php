@@ -63,8 +63,7 @@ public function guardarU() {
         $ROL_TECNICO_ID = 1; // ID fijo para el rol de Técnico
         $success = false; 
 
-        // 1. Validaciones de Contraseña
-        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '') {
+        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: index.php?accion=register");

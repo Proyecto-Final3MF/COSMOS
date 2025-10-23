@@ -28,7 +28,7 @@ require_once ("./Views/include/UH.php");
 
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
-            <input type="email" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
+            <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
                         
              <p class="fade-label">¿Eres Un?</p>
 
@@ -68,18 +68,30 @@ require_once ("./Views/include/UH.php");
                 <br><br>
                 
                 <p class="fade-label">Evidencia Técnica (Preferiblemente certificación)</p>
-                <img id="preview-evidencia" class="foto-evidencia">
+                <img id="preview-evidencia" class="foto-evidencia" src="./Assets/imagenes/sincargas4.png">
 
                 <div class="input-archivo">
-                    <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
-                    <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
-                    <span class="nombre-archivo-seleccionado-evidencia">Ningún archivo seleccionado</span>
+                <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
+                <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
+                <span class="nombre-archivo-seleccionado-evidencia">Ningún archivo seleccionado</span>
                 </div>
                 <br>
             </div>
             
             <p class="fade-label">Contraseña</p>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" placeholder="minimo 8 caracteres" required> <br><br>
+            <div class="password-container">
+            <input type="password" class="form-control" id="contrasena" name="contrasena" minlength="8" placeholder="mínimo 8 caracteres" required>
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('contrasena', this)"></i>
+            </div>
+            <br>
+
+            <p class="fade-label">Confirmar Contraseña</p>
+            <div class="password-container">
+            <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena" minlength="8" required>
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirmar_contrasena', this)"></i>
+            </div>
+            <p id="error-password" class="error-text"></p>
+            <br>
 
             <input class="button" type="submit" value="Guardar">
             <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>
@@ -90,6 +102,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/tecnico_registro.js"></script>
+<script src="Assets/js/vercontrasena.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
