@@ -39,6 +39,13 @@ class ProductoC {
             exit();
         }
 
+        if ($categoria_id === null || $categoria_id === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error: Producto sin categoria.";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
         $nombreArchivo = $_FILES['imagen']['name'];
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
 
@@ -74,7 +81,7 @@ class ProductoC {
                     $id,
                     $obs
                 );
-                header("Location: index.php?accion=redireccion");
+                header("Location: index.php?accion=formularioP");
                 exit();
             } else {
                 $_SESSION['tipo_mensaje'] = "warning";
@@ -162,6 +169,13 @@ class ProductoC {
             exit();
         }
 
+        if ($categoria_id === null || $categoria_id === '') {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error: Producto sin categoria.";
+            header("Location: index.php?accion=formularioP");
+            exit();
+        }
+
         if (!empty($_FILES['imagen']['name'])) {
             $nombreArchivo = $_FILES['imagen']['name'];
             $rutaTemporal = $_FILES['imagen']['tmp_name'];
@@ -209,18 +223,15 @@ class ProductoC {
             if ($nombre == $nombreAntiguo && $id_catAntiguo == $categoria_id) {
                 $obs = "Ningun cambio detectado";
             } else {
+                $obs = "";
                 if ($nombre !== $nombreAntiguo) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ---> ".$nombre." ‎ ";
-                    $obs = $obs1;
+                    $obs1 = "Nombre: ".$nombreAntiguo." ⟶ ".$nombre." ‎ ";
+                    $obs .= $obs1;
                 }
 
                 if ($id_catAntiguo !== $categoria_id) {
-                    $obs2 = "Categoria: ".$categoriaAntigua. " ---> ".$nuevaCat;
-                    $obs = $obs2;
-                }
-
-                if ($nombre !== $nombreAntiguo && $id_catAntiguo !== $categoria_id) {
-                    $obs = $obs1.$obs2;
+                    $obs2 = "Categoria: ".$categoriaAntigua. " ⟶ ".$nuevaCat;
+                    $obs .= $obs2;
                 }
             }
 
@@ -305,12 +316,10 @@ class ProductoC {
                 header("Location: index.php?accion=urgenteS");
                 exit();
             } else {
-                $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error al crear el producto.";
                 $_SESSION['tipo_mensaje'] = "error";
             }
         } else {
-            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al subir la imagen.";
             $_SESSION['tipo_mensaje'] = "error";
         }

@@ -15,7 +15,7 @@ require_once("Controllers/NotificacionC.php");
 
 $accion = $_GET['accion'] ?? 'index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'espera'];
 
 if (!in_array($accion, $acciones_publicas)) {
   if (!isset($_SESSION['usuario'])) {
@@ -90,6 +90,11 @@ switch ($accion) {
   case 'logout':
     $controller = new UsuarioC();
     $controller->logout();
+  break;
+
+  case 'espera':
+    $controller = new UsuarioC();
+    $controller->espera();
   break;
 
   case 'editarSF':
@@ -341,6 +346,31 @@ switch ($accion) {
     break;
 
   //accion default
+
+  case 'panelA':
+    // Esta acción debe redirigir a la vista del panel de administración
+    if ($_SESSION['rol'] == ROL_ADMIN) {
+        // Asumiendo que hay una vista principal para el admin
+        include("./Views/Usuario/Admin/PanelA.php"); 
+    } else {
+        header("Location: index.php?accion=redireccion");
+    }
+    break;
+
+case 'verificarTecnicos':
+    $controller = new UsuarioC();
+    $controller->verificarTecnicos(); // Llama a la función del controlador
+    break;
+
+case 'aprobarTecnico':
+    $controller = new UsuarioC();
+    $controller->aprobarTecnico(); // Llama a la función del controlador
+    break;
+
+case 'rechazarTecnico':
+    $controller = new UsuarioC();
+    $controller->rechazarTecnico(); // Llama a la función del controlador
+    break;
 
   default:
     if (!isset($_SESSION['usuario'])) {

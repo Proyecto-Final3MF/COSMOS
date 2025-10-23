@@ -128,7 +128,7 @@
   width: 100%;
   max-width: 700px;
   margin: 100px auto;
-  background: #fff;
+  background: var(--color-fondo-formulario);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 20px;

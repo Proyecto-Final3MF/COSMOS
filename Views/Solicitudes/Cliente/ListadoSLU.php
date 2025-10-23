@@ -19,7 +19,8 @@ require_once ("./Views/include/UH.php");
 </div>
 <br>
     <div>
-    <h2 class="fade-slide" >Solicitudes no asignadas</h2>
+    <h2 class="fade-slide">Solicitudes Recien Creadas</h2>
+    <p class="fade-slide">Aqui se mostraran todas tus solicitudes que ningun tecnico a aceptado todavia</p>
     <div class="botones-container fade-slide">
     <a href="index.php?accion=formularioS"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
@@ -64,7 +65,7 @@ require_once ("./Views/include/UH.php");
     } else {
         ?>
         <tr>
-            <td colspan="6">No hay solicitudes creadas todavia</td>
+            <td colspan="6">No hay solicitudes recien creadas</td>
         </tr>
         <?php
     }

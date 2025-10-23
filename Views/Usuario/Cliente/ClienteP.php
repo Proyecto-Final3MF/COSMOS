@@ -45,13 +45,13 @@ require_once ("./Views/include/UH.php");
 
     <a href="index.php?accion=listarSLU">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> Solicitudes Sin Asignar
+            <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> Solicitudes Recien Creadas
         </button>
     </a>
 
     <a href="index.php?accion=listarSA">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-check btn-aceptadas"></i> Solicitudes Aceptadas
+            <i class="fa-solid fa-check btn-aceptadas"></i> Solicitudes que aceptaron
         </button>
     </a>
 

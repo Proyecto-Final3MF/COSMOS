@@ -27,7 +27,7 @@ require_once("./Views/include/UH.php");
 
 <form action="index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
-    <input type="text" id="search" name="search" placeholder="Buscar Usuario" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+    <input type="text" id="search" name="search" placeholder="Buscar Usuario" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>" class="milanesa">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarU">
     <select name="orden" id="orden">
@@ -79,7 +79,7 @@ require_once("./Views/include/UH.php");
                             <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                            <a href="index.php?accion=borrarU&id=<?= $u['id'] ?>" class="icon-btn delete">
+                            <a href="index.php?accion=eliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
                             <i class="fa fa-trash"></i></a>
                             <?php endif; ?>
                         </div>
