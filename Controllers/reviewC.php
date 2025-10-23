@@ -28,8 +28,8 @@ class ReviewC {
             exit();
         }
 
-        $YaExiste = $this->ReviewModel->YaAvaliado($id);
-
+        //Busca si la solicitud ya tiene calificacion
+        $YaExiste = $this->ReviewModel->YaCalificado($id);
         if ($YaExiste) {
             $rating = ($YaExiste['rating'] ?? 0) * 2; 
             $Comentario = $YaExiste['comentario'] ?? '';
@@ -53,8 +53,8 @@ class ReviewC {
 
     public function AddReview() {
         $rating = $_POST['rating'] ?? 0;
-        $rating = $rating/2;
-        $Comentario = trim($_POST['Comentario']) ?? '';
+        $rating = $rating/2; //Pasa de 1 a 10 para 0.5 a 5
+        $Comentario = trim($_POST['Comentario']) ?? ''; //Saca espacio al inicio y final del comentario
         $id_tecnico = $_POST['id_tecnico'];
         $id_cliente = $_SESSION['id'];
         $id_solicitud = $_POST['id_solicitud'] ?? null;
@@ -74,6 +74,7 @@ class ReviewC {
             exit();
         }
         
+        //Agarra la cantidad de reviews q tiene el tecnico
         $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
         if ($HayReview === null) {
             $_SESSION['tipo_mensaje'] = "error";
@@ -82,6 +83,7 @@ class ReviewC {
             exit();
         }
         
+        //Agarra el promedio del tecnico
         $HayPromedio = $this->ReviewModel->agarrarPromedio($id_tecnico);
         if ($HayPromedio === null) {
             $_SESSION['tipo_mensaje'] = "error";
@@ -90,6 +92,7 @@ class ReviewC {
             exit(); 
         }
 
+        //Agarra la suma de todas las calificacciones del tecnico
         $HaySuma = $this->ReviewModel->agarrarSuma($id_tecnico);
         if ($HaySuma === null) {
             $_SESSION['tipo_mensaje'] = "error";
@@ -102,11 +105,13 @@ class ReviewC {
         $ratingPromedio = $HayPromedio;
         $CantReview = $HayReview;
 
-        $YaExiste = $this->ReviewModel->YaAvaliado($id_solicitud);
+        //Si la review ya fue hecha en lugar de crear el cliente va editarla.
+        $YaExiste = $this->ReviewModel->YaCalificado($id_solicitud);
         if ($YaExiste) {
             $ratingAntiguo = $YaExiste['rating'];
             $ComentarioAntiguo = $YaExiste['comentario'];
 
+            //Calculos
             $suma_rating = ((($suma_rating) - $ratingAntiguo) + $rating);
             $ratingPromedio =  $suma_rating / $CantReview;
             $ratingPromedio = round($ratingPromedio * 2) / 2;
@@ -115,6 +120,7 @@ class ReviewC {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
 
+            //Detecta q cambio para registrar en el historial
             if ($Comentario == $ComentarioAntiguo && $ratingAntiguo == $rating) {
                 $obs = "Ningun cambio detectado";
             } else {
@@ -133,12 +139,13 @@ class ReviewC {
             }
             $evento = "La calificación fue cambiada para ".$rating."★";
             $this->historiaC->registrarEvento($id_solicitud, $evento);
-            $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $evento);
+            $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $obs);
 
             header("Location:index.php?accion=listarST");
             exit();
         }
 
+        //Calcula todos los valores para la base de datos
         $suma_rating = $suma_rating + $rating;
         $ratingPromedio = $suma_rating/($CantReview + 1);
         $CantReview += 1;
@@ -147,6 +154,7 @@ class ReviewC {
         $ratingPromedio = max(0.5, min(5, $ratingPromedio));
         $this->ReviewModel->AddReview($suma_rating, $CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
 
+        //Cosas del historial
         $evento = "La Solicitud fue calificada con ".$rating."★";
         $this->historiaC->registrarEvento($id_solicitud, $evento);
         $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "calificó la solicitud", $titulo_solicitud, $id_solicitud, $evento);
