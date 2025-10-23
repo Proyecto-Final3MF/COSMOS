@@ -29,16 +29,24 @@ require_once ("./Views/include/UH.php");
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($datosProducto['nombre']) ?>" autocomplete="off" required> <br><br>
 
         <p class="fade-label">Imagen actual:</p>
-        <img src="<?= htmlspecialchars($datosProducto['imagen']) ?>" alt="Imagen actual del producto" style="max-width:150px; max-height:150px;">
-        <br><br>
+        <div id="vista-previa-contenedor" style="margin-top: 15px;">
+    <img id="vista-previa"
+         src="<?= htmlspecialchars($datosProducto['imagen']) ?>"
+         alt="Vista previa"
+         style="max-width:150px; max-height:150px;">
+</div>
 
         <p class="fade-label">Seleccionar nueva Imagen (opcional):</p>
-        <div class="input-archivo">
-        <input type="file" id="imagen" name="imagen" accept="image/*" autocomplete="off" hidden>
-        <label for="imagen" class="btn-boton3-input">Seleccionar Foto</label>
-        <span id="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
-        </div>
-        <br><br>
+<div class="input-archivo">
+    <input type="file" id="imagen" name="imagen" accept="image/*" autocomplete="off" hidden>
+    <label for="imagen" class="btn-boton3-input">Seleccionar Foto</label>
+    <span id="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
+</div>
+
+    
+
+<br><br>
+
 
         <p class="fade-label">Categoria:</p>
         <select id="categoria" name="categoria" required>
@@ -57,5 +65,6 @@ require_once ("./Views/include/UH.php");
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
+<script src="Assets/js/vistapreviafoto.js"></script>
 </body>
 </html>
