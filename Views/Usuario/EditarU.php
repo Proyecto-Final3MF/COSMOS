@@ -71,5 +71,6 @@ require_once ("./Views/include/UH.php");
 </script>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/botonvolver.js"></script>
 </body>
 </html>

@@ -1,5 +1,12 @@
 <?php require_once ("./Views/include/UH.php"); ?>
 <link rel="stylesheet" href="./Assets/css/Main.css">
+
+<div class="btn-volver-container fade-slide">
+    <button class="btn-volver" id="btnVolver">
+    <i class="fa fa-arrow-left"></i> Volver
+</button>
+</div>
+
 <div class="contenedor-formulario">
     <section class="formularios99">    
         <h2>Review de la Solicitud <?=$titulo_solicitud?></h2>
@@ -26,4 +33,5 @@
     </section>
 </div>
 <script src="Assets/js/trancicion.js"></script>
+<script src="Assets/js/botonvolver.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
