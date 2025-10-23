@@ -81,7 +81,7 @@ class ProductoC {
                     $id,
                     $obs
                 );
-                header("Location: index.php?accion=redireccion");
+                header("Location: index.php?accion=formularioP");
                 exit();
             } else {
                 $_SESSION['tipo_mensaje'] = "warning";

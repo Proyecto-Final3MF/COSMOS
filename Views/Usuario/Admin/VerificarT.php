@@ -26,7 +26,7 @@ if ($_SESSION['rol'] != 3) {
                 No hay técnicos pendientes de verificación.
             </div>
         <?php else: ?>
-            <table class="table table-striped" style="width: 100%;">
+            <table>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -50,14 +50,14 @@ if ($_SESSION['rol'] != 3) {
                             </td>
                             <td>
                                 <a href="index.php?accion=aprobarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
-                                   class="btn-aprobar"
+                                   class="icon-btn aceptar"
                                    onclick="return confirm('¿Está seguro de APROBAR a <?= htmlspecialchars($tecnico['nombre']) ?>? Esta acción es irreversible.');">
-                                    Aprobar
+                                    <i class="fa fa-check"></i>
                                 </a>
                                 <a href="index.php?accion=rechazarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
-                                   class="btn-rechazar"
+                                   class="icon-btn delete"
                                    onclick="return confirm('¿Está seguro de RECHAZAR y ELIMINAR a <?= htmlspecialchars($tecnico['nombre']) ?>? Esta acción es irreversible.');">
-                                    Rechazar
+                                    <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>
