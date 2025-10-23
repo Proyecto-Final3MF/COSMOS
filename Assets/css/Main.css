@@ -17,6 +17,7 @@
   --text-color: #333;
   --primary-color: #e83e8c;
   --secondary-color: #f8f9fa;
+  --rosado-en-eclipse: #e83e8c;
   --color-navbar: #ffffff;
   --color-borde: #cccccc;
   --color-tabla-fondo: #ffffff;
@@ -31,6 +32,7 @@
   --color-fondo-formulario: #131313;
   --text-color: #f7f6f6;
   --primary-color: #ff70c0;
+  --rosado-en-eclipse: #f36dac;
   --secondary-color: #2c2c2c;
   --color-navbar: #383838;
   --color-borde: #444444;
@@ -392,18 +394,17 @@ body {
 .btn-boton12 {
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    color: var(--primary-color);
+    color: #fff;
+    background-color: #e83e8c;
     border: 1px solid var(--primary-color);
     margin-right: 1rem;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-boton12:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    transform: scale(1.08);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    background-color: var(--primary-hover);
+    color: white;
+    transform: scale(1.05);
 }
 
 .btn-group-actions {
@@ -1896,7 +1897,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 h3 {
-    color: #e83e8c; 
+    color: var(--rosado-en-eclipse);
     margin-bottom: 20px;
     font-size: 24px;
 }
@@ -1999,7 +2000,7 @@ label {
 }
 
 .titulo3 {
-    color: #e83e8c; 
+    color: var(--rosado-en-eclipse); 
     margin-bottom: 20px;
     font-size: 24px;
     transition: color 0.3s ease;
@@ -2353,15 +2354,15 @@ p.inicio44 {
 }
 
 .btn-boton44 {
-    background-color: transparent;
-    color: var(--primary-color);
+    color: #fff;
+    background-color: #e83e8c;
     border: 1px solid var(--primary-color);
     margin-right: 1rem;
     animation: pulse 2s infinite;
 }
 
 .btn-boton44:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-hover);
     color: white;
     transform: scale(1.05);
 }
