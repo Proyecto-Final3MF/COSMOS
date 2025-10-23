@@ -94,6 +94,7 @@ class SolicitudC {
             $_SESSION['tipo_mensaje'] = "success";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud Urgente creada");
+            $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud urgente", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
