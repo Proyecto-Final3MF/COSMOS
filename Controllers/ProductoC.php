@@ -72,14 +72,13 @@ class ProductoC {
                 $_SESSION['mensaje'] = "Producto creado exitosamente.";
                 $_SESSION['tipo_mensaje'] = "success";
 
-                $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
                     $usuarioNombre,
                     $id_usuario,
                     'guardó el producto',
                     $nombre,
                     $id,
-                    $obs
+                    null
                 );
                 header("Location: index.php?accion=formularioP");
                 exit();
@@ -302,14 +301,13 @@ class ProductoC {
             $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
 
             if ($id) {
-                $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
                     $usuarioNombre,
                     $id_usuario,
                     'guardó el producto de manera urgente',
                     $nombre,
                     $id,
-                    $obs
+                    null
                 );
                 header("Location: index.php?accion=urgenteS");
                 exit();
