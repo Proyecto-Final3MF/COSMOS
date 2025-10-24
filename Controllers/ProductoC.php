@@ -72,24 +72,21 @@ class ProductoC {
                 $_SESSION['mensaje'] = "Producto creado exitosamente.";
                 $_SESSION['tipo_mensaje'] = "success";
 
-                $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
                     $usuarioNombre,
                     $id_usuario,
                     'guardó el producto',
                     $nombre,
                     $id,
-                    $obs
+                    null
                 );
                 header("Location: index.php?accion=formularioP");
                 exit();
             } else {
-                $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error al crear el producto.";
                 $_SESSION['tipo_mensaje'] = "error";
             }
         } else {
-            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al subir la imagen.";
             $_SESSION['tipo_mensaje'] = "error";
         }
@@ -130,7 +127,7 @@ class ProductoC {
             $obs
         );
 
-        header("Location: index.php?accion=redireccion");
+        header("Location: index.php?accion=listarP");
     }
 
     public function editarP() {
@@ -172,7 +169,7 @@ class ProductoC {
         if ($categoria_id === null || $categoria_id === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Producto sin categoria.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: index.php?accion=editarP&id=" . $id);
             exit();
         }
 
@@ -218,7 +215,6 @@ class ProductoC {
         if ($producto->actualizarProducto($id, $nombre, $rutaFinal, $categoria_id)) {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
-            $_SESSION['tipo_mensaje'] = "success";
 
             if ($nombre == $nombreAntiguo && $id_catAntiguo == $categoria_id) {
                 $obs = "Ningun cambio detectado";
@@ -244,10 +240,9 @@ class ProductoC {
                 $obs
             );
 
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=listarP");
             exit();
         } else {
-            $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
             $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=editarP&id=" . $id);
@@ -304,14 +299,13 @@ class ProductoC {
             $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
 
             if ($id) {
-                $obs = "Producto creado";
                 $this->historialController->registrarModificacion(
                     $usuarioNombre,
                     $id_usuario,
                     'guardó el producto de manera urgente',
                     $nombre,
                     $id,
-                    $obs
+                    null
                 );
                 header("Location: index.php?accion=urgenteS");
                 exit();

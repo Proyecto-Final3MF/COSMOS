@@ -7,7 +7,6 @@ require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
 
 $notifC = new NotificacionC();
 $notificaciones = $notifC->listarNoLeidas();
-
 ?>
 
 <header>
