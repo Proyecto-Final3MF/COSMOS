@@ -2,17 +2,20 @@
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/solicitud_historiaC.php');
 require_once ("./Views/include/popup.php");
+require_once("Controllers/HistorialC.php");
 
 class SolicitudC {
     private $solicitudModel;
     private $historiaC;
+    private $historialController;
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
+        $this->historialController = new HistorialController();
     }
 
-    public function formularioS(){ 
+    public function formularioS() {
         $id_usuario = $_SESSION['id'] ?? null;
 
         if ($id_usuario == null) {
@@ -48,6 +51,7 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
+            $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -59,11 +63,11 @@ class SolicitudC {
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
             }
             
-            header("Location: index.php?accion=listarSLU");
+            header("Location: index.php?accion=formularioS");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
             $_SESSION['tipo_mensaje'] = "error";
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=formularioS");
         }
     }
 
@@ -79,7 +83,7 @@ class SolicitudC {
         if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '' || $producto === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
-            header("Location: index.php?accion=ListarSLU");
+            header("Location: index.php?accion=urgenteS");
             exit();
         }
 
@@ -90,6 +94,7 @@ class SolicitudC {
             $_SESSION['tipo_mensaje'] = "success";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud Urgente creada");
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Creo la solicitud urgente", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -105,22 +110,35 @@ class SolicitudC {
         } else {
              $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
              $_SESSION['tipo_mensaje'] = "error";
-             header("Location: index.php?accion=redireccion");
+             header("Location: index.php?accion=urgenteS");
         }
     }
 
     public function borrarS() {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
+
+        $datosSolicitud = $solicitud->obtenerSolicitudPorId($id);
+        if (!$datosSolicitud) {
+            $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
+            $_SESSION['tipo_mensaje'] = "error";
+            header("Location: index.php?accion=redireccion");
+            exit();
+        }
+
         $solicitud->borrarS($id);
-        if($solicitud){
+        if ($solicitud){
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
             $_SESSION['tipo_mensaje'] = "success";
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "eliminó la solicitud", $datosSolicitud['titulo'], $datosSolicitud['id'], null);
             header("Location: index.php?accion=redireccion");
+            exit();
         } else {
             $_SESSION['mensaje'] = "no se pudo actualizar la solicitud";
             $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=redireccion");
+            exit();
         }
     }
 
@@ -147,17 +165,17 @@ class SolicitudC {
     }
 
     public function asignarS() {
-        $id_usuario = $_SESSION['id'] ?? null;
+        $id_tecnico = $_SESSION['id'] ?? null;
         $id_soli = $_GET['id_solicitud'] ?? null;
 
-        if ($id_usuario === null || $id_soli === null) {
+        if ($id_tecnico === null || $id_soli === null) {
             $_SESSION['mensaje'] = "Error: ID de usuario o solicitud no proporcionado.";
             $_SESSION['tipo_mensaje'] = "error";
             header("Location: index.php?accion=listarTL");
             exit();
         }
         
-        $success = $this->solicitudModel->asignarS($id_usuario, $id_soli);
+        $success = $this->solicitudModel->asignarS($id_tecnico, $id_soli);
 
         if ($success) {
             $_SESSION['mensaje'] = "Solicitud aceptada exitosamente";
@@ -168,6 +186,8 @@ class SolicitudC {
 
             $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
             $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' fue aceptada por un técnico.");
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $id_tecnico, "seleccionó a la solicitud", $solicitud['titulo'], $id_soli, null);
 
             header("Location: index.php?accion=listarTL");
             exit();
@@ -248,15 +268,20 @@ class SolicitudC {
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
 
         // REGISTRAR CAMBIO DE ESTADO
+            $obs = "";
             if ($estadoAntiguo !== $estado_id) {
                 // Se usa $nuevoEstado['nombre'] que viene de la nueva función
                 $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']); 
                 $this->historiaC->registrarEvento($id, $evento);
+                $obs .=$evento.". ‎ ";
             }
 
             if ($descAntigua !== $descripcion) {
                 $this->historiaC->registrarEvento($id, "Descripción modificada");
+                $obs .= "Desc: '$descAntigua' ⟶ '$descripcion'.";
             }
+
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Editó la solicitud", $datosSolicitud['titulo'], $id, $obs);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
@@ -304,8 +329,10 @@ class SolicitudC {
          if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
-            //$this->historiaC->registrarEvento($id_solicitud, "Solicitud cancelada");
-            
+
+            $this->historiaC->registrarEvento($id_soli, "Solicitud cancelada");
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "canceló la solicitud", $solicitud['titulo'], $id_soli, null);
+
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);
             define('ROL_CLIENTE', 2);

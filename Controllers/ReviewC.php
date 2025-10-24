@@ -41,7 +41,7 @@ class ReviewC {
         if (!$datosSolicitud) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
-            header("Location: index.php?accion=redireccion");
+            header("Location: index.php?accion=listarST");
             exit();
         }
 
