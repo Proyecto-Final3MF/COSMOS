@@ -171,11 +171,12 @@ class Solicitud {
 
     public function ListarST($id_usuario){
         $id_usuario = (int)$id_usuario;
-        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
+        $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, r.rating, e.nombre AS estado_nombre,
                     u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
+                INNER JOIN reviews r ON s.id = r.id_solicitud
                 INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
                 LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
