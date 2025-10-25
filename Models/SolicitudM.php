@@ -176,7 +176,7 @@ class Solicitud {
                 FROM solicitud s
                 INNER JOIN producto p ON s.producto_id = p.id
                 INNER JOIN estado e ON s.estado_id = e.id
-                INNER JOIN reviews r ON s.id = r.id_solicitud
+                LEFT JOIN reviews r ON s.id = r.id_solicitud
                 INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
                 LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
