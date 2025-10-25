@@ -602,9 +602,7 @@ a:has(> .btn-boton4442) {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid #979797;
     color: #e83e8c;
-    background-color: var(--otros-botones);
     text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
 }
