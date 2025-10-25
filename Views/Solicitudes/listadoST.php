@@ -35,7 +35,6 @@ require_once ("./Views/include/UH.php");
                     <th>Cliente</th>
                 <?php endif; ?>
                 <th>Estado</th>
-                <th>Calificación</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
             </tr>
@@ -64,11 +63,6 @@ require_once ("./Views/include/UH.php");
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
-                    <?php if ($resultado['rating']): ?>
-                        <td><?= htmlspecialchars($resultado['rating']."★"); ?></td>
-                    <?php else: ?>
-                        <td><?= htmlspecialchars("Sin calificaciones"); ?></td>
-                    <?php endif ?>
                     <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
                 
                 <td>
