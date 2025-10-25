@@ -65,7 +65,7 @@ require_once ("./Views/include/UH.php");
                         <?php endif; ?>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <?php if ($resultado['rating']): ?>
-                        <td><?= htmlspecialchars($resultado['rating']★); ?></td>
+                        <td><?= htmlspecialchars($resultado['rating']."★"); ?></td>
                     <?php else: ?>
                         <td><?= htmlspecialchars("Sin calificaciones"); ?></td>
                     <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
