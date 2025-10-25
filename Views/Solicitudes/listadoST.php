@@ -68,6 +68,7 @@ require_once ("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['rating']."★"); ?></td>
                     <?php else: ?>
                         <td><?= htmlspecialchars("Sin calificaciones"); ?></td>
+                    <?php endif ?>
                     <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
                 
                 <td>
