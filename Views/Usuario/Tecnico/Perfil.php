@@ -15,7 +15,7 @@
     <i class="fa fa-arrow-left"></i> Volver
 </button>
 </div>
-
+<br>
 <div class="profile-info fade-slide">
     <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
     <div class="profile-details">
