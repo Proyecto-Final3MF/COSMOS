@@ -2499,12 +2499,12 @@ input:checked ~ label {
     font-size: 14px;
 }
 
-/* --- Reviews Section Modificado --- */
 .reviews {
     /* Eliminamos el margen izquierdo grande que lo empujaba hacia la derecha */
     margin: 20px auto; /* Márgenes superior/inferior, y centrar horizontalmente */
     width: 90%; /* Ocupar el mismo ancho o similar al profile-info */
-    max-width: 800px; /* Mismo ancho máximo para alineación */
+    max-width: 600px; /* Mismo ancho máximo para alineación */
+    max-height: 300px;
     padding: 20px;
     background-color: var(--color-navbar);
     border: 1px solid #ddd;
