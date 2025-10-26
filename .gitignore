@@ -3,4 +3,7 @@
 # Con # haces comentarios.
 # Con / pones la ruta del archivo que queres ignorar, si pones la ruta de una carpeta toda la carpeta va ser ignorada.
 # Con * poner el tipo de archivo que queres ignorar (.txt, .php, .js, etc.).
+
+#Archivos ignorados:
+
 /secreto.php
