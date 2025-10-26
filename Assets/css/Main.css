@@ -2446,21 +2446,23 @@ input:checked ~ label {
 /* Fin de los estilos para estrellas */
 
 /* Perfil del Tecnico */
-
+/* --- Perfil del Técnico Modificado --- */
 .profile-info {
-    top: 150px;
-    width: 280px;
-    margin: 20px;
-    float: left;
-    border: 1px solid #ddd; /* Lighter border */
-    border-radius: 12px; /* Slightly more rounded corners */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger, nicer shadow */
+    /* Eliminamos: top, float: left, y position: fixed */
+    /* top: 150px; */
+    width: 90%; /* Ajustar el ancho para que ocupe casi todo el contenedor principal */
+    max-width: 500px; /* Limitar el ancho máximo en pantallas grandes */
+    margin: 20px auto; /* Centrar la caja horizontalmente */
+    /* float: top; */
+    /* position: fixed; */
+    
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     background-color: var(--color-navbar);
-    padding: 20px; /* Increased padding */
+    padding: 20px;
     text-align: center;
-    /* Optional: Add a subtle transition for hover effects if you add them later */
     transition: transform 0.3s ease;
-    position: fixed;
 }
 
 .profile-info img {
@@ -2468,9 +2470,9 @@ input:checked ~ label {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #e83e8c; /* Slightly thicker border for emphasis */
+    border: 5px solid #e83e8c;
     margin-bottom: 15px;
-    box-shadow: 0 0 0 3px #fff; /* White outline for contrast */
+    box-shadow: 0 0 0 3px #fff;
 }
 
 .profile-details {
@@ -2479,7 +2481,7 @@ input:checked ~ label {
 }
 
 .profile-details p {
-    margin: 8px 0; /* Increased margin for better spacing */
+    margin: 8px 0;
     color: var(--text-color);
     font-size: 16px;
     line-height: 1.4;
@@ -2487,21 +2489,22 @@ input:checked ~ label {
 
 .profile-details p:first-child {
     font-weight: bold;
-    font-size: 20px; /* Larger font */
-    color: #e83e8c; /* Primary color */
+    font-size: 20px;
+    color: #e83e8c;
 }
 
 .profile-details p:last-child {
     font-style: italic;
     color: var(--text-color);
-    font-size: 14px; /* Slightly smaller for secondary info */
+    font-size: 14px;
 }
 
-/* --- Reviews Section --- */
+/* --- Reviews Section Modificado --- */
 .reviews {
-    /* To position reviews next to the profile-info, you'd adjust this area.
-       For now, let's keep it simple to ensure it flows nicely after the float is cleared, or start them to the right. */
-    margin: 97px 20px 20px 320px; /* Pushes the review section to the right of the profile box (280px wide + margins) */
+    /* Eliminamos el margen izquierdo grande que lo empujaba hacia la derecha */
+    margin: 20px auto; /* Márgenes superior/inferior, y centrar horizontalmente */
+    width: 90%; /* Ocupar el mismo ancho o similar al profile-info */
+    max-width: 800px; /* Mismo ancho máximo para alineación */
     padding: 20px;
     background-color: var(--color-navbar);
     border: 1px solid #ddd;
@@ -2512,7 +2515,7 @@ input:checked ~ label {
 }
 
 .reviews:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Subtle hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .reviews p {
@@ -2548,6 +2551,8 @@ input:checked ~ label {
     font-style: italic;
     color: #bbb;
 }
+
+/* Creo q aqui termina lo de perfil de tecnico */
 
 .hidden-fields {
     display: none;
