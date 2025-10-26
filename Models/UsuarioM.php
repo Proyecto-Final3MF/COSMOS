@@ -299,6 +299,22 @@ class Usuario {
         return $data;
     }
 
+    public function getEspecializacion($id_tecnico) {
+        $sql = "SELECT e.nombre FROM especializacion e JOIN usuario_especializacion ue ON e.id = ue.especializacion_id WHERE ue.usuario_id = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_tecnico);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $fila = $resultado->fetch_assoc();
+
+        if ($fila !== null) {
+            return $fila['nombre'];
+        } else {
+            return null; 
+        }
+    }
+
     // Verificación de técnicos
     
     public function actualizarEstadoVerificacion($id, $estado) {

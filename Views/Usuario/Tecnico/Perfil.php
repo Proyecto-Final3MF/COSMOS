@@ -19,10 +19,13 @@
 <div class="profile-info fade-slide">
     <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
     <div class="profile-details">
-        <?php
-        echo '<p>'.$DatosTecnico['nombre'].' '. $DatosTecnico['email'].'</p>';
-        echo '<p>Cantidad de Reviews: '.$DatosTecnico['cant_review'].' Promedio: '.$DatosTecnico['promedio'].'★'.'</p>';
-        ?>
+        <p><?=$DatosTecnico['nombre']?> <?= $DatosTecnico['email']?></p>
+        <p>Cantidad de Reviews: <?=$DatosTecnico['cant_review']?> Promedio: <?=$DatosTecnico['promedio']?>★</p>
+        <p>Especialidad: <?=$especializacion?> 
+            <?php if ($DatosTecnico['otra_especialidad']): ?>
+                Y <?=$DatosTecnico['otra_especialidad']?>
+            <?php endif ?>
+        </p>
     </div>
 </div>
 <br>
