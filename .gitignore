@@ -1,5 +1,5 @@
 # Tutorial gitignore:
-# Esto sirve para que cambios hechos a ciertos archivos no sean enviados al repositorio remoto (pagina del repositorio en github) por questiones de seguridad.
+# Esto sirve para que cambios hechos a ciertos archivos no sean enviados al repositorio remoto (pagina del repositorio en github) por questiones de seguridad y queden guardados localmente.
 # Con # haces comentarios.
 # Con / pones la ruta del archivo que queres ignorar, si pones la ruta de una carpeta toda la carpeta va ser ignorada.
 # Con * poner el tipo de archivo que queres ignorar (.txt, .php, .js, etc.).
