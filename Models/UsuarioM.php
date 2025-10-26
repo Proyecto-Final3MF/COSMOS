@@ -179,15 +179,6 @@ class Usuario {
     }
 
     // CRUD básico
-    
-    public function buscarUserId($id) {
-        $sql = "SELECT * FROM usuario WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-    }
 
     public function editarU($id, $nombre, $email, $foto_perfil = null) {
         if ($foto_perfil) {
@@ -286,9 +277,7 @@ class Usuario {
         return $stmt->execute();
     }
 
-    // Obtener técnico específico
-    
-    public function getDatosTecnico($id_tecnico) {
+    public function buscarUserId($id) {
         $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
 
@@ -297,7 +286,7 @@ class Usuario {
             return [];
         }
 
-        $stmt->bind_param("i", $id_tecnico);
+        $stmt->bind_param("i", $id);
         if (!$stmt->execute()) {
             error_log("MySQLi Execute Error: " . $stmt->error);
             $stmt->close();
