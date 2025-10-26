@@ -414,7 +414,7 @@ public function guardarU() {
         $Tecnico = new Usuario();
         $Reviews = new Review();
         $id_tecnico = $_GET['id'];
-        $DatosTecnico = $Tecnico->getDatosTecnico($id_tecnico);
+        $DatosTecnico = $Tecnico->buscarUserId($id_tecnico);
         $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
         include("Views/Usuario/Tecnico/Perfil.php");
     }
