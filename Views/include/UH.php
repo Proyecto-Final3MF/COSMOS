@@ -64,14 +64,41 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     <?php endif; ?>
 
                     <div class="dropdown">
-                    <?php if (count($notificaciones) > 0): ?>
-                    <?php foreach ($notificaciones as $n): ?>
-                    <p class="notif-item"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></p>
-                    <?php endforeach; ?>
-                    <?php else: ?>
-                    <p class="notif-item">Sin notificaciones nuevas</p>
-                    <?php endif; ?>
-                    </div>
+<?php if (count($notificaciones) > 0): ?>
+<?php foreach ($notificaciones as $n): ?>
+    <?php
+        // Determinar la URL basada en el mensaje
+        $url = '';
+        if (strpos($n['mensaje'], 'aceptada') !== false) {
+            $url = 'index.php?accion=listarSA';  // Solicitudes Aceptadas para clientes
+        } elseif (strpos($n['mensaje'], 'urgente') !== false) {
+            $url = 'index.php?accion=listarTL';  // Solicitudes Disponibles para técnicos
+        } elseif (strpos($n['mensaje'], 'verificar') !== false) {
+            $url = 'index.php?accion=verificarTecnicos';  // Verificación de Técnicos para admins
+        } elseif (strpos($n['mensaje'], 'cambió de estado') !== false) {
+            // Para clientes: si contiene "Finalizado", a Terminadas; sino, a Aceptadas
+            if (strpos($n['mensaje'], 'Finalizado') !== false) {
+                $url = 'index.php?accion=listarST';
+            } else {
+                $url = 'index.php?accion=listarSA';
+            }
+        } elseif (strpos($n['mensaje'], 'calificación') !== false) {
+            $url = 'index.php?accion=listarST';  // Solicitudes Terminadas para técnicos
+        }
+    ?>
+    <div class="notif-item">
+        <span class="notif-text"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></span>
+        <?php if ($url): ?>
+            <a href="<?= $url ?>" class="btn-ver">Ver</a>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+<?php else: ?>
+<p class="notif-item">Sin notificaciones nuevas</p>
+<?php endif; ?>
+</div>
+
+
                     </div>
             
                 <div class="menu-rol-container">
