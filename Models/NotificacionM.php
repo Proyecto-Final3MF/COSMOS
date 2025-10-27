@@ -8,22 +8,49 @@ class NotificacionM {
         $this->conn = conectar();
     }
 
-    // Crear notificación
-    public function crear($usuario_id, $mensaje) {
-        $sql = "INSERT INTO notificacion (usuario_id, mensaje) VALUES (?, ?)";
+    // Crear notificación (agregamos $tipo, por defecto 'normal')
+    public function crear($usuario_id, $mensaje, $tipo = 'normal') {
+        $sql = "INSERT INTO notificacion (usuario_id, mensaje, tipo) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("is", $usuario_id, $mensaje);
+        $stmt->bind_param("iss", $usuario_id, $mensaje, $tipo);
         return $stmt->execute();
     }
 
-    // Obtener notificaciones no leídas
-    public function obtenerNoLeidas($usuario_id) {
-        $sql = "SELECT * FROM notificacion WHERE usuario_id = ? AND leida = 0 ORDER BY fecha DESC";
+    // Obtener notificaciones no leídas (opcional: filtrar por tipo)
+    public function obtenerNoLeidas($usuario_id, $tipo = null) {
+        $sql = "SELECT * FROM notificacion WHERE usuario_id = ? AND leida = 0";
+        $params = [$usuario_id];
+        $types = "i";
+        
+        if ($tipo !== null) {
+            $sql .= " AND tipo = ?";
+            $params[] = $tipo;
+            $types .= "s";
+        }
+        
+        $sql .= " ORDER BY fecha DESC";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $usuario_id);
+        $stmt->bind_param($types, ...$params);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Marcar todas como leídas (opcional: filtrar por tipo)
+    public function marcarTodasLeidas($usuario_id, $tipo = null) {
+        $sql = "UPDATE notificacion SET leida = 1 WHERE usuario_id = ?";
+        $params = [$usuario_id];
+        $types = "i";
+        
+        if ($tipo !== null) {
+            $sql .= " AND tipo = ?";
+            $params[] = $tipo;
+            $types .= "s";
+        }
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param($types, ...$params);
+        return $stmt->execute();
     }
 
     // Marcar como leída
@@ -34,12 +61,5 @@ class NotificacionM {
         return $stmt->execute();
     }
 
-    // Marcar todas como leídas
-    public function marcarTodasLeidas($usuario_id) {
-        $sql = "UPDATE notificacion SET leida = 1 WHERE usuario_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $usuario_id);
-        return $stmt->execute();
-    }
 }
 ?>
