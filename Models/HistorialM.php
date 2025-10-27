@@ -36,7 +36,7 @@ class HistorialM {
     public function getHistorial($search = null, $startDate = null, $endDate = null) {
         $historial = [];
 
-        $query = "SELECT h.id, h.usuario_id, h.usuario, h.accion, h.item, h.item_id, h.fecha_hora, h.obs FROM historial h";
+        $query = "SELECT* FROM historial h";
 
         $conditions = [];
         $params = [];

@@ -1,6 +1,6 @@
 <?php 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
+    header("Location: Index.php?accion=redireccion");
 } 
 
 require_once ("./Views/include/UH.php");
@@ -25,7 +25,7 @@ require_once ("./Views/include/UH.php");
     <div class="contenedor-formulario">
     <section class="formularios99">
     <h3>Crear Nueva Categoria</h3>
-    <form action="index.php?accion=guardarC" method="post">
+    <form action="Index.php?accion=guardarC" method="post">
         <label for="nombre">Nueva Categoria: </label>
         <input type="text" id="nombre" name="nombre"/>
         <button type="submit">Agregar Categoria</button>

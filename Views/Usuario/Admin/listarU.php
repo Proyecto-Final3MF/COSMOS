@@ -1,6 +1,6 @@
 <?php 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
+    header("Location: Index.php?accion=redireccion");
     exit();
 } 
 
@@ -25,7 +25,7 @@ require_once("./Views/include/UH.php");
   </button>
 </div>
 
-<form action="index.php" class="ordenar-form">
+<form action="Index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
     <input type="text" id="search" name="search" placeholder="Buscar Usuario" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>" class="milanesa">
     <label for="orden">Ordenar por:</label>
@@ -48,7 +48,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay usuarios registrados. <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
+        No hay usuarios registrados. <a href="Index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
@@ -76,10 +76,10 @@ require_once("./Views/include/UH.php");
                     <td><?= htmlspecialchars($u['rol']) ?></td>
                     <td>
                         <div class="btn-group-actions">  
-                            <a href="index.php?accion=editarU&id=<?= $u['id'] ?>" class="icon-btn edit">
+                            <a href="Index.php?accion=editarU&id=<?= $u['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                            <a href="index.php?accion=eliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
+                            <a href="Index.php?accion=eliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
                             <i class="fa fa-trash"></i></a>
                             <?php endif; ?>
                         </div>

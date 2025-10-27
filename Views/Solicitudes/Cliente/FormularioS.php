@@ -34,7 +34,7 @@ require_once ("./Views/include/UH.php");
         <?php endforeach; ?>
         </select>
 
-        <a href="index.php?accion=formularioP" class="btn-boton4443">
+        <a href="Index.php?accion=formularioP" class="btn-boton4443">
         <i class="fa-solid fa-plus-circle"></i>
         </a>
         </div>
