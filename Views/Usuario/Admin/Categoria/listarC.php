@@ -1,5 +1,5 @@
 <?php 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
     header("Location: Index.php?accion=redireccion");
     exit();
 } 
@@ -62,10 +62,8 @@ require_once("./Views/include/UH.php");
                         <div class="btn-group-actions">  
                             <a href="Index.php?accion=editarC&id=<?= $c['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
-                            <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
                             <a href="Index.php?accion=borrarC&id=<?= $c['id'] ?>" class="icon-btn delete">
                             <i class="fa fa-trash"></i></a>
-                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>
