@@ -23,7 +23,7 @@ require_once ("./Views/include/UH.php");
   </button>
 </div>
 
-  <form action="index.php" method="GET" class="filter-form2 fade-slide">
+  <form action="Index.php" method="GET" class="filter-form2 fade-slide">
     <input type="hidden" name="accion" value="listarTL">
       <div class="form-group search-wrapper fade-slide">
         <label for="search">Buscar: </label>
@@ -64,7 +64,7 @@ require_once ("./Views/include/UH.php");
         <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
         <td>
           <div class="btn-group-actions">
-            <a href="index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="icon-btn aceptar" >  
+            <a href="Index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="icon-btn aceptar" >  
               <i class="fa fa-check"></i>
             </a>
           </div>
@@ -75,7 +75,7 @@ require_once ("./Views/include/UH.php");
   } else {
     ?>
     <tr>
-      <td colspan="7">No hay solicitudes disponibles en este momento<br><br><a href="index.php?accion=listarSA"><button class="btn btn-boton777">Ver solicitudes aceptadas</button></a></td>
+      <td colspan="7">No hay solicitudes disponibles en este momento<br><br><a href="Index.php?accion=listarSA"><button class="btn btn-boton777">Ver solicitudes aceptadas</button></a></td>
     </tr>
     <?php
   }

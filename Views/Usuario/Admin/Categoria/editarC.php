@@ -1,5 +1,5 @@
-<?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
+<?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
+    header("Location: Index.php?accion=redireccion");
     exit();
 } 
 
@@ -24,7 +24,7 @@ require_once ("./Views/include/UH.php");
     <div class="contenedor-formulario">
     <section class="formularios99">
 <h3>Editar Categoria</h3>
-<form action="index.php?accion=actualizarC" method="POST">
+<form action="Index.php?accion=actualizarC" method="POST">
     <input type="hidden" name="id" value="<?= htmlspecialchars($categoria['id']) ?>">
     
     <label for="nombre">Nuevo nombre de la Categoria:</label>

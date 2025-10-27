@@ -1,6 +1,6 @@
 <?php 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) { 
-    header("Location: index.php?accion=redireccion"); 
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) { 
+    header("Location: Index.php?accion=redireccion"); 
     exit(); 
 } 
 
@@ -25,11 +25,11 @@ require_once ("./Views/include/UH.php");
     <div class="admin-dashboard">
 
         <section class="admin-panel-column fade-slide">
-            <h3><a href="index.php?accion=listarU" class="titulo3 fade-slide" >Ultimos Usuarios registrados</a></h3>
+            <h3><a href="Index.php?accion=listarU" class="titulo3 fade-slide" >Ultimos Usuarios registrados</a></h3>
             <?php if (empty($usuarios)): ?>
                 <div class="alert alert-info">
                     No hay usuarios registrados.
-                    <a href="index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
+                    <a href="Index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
                 </div>
             <?php else: ?>
                 <div class="table-responsive-panel">
@@ -59,15 +59,15 @@ require_once ("./Views/include/UH.php");
 
         <section class="admin-panel-column fade-slide">
         <div class="option-card">
-                <h2><a href="index.php?accion=verificarTecnicos" class="titulo3 fade-slide">Verificación de Cuentas</a></h2>
+                <h2><a href="Index.php?accion=verificarTecnicos" class="titulo3 fade-slide">Verificación de Cuentas</a></h2>
                 
                 <p>Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
-                <a href="index.php?accion=verificarTecnicos" class="btn btn-boton12">Ver Técnicos Pendientes</a>
+                <a href="Index.php?accion=verificarTecnicos" class="btn btn-boton12">Ver Técnicos Pendientes</a>
         </div>
         </section>
 
         <section class="admin-panel-column fade-slide">
-            <h3><a href="index.php?accion=mostrarHistorial" class="titulo3 fade-slide" >Ultimos registros en el Historial</a></h3>
+            <h3><a href="Index.php?accion=mostrarHistorial" class="titulo3 fade-slide" >Ultimos registros en el Historial</a></h3>
             <div class="historial-panel">
                 <?php if (!empty($historial)): ?>
                     <?php foreach ($historial as $registro): ?>

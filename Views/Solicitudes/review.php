@@ -10,7 +10,7 @@
 <div class="contenedor-formulario">
     <section class="formularios99">    
         <h2>Review de la Solicitud <?=$titulo_solicitud?></h2>
-        <form action="index.php?accion=AddReview" method="post">
+        <form action="Index.php?accion=AddReview" method="post">
             <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
             <input type="hidden" name="titulo_solicitud" value="<?=$titulo_solicitud ?>">
             <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">

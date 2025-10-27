@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         // Redirige siempre al mismo lugar
-        window.location.href = "index.php?accion=redireccion";
+        window.location.href = "Index.php?accion=redireccion";
       }, 500); // ajusta al mismo tiempo que tu transición CSS
     });
   }
