@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
+    header("Location: Index.php?accion=redireccion");
     exit();
 }
 
@@ -28,7 +28,7 @@ require_once ("./Views/include/UH.php");
 
         <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda. Por default la fecha final es el dia actual.</p>
 
-        <form action="index.php" method="GET" class="filter-form">
+        <form action="Index.php" method="GET" class="filter-form">
             <input type="hidden" name="accion" value="mostrarHistorial">
             <div class="form-group">
                 <label for="search">Buscar:</label>
@@ -45,7 +45,7 @@ require_once ("./Views/include/UH.php");
 
             <div class="button-container5">
                 <button type="submit">Aplicar Filtros</button>
-                <a href="index.php?accion=mostrarHistorial" class="clear-button">Limpiar Filtros</a>
+                <a href="Index.php?accion=mostrarHistorial" class="clear-button">Limpiar Filtros</a>
             </div>
     
         </form>

@@ -1,7 +1,7 @@
 <?php
 
     if (isset($_SESSION['rol']) == 1 or isset($_SESSION['rol']) == 2){
-        header("Location: index.php?accion=redireccion");
+        header("Location: Index.php?accion=redireccion");
     } 
 
 require_once ("./Views/include/UH.php");
@@ -37,7 +37,7 @@ require_once ("./Views/include/UH.php");
         <br>
 
     <button class="button" type="submit">Entrar</button>
-    <a href="index.php?accion=register" class="login9">¿No tiene una cuenta? Regístrese</a>
+    <a href="Index.php?accion=register" class="login9">¿No tiene una cuenta? Regístrese</a>
 </form>
 
     </section>
