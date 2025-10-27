@@ -10,7 +10,7 @@ require_once("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sus Solicitudes</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
-    </head>
+</head>
 
 <body>
     <br>
@@ -54,10 +54,10 @@ require_once("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['prioridad']); ?></td>
                         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                         <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
-                           <td>
-                            <a title="Perfil del Tecnico" href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
-                            <i class="fa fa-user"></i> <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
-                            </a>
+                            <td>
+                                <a title="Perfil del Tecnico" href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
+                                    <i class="fa fa-user"></i> <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
+                                </a>
                             </td>
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
