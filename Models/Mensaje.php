@@ -180,12 +180,15 @@ class Mensaje
                         'Usuario desconocido'
                     ) AS otro_usuario,
                     SUBSTRING_INDEX(GROUP_CONCAT(m.mensaje ORDER BY m.fecha DESC SEPARATOR '||'), '||', 1) AS ultimo_mensaje,
-                    MAX(m.fecha) AS ultima_fecha
+                    MAX(m.fecha) AS ultima_fecha,
+                    m.solicitud_id,
+                    s.titulo AS solicitud_titulo
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE m.usuario_id = ? OR m.receptor_id = ?
-                GROUP BY otro_usuario_id
+                LEFT JOIN solicitud s ON m.solicitud_id = s.id
+                WHERE (m.usuario_id = ? OR m.receptor_id = ?)
+                GROUP BY otro_usuario_id, m.solicitud_id
                 ORDER BY ultima_fecha DESC";
 
         $stmt = $this->conexion->prepare($sql);
