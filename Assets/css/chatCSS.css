@@ -276,6 +276,16 @@
   text-decoration: underline;
 }
 
+.solicitud-badge {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
 @media (max-width: 768px) {
   .chat-container {
     width: 95%;
