@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
 
 $notifC = new NotificacionC();
-$notificaciones = $notifC->listarNoLeidas();
+$notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
 ?>
 
 <header>
