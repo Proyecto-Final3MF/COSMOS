@@ -140,6 +140,9 @@ class ReviewC {
             $evento = "La calificación fue cambiada para ".$rating."★";
             $this->historiaC->registrarEvento($id_solicitud, $evento);
             $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $obs);
+            require_once(__DIR__ . '/../Controllers/NotificacionC.php');
+            $notificacion = new NotificacionC();
+            $notificacion->crearNotificacion($id_tecnico, "Tu calificación en la solicitud '$titulo_solicitud' fue editada.", 'urgente');
 
             header("Location:index.php?accion=listarST");
             exit();
@@ -158,6 +161,9 @@ class ReviewC {
         $evento = "La Solicitud fue calificada con ".$rating."★";
         $this->historiaC->registrarEvento($id_solicitud, $evento);
         $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "calificó la solicitud", $titulo_solicitud, $id_solicitud, $evento);
+        require_once(__DIR__ . '/../Controllers/NotificacionC.php');
+        $notificacion = new NotificacionC();
+        $notificacion->crearNotificacion($id_tecnico, "Has recibido una nueva calificación en la solicitud '$titulo_solicitud'.", 'urgente');
         $_SESSION['tipo_mensaje'] = "success";
         $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
         header("Location:index.php?accion=listarST");
