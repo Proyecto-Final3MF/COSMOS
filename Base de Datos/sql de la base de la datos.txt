@@ -86,6 +86,7 @@ CREATE TABLE notificacion (
     mensaje TEXT NOT NULL,
     leida TINYINT(1) DEFAULT 0, 
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipo VARCHAR(20) NOT NULL DEFAULT 'normal',
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
