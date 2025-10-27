@@ -26,13 +26,15 @@ require_once ("./Views/include/UH.php");
 
         <h3>Iniciar Sesion</h3>
         <form method="POST" action="Index.php?accion=autenticar">
-        <p class="fade-label">Correo electrónico</p>
-        <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
 
-        <p class="fade-label">Contraseña</p>
-        <div class="password-container">
-        <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required>
-        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('contrasena', this)"></i>
+            <p class="fade-label">Correo electrónico</p>
+            <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required> <br><br>
+
+            <p class="fade-label">Contraseña</p>
+            <div class="password-container">
+            <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required>
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('contrasena', this)"></i>
+            
         </div>
         <br>
 

@@ -22,6 +22,10 @@ class UsuarioC {
         include("Views/Usuario/Tecnico/Trabaja.php");
     }
 
+    public function mail(){
+        
+    }
+
     public function espera() {
         // 1. Obtener el email de la URL
         $email = $_GET['email'] ?? '';
