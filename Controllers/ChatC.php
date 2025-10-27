@@ -29,14 +29,14 @@ class ChatC
         }
 
         $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
-        
+
         // Pasar el ID de solicitud a la vista
         $solicitud = null;
         if ($solicitudId) {
             $solicitudModel = new Solicitud();
             $solicitud = $solicitudModel->obtenerSolicitudPorId($solicitudId);
         }
-        
+
         require_once "Views/chat.php";
     }
 
@@ -187,14 +187,18 @@ class ChatC
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
         $solicitud_id = $_POST['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
+        if (!$usuarioId || !$receptor_id || $mensajeTexto === '' || !$solicitud_id) {
             http_response_code(400);
-            echo "Fatal parámetros";
+            echo "Error: Faltan paramentros requeridos (usuario, receptor, mensaje o solicitud)";
             exit();
         }
 
-        $mensajeModel = new Mensaje();
-        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
+        $resultado = $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
+
+        if (!$resultado) {
+            http_response_code(500);
+            echo "Error al enviar el mensaje";
+        }
 
         exit();
     }
