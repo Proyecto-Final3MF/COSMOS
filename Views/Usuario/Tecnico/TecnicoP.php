@@ -1,7 +1,7 @@
 <?php
     
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
-    header("Location: Index.php?accion=redireccion");
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 2) {
+    header("Location: index.php?accion=redireccion");
     exit();
 }
     require_once ("./Views/include/UH.php");
