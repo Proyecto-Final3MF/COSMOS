@@ -293,7 +293,7 @@ class SolicitudC {
             $notificacion = new NotificacionC();
 
             $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
-            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' cambió de estado.", 'urgente');
+            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' cambió de estado a '{$nuevoEstado['nombre']}'.", 'urgente');
 
             header("Location: index.php?accion=redireccion");
             exit();
