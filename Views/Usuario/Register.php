@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [1, 2, 3])) {
-    header("Location: index.php?accion=redireccion");
+    header("Location: Index.php?accion=redireccion");
 } 
 
 require_once ("./Views/include/UH.php");
@@ -21,7 +21,7 @@ require_once ("./Views/include/UH.php");
     <section class="formularios99">
         <h3>Registrarse</h3>
 
-        <form method="POST" action="index.php?accion=guardarU" enctype="multipart/form-data">
+        <form method="POST" action="Index.php?accion=guardarU" enctype="multipart/form-data">
 
             <p class="fade-label">Nombre de Usuario</p>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
