@@ -224,8 +224,8 @@ body {
 
 .contador {
     position: absolute;
-    top: -8px;      /* Ajusta hacia arriba */
-    right: -8px;    /* Ajusta hacia la derecha */
+    top: 6px;      
+    right: 6px;    
     background: red;
     color: white;
     border-radius: 50%;
