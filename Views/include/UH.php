@@ -49,7 +49,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     <a href="Index.php?accion=login">
                         <button class="btn btn-boton">Iniciar sesión</button>
                     </a>
-                    <a href="Index.php?accion=register">
+                    <a href="Index.php?accion=registro">
                         <button class="btn btn-boton">Registrarse</button>
                     </a>
 

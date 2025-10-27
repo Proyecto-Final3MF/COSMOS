@@ -1,5 +1,5 @@
 <?php
-    require_once("Views/include/UH.php");
+    require_once("./include/UH.phpS");
 ?>
 
 <h1>Sistema Web de Gestión de Servicio Técnico _COSMOS_.</h1>
