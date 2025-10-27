@@ -60,7 +60,8 @@ class SolicitudC {
             $conn = conectar();
             $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
             while ($row = $result->fetch_assoc()) {
-                $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo");
+                $tipo = ($prioridad === 'urgente') ? 'urgente' : 'normal';
+                $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo", $tipo);
             }
             
             header("Location: index.php?accion=formularioS");
@@ -103,7 +104,8 @@ class SolicitudC {
             $conn = conectar();
             $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
             while ($row = $result->fetch_assoc()) {
-            $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo");
+            $tipo = 'urgente';  // Ya es urgente
+            $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo", $tipo);
             }
 
             header("Location: index.php?accion=listarSLU");
@@ -157,6 +159,10 @@ class SolicitudC {
         if (isset($_SESSION['id'])) {
             $usuarioId = $_SESSION['id'];
             $search = $_GET['search'] ?? null;
+
+            $notifC = new NotificacionC();
+            $notifC->marcarTodasLeidas('normal');
+
             return $this->solicitudModel->ListarTL($usuarioId, $search);
         } else {
             echo "paso algo mal";
@@ -185,7 +191,7 @@ class SolicitudC {
             $notificacion = new NotificacionC();
 
             $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
-            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' fue aceptada por un técnico.");
+            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' fue aceptada por un técnico.", 'urgente');
 
             $this->historialController->registrarModificacion($_SESSION['usuario'], $id_tecnico, "seleccionó a la solicitud", $solicitud['titulo'], $id_soli, null);
 
@@ -287,7 +293,7 @@ class SolicitudC {
             $notificacion = new NotificacionC();
 
             $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
-            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' cambió de estado.");
+            $notificacion->crearNotificacion($solicitud['cliente_id'], "Tu solicitud '{$solicitud['titulo']}' cambió de estado.", 'urgente');
 
             header("Location: index.php?accion=redireccion");
             exit();

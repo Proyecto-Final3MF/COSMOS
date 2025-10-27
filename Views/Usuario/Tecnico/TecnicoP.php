@@ -5,6 +5,10 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     exit();
 }
     require_once ("./Views/include/UH.php");
+
+$notifC = new NotificacionC();
+$contador_normales = count($notifC->listarNoLeidas('normal'));
+
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +26,13 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
 
 <div class="btn-container fade-slide">
     <a href="Index.php?accion=listarTL">
-        <button class="btn btn-boton444">
-            <i class="fa-solid fa-list btn-disponibles"></i> Solicitudes Disponibles
-        </button>
-    </a>
+    <button class="btn btn-boton444">
+        <i class="fa-solid fa-list btn-disponibles"></i> Solicitudes Disponibles
+        <?php if ($contador_normales > 0): ?>
+            <span class="contador" id="contador-normales"><?= $contador_normales ?></span>
+        <?php endif; ?>
+    </button>
+</a>
     <a href="Index.php?accion=listarSA">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-check-circle btn-aceptadas"></i> Solicitudes Aceptadas

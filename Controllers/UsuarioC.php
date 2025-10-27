@@ -166,6 +166,15 @@ public function guardarU() {
         $nuevo_usuario_id = $usuarioN['id'];
 
             if ($rol_id == $ROL_TECNICO_ID) {
+                require_once(__DIR__ . '/NotificacionC.php');
+                $notificacion = new NotificacionC();
+    
+                // Notificar a todos los administradores (rol_id = 3)
+                $conn = conectar();
+                $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 3");
+                while ($row = $result->fetch_assoc()) {
+                $notificacion->crearNotificacion($row['id'], "Nuevo técnico pendiente de verificación: $usuario", 'urgente');
+                }
                 $_SESSION['tipo_mensaje'] = "success";
                 $_SESSION['mensaje'] = "Registro completado. Tu evidencia será verificada pronto.";
                 header("Location: index.php?accion=espera&email=" . urlencode($mail));
