@@ -23,7 +23,7 @@ $accion = $_GET['accion'] ?? 'Index';
 //define el array de acciones publicas (acciones para los usuarios no logueados/registrados)
 //si un usuario no logueado intenta hacer otras acciones no va a poder
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'espera'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'tecnico'];
 
 // si la accion que el usuario quiere hacer no esta en el array de acciones publicas entonces entra en el if
 //si la accion esta en el array entonces no entra al if y entra al switch
@@ -175,13 +175,13 @@ switch ($accion) {
     //ejecuta la funcion logout para cerrar sesion
     $controller->logout();
   break;
+    
+  case 'tecnico':
 
-  //si la accion es espera entra al case
-  case 'espera':
-    //crea una nueva instancia del objeto UsuarioC
     $controller = new UsuarioC();
-    //ejecuta la funcion espera para mostrar pantalla de espera
-    $controller->espera();
+
+
+    $controller->tecnico();
   break;
 
   //si la accion es editarSF entra al case 

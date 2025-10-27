@@ -6,17 +6,20 @@ require_once("Controllers/HistorialC.php");
 class UsuarioC {
     private $historialController;
     private $reviewController;
-    private $conn; // Propiedad para la conexión, necesaria para insert_id
+    private $conn;
 
     public function __construct(){
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
-        // Asumo que tienes una función global conectar() o la inicializas aquí
         $this->conn = conectar(); 
     }
 
     public function login() {
         include("Views/Usuario/Login.php");
+    }
+
+    public function tecnico(){
+        include("Views/Usuario/Tecnico/Trabaja.php");
     }
 
     public function espera() {

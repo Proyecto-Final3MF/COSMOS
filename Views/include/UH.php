@@ -10,7 +10,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
 ?>
 
 <header>
-    
+    <title>C O S M O S</title>
     <link rel="stylesheet" href="./Assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <nav class="navbar">
