@@ -7,86 +7,6 @@ class Usuario {
         $this->conn = conectar();
     }
 
-    // En la clase Usuario (UsuarioM.php)
-    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $ruta_evidencia, $otra_especialidad) {
-        $estado_verificacion = 'pendiente'; // Específico para Técnicos
-        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
-        
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
-        
-        $stmt = $this->conn->prepare($sql);
-        
-        if (!$stmt) {
-            error_log("MySQLi Prepare Error (crearT): " . $this->conn->error);
-            return false;
-        }
-
-        // Tipos de parámetros: s s s i s s s s
-        $stmt->bind_param("sssissss", 
-            $usuario, 
-            $contrasena_hash, // Usar el hash
-            $mail, 
-            $rol_id,
-            $ruta_evidencia, 
-            $otra_especialidad, 
-            $foto_perfil_default, 
-            $estado_verificacion
-        );
-        
-        $success = $stmt->execute();
-        
-        if (!$success) {
-            error_log("MySQLi Execute Error (crearT): " . $stmt->error);
-        }
-        
-        $stmt->close();
-        return $success;
-    }
-
-    public function crearC($usuario, $mail, $rol_id, $contrasena_hash) {
-        $estado_verificacion = 'aprobado'; 
-        $ruta_evidencia = null; 
-        $otra_especialidad = null; 
-        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
-        
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
-        
-        $stmt = $this->conn->prepare($sql);
-        
-        if (!$stmt) {
-            // 🛑 PUNTO DE FALLO 1: Error al preparar la consulta
-            // Esto indica un problema con la sintaxis SQL, nombre de tabla/columna, o la conexión.
-            die("❌ ERROR AL PREPARAR LA CONSULTA (PREPARE): " . $this->conn->error . " | SQL: " . $sql);
-            // Quita la línea 'die' una vez resuelto el problema.
-            return false;
-        }
-
-        // Tipos de parámetros: s s s i s s s s
-        $stmt->bind_param("sssissss", 
-            $usuario, 
-            $contrasena_hash, 
-            $mail, 
-            $rol_id, 
-            $ruta_evidencia, 
-            $otra_especialidad, 
-            $foto_perfil_default, 
-            $estado_verificacion
-        );
-        
-        $success = $stmt->execute();
-        
-        if (!$success) {
-            // 🛑 PUNTO DE FALLO 2: Error al ejecutar la consulta
-            // Esto indica una violación de restricción (ej. 'email' duplicado, 'rol_id' inválido, longitud de datos).
-            die("❌ ERROR AL EJECUTAR LA CONSULTA (EXECUTE): " . $stmt->error);
-            // Quita la línea 'die' una vez resuelto el problema.
-        }
-        
-        $stmt->close();
-        return $success;
-    }
 
     // Especializaciones
 
@@ -126,16 +46,6 @@ class Usuario {
     }
 
     // Obtener usuario
-    
-    public function obtenerPorNombre($usuario) {
-        $usuario = $this->conn->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
-        $res = $this->conn->query($sql);
-        if ($res && $res->num_rows > 0) {
-            return $res->fetch_assoc();
-        }
-        return false;
-    }
 
     public function obtenerPorEmail($email) {
         $email = $this->conn->real_escape_string($email);
