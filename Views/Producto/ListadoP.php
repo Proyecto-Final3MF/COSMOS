@@ -14,7 +14,7 @@ require_once ("./Views/include/UH.php");
     <br>
     <h2 class="fade-slide" >Tus Productos</h2>
 <div class="botones-container fade-slide">
-    <a href="index.php?accion=formularioP"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
+    <a href="Index.php?accion=formularioP"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
 
 <div class="btn-volver-container fade-slide">
@@ -23,7 +23,7 @@ require_once ("./Views/include/UH.php");
   </button>
 </div>
 
-<form action="index.php" class="ordenar-form">
+<form action="Index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
     <input type="text" id="search" name="search" placeholder="Buscar Producto" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
     <label for="orden">Ordenar por:</label>
@@ -63,10 +63,10 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($productoModel->obtenerCategoriaporId($p['id_cat'])) ?></td>
                 <td>
     <div class="btn-group-actions">                
-    <a href="index.php?accion=editarP&id=<?= $p['id'] ?>" class="icon-btn edit">
+    <a href="Index.php?accion=editarP&id=<?= $p['id'] ?>" class="icon-btn edit">
     <i class="fa fa-edit"></i>
     </a>
-    <a href="index.php?accion=borrarP&id=<?= $p['id'] ?>" 
+    <a href="Index.php?accion=borrarP&id=<?= $p['id'] ?>" 
        onclick="return confirm('¿Seguro que quieres borrar este producto?');" 
        class="icon-btn delete">
         <i class="fa fa-trash"></i>

@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <i class="fa fa-arrow-left">Volver</i>
         </button>
     </div>
-    <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
+    <form id="form-chat" class="chat-input" method="POST" action="Index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
         <?php if (isset($solicitudId) && $solicitudId): ?>
@@ -44,7 +44,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <script>
     // Cargar mensajes
     async function cargarMensajes() {
-        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?><?= isset($solicitudId) && $solicitudId ? '&solicitud_id=' . $solicitudId : '' ?>");
+        let res = await fetch("Index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?><?= isset($solicitudId) && $solicitudId ? '&solicitud_id=' . $solicitudId : '' ?>");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
@@ -53,7 +53,7 @@ if (session_status() === PHP_SESSION_NONE) {
     document.getElementById("form-chat").addEventListener("submit", async function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        await fetch("index.php?accion=enviarMensaje", {
+        await fetch("Index.php?accion=enviarMensaje", {
             method: "POST",
             body: formData
         });

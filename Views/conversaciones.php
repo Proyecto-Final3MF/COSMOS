@@ -33,11 +33,11 @@ if (session_status() === PHP_SESSION_NONE) {
                         <strong><?= htmlspecialchars($c['otro_usuario']) ?></strong><br>
                         <em><?= htmlspecialchars($c['ultimo_mensaje']) ?></em><br>
                         <small><?= $c['ultima_fecha'] ?></small><br>
-                        <a href="index.php?accion=mostrarChat&usuario_id=<?= $c['otro_usuario_id'] ?>">
+                        <a href="Index.php?accion=mostrarChat&usuario_id=<?= $c['otro_usuario_id'] ?>">
                             Ver conversacion
                         </a>
 
-                        <form method="POST" action="index.php?accion=borrarConversacion" style="display:inline" onsubmit="return confirm('¿Seguro que deseas borrar esta conversacion?');">
+                        <form method="POST" action="Index.php?accion=borrarConversacion" style="display:inline" onsubmit="return confirm('¿Seguro que deseas borrar esta conversacion?');">
                             <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
                             <input type="hidden" name="receptor_id" value="<?= $c['otro_usuario_id'] ?>">
                             <button type="submit">Borrar</button>

@@ -33,7 +33,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <td><?= $c['total_mensajes'] ?></td>
                 <td><?= $c['ultima_fecha'] ?></td>
                 <td>
-                    <a href="index.php?accion=mostrarConversacion&usuario=<?= $c['u1'] ?>&otro=<?= $c['u2'] ?>">
+                    <a href="Index.php?accion=mostrarConversacion&usuario=<?= $c['u1'] ?>&otro=<?= $c['u2'] ?>">
                         Ver Conversación
                     </a>
                 </td>
