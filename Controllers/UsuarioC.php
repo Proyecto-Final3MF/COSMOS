@@ -356,63 +356,6 @@ public function guardarU() {
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
         include("Views/Usuario/Admin/listarU.php");
     }
-    
-    // --- NUEVAS ACCIONES DE ADMINISTRACIÓN ---
-
-    public function verificarTecnicos() {
-        if ($_SESSION['rol'] != ROL_ADMIN) {
-            header("Location: index.php?accion=redireccion");
-            exit();
-        }
-        $usuarioM = new Usuario();
-        $tecnicosPendientes = $usuarioM->obtenerTecnicosPendientes();
-        include("Views/Usuario/Admin/VerificarT.php");
-    }
-
-    public function aprobarTecnico() {
-        if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
-            header("Location: index.php?accion=redireccion");
-            exit();
-        }
-        $id = (int)$_GET['id'];
-        $usuarioM = new Usuario();
-        
-        if ($usuarioM->actualizarEstadoVerificacion($id, 'aprobado')) {
-            $_SESSION['mensaje'] = "El técnico ha sido APROBADO y ahora puede iniciar sesión.";
-            $_SESSION['tipo_mensaje'] = "success";
-        } else {
-            $_SESSION['mensaje'] = "Error al aprobar al técnico.";
-            $_SESSION['tipo_mensaje'] = "danger";
-        }
-        header("Location: index.php?accion=verificarTecnicos");
-        exit();
-    }
-
-    public function rechazarTecnico() {
-        if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
-            header("Location: index.php?accion=redireccion");
-            exit();
-        }
-        $id = (int)$_GET['id'];
-        $usuarioM = new Usuario();
-        $tecnico = $usuarioM->buscarUserId($id);
-        
-        if ($tecnico && $usuarioM->borrar($id)) {
-            // Opcional: Eliminar archivo de evidencia
-            if ($tecnico['evidencia_tecnica_ruta'] && file_exists($tecnico['evidencia_tecnica_ruta'])) {
-                unlink($tecnico['evidencia_tecnica_ruta']);
-            }
-            $_SESSION['mensaje'] = "El técnico fue RECHAZADO y su cuenta fue eliminada.";
-            $_SESSION['tipo_mensaje'] = "success";
-        } else {
-            $_SESSION['mensaje'] = "Error al rechazar y eliminar al técnico.";
-            $_SESSION['tipo_mensaje'] = "danger";
-        }
-        header("Location: index.php?accion=verificarTecnicos");
-        exit();
-    }
-
-    // --- FIN NUEVAS ACCIONES DE ADMINISTRACIÓN ---
 
     public function PreviewU() {
         $usuario = new Usuario();

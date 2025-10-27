@@ -3,19 +3,19 @@
 require_once(__DIR__ . '/../Config/conexion.php');
 
 class HistoriaM {
-    private $conexion;
+    private $conn;
 
     public function __construct() {
-        $this->conexion = conectar();
+        $this->conn = conectar();
     }
 
     public function registrarEvento($id_solicitud, $evento) {
 
         $query = "INSERT INTO historia_solicitud (id_solicitud, evento, fecha_hora) VALUES (?, ?, NOW())";
-        $stmt = $this->conexion->prepare($query);
+        $stmt = $this->conn->prepare($query);
 
         if ($stmt === false) {
-            error_log("ERROR: Failed to prepare statement in HistoriaM: " . $this->conexion->error);
+            error_log("ERROR: Failed to prepare statement in HistoriaM: " . $this->conn->error);
             return false;
         }
 
@@ -36,7 +36,7 @@ class HistoriaM {
 
         $sql = "SELECT * FROM historia_solicitud WHERE id_solicitud = ?";
         
-        $stmt = $this->conexion->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
             
         if (!$stmt) {
             error_log("MySQLi Prepare Error: " . $this->conn->error);
