@@ -1,4 +1,7 @@
 <?php
+require_once("./Views/include/UH.php");
+
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
