@@ -28,6 +28,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <form id="form-chat" class="chat-input" method="POST" action="index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
+        <?php if (isset($solicitudId) && $solicitudId): ?>
+        <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
+        <?php endif; ?>
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
         <button type="submit">Enviar</button>
@@ -45,7 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <script>
     // Cargar mensajes
     async function cargarMensajes() {
-        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?>");
+        let res = await fetch("index.php?accion=cargarMensajes&usuario_id=<?= $otroUsuarioId ?><?= isset($solicitudId) && $solicitudId ? '&solicitud_id='.$solicitudId : '' ?>");
         let html = await res.text();
         document.getElementById("chat-box").innerHTML = html;
     }
