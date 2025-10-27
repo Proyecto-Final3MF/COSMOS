@@ -341,9 +341,10 @@ switch ($accion) {
 
   case 'marcarNotificacionesLeidas':
     $controller = new NotificacionC();
-    $controller->marcarTodasLeidas();
+    $controller->marcarTodasLeidas('urgente');  // Solo urgentes
     echo json_encode(['success' => true]);
-    break;
+  break;
+
 
   //accion default
 
