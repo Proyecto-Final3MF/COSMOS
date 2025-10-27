@@ -48,20 +48,32 @@ class Mensaje
         // Devuelve todos los resultados como array asociativo
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-    public function obtenerMensajesConversacion($usuario_id, $otroUsuario_id)
+    public function obtenerMensajesConversacion($usuario_id, $otroUsuario_id, $solicitud_id = null)
     {
-        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                    u.nombre AS emisor,
                    r.nombre AS receptor
             FROM mensaje m
             JOIN usuario u ON m.usuario_id = u.id
             LEFT JOIN usuario r ON m.receptor_id = r.id
-            WHERE (m.usuario_id = ? AND m.receptor_id = ?)
-               OR (m.usuario_id = ? AND m.receptor_id = ?)
-            ORDER BY m.fecha ASC";
+            WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
+               OR (m.usuario_id = ? AND m.receptor_id = ?))";
+        
+        // Si se proporciona un ID de solicitud, filtrar por él
+        if ($solicitud_id !== null) {
+            $sql .= " AND m.solicitud_id = ?";
+        }
+        
+        $sql .= " ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id);
+        
+        if ($solicitud_id !== null) {
+            $stmt->bind_param("iiiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id, $solicitud_id);
+        } else {
+            $stmt->bind_param("iiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id);
+        }
+        
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -69,19 +81,31 @@ class Mensaje
     }
 
     // Obtener conversación entre dos usuarios específicos
-    public function obtenerConversacion($usuario_id, $otro_usuario_id)
+    public function obtenerConversacion($usuario_id, $otro_usuario_id, $solicitud_id = null)
     {
-        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha,
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                        u.nombre AS emisor, r.nombre AS receptor
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
-                WHERE (m.usuario_id = ? AND m.receptor_id = ?)
-                   OR (m.usuario_id = ? AND m.receptor_id = ?)
-                ORDER BY m.fecha ASC";
+                WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
+                   OR (m.usuario_id = ? AND m.receptor_id = ?))";
+        
+        // Si se proporciona un ID de solicitud, filtrar por él
+        if ($solicitud_id !== null) {
+            $sql .= " AND m.solicitud_id = ?";
+        }
+        
+        $sql .= " ORDER BY m.fecha ASC";
 
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
+        
+        if ($solicitud_id !== null) {
+            $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
+        } else {
+            $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
+        }
+        
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -146,14 +170,19 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
     // Enviar mensaje
-    public function enviarMensaje($usuario_id, $receptor_id, $mensaje)
-    {
-        $sql = "INSERT INTO mensaje (usuario_id, receptor_id, mensaje, fecha)
-                VALUES (?, ?, ?, NOW())";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("iis", $usuario_id, $receptor_id, $mensaje);
-        return $stmt->execute();
-    }
+    public function enviarMensaje($emisor_id, $receptor_id, $mensaje, $solicitud_id = null)
+     {
+         if ($solicitud_id) {
+             $sql = "INSERT INTO mensaje (emisor_id, receptor_id, mensaje, fecha, solicitud_id) VALUES (?, ?, ?, NOW(), ?)";
+             $stmt = $this->conexion->prepare($sql);
+             $stmt->bind_param("iisi", $emisor_id, $receptor_id, $mensaje, $solicitud_id);
+         } else {
+             $sql = "INSERT INTO mensaje (emisor_id, receptor_id, mensaje, fecha) VALUES (?, ?, ?, NOW())";
+             $stmt = $this->conexion->prepare($sql);
+             $stmt->bind_param("iis", $emisor_id, $receptor_id, $mensaje);
+         }
+         return $stmt->execute();
+     }
 
     // Guardar mensaje sin receptor
     public function guardarMensaje($usuario_id, $mensaje)
