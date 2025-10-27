@@ -99,7 +99,7 @@ class ChatC
             exit("No autorizado");
         }
 
-        $esAdmin = ($rol == ROL_ADMIN);
+        $esAdmin = ($rol == 3);
         $mensajes = $mensaje->obtenerMensajes($usuario_id, $esAdmin);
         // Recorre los mensajes y los imprime en HTML
         foreach ($mensajes as $m) {
@@ -116,7 +116,7 @@ class ChatC
 
         $usuario_id = $_SESSION['id'] ?? null;
         if (!$usuario_id) {
-            header("Location: index.php?accion=login");
+            header("Location: Index.php?accion=login");
             exit();
         }
 
@@ -144,7 +144,7 @@ class ChatC
 
         if (!$idSolicitud || !$usuarioId) {
             $_SESSION['mensaje'] = "Error: Solicitud o usuario no especificado.";
-            header("Location: index.php?accion=listarSA");
+            header("Location: Index.php?accion=listarSA");
             exit();
         }
 
@@ -155,7 +155,7 @@ class ChatC
 
         if (!$datosSolicitud) {
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
-            header("Location: index.php?accion=listarSA");
+            header("Location: Index.php?accion=listarSA");
             exit();
         }
 
@@ -166,12 +166,12 @@ class ChatC
             $otroUsuarioId = $datosSolicitud['tecnico_id'];
         } else {
             $_SESSION['mensaje'] = "Error: rol no válido.";
-            header("Location: index.php?accion=listarSA");
+            header("Location: Index.php?accion=listarSA");
             exit();
         }
 
         // Redirigir a la conversación incluyendo el ID de solicitud
-        header("Location: index.php?accion=mostrarChat&usuario_id=" . $otroUsuarioId . "&solicitud_id=" . $idSolicitud);
+        header("Location: Index.php?accion=mostrarChat&usuario_id=" . $otroUsuarioId . "&solicitud_id=" . $idSolicitud);
         exit();
     }
 
@@ -213,14 +213,14 @@ class ChatC
         $usuario_Id = $_POST['usuario_id'] ?? $_SESSION['id'];
 
         if (!$receptor_id) {
-            header("Location: index.php?accion=listarConversaciones");
+            header("Location: Index.php?accion=listarConversaciones");
             exit();
         }
 
         $mensajeModel = new Mensaje();
         $mensajeModel->borrarConversacion($usuario_Id, $receptor_id);
 
-        header("Location: index.php?accion=listarConversaciones");
+        header("Location: Index.php?accion=listarConversaciones");
         exit();
     }
 }
