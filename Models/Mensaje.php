@@ -12,7 +12,7 @@ class Mensaje
         }
     }
 
-    public function obtenerMensajes($receptor_id = null, $esAdmin = false)
+   public function obtenerMensajes($receptor_id = null, $esAdmin = false)
     {
         if ($esAdmin) {
             // Si es admin -> ver todos los mensajes
@@ -48,7 +48,8 @@ class Mensaje
         // Devuelve todos los resultados como array asociativo
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-    public function obtenerMensajesConversacion($usuario_id, $otroUsuario_id, $solicitud_id = null)
+    
+   public function obtenerMensajesConversacion($usuario_id, $otroUsuario_id, $solicitud_id = null)
     {
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                    u.nombre AS emisor,
@@ -57,7 +58,6 @@ class Mensaje
             JOIN usuario u ON m.usuario_id = u.id
             LEFT JOIN usuario r ON m.receptor_id = r.id
             WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
-<<<<<<< Updated upstream
                OR (m.usuario_id = ? AND m.receptor_id = ?))";
         
         // Si se proporciona un ID de solicitud, filtrar por él
@@ -75,36 +75,11 @@ class Mensaje
             $stmt->bind_param("iiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id);
         }
         
-=======
-                OR (m.usuario_id = ? AND m.receptor_id = ?))";
-
-        if ($solicitud_id !== null) {
-            $sql .= " AND m.solicitud_id = ?";
-        }
-
-        $sql .= " ORDER BY m.fecha ASC";
-
-        $stmt = $this->conexion->prepare($sql);
-
-        if ($solicitud_id !== null) {
-            $stmt->bind_param("iiiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id, $solicitud_id);
-        } else {
-            $stmt->bind_param("iiii", $usuario_id, $otroUsuario_id, $otroUsuario_id, $usuario_id, $solicitud_id);
-        }
-
->>>>>>> Stashed changes
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
-<<<<<<< Updated upstream
-
-    // Obtener conversación entre dos usuarios específicos
-    public function obtenerConversacion($usuario_id, $otro_usuario_id, $solicitud_id = null)
-    {
-        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
-=======
 
     public function obtenerConversacionesPorSolicitud($usuario_id, $idSolicitud)
     {
@@ -134,15 +109,13 @@ class Mensaje
     // Obtener conversación entre dos usuarios específicos
     public function obtenerConversacion($usuario_id, $otro_usuario_id, $solicitud_id = null)
     {
-        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, $solicitud_id
->>>>>>> Stashed changes
+        $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                        u.nombre AS emisor, r.nombre AS receptor
                 FROM mensaje m
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
                 WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
                    OR (m.usuario_id = ? AND m.receptor_id = ?))";
-<<<<<<< Updated upstream
         
         // Si se proporciona un ID de solicitud, filtrar por él
         if ($solicitud_id !== null) {
@@ -153,27 +126,12 @@ class Mensaje
 
         $stmt = $this->conexion->prepare($sql);
         
-=======
-
-        if ($solicitud_id !== null) {
-            $sql .= " AND m.solicitud_id = ?";
-        }
-
-        $sql .= " ORDER BY m.fecha ASC";
-
-        $stmt = $this->conexion->prepare($sql);
-
->>>>>>> Stashed changes
         if ($solicitud_id !== null) {
             $stmt->bind_param("iiiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id, $solicitud_id);
         } else {
             $stmt->bind_param("iiii", $usuario_id, $otro_usuario_id, $otro_usuario_id, $usuario_id);
         }
-<<<<<<< Updated upstream
         
-=======
-
->>>>>>> Stashed changes
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -213,7 +171,7 @@ class Mensaje
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
-    public function obtenerConversaciones($usuario_id)
+   public function obtenerConversaciones($usuario_id)
     {
         $sql = "SELECT 
                     CASE WHEN m.usuario_id = ? THEN m.receptor_id ELSE m.usuario_id END AS otro_usuario_id,
@@ -239,7 +197,6 @@ class Mensaje
     }
     // Enviar mensaje
     public function enviarMensaje($emisor_id, $receptor_id, $mensaje, $solicitud_id = null)
-<<<<<<< Updated upstream
      {
          if ($solicitud_id) {
              $sql = "INSERT INTO mensaje (emisor_id, receptor_id, mensaje, fecha, solicitud_id) VALUES (?, ?, ?, NOW(), ?)";
@@ -252,20 +209,6 @@ class Mensaje
          }
          return $stmt->execute();
      }
-=======
-    {
-        if ($solicitud_id) {
-            $sql = "INSERT INTO mensaje (emisor_id, receptor_id, mensaje, fecha, solicitud_id) VALUES (?, ?, ?, NOW(), ?)";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("iisi", $emisor_id, $receptor_id, $mensaje, $solicitud_id);
-        } else {
-            $sql = "INSERT INTO mensaje (emisor_id, receptor_id, mensaje, fecha) VALUES (?, ?, ?, NOW())";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("iis", $emisor_id, $receptor_id, $mensaje);
-        }
-        return $stmt->execute();
-    }
->>>>>>> Stashed changes
 
     // Guardar mensaje sin receptor
     public function guardarMensaje($usuario_id, $mensaje)
