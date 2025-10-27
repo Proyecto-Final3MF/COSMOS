@@ -73,22 +73,23 @@ require_once("./Views/include/UH.php");
                                 <?php endif; ?>
 
                                 <?php
-                                $usuarioLogueado = $_SESSION['id'];
-
-                                $usuarioDestino = isset($resultado['id_tecnico'])
-                                    ? $resultado['id_tecnico']
-                                    : $resultado['id_usuario'];
-
-                                $solicitudId = $resultado['id'];
+                                $usuarioDestino = 0;
+                                if (isset($_SESSION['rol'])) {
+                                    if ($_SESSION['rol'] == ROL_TECNICO) {
+                                        $usuarioDestino = $resultado['cliente_id'];
+                                    } elseif ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == 1) { // Asumiendo rol 1 es Admin
+                                        $usuarioDestino = $resultado['tecnico_id'];
+                                    }
+                                }
                                 ?>
 
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&id_solicitud=<?= $solicitudId ?>"
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
                                         class="icon-btn chat">
                                         <i class="fa fa-comments"></i>
                                     </a>
                                 <?php endif; ?>
-
+    
                                 <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                                     <i class="fa fa-file-alt"></i>
                                 </a>
