@@ -84,12 +84,12 @@ require_once("./Views/include/UH.php");
                                 ?>
 
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>"
+                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
                                         class="icon-btn chat">
                                         <i class="fa fa-comments"></i>
                                     </a>
                                 <?php endif; ?>
-
+    
                                 <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                                     <i class="fa fa-file-alt"></i>
                                 </a>
