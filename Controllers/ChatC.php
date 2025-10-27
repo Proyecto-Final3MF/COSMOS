@@ -21,16 +21,22 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $idSolicitud = $_GET['id_solicitud'] ?? null;
+        $solicitudId = $_GET['solicitud_id'] ?? null;
 
         if (!$usuarioId || !$otroUsuarioId) {
             echo "Usuario no especificado";
             return;
         }
 
-        $idSolicitud = $idSolicitud ?? null;
-
-        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $this->mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
+        
+        // Pasar el ID de solicitud a la vista
+        $solicitud = null;
+        if ($solicitudId) {
+            $solicitudModel = new Solicitud();
+            $solicitud = $solicitudModel->obtenerSolicitudPorId($solicitudId);
+        }
+        
         require_once "Views/chat.php";
     }
 
@@ -38,23 +44,17 @@ class ChatC
     {
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = $_GET['usuario_id'] ?? null;
-        $idSolicitud = $_GET['id_solicitud'] ?? null;
+        $solicitudId = $_GET['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$otroUsuarioId || !$idSolicitud) {
+        if (!$usuarioId || !$otroUsuarioId) {
             http_response_code(400);
             exit("Faltan paramentros.");
         }
 
         $mensajeModel = new Mensaje();
-        if ($idSolicitud) {
-            $mensajes = $mensajeModel->obtenerConversacionesPorSolicitud($usuarioId, $otroUsuarioId, $idSolicitud);
-        } else {
-            $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
-        }
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
 
         include __DIR__ . "/../Views/mensajes.php";
-        exit();
     }
 
     // Mostrar la vista de chat
@@ -71,6 +71,7 @@ class ChatC
 
         $usuarioId = $_SESSION['id'] ?? null;
         $otroUsuarioId = intval($_GET['usuario_id'] ?? null);
+        $solicitudId = $_GET['solicitud_id'] ?? null;
 
         if (!$usuarioId || !$otroUsuarioId) {
             echo "Error: no se especificoel usuario receptor.";
@@ -81,7 +82,7 @@ class ChatC
         $mensajeModel = new Mensaje();
 
         // Obtener todos los mensajes entre los dos usuarios
-        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId);
+        $mensajes = $mensajeModel->obtenerConversacion($usuarioId, $otroUsuarioId, $solicitudId);
 
         include __DIR__ . "/../Views/conversaciones.php";
     }
@@ -114,15 +115,13 @@ class ChatC
         }
 
         $usuario_id = $_SESSION['id'] ?? null;
-        $idSolicitud = $_GET['id_solicitud'] ?? null;
-
-        if (!$usuario_id || !$idSolicitud) {
+        if (!$usuario_id) {
             header("Location: index.php?accion=login");
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $conversaciones = $mensajeModel->obtenerConversacionesPorSolicitud($usuario_id, $idSolicitud);
+        $conversaciones = $mensajeModel->obtenerConversaciones($usuario_id);
 
         include __DIR__ . "/../Views/conversaciones.php";
     }
@@ -171,8 +170,8 @@ class ChatC
             exit();
         }
 
-        // Redirigir a la conversación
-        header("Location: index.php?accion=mostrarConversacion&usuario_id=" . $otroUsuarioId . "&id_solicitud=" . $idSolicitud);
+        // Redirigir a la conversación incluyendo el ID de solicitud
+        header("Location: index.php?accion=mostrarChat&usuario_id=" . $otroUsuarioId . "&solicitud_id=" . $idSolicitud);
         exit();
     }
 
@@ -183,29 +182,20 @@ class ChatC
             session_start();
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            echo '<pre>';
-            var_dump($_POST);
-            echo '</pre>';
-            exit;
-        }
-
         $usuarioId = $_SESSION['id'] ?? null;
         $receptor_id = $_POST['receptor_id'] ?? null;
-        $solicitud_id = $_POST['solicitud_id'] ?? null;
         $mensajeTexto = trim($_POST['mensaje'] ?? '');
+        $solicitud_id = $_POST['solicitud_id'] ?? null;
 
-        if (!$usuarioId || !$receptor_id || !$solicitud_id || $mensajeTexto === '') {
+        if (!$usuarioId || !$receptor_id || $mensajeTexto === '') {
             http_response_code(400);
-            echo "Error: parámetros inválidos";
+            echo "Fatal parámetros";
             exit();
         }
 
         $mensajeModel = new Mensaje();
-        $mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
+        $this->mensajeModel->enviarMensaje($usuarioId, $receptor_id, $mensajeTexto, $solicitud_id);
 
-        // Devuelve un simple OK para JS
-        echo "OK";
         exit();
     }
 
