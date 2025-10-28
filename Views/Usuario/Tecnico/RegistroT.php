@@ -22,8 +22,10 @@ include_once("./Views/include/UH.php");
             <label for="mail" class="form-label"></label>
             <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
             
-            <p class="fade-label">Especializaciones (Seleccione al menos 1)</p>
-                
+
+            <div id="tecnico-fields">
+                <p class="fade-label">Especializaciones (Seleccione al menos 1)</p>
+                    
                 <select class="form-control select2" name="especializaciones[]" multiple> 
                     <?php foreach ($especializaciones as $esp): ?>
                         <option value="<?php echo htmlspecialchars($esp['id']); ?>">
@@ -31,16 +33,18 @@ include_once("./Views/include/UH.php");
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <br><br>
+                <br>
+                <br>
+            
 
-
             
-            <p class="fade-label">Otra Especialidad (Opcional)</p>
-            
-            <input type="text" class="form-control" name="otra_especialidad" placeholder="Ej: Reparación de drones"> 
-            
-            <br>
-            <br>
+                <p class="fade-label">Otra Especialidad (Opcional)</p>
+                
+                <input type="text" class="form-control" name="otra_especialidad" placeholder="Ej: Reparación GPU"> 
+                
+                <br>
+                <br>
+            </div>
 
             <p class="fade-label">Contraseña</p>
             <div class="password-container">
@@ -71,6 +75,17 @@ include_once("./Views/include/UH.php");
             // Puedes añadir opciones aquí, por ejemplo:
             placeholder: "Selecciona una o más especializaciones",
             allowClear: true // Permite deseleccionar todos los elementos
+        });
+    });
+</script>
+
+<script>
+    // Se ejecuta una vez que el DOM está completamente cargado
+    $(document).ready(function() {
+        // Inicializa Select2 en el elemento con la clase 'select2'
+        $('.select2').select2({
+            placeholder: "Selecciona una o más especializaciones",
+            allowClear: true
         });
     });
 </script>
