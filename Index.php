@@ -119,6 +119,11 @@ switch ($accion) {
       $controller->registroT();
     break;
 
+    case 'guardarT':
+      $controller = new UsuarioC();
+      $controller->guardarT();
+    break;
+
     //si la accion es redireccion entra al case
 
     case 'redireccion':
