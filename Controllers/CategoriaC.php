@@ -27,7 +27,7 @@ class CategoriaC {
         if (empty($nombre) || $nombre === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "La categoría no puede tener un nombre vacío.";
-            header("Location: index.php?accion=FormularioC");
+            header("Location: Index.php?accion=FormularioC");
             exit();
         }
 
@@ -54,7 +54,7 @@ class CategoriaC {
             }
         }
 
-        header("Location: index.php?accion=FormularioC");
+        header("Location: Index.php?accion=FormularioC");
         exit();
     }
 
@@ -76,7 +76,7 @@ class CategoriaC {
         if ($id <= 0) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "ID de categoría no válido.";
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         }
 
@@ -84,7 +84,7 @@ class CategoriaC {
         if (!$categoria) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Categoría no encontrada.";
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         }
 
@@ -125,10 +125,10 @@ class CategoriaC {
                 $_SESSION['mensaje'] = "Error: Datos no válidos para la actualización.";
             }
 
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         } else {
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         }
     }
@@ -141,7 +141,7 @@ class CategoriaC {
         if ($id <= 0) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "ID de categoría no válido.";
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         }
 
@@ -151,7 +151,7 @@ class CategoriaC {
         if (!$categoria) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Categoría no encontrada.";
-            header("Location: index.php?accion=listarC");
+            header("Location: Index.php?accion=listarC");
             exit();
         }
 
@@ -174,7 +174,7 @@ class CategoriaC {
             $_SESSION['mensaje'] = "Error: No se pudo eliminar la categoría.";
         }
 
-        header("Location: index.php?accion=listarC");
+        header("Location: Index.php?accion=listarC");
         exit();
     }
 }

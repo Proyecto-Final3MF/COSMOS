@@ -28,21 +28,21 @@ class ProductoC {
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name']) || $nombre === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
         if ($producto->existeProducto($nombre, $id_usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
         if ($categoria_id === null || $categoria_id === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Producto sin categoria.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
@@ -55,7 +55,7 @@ class ProductoC {
         if (!in_array($tipoArchivo, $tiposPermitidos)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
@@ -80,7 +80,7 @@ class ProductoC {
                     $id,
                     null
                 );
-                header("Location: index.php?accion=formularioP");
+                header("Location: Index.php?accion=formularioP");
                 exit();
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
@@ -95,7 +95,7 @@ class ProductoC {
     public function listarP() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario === null) {
-            header("Location: index.php?accion=login");
+            header("Location: Index.php?accion=login");
             exit();
         }
 
@@ -127,7 +127,7 @@ class ProductoC {
             $obs
         );
 
-        header("Location: index.php?accion=listarP");
+        header("Location: Index.php?accion=listarP");
     }
 
     public function editarP() {
@@ -162,14 +162,14 @@ class ProductoC {
         if (!$id || empty($nombre) || empty($categoria_id) || $nombre === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            header("Location: index.php?accion=editarP&id=" . $id);
+            header("Location: Index.php?accion=editarP&id=" . $id);
             exit();
         }
 
         if ($categoria_id === null || $categoria_id === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Producto sin categoria.";
-            header("Location: index.php?accion=editarP&id=" . $id);
+            header("Location: Index.php?accion=editarP&id=" . $id);
             exit();
         }
 
@@ -183,7 +183,7 @@ class ProductoC {
             if (!in_array($tipoArchivo, $tiposPermitidos)) {
                 $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
-                header("Location: index.php?accion=editarP&id=" . $id);
+                header("Location: Index.php?accion=editarP&id=" . $id);
                 exit();
             }
 
@@ -195,7 +195,7 @@ class ProductoC {
             if (!move_uploaded_file($rutaTemporal, $rutaFinal)) {
                 $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Error al subir la imagen.";
-                header("Location: index.php?accion=editarP&id=" . $id);
+                header("Location: Index.php?accion=editarP&id=" . $id);
                 exit();
             }
         } else {
@@ -240,12 +240,12 @@ class ProductoC {
                 $obs
             );
 
-            header("Location: index.php?accion=listarP");
+            header("Location: Index.php?accion=listarP");
             exit();
         } else {
             $_SESSION['mensaje'] = "Error al actualizar el producto.";
             $_SESSION['tipo_mensaje'] = "error";
-            header("Location: index.php?accion=editarP&id=" . $id);
+            header("Location: Index.php?accion=editarP&id=" . $id);
             exit();
         }
     }
@@ -266,14 +266,14 @@ class ProductoC {
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
         if ($producto->existeProducto($nombre, $id_usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
@@ -286,7 +286,7 @@ class ProductoC {
         if (!in_array($tipoArchivo, $tiposPermitidos)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
-            header("Location: index.php?accion=formularioP");
+            header("Location: Index.php?accion=formularioP");
             exit();
         }
 
@@ -307,7 +307,7 @@ class ProductoC {
                     $id,
                     null
                 );
-                header("Location: index.php?accion=urgenteS");
+                header("Location: Index.php?accion=urgenteS");
                 exit();
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";

@@ -22,7 +22,7 @@ require_once ("./Views/include/UH.php");
     <h2 class="fade-slide">Solicitudes Recien Creadas</h2>
     <p class="fade-slide">Aqui se mostraran todas tus solicitudes que ningun tecnico a aceptado todavia</p>
     <div class="botones-container fade-slide">
-    <a href="index.php?accion=formularioS"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
+    <a href="Index.php?accion=formularioS"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
     <table>
         <thead>
@@ -51,7 +51,7 @@ require_once ("./Views/include/UH.php");
                 <td><?= htmlspecialchars($resultado['fecha_creacion']); ?></td>
                 <td>
                     <div class="btn-group-actions">  
-                    <a href="index.php?accion=borrarS&id=<?= $resultado['id']; ?>" class="icon-btn delete">
+                    <a href="Index.php?accion=borrarS&id=<?= $resultado['id']; ?>" class="icon-btn delete">
                     <i class="fa fa-trash"></i>
                     </a>
                     </div>

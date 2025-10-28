@@ -13,13 +13,13 @@ require_once("Models/ProductoM.php");
 require_once("Controllers/ChatC.php");
 require_once("Controllers/NotificacionC.php");
 
-$accion = $_GET['accion'] ?? 'index';
+$accion = $_GET['accion'] ?? 'Index';
 
 $acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'espera'];
 
 if (!in_array($accion, $acciones_publicas)) {
   if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php?accion=login");
+    header("Location: Index.php?accion=login");
     exit;
   }
 }
@@ -59,13 +59,13 @@ switch ($accion) {
       } elseif ($_SESSION['rol'] == ROL_TECNICO) {
         include("./Views/Usuario/Tecnico/TecnicoP.php");
       } elseif ($_SESSION['rol'] == ROL_ADMIN) {
-        header("Location:index.php?accion=panelA");
+        header("Location:Index.php?accion=panelA");
       } else {
         echo "<h1>Error: Rol no reconocido.</h1>";
-        echo "<p><a href='index.php?accion=logout'>Cerrar Sesión</a></p>";
+        echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
       }
     } else {
-      header("Location: index.php?accion=login");
+      header("Location: Index.php?accion=login");
       exit();
     }
   break;
@@ -354,7 +354,7 @@ switch ($accion) {
         // Asumiendo que hay una vista principal para el admin
         include("./Views/Usuario/Admin/PanelA.php"); 
     } else {
-        header("Location: index.php?accion=redireccion");
+        header("Location: Index.php?accion=redireccion");
     }
     break;
 
@@ -375,7 +375,7 @@ case 'rechazarTecnico':
 
   default:
     if (!isset($_SESSION['usuario'])) {
-      header("Location: index.php?accion=login");
+      header("Location: Index.php?accion=login");
     } else {
       http_response_code(404);
       header("Location: Error.php");

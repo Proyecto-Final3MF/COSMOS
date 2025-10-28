@@ -55,7 +55,7 @@ require_once("./Views/include/UH.php");
                         <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                         <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
                             <td>
-                                <a title="Perfil del Tecnico" href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
+                                <a title="Perfil del Tecnico" href="Index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
                                     <i class="fa fa-user"></i> <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
                                 </a>
                             </td>
@@ -67,7 +67,7 @@ require_once("./Views/include/UH.php");
                         <td>
                             <div class="btn-group-actions d-flex">
                                 <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
-                                    <a href="index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="icon-btn edit">
+                                    <a href="Index.php?accion=editarSF&id=<?= $resultado['id']; ?>" class="icon-btn edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 <?php endif; ?>
@@ -84,17 +84,17 @@ require_once("./Views/include/UH.php");
                                 ?>
 
                                 <?php if ($usuarioDestino): ?>
-                                    <a href="index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
+                                    <a href="Index.php?accion=mostrarChat&usuario_id=<?= $usuarioDestino ?>&solicitud_id=<?= $resultado['id'] ?>"
                                         class="icon-btn chat">
                                         <i class="fa fa-comments"></i>
                                     </a>
                                 <?php endif; ?>
     
-                                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                                <a href="Index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                                     <i class="fa fa-file-alt"></i>
                                 </a>
 
-                                <a href="index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
+                                <a href="Index.php?accion=cancelarS&id_solicitud=<?= $resultado['id']; ?>"
                                     onclick="return confirm('¿Estás seguro de que quieres cancelar esta solicitud?');"
                                     class="icon-btn delete">
                                     <i class="fa fa-times"></i>
@@ -109,7 +109,7 @@ require_once("./Views/include/UH.php");
                     <td colspan="<?= (isset($_SESSION['rol']) && ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == ROL_TECNICO)) ? 8 : 7; ?>">
                         No acepto solicitudes todavia
                         <div style="display:flex; justify-content:center; margin-top:15px;">
-                            <a href="index.php?accion=listarTL">
+                            <a href="Index.php?accion=listarTL">
                                 <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                             </a>
                         </div>
