@@ -11,7 +11,7 @@ include_once("./Views/include/UH.php");
 
 <div class="contenedor-formulario">
     <section class="formularios99">
-        <h3>Registrarse</h3>
+        <h3>Registrarse como Tecnico</h3>
 
         <form method="POST" action="index.php?accion=guardarT" enctype="multipart/form-data">
 
@@ -22,8 +22,9 @@ include_once("./Views/include/UH.php");
             <label for="mail" class="form-label"></label>
             <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
             
-            <p class="fade-label">Especializaciones (Selecciona al menos una)</p>
-                <select class="form-control select2" name="especializaciones[]" multiple="multiple" required>
+            <p class="fade-label">Especializaciones (Seleccione al menos 1)</p>
+                
+                <select class="form-control select2" name="especializaciones[]" multiple> 
                     <?php foreach ($especializaciones as $esp): ?>
                         <option value="<?php echo htmlspecialchars($esp['id']); ?>">
                             <?php echo htmlspecialchars($esp['nombre']); ?>
@@ -31,6 +32,7 @@ include_once("./Views/include/UH.php");
                     <?php endforeach; ?>
                 </select>
                 <br><br>
+
 
             
             <p class="fade-label">Otra Especialidad (Opcional)</p>
@@ -79,13 +81,3 @@ include_once("./Views/include/UH.php");
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<p class="fade-label">Especializaciones (Selecciona las que apliquen)</p>
-    
-    <select class="form-control select2" name="especializaciones[]" multiple> 
-        <?php foreach ($especializaciones as $esp): ?>
-            <option value="<?php echo htmlspecialchars($esp['id']); ?>">
-                <?php echo htmlspecialchars($esp['nombre']); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <br><br>
