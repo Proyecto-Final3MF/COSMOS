@@ -37,7 +37,7 @@ class UsuarioC {
         $usuarioM = new Usuario();
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
-        $rol_id = (int)$_POST['rol'];
+        $rol_id = 2;
         $contrasena = $_POST['contrasena'];
 
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
@@ -67,13 +67,6 @@ class UsuarioC {
             exit();
         }
 
-        if (!isset($_POST['rol']) || empty($_POST['rol'])) {
-            $_SESSION['tipo_mensaje'] = "warning";
-            $_SESSION['mensaje'] = "Debe seleccionar un Rol para registrarse.";
-            header("Location: Index.php?accion=register");
-            exit();
-        }   
-
         if (empty($usuario) || empty($mail)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
@@ -88,7 +81,117 @@ class UsuarioC {
             exit();
         }
 
+        $id_nuevo_usuario = $usuarioM->guardarC($usuario, $contrasena_hash, $mail, $rol_id);
+
+        if ($id_nuevo_usuario) {
+            $_SESSION['mensaje'] = "Registro de cliente exitoso. ¡Inicia sesión!";
+            $_SESSION['tipo_mensaje'] = "success";
+
+            $this->historialController->registrarModificacion($usuario, $id_nuevo_usuario, 'fue registrado', null, 0, "Rol ID: $rol_id");
+
+            header("Location: Index.php?accion=login");
+            exit();
+         } else {
+            $_SESSION['mensaje'] = "Error al guardar el usuario.";
+            $_SESSION['tipo_mensaje'] = "danger";
+            header("Location: Index.php?accion=register");
+            exit();
+        }
     }
+
+
+    public function guardarT() {
+        $usuarioM = new Usuario();
+        $usuario = trim($_POST['usuario']);
+        $mail = trim($_POST['mail']);
+        $contrasena = $_POST['contrasena'];
+        $rol_id = 1;
+        $especializaciones = $_POST['especializaciones'] ?? [];
+        $otra_especialidad = trim($_POST['otra_especialidad']) ?? null;
+
+       
+        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
+            $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            header("Location: Index.php?accion=registerT");
+            exit();
+        }
+        
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+            // 2. Validaciones de Usuario y Email
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        $existe = $usuarioM->obtenerPorEmail($mail);
+            
+        if ($existe) {
+            $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+            $_SESSION['tipo_mensaje'] = "warning";
+                
+            header("Location: Index.php?accion=registerT");
+            exit();
+        }
+
+        if (empty($usuario) || empty($mail)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        // Validaciones específicas de técnico
+        if (empty($especializaciones) && empty($otra_especialidad)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Debe seleccionar al menos una especialización o especificar 'Otra Especialidad'.";
+            header("Location: Index.php?accion=registroT"); 
+            exit();
+        }
+        if (!isset($_FILES['evidencia_tecnica']) || $_FILES['evidencia_tecnica']['error'] !== 0) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Debe subir la evidencia técnica para la verificación.";
+            header("Location: Index.php?accion=registroT"); 
+            exit();
+        }
+        
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+        
+        $id_nuevo_usuario = $usuarioM->guardarT(
+            $usuario, 
+            $contrasena_hash, 
+            $mail, 
+            $rol_id,
+            $otra_especialidad,
+            $especializaciones
+        );
+
+        if ($id_nuevo_usuario) {
+            $_SESSION['mensaje'] = "Registro de técnico exitoso. Su cuenta está pendiente de verificación.";
+            $_SESSION['tipo_mensaje'] = "info";
+            
+            $this->historialController->registrarModificacion($usuario, $id_nuevo_usuario, 'fue registrado', null, 0, "Rol ID: $rol_id (Pendiente)");
+
+            header("Location: Index.php?accion=login");
+            exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al guardar el técnico.";
+            $_SESSION['tipo_mensaje'] = "danger";
+            header("Location: Index.php?accion=registroT");
+            exit();
+        }
+    }
+
 
     public function actualizarU() {
         session_start();
