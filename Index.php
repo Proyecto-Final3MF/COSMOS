@@ -23,7 +23,7 @@ $accion = $_GET['accion'] ?? 'Index';
 //define el array de acciones publicas (acciones para los usuarios no logueados/registrados)
 //si un usuario no logueado intenta hacer otras acciones no va a poder
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'redireccion', 'tecnico', 'mail'];
+$acciones_publicas = ['login', 'autenticar', 'registro', 'guardarU', 'redireccion', 'tecnico', 'registroT'];
 
 // si la accion que el usuario quiere hacer no esta en el array de acciones publicas entonces entra en el if
 //si la accion esta en el array entonces no entra al if y entra al switch
@@ -114,9 +114,9 @@ switch ($accion) {
       $controller->tecnico();
     break;
 
-    case 'mail':
+    case 'registroT':
       $controller = new UsuarioC();
-      $controller->mail();
+      $controller->registroT();
     break;
 
     //si la accion es redireccion entra al case

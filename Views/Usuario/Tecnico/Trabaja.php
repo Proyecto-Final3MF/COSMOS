@@ -4,15 +4,6 @@
 <br>
 
 <h1 class="fade-label">Bienvenido</h1>
-<p class="fade-label">para trabajar con nosotros porfavor envianos tu email para poder entrar en contacto</p>
+<p class="fade-label">Para trabajar con nosotros porfavor envianos tu curriculum vitae</p>
 
-<div class="contenedor-formulario">
-    <section class="formularios999">
-        <form method="POST" action="Index.php?accion=mail">
-            <p class="fade-label">Correo electrónico</p>
-            <input type="email" class="form-control" id="usuario" name="usuario" autocomplete="off" required>
-
-            <button class="button" type="submit">Enviar</button>
-        </form>
-    </section>
-</div>
+<p class="fade-label">Ingrese mail de empresa</p>
