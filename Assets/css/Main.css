@@ -2606,16 +2606,6 @@ input:checked ~ label {
     padding: 0 5px;
 }
 
-.foto-evidencia {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0;
-    object-fit: contain;
-    border: 1px solid #ddd;
-    display: block;
-    margin: 10px auto;
-}
-
 .container-admin {
     max-width: 1200px;
     margin: 20px auto;
