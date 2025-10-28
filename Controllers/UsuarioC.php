@@ -33,7 +33,7 @@ class UsuarioC {
         if (!$datos_usuario) {
             $_SESSION['tipo_mensaje'] = "danger";
             $_SESSION['mensaje'] = "No se pudo encontrar la información del técnico.";
-            header("Location: index.php?accion=login");
+            header("Location: Index.php?accion=login");
             exit();
         }
         
@@ -66,7 +66,7 @@ public function guardarU() {
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
             $_SESSION['tipo_mensaje'] = "warning";
-            header("Location: index.php?accion=register");
+            header("Location: Index.php?accion=register");
             exit();
         }
         $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
@@ -75,7 +75,7 @@ public function guardarU() {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-            header("Location: index.php?accion=register"); 
+            header("Location: Index.php?accion=register"); 
             exit();
         }
 
@@ -85,28 +85,28 @@ public function guardarU() {
             $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
             $_SESSION['tipo_mensaje'] = "warning";
             
-            header("Location: index.php?accion=register");
+            header("Location: Index.php?accion=register");
             exit();
         }
 
         if (!isset($_POST['rol']) || empty($_POST['rol'])) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Debe seleccionar un Rol para registrarse.";
-            header("Location: index.php?accion=register");
+            header("Location: Index.php?accion=register");
             exit();
         }   
 
         if (empty($usuario) || empty($mail)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
-            header("Location: index.php?accion=register"); 
+            header("Location: Index.php?accion=register"); 
             exit();
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
-            header("Location: index.php?accion=register"); 
+            header("Location: Index.php?accion=register"); 
             exit();
         }
         $rol_id = 0;
@@ -122,7 +122,7 @@ public function guardarU() {
             if ($rol_id !== 1 && $rol_id !== 2) {
                 $_SESSION['tipo_mensaje'] = "danger";
                 $_SESSION['mensaje'] = "El Rol seleccionado no es válido.";
-                header("Location: index.php?accion=register");
+                header("Location: Index.php?accion=register");
                 exit();
             }
             
@@ -134,7 +134,7 @@ public function guardarU() {
             if (!isset($_FILES['foto_evidencia']) || $_FILES['foto_evidencia']['error'] !== 0) {
                 $_SESSION['tipo_mensaje'] = "warning";
                 $_SESSION['mensaje'] = "Debe subir una foto de evidencia para registrarse como Técnico.";
-                header("Location: index.php?accion=register"); 
+                header("Location: Index.php?accion=register"); 
                 exit();
             }
 
@@ -143,7 +143,7 @@ public function guardarU() {
             if (!move_uploaded_file($_FILES['foto_evidencia']['tmp_name'], $ruta_evidencia)) {
                 $_SESSION['tipo_mensaje'] = "danger";
                 $_SESSION['mensaje'] = "Error al subir la foto de evidencia. Intente de nuevo.";
-                header("Location: index.php?accion=register"); 
+                header("Location: Index.php?accion=register"); 
                 exit();
             }
             
@@ -177,7 +177,7 @@ public function guardarU() {
                 }
                 $_SESSION['tipo_mensaje'] = "success";
                 $_SESSION['mensaje'] = "Registro completado. Tu evidencia será verificada pronto.";
-                header("Location: index.php?accion=espera&email=" . urlencode($mail));
+                header("Location: Index.php?accion=espera&email=" . urlencode($mail));
                 exit();
             } else {
                 session_start();
@@ -191,7 +191,7 @@ public function guardarU() {
                 $_SESSION['tipo_mensaje'] = "success";
                 
                 // 🚨 ESTA REDIRECCIÓN PREVIENE EL REENVÍO DEL FORMULARIO
-                header("Location: index.php?accion=redireccion");
+                header("Location: Index.php?accion=redireccion");
                 exit();
             }
 
@@ -203,7 +203,7 @@ public function guardarU() {
                 unlink($ruta_evidencia);
             }
 
-            header("Location: index.php?accion=register");
+            header("Location: Index.php?accion=register");
             $_SESSION['mensaje'] = "Tu cuenta no pudo ser creada. Por favor, intenta de nuevo o revisa los datos.";
             $_SESSION['tipo_mensaje'] = "danger"; // Cambiado a 'danger' para un fallo de BD/inserción
             exit();
@@ -221,21 +221,21 @@ public function guardarU() {
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
-            header("Location: index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id"); 
             exit();
         }
 
         if (empty($nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El nombre no puede estar vacío.";
-            header("Location: index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id"); 
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
-            header("Location: index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id"); 
             exit();
         }
 
@@ -276,12 +276,12 @@ public function guardarU() {
 
             $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
 
-            header("Location: index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
+            header("Location: Index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
             exit();
         } else {
             $_SESSION['tipo_mensaje'] = "danger";
             $_SESSION['mensaje'] = "Error al actualizar el usuario.";
-            header("Location: index.php?accion=editarU&id=$id");
+            header("Location: Index.php?accion=editarU&id=$id");
             exit();
         }
     }
@@ -294,7 +294,7 @@ public function guardarU() {
         $nombre = $usuarioBorrado['nombre'];
         $usuario->borrar($id);
         $this->historialController->registrarModificacion($nombre, $id, 'fue eliminado', null, 0, null);
-        header("Location: index.php?accion=redireccion");
+        header("Location: Index.php?accion=redireccion");
         exit();
     }
 
@@ -320,12 +320,12 @@ public function guardarU() {
                     case 'pendiente':
                         $_SESSION['tipo_mensaje'] = "warning";
                         $_SESSION['mensaje'] = "Tu cuenta de técnico está pendiente de verificación.";
-                        header("Location: index.php?accion=espera&email=" . urlencode($user['email']));
+                        header("Location: Index.php?accion=espera&email=" . urlencode($user['email']));
                         exit();
                     case 'rechazado':
                         $_SESSION['tipo_mensaje'] = "danger";
                         $_SESSION['mensaje'] = "Tu solicitud como técnico fue rechazada. Contacta al administrador.";
-                        header("Location: index.php?accion=login");
+                        header("Location: Index.php?accion=login");
                         exit();
                     case 'aprobado':
                         break;
@@ -339,7 +339,7 @@ public function guardarU() {
             $_SESSION['email'] = $user['email'];
             $_SESSION['foto_perfil'] = $user['foto_perfil'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-            header("Location: index.php?accion=redireccion");
+            header("Location: Index.php?accion=redireccion");
             exit();
         } else {
             $error = "Correo o contraseña incorrectos";
@@ -361,7 +361,7 @@ public function guardarU() {
 
     public function verificarTecnicos() {
         if ($_SESSION['rol'] != ROL_ADMIN) {
-            header("Location: index.php?accion=redireccion");
+            header("Location: Index.php?accion=redireccion");
             exit();
         }
         $usuarioM = new Usuario();
@@ -371,7 +371,7 @@ public function guardarU() {
 
     public function aprobarTecnico() {
         if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
-            header("Location: index.php?accion=redireccion");
+            header("Location: Index.php?accion=redireccion");
             exit();
         }
         $id = (int)$_GET['id'];
@@ -384,13 +384,13 @@ public function guardarU() {
             $_SESSION['mensaje'] = "Error al aprobar al técnico.";
             $_SESSION['tipo_mensaje'] = "danger";
         }
-        header("Location: index.php?accion=verificarTecnicos");
+        header("Location: Index.php?accion=verificarTecnicos");
         exit();
     }
 
     public function rechazarTecnico() {
         if ($_SESSION['rol'] != ROL_ADMIN || !isset($_GET['id'])) {
-            header("Location: index.php?accion=redireccion");
+            header("Location: Index.php?accion=redireccion");
             exit();
         }
         $id = (int)$_GET['id'];
@@ -408,7 +408,7 @@ public function guardarU() {
             $_SESSION['mensaje'] = "Error al rechazar y eliminar al técnico.";
             $_SESSION['tipo_mensaje'] = "danger";
         }
-        header("Location: index.php?accion=verificarTecnicos");
+        header("Location: Index.php?accion=verificarTecnicos");
         exit();
     }
 
@@ -433,7 +433,7 @@ public function guardarU() {
         session_start();
         session_unset();
         session_destroy();
-        header("Location: index.php");
+        header("Location: Index.php");
         exit();
     }
 }

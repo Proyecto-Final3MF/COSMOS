@@ -3,7 +3,7 @@ require_once ("./Views/include/UH.php");
 require_once ("./Views/include/popup.php"); 
 
 if ($_SESSION['rol'] != 3) {
-    header("Location: index.php?accion=redireccion");
+    header("Location: Index.php?accion=redireccion");
     exit();
 }
 ?>
@@ -49,12 +49,12 @@ if ($_SESSION['rol'] != 3) {
                                      onclick="mostrarEvidencia('<?= htmlspecialchars($tecnico['evidencia_tecnica_ruta']) ?>')">
                             </td>
                             <td>
-                                <a href="index.php?accion=aprobarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
+                                <a href="Index.php?accion=aprobarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
                                    class="icon-btn aceptar"
                                    onclick="return confirm('¿Está seguro de APROBAR a <?= htmlspecialchars($tecnico['nombre']) ?>? Esta acción es irreversible.');">
                                     <i class="fa fa-check"></i>
                                 </a>
-                                <a href="index.php?accion=rechazarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
+                                <a href="Index.php?accion=rechazarTecnico&id=<?= htmlspecialchars($tecnico['id']) ?>" 
                                    class="icon-btn delete"
                                    onclick="return confirm('¿Está seguro de RECHAZAR y ELIMINAR a <?= htmlspecialchars($tecnico['nombre']) ?>? Esta acción es irreversible.');">
                                     <i class="fa fa-times"></i>

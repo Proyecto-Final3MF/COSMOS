@@ -24,7 +24,7 @@ class ReviewC {
         if (!$id) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
-            header("Location: index.php?accion=listarST"); 
+            header("Location: Index.php?accion=listarST"); 
             exit();
         }
 
@@ -41,7 +41,7 @@ class ReviewC {
         if (!$datosSolicitud) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solicitud no encontrada.";
-            header("Location: index.php?accion=listarST");
+            header("Location: Index.php?accion=listarST");
             exit();
         }
 
@@ -63,14 +63,14 @@ class ReviewC {
         if ($rating == 0) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
-            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            header("Location:Index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
 
         if (empty($titulo_solicitud) || $titulo_solicitud === '') {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            header("Location:Index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
         
@@ -79,7 +79,7 @@ class ReviewC {
         if ($HayReview === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            header("Location:Index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit();
         }
         
@@ -88,7 +88,7 @@ class ReviewC {
         if ($HayPromedio === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            header("Location:Index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
 
@@ -97,7 +97,7 @@ class ReviewC {
         if ($HaySuma === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
-            header("Location:index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
+            header("Location:Index.php?accion=FormularioReview&id_solicitud=" . $id_solicitud);
             exit(); 
         }
         
@@ -144,7 +144,7 @@ class ReviewC {
             $notificacion = new NotificacionC();
             $notificacion->crearNotificacion($id_tecnico, "Tu calificación en la solicitud '$titulo_solicitud' fue editada.", 'urgente');
 
-            header("Location:index.php?accion=listarST");
+            header("Location:Index.php?accion=listarST");
             exit();
         }
 
@@ -166,7 +166,7 @@ class ReviewC {
         $notificacion->crearNotificacion($id_tecnico, "Has recibido una nueva calificación en la solicitud '$titulo_solicitud'.", 'urgente');
         $_SESSION['tipo_mensaje'] = "success";
         $_SESSION['mensaje'] = "Gracias por compartir tu experiencia.";
-        header("Location:index.php?accion=listarST");
+        header("Location:Index.php?accion=listarST");
         exit();
     }
 }

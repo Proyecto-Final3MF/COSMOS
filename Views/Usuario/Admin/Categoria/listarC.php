@@ -1,6 +1,6 @@
 <?php 
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
-    header("Location: index.php?accion=redireccion");
+    header("Location: Index.php?accion=redireccion");
     exit();
 } 
 
@@ -19,14 +19,14 @@ require_once("./Views/include/UH.php");
     <br>
 <h2 class="fade-slide" >Listado de todas las categorias</h2>
 <div class="botones-container fade-slide">
-    <a href="index.php?accion=FormularioC"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
+    <a href="Index.php?accion=FormularioC"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
 <div class="btn-volver-container fade-slide">
   <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
   </button>
 </div>
-<form action="index.php" class="ordenar-form">
+<form action="Index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
     <input type="text" id="search" name="search" placeholder="Buscar Categoria" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
     <label for="orden">Ordenar por:</label>
@@ -42,7 +42,7 @@ require_once("./Views/include/UH.php");
 
 <?php if (empty($resultados)): ?>
     <div class="alert alert-info">
-        No hay categorias registradas. <a href="index.php?accion=FormularioC" class="btn btn-boton777">Crear la primera</a>
+        No hay categorias registradas. <a href="Index.php?accion=FormularioC" class="btn btn-boton777">Crear la primera</a>
     </div>
 <?php else: ?>
     <table class="table table-striped">
@@ -60,10 +60,10 @@ require_once("./Views/include/UH.php");
                     <td><?= htmlspecialchars($c['nombre']) ?></td>
                     <td>
                         <div class="btn-group-actions">  
-                            <a href="index.php?accion=editarC&id=<?= $c['id'] ?>" class="icon-btn edit">
+                            <a href="Index.php?accion=editarC&id=<?= $c['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                            <a href="index.php?accion=borrarC&id=<?= $c['id'] ?>" class="icon-btn delete">
+                            <a href="Index.php?accion=borrarC&id=<?= $c['id'] ?>" class="icon-btn delete">
                             <i class="fa fa-trash"></i></a>
                             <?php endif; ?>
                         </div>

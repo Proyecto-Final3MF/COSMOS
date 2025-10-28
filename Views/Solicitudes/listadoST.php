@@ -56,7 +56,7 @@ require_once ("./Views/include/UH.php");
                     <td><?= htmlspecialchars($resultado['descripcion']); ?></td>
                     <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
                             <td>
-                            <a title="Perfil del Tecnico" href="index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
+                            <a title="Perfil del Tecnico" href="Index.php?accion=PerfilTecnico&id=<?= $resultado['id_tecnico'] ?>" class="btn btn-perfil-tecnico">
                             <i class="fa fa-user"></i> <?= htmlspecialchars($resultado['nombre_tecnico'] ?? 'No asignado'); ?>
                             </a>
                             </td>
@@ -73,11 +73,11 @@ require_once ("./Views/include/UH.php");
                 
                 <td>
                 <div class="btn-group-actions">
-                <a href="index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                <a href="Index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
                 <i class="fa fa-file-alt"></i>
                 </a>
                 <?php if ($_SESSION['rol'] == ROL_CLIENTE): ?>
-                <a href="index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn review">
+                <a href="Index.php?accion=FormularioReview&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn review">
                 <i class="fa-solid fa-star"></i>
                 <?php endif; ?>
                 </a>
@@ -92,7 +92,7 @@ require_once ("./Views/include/UH.php");
                 <td colspan="8">
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
-                        <a href="index.php?accion=listarTL">
+                        <a href="Index.php?accion=listarTL">
                             <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                         </a>
                     </div>

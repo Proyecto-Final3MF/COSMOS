@@ -70,20 +70,20 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
         // Determinar la URL basada en el mensaje
         $url = '';
         if (strpos($n['mensaje'], 'aceptada') !== false) {
-            $url = 'index.php?accion=listarSA';  // Solicitudes Aceptadas para clientes
+            $url = 'Index.php?accion=listarSA';  // Solicitudes Aceptadas para clientes
         } elseif (strpos($n['mensaje'], 'urgente') !== false) {
-            $url = 'index.php?accion=listarTL';  // Solicitudes Disponibles para técnicos
+            $url = 'Index.php?accion=listarTL';  // Solicitudes Disponibles para técnicos
         } elseif (strpos($n['mensaje'], 'verificar') !== false) {
-            $url = 'index.php?accion=verificarTecnicos';  // Verificación de Técnicos para admins
+            $url = 'Index.php?accion=verificarTecnicos';  // Verificación de Técnicos para admins
         } elseif (strpos($n['mensaje'], 'cambió de estado') !== false) {
             // Para clientes: si contiene "Finalizado", a Terminadas; sino, a Aceptadas
             if (strpos($n['mensaje'], 'Finalizado') !== false) {
-                $url = 'index.php?accion=listarST';
+                $url = 'Index.php?accion=listarST';
             } else {
-                $url = 'index.php?accion=listarSA';
+                $url = 'Index.php?accion=listarSA';
             }
         } elseif (strpos($n['mensaje'], 'calificación') !== false) {
-            $url = 'index.php?accion=listarST';  // Solicitudes Terminadas para técnicos
+            $url = 'Index.php?accion=listarST';  // Solicitudes Terminadas para técnicos
         }
     ?>
     <div class="notif-item">
@@ -109,19 +109,19 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     <div id="rolDropdown" class="dropdown-menu">
                         <?php if ($_SESSION['rol'] == 2): ?> 
                             <!-- CLIENTE -->
-                            <a href="index.php?accion=listarP" class="dropdown-item">
+                            <a href="Index.php?accion=listarP" class="dropdown-item">
                                 <i class="fa-solid fa-box"></i> Mis Productos
                             </a>
-                            <a href="index.php?accion=formularioS" class="dropdown-item">
+                            <a href="Index.php?accion=formularioS" class="dropdown-item">
                                 <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud
                             </a>
-                            <a href="index.php?accion=listarSLU" class="dropdown-item">
+                            <a href="Index.php?accion=listarSLU" class="dropdown-item">
                                 <i class="fa-solid fa-hourglass-half"></i> Solicitudes Sin Asignar
                             </a>
-                            <a href="index.php?accion=listarSA" class="dropdown-item">
+                            <a href="Index.php?accion=listarSA" class="dropdown-item">
                                 <i class="fa-solid fa-check"></i> Solicitudes Aceptadas
                             </a>
-                            <a href="index.php?accion=listarST" class="dropdown-item">
+                            <a href="Index.php?accion=listarST" class="dropdown-item">
                                 <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
                             </a>
 
@@ -139,16 +139,16 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
 
                         <?php elseif ($_SESSION['rol'] == 3): ?> 
                             <!-- ADMIN -->
-                            <a href="index.php?accion=FormularioC" class="dropdown-item">
+                            <a href="Index.php?accion=FormularioC" class="dropdown-item">
                                 <i class="fa-solid fa-plus-circle"></i> Crear Nueva Categoría
                             </a>
-                            <a href="index.php?accion=listarC" class="dropdown-item">
+                            <a href="Index.php?accion=listarC" class="dropdown-item">
                                 <i class="fa-solid fa-list"></i> Todas Las Categorías
                             </a>
-                            <a href="index.php?accion=mostrarHistorial" class="dropdown-item">
+                            <a href="Index.php?accion=mostrarHistorial" class="dropdown-item">
                                 <i class="fa-solid fa-clock-rotate-left"></i> Historial de Actividades
                             </a>
-                            <a href="index.php?accion=listarU" class="dropdown-item">
+                            <a href="Index.php?accion=listarU" class="dropdown-item">
                                 <i class="fa-solid fa-users"></i> Lista de Usuarios
                             </a>
                         <?php endif; ?>
@@ -176,7 +176,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                                 <i class="fa fa-edit"></i> Editar Perfil
                             </a>
 
-                            <a href="index.php?accion=listarConversaciones" class="dropdown-item">
+                            <a href="Index.php?accion=listarConversaciones" class="dropdown-item">
                                 <i class="fa fa-comments"></i> Mis Conversaciones
                             </a>
 
