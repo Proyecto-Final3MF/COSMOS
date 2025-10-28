@@ -8,8 +8,29 @@ class Usuario {
     }
 
 
-    // Especializaciones
+    public function guardarU($nombre, $contrasena_hash, $email, $rol_id) {
+        $estado_verificacion = ($rol_id == 1) ? 'pendiente' : 'aprobado';
+        
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, estado_verificacion) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
 
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error (guardarU): " . $this->conn->error);
+            return false;
+        }
+
+        $stmt->bind_param("sssis", $nombre, $contrasena_hash, $email, $rol_id, $estado_verificacion);
+        
+        if ($stmt->execute()) {
+            $id = $stmt->insert_id;
+            $stmt->close();
+            return $id;
+        } else {
+            error_log("MySQLi Execute Error (guardarU): " . $stmt->error);
+            $stmt->close();
+            return false;
+        }
+}
     public function obtenerEspecializaciones() {
         $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
         $resultado = $this->conn->query($sql);
