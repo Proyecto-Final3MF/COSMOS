@@ -2595,6 +2595,14 @@ input:checked ~ label {
   opacity: 0.9;
 }
 
+#tecnico-fields .select2-selection--multiple .select2-selection__rendered {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center !important;
+  padding: 4px 8px !important;
+  min-height: 38px;
+}
+
 #tecnico-fields .select2-container {
   width: 100% !important;
   box-sizing: border-box;
@@ -2603,13 +2611,14 @@ input:checked ~ label {
 
 /* Apariencia general del campo */
 #tecnico-fields .select2-container--default .select2-selection--multiple {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
+  padding: 5px 6px;
   min-height: 45px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 6px;
-  display: flex;
   flex-wrap: wrap;
-  align-items: center;
   background-color: #fff;
   transition: all 0.2s ease;
 }

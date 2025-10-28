@@ -157,9 +157,6 @@ switch ($accion) {
                 echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
             }
         } else {
-
-            // no esta logueado todavia
-
             header("Location: Index.php?accion=login");
             exit();
         }

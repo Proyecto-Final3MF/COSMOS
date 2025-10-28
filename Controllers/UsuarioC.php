@@ -186,7 +186,7 @@ class UsuarioC {
                 $this->historialController->registrarModificacion($usuario, $id_nuevo_usuario, 'fue registrado', null, 0, "Rol ID: $rol_id (Técnico). Otra especialidad: " . ($otra_especialidad ?? 'Ninguna'));
 
                 // 3. Redireccionar al dashboard del técnico o a la página de inicio.
-                header("Location: Index.php?accion=inicio"); 
+                header("Location: Index.php?accion=redireccion"); 
                 exit();
             } else {
                 $_SESSION['mensaje'] = "Error al guardar el técnico.";
