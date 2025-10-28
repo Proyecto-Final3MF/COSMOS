@@ -8,29 +8,55 @@ class Usuario {
     }
 
 
-    public function guardarU($nombre, $contrasena_hash, $email, $rol_id) {
-        $estado_verificacion = ($rol_id == 1) ? 'pendiente' : 'aprobado';
+    public function guardarU($nombre, $contrasena_hash, $email, $rol_id, $especializaciones = [], $otra_especialidad = null) {
         
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, estado_verificacion) VALUES (?, ?, ?, ?, ?)";
+        // Si es Cliente (Rol 2)
+        if ($rol_id == 2) {
+            $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id) VALUES (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssi", $nombre, $contrasena_hash, $email, $rol_id);
+        } 
+        // Si es Técnico (Rol 1)
+        else { 
+            $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, otra_especialidad) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssis", $nombre, $contrasena_hash, $email, $rol_id, $otra_especialidad);
+        }
+
+        if (!$stmt || !$stmt->execute()) {
+            $error = $stmt ? $stmt->error : $this->conn->error;
+            error_log("MySQLi Error (guardarU): " . $error);
+            $stmt->close();
+            return false;
+        }
+
+        $id_nuevo_usuario = $stmt->insert_id;
+        $stmt->close();
+
+        // Guardar las Especializaciones (solo para el Técnico)
+        if ($rol_id == 1 && !empty($especializaciones)) {
+            if (!$this->guardarEspecializaciones($id_nuevo_usuario, $especializaciones)) {
+                error_log("Error al guardar especializaciones para el usuario ID: $id_nuevo_usuario");
+            }
+        }
+        
+        return $id_nuevo_usuario;
+    }
+
+    public function obtenerPorId($id) {
+        $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-
-        if (!$stmt) {
-            error_log("MySQLi Prepare Error (guardarU): " . $this->conn->error);
-            return false;
-        }
-
-        $stmt->bind_param("sssis", $nombre, $contrasena_hash, $email, $rol_id, $estado_verificacion);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         
-        if ($stmt->execute()) {
-            $id = $stmt->insert_id;
-            $stmt->close();
-            return $id;
+        if ($resultado->num_rows > 0) {
+            return $resultado->fetch_assoc();
         } else {
-            error_log("MySQLi Execute Error (guardarU): " . $stmt->error);
-            $stmt->close();
-            return false;
+            return null;
         }
-}
+    }
+
     public function obtenerEspecializaciones() {
         $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
         $resultado = $this->conn->query($sql);
