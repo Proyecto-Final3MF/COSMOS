@@ -18,9 +18,7 @@ CREATE TABLE usuario (
     cant_review INT DEFAULT 0,
     suma_rating double DEFAULT 0.0,
     promedio DOUBLE DEFAULT 0.0,
-    estado_verificacion ENUM('pendiente', 'aprobado', 'rechazado') NOT NULL DEFAULT 'aprobado',
-    otra_especialidad VARCHAR(255) NULL, 
-    evidencia_tecnica_ruta VARCHAR(255) NULL
+    otra_especialidad VARCHAR(255) NULL
 );
 
 CREATE TABLE producto (

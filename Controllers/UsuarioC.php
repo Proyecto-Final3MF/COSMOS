@@ -6,12 +6,11 @@ require_once("Controllers/HistorialC.php");
 class UsuarioC {
     private $historialController;
     private $reviewController;
-    private $conn; // Propiedad para la conexión, necesaria para insert_id
+    private $conn;
 
     public function __construct(){
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
-        // Asumo que tienes una función global conectar() o la inicializas aquí
         $this->conn = conectar(); 
     }
 
@@ -19,33 +18,18 @@ class UsuarioC {
         include("Views/Usuario/Login.php");
     }
 
-    public function espera() {
-        // 1. Obtener el email de la URL
-        $email = $_GET['email'] ?? '';
-        
-        // 2. Instanciar el modelo (necesario para obtenerPorEmail)
-        $usuarioM = new Usuario(); 
-        
-        // 3. Obtener los datos del usuario. $datos_usuario debe ser definido AQUÍ.
-        $datos_usuario = $usuarioM->obtenerPorEmail($email); 
-        
-        // 4. Verificación de seguridad: si no encuentra al usuario, redirige
-        if (!$datos_usuario) {
-            $_SESSION['tipo_mensaje'] = "danger";
-            $_SESSION['mensaje'] = "No se pudo encontrar la información del técnico.";
-            header("Location: Index.php?accion=login");
-            exit();
-        }
-        
-        // 5. Incluir la vista. La vista espera que $datos_usuario exista.
-        include("views/Usuario/Tecnico/Espera.php"); 
+    public function tecnico(){
+        include("Views/Usuario/Tecnico/Trabaja.php");
     }
 
-// ...
+    public function registroT(){
+        $usuario= new Usuario();
+        $especializaciones = $usuario->obtenerEspecializaciones(); 
+        include("Views/Usuario/Tecnico/RegistroT.php");
+    }
+
     public function crear() {
         $usuario = new Usuario();
-        $roles = $usuario->obtenerRol();
-        $especializaciones = $usuario->obtenerEspecializaciones(); 
         include("views/Usuario/Register.php");
     }
 
@@ -53,8 +37,8 @@ class UsuarioC {
         $usuarioM = new Usuario();
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
-        $rol_id = (int)$_POST['rol'];
         $contrasena = $_POST['contrasena'];
+        $rol_id = 2;
 
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
@@ -83,13 +67,6 @@ class UsuarioC {
             exit();
         }
 
-        if (!isset($_POST['rol']) || empty($_POST['rol'])) {
-            $_SESSION['tipo_mensaje'] = "warning";
-            $_SESSION['mensaje'] = "Debe seleccionar un Rol para registrarse.";
-            header("Location: Index.php?accion=register");
-            exit();
-        }   
-
         if (empty($usuario) || empty($mail)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
@@ -104,7 +81,121 @@ class UsuarioC {
             exit();
         }
 
+        $id_nuevo_usuario = $usuarioM->guardarU($usuario, $contrasena_hash, $mail, $rol_id);
+
+        if ($id_nuevo_usuario) {
+            
+            $nuevo_usuario = $usuarioM->obtenerPorId($id_nuevo_usuario); // Asume que tienes este método en tu modelo
+            
+            // 2. Establecer la Sesión
+            $_SESSION['usuario'] = $nuevo_usuario;
+            $_SESSION['user_id'] = $nuevo_usuario['id'];
+            $_SESSION['nombre'] = $nuevo_usuario['nombre'];
+            $_SESSION['rol_id'] = $nuevo_usuario['rol_id'];
+            
+            $_SESSION['mensaje'] = "¡Bienvenido, $usuario! Has iniciado sesión.";
+            $_SESSION['tipo_mensaje'] = "success";
+            
+            $this->historialController->registrarModificacion($usuario, $id_nuevo_usuario, 'fue registrado', null, 0, "Rol ID: $rol_id (Cliente)");
+            
+            // 3. Redireccionar a la página principal o al dashboard del cliente (no al login)
+            header("Location: Index.php?accion=inicio"); // O la acción que uses para la página de inicio
+            exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al guardar el usuario.";
+            $_SESSION['tipo_mensaje'] = "danger";
+            header("Location: Index.php?accion=register");
+            exit();
+        }
     }
+
+
+    public function guardarT() {
+        $usuarioM = new Usuario();
+        $usuario = trim($_POST['usuario']);
+        $mail = trim($_POST['mail']);
+        $contrasena = $_POST['contrasena'];
+        $rol_id = 1; // Fijo: Técnico
+        $especializaciones = $_POST['especializaciones'] ?? [];
+        $otra_especialidad = trim($_POST['otra_especialidad']) ?: null;
+
+       
+        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
+            $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            header("Location: Index.php?accion=registerT");
+            exit();
+        }
+        
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+            // 2. Validaciones de Usuario y Email
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        $existe = $usuarioM->obtenerPorEmail($mail);
+            
+        if ($existe) {
+            $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+            $_SESSION['tipo_mensaje'] = "warning";
+                
+            header("Location: Index.php?accion=registerT");
+            exit();
+        }
+
+        if (empty($usuario) || empty($mail)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: Index.php?accion=registerT"); 
+            exit();
+        }
+
+        if (empty($especializaciones) && empty($otra_especialidad)) {
+                $_SESSION['tipo_mensaje'] = "warning";
+                $_SESSION['mensaje'] = "Debe seleccionar al menos una especialización o especificar 'Otra Especialidad'.";
+                header("Location: Index.php?accion=registroT"); 
+                exit();
+            }
+            
+            $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+            
+            // Llamar al método de guardado con el nuevo parámetro
+            $id_nuevo_usuario = $usuarioM->guardarU($usuario, $contrasena_hash, $mail, $rol_id, $especializaciones, $otra_especialidad );
+
+            if ($id_nuevo_usuario) {
+                $nuevo_usuario = $usuarioM->obtenerPorId($id_nuevo_usuario);
+
+                $_SESSION['usuario'] = $nuevo_usuario;
+                $_SESSION['user_id'] = $nuevo_usuario['id'];
+                $_SESSION['nombre'] = $nuevo_usuario['nombre'];
+                $_SESSION['rol_id'] = $nuevo_usuario['rol_id'];
+                $_SESSION['mensaje'] = "¡Bienvenido, $usuario! Has iniciado sesión como técnico.";
+                $_SESSION['tipo_mensaje'] = "success";
+                
+                $this->historialController->registrarModificacion($usuario, $id_nuevo_usuario, 'fue registrado', null, 0, "Rol ID: $rol_id (Técnico). Otra especialidad: " . ($otra_especialidad ?? 'Ninguna'));
+
+                // 3. Redireccionar al dashboard del técnico o a la página de inicio.
+                header("Location: Index.php?accion=redireccion"); 
+                exit();
+            } else {
+                $_SESSION['mensaje'] = "Error al guardar el técnico.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: Index.php?accion=registroT");
+                exit();
+        }
+    }
+
 
     public function actualizarU() {
         session_start();
