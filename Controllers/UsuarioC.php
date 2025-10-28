@@ -22,37 +22,14 @@ class UsuarioC {
         include("Views/Usuario/Tecnico/Trabaja.php");
     }
 
-    public function mail(){
-        
+    public function registroT(){
+        $usuario= new Usuario();
+        $especializaciones = $usuario->obtenerEspecializaciones(); 
+        include("Views/Usuario/Tecnico/RegistroT.php");
     }
 
-    public function espera() {
-        // 1. Obtener el email de la URL
-        $email = $_GET['email'] ?? '';
-        
-        // 2. Instanciar el modelo (necesario para obtenerPorEmail)
-        $usuarioM = new Usuario(); 
-        
-        // 3. Obtener los datos del usuario. $datos_usuario debe ser definido AQUÍ.
-        $datos_usuario = $usuarioM->obtenerPorEmail($email); 
-        
-        // 4. Verificación de seguridad: si no encuentra al usuario, redirige
-        if (!$datos_usuario) {
-            $_SESSION['tipo_mensaje'] = "danger";
-            $_SESSION['mensaje'] = "No se pudo encontrar la información del técnico.";
-            header("Location: Index.php?accion=login");
-            exit();
-        }
-        
-        // 5. Incluir la vista. La vista espera que $datos_usuario exista.
-        include("views/Usuario/Tecnico/Espera.php"); 
-    }
-
-// ...
     public function crear() {
         $usuario = new Usuario();
-        $roles = $usuario->obtenerRol();
-        $especializaciones = $usuario->obtenerEspecializaciones(); 
         include("views/Usuario/Register.php");
     }
 
