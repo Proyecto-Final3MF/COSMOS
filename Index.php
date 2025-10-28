@@ -113,13 +113,13 @@ switch ($accion) {
 
             //redirige segun el rol del usuario
 
-            if ($_SESSION['rol'] == 1) {
+            if ($_SESSION['rol'] == 2) {
 
                 //pagina cliente
 
                 include("./Views/Usuario/Cliente/ClienteP.php");
 
-            } elseif ($_SESSION['rol'] == 2) {
+            } elseif ($_SESSION['rol'] == 1) {
 
                 // pagina tecnico
                 include("./Views/Usuario/Tecnico/TecnicoP.php");
