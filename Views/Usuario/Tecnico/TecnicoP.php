@@ -1,6 +1,6 @@
 <?php
     
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
     header("Location: Index.php?accion=redireccion");
     exit();
 }
