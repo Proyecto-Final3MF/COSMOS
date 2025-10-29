@@ -51,115 +51,112 @@ switch ($accion) {
 
   //acciones publicas
 
-    // si la accion es login entra al case
+  // si la accion es login entra al case
 
-    case 'login':
+  case 'login':
 
-      // crea una nueva instancia del objeto UsuarioC (controlador usuario)
+    // crea una nueva instancia del objeto UsuarioC (controlador usuario)
 
-      $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-      // mas especificamente la funcion login      
+    // mas especificamente la funcion login      
 
-      $controller->login();
+    $controller->login();
     break;
 
-    //si la accion es autenticar entra al case
+  //si la accion es autenticar entra al case
 
-    case 'autenticar':
+  case 'autenticar':
 
-      //crea una nueva instancia del objeto UsuarioC
+    //crea una nueva instancia del objeto UsuarioC
 
-      $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-      //mas especificamente la funcion autenticar
+    //mas especificamente la funcion autenticar
 
-      $controller->autenticar();
+    $controller->autenticar();
     break;
 
-    //si la accion es registro entra al case
+  //si la accion es registro entra al case
 
-    case 'registro':
-    
-      //crea una nueva instancia del objeto UsuarioC
+  case 'registro':
 
-      $controller = new UsuarioC();
+    //crea una nueva instancia del objeto UsuarioC
 
-      //mas especificamente la funcion crear
+    $controller = new UsuarioC();
 
-      $controller->crear();
+    //mas especificamente la funcion crear
+
+    $controller->crear();
     break;
 
-    //si la accion es guardarU entra al case
+  //si la accion es guardarU entra al case
 
-    case 'guardarU':
+  case 'guardarU':
 
-        //crea una nueva instancia del objeto UsuarioC
+    //crea una nueva instancia del objeto UsuarioC
 
-        $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-        //ejecuta la funcion guardarU para registrar el usuario
+    //ejecuta la funcion guardarU para registrar el usuario
 
-        $controller->guardarU();
+    $controller->guardarU();
     break;
 
-    case 'tecnico':
+  case 'tecnico':
 
-      //crea una nueva instacia del objeto UsuarioC
+    //crea una nueva instacia del objeto UsuarioC
 
-      $controller = new UsuarioC();
+    $controller = new UsuarioC();
 
-      //ejecuta la funcion tecnico para mostrar la pagina para los nuevos tecnicos
+    //ejecuta la funcion tecnico para mostrar la pagina para los nuevos tecnicos
 
-      $controller->tecnico();
+    $controller->tecnico();
     break;
 
-    case 'registroT':
-      $controller = new UsuarioC();
-      $controller->registroT();
+  case 'registroT':
+    $controller = new UsuarioC();
+    $controller->registroT();
     break;
 
-    case 'guardarT':
-      $controller = new UsuarioC();
-      $controller->guardarT();
+  case 'guardarT':
+    $controller = new UsuarioC();
+    $controller->guardarT();
     break;
 
-    //si la accion es redireccion entra al case
+  //si la accion es redireccion entra al case
 
-    case 'redireccion':
+  case 'redireccion':
 
-        //verifica si existe usuario y rol en la sesion
+    //verifica si existe usuario y rol en la sesion
 
-        if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
+    if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
 
-            //redirige segun el rol del usuario
+      //redirige segun el rol del usuario
 
-            if ($_SESSION['rol'] == 2) {
+      if ($_SESSION['rol'] == 2) {
 
-                //pagina cliente
+        //pagina cliente
 
-                include("./Views/Usuario/Cliente/ClienteP.php");
+        include("./Views/Usuario/Cliente/ClienteP.php");
+      } elseif ($_SESSION['rol'] == 1) {
 
-            } elseif ($_SESSION['rol'] == 1) {
+        // pagina tecnico
+        include("./Views/Usuario/Tecnico/TecnicoP.php");
+      } elseif ($_SESSION['rol'] == 3) {
 
-                // pagina tecnico
-                include("./Views/Usuario/Tecnico/TecnicoP.php");
+        header("Location:Index.php?accion=panelA");
+      } else {
 
-            } elseif ($_SESSION['rol'] == 3) {
+        //el rol no concuerda con los actuales
 
-                header("Location:Index.php?accion=panelA");
-
-            } else {
-
-                //el rol no concuerda con los actuales
-
-                echo "<h1>Error: Rol no reconocido.</h1>";
-                echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
-            }
-        } else {
-            header("Location: Index.php?accion=login");
-            exit();
-        }
+        echo "<h1>Error: Rol no reconocido.</h1>";
+        echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
+      }
+    } else {
+      header("Location: Index.php?accion=login");
+      exit();
+    }
     break;
 
 
@@ -171,7 +168,7 @@ switch ($accion) {
     $controller = new UsuarioC();
     //ejecuta la funcion editarU para mostrar formulario de edicion
     $controller->editarU();
-  break;
+    break;
 
   //si la accion es actualizarU entra al case
   case 'actualizarU':
@@ -179,12 +176,12 @@ switch ($accion) {
     $controller = new UsuarioC();
     //ejecuta la funcion actualizarU para guardar cambios
     $controller->actualizarU();
-  break;
+    break;
 
   case 'eliminarU':
     $controller = new UsuarioC();
     $controller->borrar();
-  break;
+    break;
 
   //si la accion es logout entra al case
   case 'logout':
@@ -192,8 +189,8 @@ switch ($accion) {
     $controller = new UsuarioC();
     //ejecuta la funcion logout para cerrar sesion
     $controller->logout();
-  break;
-    
+    break;
+
 
   //si la accion es editarSF entra al case 
   case 'editarSF':
@@ -201,7 +198,7 @@ switch ($accion) {
     $controller = new SolicitudC();
     //ejecuta la funcion editarSF para editar solicitud
     $controller->editarSF();
-  break;
+    break;
 
   //si la accion es actualizarSF entra al case
   case 'actualizarSF':
@@ -209,7 +206,7 @@ switch ($accion) {
     $controller = new SolicitudC();
     //ejecuta la funcion actualizarSF para guardar cambios
     $controller->actualizarSF();
-  break;
+    break;
 
   //si la accion es listarSA entra al case
   case 'listarSA':
@@ -217,7 +214,7 @@ switch ($accion) {
     $controller = new SolicitudC();
     //ejecuta la funcion listarSA para mostrar solicitudes activas
     $controller->listarSA();
-  break;
+    break;
 
   //si la accion es cancelarS entra al case
   case 'cancelarS':
@@ -225,7 +222,7 @@ switch ($accion) {
     $controller = new SolicitudC();
     //ejecuta la funcion cancelarS para cancelar solicitud
     $controller->cancelarS();
-  break;
+    break;
 
   //si la accion es listarST entra al case
   case 'listarST':
@@ -233,7 +230,7 @@ switch ($accion) {
     $controller = new SolicitudC();
     //ejecuta la funcion listarST para mostrar solicitudes terminadas
     $controller->listarST();
-  break;
+    break;
 
   //acciones para productos
 
@@ -243,7 +240,7 @@ switch ($accion) {
     $controller = new ProductoC();
     //ejecuta la funcion guardarP para registrar producto
     $controller->guardarP();
-  break;
+    break;
 
   //si la accion es borrarP entra al case
   case 'borrarP':
@@ -251,7 +248,7 @@ switch ($accion) {
     $controller = new ProductoC();
     //ejecuta la funcion borrarP para eliminar producto
     $controller->borrarP();
-  break;
+    break;
 
   //si la accion es editarP entra al case
   case 'editarP':
@@ -259,7 +256,7 @@ switch ($accion) {
     $controller = new ProductoC();
     //ejecuta la funcion editarP para mostrar formulario de edicion
     $controller->editarP();
-  break;
+    break;
 
   //si la accion es actualizarP entra al case
   case 'actualizarP':
@@ -267,7 +264,7 @@ switch ($accion) {
     $controller = new ProductoC();
     //ejecuta la funcion actualizarP para guardar cambios
     $controller->actualizarP();
-  break;
+    break;
 
   //si la accion es listarP entra al case
   case 'listarP':
@@ -275,13 +272,13 @@ switch ($accion) {
     $controller = new ProductoC();
     //ejecuta la funcion listarP para mostrar productos
     $controller->listarP();
-  break;
+    break;
 
   //si la accion es formularioP entra al case
   case 'formularioP':
     //ejecuta la funcion formularioP para mostrar formulario
     $controller->formularioP();
-  break;
+    break;
 
   //acciones para solicitudes urgentes
 
@@ -289,13 +286,13 @@ switch ($accion) {
   case 'urgenteP':
     //ejecuta la funcion urgentePF para mostrar formulario urgente
     $controller->urgentePF();
-  break;
+    break;
 
   //si la accion es urgenteGP entra al case
   case 'urgenteGP':
     //ejecuta la funcion urgenteGP para guardar solicitud urgente
     $controller->urgenteGP();
-  break;
+    break;
 
   //acciones para solicitudes normales
 
@@ -303,31 +300,31 @@ switch ($accion) {
   case 'formularioS':
     //ejecuta la funcion formularioS para mostrar formulario
     $controller->formularioS();
-  break;
+    break;
 
   //si la accion es guardarS entra al case
   case 'guardarS':
     //ejecuta la funcion guardarS para registrar solicitud
     $controller->guardarS();
-  break;
-  
+    break;
+
   //si la accion es guardarSU entra al case
   case 'guardarSU':
     //ejecuta la funcion guardarSU para registrar solicitud urgente
     $controller->guardarSU();
-  break;
+    break;
 
   //si la accion es borrarS entra al case
   case 'borrarS':
     //ejecuta la funcion borrarS para eliminar solicitud
     $controller->borrarS();
-  break;
+    break;
 
   //si la accion es listarSLU entra al case
   case 'listarSLU':
     //ejecuta la funcion listarSLU para mostrar solicitudes de usuario
     $controller->listarSLU();
-  break;
+    break;
 
   //acciones para reviews
 
@@ -335,13 +332,13 @@ switch ($accion) {
   case 'FormularioReview':
     //ejecuta la funcion FormularioR para mostrar formulario
     $controller->FormularioR();
-  break;
+    break;
 
   //si la accion es AddReview entra al case
   case 'AddReview':
     //ejecuta la funcion AddReview para agregar review
     $controller->AddReview();
-  break;
+    break;
 
   //acciones para el rol tecnico
 
@@ -349,30 +346,30 @@ switch ($accion) {
   case 'asignarS':
     $controller = new SolicitudC();
     $controller->asignarS();
-  break;
+    break;
 
   case 'listarTL':
     $controller = new SolicitudC();
     $controller->ListarTL();
     require_once("Views/Solicitudes/Tecnico/listadoTL.php");
-  break;
+    break;
 
   case 'EditarSF':
     $controller = new SolicitudC();
     $controller->EditarSF();
-  break;
+    break;
 
   case 'PerfilTecnico':
     $controller = new UsuarioC();
     $controller->PerfilTecnico();
-  break;
+    break;
 
   //acciones para el rol admin
 
   case 'solicitud_historia':
     $controller = new HistoriaC();
     $controller->mostrarHistoria();
-  break;
+    break;
 
   case 'panelA':
     $PreviewUsuarios = new UsuarioC();
@@ -380,19 +377,19 @@ switch ($accion) {
     $usuarios = $PreviewUsuarios->PreviewU();
     $historial = $PreviewHistorial->PreviewH();
     include("Views/Usuario/Admin/Adminp.php");
-  break;
+    break;
 
   case 'listarU':
     $controller = new UsuarioC();
     $controller->listarU();
-  break;
+    break;
 
   //acciones historial
 
   case 'mostrarHistorial':
     $controller = new HistorialController();
     $controller->mostrarHistorial();
-  break;
+    break;
 
   // acciones categoria
 
@@ -400,88 +397,93 @@ switch ($accion) {
     $controller = new CategoriaC();
     $controller->FormularioC();
     require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
-  break;
+    break;
 
   case 'guardarC':
     $controller = new CategoriaC();
     $controller->guardarC();
-  break;
+    break;
 
   case 'listarC':
     $controller = new CategoriaC();
     $controller->listarC();
-  break;
+    break;
 
   case 'editarC':
     $controller = new CategoriaC();
     $controller->editarC();
-  break;
+    break;
 
   case 'actualizarC':
     $controller = new CategoriaC();
     $controller->actualizarC();
-  break;
+    break;
 
   case 'borrarC':
     $controller = new CategoriaC();
     $controller->borrarC();
-  break;
+    break;
 
   // case de Chat
 
   case 'mostrarChat':
     //ejecuta la funcion mostrarChat para mostrar interfaz
+    $controller = new ChatC();
     $controller->mostrarChat();
-  break;
+    break;
 
   //si la accion es abrirChat entra al case
   case 'abrirChat':
     //ejecuta la funcion abrirChat para iniciar conversacion
+    $controller = new ChatC();
     $controller->abrirChat();
-  break;
+    break;
 
   //si la accion es enviarMensaje entra al case
   case 'enviarMensaje':
     //ejecuta la funcion enviar para mandar mensaje
+    $controller = new ChatC();
     $controller->enviar();
-  break;
+    break;
 
   case 'listarMensajes':
     $controller = new ChatC();
     $controller->listarMensajes();
-  break;
+    break;
 
   case 'mostrarConversacion':
     $controller = new ChatC();
     $controller->mostrarConversacion();
-  break;
+    break;
 
   case 'registroChats':
     $controller = new ChatC();
     $controller->registroChats();
-  break;
+    break;
 
   case 'listarConversaciones':
     $controller = new ChatC();
     $controller->listarConversaciones();
-  break;
+    break;
   //si la accion es cargarMensajes entra al case
   case 'cargarMensajes':
     //ejecuta la funcion cargarMensajes para mostrar historial
+    $controller = new ChatC();
     $controller->cargarMensajes();
-  break;
+    break;
 
   //si la accion es borrarConversacion entra al case
   case 'borrarConversacion':
     //ejecuta la funcion borrar para eliminar chat
+    $controller = new ChatC();
     $controller->borrar();
-  break;
+    break;
 
   //si la accion es marcarNotificacionesLeidas entra al case
   case 'marcarNotificacionesLeidas':
     //retorna respuesta json de exito
     echo json_encode(['success' => true]);
-  break;
+    break;
 
 
   //accion default
@@ -489,10 +491,10 @@ switch ($accion) {
   case 'panelA':
     // Esta acción debe redirigir a la vista del panel de administración
     if ($_SESSION['rol'] == 3) {
-        // Asumiendo que hay una vista principal para el admin
-        include("./Views/Usuario/Admin/PanelA.php"); 
+      // Asumiendo que hay una vista principal para el admin
+      include("./Views/Usuario/Admin/PanelA.php");
     } else {
-        header("Location: Index.php?accion=redireccion");
+      header("Location: Index.php?accion=redireccion");
     }
     break;
 
@@ -501,11 +503,11 @@ switch ($accion) {
   default:
     //si el usuario no esta logueado redirige al login
     if (!isset($_SESSION['usuario'])) {
-        header("Location: Index.php?accion=login");
+      header("Location: Index.php?accion=login");
     } else {
-        //si esta logueado muestra error 404
-        http_response_code(404);
-        header("Location: Error.php");
+      //si esta logueado muestra error 404
+      http_response_code(404);
+      header("Location: Error.php");
     }
     exit();
 }
