@@ -131,6 +131,88 @@ class UsuarioC {
         }
     }
 
+    public function guardarT() {
+        $usuarioM = new Usuario();
+        $usuario = trim($_POST['usuario']);
+        $mail = trim($_POST['mail']);
+        $rol_id = 1;
+        $contrasena = $_POST['contrasena'];
+        $especializaciones = $_POST['especializaciones'] ?? [];
+        $otra_especialidad = trim($_POST['otra_especialidad']) ?: null;
+
+        if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
+            $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            header("Location: Index.php?accion=TecnicoForm");
+            exit();
+        }
+
+        $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+        // 2. Validaciones de Usuario y Email
+        if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
+            header("Location: Index.php?accion=TecnicoForm"); 
+            exit();
+        }
+
+        $existe = $usuarioM->obtenerPorEmail($mail);
+        
+        if ($existe) {
+            $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            
+            header("Location: Index.php?accion=TecnicoForm");
+            exit();
+        }
+
+        if (empty($usuario) || empty($mail)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
+            header("Location: Index.php?accion=TecnicoForm"); 
+            exit();
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
+            header("Location: Index.php?accion=TecnicoForm"); 
+            exit();
+        }
+
+        if (empty($especializaciones) && empty($otra_especialidad)) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Debe seleccionar al menos una especialización o especificar 'Otra Especialidad'.";
+            header("Location: Index.php?accion=TecnicoForm"); 
+            exit();
+        }
+    
+        $success = $usuarioM->crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad);
+
+        if ($success) { 
+            $usuarioN = $usuarioM->obtenerPorEmail($mail);
+
+            if ($usuarioN) {
+                $_SESSION['id'] = $usuarioN['id'];
+                $_SESSION['rol'] = 1;
+                $_SESSION['email'] = $usuarioN['email'];
+                $_SESSION['usuario'] = $usuarioN['nombre'];
+                header("Location:index.php?accion=redireccion");
+            } else {
+                header("Location: Index.php?accion=TecnicoForm");
+                $_SESSION['mensaje'] = "Tu cuenta no pudo ser creada. Por favor, intenta de nuevo o revisa los datos.";
+                $_SESSION['tipo_mensaje'] = "danger"; // Cambiado a 'danger' para un fallo de BD/inserción
+                exit();
+            }
+        } else {
+            header("Location: Index.php?accion=TecnicoForm");
+            $_SESSION['mensaje'] = "Tu cuenta no pudo ser creada. Por favor, intenta de nuevo o revisa los datos.";
+            $_SESSION['tipo_mensaje'] = "danger"; // Cambiado a 'danger' para un fallo de BD/inserción
+            exit();
+        }
+    }
+
     public function actualizarU() {
         session_start();
         $id = $_POST['id'];
