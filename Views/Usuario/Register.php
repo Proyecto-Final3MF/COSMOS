@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [1, 2, 3])) {
+if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [ROL_TECNICO, ROL_CLIENTE, ROL_ADMIN])) {
     header("Location: Index.php?accion=redireccion");
 } 
 

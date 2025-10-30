@@ -7,55 +7,88 @@ class Usuario {
         $this->conn = conectar();
     }
 
-
-    public function guardarU($nombre, $contrasena_hash, $email, $rol_id, $especializaciones = [], $otra_especialidad = null) {
+    // En la clase Usuario (UsuarioM.php)
+    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad) {
+        $estado_verificacion = 'pendiente'; // Específico para Técnicos
+        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
-        // Si es Cliente (Rol 2)
-        if ($rol_id == 2) {
-            $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id) VALUES (?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssi", $nombre, $contrasena_hash, $email, $rol_id);
-        } 
-        // Si es Técnico (Rol 1)
-        else { 
-            $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, otra_especialidad) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssis", $nombre, $contrasena_hash, $email, $rol_id, $otra_especialidad);
-        }
-
-        if (!$stmt || !$stmt->execute()) {
-            $error = $stmt ? $stmt->error : $this->conn->error;
-            error_log("MySQLi Error (guardarU): " . $error);
-            $stmt->close();
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error (crearT): " . $this->conn->error);
             return false;
         }
 
-        $id_nuevo_usuario = $stmt->insert_id;
+        // Tipos de parámetros: s s s i s s s s
+        $stmt->bind_param("sssissss", 
+            $usuario, 
+            $contrasena_hash, // Usar el hash
+            $mail, 
+            $rol_id,
+            $ruta_evidencia, 
+            $otra_especialidad, 
+            $foto_perfil_default, 
+            $estado_verificacion
+        );
+        
+        $success = $stmt->execute();
+        
+        if (!$success) {
+            error_log("MySQLi Execute Error (crearT): " . $stmt->error);
+        }
+        
         $stmt->close();
-
-        // Guardar las Especializaciones (solo para el Técnico)
-        if ($rol_id == 1 && !empty($especializaciones)) {
-            if (!$this->guardarEspecializaciones($id_nuevo_usuario, $especializaciones)) {
-                error_log("Error al guardar especializaciones para el usuario ID: $id_nuevo_usuario");
-            }
-        }
-        
-        return $id_nuevo_usuario;
+        return $success;
     }
 
-    public function obtenerPorId($id) {
-        $sql = "SELECT * FROM usuario WHERE id = ?";
+    public function crearC($usuario, $mail, $rol_id, $contrasena_hash) {
+        $estado_verificacion = 'aprobado'; 
+        $ruta_evidencia = null; 
+        $otra_especialidad = null; 
+        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
+        
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
         
-        if ($resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
-        } else {
-            return null;
+        if (!$stmt) {
+            // 🛑 PUNTO DE FALLO 1: Error al preparar la consulta
+            // Esto indica un problema con la sintaxis SQL, nombre de tabla/columna, o la conexión.
+            die("❌ ERROR AL PREPARAR LA CONSULTA (PREPARE): " . $this->conn->error . " | SQL: " . $sql);
+            // Quita la línea 'die' una vez resuelto el problema.
+            return false;
         }
+
+        // Tipos de parámetros: s s s i s s s s
+        $stmt->bind_param("sssissss", 
+            $usuario, 
+            $contrasena_hash, 
+            $mail, 
+            $rol_id, 
+            $ruta_evidencia, 
+            $otra_especialidad, 
+            $foto_perfil_default, 
+            $estado_verificacion
+        );
+        
+        $success = $stmt->execute();
+        
+        if (!$success) {
+            // 🛑 PUNTO DE FALLO 2: Error al ejecutar la consulta
+            // Esto indica una violación de restricción (ej. 'email' duplicado, 'rol_id' inválido, longitud de datos).
+            die("❌ ERROR AL EJECUTAR LA CONSULTA (EXECUTE): " . $stmt->error);
+            // Quita la línea 'die' una vez resuelto el problema.
+        }
+        
+        $stmt->close();
+        return $success;
     }
+
+    // Especializaciones
 
     public function obtenerEspecializaciones() {
         $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
@@ -93,6 +126,16 @@ class Usuario {
     }
 
     // Obtener usuario
+    
+    public function obtenerPorNombre($usuario) {
+        $usuario = $this->conn->real_escape_string($usuario);
+        $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
+        $res = $this->conn->query($sql);
+        if ($res && $res->num_rows > 0) {
+            return $res->fetch_assoc();
+        }
+        return false;
+    }
 
     public function obtenerPorEmail($email) {
         $email = $this->conn->real_escape_string($email);
