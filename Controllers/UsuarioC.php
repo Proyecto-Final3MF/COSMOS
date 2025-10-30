@@ -113,6 +113,8 @@ class UsuarioC {
 
             if ($usuarioN) {
                 $_SESSION['id'] = $usuarioN['id'];
+                $_SESSION['rol'] = 2;
+                $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 header("Location:index.php?accion=redireccion");
             } else {
