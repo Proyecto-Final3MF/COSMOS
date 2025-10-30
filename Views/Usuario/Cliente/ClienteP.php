@@ -20,44 +20,55 @@ require_once ("./Views/include/UH.php");
     <br>
 <div>
 
-<div class="btn-container fade-slide">
-<a href="Index.php?accion=urgenteP">
+    <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
+
+    <div class="btn-container fade-slide">
+    <a href="Index.php?accion=urgenteP">
         <button class="btn btn-boton4445 btn-crearU">
-            <i class="fa-solid fa-plus-circle"></i>Nueva Solicitud Urgente
+            <i class="fa-solid fa-plus-circle"></i>
+            <span class="title">Nueva Solicitud Urgente</span>
         </button>
     </a>
-</div>
-
-    <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
+    </div>
     
     <div class="btn-container fade-slide">
     <a href="Index.php?accion=listarP">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-box btn-mis-productos"></i> Mis Productos
+            <i class="fa-solid fa-box btn-mis-productos"></i> 
+            <span class="title">Mis Productos</span>
+            <span class="desc">Consulta tus Productos Hecho o Crea uno Nuevo.</span>
         </button>
     </a>
 
     <a href="Index.php?accion=formularioS">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-plus-circle btn-crear"></i> Crear Nueva Solicitud
+            <i class="fa-solid fa-plus-circle btn-crear"></i> 
+            <span class="title">Crear Nueva Solicitud</span>
+            <span class="desc">Crea Una Nueva Solicitud Asociando un Producto</span>
         </button>
     </a>
 
     <a href="Index.php?accion=listarSLU">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> Solicitudes Recien Creadas
+            <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> 
+            <span class="title">Solicitudes Creadas</span>
+            <span class="desc">Consulta Tus Solicitudes ya Creadas en Espera de un Tecnico</span>
         </button>
     </a>
 
     <a href="Index.php?accion=listarSA">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-check btn-aceptadas"></i> Solicitudes que aceptaron
+            <i class="fa-solid fa-check btn-aceptadas"></i> 
+            <span class="title">Solicitudes que Aceptaron</span>
+            <span class="desc">Consulta Tus Solicitudes Aceptadas Por el Tecnico y su Estado Actual</span>
         </button>
     </a>
 
     <a href="Index.php?accion=listarST">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> Solicitudes Terminadas
+            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> 
+            <span class="title">Solicitudes Terminadas</span>
+            <span class="desc">Consulta tus Ya Terminadas y Puntua el trabajo del Tecnico</span>
         </button>
     </a>
 
