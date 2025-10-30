@@ -6,11 +6,12 @@ require_once("Controllers/HistorialC.php");
 class UsuarioC {
     private $historialController;
     private $reviewController;
-    private $conn;
+    private $conn; // Propiedad para la conexión, necesaria para insert_id
 
     public function __construct(){
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
+        // Asumo que tienes una función global conectar() o la inicializas aquí
         $this->conn = conectar(); 
     }
 
@@ -52,6 +53,8 @@ class UsuarioC {
 
     public function crear() {
         $usuario = new Usuario();
+        $roles = $usuario->obtenerRol();
+        $especializaciones = $usuario->obtenerEspecializaciones(); 
         include("views/Usuario/Register.php");
     }
 
@@ -68,9 +71,10 @@ class UsuarioC {
             header("Location: Index.php?accion=register");
             exit();
         }
+
         $contrasena_hash = password_hash($contrasena, PASSWORD_DEFAULT);
 
-            // 2. Validaciones de Usuario y Email
+        // 2. Validaciones de Usuario y Email
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
@@ -79,7 +83,7 @@ class UsuarioC {
         }
 
         $existe = $usuarioM->obtenerPorEmail($mail);
-            
+        
         if ($existe) {
             $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
             $_SESSION['tipo_mensaje'] = "warning";
