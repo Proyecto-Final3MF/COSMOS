@@ -303,6 +303,8 @@ switch ($accion) {
 
   //si la accion es formularioS entra al case
   case 'formularioS':
+    //crea una nueva instancia del objeto SolicitudC 
+    $controller = new SolicitudC();
     //ejecuta la funcion formularioS para mostrar formulario
     $controller->formularioS();
   break;
@@ -327,6 +329,7 @@ switch ($accion) {
 
   //si la accion es listarSLU entra al case
   case 'listarSLU':
+    $controller = new SolicitudC();
     //ejecuta la funcion listarSLU para mostrar solicitudes de usuario
     $controller->listarSLU();
   break;
