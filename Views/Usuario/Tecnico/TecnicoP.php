@@ -27,7 +27,9 @@ $contador_normales = count($notifC->listarNoLeidas('normal'));
 <div class="btn-container fade-slide">
     <a href="Index.php?accion=listarTL">
     <button class="btn btn-boton444">
-        <i class="fa-solid fa-list btn-disponibles"></i> Solicitudes Disponibles
+        <i class="fa-solid fa-list btn-disponibles"></i> 
+        <span class="title">Solicitudes Disponibles</span>
+        <span class="desc">Aqui Podra Encontrar Solicitudes en Espera de un Tecnico</span>
         <?php if ($contador_normales > 0): ?>
             <span class="contador" id="contador-normales"><?= $contador_normales ?></span>
         <?php endif; ?>
@@ -35,12 +37,16 @@ $contador_normales = count($notifC->listarNoLeidas('normal'));
 </a>
     <a href="Index.php?accion=listarSA">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-check-circle btn-aceptadas"></i> Solicitudes Aceptadas
+            <i class="fa-solid fa-check-circle btn-aceptadas"></i> 
+            <span class="title">Solicitudes Aceptadas</span>
+            <span class="desc">Vea Las Solicitudes que Acepto y Esta Trabajando en Ella</span>
         </button>
     </a>
     <a href="Index.php?accion=listarST">
         <button class="btn btn-boton444">
-            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> Solicitudes Terminadas
+            <i class="fa-solid fa-flag-checkered btn-terminadas"></i> 
+            <span class="title">Solicitudes Terminadas</span>
+            <span class="desc">Consulta sus Solicitudes Terminadas y la Califiacion del Cliente</span>
         </button>
     </a>
 </div>
