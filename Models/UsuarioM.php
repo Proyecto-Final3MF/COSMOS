@@ -59,7 +59,6 @@ class Usuario {
             return false;
         }
 
-        // Tipos de parámetros: s s s i s s s s
         $stmt->bind_param("sssiss", 
             $usuario, 
             $contrasena_hash, 
