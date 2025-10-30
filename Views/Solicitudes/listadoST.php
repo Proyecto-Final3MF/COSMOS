@@ -89,7 +89,7 @@ require_once ("./Views/include/UH.php");
         } else {
             ?>
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="Index.php?accion=listarTL">
