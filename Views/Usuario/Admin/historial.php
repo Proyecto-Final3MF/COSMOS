@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 3) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_ADMIN) {
     header("Location: Index.php?accion=redireccion");
     exit();
 }

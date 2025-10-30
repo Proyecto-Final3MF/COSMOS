@@ -16,7 +16,7 @@ require_once("Models/ProductoM.php");
 require_once("Controllers/ChatC.php");
 require_once("Controllers/NotificacionC.php");
 
-//define la variable accion con lo que llegue por el metodo GET
+$accion = $_GET['accion'] ?? 'Index';
 
 $accion = $_GET['accion'] ?? 'Index';
 
@@ -34,9 +34,6 @@ if (!in_array($accion, $acciones_publicas)) {
   //si esta logueado sale del if y entra al switch
 
   if (!isset($_SESSION['usuario'])) {
-
-    //redirige al Index pero ahora con una accion en el array de acciones publicas
-
     header("Location: Index.php?accion=login");
     exit;
   }
@@ -57,110 +54,23 @@ switch ($accion) {
 
       // crea una nueva instancia del objeto UsuarioC (controlador usuario)
 
-      $controller = new UsuarioC();
-
-      // mas especificamente la funcion login      
-
-      $controller->login();
-    break;
-
-    //si la accion es autenticar entra al case
-
-    case 'autenticar':
-
-      //crea una nueva instancia del objeto UsuarioC
-
-      $controller = new UsuarioC();
-
-      //mas especificamente la funcion autenticar
-
-      $controller->autenticar();
-    break;
-
-    //si la accion es registro entra al case
-
-    case 'registro':
-    
-      //crea una nueva instancia del objeto UsuarioC
-
-      $controller = new UsuarioC();
-
-      //mas especificamente la funcion crear
-
-      $controller->crear();
-    break;
-
-    //si la accion es guardarU entra al case
-
-    case 'guardarU':
-
-        //crea una nueva instancia del objeto UsuarioC
-
-        $controller = new UsuarioC();
-
-        //ejecuta la funcion guardarU para registrar el usuario
-
-        $controller->guardarU();
-    break;
-
-    case 'tecnico':
-
-      //crea una nueva instacia del objeto UsuarioC
-
-      $controller = new UsuarioC();
-
-      //ejecuta la funcion tecnico para mostrar la pagina para los nuevos tecnicos
-
-      $controller->tecnico();
-    break;
-
-    case 'registroT':
-      $controller = new UsuarioC();
-      $controller->registroT();
-    break;
-
-    case 'guardarT':
-      $controller = new UsuarioC();
-      $controller->guardarT();
-    break;
-
-    //si la accion es redireccion entra al case
-
-    case 'redireccion':
-
-        //verifica si existe usuario y rol en la sesion
-
-        if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
-
-            //redirige segun el rol del usuario
-
-            if ($_SESSION['rol'] == 2) {
-
-                //pagina cliente
-
-                include("./Views/Usuario/Cliente/ClienteP.php");
-
-            } elseif ($_SESSION['rol'] == 1) {
-
-                // pagina tecnico
-                include("./Views/Usuario/Tecnico/TecnicoP.php");
-
-            } elseif ($_SESSION['rol'] == 3) {
-
-                header("Location:Index.php?accion=panelA");
-
-            } else {
-
-                //el rol no concuerda con los actuales
-
-                echo "<h1>Error: Rol no reconocido.</h1>";
-                echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
-            }
-        } else {
-            header("Location: Index.php?accion=login");
-            exit();
-        }
-    break;
+  case 'redireccion':
+    if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
+      if ($_SESSION['rol'] == ROL_CLIENTE) {
+        include("./Views/Usuario/Cliente/ClienteP.php");
+      } elseif ($_SESSION['rol'] == ROL_TECNICO) {
+        include("./Views/Usuario/Tecnico/TecnicoP.php");
+      } elseif ($_SESSION['rol'] == ROL_ADMIN) {
+        header("Location:Index.php?accion=panelA");
+      } else {
+        echo "<h1>Error: Rol no reconocido.</h1>";
+        echo "<p><a href='Index.php?accion=logout'>Cerrar Sesión</a></p>";
+      }
+    } else {
+      header("Location: Index.php?accion=login");
+      exit();
+    }
+  break;
 
 
   //acciones para todos los roles
@@ -479,7 +389,8 @@ switch ($accion) {
 
   //si la accion es marcarNotificacionesLeidas entra al case
   case 'marcarNotificacionesLeidas':
-    //retorna respuesta json de exito
+    $controller = new NotificacionC();
+    $controller->marcarTodasLeidas('urgente');  // Solo urgentes
     echo json_encode(['success' => true]);
   break;
 
@@ -501,7 +412,7 @@ switch ($accion) {
   default:
     //si el usuario no esta logueado redirige al login
     if (!isset($_SESSION['usuario'])) {
-        header("Location: Index.php?accion=login");
+      header("Location: Index.php?accion=login");
     } else {
         //si esta logueado muestra error 404
         http_response_code(404);
