@@ -15,6 +15,8 @@
 <div class="btn-container2">
     <a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
 </div>
+<br>
+<p class="inicio44">Estas Interesado en Trabajar Como Tecnico con Nosotros? Haga click Abajo</p>
 
 <div class="btn-container2">
     <a href="Index.php?accion=trabajo"><button class="btn btn-boton44">Trabajar con Nosotros</button></a>
