@@ -2329,7 +2329,6 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
 }
 
-
 /* === Estilo general para inputs y selects === */
 .form-control, select, input[type="text"], input[type="email"], input[type="password"], textarea {
     background-color: var(--color-fondo);
@@ -2420,7 +2419,6 @@ form[action*="guardarT"] .select2-selection__clear {
     margin: 3px;
     padding: 3px 6px;
 }
-
 
 /* Aca termina el CSS de los Formularios */
 
