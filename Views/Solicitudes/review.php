@@ -13,7 +13,6 @@
         <form action="Index.php?accion=AddReview" method="post">
             <input type="hidden" name="id_tecnico" value="<?=$id_tecnico ?>">
             <input type="hidden" name="titulo_solicitud" value="<?=$titulo_solicitud ?>">
-            <input type="hidden" name="id_cliente" value="<?=$_SESSION['id'] ?>">
             <input type="hidden" name="id_solicitud" value="<?=$id ?>">
             <fieldset class="rate" id="interactive-rating">
                 <input type="radio" id="rating10" name="rating" value="10" <?= ($rating == 10) ? 'checked' : '' ?> /><label for="rating10" title="5 stars"></label>
