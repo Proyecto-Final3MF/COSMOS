@@ -7,8 +7,10 @@ class Usuario {
         $this->conn = conectar();
     }
 
-
-    public function guardarU($nombre, $contrasena_hash, $email, $rol_id, $especializaciones = [], $otra_especialidad = null) {
+    // En la clase Usuario (UsuarioM.php)
+    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad) {
+        $estado_verificacion = 'pendiente'; // Específico para Técnicos
+        $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
         // Si es Cliente (Rol 2)
         if ($rol_id == 2) {
