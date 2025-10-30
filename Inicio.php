@@ -13,14 +13,11 @@
 <p class="inicio44">Te ayudamos a encontrar un tecnico para arreglar tu dispositivo en tiempo record</p>
 
 <div class="btn-container2">
-        <a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
+<a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
+<a href="Index.php?accion=trabajo"><button class="btn btn-boton44">Trabajar con Nosotros</button></a>
 </div>
 
 <br>
-
-<div class="btn-container2">
-    <a href="Index.php?accion=tecnico"><button class="btn btn-boton44">Trabaja con nosotros</button></a>
-</div>
     
 <script src="Assets/js/trancicion.js"></script>
 
