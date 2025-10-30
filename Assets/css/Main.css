@@ -2303,6 +2303,33 @@ input[type="submit"]:hover {
     }
 }
 
+/* === Ajuste de altura para el Select2 del formulario de producto === */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection {
+    height: 50px !important; /* altura más alta */
+    padding: 10px 40px 10px 35px !important; /* más espacio interno */
+    font-size: 17px;
+    align-items: center;
+}
+
+/* Centrar mejor el texto dentro del select */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__rendered {
+    line-height: 30px !important;
+}
+
+/* Ajustar posición de la flecha (▼) y la X (clear) */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__arrow {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__clear {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
 /* === Estilo general para inputs y selects === */
 .form-control, select, input[type="text"], input[type="email"], input[type="password"], textarea {
     background-color: var(--color-fondo);
