@@ -9,21 +9,45 @@ class Review {
    public function agarrarCantReview ($id_tecnico) {
         $sql = "SELECT cant_review FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return null; 
+        }
+
         $stmt->bind_param("i", $id_tecnico);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return null;
+        }
+
         $resultado = $stmt->get_result();
-        $fila = $resultado->fetch_assoc(); 
-        return $fila['cant_review']; 
+        $data = $resultado->fetch_assoc();
+        $stmt->close();
+        return $data['cant_review'] ?? null;
     }
 
     public function agarrarPromedio($id_tecnico) {
         $sql = "SELECT promedio FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return null; 
+        }
+
         $stmt->bind_param("i", $id_tecnico);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return null;
+        }
+
         $resultado = $stmt->get_result();
-        $fila = $resultado->fetch_assoc();
-        return $fila['promedio'];
+        $data = $resultado->fetch_assoc();
+        $stmt->close();
+        return $data['promedio'] ?? null;
     }
 
     public function AddReview($suma_rating, $CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud) {
@@ -158,11 +182,23 @@ class Review {
     public function agarrarSuma($id_tecnico) {
         $sql = "SELECT suma_rating FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return null; 
+        }
+
         $stmt->bind_param("i", $id_tecnico);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return null;
+        }
+
         $resultado = $stmt->get_result();
-        $fila = $resultado->fetch_assoc(); 
-        return $fila['suma_rating']; 
+        $data = $resultado->fetch_assoc();
+        $stmt->close();
+        return $data['suma_rating'] ?? null; 
     }
 
     public function checkUsuario($id_solicitud, $id_usuario) {
