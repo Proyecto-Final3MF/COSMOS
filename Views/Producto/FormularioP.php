@@ -10,6 +10,7 @@ require_once ("./Views/include/UH.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Producto</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -81,7 +82,6 @@ require_once ("./Views/include/UH.php");
     <script src="Assets/js/imagenformulario.js"></script>
     <script src="Assets/js/trancicion.js"></script>
     <script src="Assets/js/botonvolver.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

@@ -279,8 +279,10 @@ switch ($accion) {
 
   //si la accion es formularioP entra al case
   case 'formularioP':
-    //ejecuta la funcion formularioP para mostrar formulario
-    $controller->formularioP();
+  //crea una nueva instancia del objeto ProductoC
+  $controller = new ProductoC();
+  //ejecuta la funcion formularioP para mostrar formulario
+  $controller->formularioP();
   break;
 
   //acciones para solicitudes urgentes
