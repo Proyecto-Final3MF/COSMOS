@@ -19,6 +19,7 @@
 
 <div class="btn-container2">
 <a href="Index.php?accion=login"><button class="btn btn-boton44">Empezar Ahora</button></a>
+<a href="Index.php?accion=trabajo"><button class="btn btn-boton44">Trabajar con Nosotros</button></a>
 </div>
 <script src="Assets/js/trancicion.js"></script>
 <script>
