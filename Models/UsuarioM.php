@@ -9,11 +9,10 @@ class Usuario {
 
     // En la clase Usuario (UsuarioM.php)
     public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad) {
-        $estado_verificacion = 'pendiente'; // Específico para Técnicos
         $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, otra_especialidad, foto_perfil) 
+                VALUES (?, ?, ?, ?, ?, ?)"; 
         
         $stmt = $this->conn->prepare($sql);
         
@@ -22,16 +21,13 @@ class Usuario {
             return false;
         }
 
-        // Tipos de parámetros: s s s i s s s s
-        $stmt->bind_param("sssissss", 
+        $stmt->bind_param("sssiss", 
             $usuario, 
             $contrasena_hash, // Usar el hash
             $mail, 
             $rol_id,
-            $ruta_evidencia, 
             $otra_especialidad, 
-            $foto_perfil_default, 
-            $estado_verificacion
+            $foto_perfil_default
         );
         
         $success = $stmt->execute();
@@ -50,8 +46,8 @@ class Usuario {
         $otra_especialidad = null; 
         $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
-        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, evidencia_tecnica_ruta, otra_especialidad, foto_perfil, estado_verificacion) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
+        $sql = "INSERT INTO usuario (nombre, contrasena, email, rol_id, otra_especialidad, foto_perfil) 
+                VALUES (?, ?, ?, ?, ?, ?)"; 
         
         $stmt = $this->conn->prepare($sql);
         
@@ -64,15 +60,13 @@ class Usuario {
         }
 
         // Tipos de parámetros: s s s i s s s s
-        $stmt->bind_param("sssissss", 
+        $stmt->bind_param("sssiss", 
             $usuario, 
             $contrasena_hash, 
             $mail, 
-            $rol_id, 
-            $ruta_evidencia, 
+            $rol_id,
             $otra_especialidad, 
-            $foto_perfil_default, 
-            $estado_verificacion
+            $foto_perfil_default
         );
         
         $success = $stmt->execute();
