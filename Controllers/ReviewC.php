@@ -60,6 +60,15 @@ class ReviewC {
         $id_solicitud = $_POST['id_solicitud'] ?? null;
         $titulo_solicitud = $_POST['titulo_solicitud'] ?? '';
         
+        $WrongTecnico = $this->ReviewModel->checkUsuario($id_solicitud, $id_tecnico);
+        $WrongCliente = $this->ReviewModel->checkUsuario($id_solicitud, $id_cliente);
+        if (!$WrongTecnico || !$WrongCliente) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "Accesso negado";
+            header("Location:Index.php?accion=listarST");
+            exit();
+        }
+
         if ($rating == 0) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El valor minimo es media estrella";
