@@ -2,7 +2,7 @@
 if (isset($_SESSION['mensaje'])) {
     $tipo = isset($_SESSION['tipo_mensaje']) ? $_SESSION['tipo_mensaje'] : 'info';
 
-    echo '<link rel="stylesheet" href="Assets/css/popup.css">
+    echo '<link rel="stylesheet" href="Assets/css/Main.css">
            <div class="popup-modal popup-' . htmlspecialchars($tipo) . ' active" id="popupMsg"> 
              <div class="popup-header">
                <div class="popup-title">Mensaje</div>
