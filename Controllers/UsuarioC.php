@@ -116,6 +116,7 @@ class UsuarioC {
                 $_SESSION['rol'] = 2;
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['usuario'] = $usuarioN['nombre'];
+                $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Se registro", null, 0, "Usuario registrado como Cliente.");
                 header("Location:index.php?accion=redireccion");
             } else {
                 header("Location: Index.php?accion=register");
@@ -198,6 +199,7 @@ class UsuarioC {
                 $_SESSION['rol'] = 1;
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['usuario'] = $usuarioN['nombre'];
+                $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Se registro", null, 0, "Usuario registrado como Tecnico.");
                 header("Location:index.php?accion=redireccion");
             } else {
                 header("Location: Index.php?accion=TecnicoForm");
