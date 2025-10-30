@@ -57,6 +57,10 @@ body {
     color: var(--text-color);
     transition: background-color 0.4s, color 0.4s;
 }
+
+.no-scroll {
+    overflow: hidden;
+}
  
 /* Esto afecta al header el UH.php basicamente */
 
