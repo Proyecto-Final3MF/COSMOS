@@ -1564,7 +1564,103 @@ input[type="text"]::placeholder {
 
 /* aca termina el css del menu de usuario */
 
-/* aca esta el css que afecta al mensaje que sale cuando actualizas usuario, creas tabla etc. el que era popup */
+/* aca esta el css que afecta al mensaje que sale cuando actualizas usuario, creas tabla etc. el popup */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 9998;
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  max-width: 85%;
+  opacity: 0;
+  transition: all 0.25s ease;
+  z-index: 9999;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.popup-modal.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  color: #fff;
+}
+
+.popup-success .popup-header {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+.popup-error .popup-header {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+.popup-warning .popup-header {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+.popup-info .popup-header {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.popup-header .popup-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.popup-header .popup-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.popup-header .popup-close:hover {
+  transform: scale(1.2);
+  color: #333;
+}
+
+.popup-body {
+  padding: 20px;
+  text-align: center;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.popup-body p {
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .popup-modal {
+    width: 90%;
+  }
+}
 
 .modal {
     position: fixed;
@@ -2301,6 +2397,123 @@ input[type="submit"]:hover {
         font-size: 14px;
         height: 45px;
     }
+}
+
+/* === Ajuste de altura para el Select2 del formulario de producto === */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection {
+    height: 50px !important; /* altura más alta */
+    padding: 10px 40px 10px 35px !important; /* más espacio interno */
+    font-size: 17px;
+    align-items: center;
+}
+
+/* Centrar mejor el texto dentro del select */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__rendered {
+    line-height: 30px !important;
+}
+
+/* Ajustar posición de la flecha (▼) y la X (clear) */
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__arrow {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__clear {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* === Estilo general para inputs y selects === */
+.form-control, select, input[type="text"], input[type="email"], input[type="password"], textarea {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-control:focus, select:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* === Botón === */
+.button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--primary-color-hover);
+}
+
+/* === Select2 igual que el otro formulario === */
+.select2-container--bootstrap .select2-selection {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-size: 16px;
+    height: 50px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.select2-dropdown {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.select2-results__option {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+}
+
+.select2-results__option--highlighted {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* === Scroll interno para múltiples selecciones === */
+.select2-container--bootstrap .select2-selection--multiple {
+    max-height: 90px;  /* ajusta según prefieras */
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    scrollbar-width: thin; /* scroll más fino en Firefox */
+}
+
+/* Ocultar la X global (botón de limpiar) solo para este formulario */
+form[action*="guardarT"] .select2-selection__clear {
+    display: none !important;
+}
+
+/* Asegurar que las etiquetas (tags) se mantengan visibles */
+.select2-container--bootstrap .select2-selection__choice {
+    background-color: var(--color-fondo-formulario, #333);
+    color: var(--text-color);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--border-radius);
+    margin: 3px;
+    padding: 3px 6px;
 }
 
 /* Aca termina el CSS de los Formularios */
