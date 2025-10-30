@@ -8,7 +8,7 @@ class Usuario {
     }
 
     // En la clase Usuario (UsuarioM.php)
-    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $ruta_evidencia, $otra_especialidad) {
+    public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad) {
         $estado_verificacion = 'pendiente'; // Específico para Técnicos
         $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
