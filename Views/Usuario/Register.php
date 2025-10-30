@@ -4,8 +4,6 @@ if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [ROL_TECNICO, ROL_CLIE
 } 
 
 require_once ("./Views/include/UH.php");
-// ASUMIMOS que el controlador ha cargado las especializaciones disponibles:
-// $especializaciones = [ ['id' => 1, 'nombre' => 'Reparación de Laptops'], ... ];
 ?>
 
 <!DOCTYPE html>
@@ -29,54 +27,6 @@ require_once ("./Views/include/UH.php");
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
             <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
-                        
-             <p class="fade-label">¿Eres Un?</p>
-
-            <div class="rol-container">
-                <?php foreach ($roles as $rol): ?>
-                <div class="rol-option" data-value="<?= $rol['id'] ?>">
-                    <?= htmlspecialchars($rol['nombre']) ?>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            <input type="hidden" id="rol" name="rol" required>  
-
-            <br><br>
-
-            <div id="tecnico-fields" class="hidden-fields">
-                
-                <p class="fade-label">Selecciona tus Especialidades</p>
-                <p class="fade-label">maximo 2</p>
-
-                <select id="especialidad_selector" name="especializaciones_ids[]" class="js-example-basic-multiple" multiple="multiple" required> 
-                    <option value="" disabled></option>
-                    <?php 
-                    if (isset($especializaciones) && is_array($especializaciones)):
-                        foreach ($especializaciones as $especialidad): ?>
-                            <option value="<?= $especialidad['id'] ?>"><?= htmlspecialchars($especialidad['nombre']) ?></option>
-                    <?php endforeach; 
-                    endif;
-                    ?>
-                </select>
-                
-                <div id="especialidades_tags" style="margin-top: 10px;"></div>
-                
-                <br>
-                
-                <p class="fade-label">Otra Especialidad Específica (Opcional)</p>
-                <input type="text" class="form-control" id="otra_especialidad" name="otra_especialidad" placeholder="Ej: Micro soldadura de placa base">
-                <br><br>
-                
-                <p class="fade-label">Evidencia Técnica (Preferiblemente certificación)</p>
-                <img id="preview-evidencia" class="foto-evidencia" src="./Assets/imagenes/sincargas4.png">
-
-                <div class="input-archivo">
-                <input type="file" name="foto_evidencia" accept="image/*" id="foto_evidencia" hidden>
-                <label for="foto_evidencia" class="btn-boton3-input">Subir Evidencia</label>
-                <span class="nombre-archivo-seleccionado-evidencia">Ningún archivo seleccionado</span>
-                </div>
-                <br>
-            </div>
             
             <p class="fade-label">Contraseña</p>
             <div class="password-container">
