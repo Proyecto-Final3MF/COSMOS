@@ -11,18 +11,11 @@
     <div class="contenedor-formulario">
         <section class="formularios99">
             <h2 class="fade-label">Bienvenido</h2>
-            <p class="fade-label">Ingrese tu email para que se envie el formulario de inscripción</p>
-
-            <form method="POST" action="Index.php?accion=guardarU" enctype="multipart/form-data">
-                <p class="fade-label">Email </p>
-                <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required>
-
-                <input class="button" type="submit" value="Guardar">
-            </form>
+            <p class="fade-label">Para trabajar con nosotros envienos su curriculum</p>
+            <p class="fade-label">tecnicosyasociados0@gmail.com</p>
         </section>
         
-        <!-- Falta hacer los de email asi q pongo un link directo para el formulario -->
-         <a href="index.php?accion=TecnicoForm">TecnicoForm</a>
+         <a href="index.php?accion=TecnicoForm">Registro Temporal</a>
     </div>
 </body>
 </html>
