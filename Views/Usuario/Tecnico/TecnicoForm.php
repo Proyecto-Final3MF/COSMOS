@@ -73,6 +73,7 @@ $(document).ready(function() {
     allowClear: true,
     width: '100%',
     closeOnSelect: false,
+    theme: 'bootstrap', // ✅ usa el mismo tema que en el otro formulario
     language: {
       noResults: function() {
         return "No se encontraron resultados";
@@ -81,7 +82,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
 
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/vercontrasena.js"></script>
