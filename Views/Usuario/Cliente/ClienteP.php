@@ -20,7 +20,7 @@ require_once ("./Views/include/UH.php");
     <br>
 <div>
 
-    <h2 class="fade-slide">¿En qué podemos ayudarte?</h2>
+    <h1 class="inicio55">¿En qué podemos ayudarte?</h1>
 
     <div class="btn-container fade-slide">
     <a href="Index.php?accion=urgenteP">

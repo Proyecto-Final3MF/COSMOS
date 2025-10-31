@@ -17,6 +17,7 @@
   --urgente3: #b91c1c;
   --botonP: #f6f8fa;
   --color-fondo: #ffffff;
+  --specialz: #ffffff;
   --color-fondo-formulario: #f0f2f5;
   --text-color: #333;
   --primary-color: #e83e8c;
@@ -37,6 +38,7 @@
   --urgente3: #ff2121;
   --botonP: #383838;
   --color-fondo: #1e1e1e;
+  --specialz: #383838;
   --color-fondo-formulario: #131313;
   --text-color: #f7f6f6;
   --primary-color: #ff70c0;
@@ -2006,6 +2008,58 @@ input:focus, select:focus, textarea:focus {
     to { opacity: 1; transform: translateX(0); }
 }
 
+.contenedor-formulario2 {  
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    padding-top: 50px;
+    min-height: 100vh;
+    gap: 20px; 
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 0.8s ease-out forwards;
+}
+
+.contenedor-formulario2 h3 {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideDown 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.contenedor-formulario2 form > * {
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+.contenedor-formulario2 form > *:nth-child(1) { animation-delay: 0.3s; }
+.contenedor-formulario2 form > *:nth-child(2) { animation-delay: 0.4s; }
+.contenedor-formulario2 form > *:nth-child(3) { animation-delay: 0.5s; }
+.contenedor-formulario2 form > *:nth-child(4) { animation-delay: 0.6s; }
+.contenedor-formulario2 form > *:nth-child(5) { animation-delay: 0.7s; }
+.contenedor-formulario2 form > *:nth-child(6) { animation-delay: 0.8s; }
+.contenedor-formulario2 form > *:nth-child(7) { animation-delay: 0.9s; }
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border: 2px solid #e83e8c;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 .fade-label {
   opacity: 0;
   transform: translateY(-10px);
@@ -2023,6 +2077,36 @@ input:focus, select:focus, textarea:focus {
 .fade-label:nth-of-type(2) { animation-delay: 0.2s; }
 .fade-label:nth-of-type(3) { animation-delay: 0.3s; }
 .fade-label:nth-of-type(4) { animation-delay: 0.4s; }
+
+.formularios992 {
+    background-color: var(--specialz); 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h3 {
+    color: var(--rosado-en-eclipse);
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form p {
+    color: var(--text-color);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.formularios992 input[type="text"],
+.formularios992 input[type="email"],
+.formularios992 input[type="password"],
+.formularios992 select {
+  
+  color: var(--text-color);
+}
 
 .formularios99 {
     background-color: var(--color-fondo); 

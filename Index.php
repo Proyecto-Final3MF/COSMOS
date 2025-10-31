@@ -364,7 +364,18 @@ switch ($accion) {
     $controller->marcarTodasLeidas('urgente');  // Solo urgentes
     echo json_encode(['success' => true]);
   break;
+  
+  case 'contactanos':
+    require_once('Controllers/ContactoC.php');
+    $controlador = new ContactoC();
+    $controlador->mostrarFormulario();
+  break;
 
+  case 'enviarMensajeContacto':
+    require_once('Controllers/ContactoC.php');
+    $controlador = new ContactoC();
+    $controlador->enviarMensajeContacto();
+  break;
 
   //accion default
 
