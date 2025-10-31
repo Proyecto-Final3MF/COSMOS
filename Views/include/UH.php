@@ -172,6 +172,10 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                                 <p class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? 'Sin correo') ?></p>
                             </div>
 
+                            <a href="Index.php?accion=PerfilTecnico&id=<?= $_SESSION['id'] ?>" class="dropdown-item">
+                                <i class="fa fa-user"></i> Mi Perfil
+                            </a>
+
                             <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
                                 <i class="fa fa-edit"></i> Editar Perfil
                             </a>

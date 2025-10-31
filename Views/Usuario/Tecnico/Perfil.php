@@ -21,10 +21,16 @@
     <div class="profile-details">
         <p><?=$DatosTecnico['nombre']?> <?= $DatosTecnico['email']?></p>
         <p>Cantidad de Reviews: <?=$DatosTecnico['cant_review']?> Promedio: <?=$DatosTecnico['promedio']?>★</p>
-        <p>Especialidad: <?=$especializacion?> 
-            <?php if ($DatosTecnico['otra_especialidad']): ?>
+        <p>Especialidad: 
+            <?php if ($especializaciones):
+                echo implode(", ", $especializaciones);
+                if ($DatosTecnico['otra_especialidad']): ?>
                 Y <?=$DatosTecnico['otra_especialidad']?>
-            <?php endif ?>
+                <?php endif ?>
+            <?php else: ?>
+            <?php if ($DatosTecnico['otra_especialidad']): ?>
+                <?=$DatosTecnico['otra_especialidad']?>
+            <?php endif; endif ?>
         </p>
     </div>
 </div>
