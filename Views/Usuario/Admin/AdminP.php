@@ -19,7 +19,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
     <main>
-        <h2 class="fade-slide">Aquí podrás gestionar tus tareas como Admin.</h2>
+        <h1 class="inicio55">Aquí podrás gestionar tus tareas como Admin.</h1>
     </main>
 
     <div class="admin-dashboard">
