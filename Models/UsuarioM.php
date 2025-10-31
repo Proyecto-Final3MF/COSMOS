@@ -81,6 +81,43 @@ class Usuario {
         return $success;
     }
 
+
+    // En tu archivo UsuarioM.php, dentro de la clase Usuario:
+
+// ... (código existente de la clase)
+
+    /**
+     * Obtiene el email de un usuario dado su ID.
+     * Es ideal para usar en servicios de notificación.
+     * @param int $id El ID del usuario.
+     * @return string|null El email del usuario o null si no existe.
+     */
+    public function obtenerEmailUsuarioPorId($id) {
+        $sql = "SELECT email FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error (obtenerEmailUsuarioPorId): " . $this->conn->error);
+            return null;
+        }
+
+        $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            error_log("MySQLi Execute Error (obtenerEmailUsuarioPorId): " . $stmt->error);
+            $stmt->close();
+            return null;
+        }
+
+        $resultado = $stmt->get_result();
+        $data = $resultado->fetch_assoc();
+        $stmt->close();
+
+        // Devuelve el email o null si no encuentra la fila
+        return $data ? $data['email'] : null; 
+    }
+
+// ... (resto del código de la clase)
+
     // Especializaciones
 
     public function obtenerEspecializaciones() {

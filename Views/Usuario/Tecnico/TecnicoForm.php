@@ -19,7 +19,7 @@ include_once("./Views/include/UH.php");
 
     <h3>Registrarse como Tecnico</h3>
 
-    <form method="POST" action="index.php?accion=guardarT" enctype="multipart/form-data">
+    <form class="tecnico-fields" method="POST" action="index.php?accion=guardarT" enctype="multipart/form-data">
         
         <p class="fade-label">Nombre de Usuario</p>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
