@@ -3,16 +3,24 @@ require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/solicitud_historiaC.php');
 require_once ("./Views/include/popup.php");
 require_once("Controllers/HistorialC.php");
+require_once(__DIR__ . '/../Services/EmailService.php');
 
 class SolicitudC {
     private $solicitudModel;
     private $historiaC;
     private $historialController;
+    private $emailService; // NUEVO: Propiedad para el servicio de email
+    private $adminEmail; // NUEVO: Propiedad para el email del admin
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
         $this->historialController = new HistorialController();
+
+        // NUEVO: Inicializar EmailService y obtener la configuración
+        $this->emailService = new EmailService(); 
+        $config = include(__DIR__ . '/../config/email.php');
+        $this->adminEmail = $config['notifications']['admin_email'];
     }
 
     public function formularioS() {
@@ -52,6 +60,22 @@ class SolicitudC {
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
             $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud", $titulo, $id_solicitud, null);
+
+            // Notificar por email al administrador
+            $cliente = $_SESSION['usuario'];
+            $asunto = "📧 Nueva Solicitud Creada: $titulo";
+            $mensaje = "El cliente ".$cliente." ha creado una nueva solicitud:
+                <br><strong>Título:</strong> {$titulo}
+                <br><strong>Descripción:</strong> {$descripcion}
+                <br><strong>Prioridad:</strong> {$prioridad}
+                <br><br>Revisa la solicitud en el panel de administrador para asignarla.";
+            
+            $this->emailService->enviarNotificacion(
+                $this->adminEmail, 
+                $asunto, 
+                $mensaje, 
+                ($prioridad === 'urgente' ? 'urgente' : 'normal')
+            );
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
