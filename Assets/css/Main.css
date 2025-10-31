@@ -2855,11 +2855,11 @@ p.inicio44 {
 }
 
 .miembro {
-    background: #fff;
+    background: var(--color-fondo-formulario);
     border-radius: 16px;
     padding: 20px;
     width: 155px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 7px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -2879,7 +2879,7 @@ p.inicio44 {
 
 .miembro h3 {
     font-size: 1rem;
-    color: #333;
+    color: var(--text-color);
     margin-top: 8px;
 }
 
