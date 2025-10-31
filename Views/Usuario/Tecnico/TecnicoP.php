@@ -21,7 +21,7 @@ $contador_normales = count($notifC->listarNoLeidas('normal'));
 <body>
     <br>
 
-    <h2 class="fade-slide">Aquí podrás gestionar tus tareas como técnico.</h2>
+    <h1 class="inicio55">Aquí podrás gestionar tus tareas como técnico.</h1>
 
 
 <div class="btn-container fade-slide">

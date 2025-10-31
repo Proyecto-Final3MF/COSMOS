@@ -9,6 +9,7 @@
 </head>
 <body class="no-scroll">
     <div class="contenedor-formulario">
+        <br><br>
         <section class="formularios99">
             <h2 class="fade-label">Bienvenido</h2>
             <p class="fade-label">Para trabajar con nosotros envienos su curriculum</p>
