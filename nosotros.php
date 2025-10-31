@@ -61,7 +61,7 @@
     </div>
 
     <div class="miembro reveal">
-        <img src="Assets/imagenes/perfil/fotodefault.webp" alt="Miembro 2">
+        <img src="Assets/imagenes/perfil/elthiago.jpeg" alt="Miembro 2">
         <h3>Thiago Carballo</h3>
     </div>
 
