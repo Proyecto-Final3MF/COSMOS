@@ -195,6 +195,12 @@ class UsuarioC {
             $usuarioN = $usuarioM->obtenerPorEmail($mail);
 
             if ($usuarioN) {
+                $guardarEsp = $usuarioM->guardarEspecializaciones($usuarioN['id'], $especializaciones);
+                if (!$guardarEsp) {
+                    $_SESSION['tipo_mensaje'] = "error";
+                    $_SESSION['mensaje'] = "Error: tuvimos problemas al guardar tus especializaciones, intente mas tader.";
+                }
+
                 $_SESSION['id'] = $usuarioN['id'];
                 $_SESSION['rol'] = 1;
                 $_SESSION['email'] = $usuarioN['email'];
@@ -428,7 +434,7 @@ class UsuarioC {
         $Reviews = new Review();
         $id_tecnico = $_GET['id'];
         $DatosTecnico = $Tecnico->buscarUserId($id_tecnico);
-        $especializacion = $Tecnico->getEspecializacion($id_tecnico);
+        $especializaciones = $Tecnico->getEspecializacion($id_tecnico);
         $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
         include("Views/Usuario/Tecnico/Perfil.php");
     }

@@ -7,7 +7,6 @@ class Usuario {
         $this->conn = conectar();
     }
 
-    // En la clase Usuario (UsuarioM.php)
     public function crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad) {
         $foto_perfil_default = "Assets/imagenes/perfil/fotodefault.webp"; 
         
@@ -23,7 +22,7 @@ class Usuario {
 
         $stmt->bind_param("sssiss", 
             $usuario, 
-            $contrasena_hash, // Usar el hash
+            $contrasena_hash,
             $mail, 
             $rol_id,
             $otra_especialidad, 
@@ -52,10 +51,7 @@ class Usuario {
         $stmt = $this->conn->prepare($sql);
         
         if (!$stmt) {
-            // 🛑 PUNTO DE FALLO 1: Error al preparar la consulta
-            // Esto indica un problema con la sintaxis SQL, nombre de tabla/columna, o la conexión.
             die("❌ ERROR AL PREPARAR LA CONSULTA (PREPARE): " . $this->conn->error . " | SQL: " . $sql);
-            // Quita la línea 'die' una vez resuelto el problema.
             return false;
         }
 
@@ -71,20 +67,12 @@ class Usuario {
         $success = $stmt->execute();
         
         if (!$success) {
-            // 🛑 PUNTO DE FALLO 2: Error al ejecutar la consulta
-            // Esto indica una violación de restricción (ej. 'email' duplicado, 'rol_id' inválido, longitud de datos).
             die("❌ ERROR AL EJECUTAR LA CONSULTA (EXECUTE): " . $stmt->error);
-            // Quita la línea 'die' una vez resuelto el problema.
         }
         
         $stmt->close();
         return $success;
     }
-
-
-    // En tu archivo UsuarioM.php, dentro de la clase Usuario:
-
-// ... (código existente de la clase)
 
     /**
      * Obtiene el email de un usuario dado su ID.
@@ -115,10 +103,6 @@ class Usuario {
         // Devuelve el email o null si no encuentra la fila
         return $data ? $data['email'] : null; 
     }
-
-// ... (resto del código de la clase)
-
-    // Especializaciones
 
     public function obtenerEspecializaciones() {
         $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
@@ -336,13 +320,12 @@ class Usuario {
         $stmt->bind_param("i", $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        $fila = $resultado->fetch_assoc();
-
-        if ($fila !== null) {
-            return $fila['nombre'];
-        } else {
-            return null; 
+        
+        $especializaciones = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $especializaciones[] = $fila['nombre'];
         }
+        return $especializaciones;
     }
 
     // Verificación de técnicos
