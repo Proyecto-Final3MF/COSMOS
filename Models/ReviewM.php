@@ -201,15 +201,15 @@ class Review {
         return $data['suma_rating'] ?? null; 
     }
 
-    public function checkUsuario($id_solicitud, $id_usuario) {
-        $sql = "SELECT id FROM solicitud WHERE id = ? AND cliente_id = ?";
+    public function checkUsuario($id_solicitud, $id_tecnico, $id_cliente) {
+        $sql = "SELECT id FROM solicitud WHERE id = ? AND cliente_id = ? AND tecnico_id = ?";
         $stmt = $this->conn->prepare($sql);
 
         if ($stmt === false) {
             return false;
         }
 
-        $stmt->bind_param("ii", $id_solicitud, $id_usuario);
+        $stmt->bind_param("iii", $id_solicitud, $id_cliente, $id_tecnico);
         $stmt->execute();
         $resultado = $stmt->get_result();
 
