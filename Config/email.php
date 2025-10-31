@@ -8,7 +8,7 @@ return [
         'user' => 'tecnicosyasociados0@gmail.com',          // CAMBIAR: Tu email de Gmail
         'pass' => contrasena,          // CAMBIAR: Tu contraseña de aplicación (16 caracteres)
         'from_email' => 'tecnicosyasociados0@gmail.com',
-        'from_name' => 'Sistema de Tickets',
+        'from_name' => 'COSMOS',
         'secure' => 'tls',
         'auth' => true
     ],
