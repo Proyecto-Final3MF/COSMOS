@@ -61,8 +61,8 @@ require_once ("./Views/include/UH.php");
         <div class="option-card">
                 <h2><a href="Index.php?accion=verificarTecnicos" class="titulo3 fade-slide">Verificación de Cuentas</a></h2>
                 
-                <p>Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
-                <a href="Index.php?accion=verificarTecnicos" class="btn btn-boton12">Ver Técnicos Pendientes</a>
+                <p class="fade-slide">Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
+                <a href="Index.php?accion=verificarTecnicos" class="btn btn-boton12 fade-slide">Ver Técnicos Pendientes</a>
         </div>
         </section>
 
