@@ -2753,7 +2753,7 @@ input::placeholder {
 
 /* aca termina el css del filtrado de las tablas */
 
-/* Aca hay CSS del inicio con animaciones y eso */
+/* Aca hay CSS del inicio y nosotros con animaciones y eso */
 
 h1.inicio55 {
     text-align: center;
@@ -2839,7 +2839,74 @@ p.inicio44 {
 .btn-container a:nth-child(3) { animation-delay: 0.6s; }
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
 
-/* y aca termina el css de animaciones para inicio */
+.nosotros {
+    text-align: left;
+    margin: 30px;
+}
+
+.equipo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px auto;
+    max-width: 1100px;
+    text-align: center;
+}
+
+.miembro {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 155px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.miembro:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.miembro img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #e83e8c;
+}
+
+.miembro h3 {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .miembro {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .miembro {
+        width: 80%;
+    }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* y aca termina el css de animaciones para inicio y nosotros */
 
 
 /* Estrellas */
