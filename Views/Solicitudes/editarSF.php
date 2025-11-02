@@ -44,6 +44,9 @@ if (!isset($estados) || $estados === null) {
         <p class="fade-label">Descripción:</p>
         <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
 
+        <p class="fade-label">Precio:</p>
+        <input type="number" step="0.01" id="precio" name="precio" value="<?= htmlspecialchars($datosSolicitud['precio'] ?? 0.0)?>">
+
         <p class="fade-label">Estado:</p>
         <select name="estado" required>
             <?php foreach ($estados as $estado): ?>

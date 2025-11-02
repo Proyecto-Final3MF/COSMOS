@@ -228,12 +228,13 @@ class Solicitud {
         return $resultado->fetch_assoc(); 
     }
 
-    public function actualizarS($id, $descripcion, $estado_id) {
+    public function actualizarS($id, $descripcion, $estado_id, $precio) {
         $id = (int)$id;
         $descripcion = $this->conn->real_escape_string($descripcion);
         $estado_id = (int)$estado_id;
+        $precio = (double)$precio;
 
-        $sql = "UPDATE solicitud SET descripcion = '$descripcion', estado_id = $estado_id, fecha_actualizacion = NOW() WHERE id = $id";
+        $sql = "UPDATE solicitud SET descripcion = '$descripcion', estado_id = $estado_id, precio = $precio, fecha_actualizacion = NOW() WHERE id = $id";
         return $this->conn->query($sql);
     }
 

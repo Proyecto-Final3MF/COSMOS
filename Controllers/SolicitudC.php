@@ -279,6 +279,7 @@ class SolicitudC {
         $id = $_POST['id'] ?? null;
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
+        $precio = $_POST['precio'] ?? 0.0;
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
         $estadoAntiguo = $datosSolicitud['estado_id'];
@@ -293,7 +294,7 @@ class SolicitudC {
 
         $nuevoEstado = $this->solicitudModel->obtenerNombreEstadoPorId($estado_id);
 
-        if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id)) {
+        if ($this->solicitudModel->actualizarS($id, $descripcion, $estado_id, $precio)) {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
 
