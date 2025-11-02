@@ -204,7 +204,7 @@ class Usuario {
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("ssi", $nombre, $email, $id);
         }
-        return $stmt->execute();
+        return $stmt->execute(); 
     }
 
     public function actualizarContrasena($id, $nuevoHash) {
