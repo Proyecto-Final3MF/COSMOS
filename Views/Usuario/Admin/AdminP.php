@@ -58,15 +58,6 @@ require_once ("./Views/include/UH.php");
         </section>
 
         <section class="admin-panel-column fade-slide">
-        <div class="option-card">
-                <h2><a href="Index.php?accion=verificarTecnicos" class="titulo3 fade-slide">Verificación de Cuentas</a></h2>
-                
-                <p class="fade-slide">Revisa y aprueba o rechaza las solicitudes de registro de nuevos técnicos.</p>
-                <a href="Index.php?accion=verificarTecnicos" class="btn btn-boton12 fade-slide">Ver Técnicos Pendientes</a>
-        </div>
-        </section>
-
-        <section class="admin-panel-column fade-slide">
             <h3><a href="Index.php?accion=mostrarHistorial" class="titulo3 fade-slide" >Ultimos registros en el Historial</a></h3>
             <div class="historial-panel">
                 <?php if (!empty($historial)): ?>
