@@ -47,11 +47,11 @@
 <br>
 
 <h2 class="nosotros reveal">
-    Quienes Lo Crearon
+    Desarrolladores
 </h2>
 
 <p class="nosotros reveal">
-    El Servicio COSMOS fue creado por la empresa Técnicos y Asociados, que a su vez fue fundada por:
+    La aplicacion COSMOS fue desarrolada por:
 </p>
 
 <section class="equipo-container">
