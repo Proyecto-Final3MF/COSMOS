@@ -34,6 +34,7 @@ require_once ("./Views/include/UH.php");
                 <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                     <th>Cliente</th>
                 <?php endif; ?>
+                <th>Precio</th>
                 <th>Estado</th>
                 <th>Calificación</th>
                 <th>Fecha de Creacion</th>
@@ -63,6 +64,7 @@ require_once ("./Views/include/UH.php");
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
+                    <td><?= htmlspecialchars($resultado['precio']); ?></td>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <?php if ($resultado['rating']): ?>
                         <td><?= htmlspecialchars($resultado['rating']."★"); ?></td>
@@ -89,7 +91,7 @@ require_once ("./Views/include/UH.php");
         } else {
             ?>
             <tr>
-                <td colspan="9">
+                <td colspan="10">
                     No se terminarion solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="Index.php?accion=listarTL">
