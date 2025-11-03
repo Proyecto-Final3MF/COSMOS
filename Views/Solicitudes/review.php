@@ -26,7 +26,7 @@
                 <input type="radio" id="rating2" name="rating" value="2" <?= ($rating == 2) ? 'checked' : '' ?> /><label for="rating2" title="1 star"></label>
                 <input type="radio" id="rating1" name="rating" value="1" <?= ($rating == 1) ? 'checked' : '' ?> /><label class="half" for="rating1" title="1/2 star"></label>
             </fieldset>
-            <textarea class="form-control" rows="3"  name="Comentario" placeholder="Describi tu experiencia." id="Comentario"><?= htmlspecialchars($Comentario) ?? ''?></textarea>
+            <textarea class="form-control" rows="3" name="Comentario" placeholder="Describi tu experiencia." id="Comentario"><?= htmlspecialchars($Comentario) ?? ''?></textarea>
             <button type="submit">Enviar</button>
         </form>
     </section>
