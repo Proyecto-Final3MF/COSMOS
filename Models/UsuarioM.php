@@ -104,6 +104,37 @@ class Usuario {
         return $data ? $data['email'] : null; 
     }
 
+    // Método para obtener emails de todos los técnicos aprobados
+    public function obtenerEmailsTecnicos() {
+    $sql = "SELECT email FROM usuario WHERE rol_id = 1";  // Quita: AND estado_verificacion = 'aprobado'
+    $resultado = $this->conn->query($sql);
+    if ($resultado) {
+        $emails = [];
+        while ($row = $resultado->fetch_assoc()) {
+            $emails[] = $row['email'];
+        }
+        return $emails;
+    }
+    return [];
+    }
+
+    public function obtenerEmailsTecnicosPorEspecializacion($especializacion_id) {
+    $sql = "SELECT DISTINCT u.email 
+            FROM usuario u 
+            JOIN usuario_especializacion ue ON u.id = ue.usuario_id 
+            WHERE u.rol_id = 1 AND u.estado_verificacion = 'aprobado' AND ue.especializacion_id = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $especializacion_id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $emails = [];
+    while ($row = $resultado->fetch_assoc()) {
+        $emails[] = $row['email'];
+    }
+    $stmt->close();
+    return $emails;
+    }
+
     public function obtenerEspecializaciones() {
         $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
         $resultado = $this->conn->query($sql);
