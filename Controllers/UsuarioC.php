@@ -373,13 +373,27 @@ class UsuarioC {
     }
 
     public function PerfilTecnico() {
-        $Tecnico = new Usuario();
-        $Reviews = new Review();
-        $id_tecnico = $_GET['id'];
-        $DatosTecnico = $Tecnico->buscarUserId($id_tecnico);
-        $especializaciones = $Tecnico->getEspecializacion($id_tecnico);
-        $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
-        include("Views/Usuario/Tecnico/Perfil.php");
+    $Tecnico = new Usuario();
+    $Reviews = new Review();
+    $id_tecnico = $_GET['id'] ?? null;
+
+    if (!$id_tecnico || !is_numeric($id_tecnico)) {
+        // Redirige a una acción inexistente para activar el default
+        header("Location: Index.php?accion=notfound");
+        exit();
+    }
+
+    $DatosTecnico = $Tecnico->buscarUserId($id_tecnico);
+
+    if (!$DatosTecnico) {
+        // Redirige a una acción inexistente para activar el default
+        header("Location: Index.php?accion=notfound");
+        exit();
+    }
+
+    $especializaciones = $Tecnico->getEspecializacion($id_tecnico);
+    $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
+    include("Views/Usuario/Tecnico/Perfil.php");
     }
 
     public function logout() {

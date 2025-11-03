@@ -33,7 +33,7 @@
     Cómo Nació
 </h2>
 
-<p class="nosotros reveal">
+<p class="nosotro reveal">
     Todos hemos pasado por ese momento en que nuestra computadora, celular o 
     tablet deja de funcionar justo cuando más la necesitamos, ¿verdad? 
     Y lo peor es que no sabemos a quién acudir, los servicios tardan, o simplemente 
@@ -50,13 +50,13 @@
     Quienes Lo Crearon
 </h2>
 
-<p class="nosotros reveal">
+<p class="nosotro reveal">
     El Servicio COSMOS fue creado por la empresa Técnicos y Asociados, que a su vez fue fundada por:
 </p>
 
 <section class="equipo-container">
     <div class="miembro reveal">
-        <img src="Assets/imagenes/perfil/fotodefault.webp" alt="Miembro 1">
+        <img src="Assets/imagenes/perfil/elfede.jpeg" alt="Miembro 1">
         <h3>Federico Mosegui</h3>
     </div>
 

@@ -15,7 +15,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="inicio.php" class="logo-link" title="Inicio">
+            <a href="Index.php?accion=inicio" class="logo-link" title="Inicio">
                 <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
             </a>
 
@@ -26,7 +26,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
             <ul class="nav-links" id="nav-links">
                 <!-- Botón de Inicio -->
                 <li>
-                    <a href="inicio.php">
+                    <a href="Index.php?accion=inicio">
                         <i class="fa fa-home"></i> Inicio
                     </a>
                 </li>
@@ -42,12 +42,12 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
 
                 <!-- Estos dos botones siempre se muestran -->
                 <li>
-                    <a href="nosotros.php">
+                    <a href="Index.php?accion=nosotros">
                         <i class="fa fa-users"></i> Nosotros
                     </a>
                 </li>
                 <li>
-                    <a href="contacto.php">
+                    <a href="Index.php?accion=contacto">
                         <i class="fa fa-envelope"></i> Contáctanos
                     </a>
                 </li>

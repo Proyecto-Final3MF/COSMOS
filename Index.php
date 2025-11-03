@@ -12,10 +12,11 @@ require_once("Controllers/ReviewC.php");
 require_once("Models/ProductoM.php");
 require_once("Controllers/ChatC.php");
 require_once("Controllers/NotificacionC.php");
+require_once("Controllers/PublicC.php");
 
 $accion = $_GET['accion'] ?? 'Index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'guardarT', 'redireccion', 'espera', 'trabajo', 'TecnicoForm'];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'guardarT', 'redireccion', 'espera', 'trabajo', 'TecnicoForm' , 'inicio', 'nosotros', 'contacto' ];
 
 if (!in_array($accion, $acciones_publicas)) {
   if (!isset($_SESSION['usuario'])) {
@@ -45,6 +46,21 @@ switch ($accion) {
   case 'register':
     $controller = new UsuarioC();
     $controller->crear();
+  break;
+
+  case 'inicio':
+    $controller = new PublicC();
+    $controller->inicio();
+  break;
+
+  case 'nosotros':
+    $controller = new PublicC();
+    $controller->nosotros();
+  break;
+
+  case 'contacto':
+    $controller = new PublicC();
+    $controller->contacto();
   break;
 
   case 'trabajo':

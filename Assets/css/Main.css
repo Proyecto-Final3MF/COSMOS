@@ -2802,7 +2802,7 @@ p.inicio44 {
 
 .btn-boton44 {
     color: #fff;
-    background-color: #e83e8c;
+    background-color: var(--rosado-en-eclipse);
     border: 1px solid var(--primary-color);
     margin-right: 1rem;
     animation: pulse 2s infinite;
@@ -2839,8 +2839,14 @@ p.inicio44 {
 .btn-container a:nth-child(4) { animation-delay: 0.8s; }
 
 .nosotros {
-    text-align: left;
+    text-align: center;
     margin: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+p.nosotro {
+    text-align: center;
 }
 
 .equipo-container {
@@ -3214,4 +3220,52 @@ input:checked ~ label {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.top-tecnicos {
+    text-align: center;
+    margin: 50px 0;
+}
+.top-tecnicos-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.card-tecnico {
+    background: var(--color-navbar);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 20px;
+    width: 250px;
+}
+
+.foto-tecnico {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-ver-perfil {
+    background-color: var(--rosado-en-eclipse);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-ver-perfil:hover {
+    background-color: var(--primary-hover);
+}
+
+.puntuacion {
+    font-size: 1.2em;
+    color: #f1c40f;
+}
+
+.reviews {
+    color: var(--text-color);
+    font-size: 0.9em;
 }

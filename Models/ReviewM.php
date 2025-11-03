@@ -201,6 +201,19 @@ class Review {
         return $data['suma_rating'] ?? null; 
     }
 
+    public function obtenerTopTecnicos($limite = 3) {
+    $sql = "SELECT id, nombre, foto_perfil, promedio, cant_review 
+            FROM usuario 
+            WHERE rol_id = 1 AND cant_review > 0
+            ORDER BY promedio DESC, cant_review DESC
+            LIMIT ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $limite);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function checkUsuario($id_solicitud, $id_tecnico, $id_cliente) {
         $sql = "SELECT id FROM solicitud WHERE id = ? AND cliente_id = ? AND tecnico_id = ?";
         $stmt = $this->conn->prepare($sql);

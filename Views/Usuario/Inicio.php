@@ -3,7 +3,10 @@
 <?php
     require_once("Views/include/UH.php");
 
-    // Iniciar sesión si no está iniciada
+    require_once("./Models/ReviewM.php");
+    $reviewModel = new Review();
+    $topTecnicos = $reviewModel->obtenerTopTecnicos();
+
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -45,6 +48,28 @@
         </a>
     </div>
 <?php endif; ?>
+
+<section class="top-tecnicos fade-slide">
+    <h2 class="inicio55"> Top 3 Técnicos Mejor Calificados</h2>
+<br>
+    <?php if (!empty($topTecnicos)): ?>
+        <div class="top-tecnicos-container">
+            <?php foreach ($topTecnicos as $tecnico): ?>
+                <div class="card-tecnico">
+                    <img src="<?= htmlspecialchars($tecnico['foto_perfil']) ?>" alt="Foto de <?= htmlspecialchars($tecnico['nombre']) ?>" class="foto-tecnico">
+                    <h2><?= htmlspecialchars($tecnico['nombre']) ?></h2>
+                    <p class="puntuacion">⭐ <?= number_format($tecnico['promedio'], 1) ?> / 5</p>
+                    <p class="reviews">(<?= $tecnico['cant_review'] ?> reseñas)</p>
+
+                    <a title="Perfil del Tecnico" href="Index.php?accion=PerfilTecnico&id=<?= $tecnico['id'] ?>" class="btn-ver-perfil">Ver Perfil</a>
+
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p class="inicio44">Aún no hay técnicos calificados.</p>
+    <?php endif; ?>
+</section>
 
 <script src="Assets/js/trancicion.js"></script>
 
