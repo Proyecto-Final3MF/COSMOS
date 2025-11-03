@@ -133,7 +133,7 @@ class ReviewC {
                 $obs = "Ningun cambio detectado";
             } else {
                 if ($ratingAntiguo !== $rating) {
-                    $obs1 = "Rating: ".$ratingAntiguo."★" ." ⟶ ". $rating."★"." ‎ ";
+                    $obs1 = "Rating: ".$ratingAntiguo."⭐" ." ⟶ ". $rating."⭐"." ‎ ";
                     $obs = $obs1;
                 }
 
@@ -145,7 +145,7 @@ class ReviewC {
                 }
                 $obs = $obs1.$obs2;
             }
-            $evento = "La calificación fue cambiada para ".$rating."★";
+            $evento = "La calificación fue cambiada para ".$rating."⭐";
             $this->historiaC->registrarEvento($id_solicitud, $evento);
             $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "edito su evaluación de la solicitud", $titulo_solicitud, $id_solicitud, $obs);
             require_once(__DIR__ . '/../Controllers/NotificacionC.php');
@@ -166,7 +166,7 @@ class ReviewC {
         $this->ReviewModel->AddReview($suma_rating, $CantReview, $ratingPromedio, $rating, $id_tecnico, $id_cliente, $Comentario, $id_solicitud);
 
         //Cosas del historial
-        $evento = "La Solicitud fue calificada con ".$rating."★";
+        $evento = "La Solicitud fue calificada con ".$rating."⭐";
         $this->historiaC->registrarEvento($id_solicitud, $evento);
         $this->HistorialModel->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "calificó la solicitud", $titulo_solicitud, $id_solicitud, $evento);
         require_once(__DIR__ . '/../Controllers/NotificacionC.php');

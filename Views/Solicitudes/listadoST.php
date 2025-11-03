@@ -67,7 +67,7 @@ require_once ("./Views/include/UH.php");
                     <td><?= htmlspecialchars($resultado['precio']); ?></td>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <?php if ($resultado['rating']): ?>
-                        <td><?= htmlspecialchars($resultado['rating']."★"); ?></td>
+                        <td><?= htmlspecialchars($resultado['rating']."⭐"); ?></td>
                     <?php else: ?>
                         <td><?= htmlspecialchars("Sin calificaciones"); ?></td>
                     <?php endif ?>
