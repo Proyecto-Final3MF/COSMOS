@@ -2603,6 +2603,60 @@ form[action*="guardarT"] .select2-selection__clear {
     padding: 3px 6px;
 }
 
+#precio {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 100%; 
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin: 0 auto;            
+    text-align: right; /* alinea el valor numérico a la derecha */
+}
+
+/* Efecto al pasar el mouse */
+#precio:hover {
+    border-color: #e83e8c;
+    box-shadow: 0 0 6px rgba(232, 62, 140, 0.3);
+}
+
+/* Ajuste para modo oscuro */
+body.dark-mode #precio {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    border-color: var(--color-borde);
+}
+
+.input-precio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 80%;
+}
+
+.simbolo {
+    position: absolute;
+    left: 10px;
+    color: var(--text-color);
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.input-precio input {
+    padding-left: 30px; 
+}
+
+body.dark-mode #precio::-webkit-inner-spin-button,
+body.dark-mode #precio::-webkit-outer-spin-button {
+    background-color: var(--color-navbar);
+    color: var(--text-color);
+    filter: invert(1);
+    border: 1px solid var(--color-navbar);
+}
+
 /* Aca termina el CSS de los Formularios */
 
 /* aca empieza el css de filtrado de las tablas */
