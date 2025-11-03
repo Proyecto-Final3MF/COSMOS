@@ -36,7 +36,6 @@ require_once("./Views/include/UH.php");
                 <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                     <th>Cliente</th>
                 <?php endif; ?>
-                <th>Precio</th>
                 <th>Estado</th>
                 <th>Fecha de Creacion</th>
                 <th>Acciones</th>
@@ -63,7 +62,6 @@ require_once("./Views/include/UH.php");
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
-                        <td><?= htmlspecialchars($resultado['precio']); ?></td>
                         <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                         <td><?= htmlspecialchars(date('d/m/Y H:i:s ', strtotime($resultado['fecha_creacion']))); ?></td>
                         <td>
