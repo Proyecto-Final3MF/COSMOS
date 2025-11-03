@@ -67,13 +67,34 @@ class Solicitud {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
                 inner join producto p on s.producto_id = p.id 
-                WHERE s.cliente_id = $id_usuario AND s.estado_id = 1;";
-        $resultado = $this->conn->query($sql);
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        } else {
+                WHERE s.cliente_id = ? AND s.estado_id = 1;";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            error_log("Error al preparar la consulta: " . $this->conn->error);
             return [];
         }
+
+        $stmt->bind_param("i", $id_usuario);
+
+        $ejecucion_exitosa = $stmt->execute();
+
+        if ($ejecucion_exitosa) {
+            $resultado = $stmt->get_result();
+
+            if ($resultado) {
+                $datos = $resultado->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+                return $datos;
+            }
+        } else {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
+        }
+
+        if ($stmt) {
+            $stmt->close();
+        }
+        return [];
     }
 
     public function ListarTL($usuarioId, $search = null) {
@@ -149,7 +170,6 @@ class Solicitud {
     }
 
     public function ListarSA($id_usuario){
-        $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
                     u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
@@ -157,16 +177,37 @@ class Solicitud {
                 INNER JOIN estado e ON s.estado_id = e.id
                 INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
                 LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
-                WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
+                WHERE (s.tecnico_id = ? OR s.cliente_id = ?)
                 AND s.estado_id > 1 AND s.estado_id < 5
-                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
+                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC";
 
-        $resultado = $this->conn->query($sql);
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        } else {
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            error_log("Error al preparar la consulta: " . $this->conn->error);
             return [];
         }
+
+        $stmt->bind_param("ii", $id_usuario, $id_usuario);
+
+        $ejecucion_exitosa = $stmt->execute();
+
+        if ($ejecucion_exitosa) {
+            $resultado = $stmt->get_result();
+
+            if ($resultado) {
+                $datos = $resultado->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+                return $datos;
+            }
+        } else {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
+        }
+
+        if ($stmt) {
+            $stmt->close();
+        }
+        return [];
     }
 
     public function ListarST($id_usuario){
@@ -179,16 +220,37 @@ class Solicitud {
                 LEFT JOIN reviews r ON s.id = r.id_solicitud
                 INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
                 LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
-                WHERE (s.tecnico_id = $id_usuario OR s.cliente_id = $id_usuario)
+                WHERE (s.tecnico_id = ? OR s.cliente_id = ?)
                 AND s.estado_id = 5
                 ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
         
-        $resultado = $this->conn->query($sql);
-        if ($resultado) {
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        } else {
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            error_log("Error al preparar la consulta: " . $this->conn->error);
             return [];
         }
+
+        $stmt->bind_param("ii", $id_usuario, $id_usuario);
+
+        $ejecucion_exitosa = $stmt->execute();
+
+        if ($ejecucion_exitosa) {
+            $resultado = $stmt->get_result();
+
+            if ($resultado) {
+                $datos = $resultado->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+                return $datos;
+            }
+        } else {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
+        }
+
+        if ($stmt) {
+            $stmt->close();
+        }
+        return [];
     }
 
     public function crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad) {
