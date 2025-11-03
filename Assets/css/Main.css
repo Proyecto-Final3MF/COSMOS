@@ -3323,3 +3323,316 @@ input:checked ~ label {
     color: var(--text-color);
     font-size: 0.9em;
 }
+
+/* aca empieza el css del chat */
+
+/* Contenedor principal del chat */
+.chat-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 100px auto 100px; /* Margen superior aumentado para no chocar con header fijo */
+  background: var(--color-fondo);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+}
+
+/* Caja de mensajes */
+.chat-box {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: var(--color-fondo-formulario);
+  scroll-behavior: smooth;
+  border: 2px solid var(--color-borde);
+  border-radius: 10px;
+}
+
+/* Mensajes individuales */
+.chat-box .mensaje {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.chat-box .mensaje p.texto {
+  background: var(--color-navbar);
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 70%;
+  word-wrap: break-word;
+  font-size: 15px;
+  color: var(--text-color);
+  border: 1px solid var(--color-borde);
+}
+
+/* Mensaje propio (derecha, rosado) */
+.chat-box .mensaje:nth-child(even) p.texto {
+  background: var(--primary-color);
+  color: #fff;
+  margin-left: auto;
+}
+
+/* Mensaje del otro (izquierda, gris) */
+.chat-box .mensaje:nth-child(odd) p.texto {
+  background: var(--color-navbar);
+  color: var(--text-color);
+  margin-right: auto;
+}
+
+/* Sin mensajes */
+.sin-mensajes {
+  text-align: center;
+  color: var(--text-color);
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Formulario de input */
+.chat-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 15px;
+  background: var(--color-fondo);
+  border-top: 1px solid var(--color-borde);
+  gap: 10px;
+}
+
+.chat-input input[type="text"] {
+  width: 70%;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+  background: var(--color-fondo);
+  color: var(--text-color);
+  transition: border 0.3s;
+}
+
+.chat-input input[type="text"]:focus {
+  border-color: var(--primary-color);
+}
+
+.chat-input button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.chat-input button:hover {
+  background: var(--primary-hover);
+}
+
+/* Contenedor de conversaciones */
+.conversaciones-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 120px auto; /* Margen superior ajustado para header */
+  background: var(--color-fondo);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  border: 1px solid var(--color-borde);
+}
+
+.conversaciones-container h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+}
+
+.conversaciones-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.conversaciones-container li {
+  background: var(--color-fondo-formulario);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: background 0.3s;
+}
+
+.conversaciones-container li:hover {
+  background: var(--color-hover);
+}
+
+.conversaciones-container a {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.conversaciones-container a:hover {
+  text-decoration: underline;
+}
+
+.conversaciones-container form button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.conversaciones-container form button:hover {
+  background: var(--primary-hover);
+}
+
+/* Contenedor de chat admin */
+.chat-admin-container {
+  width: 95%;
+  max-width: 1000px;
+  margin: 120px auto; /* Margen superior ajustado */
+  background: var(--color-fondo);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  border: 1px solid var(--color-borde);
+}
+
+.chat-admin-container h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+}
+
+.chat-admin-container table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-admin-container th {
+  background: var(--primary-color);
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+}
+
+.chat-admin-container td {
+  padding: 10px;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.chat-admin-container tr:nth-child(even) {
+  background: var(--color-navbar);
+}
+
+/* Contenedor de registro */
+.registro-container {
+  width: 95%;
+  max-width: 1000px;
+  margin: 120px auto; /* Margen superior ajustado */
+  background: var(--color-fondo);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  border: 1px solid var(--color-borde);
+}
+
+.registro-container h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+}
+
+.registro-container table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.registro-container th {
+  background: var(--primary-color);
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.registro-container td {
+  padding: 10px;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.registro-container tr:nth-child(even) {
+  background: var(--color-navbar);
+}
+
+.registro-container a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro-container a:hover {
+  text-decoration: underline;
+}
+
+/* Badge de solicitud */
+.solicitud-badge {
+  display: inline-block;
+  background-color: var(--urgente2);
+  color: white;
+  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chat-container {
+    width: 95%;
+    margin: 80px auto 90px; /* Ajuste para móviles */
+    height: 75vh;
+  }
+
+  .chat-input input[type="text"] {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .chat-input button {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .chat-admin-container, .registro-container, .conversaciones-container {
+    width: 95%;
+    padding: 15px;
+    margin-top: 100px; /* Ajuste para móviles */
+  }
+
+  .chat-admin-container table, 
+  .registro-container table {
+    font-size: 13px;
+  }
+
+  .chat-admin-container th, 
+  .registro-container th {
+    font-size: 13px;
+  }
+}
+
+/* aca termina el css del chat */

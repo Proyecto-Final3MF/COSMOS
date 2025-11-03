@@ -16,18 +16,48 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <link rel="stylesheet" href="Assets/css/chatCSS.css">
 </head>
 
+<div class="btn-volver-container fade-slide">
+
+    <button class="btn-volver" id="btnVolver">
+        <i class="fa fa-arrow-left"></i> Volver
+    </button>
+
+</div>
+
 <body>
+<br>
+      <?php
+    // Obtener datos de la solicitud y el interlocutor
+    $solicitudNombre = 'Sin solicitud';
+    $interlocutorNombre = 'Usuario desconocido';
+    $rolLabel = '';
+    if (isset($solicitud) && $solicitud) {
+        $solicitudNombre = htmlspecialchars($solicitud['titulo']);
+    }
+    // Obtener nombre del interlocutor
+    require_once("Models/UsuarioM.php");
+    $usuarioModel = new Usuario();
+    $interlocutor = $usuarioModel->buscarUserId($otroUsuarioId);
+    if ($interlocutor) {
+        $interlocutorNombre = htmlspecialchars($interlocutor['nombre']);
+    }
+    // Determinar etiqueta según rol
+    if ($_SESSION['rol'] == 1) { // Técnico
+        $rolLabel = 'Cliente:';
+    } elseif ($_SESSION['rol'] == 2) { // Cliente
+        $rolLabel = 'Técnico:';
+    }
+    ?>
+    <div class="chat-header" style="text-align: center; margin: 20px 0; color: var(--text-color);">
+        <h1>Chat de la solicitud: <?php echo $solicitudNombre; ?></h1>
+        <h2><?php echo $rolLabel; ?> <?php echo $interlocutorNombre; ?></h2>
+
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
     </div>
-    <div class="btn-volver-container">
-        <button class="btn-volver" id="btnVolver">
-            <i class="fa fa-arrow-left">Volver</i>
-        </button>
-    </div>
+
     <form id="form-chat" class="chat-input" method="POST" action="Index.php?accion=enviarMensaje">
         <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
         <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
@@ -43,6 +73,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 </html>
+<script src="Assets/js/botonvolver.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script>
     // Cargar mensajes
