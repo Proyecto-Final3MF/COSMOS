@@ -61,7 +61,7 @@
                     <p class="puntuacion">⭐ <?= number_format($tecnico['promedio'], 1) ?> / 5</p>
                     <p class="reviews">(<?= $tecnico['cant_review'] ?> reseñas)</p>
 
-                    <a title="Perfil del Tecnico" href="Index.php?accion=PerfilTecnico&id=<?= $tecnico['id'] ?>" class="btn-ver-perfil">Ver Perfil</a>
+                    <a title="Perfil de <?=$tecnico['nombre']?>" href="Index.php?accion=PerfilTecnico&id=<?= $tecnico['id'] ?>" class="btn-ver-perfil">Ver Perfil</a>
 
                 </div>
             <?php endforeach; ?>
