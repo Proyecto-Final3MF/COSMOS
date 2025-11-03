@@ -66,7 +66,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
 
         <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
-        <button type="submit">Enviar</button>
+        <button type="submit"><i class="fa fa-upload"></i></button>
     </form>
 
 </body>
