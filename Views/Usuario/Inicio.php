@@ -30,14 +30,6 @@
 
     <br>
 
-    <p class="inicio44">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</p>
-
-    <div class="btn-container2">
-        <a href="Index.php?accion=trabajo">
-            <button class="btn btn-boton44">Trabajar con Nosotros</button>
-        </a>
-    </div>
-
 <?php else: ?>
     <!-- Contenido visible solo para usuarios logueados -->
     <p class="inicio44">Nos alegra verte de nuevo, <?= htmlspecialchars($_SESSION['usuario']) ?>.</p>
@@ -70,6 +62,15 @@
         <p class="inicio44">Aún no hay técnicos calificados.</p>
     <?php endif; ?>
 </section>
+
+<h2 class="inicio44">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</h2>
+
+    <div class="btn-container2">
+        <a href="Index.php?accion=trabajo">
+            <button class="btn btn-boton44">Trabajar con Nosotros</button>
+        </a>
+    </div>
+    <br><br><br>
 
 <script src="Assets/js/trancicion.js"></script>
 
