@@ -1035,7 +1035,7 @@ table td, table th {
 
 .btn-perfil-tecnico {
     display: inline-block; 
-    background-color: #28a745; 
+    background-color: var(--rosado-en-eclipse);
     color: white;
     text-decoration: none; 
     padding: 8px 12px;
@@ -1046,7 +1046,7 @@ table td, table th {
     cursor: pointer;
 }
 .btn-perfil-tecnico:hover {
-    background-color: #218838; 
+    background-color: var(--primary-hover);
     transform: scale(1.05); 
 }
 .btn-perfil-tecnico i {

@@ -13,7 +13,7 @@ require_once ("./Views/include/UH.php");
 <body>
     <br>
     <div>
-        <h2 class="fade-slide" >Solicitudes Terminadas</h2>
+        <h1 class="inicio55">Solicitudes Terminadas</h1>
     </div>
 
     <div class="btn-volver-container fade-slide">

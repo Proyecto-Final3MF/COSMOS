@@ -20,7 +20,7 @@ require_once ("./Views/include/UH.php");
     </div>
 
     <br>
-    <h2 class="tiempo fade-slide">Linea del Tiempo</h2>
+    <h1 class="inicio55">Linea del Tiempo</h1>
     <div class="container4 fade-slide">
     <?php foreach ($resultados as $evento): ?>
     <div class="list-item">

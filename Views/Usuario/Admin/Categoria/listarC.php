@@ -17,7 +17,7 @@ require_once("./Views/include/UH.php");
 </head>
 <body>
     <br>
-<h2 class="fade-slide" >Listado de todas las categorias</h2>
+<h1 class="inicio55">Listado de todas las categorias</h1>
 <div class="botones-container fade-slide">
     <a href="Index.php?accion=FormularioC"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>

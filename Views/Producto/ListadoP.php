@@ -12,7 +12,7 @@ require_once ("./Views/include/UH.php");
 </head>
 <body>
     <br>
-    <h2 class="fade-slide" >Tus Productos</h2>
+    <h1 class="inicio55">Tus Productos</h1>
 <div class="botones-container fade-slide">
     <a href="Index.php?accion=formularioP"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>

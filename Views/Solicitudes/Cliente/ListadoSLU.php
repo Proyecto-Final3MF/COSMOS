@@ -19,7 +19,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <br>
     <div>
-    <h2 class="fade-slide">Solicitudes Recien Creadas</h2>
+    <h1 class="inicio55">Solicitudes Recien Creadas</h1>
     <p class="fade-slide">Aqui se mostraran todas tus solicitudes que ningun tecnico a aceptado todavia</p>
     <div class="botones-container fade-slide">
     <a href="Index.php?accion=formularioS"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>

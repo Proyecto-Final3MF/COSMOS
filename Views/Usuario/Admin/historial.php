@@ -24,7 +24,7 @@ require_once ("./Views/include/UH.php");
 </div>
 <br>
     <div class="container3">
-        <h1>Histórial de actividades</h1>
+        <h1 class="inicio55">Histórial de actividades</h1>
 
         <p>En esta pagina encontraras todas las modificaciones hechas en la base de datos. <br> Por favor al elegir un rango de fechas no elijas un rango muy grande para no sobrecargar el servidor, es recomendado especificar lo maximo possible tu busqueda. Por default la fecha final es el dia actual.</p>
 

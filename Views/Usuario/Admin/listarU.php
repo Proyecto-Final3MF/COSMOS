@@ -17,7 +17,7 @@ require_once("./Views/include/UH.php");
 </head>
 <body>
     <br>
-<h2 class="fade-slide" >Listado de todos los Usuarios</h2>
+<h1 class="inicio55">Listado de todos los Usuarios</h1>
 
 <div class="btn-volver-container fade-slide">
   <button class="btn-volver" id="btnVolver">
