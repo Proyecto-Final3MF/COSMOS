@@ -9,15 +9,15 @@ class SolicitudC {
     private $solicitudModel;
     private $historiaC;
     private $historialController;
-    private $emailService; // NUEVO: Propiedad para el servicio de email
-    private $adminEmail; // NUEVO: Propiedad para el email del admin
+    private $emailService; // Propiedad para el servicio de email
+    private $adminEmail; // Propiedad para el email del admin
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
         $this->historialController = new HistorialController();
 
-        // NUEVO: Inicializar EmailService y obtener la configuración
+        // Inicializar EmailService y obtener la configuración
         $this->emailService = new EmailService(); 
         $config = include(__DIR__ . '/../config/email.php');
         $this->adminEmail = $config['notifications']['admin_email'];
