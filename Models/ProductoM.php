@@ -34,6 +34,27 @@ class Producto {
         return null;
     }
 
+    public function checkProducto($id, $id_usuario) {
+        $sql = "SELECT* FROM producto WHERE id = ? AND id_usuario = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("ii", $id, $id_usuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows > 0) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
     public function listarP($id_usuario, $orden, $search) {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT p.*, c.nombre AS categoria_nombre FROM producto p INNER JOIN categoria c ON p.id_cat = c.id WHERE p.id_usuario = ? ";
