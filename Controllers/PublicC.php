@@ -4,7 +4,7 @@ class PublicC
 
     public function inicio()
     {
-        include(__DIR__ . "Views/Usuario/inicio.php");
+        include(__DIR__ . "Views/Usuario/Inicio.php");
     }
 
     public function nosotros()
