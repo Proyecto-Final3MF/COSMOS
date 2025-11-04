@@ -4,7 +4,7 @@ if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [1, 2, 3])) {
   header("Location: index.php?accion=redireccion");
 }
 
-include_once("./Views/include/UH.php");
+require_once(__DIR__ . "../../../include/UH.php");
 ?>
 
 <title>Registro</title>

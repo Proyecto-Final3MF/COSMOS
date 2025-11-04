@@ -1,5 +1,5 @@
 <?php
-require_once ("./Views/include/UH.php");
+require_once(__DIR__ . "../../include/UH.php");
 // Defensivo: evitar errores si $datosSolicitud no existe
 if (!isset($datosSolicitud) || $datosSolicitud === null) {
     $datosSolicitud = [

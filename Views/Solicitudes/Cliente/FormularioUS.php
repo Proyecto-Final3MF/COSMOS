@@ -1,5 +1,5 @@
 <?php
-require_once ("./Views/include/UH.php");
+require_once(__DIR__ . "/../../include/UH.php");
 // Assume $productos and $producto_preseleccionado_id are set by the controller.
 // We'll rely on $producto_preseleccionado_id for the product ID.
 ?>

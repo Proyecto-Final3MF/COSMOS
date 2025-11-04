@@ -1,4 +1,4 @@
-<?php require_once ("./Views/include/UH.php"); ?>
+<?php require_once(__DIR__ . "../../include/UH.php"); ?>
 <link rel="stylesheet" href="./Assets/css/Main.css">
 
 <div class="btn-volver-container fade-slide">

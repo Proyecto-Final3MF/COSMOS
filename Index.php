@@ -3,16 +3,16 @@
 <?php
 session_start();
 
-require_once("Config/conexion.php");
-require_once("Controllers/UsuarioC.php");
-require_once("Controllers/SolicitudC.php");
-require_once("Controllers/ProductoC.php");
-require_once("Controllers/CategoriaC.php");
-require_once("Controllers/ReviewC.php");
-require_once("Models/ProductoM.php");
-require_once("Controllers/ChatC.php");
-require_once("Controllers/NotificacionC.php");
-require_once("Controllers/PublicC.php");
+require_once(__DIR__ . "/Config/conexion.php");
+require_once(__DIR__ . "/Controllers/UsuarioC.php");
+require_once(__DIR__ . "/Controllers/SolicitudC.php");
+require_once(__DIR__ . "/Controllers/ProductoC.php");
+require_once(__DIR__ . "/Controllers/CategoriaC.php");
+require_once(__DIR__ . "/Controllers/ReviewC.php");
+require_once(__DIR__ . "/Models/ProductoM.php");
+require_once(__DIR__ . "/Controllers/ChatC.php");
+require_once(__DIR__ . "/Controllers/NotificacionC.php");
+require_once(__DIR__ . "/Controllers/PublicC.php");
 
 $accion = $_GET['accion'] ?? 'Index';
 
@@ -86,9 +86,9 @@ switch ($accion) {
   case 'redireccion':
     if (isset($_SESSION['usuario']) && isset($_SESSION['rol'])) {
       if ($_SESSION['rol'] == ROL_CLIENTE) {
-        include("./Views/Usuario/Cliente/ClienteP.php");
+        include(__DIR__ . "/Views/Usuario/Cliente/ClienteP.php");
       } elseif ($_SESSION['rol'] == ROL_TECNICO) {
-        include("./Views/Usuario/Tecnico/TecnicoP.php");
+        include(__DIR__ . "/Views/Usuario/Tecnico/TecnicoP.php");
       } elseif ($_SESSION['rol'] == ROL_ADMIN) {
         header("Location:Index.php?accion=panelA");
       } else {
@@ -260,7 +260,7 @@ switch ($accion) {
   case 'listarTL':
     $controller = new SolicitudC();
     $controller->ListarTL();
-    require_once("Views/Solicitudes/Tecnico/listadoTL.php");
+    include(__DIR__ . "/Views/Solicitudes/Tecnico/ListadoTL.php");
   break;
 
   case 'EditarSF':
@@ -280,7 +280,7 @@ switch ($accion) {
     $PreviewHistorial = new HistorialController();
     $usuarios = $PreviewUsuarios->PreviewU();
     $historial = $PreviewHistorial->PreviewH();
-    include("Views/Usuario/Admin/Adminp.php");
+    include(__DIR__ . "/Views/Usuario/Admin/AdminP.php");
   break;
 
   case 'listarU':
@@ -300,7 +300,7 @@ switch ($accion) {
   case 'FormularioC':
     $controller = new CategoriaC();
     $controller->FormularioC();
-    require_once("./Views/Usuario/Admin/Categoria/agregarC.php");
+    require_once(__DIR__ . "./Views/Usuario/Admin/Categoria/agregarC.php");
   break;
 
   case 'guardarC':
@@ -382,13 +382,13 @@ switch ($accion) {
   break;
   
   case 'contactanos':
-    require_once('Controllers/ContactoC.php');
+    require_once(__DIR__ . "/Controllers/ContactoC.php");
     $controlador = new ContactoC();
     $controlador->mostrarFormulario();
   break;
 
   case 'enviarMensajeContacto':
-    require_once('Controllers/ContactoC.php');
+    require_once(__DIR__ . "/Controllers/ContactoC.php");
     $controlador = new ContactoC();
     $controlador->enviarMensajeContacto();
   break;
@@ -399,7 +399,7 @@ switch ($accion) {
     // Esta acción debe redirigir a la vista del panel de administración
     if ($_SESSION['rol'] == ROL_ADMIN) {
         // Asumiendo que hay una vista principal para el admin
-        include("./Views/Usuario/Admin/PanelA.php"); 
+        include(__DIR__ . "/Views/Usuario/Admin/PanelA.php");
     } else {
         header("Location: Index.php?accion=redireccion");
     }

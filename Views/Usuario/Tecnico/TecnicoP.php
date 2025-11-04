@@ -4,7 +4,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_TECNICO) {
     header("Location: Index.php?accion=redireccion");
     exit();
 }
-    require_once ("./Views/include/UH.php");
+    require_once(__DIR__ . "../../../include/UH.php");
 
 $notifC = new NotificacionC();
 $contador_normales = count($notifC->listarNoLeidas('normal'));

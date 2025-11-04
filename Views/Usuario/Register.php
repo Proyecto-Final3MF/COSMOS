@@ -3,7 +3,7 @@ if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], [ROL_TECNICO, ROL_CLIE
     header("Location: Index.php?accion=redireccion");
 } 
 
-require_once ("./Views/include/UH.php");
+require_once(__DIR__ . "../../include/UH.php");
 ?>
 
     <title>Registro</title>

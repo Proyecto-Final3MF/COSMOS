@@ -4,7 +4,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != ROL_CLIENTE) {
     exit();
 }  
 
-require_once ("./Views/include/UH.php");
+require_once(__DIR__ . "../../../include/UH.php");
 
 ?>
 

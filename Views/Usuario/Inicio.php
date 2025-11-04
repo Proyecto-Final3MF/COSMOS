@@ -1,9 +1,9 @@
 <link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
 
 <?php
-    require_once("Views/include/UH.php");
+    require_once(__DIR__ . "../../include/UH.php");
 
-    require_once("./Models/ReviewM.php");
+    require_once(__DIR__ . "/../../Models/ReviewM.php");
     $reviewModel = new Review();
     $topTecnicos = $reviewModel->obtenerTopTecnicos();
 

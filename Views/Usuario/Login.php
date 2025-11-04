@@ -4,7 +4,7 @@
         header("Location: Index.php?accion=redireccion");
     } 
 
-require_once ("./Views/include/UH.php");
+require_once(__DIR__ . "../../include/UH.php");
 
 ?>
 

@@ -5,7 +5,7 @@ require_once ("./Views/include/popup.php");
 class ContactoC {
 
     public function mostrarFormulario() {
-        include('contacto.php');
+        include(__DIR__ . '/../Views/Usuario/contacto.php');
     }
 
     public function enviarMensajeContacto() {

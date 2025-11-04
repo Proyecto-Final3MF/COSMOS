@@ -1,4 +1,4 @@
-<?php require_once ("./Views/include/UH.php"); ?>
+<?php require_once(__DIR__ . "../../../include/UH.php"); ?>
 
 <!DOCTYPE html>
 <html lang="es">

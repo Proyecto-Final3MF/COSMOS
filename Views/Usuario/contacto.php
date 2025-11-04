@@ -1,7 +1,7 @@
 <link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
 
 <?php
-    require_once("Views/include/UH.php");
+    require_once(__DIR__ . "../../include/UH.php");
 
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -10,16 +10,7 @@
 
 <br>
 
-<h1 class="inicio55">
-    <?php if (isset($_SESSION['usuario'])): ?>
-        Ponte en contacto con nosotros, 
-        <span style="color: #e83e8c; font-weight: bold;">
-            <?= htmlspecialchars($_SESSION['usuario']) ?>
-        </span>
-    <?php else: ?>
-        Ponte en Contacto con Nosotros
-    <?php endif; ?>
-</h1>
+<h1 class="inicio55"> Ponte en Contacto con Nosotros </h1>
 
 <p class="inicio44">
     Puedes comunicarte con nosotros mediante correo electrónico 

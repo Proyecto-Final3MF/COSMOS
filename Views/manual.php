@@ -1,5 +1,5 @@
 <?php
-    require_once("./include/UH.phpS");
+    require_once(__DIR__ . "../include/UH.php");
 ?>
 
 <h1>Sistema Web de Gestión de Servicio Técnico _COSMOS_.</h1>
