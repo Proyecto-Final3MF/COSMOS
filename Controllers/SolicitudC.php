@@ -278,6 +278,16 @@ class SolicitudC {
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
         $precio = $_POST['precio'] ?? 0.0;
+        $id_cliente = $_SESSION['id'];
+        $id_tecnico = $_POST['id_tecnico'];
+
+        $checkU = $this->solicitudModel->checkUsuario($id_solicitud, $id_tecnico, $id_cliente);
+        if (!$checkU) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "Accesso negado";
+            header("Location:Index.php?accion=listarST");
+            exit();
+        }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
         $estadoAntiguo = $datosSolicitud['estado_id'];
