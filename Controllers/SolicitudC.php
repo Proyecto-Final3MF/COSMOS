@@ -98,7 +98,7 @@ class SolicitudC {
 
         $id_solicitud = $solicitud->crearS($titulo, $descripcion, $producto, $usuario_id, $prioridad);
 
-        if ($id_solicitud){
+        if ($id_solicitud) {
             $_SESSION['mensaje'] = "Solicitud urgente guardada exitosamente";
             $_SESSION['tipo_mensaje'] = "success";
 
@@ -145,7 +145,7 @@ class SolicitudC {
         }
 
         $solicitud->borrarS($id);
-        if ($solicitud){
+        if ($solicitud) {
             $_SESSION['mensaje'] = "Solicitud eliminada existosamente";
             $_SESSION['tipo_mensaje'] = "success";
 
@@ -160,7 +160,7 @@ class SolicitudC {
         }
     }
 
-    public function listarSLU(){
+    public function listarSLU() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
@@ -249,7 +249,7 @@ class SolicitudC {
         include("./Views/Solicitudes/listadoST.php");
     }
     
-    public function editarSF(){
+    public function editarSF() {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
@@ -403,7 +403,7 @@ class SolicitudC {
         }
     }
 
-    public function formularioUS(){ 
+    public function formularioUS() { 
         $id_usuario = $_SESSION['id'] ?? null;
         
         if ($id_usuario == null) {

@@ -9,7 +9,7 @@ class Solicitud {
         $this->conn = conectar();
     }
 
-    public function obtenerProductos($id_usuario){
+    public function obtenerProductos($id_usuario) {
         $id_usuario = (int)$id_usuario;
         $productos_ocupados_sql = " SELECT DISTINCT producto_id FROM solicitud WHERE estado_id BETWEEN 1 AND 4"; 
         $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario AND id NOT IN ($productos_ocupados_sql) ORDER BY nombre ASC";
@@ -87,7 +87,7 @@ class Solicitud {
         }
     }
 
-    public function ListarSLU($id_usuario){
+    public function ListarSLU($id_usuario) {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
                 inner join producto p on s.producto_id = p.id 
@@ -176,7 +176,7 @@ class Solicitud {
     }
 
 
-    public function asignarS($id_tecnico, $id_soli){
+    public function asignarS($id_tecnico, $id_soli) {
         $sql = "UPDATE solicitud SET tecnico_id = ?, estado_id = 2 WHERE id = ?";
 
         $stmt = $this->conn->prepare($sql);
@@ -193,7 +193,7 @@ class Solicitud {
         return $success;
     }
 
-    public function ListarSA($id_usuario){
+    public function ListarSA($id_usuario) {
         $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, e.nombre AS estado_nombre,
                     u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
@@ -234,7 +234,7 @@ class Solicitud {
         return [];
     }
 
-    public function ListarST($id_usuario){
+    public function ListarST($id_usuario) {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, r.rating, e.nombre AS estado_nombre,
                     u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico

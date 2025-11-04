@@ -250,13 +250,13 @@ class ProductoC {
         }
     }
 
-    public function urgentePF(){
+    public function urgentePF() {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
         include("./Views/Producto/FormularioUP.php");
     }
 
-    public function urgenteGP(){
+    public function urgenteGP() {
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';

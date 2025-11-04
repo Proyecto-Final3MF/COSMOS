@@ -8,7 +8,7 @@ class UsuarioC {
     private $reviewController;
     private $conn; // Propiedad para la conexión, necesaria para insert_id
 
-    public function __construct(){
+    public function __construct() {
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
         // Asumo que tienes una función global conectar() o la inicializas aquí

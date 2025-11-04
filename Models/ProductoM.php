@@ -8,7 +8,7 @@ class Producto {
         $this->conn = conectar();
     }
 
-    public function obtenerCategorias(){
+    public function obtenerCategorias() {
         $sql = "SELECT * FROM categoria";
         $resultado = $this->conn->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
