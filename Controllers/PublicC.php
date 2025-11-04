@@ -1,15 +1,19 @@
 <?php
-class PublicC {
+class PublicC
+{
 
-    public function inicio() {
-        include("Views/Usuario/inicio.php");
+    public function inicio()
+    {
+        include(__DIR__ . "Views/Usuario/inicio.php");
     }
 
-    public function nosotros() {
-        include("Views/Usuario/nosotros.php");
+    public function nosotros()
+    {
+        include(__DIR__ . "Views/Usuario/nosotros.php");
     }
 
-    public function contacto() {
-        include("Views/Usuario/contacto.php");
+    public function contacto()
+    {
+        include(__DIR__ . "Views/Usuario/contacto.php");
     }
 }
