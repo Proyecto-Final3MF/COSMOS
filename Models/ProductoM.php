@@ -15,12 +15,22 @@ class Producto {
     }
 
     public function obtenerCategoriaporId($categoria_id) {
-        $categoria_id = (int)$categoria_id;
-        $sql = "SELECT nombre FROM categoria WHERE id = $categoria_id LIMIT 1";
-        $result = $this->conn->query($sql);
-        if ($row = $result->fetch_assoc()) {
+        $sql = "SELECT nombre FROM categoria WHERE id = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return null; // O manejar el error
+        }
+        $stmt->bind_param("i", $categoria_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result && $row = $result->fetch_assoc()) {
+            $stmt->close();
             return $row['nombre'];
         }
+        $stmt->close();
         return null;
     }
 
@@ -86,34 +96,55 @@ class Producto {
     }
 
     public function existeProducto($nombre, $id_usuario) {
-        $nombre = $this->conn->real_escape_string($nombre);
-        $id_usuario = (int)$id_usuario;
-        $sql = "SELECT COUNT(*) AS count FROM producto WHERE nombre = '$nombre' AND id_usuario = '$id_usuario'";
-        $result = $this->conn->query($sql);
+        $sql = "SELECT COUNT(*) AS count FROM producto WHERE nombre = ? AND id_usuario = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("si", $nombre, $id_usuario);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
         if ($result && $row = $result->fetch_assoc()) {
+            $stmt->close();
             return $row['count'] > 0;
         }
+        $stmt->close();
         return false;
     }
 
     public function obtenerProductoPorId($id) {
         $id = (int)$id;
-        $sql = "SELECT p.*, c.nombre as categoria, c.id as id_cat FROM producto p INNER JOIN CATEGORIA c ON p.id_cat = c.id WHERE p.id = $id LIMIT 1";
-        $result = $this->conn->query($sql);
+        $sql = "SELECT p.*, c.nombre as categoria, c.id as id_cat FROM producto p INNER JOIN CATEGORIA c ON p.id_cat = c.id WHERE p.id = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if ($result && $row = $result->fetch_assoc()) {
             return $row;
         }
         return null;
     }
 
-    public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
-        $id = (int)$id;
-        $nombre = $this->conn->real_escape_string($nombre);
-        $imagen = $this->conn->real_escape_string($imagen);
-        $categoria_id = (int)$categoria_id;
+public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
+        $sql = "UPDATE producto SET nombre = ?, imagen = ?, id_cat = ? WHERE id = ?";
 
-        $sql = "UPDATE producto SET nombre = '$nombre', imagen = '$imagen', id_cat = '$categoria_id' WHERE id = $id";
-        return $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("ssii", $nombre, $imagen, $categoria_id, $id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+
+        return $resultado;
     }
 
     public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
@@ -134,8 +165,18 @@ class Producto {
 }
 
     public function borrar($id) {
-        $sql = "DELETE FROM producto WHERE id=$id";
-        return $this->conn->query($sql);
+        $sql = "DELETE FROM producto WHERE id = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("i", $id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+
+        return $resultado;
     }
 }
 ?>

@@ -25,24 +25,48 @@ class Solicitud {
     }
 
     public function obtenerProductoporId($producto_id) {
-        $producto_id = (int)$producto_id;
-        $sql = "SELECT nombre FROM producto WHERE id = $producto_id LIMIT 1";
-        $result = $this->conn->query($sql);     
-        if ($row = $result->fetch_assoc()) {
+        $sql = "SELECT nombre FROM producto WHERE id = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return null;
+        }
+
+        $stmt->bind_param("i", $producto_id);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result && $row = $result->fetch_assoc()) {
+            $stmt->close();
             return $row['nombre'];
         }
+
+        $stmt->close();
         return null;
     }
 
-    public function obtenerProductoUrgente($id_usuario){
-        $id_usuario = (int)$id_usuario;
-        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = $id_usuario ORDER BY id DESC LIMIT 1";
-       
-        $resultado = $this->conn->query($sql);
-        
+    public function obtenerProductoUrgente($id_usuario) {
+        $sql = "SELECT id, nombre FROM producto WHERE id_usuario = ? ORDER BY id DESC LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return null;
+        }
+
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
         if ($resultado && $resultado->num_rows > 0) {
-            return $resultado->fetch_assoc();
+            $data = $resultado->fetch_assoc();
+            $stmt->close();
+            return $data;
         } else {
+            $stmt->close();
             return null;
         }
     }
@@ -267,10 +291,25 @@ class Solicitud {
     }
 
     public function obtenerSolicitudPorId($id) {
-        $id = (int)$id;
-        $sql = "SELECT * FROM solicitud WHERE id = $id LIMIT 1";
-        $resultado = $this->conn->query($sql);
-        return $resultado->fetch_assoc();
+        $sql = "SELECT * FROM solicitud WHERE id = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return null;
+        }
+
+        $stmt->bind_param("i", $id);
+
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+
+        $data = $resultado ? $resultado->fetch_assoc() : null;
+
+        $stmt->close();
+        
+        return $data;
     }
 
     public function obtenerEstados() {
@@ -291,13 +330,20 @@ class Solicitud {
     }
 
     public function actualizarS($id, $descripcion, $estado_id, $precio) {
-        $id = (int)$id;
-        $descripcion = $this->conn->real_escape_string($descripcion);
-        $estado_id = (int)$estado_id;
-        $precio = (double)$precio;
+        $sql = "UPDATE solicitud SET descripcion = ?, estado_id = ?, precio = ?, fecha_actualizacion = NOW() WHERE id = ?";
 
-        $sql = "UPDATE solicitud SET descripcion = '$descripcion', estado_id = $estado_id, precio = $precio, fecha_actualizacion = NOW() WHERE id = $id";
-        return $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return false;
+        }
+        $stmt->bind_param("sidi", $descripcion, $estado_id, $precio, $id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+
+        return $resultado;
     }
 
     public function cancelarS($id_soli) {
