@@ -50,7 +50,7 @@
     Desarrolladores
 </h2>
 
-<p class="nosotros reveal">
+<p class="nosotro reveal">
     La aplicacion COSMOS fue desarrolada por:
 </p>
 
@@ -71,17 +71,17 @@
     </div>
 
     <div class="miembro reveal">
-        <img src="Assets/imagenes/perfil/fotodefault.webp" alt="Miembro 4">
+        <img src="Assets/imagenes/perfil/elsergio.jpeg" alt="Miembro 4">
         <h3>Sergio Lopez</h3>
     </div>
 
     <div class="miembro reveal">
-        <img src="Assets/imagenes/perfil/fotodefault.webp" alt="Miembro 5">
+        <img src="Assets/imagenes/perfil/ellucas.jpeg" alt="Miembro 5">
         <h3>Lucas Vargas</h3>
     </div>
 
     <div class="miembro reveal">
-        <img src="Assets/imagenes/perfil/fotodefault.webp" alt="Miembro 6">
+        <img src="Assets/imagenes/perfil/elfranco.jpeg" alt="Miembro 6">
         <h3>Franco Fagundez</h3>
     </div>
 </section>
