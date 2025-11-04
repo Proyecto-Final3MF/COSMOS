@@ -16,7 +16,7 @@ class EmailService {
 
     public function __construct() {
         // La ruta de la configuración ahora es más segura usando __DIR__
-        $this->config = include(__DIR__ . '/../config/email.php');
+        $this->config = include(__DIR__ . '/../Config/email.php');
     }
 
     /**
