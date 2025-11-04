@@ -9,15 +9,15 @@ class SolicitudC {
     private $solicitudModel;
     private $historiaC;
     private $historialController;
-    private $emailService; // NUEVO: Propiedad para el servicio de email
-    private $adminEmail; // NUEVO: Propiedad para el email del admin
+    private $emailService; // Propiedad para el servicio de email
+    private $adminEmail; // Propiedad para el email del admin
 
     public function __construct() {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
         $this->historialController = new HistorialController();
 
-        // NUEVO: Inicializar EmailService y obtener la configuración
+        // Inicializar EmailService y obtener la configuración
         $this->emailService = new EmailService(); 
         $config = include(__DIR__ . '/../config/email.php');
         $this->adminEmail = $config['notifications']['admin_email'];
@@ -278,6 +278,16 @@ class SolicitudC {
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
         $precio = $_POST['precio'] ?? 0.0;
+        $id_cliente = $_SESSION['id'];
+        $id_tecnico = $_POST['id_tecnico'];
+
+        $checkU = $this->solicitudModel->checkUsuario($id_solicitud, $id_tecnico, $id_cliente);
+        if (!$checkU) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "Accesso negado";
+            header("Location:Index.php?accion=listarST");
+            exit();
+        }
 
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
         $estadoAntiguo = $datosSolicitud['estado_id'];

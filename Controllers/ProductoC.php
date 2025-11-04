@@ -159,6 +159,14 @@ class ProductoC {
         $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
+        $checkP = $producto->checkProducto($id, $id_usuario);
+        if (!$checkP) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Acceso Negado.";
+            header("Location: Index.php?accion=listarP");
+            exit();
+        }
+
         if (!$id || empty($nombre) || empty($categoria_id) || $nombre === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";

@@ -213,25 +213,4 @@ class Review {
         $resultado = $stmt->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
-
-    public function checkUsuario($id_solicitud, $id_tecnico, $id_cliente) {
-        $sql = "SELECT id FROM solicitud WHERE id = ? AND cliente_id = ? AND tecnico_id = ?";
-        $stmt = $this->conn->prepare($sql);
-
-        if ($stmt === false) {
-            return false;
-        }
-
-        $stmt->bind_param("iii", $id_solicitud, $id_cliente, $id_tecnico);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if ($resultado->num_rows > 0) {
-            $stmt->close();
-            return true;
-        } else {
-            $stmt->close();
-            return false;
-        }
-    }
 }
