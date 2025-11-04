@@ -60,8 +60,8 @@ class ReviewC {
         $id_solicitud = $_POST['id_solicitud'] ?? null;
         $titulo_solicitud = $_POST['titulo_solicitud'] ?? '';
         
-        $Wrong = $this->ReviewModel->checkUsuario($id_solicitud, $id_tecnico, $id_cliente);
-        if (!$Wrong) {
+        $checkU = $this->solicitudModel->checkUsuario($id_solicitud, $id_tecnico, $id_cliente);
+        if (!$checkU) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Accesso negado";
             header("Location:Index.php?accion=listarST");
