@@ -282,12 +282,14 @@ class UsuarioC
         }
 
         if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
-            $_SESSION['usuario'] = $nombre;
-            $_SESSION['email'] = $email;
-            $_SESSION['foto_perfil'] = $foto_perfil;
-            $_SESSION['tipo_mensaje'] = "success";
-            $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
-            $_SESSION['tipo_mensaje'] = "success";
+            if ($id == $_SESSION['id']) {
+                $_SESSION['usuario'] = $nombre;
+                $_SESSION['email'] = $email;
+                $_SESSION['foto_perfil'] = $foto_perfil;
+                $_SESSION['tipo_mensaje'] = "success";
+                $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+                $_SESSION['tipo_mensaje'] = "success";
+            }
 
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
                 $obs = "Ningún cambio detectado";
@@ -385,7 +387,7 @@ class UsuarioC
 
         $usuario = new Usuario();
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
-        include(__DIR__ . "Views/Usuario/Admin/listarU.php");
+        include(__DIR__ . "/../Views/Usuario/Admin/listarU.php");
     }
 
     public function PreviewU()
