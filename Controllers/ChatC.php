@@ -1,6 +1,6 @@
 <?php
-require_once "Models/Mensaje.php";
-require_once "Models/SolicitudM.php";
+require_once __DIR__ . '/../Models/Mensaje.php';
+require_once __DIR__ . '/../Models/SolicitudM.php';
 
 class ChatC
 {
@@ -37,7 +37,7 @@ class ChatC
             $solicitud = $solicitudModel->obtenerSolicitudPorId($solicitudId);
         }
 
-        require_once "Views/chat.php";
+        require_once __DIR__ . '/../Views/chat.php';
     }
 
     public function cargarMensajes()
@@ -149,7 +149,7 @@ class ChatC
         }
 
         // Obtener datos de la solicitud
-        require_once "Models/Solicitud.php";
+        require_once __DIR__ . '/../Models/SolicitudM.php';
         $solicitud = new Solicitud();
         $datosSolicitud = $solicitud->obtenerSolicitudPorId($idSolicitud);
 
