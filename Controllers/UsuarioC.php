@@ -229,7 +229,8 @@ class UsuarioC
         }
     }
 
-    public function actualizarU() {
+    public function actualizarU()
+    {
         session_start();
         $usuarioM = new Usuario();
 
