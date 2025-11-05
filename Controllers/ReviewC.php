@@ -3,22 +3,19 @@ require_once(__DIR__ . "./Views/include/popup.php");
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/../Models/ReviewM.php');
 
-class ReviewC
-{
+class ReviewC {
     private $ReviewModel;
     private $HistorialModel;
     private $historiaC;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->ReviewModel = new Review();
         $this->solicitudModel = new Solicitud();
         $this->HistorialModel = new HistorialController();
         $this->historiaC = new HistoriaC();
     }
 
-    public function FormularioR()
-    {
+    public function FormularioR() {
         $id = $_GET['id_solicitud'] ?? null;
 
         $rating = 0;
@@ -54,8 +51,7 @@ class ReviewC
         include(__DIR__ . "Views/Solicitudes/review.php");
     }
 
-    public function AddReview()
-    {
+    public function AddReview() {
         $rating = $_POST['rating'] ?? 0;
         $rating = $rating / 2; //Pasa de 1 a 10 para 0.5 a 5
         $Comentario = trim($_POST['Comentario']) ?? ''; //Saca espacio al inicio y final del comentario
