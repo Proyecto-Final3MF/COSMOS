@@ -334,7 +334,7 @@ class UsuarioC
         $usuarioM = new Usuario();
         $id = $id ?? $_GET['id'];
         $datos = $usuarioM->buscarUserId($id);
-        include(__DIR__ . "/../Views/Usuario/editarU.php");
+        include(__DIR__ . "/../Views/Usuario/EditarU.php");
     }
 
     public function autenticar()

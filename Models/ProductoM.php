@@ -1,5 +1,5 @@
 <?php
-require_once("./Config/conexion.php");
+require_once(__DIR__ . '/../Config/conexion.php');
 
 class Producto {
     private $conn;
