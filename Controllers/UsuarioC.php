@@ -13,7 +13,6 @@ class UsuarioC
     {
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
-        // Asumo que tienes una función global conectar() o la inicializas aquí
         $this->conn = conectar();
     }
 
