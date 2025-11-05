@@ -61,7 +61,7 @@ class UsuarioC
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
         $especializaciones = $usuario->obtenerEspecializaciones();
-        include(__DIR__ . "Views/Usuario/Register.php");
+        include(__DIR__ . "/../Views/Usuario/Register.php");
     }
 
     public function guardarU()
