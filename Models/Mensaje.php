@@ -54,11 +54,11 @@ class Mensaje
         $sql = "SELECT m.id, m.usuario_id, m.receptor_id, m.mensaje, m.fecha, m.solicitud_id,
                    u.nombre AS emisor,
                    r.nombre AS receptor
-            FROM mensaje m
-            JOIN usuario u ON m.usuario_id = u.id
-            LEFT JOIN usuario r ON m.receptor_id = r.id
-            WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
-               OR (m.usuario_id = ? AND m.receptor_id = ?))";
+                FROM mensaje m
+                JOIN usuario u ON m.usuario_id = u.id
+                LEFT JOIN usuario r ON m.receptor_id = r.id
+                WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
+                OR (m.usuario_id = ? AND m.receptor_id = ?))";
 
         // Si se proporciona un ID de solicitud, filtrar por él
         if ($solicitud_id !== null) {
@@ -91,13 +91,13 @@ class Mensaje
                 ) AS otro_usuario,
                 SUBSTRING_INDEX(GROUP_CONCAT(mensaje ORDER BY fecha DESC SEPARATOR '||'), '||', 1) AS ultimo_mensaje,
                 MAX(fecha) AS ultima_fecha
-            FROM mensaje
-            LEFT JOIN usuario u ON mensaje.usuario_id = u.id
-            LEFT JOIN usuario r ON mensaje.receptor_id = r.id
-            WHERE (usuario_id = ? OR receptor_id = ?) 
-              AND solicitud_id = ?
-            GROUP BY otro_usuario_id
-            ORDER BY ultima_fecha DESC";
+                FROM mensaje
+                LEFT JOIN usuario u ON mensaje.usuario_id = u.id
+                LEFT JOIN usuario r ON mensaje.receptor_id = r.id
+                WHERE (usuario_id = ? OR receptor_id = ?) 
+                AND solicitud_id = ?
+                GROUP BY otro_usuario_id
+                ORDER BY ultima_fecha DESC";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("iiiii", $usuario_id, $usuario_id, $usuario_id, $usuario_id, $idSolicitud);
@@ -106,6 +106,7 @@ class Mensaje
 
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
+    
     // Obtener conversación entre dos usuarios específicos
     public function obtenerConversacion($usuario_id, $otro_usuario_id, $solicitud_id = null)
     {
@@ -115,7 +116,7 @@ class Mensaje
                 JOIN usuario u ON m.usuario_id = u.id
                 LEFT JOIN usuario r ON m.receptor_id = r.id
                 WHERE ((m.usuario_id = ? AND m.receptor_id = ?)
-                   OR (m.usuario_id = ? AND m.receptor_id = ?))";
+                OR (m.usuario_id = ? AND m.receptor_id = ?))";
 
         // Si se proporciona un ID de solicitud, filtrar por él
         if ($solicitud_id !== null) {
