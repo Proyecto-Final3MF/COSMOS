@@ -66,7 +66,7 @@ class Review {
             }
             $stmt1->close();
         } else {
-            error_log("Error al preparar la sentencia SQL1: " . $conn->error);
+            error_log("Error al preparar la sentencia SQL1: " . $this->conn->error);
             return false;
         }
 
