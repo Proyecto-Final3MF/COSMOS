@@ -1,43 +1,47 @@
 <?php
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/solicitud_historiaC.php');
-require_once ("./Views/include/popup.php");
-require_once("Controllers/HistorialC.php");
+require_once(__DIR__ . "./Views/include/popup.php");
+require_once(__DIR__ . "Controllers/HistorialC.php");
 require_once(__DIR__ . '/../Services/EmailService.php');
 
-class SolicitudC {
+class SolicitudC
+{
     private $solicitudModel;
     private $historiaC;
     private $historialController;
     private $emailService; // Propiedad para el servicio de email
     private $adminEmail; // Propiedad para el email del admin
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->solicitudModel = new Solicitud();
         $this->historiaC = new HistoriaC();
         $this->historialController = new HistorialController();
 
         // Inicializar EmailService y obtener la configuración
-        $this->emailService = new EmailService(); 
-        $config = include(__DIR__ . '/../config/email.php');
+        $this->emailService = new EmailService();
+        $config = include(__DIR__ . '/../Config/email.php');
         $this->adminEmail = $config['notifications']['admin_email'];
     }
 
-    public function formularioS() {
+    public function formularioS()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
 
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
-        } 
+        }
 
         $solicitud = new Solicitud();
-        $productos = $solicitud->obtenerProductos($id_usuario); 
+        $productos = $solicitud->obtenerProductos($id_usuario);
         $producto_preseleccionado_id = null;
-        include ("./Views/Solicitudes/Cliente/FormularioS.php");
+        include(__DIR__ . "./Views/Solicitudes/Cliente/FormularioS.php");
     }
 
-    public function guardarS() {
+    public function guardarS()
+    {
         $solicitud = new Solicitud();
         $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
@@ -71,7 +75,7 @@ class SolicitudC {
                 $tipo = ($prioridad === 'urgente') ? 'urgente' : 'normal';
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud creada: $titulo", $tipo);
             }
-            
+
             header("Location: Index.php?accion=formularioS");
         } else {
             $_SESSION['error'] = "Error al guardar la solicitud.";
@@ -80,15 +84,16 @@ class SolicitudC {
         }
     }
 
-    public function guardarSU() {
+    public function guardarSU()
+    {
         $solicitud = new Solicitud();
         $titulo = trim($_POST['titulo']) ?? '';
         $producto = $_POST['producto'] ?? '';
         $descripcion = trim($_POST['descripcion']) ?? '';
-        $prioridad = 'urgente'; 
-        
+        $prioridad = 'urgente';
+
         $usuario_id = $_SESSION['id'] ?? '';
-        
+
         if (empty($titulo) || empty($producto) || empty($descripcion) || empty($usuario_id) || $titulo === '' || $descripcion === '' || $producto === '') {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Faltan campos obligatorios en la solicitud urgente.";
@@ -110,7 +115,7 @@ class SolicitudC {
             $asunto = "🚨 Nueva Solicitud Urgente Creada: $titulo";
             $mensaje = "Se ha creado una nueva solicitud urgente:<br><strong>Título:</strong> {$titulo}<br><strong>Descripción:</strong> {$descripcion}<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarTL' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
             foreach ($emailsTecnicos as $email) {
-            $this->emailService->enviarNotificacion($email, $asunto, $mensaje, 'urgente');
+                $this->emailService->enviarNotificacion($email, $asunto, $mensaje, 'urgente');
             }
 
             require_once(__DIR__ . '/NotificacionC.php');
@@ -120,19 +125,20 @@ class SolicitudC {
             $conn = conectar();
             $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
             while ($row = $result->fetch_assoc()) {
-            $tipo = 'urgente';  // Ya es urgente
-            $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo", $tipo);
+                $tipo = 'urgente';  // Ya es urgente
+                $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo", $tipo);
             }
 
             header("Location: Index.php?accion=listarSLU");
         } else {
-             $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
-             $_SESSION['tipo_mensaje'] = "error";
-             header("Location: Index.php?accion=urgenteS");
+            $_SESSION['mensaje'] = "Error al guardar la solicitud urgente.";
+            $_SESSION['tipo_mensaje'] = "error";
+            header("Location: Index.php?accion=urgenteS");
         }
     }
 
-    public function borrarS() {
+    public function borrarS()
+    {
         $solicitud = new Solicitud();
         $id = $_GET['id'];
 
@@ -160,18 +166,20 @@ class SolicitudC {
         }
     }
 
-    public function listarSLU() {
+    public function listarSLU()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
-        }   
+        }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSLU($id_usuario);
-        include("./Views/Solicitudes/Cliente/ListadoSLU.php");
+        include(__DIR__ . "./Views/Solicitudes/Cliente/ListadoSLU.php");
     }
 
-    public function ListarTL() {
+    public function ListarTL()
+    {
         if (isset($_SESSION['id'])) {
             $usuarioId = $_SESSION['id'];
             $search = $_GET['search'] ?? null;
@@ -186,7 +194,8 @@ class SolicitudC {
         }
     }
 
-    public function asignarS() {
+    public function asignarS()
+    {
         $id_tecnico = $_SESSION['id'] ?? null;
         $id_soli = $_GET['id_solicitud'] ?? null;
 
@@ -196,7 +205,7 @@ class SolicitudC {
             header("Location: Index.php?accion=listarTL");
             exit();
         }
-        
+
         $success = $this->solicitudModel->asignarS($id_tecnico, $id_soli);
 
         if ($success) {
@@ -227,29 +236,32 @@ class SolicitudC {
         }
     }
 
-    public function listarSA() {
+    public function listarSA()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
-        }   
+        }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSA($id_usuario);
-        include("./Views/Solicitudes/listadoSA.php");
+        include(__DIR__ . "./Views/Solicitudes/listadoSA.php");
     }
 
-    public function listarST() {
+    public function listarST()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
-        }   
+        }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarST($id_usuario);
-        include("./Views/Solicitudes/listadoST.php");
+        include(__DIR__ . "./Views/Solicitudes/listadoST.php");
     }
-    
-    public function editarSF() {
+
+    public function editarSF()
+    {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
@@ -270,10 +282,11 @@ class SolicitudC {
         // Obtener la lista de estados para el select
         $estados = $this->solicitudModel->obtenerEstados();
 
-        include("./Views/Solicitudes/editarSF.php");
+        include(__DIR__ . "./Views/Solicitudes/editarSF.php");
     }
-    
-    public function actualizarSF() {
+
+    public function actualizarSF()
+    {
         $id = $_POST['id'] ?? null;
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
@@ -306,15 +319,15 @@ class SolicitudC {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud actualizada exitosamente.";
 
-        // REGISTRAR CAMBIO DE ESTADO
+            // REGISTRAR CAMBIO DE ESTADO
             $obs = "";
             if ($estadoAntiguo !== $estado_id) {
                 // Se usa $nuevoEstado['nombre'] que viene de la nueva función
-                $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']); 
+                $evento = "Estado cambiado a " . strtolower($nuevoEstado['nombre']);
                 $this->historiaC->registrarEvento($id, $evento);
-                $obs .=$evento.". ‎ ";
+                $obs .= $evento . ". ‎ ";
 
-               $usuarioModel = new Usuario();
+                $usuarioModel = new Usuario();
                 $emailCliente = $usuarioModel->obtenerEmailUsuarioPorId($datosSolicitud['cliente_id']);
                 $asunto = "🔄 Estado de Tu Solicitud Cambió: {$datosSolicitud['titulo']}";
                 $enlace = ($estado_id == 5) ? 'http://localhost/COSMOS/Index.php?accion=listarST' : 'http://localhost/COSMOS/Index.php?accion=listarSA';  // Finalizado -> listarST, otros -> listarSA
@@ -345,7 +358,8 @@ class SolicitudC {
         }
     }
 
-    public function cancelarS() {
+    public function cancelarS()
+    {
         $id_soli = $_GET['id_solicitud'] ?? null;
         $usuarioId = $_SESSION['id'] ?? null;
 
@@ -355,7 +369,7 @@ class SolicitudC {
             header("Location: Index.php?accion=listarSA");
             exit();
         }
-        
+
         $solicitud = $this->solicitudModel->obtenerSolicitudPorId($id_soli);
         if (!$solicitud) {
             $_SESSION['mensaje'] = "Error: La solicitud no existe.";
@@ -372,7 +386,7 @@ class SolicitudC {
             exit();
         }
 
-         if ($this->solicitudModel->cancelarS($id_soli)) {
+        if ($this->solicitudModel->cancelarS($id_soli)) {
             $_SESSION['tipo_mensaje'] = "success";
             $_SESSION['mensaje'] = "Solicitud cancelada exitosamente.";
 
@@ -381,13 +395,13 @@ class SolicitudC {
 
             $usuarioModel = new Usuario();
             if ($_SESSION['rol'] == 1) {  // Técnico canceló -> notificar al cliente
-            $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['cliente_id']);
-            $asunto = "❌ Tu Solicitud Fue Cancelada por el Técnico: {$solicitud['titulo']}";
-            $mensaje = "El técnico canceló tu solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSLU' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+                $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['cliente_id']);
+                $asunto = "❌ Tu Solicitud Fue Cancelada por el Técnico: {$solicitud['titulo']}";
+                $mensaje = "El técnico canceló tu solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSLU' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
             } elseif ($_SESSION['rol'] == 2) {  // Cliente canceló -> notificar al técnico
-            $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['tecnico_id']);
-            $asunto = "❌ Solicitud Cancelada por el Cliente: {$solicitud['titulo']}";
-            $mensaje = "El cliente canceló la solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSA' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+                $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['tecnico_id']);
+                $asunto = "❌ Solicitud Cancelada por el Cliente: {$solicitud['titulo']}";
+                $mensaje = "El cliente canceló la solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSA' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
             }
 
             $this->emailService->enviarNotificacion($emailDestinatario, $asunto, $mensaje, 'urgente');
@@ -395,7 +409,7 @@ class SolicitudC {
             // Asumo que tienes definidas estas constantes
             define('ROL_TECNICO', 1);
             define('ROL_CLIENTE', 2);
-            
+
             if (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_TECNICO) {
                 header("Location: Index.php?accion=listarTL"); // Redirigir a solicitudes disponibles
             } elseif (isset($_SESSION['rol']) && $_SESSION['rol'] == ROL_CLIENTE) {
@@ -413,19 +427,19 @@ class SolicitudC {
         }
     }
 
-    public function formularioUS() { 
+    public function formularioUS()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
-        
+
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
-        } 
-        
+        }
+
         $solicitud = new Solicitud();
         $productos = $solicitud->obtenerProductos($id_usuario);
         $ultimo_producto = $solicitud->obtenerProductoUrgente($id_usuario);
-        $producto_preseleccionado_id = $ultimo_producto['id'] ?? null; 
-        include ("./Views/Solicitudes/Cliente/FormularioUS.php");
+        $producto_preseleccionado_id = $ultimo_producto['id'] ?? null;
+        include(__DIR__ . "./Views/Solicitudes/Cliente/FormularioUS.php");
     }
 }
-?>

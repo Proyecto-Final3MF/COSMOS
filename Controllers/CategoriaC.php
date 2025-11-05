@@ -1,23 +1,27 @@
 <?php
 require_once("./Config/conexion.php");
 require_once("./Models/CategoriaM.php");
-require_once ("./Views/include/popup.php");
+require_once("./Views/include/popup.php");
 require_once("./Controllers/HistorialC.php");
 
-class CategoriaC {
+class CategoriaC
+{
 
     private $historialController;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->historialController = new HistorialController();
     }
 
-    public function FormularioC() {
+    public function FormularioC()
+    {
         $categoria = new Categoria();
-        include("./Views/Usuario/Admin/Categoria/agregarC.php");
+        include(__DIR__ . "./Views/Usuario/Admin/Categoria/agregarC.php");
     }
 
-    public function guardarC() {
+    public function guardarC()
+    {
         $categoria = new Categoria();
         $nombre = trim($_POST['nombre']) ?? '';
 
@@ -58,19 +62,21 @@ class CategoriaC {
         exit();
     }
 
-    public function listarC() {
+    public function listarC()
+    {
         $categoria = new Categoria();
-        
+
         $orden = $_GET['orden'] ?? 'Más Antiguas';
 
         $search = $_GET['search'] ?? '';
 
         $resultados = $categoria->listarC($orden, $search);
 
-        include("./Views/Usuario/Admin/Categoria/listarC.php");
+        include(__DIR__ . "./Views/Usuario/Admin/Categoria/listarC.php");
     }
 
-    public function editarC() {
+    public function editarC()
+    {
         $categoria_modelo = new Categoria();
         $id = $_GET['id'] ?? 0;
         if ($id <= 0) {
@@ -88,10 +94,11 @@ class CategoriaC {
             exit();
         }
 
-        include("./Views/Usuario/Admin/Categoria/editarC.php");
+        include(__DIR__ . "./Views/Usuario/Admin/Categoria/editarC.php");
     }
 
-    public function actualizarC() {
+    public function actualizarC()
+    {
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
         $usuarioId = $_SESSION['id'] ?? 0;
 
@@ -133,7 +140,8 @@ class CategoriaC {
         }
     }
 
-    public function borrarC() {
+    public function borrarC()
+    {
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
         $usuarioId = $_SESSION['id'] ?? 0;
 
@@ -178,4 +186,3 @@ class CategoriaC {
         exit();
     }
 }
-?>

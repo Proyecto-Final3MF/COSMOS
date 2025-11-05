@@ -1,44 +1,50 @@
 <?php
 require_once("Models/UsuarioM.php");
-require_once ("./Views/include/popup.php");
+require_once("./Views/include/popup.php");
 require_once("Controllers/HistorialC.php");
 
-class UsuarioC {
+class UsuarioC
+{
     private $historialController;
     private $reviewController;
     private $conn; // Propiedad para la conexión, necesaria para insert_id
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->historialController = new HistorialController();
         $this->reviewController = new ReviewC();
         // Asumo que tienes una función global conectar() o la inicializas aquí
-        $this->conn = conectar(); 
+        $this->conn = conectar();
     }
 
-    public function login() {
-        include("Views/Usuario/Login.php");
+    public function login()
+    {
+        include(__DIR__ . "Views/Usuario/Login.php");
     }
 
-    public function trabajo() {
-        include("Views/Usuario/Tecnico/Trabajo.php");
+    public function trabajo()
+    {
+        include(__DIR__ . "Views/Usuario/Tecnico/Trabajo.php");
     }
 
-    public function TecnicoForm() {
+    public function TecnicoForm()
+    {
         $usuario = new Usuario();
-        $especializaciones = $usuario->obtenerEspecializaciones(); 
-        include("Views/Usuario/Tecnico/TecnicoForm.php");
+        $especializaciones = $usuario->obtenerEspecializaciones();
+        include(__DIR__ . "Views/Usuario/Tecnico/TecnicoForm.php");
     }
 
-    public function espera() {
+    public function espera()
+    {
         // 1. Obtener el email de la URL
         $email = $_GET['email'] ?? '';
-        
+
         // 2. Instanciar el modelo (necesario para obtenerPorEmail)
-        $usuarioM = new Usuario(); 
-        
+        $usuarioM = new Usuario();
+
         // 3. Obtener los datos del usuario. $datos_usuario debe ser definido AQUÍ.
-        $datos_usuario = $usuarioM->obtenerPorEmail($email); 
-        
+        $datos_usuario = $usuarioM->obtenerPorEmail($email);
+
         // 4. Verificación de seguridad: si no encuentra al usuario, redirige
         if (!$datos_usuario) {
             $_SESSION['tipo_mensaje'] = "danger";
@@ -46,19 +52,21 @@ class UsuarioC {
             header("Location: Index.php?accion=login");
             exit();
         }
-        
+
         // 5. Incluir la vista. La vista espera que $datos_usuario exista.
-        include("views/Usuario/Tecnico/Espera.php"); 
+        include(__DIR__ . "Views/Usuario/Tecnico/Espera.php");
     }
 
-    public function crear() {
+    public function crear()
+    {
         $usuario = new Usuario();
         $roles = $usuario->obtenerRol();
-        $especializaciones = $usuario->obtenerEspecializaciones(); 
-        include("views/Usuario/Register.php");
+        $especializaciones = $usuario->obtenerEspecializaciones();
+        include(__DIR__ . "Views/Usuario/Register.php");
     }
 
-    public function guardarU() {
+    public function guardarU()
+    {
         $usuarioM = new Usuario();
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
@@ -78,16 +86,16 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-            header("Location: Index.php?accion=register"); 
+            header("Location: Index.php?accion=register");
             exit();
         }
 
         $existe = $usuarioM->obtenerPorEmail($mail);
-        
+
         if ($existe) {
             $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
             $_SESSION['tipo_mensaje'] = "warning";
-            
+
             header("Location: Index.php?accion=register");
             exit();
         }
@@ -95,20 +103,20 @@ class UsuarioC {
         if (empty($usuario) || empty($mail)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
-            header("Location: Index.php?accion=register"); 
+            header("Location: Index.php?accion=register");
             exit();
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
-            header("Location: Index.php?accion=register"); 
+            header("Location: Index.php?accion=register");
             exit();
         }
-    
+
         $success = $usuarioM->crearC($usuario, $mail, $rol_id, $contrasena_hash);
 
-        if ($success) { 
+        if ($success) {
             $usuarioN = $usuarioM->obtenerPorEmail($mail);
 
             if ($usuarioN) {
@@ -117,7 +125,7 @@ class UsuarioC {
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Se registro", null, 0, "Usuario registrado como Cliente.");
-                header("Location:index.php?accion=redireccion");
+                header("Location:Index.php?accion=redireccion");
             } else {
                 header("Location: Index.php?accion=register");
                 $_SESSION['mensaje'] = "Tu cuenta no pudo ser creada. Por favor, intenta de nuevo o revisa los datos.";
@@ -132,7 +140,8 @@ class UsuarioC {
         }
     }
 
-    public function guardarT() {
+    public function guardarT()
+    {
         $usuarioM = new Usuario();
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);
@@ -154,16 +163,16 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en Nombre de Usuario. Solo se permiten letras y espacios.";
-            header("Location: Index.php?accion=TecnicoForm"); 
+            header("Location: Index.php?accion=TecnicoForm");
             exit();
         }
 
         $existe = $usuarioM->obtenerPorEmail($mail);
-        
+
         if ($existe) {
             $_SESSION['mensaje'] = "El correo electrónico ya está registrado.";
             $_SESSION['tipo_mensaje'] = "warning";
-            
+
             header("Location: Index.php?accion=TecnicoForm");
             exit();
         }
@@ -171,27 +180,27 @@ class UsuarioC {
         if (empty($usuario) || empty($mail)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El Nombre y Email de Usuario no pueden estar vacíos.";
-            header("Location: Index.php?accion=TecnicoForm"); 
+            header("Location: Index.php?accion=TecnicoForm");
             exit();
         }
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
-            header("Location: Index.php?accion=TecnicoForm"); 
+            header("Location: Index.php?accion=TecnicoForm");
             exit();
         }
 
         if (empty($especializaciones) && empty($otra_especialidad)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Debe seleccionar al menos una especialización o especificar 'Otra Especialidad'.";
-            header("Location: Index.php?accion=TecnicoForm"); 
+            header("Location: Index.php?accion=TecnicoForm");
             exit();
         }
-    
+
         $success = $usuarioM->crearT($usuario, $mail, $rol_id, $contrasena_hash, $otra_especialidad);
 
-        if ($success) { 
+        if ($success) {
             $usuarioN = $usuarioM->obtenerPorEmail($mail);
 
             if ($usuarioN) {
@@ -206,7 +215,7 @@ class UsuarioC {
                 $_SESSION['email'] = $usuarioN['email'];
                 $_SESSION['usuario'] = $usuarioN['nombre'];
                 $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Se registro", null, 0, "Usuario registrado como Tecnico.");
-                header("Location:index.php?accion=redireccion");
+                header("Location:Index.php?accion=redireccion");
             } else {
                 header("Location: Index.php?accion=TecnicoForm");
                 $_SESSION['mensaje'] = "Tu cuenta no pudo ser creada. Por favor, intenta de nuevo o revisa los datos.";
@@ -221,7 +230,8 @@ class UsuarioC {
         }
     }
 
-    public function actualizarU() {
+    public function actualizarU()
+    {
         session_start();
         $id = $_POST['id'];
         $nombre = trim($_POST['nombre']);
@@ -231,21 +241,21 @@ class UsuarioC {
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Caracteres inválidos en el nombre. Solo se permiten letras y espacios.";
-            header("Location: Index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id");
             exit();
         }
 
         if (empty($nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El nombre no puede estar vacío.";
-            header("Location: Index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id");
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
-            header("Location: Index.php?accion=editarU&id=$id"); 
+            header("Location: Index.php?accion=editarU&id=$id");
             exit();
         }
 
@@ -297,7 +307,8 @@ class UsuarioC {
     }
 
 
-    public function borrar() {
+    public function borrar()
+    {
         $usuario = new Usuario();
         $id = $_GET["id"];
         $usuarioBorrado = $usuario->buscarUserId($id);
@@ -308,23 +319,25 @@ class UsuarioC {
         exit();
     }
 
-    public function editarU($id = null) {
+    public function editarU($id = null)
+    {
         $usuarioM = new Usuario();
         $id = $id ?? $_GET['id'];
         $datos = $usuarioM->buscarUserId($id);
-        include("views/Usuario/editarU.php");
+        include(__DIR__ . "Views/Usuario/editarU.php");
     }
 
-    public function autenticar() {
-        $email = trim($_POST['usuario']); 
+    public function autenticar()
+    {
+        $email = trim($_POST['usuario']);
         $contrasena = $_POST['contrasena'];
         $modelo = new Usuario();
 
         $user = $modelo->obtenerPorEmail($email);
-        $ROL_TECNICO_ID = 1; 
-        
+        $ROL_TECNICO_ID = 1;
+
         if ($user && password_verify($contrasena, $user['contrasena'])) {
-            
+
             if ($user['rol_id'] == $ROL_TECNICO_ID) {
                 switch ($user['estado_verificacion']) {
                     case 'pendiente':
@@ -353,26 +366,29 @@ class UsuarioC {
             exit();
         } else {
             $error = "Correo o contraseña incorrectos";
-            include("views/Usuario/Login.php");
+            include(__DIR__ . "Views/Usuario/Login.php");
         }
     }
 
-    public function listarU() {
-        $orden = $_GET['orden'] ?? ''; 
+    public function listarU()
+    {
+        $orden = $_GET['orden'] ?? '';
         $rol_filter = $_GET['rol_filter'] ?? 'Todos';
         $search = $_GET['search'] ?? '';
 
         $usuario = new Usuario();
         $resultados = $usuario->listarU($orden, $rol_filter, $search);
-        include("Views/Usuario/Admin/listarU.php");
+        include(__DIR__ . "Views/Usuario/Admin/listarU.php");
     }
 
-    public function PreviewU() {
+    public function PreviewU()
+    {
         $usuario = new Usuario();
         return $usuario->PreviewU();
     }
 
-    public function PerfilTecnico() {
+    public function PerfilTecnico()
+    {
         $Tecnico = new Usuario();
         $Reviews = new Review();
         $id_tecnico = $_GET['id'] ?? null;
@@ -393,10 +409,11 @@ class UsuarioC {
 
         $especializaciones = $Tecnico->getEspecializacion($id_tecnico);
         $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
-        include("Views/Usuario/Tecnico/Perfil.php");
+        include(__DIR__ . "Views/Usuario/Tecnico/Perfil.php");
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_start();
         session_unset();
         session_destroy();
@@ -404,4 +421,3 @@ class UsuarioC {
         exit();
     }
 }
-?>

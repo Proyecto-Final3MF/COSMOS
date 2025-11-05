@@ -1,24 +1,28 @@
 <?php
-require_once ("./Config/conexion.php");
-require_once ("./Models/ProductoM.php");
-require_once ("./Controllers/HistorialC.php");
-require_once ("./Views/include/popup.php");
+require_once("./Config/conexion.php");
+require_once("./Models/ProductoM.php");
+require_once("./Controllers/HistorialC.php");
+require_once("./Views/include/popup.php");
 
-class ProductoC {
+class ProductoC
+{
 
     private $historialController;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->historialController = new HistorialController();
     }
 
-    public function formularioP() {
+    public function formularioP()
+    {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
-        include("./Views/Producto/FormularioP.php");
+        include(__DIR__ . "./Views/Producto/FormularioP.php");
     }
 
-    public function guardarP() {
+    public function guardarP()
+    {
         $producto = new Producto();
         $nombre = trim($_POST['nombre']) ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
@@ -92,7 +96,8 @@ class ProductoC {
         }
     }
 
-    public function listarP() {
+    public function listarP()
+    {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario === null) {
             header("Location: Index.php?accion=login");
@@ -103,10 +108,11 @@ class ProductoC {
         $orden = $_GET['orden'] ?? 'Más Recientes';
         $search = $_GET['search'] ?? null;
         $resultados = $producto->listarP($id_usuario, $orden, $search);
-        include("./Views/Producto/ListadoP.php");
+        include(__DIR__ . "./Views/Producto/ListadoP.php");
     }
 
-    public function borrarP() {
+    public function borrarP()
+    {
         $producto = new Producto();
         $id = $_GET['id'];
         $id_usuario = $_SESSION['id'];
@@ -130,7 +136,8 @@ class ProductoC {
         header("Location: Index.php?accion=listarP");
     }
 
-    public function editarP() {
+    public function editarP()
+    {
         $producto = new Producto();
         $id = $_GET['id'] ?? null;
 
@@ -147,10 +154,11 @@ class ProductoC {
         }
 
         $categorias = $producto->obtenerCategorias();
-        include("./Views/Producto/EditarP.php");
+        include(__DIR__ . "./Views/Producto/EditarP.php");
     }
 
-    public function actualizarP() {
+    public function actualizarP()
+    {
         $producto = new Producto();
         $id = $_POST['id'] ?? null;
         $nombre = trim($_POST['nombre']) ?? '';
@@ -216,7 +224,7 @@ class ProductoC {
         $id_catAntiguo = $ProductoAntiguo['id_cat'] ?? 'Id desconocido';
         $categoriaAntigua = $ProductoAntiguo['categoria'] ?? 'Categoria desconocida';
 
-        
+
         $categoria_nombre = $productoModel->obtenerCategoriaporId($categoria_id);
         $nuevaCat = $categoria_nombre ?? "categoria desconocida";
 
@@ -229,12 +237,12 @@ class ProductoC {
             } else {
                 $obs = "";
                 if ($nombre !== $nombreAntiguo) {
-                    $obs1 = "Nombre: ".$nombreAntiguo." ⟶ ".$nombre." ‎ ";
+                    $obs1 = "Nombre: " . $nombreAntiguo . " ⟶ " . $nombre . " ‎ ";
                     $obs .= $obs1;
                 }
 
                 if ($id_catAntiguo !== $categoria_id) {
-                    $obs2 = "Categoria: ".$categoriaAntigua. " ⟶ ".$nuevaCat;
+                    $obs2 = "Categoria: " . $categoriaAntigua . " ⟶ " . $nuevaCat;
                     $obs .= $obs2;
                 }
             }
@@ -258,13 +266,15 @@ class ProductoC {
         }
     }
 
-    public function urgentePF() {
+    public function urgentePF()
+    {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
-        include("./Views/Producto/FormularioUP.php");
+        include(__DIR__ . "./Views/Producto/FormularioUP.php");
     }
 
-    public function urgenteGP() {
+    public function urgenteGP()
+    {
         $producto = new Producto();
         $nombre = $_POST['nombre'] ?? '';
         $categoria_id = $_POST['categoria'] ?? '';
@@ -327,4 +337,3 @@ class ProductoC {
         }
     }
 }
-?>
