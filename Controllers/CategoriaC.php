@@ -1,8 +1,8 @@
 <?php
-require_once("./Config/conexion.php");
-require_once("./Models/CategoriaM.php");
-require_once("./Views/include/popup.php");
-require_once("./Controllers/HistorialC.php");
+require_once(__DIR__ . "/../Config/conexion.php");
+require_once(__DIR__ . "/../Models/CategoriaM.php");
+require_once(__DIR__ . "/../Views/include/popup.php");
+require_once(__DIR__ . "/../Controllers/HistorialC.php");
 
 class CategoriaC
 {
@@ -17,7 +17,7 @@ class CategoriaC
     public function FormularioC()
     {
         $categoria = new Categoria();
-        include(__DIR__ . "./Views/Usuario/Admin/Categoria/agregarC.php");
+        include(__DIR__ . "/../Views/Usuario/Admin/Categoria/agregarC.php");
     }
 
     public function guardarC()
@@ -72,7 +72,7 @@ class CategoriaC
 
         $resultados = $categoria->listarC($orden, $search);
 
-        include(__DIR__ . "./Views/Usuario/Admin/Categoria/listarC.php");
+        include(__DIR__ . "/../Views/Usuario/Admin/Categoria/listarC.php");
     }
 
     public function editarC()
@@ -94,7 +94,7 @@ class CategoriaC
             exit();
         }
 
-        include(__DIR__ . "./Views/Usuario/Admin/Categoria/editarC.php");
+        include(__DIR__ . "/../Views/Usuario/Admin/Categoria/editarC.php");
     }
 
     public function actualizarC()

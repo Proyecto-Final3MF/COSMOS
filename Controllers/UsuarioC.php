@@ -1,7 +1,7 @@
 <?php
-require_once("Models/UsuarioM.php");
-require_once("./Views/include/popup.php");
-require_once("Controllers/HistorialC.php");
+require_once(__DIR__ . "/../Models/UsuarioM.php");
+require_once(__DIR__ . "/../Views/include/popup.php");
+require_once(__DIR__ . "/../Controllers/HistorialC.php");
 
 class UsuarioC
 {

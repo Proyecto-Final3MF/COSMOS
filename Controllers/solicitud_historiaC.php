@@ -22,6 +22,6 @@ class HistoriaC
 
         $historia = new HistoriaM();
         $resultados = $historia->mostrarHistoria($id_solicitud);
-        include(__DIR__ . "./Views/Solicitudes/Historia.php");
+        include(__DIR__ . "/../Views/Solicitudes/Historia.php");
     }
 }

@@ -1,8 +1,8 @@
 <?php
-require_once("./Config/conexion.php");
-require_once("./Models/ProductoM.php");
-require_once("./Controllers/HistorialC.php");
-require_once("./Views/include/popup.php");
+require_once(__DIR__ . "/../Config/conexion.php");
+require_once(__DIR__ . "/../Models/ProductoM.php");
+require_once(__DIR__ . "/../Controllers/HistorialC.php");
+require_once(__DIR__ . "/../Views/include/popup.php");
 
 class ProductoC
 {
@@ -18,7 +18,7 @@ class ProductoC
     {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
-        include(__DIR__ . "./Views/Producto/FormularioP.php");
+        include(__DIR__ . "/../Views/Producto/FormularioP.php");
     }
 
     public function guardarP()
@@ -108,7 +108,7 @@ class ProductoC
         $orden = $_GET['orden'] ?? 'Más Recientes';
         $search = $_GET['search'] ?? null;
         $resultados = $producto->listarP($id_usuario, $orden, $search);
-        include(__DIR__ . "./Views/Producto/ListadoP.php");
+        include(__DIR__ . "/../Views/Producto/ListadoP.php");
     }
 
     public function borrarP()
@@ -154,7 +154,7 @@ class ProductoC
         }
 
         $categorias = $producto->obtenerCategorias();
-        include(__DIR__ . "./Views/Producto/EditarP.php");
+        include(__DIR__ . "/../Views/Producto/EditarP.php");
     }
 
     public function actualizarP()
@@ -270,7 +270,7 @@ class ProductoC
     {
         $producto = new Producto();
         $categorias = $producto->obtenerCategorias();
-        include(__DIR__ . "./Views/Producto/FormularioUP.php");
+        include(__DIR__ . "/../Views/Producto/FormularioUP.php");
     }
 
     public function urgenteGP()

@@ -37,7 +37,7 @@ class SolicitudC
         $solicitud = new Solicitud();
         $productos = $solicitud->obtenerProductos($id_usuario);
         $producto_preseleccionado_id = null;
-        include(__DIR__ . "./Views/Solicitudes/Cliente/FormularioS.php");
+        include(__DIR__ . "/../Views/Solicitudes/Cliente/FormularioS.php");
     }
 
     public function guardarS()
@@ -175,7 +175,7 @@ class SolicitudC
         }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSLU($id_usuario);
-        include(__DIR__ . "./Views/Solicitudes/Cliente/ListadoSLU.php");
+        include(__DIR__ . "/../Views/Solicitudes/Cliente/ListadoSLU.php");
     }
 
     public function ListarTL()
@@ -440,6 +440,6 @@ class SolicitudC
         $productos = $solicitud->obtenerProductos($id_usuario);
         $ultimo_producto = $solicitud->obtenerProductoUrgente($id_usuario);
         $producto_preseleccionado_id = $ultimo_producto['id'] ?? null;
-        include(__DIR__ . "./Views/Solicitudes/Cliente/FormularioUS.php");
+        include(__DIR__ . "/../Views/Solicitudes/Cliente/FormularioUS.php");
     }
 }
