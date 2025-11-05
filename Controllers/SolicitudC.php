@@ -125,13 +125,8 @@ class SolicitudC
             $conn = conectar();
             $result = $conn->query("SELECT id FROM usuario WHERE rol_id = 1");
             while ($row = $result->fetch_assoc()) {
-<<<<<<< Updated upstream
-                $tipo = 'urgente';  // Ya es urgente
+                $tipo = 'urgente';
                 $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo", $tipo);
-=======
-            $tipo = 'urgente';
-            $notificacion->crearNotificacion($row['id'], "Nueva solicitud Urgente creada: $titulo", $tipo);
->>>>>>> Stashed changes
             }
 
             header("Location: Index.php?accion=listarSLU");
