@@ -48,7 +48,7 @@ class ReviewC {
         $titulo_solicitud = $datosSolicitud['titulo'];
         $id_tecnico = $datosSolicitud['tecnico_id'];
 
-        include(__DIR__ . "Views/Solicitudes/review.php");
+        include(__DIR__ . "/../Views/Solicitudes/review.php");
     }
 
     public function AddReview() {
