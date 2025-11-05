@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/solicitud_historiaC.php');
-require_once(__DIR__ . "./Views/include/popup.php");
-require_once(__DIR__ . "Controllers/HistorialC.php");
+require_once(__DIR__ . "/../Views/include/popup.php");
+require_once(__DIR__ . "/HistorialC.php");
 require_once(__DIR__ . '/../Services/EmailService.php');
 
 class SolicitudC
@@ -245,7 +245,7 @@ class SolicitudC
         }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarSA($id_usuario);
-        include(__DIR__ . "./Views/Solicitudes/listadoSA.php");
+        include(__DIR__ . "/../Views/Solicitudes/listadoSA.php");
     }
 
     public function listarST()
@@ -257,7 +257,7 @@ class SolicitudC
         }
         $solicitud = new Solicitud();
         $resultados = $solicitud->listarST($id_usuario);
-        include(__DIR__ . "./Views/Solicitudes/listadoST.php");
+        include(__DIR__ . "/../Views/Solicitudes/listadoST.php");
     }
 
     public function editarSF()
@@ -282,7 +282,7 @@ class SolicitudC
         // Obtener la lista de estados para el select
         $estados = $this->solicitudModel->obtenerEstados();
 
-        include(__DIR__ . "./Views/Solicitudes/editarSF.php");
+        include(__DIR__ . "/../Views/Solicitudes/editarSF.php");
     }
 
     public function actualizarSF()
@@ -291,14 +291,14 @@ class SolicitudC
         $descripcion = trim($_POST['descripcion']) ?? '';
         $estado_id = $_POST['estado'] ?? null;
         $precio = $_POST['precio'] ?? 0.0;
-        $id_cliente = $_SESSION['id'];
-        $id_tecnico = $_POST['id_tecnico'];
+        $id_cliente = $_POST['id_cliente'];
+        $id_tecnico = $_SESSION['id'];
 
-        $checkU = $this->solicitudModel->checkUsuario($id_solicitud, $id_tecnico, $id_cliente);
+        $checkU = $this->solicitudModel->checkUsuario($id, $id_tecnico, $id_cliente);
         if (!$checkU) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Accesso negado";
-            header("Location:Index.php?accion=listarST");
+            header("Location:Index.php?accion=listarSA");
             exit();
         }
 

@@ -19,19 +19,19 @@ class UsuarioC
 
     public function login()
     {
-        include(__DIR__ . "Views/Usuario/Login.php");
+        include(__DIR__ . "/../Views/Usuario/Login.php");
     }
 
     public function trabajo()
     {
-        include(__DIR__ . "Views/Usuario/Tecnico/Trabajo.php");
+        include(__DIR__ . "/../Views/Usuario/Tecnico/Trabajo.php");
     }
 
     public function TecnicoForm()
     {
         $usuario = new Usuario();
         $especializaciones = $usuario->obtenerEspecializaciones();
-        include(__DIR__ . "Views/Usuario/Tecnico/TecnicoForm.php");
+        include(__DIR__ . "/../Views/Usuario/Tecnico/TecnicoForm.php");
     }
 
     public function espera()
@@ -230,13 +230,23 @@ class UsuarioC
         }
     }
 
-    public function actualizarU()
-    {
+    public function actualizarU() {
         session_start();
+        $usuarioM = new Usuario();
+
         $id = $_POST['id'];
         $nombre = trim($_POST['nombre']);
         $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
+
+        if ($_SESSION['rol'] !== ROL_ADMIN) {
+            if ($_SESSION['id'] !== $id) {
+                $_SESSION['tipo_mensaje'] = "warning";
+                $_SESSION['mensaje'] = "ACCESO NEGADO";
+                header("Location: Index.php?accion=redireccion");
+                exit();
+            }
+        }
 
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
@@ -261,8 +271,6 @@ class UsuarioC
 
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
         $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
-
-        $usuarioM = new Usuario();
 
         $foto_perfil = $foto_actual;
         if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
@@ -324,7 +332,7 @@ class UsuarioC
         $usuarioM = new Usuario();
         $id = $id ?? $_GET['id'];
         $datos = $usuarioM->buscarUserId($id);
-        include(__DIR__ . "Views/Usuario/editarU.php");
+        include(__DIR__ . "/../Views/Usuario/editarU.php");
     }
 
     public function autenticar()

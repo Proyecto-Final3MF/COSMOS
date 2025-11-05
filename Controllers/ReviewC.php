@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "./Views/include/popup.php");
+require_once(__DIR__ . "/../Views/include/popup.php");
 require_once(__DIR__ . '/../Models/SolicitudM.php');
 require_once(__DIR__ . '/../Models/ReviewM.php');
 

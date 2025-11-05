@@ -37,7 +37,7 @@ if (!isset($estados) || $estados === null) {
     <h3>Editar Solicitud</h3>
     <form method="POST" action="Index.php?accion=actualizarSF">
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosSolicitud['id']) ?>">
-        <input type="hidden" name="id_tecnico" value="<?= htmlspecialchars($datosSolicitud['tecnico_id']) ?>">
+        <input type="hidden" name="id_cliente" value="<?= htmlspecialchars($datosSolicitud['cliente_id']) ?>">
 
         <p class="fade-label">Título:</p>
         <input type="text" class="form-control" name="titulo" value="<?= htmlspecialchars($datosSolicitud['titulo']) ?>" disabled>

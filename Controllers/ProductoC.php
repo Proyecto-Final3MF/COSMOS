@@ -170,7 +170,7 @@ class ProductoC
         $checkP = $producto->checkProducto($id, $id_usuario);
         if (!$checkP) {
             $_SESSION['tipo_mensaje'] = "warning";
-            $_SESSION['mensaje'] = "Acceso Negado.";
+            $_SESSION['mensaje'] = "ACCESO Negado.";
             header("Location: Index.php?accion=listarP");
             exit();
         }

@@ -182,6 +182,27 @@ class Usuario {
         return false;
     }
 
+    public function check($id_logeado) {
+        $sql = "SELECT id FROM usuario WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            return false;
+        }
+
+        $stmt->bind_param("i", $id_logeado);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows > 0) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
     public function obtenerPorEmail($email) {
         $email = $this->conn->real_escape_string($email);
         $sql = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
