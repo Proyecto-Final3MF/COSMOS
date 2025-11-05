@@ -41,6 +41,12 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                 <?php endif; ?>
 
                 <!-- Estos dos botones siempre se muestran -->
+                <!-- Estos dos botones solo se muestran en inicio, nosotros y contacto -->
+            <?php
+            $current_action = $_GET['accion'] ?? '';
+            $allowed_pages = ['inicio', 'nosotros', 'contacto'];
+            if (in_array($current_action, $allowed_pages)):
+            ?>
                 <li>
                     <a href="Index.php?accion=nosotros">
                         <i class="fa fa-users"></i> Nosotros
@@ -51,7 +57,8 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                         <i class="fa fa-envelope"></i> Contáctanos
                     </a>
                 </li>
-            </ul>
+            <?php endif; ?>
+                        </ul>
         </div>
 
         <div class="navbar-right">
@@ -198,4 +205,3 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
 <script src="Assets/js/menudeusuario.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/modoOscuro.js"></script>
-
