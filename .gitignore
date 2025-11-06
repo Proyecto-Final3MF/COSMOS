@@ -5,3 +5,5 @@
 # Con * poner el tipo de archivo que queres ignorar (.txt, .php, .js, etc.).
 
 #Archivos ignorados:
+
+*.png
