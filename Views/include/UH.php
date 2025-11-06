@@ -16,7 +16,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
     <nav class="navbar">
         <div class="navbar-left">
             <a href="Index.php?accion=inicio" class="logo-link" title="Inicio">
-                <img src="Assets/imagenes/logoNueva.png" height="50px" alt="logo de la app">
+                <img src="Assets/imagenes/logonueva.png" height="50px" alt="logo de la app">
             </a>
 
             <button id="togglethemeBtn" class="btn-modo" title="Cambiar tema">
@@ -42,23 +42,23 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                 
                 <!-- Estos dos botones siempre se muestran -->
                 <!-- Estos dos botones solo se muestran en inicio, nosotros y contacto -->
-            <?php
-            $current_action = $_GET['accion'] ?? '';
-            $allowed_pages = ['inicio', 'nosotros', 'contacto'];
-            if (in_array($current_action, $allowed_pages)):
-            ?>
-                <li>
-                    <a href="Index.php?accion=nosotros">
-                        <i class="fa fa-users"></i> Nosotros
-                    </a>
-                </li>
-                <li>
-                    <a href="Index.php?accion=contacto">
-                        <i class="fa fa-envelope"></i> Contáctanos
-                    </a>
-                </li>
-            <?php endif; ?>
-                        </ul>
+                <?php
+                $current_action = $_GET['accion'] ?? '';
+                $allowed_pages = ['inicio', 'nosotros', 'contacto'];
+                if (in_array($current_action, $allowed_pages)):
+                ?>
+                    <li>
+                        <a href="Index.php?accion=nosotros">
+                            <i class="fa fa-users"></i> Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Index.php?accion=contacto">
+                            <i class="fa fa-envelope"></i> Contáctanos
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </div>
 
         <div class="navbar-right">
@@ -84,20 +84,20 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                         <?php if (count($notificaciones) > 0): ?>
                             <?php foreach ($notificaciones as $n): ?>
                                 <?php
-                                    $url = '';
-                                    if (strpos($n['mensaje'], 'aceptada') !== false) {
-                                        $url = 'Index.php?accion=listarSA';
-                                    } elseif (strpos($n['mensaje'], 'urgente') !== false) {
-                                        $url = 'Index.php?accion=listarTL';
-                                    } elseif (strpos($n['mensaje'], 'verificar') !== false) {
-                                        $url = 'Index.php?accion=verificarTecnicos';
-                                    } elseif (strpos($n['mensaje'], 'cambió de estado') !== false) {
-                                        $url = (strpos($n['mensaje'], 'Finalizado') !== false)
-                                            ? 'Index.php?accion=listarST'
-                                            : 'Index.php?accion=listarSA';
-                                    } elseif (strpos($n['mensaje'], 'calificación') !== false) {
-                                        $url = 'Index.php?accion=listarST';
-                                    }
+                                $url = '';
+                                if (strpos($n['mensaje'], 'aceptada') !== false) {
+                                    $url = 'Index.php?accion=listarSA';
+                                } elseif (strpos($n['mensaje'], 'urgente') !== false) {
+                                    $url = 'Index.php?accion=listarTL';
+                                } elseif (strpos($n['mensaje'], 'verificar') !== false) {
+                                    $url = 'Index.php?accion=verificarTecnicos';
+                                } elseif (strpos($n['mensaje'], 'cambió de estado') !== false) {
+                                    $url = (strpos($n['mensaje'], 'Finalizado') !== false)
+                                        ? 'Index.php?accion=listarST'
+                                        : 'Index.php?accion=listarSA';
+                                } elseif (strpos($n['mensaje'], 'calificación') !== false) {
+                                    $url = 'Index.php?accion=listarST';
+                                }
                                 ?>
                                 <div class="notif-item">
                                     <span class="notif-text"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></span>
@@ -119,7 +119,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     </button>
 
                     <div id="rolDropdown" class="dropdown-menu">
-                        <?php if ($_SESSION['rol'] == 2): ?> 
+                        <?php if ($_SESSION['rol'] == 2): ?>
                             <a href="Index.php?accion=listarP" class="dropdown-item">
                                 <i class="fa-solid fa-box"></i> Mis Productos
                             </a>
@@ -135,7 +135,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             <a href="Index.php?accion=listarST" class="dropdown-item">
                                 <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
                             </a>
-                        <?php elseif ($_SESSION['rol'] == 1): ?> 
+                        <?php elseif ($_SESSION['rol'] == 1): ?>
                             <a href="Index.php?accion=listarTL" class="dropdown-item">
                                 <i class="fa-solid fa-list"></i> Solicitudes Disponibles
                             </a>
@@ -145,7 +145,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             <a href="Index.php?accion=listarST" class="dropdown-item">
                                 <i class="fa-solid fa-flag-checkered"></i> Solicitudes Terminadas
                             </a>
-                        <?php elseif ($_SESSION['rol'] == 3): ?> 
+                        <?php elseif ($_SESSION['rol'] == 3): ?>
                             <a href="Index.php?accion=FormularioC" class="dropdown-item">
                                 <i class="fa-solid fa-plus-circle"></i> Crear Nueva Categoría
                             </a>
@@ -180,9 +180,9 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             </div>
 
                             <?php if ($_SESSION['rol'] == 1): ?>
-                            <a href="Index.php?accion=PerfilTecnico&id=<?= $_SESSION['id'] ?>" class="dropdown-item">
-                                <i class="fa fa-user"></i> Mi Perfil
-                            </a>
+                                <a href="Index.php?accion=PerfilTecnico&id=<?= $_SESSION['id'] ?>" class="dropdown-item">
+                                    <i class="fa fa-user"></i> Mi Perfil
+                                </a>
                             <?php endif; ?>
 
                             <a href="Index.php?accion=editarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
