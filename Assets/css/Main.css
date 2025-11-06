@@ -2911,9 +2911,11 @@ p.nosotro {
     margin: 50px auto;
     max-width: 1100px;
     text-align: center;
+    text-decoration: none;
 }
 
 .miembro {
+    text-decoration: none;
     background: var(--color-fondo-formulario);
     border-radius: 16px;
     padding: 20px;
@@ -2937,9 +2939,19 @@ p.nosotro {
 }
 
 .miembro h3 {
+    text-decoration: none;
     font-size: 1rem;
     color: var(--text-color);
     margin-top: 8px;
+}
+
+.equipo-container a:hover {
+    text-decoration: none;
+}
+
+.equipo-container a {
+    text-decoration: none;
+    color: inherit; /* mantiene el color del texto del h3 */
 }
 
 @media (max-width: 768px) {
