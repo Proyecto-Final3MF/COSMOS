@@ -59,13 +59,11 @@ class UsuarioC
     public function crear()
     {
         $usuario = new Usuario();
-        $roles = $usuario->obtenerRol();
         $especializaciones = $usuario->obtenerEspecializaciones();
         include(__DIR__ . "/../Views/Usuario/Register.php");
     }
 
-    public function guardarU()
-    {
+    public function guardarU() {
         $usuarioM = new Usuario();
         $usuario = trim($_POST['usuario']);
         $mail = trim($_POST['mail']);

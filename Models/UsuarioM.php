@@ -106,33 +106,33 @@ class Usuario {
 
     // Método para obtener emails de todos los técnicos aprobados
     public function obtenerEmailsTecnicos() {
-    $sql = "SELECT email FROM usuario WHERE rol_id = 1";  // Quita: AND estado_verificacion = 'aprobado'
-    $resultado = $this->conn->query($sql);
-    if ($resultado) {
+        $sql = "SELECT email FROM usuario WHERE rol_id = 1";
+        $resultado = $this->conn->query($sql);
+        if ($resultado) {
+            $emails = [];
+            while ($row = $resultado->fetch_assoc()) {
+                $emails[] = $row['email'];
+            }
+            return $emails;
+        }
+        return [];
+    }
+
+    public function obtenerEmailsTecnicosPorEspecializacion($especializacion_id) {
+        $sql = "SELECT DISTINCT u.email 
+                FROM usuario u 
+                JOIN usuario_especializacion ue ON u.id = ue.usuario_id 
+                WHERE u.rol_id = 1 AND u.estado_verificacion = 'aprobado' AND ue.especializacion_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $especializacion_id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $emails = [];
         while ($row = $resultado->fetch_assoc()) {
             $emails[] = $row['email'];
         }
+        $stmt->close();
         return $emails;
-    }
-    return [];
-    }
-
-    public function obtenerEmailsTecnicosPorEspecializacion($especializacion_id) {
-    $sql = "SELECT DISTINCT u.email 
-            FROM usuario u 
-            JOIN usuario_especializacion ue ON u.id = ue.usuario_id 
-            WHERE u.rol_id = 1 AND u.estado_verificacion = 'aprobado' AND ue.especializacion_id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $especializacion_id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    $emails = [];
-    while ($row = $resultado->fetch_assoc()) {
-        $emails[] = $row['email'];
-    }
-    $stmt->close();
-    return $emails;
     }
 
     public function obtenerEspecializaciones() {
@@ -168,18 +168,6 @@ class Usuario {
         }
         $stmt->close();
         return $success;
-    }
-
-    // Obtener usuario
-    
-    public function obtenerPorNombre($usuario) {
-        $usuario = $this->conn->real_escape_string($usuario);
-        $sql = "SELECT * FROM usuario WHERE nombre = '$usuario' LIMIT 1";
-        $res = $this->conn->query($sql);
-        if ($res && $res->num_rows > 0) {
-            return $res->fetch_assoc();
-        }
-        return false;
     }
 
     public function check($id_logeado) {
@@ -227,23 +215,7 @@ class Usuario {
         }
         return false;
     }
-
-    // Roles
-
-    public function setRolId($rolId) {
-        $this->rolId = $rolId;
-    }
-
-    public function getRolId() {
-        return $this->rolId;
-    }
     
-    public function obtenerRol() {
-        $sql = "SELECT * FROM rol WHERE id < 3";
-        $resultado = $this->conn->query($sql);
-        return $resultado ? $resultado->fetch_all(MYSQLI_ASSOC) : [];
-    }
-
     // CRUD básico
 
     public function editarU($id, $nombre, $email, $foto_perfil = null) {
