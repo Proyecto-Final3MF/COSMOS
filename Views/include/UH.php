@@ -39,7 +39,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                         </a>
                     </li>
                 <?php endif; ?>
-
+                
                 <!-- Estos dos botones siempre se muestran -->
                 <!-- Estos dos botones solo se muestran en inicio, nosotros y contacto -->
             <?php
