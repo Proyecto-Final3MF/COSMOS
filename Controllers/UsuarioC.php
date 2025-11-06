@@ -59,7 +59,6 @@ class UsuarioC
     public function crear()
     {
         $usuario = new Usuario();
-        $roles = $usuario->obtenerRol();
         $especializaciones = $usuario->obtenerEspecializaciones();
         include(__DIR__ . "/../Views/Usuario/Register.php");
     }

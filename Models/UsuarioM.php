@@ -215,15 +215,7 @@ class Usuario {
         }
         return false;
     }
-
-    // Roles
-
-    public function obtenerRol() {
-        $sql = "SELECT * FROM rol WHERE id < 3";
-        $resultado = $this->conn->query($sql);
-        return $resultado ? $resultado->fetch_all(MYSQLI_ASSOC) : [];
-    }
-
+    
     // CRUD básico
 
     public function editarU($id, $nombre, $email, $foto_perfil = null) {
