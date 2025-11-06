@@ -1,24 +1,24 @@
 <link rel="icon" type="image/png" href="Assets/imagenes/logonueva.png">
 
 <?php
-    require_once(__DIR__ . "../../include/UH.php");
+require_once(__DIR__ . "../../include/UH.php");
 
-    require_once(__DIR__ . "/../../Models/ReviewM.php");
-    $reviewModel = new Review();
-    $topTecnicos = $reviewModel->obtenerTopTecnicos();
+require_once(__DIR__ . "/../../Models/ReviewM.php");
+$reviewModel = new Review();
+$topTecnicos = $reviewModel->obtenerTopTecnicos();
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <br>
 
 <h1 class="inicio55">Bienvenido a</h1>
 
-<h1 class="inicio55">C<img src="Assets/imagenes/logoNueva.png" class="logoeninicio" height="50px" alt="logo de la app">SMOS</h1>
+<h1 class="inicio55">C<img src="Assets/imagenes/logonueva.png" class="logoeninicio" height="50px" alt="logo de la app">SMOS</h1>
 
-<?php if (!isset($_SESSION['usuario'])): ?> 
+<?php if (!isset($_SESSION['usuario'])): ?>
     <!-- Contenido visible solo para visitantes -->
     <p class="inicio44">Te ayudamos a encontrar un técnico para arreglar tu dispositivo en tiempo récord</p>
 
@@ -43,7 +43,7 @@
 
 <section class="top-tecnicos fade-slide">
     <h2 class="inicio55"> Top 3 Técnicos Mejor Calificados</h2>
-<br>
+    <br>
     <?php if (!empty($topTecnicos)): ?>
         <div class="top-tecnicos-container">
             <?php foreach ($topTecnicos as $tecnico): ?>
@@ -53,7 +53,7 @@
                     <p class="puntuacion">⭐ <?= number_format($tecnico['promedio'], 1) ?> / 5</p>
                     <p class="reviews">(<?= $tecnico['cant_review'] ?> reseñas)</p>
 
-                    <a title="Perfil de <?=$tecnico['nombre']?>" href="Index.php?accion=PerfilTecnico&id=<?= $tecnico['id'] ?>" class="btn-ver-perfil">Ver Perfil</a>
+                    <a title="Perfil de <?= $tecnico['nombre'] ?>" href="Index.php?accion=PerfilTecnico&id=<?= $tecnico['id'] ?>" class="btn-ver-perfil">Ver Perfil</a>
 
                 </div>
             <?php endforeach; ?>
@@ -65,12 +65,12 @@
 
 <h2 class="inicio44 fade-slide">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</h2>
 
-    <div class="btn-container2 fade-slide">
-        <a href="Index.php?accion=trabajo">
-            <button class="btn btn-boton44">Trabajar con Nosotros</button>
-        </a>
-    </div>
-    <br><br><br>
+<div class="btn-container2 fade-slide">
+    <a href="Index.php?accion=trabajo">
+        <button class="btn btn-boton44">Trabajar con Nosotros</button>
+    </a>
+</div>
+<br><br><br>
 
 <script src="Assets/js/trancicion.js"></script>
 
@@ -79,4 +79,3 @@
         document.body.classList.add("loaded");
     });
 </script>
-
