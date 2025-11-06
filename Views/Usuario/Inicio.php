@@ -22,7 +22,7 @@
     <!-- Contenido visible solo para visitantes -->
     <p class="inicio44">Te ayudamos a encontrar un técnico para arreglar tu dispositivo en tiempo récord</p>
 
-    <div class="btn-container2">
+    <div class="btn-container2 fade-slide">
         <a href="Index.php?accion=login">
             <button class="btn btn-boton44">Empezar Ahora</button>
         </a>
@@ -59,13 +59,13 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p class="inicio44">Aún no hay técnicos calificados.</p>
+        <p class="inicio44 fade-slide">Aún no hay técnicos calificados.</p>
     <?php endif; ?>
 </section>
 
-<h2 class="inicio44">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</h2>
+<h2 class="inicio44 fade-slide">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</h2>
 
-    <div class="btn-container2">
+    <div class="btn-container2 fade-slide">
         <a href="Index.php?accion=trabajo">
             <button class="btn btn-boton44">Trabajar con Nosotros</button>
         </a>
