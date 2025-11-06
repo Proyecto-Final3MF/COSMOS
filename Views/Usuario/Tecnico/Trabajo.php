@@ -16,7 +16,7 @@
             <p class="fade-label">tecnicosyasociados0@gmail.com</p>
         </section>
         
-         <a href="index.php?accion=TecnicoForm">Registro Temporal</a>
+         <a href="Index.php?accion=TecnicoForm">Registro Temporal</a>
     </div>
 </body>
 </html>
