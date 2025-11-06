@@ -404,22 +404,7 @@ switch ($accion) {
         header("Location: Index.php?accion=redireccion");
     }
     break;
-
-case 'verificarTecnicos':
-    $controller = new UsuarioC();
-    $controller->verificarTecnicos(); // Llama a la función del controlador
-    break;
-
-case 'aprobarTecnico':
-    $controller = new UsuarioC();
-    $controller->aprobarTecnico(); // Llama a la función del controlador
-    break;
-
-case 'rechazarTecnico':
-    $controller = new UsuarioC();
-    $controller->rechazarTecnico(); // Llama a la función del controlador
-    break;
-
+    
   default:
     if (!isset($_SESSION['usuario'])) {
       header("Location: Index.php?accion=login");
