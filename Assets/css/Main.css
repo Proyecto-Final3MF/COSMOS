@@ -694,9 +694,9 @@ a:has(> .btn-boton4442) {
 
 .btn-volver-container {
     position: fixed;
-    top: 100px; 
-    left: 20px; 
-    z-index: 1001; 
+    top: 100px;  /* Posición original para pantallas grandes */
+    left: 20px;
+    z-index: 1001;
 }
 
 .btn-volver {
@@ -722,6 +722,14 @@ a:has(> .btn-boton4442) {
 
 .btn-volver i {
     font-size: 1rem;
+}
+
+/* Ajuste responsivo para móviles */
+@media (max-width: 768px) {
+    .btn-volver-container {
+        top: 130px;
+        left: 10px;
+    }
 }
 
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
@@ -1565,6 +1573,31 @@ input[type="text"]::placeholder {
 
 .dropdown-menu {
   z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        right: auto;  
+        left: 0;      
+        width: 90vw; 
+        max-width: 300px;  
+        top: 50px;    
+    }
+
+    .menu-rol-container .dropdown-menu {
+        right: auto;  
+        left: 0;      
+        width: 90vw;  
+        max-width: 250px;  
+        top: 50px;    
+    }
+
+    .notificaciones .dropdown {
+        right: auto;  
+        left: 0;
+        width: 90vw;  
+        max-width: 320px;  
+    }
 }
 
 /* aca termina el css del menu de usuario */
@@ -2966,17 +2999,6 @@ p.nosotro {
     }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* y aca termina el css de animaciones para inicio y nosotros */
 
 
@@ -3797,3 +3819,15 @@ input:checked ~ label {
 }
 
 /* aca termina el css del chat */
+
+@media (max-width: 768px) {
+    
+    body {
+        margin-top: 90px;
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem; 
+    }
+
+}

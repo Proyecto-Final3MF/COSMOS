@@ -417,7 +417,7 @@ class UsuarioC
 
         $especializaciones = $Tecnico->getEspecializacion($id_tecnico);
         $ReviewsTecnico = $Reviews->listarReviewsTecnico($id_tecnico);
-        include(__DIR__ . "Views/Usuario/Tecnico/Perfil.php");
+        include(__DIR__ . "/../Views/Usuario/Tecnico/Perfil.php");
     }
 
     public function logout()
