@@ -2,8 +2,8 @@
 function conectar()
 {
     $host = 'localhost';
-    $usuario = 'usuario_tecnicos';
-    $clave = '12345';
+    $usuario = 'root';
+    $clave = '';
     $base_datos = 'tecnicosasociados';
 
     $conexion = new mysqli($host, $usuario, $clave, $base_datos);
