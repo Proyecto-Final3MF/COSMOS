@@ -45,14 +45,18 @@ if (!isset($estados) || $estados === null) {
         <p class="fade-label">Descripción:</p>
         <textarea class="form-control" name="descripcion" rows="5" required><?= htmlspecialchars($datosSolicitud['descripcion']) ?></textarea><br><br>
 
-        <p class="fade-label">Precio:</p>
-        <div class="input-precio">
-        <span class="simbolo">$</span>
-        <input type="number" step="0.01" id="precio" name="precio" value="<?= htmlspecialchars($datosSolicitud['precio'] ?? 0.0) ?>">
+        <!-- Campo de precio envuelto en un div para mostrar/ocultar -->
+        <div id="campo-precio" style="display: none;">
+            <p class="fade-label">Precio:</p>
+            <div class="input-precio">
+                <span class="simbolo">$</span>
+                <input type="number" step="0.01" id="precio" name="precio" value="<?= htmlspecialchars($datosSolicitud['precio'] ?? 0.0) ?>">
+            </div>
+            <br><br>
         </div>
-        <br><br>
+
         <p class="fade-label">Estado:</p>
-        <select name="estado" required>
+        <select name="estado" id="estado-select" required>
             <?php foreach ($estados as $estado): ?>
                 <option value="<?= htmlspecialchars($estado['id']) ?>" 
                 <?= ($estado['id'] == $datosSolicitud['estado_id']) ? 'selected' : '' ?>>
@@ -67,5 +71,32 @@ if (!isset($estados) || $estados === null) {
 <br>
 </div>
 <script src="Assets/js/trancicion.js"></script>
+
+<!-- Script para mostrar/ocultar el campo de precio basado en el estado seleccionado -->
+<script>
+    // Función para mostrar/ocultar el campo de precio
+    function toggleCampoPrecio() {
+        const estadoSelect = document.getElementById('estado-select');
+        const campoPrecio = document.getElementById('campo-precio');
+        const estadoSeleccionado = estadoSelect.value;
+
+        // Mostrar solo si el estado es "Finalizado" (ID 5)
+        if (estadoSeleccionado === '5') {
+            campoPrecio.style.display = 'block';
+        } else {
+            campoPrecio.style.display = 'none';
+        }
+    }
+
+    // Ejecutar al cargar la página para verificar el estado inicial
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleCampoPrecio();
+    });
+
+    // Escuchar cambios en el select de estado
+    document.getElementById('estado-select').addEventListener('change', function() {
+        toggleCampoPrecio();
+    });
+</script>
 </body>
 </html>
