@@ -234,8 +234,13 @@ class Solicitud {
         return [];
     }
 
-    public function ListarST($id_usuario) {
+    public function ListarST($id_usuario, $search) {
         $id_usuario = (int)$id_usuario;
+
+        $params = [];
+        $param_types = '';
+        $stmt = null;
+
         $sql = "SELECT s.*, p.nombre AS producto_nombre, p.imagen, r.rating, e.nombre AS estado_nombre,
                     u_cliente.nombre AS nombre_cliente, u_tecnico.id AS id_tecnico, u_tecnico.nombre AS nombre_tecnico
                 FROM solicitud s
@@ -245,8 +250,33 @@ class Solicitud {
                 INNER JOIN usuario u_cliente ON s.cliente_id = u_cliente.id
                 LEFT JOIN usuario u_tecnico ON s.tecnico_id = u_tecnico.id
                 WHERE (s.tecnico_id = ? OR s.cliente_id = ?)
-                AND s.estado_id = 5
-                ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_actualizacion DESC;";
+                AND s.estado_id = 5";
+
+        $params[] = $id_usuario;
+        $params[] = $id_usuario;
+        $param_types = "ii";
+
+        if (!empty($search)) {
+            $search_terms = explode(" ", $search);
+            foreach ($search_terms as $palabra) {
+                $sql .= " AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR p.nombre LIKE ?";
+
+                if ($_SESSION['rol'] == ROL_CLIENTE) {
+                    $sql .= " OR u_tecnico.nombre LIKE ?)";
+                } else {
+                    $sql .= " OR u_cliente.nombre LIKE ?)";
+                }
+
+                $search_term = "%".$palabra."%";
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $params[] = $search_term;
+                $param_types .= "ssss";
+            }
+        }
+
+        $sql .= " ORDER BY FIELD(s.prioridad, 'urgente', 'alta', 'media', 'baja'), s.fecha_creacion DESC";
         
         $stmt = $this->conn->prepare($sql);
 
@@ -255,7 +285,7 @@ class Solicitud {
             return [];
         }
 
-        $stmt->bind_param("ii", $id_usuario, $id_usuario);
+        $stmt->bind_param($param_types, ...$params);
 
         $ejecucion_exitosa = $stmt->execute();
 
