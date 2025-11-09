@@ -71,8 +71,7 @@ if (!isset($estados) || $estados === null) {
 <br>
 </div>
 <script src="Assets/js/trancicion.js"></script>
-
-<!-- Script para mostrar/ocultar el campo de precio basado en el estado seleccionado -->
+<script src="Assets/js/botonvolver.js"></script>
 <script>
     // Función para mostrar/ocultar el campo de precio
     function toggleCampoPrecio() {

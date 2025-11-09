@@ -16,11 +16,25 @@ require_once(__DIR__ . "../../include/UH.php");
         <h1 class="inicio55">Solicitudes Terminadas</h1>
     </div>
 
+    <?php if ($_SESSION['rol'] == ROL_TECNICO && !empty($resultados)): ?>
+        <?php
+        $totalGanancias = 0.0;
+        foreach ($resultados as $resultado) {
+            $totalGanancias += (float) ($resultado['precio'] ?? 0.0);
+        }
+        ?>
+        <div class="contador-ganancias">
+            <h2>Ganancias Totales</h2>
+            <p>$<?= number_format($totalGanancias, 2, ',', '.'); ?></p>
+            <small class="champions">Suma de precios de todas tus solicitudes finalizadas.</small>
+        </div>
+    <?php endif; ?>
+
     <div class="btn-volver-container fade-slide">
-  <button class="btn-volver" id="btnVolver">
-    <i class="fa fa-arrow-left"></i> Volver
-  </button>
-</div>
+        <button class="btn-volver" id="btnVolver">
+            <i class="fa fa-arrow-left"></i> Volver
+        </button>
+    </div>
     
     <table>
         <thead>
@@ -64,7 +78,7 @@ require_once(__DIR__ . "../../include/UH.php");
                         <?php elseif ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <td><?= htmlspecialchars($resultado['nombre_cliente']); ?></td>
                         <?php endif; ?>
-                    <td><?= htmlspecialchars($resultado['precio']); ?></td>
+                    <td>$<?= htmlspecialchars($resultado['precio']); ?></td>
                     <td><?= htmlspecialchars($resultado['estado_nombre']); ?></td>
                     <?php if ($resultado['rating']): ?>
                         <td><?= htmlspecialchars($resultado['rating']."⭐"); ?></td>
@@ -92,7 +106,7 @@ require_once(__DIR__ . "../../include/UH.php");
             ?>
             <tr>
                 <td colspan="10">
-                    No se terminarion solicitudes
+                    No se terminaron solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
                         <a href="Index.php?accion=listarTL">
                             <button class="btn btn-boton777">Ver solicitudes disponibles</button>

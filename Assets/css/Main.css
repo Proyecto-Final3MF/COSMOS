@@ -3831,3 +3831,20 @@ input:checked ~ label {
     }
 
 }
+
+/* aca empieza el css de ganancias */
+
+.contador-ganancias {
+    text-align: center !important; 
+    margin: 20px 0; 
+    padding: 15px; 
+    background-color: var(--color-fondo-formulario);
+    border: 1px solid #dee2e6; 
+    border-radius: 5px;
+}
+
+.champions {
+    color: var(--text-color);
+}
+
+/* aca termina el css de ganancias */
