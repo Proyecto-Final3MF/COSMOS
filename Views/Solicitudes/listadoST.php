@@ -35,6 +35,14 @@ require_once(__DIR__ . "../../include/UH.php");
             <i class="fa fa-arrow-left"></i> Volver
         </button>
     </div>
+
+    <form action="Index.php" method="GET" class="filter-form2 fade-slide">
+        <input type="hidden" name="accion" value="listarST">
+        <div class="form-group search-wrapper fade-slide">
+            <label for="search">Buscar: </label>
+            <input type="text" id="search" autocomplete="off" name="search" placeholder="Buscar..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+        </div>
+    </form>
     
     <table>
         <thead>
