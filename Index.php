@@ -407,7 +407,7 @@ switch ($accion) {
     
   default:
     if (!isset($_SESSION['usuario'])) {
-      header("Location: Index.php?accion=login");
+      header("Location: Index.php?accion=inicio");
     } else {
       http_response_code(404);
       header("Location: Error.php");
