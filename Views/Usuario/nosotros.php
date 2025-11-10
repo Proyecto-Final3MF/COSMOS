@@ -21,11 +21,11 @@
 
 <br><br>
 
-<h2 class="nosotros">
+<h2 class="nosotros fade-slide">
     Cómo Nació
 </h2>
 
-<p class="nosotro">
+<p class="nosotro fade-slide">
     Todos hemos pasado por ese momento en que nuestra computadora, celular o 
     tablet deja de funcionar justo cuando más la necesitamos, ¿verdad? 
     Y lo peor es que no sabemos a quién acudir, los servicios tardan, o simplemente 
@@ -38,15 +38,15 @@
 
 <br>
 
-<h2 class="nosotros">
+<h2 class="nosotros fade-slide">
     Desarrolladores
 </h2>
 
-<p class="nosotro">
+<p class="nosotro fade-slide">
     La aplicacion COSMOS fue desarrolada por:
 </p>
 
-<section class="equipo-container">
+<section class="equipo-container fade-slide">
     <a href="https://github.com/FMS-php"> 
     <div class="miembro">
         <img src="Assets/imagenes/perfil/elfede.jpeg" alt="Miembro 1">

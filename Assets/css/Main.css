@@ -694,9 +694,9 @@ a:has(> .btn-boton4442) {
 
 .btn-volver-container {
     position: fixed;
-    top: 100px; 
-    left: 20px; 
-    z-index: 1001; 
+    top: 100px;  /* Posición original para pantallas grandes */
+    left: 20px;
+    z-index: 1001;
 }
 
 .btn-volver {
@@ -722,6 +722,14 @@ a:has(> .btn-boton4442) {
 
 .btn-volver i {
     font-size: 1rem;
+}
+
+/* Ajuste responsivo para móviles */
+@media (max-width: 768px) {
+    .btn-volver-container {
+        top: 130px;
+        left: 10px;
+    }
 }
 
 /* aca terminan estos botones, hay mas adelante pero se dejan ahi para mas control de esos en especifico */
@@ -1565,6 +1573,31 @@ input[type="text"]::placeholder {
 
 .dropdown-menu {
   z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        right: auto;  
+        left: 0;      
+        width: 90vw; 
+        max-width: 300px;  
+        top: 50px;    
+    }
+
+    .menu-rol-container .dropdown-menu {
+        right: auto;  
+        left: 0;      
+        width: 90vw;  
+        max-width: 250px;  
+        top: 50px;    
+    }
+
+    .notificaciones .dropdown {
+        right: auto;  
+        left: 0;
+        width: 90vw;  
+        max-width: 320px;  
+    }
 }
 
 /* aca termina el css del menu de usuario */
@@ -2966,17 +2999,6 @@ p.nosotro {
     }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* y aca termina el css de animaciones para inicio y nosotros */
 
 
@@ -3338,11 +3360,10 @@ input:checked ~ label {
 
 /* aca empieza el css del chat */
 
-/* === CHAT PRINCIPAL === */
 .chat-container {
   width: 100%;
   max-width: 900px;
-  height: calc(100vh - 180px); /* Ajusta según altura de tu header */
+  height: calc(100vh - 180px); 
   margin: 100px auto 0;
   display: flex;
   flex-direction: column;
@@ -3353,7 +3374,6 @@ input:checked ~ label {
   border: 1px solid var(--color-borde);
 }
 
-/* === CAJA DE MENSAJES === */
 .chat-box {
   flex: 1;
   padding: 25px;
@@ -3363,10 +3383,29 @@ input:checked ~ label {
   border-bottom: 1px solid var(--color-borde);
 }
 
-/* Mensajes */
 .chat-box .mensaje {
   display: flex;
   margin-bottom: 14px;
+}
+
+.chat-box .mensaje-emisor {
+  justify-content: flex-end; 
+}
+
+.chat-box .mensaje-emisor .texto {
+  background: #e8f5e8; 
+  border: 2px solid green; 
+  color: var(--text-color);
+}
+
+.chat-box .mensaje-receptor {
+  justify-content: flex-start; 
+}
+
+.chat-box .mensaje-receptor .texto {
+  background: #e3f2fd; 
+  border: 2px solid blue; 
+  color: var(--text-color);
 }
 
 .chat-box .mensaje p.texto {
@@ -3376,17 +3415,15 @@ input:checked ~ label {
   font-size: 15px;
   line-height: 1.4;
   word-wrap: break-word;
-  border: 1px solid var(--color-borde);
 }
 
-/* === INPUT ABAJO === */
 .chat-input {
   display: flex;
   align-items: center;
   padding: 15px 20px;
   background: var(--color-fondo);
   border-top: 1px solid var(--color-borde);
-  gap: 10px;
+  gap: 8px;
   position: sticky;
   bottom: 0;
 }
@@ -3416,7 +3453,6 @@ input:checked ~ label {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3424,14 +3460,12 @@ input:checked ~ label {
 
 .chat-input button[type="submit"]:hover {
   background: var(--primary-hover);
-  transform: scale(1.1);
 }
 
-/* Contenedor de conversaciones */
 .conversaciones-container {
   width: 100%;
   max-width: 700px;
-  margin: 120px auto; /* Margen superior ajustado para header */
+  margin: 120px auto;
   background: var(--color-fondo);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -3484,18 +3518,16 @@ input:checked ~ label {
   cursor: pointer;
   font-size: 13px;
   margin-left: 10px;
-  transition: background 0.3s;
 }
 
 .conversaciones-container form button:hover {
   background: var(--primary-hover);
 }
 
-/* Contenedor de chat admin */
 .chat-admin-container {
   width: 95%;
   max-width: 1000px;
-  margin: 120px auto; /* Margen superior ajustado */
+  margin: 120px auto; 
   background: var(--color-fondo);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -3532,11 +3564,10 @@ input:checked ~ label {
   background: var(--color-navbar);
 }
 
-/* Contenedor de registro */
 .registro-container {
   width: 95%;
   max-width: 1000px;
-  margin: 120px auto; /* Margen superior ajustado */
+  margin: 120px auto; 
   background: var(--color-fondo);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -3583,7 +3614,6 @@ input:checked ~ label {
   text-decoration: underline;
 }
 
-/* Badge de solicitud */
 .solicitud-badge {
   display: inline-block;
   background-color: var(--urgente2);
@@ -3594,11 +3624,10 @@ input:checked ~ label {
   margin-left: 10px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .chat-container {
     width: 95%;
-    margin: 80px auto 90px; /* Ajuste para móviles */
+    margin: 80px auto 90px; 
     height: 75vh;
   }
 
@@ -3615,7 +3644,7 @@ input:checked ~ label {
   .chat-admin-container, .registro-container, .conversaciones-container {
     width: 95%;
     padding: 15px;
-    margin-top: 100px; /* Ajuste para móviles */
+    margin-top: 100px; 
   }
 
   .chat-admin-container table, 
@@ -3629,4 +3658,193 @@ input:checked ~ label {
   }
 }
 
+.chat-box .mensaje {
+  display: flex;
+  margin-bottom: 14px;
+  width: 100%; 
+}
+
+.chat-box .mensaje-emisor {
+  justify-content: flex-end; 
+}
+
+.chat-box .mensaje-receptor {
+  justify-content: flex-start; 
+}
+
+.chat-box .mensaje p.texto {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 18px;
+  max-width: 70%;
+  font-size: 15px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-box .mensaje-emisor .texto {
+  background: #e8f5e8;
+  border: 2px solid green;
+  color: var(--text-color);
+  text-align: right;
+}
+
+.chat-box .mensaje-receptor .texto {
+  background: #e3f2fd;
+  border: 2px solid blue;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.chat-box .mensaje {
+  display: flex !important;
+  width: 100% !important;
+  margin-bottom: 14px !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important; /* por defecto izquierda */
+}
+
+.chat-box .mensaje .texto {
+  display: inline-block !important;
+  padding: 10px 16px !important;
+  border-radius: 18px !important;
+  max-width: 70% !important;
+  word-wrap: break-word !important;
+}
+
+.chat-box .mensaje.mensaje-emisor .texto {
+  margin-left: auto !important;      
+  margin-right: 0 !important;
+  text-align: right !important;
+  background: #e8f5e8 !important;
+  border: 2px solid green !important;
+  color: var(--text-color) !important;
+}
+
+.chat-box .mensaje.mensaje-receptor .texto {
+  margin-right: auto !important;     
+  margin-left: 0 !important;
+  text-align: left !important;
+  background: #e3f2fd !important;
+  border: 2px solid blue !important;
+  color: var(--text-color) !important;
+}
+
+.chat-box, .chat-box * {
+  text-align: initial !important;
+}
+
+.chat-input {
+  justify-content: center; 
+  gap: 8px !important;
+  padding: 1px 15px;
+}
+
+.chat-input input[type="text"] {
+  flex: none !important;
+  width: 50% !important; 
+  padding: 10px 16px !important;
+  font-size: 15px !important;
+}
+
+.chat-input button[type="submit"] {
+  width: 45px !important;
+  height: 45px !important;
+  margin-bottom: 0 !important; 
+}
+
+@media (max-width: 768px) {
+  .chat-input input[type="text"] {
+    width: 70% !important;
+  }
+
+  .chat-input button[type="submit"] {
+    width: 40px !important;
+    height: 40px !important;
+    transform: translateY(-2px);
+  }
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 10px 20px; 
+  background: var(--color-fondo);
+  border-top: 1px solid var(--color-borde);
+  gap: 10px;
+  width: 100%; 
+  max-width: 900px; 
+  margin: 0 auto; 
+}
+
+.chat-input input[type="text"] {
+  flex: 1; 
+  width: auto !important; 
+  padding: 12px 20px; 
+  border-radius: 50px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-fondo);
+  color: var(--text-color);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.chat-input button[type="submit"] {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px !important; 
+  height: 40px !important; 
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25 !important; 
+}
+
+@media (max-width: 768px) {
+  
+  .chat-input input[type="text"] {
+    width: auto !important;
+  }
+
+  .chat-input button[type="submit"] {
+    width: 35px !important;
+    height: 35px !important;
+  }
+}
+
 /* aca termina el css del chat */
+
+@media (max-width: 768px) {
+    
+    body {
+        margin-top: 90px;
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem; 
+    }
+
+}
+
+/* aca empieza el css de ganancias */
+
+.contador-ganancias {
+    text-align: center !important; 
+    margin: 20px 0; 
+    padding: 15px; 
+    background-color: var(--color-fondo-formulario);
+    border: 1px solid #dee2e6; 
+    border-radius: 5px;
+}
+
+.champions {
+    color: var(--text-color);
+}
+
+/* aca termina el css de ganancias */
