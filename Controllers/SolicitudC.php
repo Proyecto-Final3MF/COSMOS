@@ -297,6 +297,13 @@ class SolicitudC
             exit();
         }
 
+        if ($precio < 0) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "El precio no puede ser negativo.";
+            header("Location:Index.php?accion=listarSA");
+            exit();
+        }
+
         $datosSolicitud = $this->solicitudModel->obtenerSolicitudPorId($id);
         $estadoAntiguo = $datosSolicitud['estado_id'];
         $descAntigua = $datosSolicitud['descripcion'];
