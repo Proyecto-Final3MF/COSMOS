@@ -107,11 +107,17 @@ require_once(__DIR__ . "../../include/UH.php");
             <?php else: ?>
                 <tr>
                     <td colspan="<?= (isset($_SESSION['rol']) && ($_SESSION['rol'] == ROL_CLIENTE || $_SESSION['rol'] == ROL_TECNICO)) ? 9 : 8; ?>">
-                        No acepto solicitudes todavia
+                        No hay solicitudes aceptadas
                         <div style="display:flex; justify-content:center; margin-top:15px;">
+                            <?php if ($_SESSION['rol'] == ROL_TECNICO): ?>
                             <a href="Index.php?accion=listarTL">
                                 <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                             </a>
+                            <?php else: ?>
+                                <a href="Index.php?accion=listarSLU">
+                                <button class="btn btn-boton777">Ver tus solicitudes no asignadas</button>
+                            </a>
+                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>
