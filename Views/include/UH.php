@@ -121,7 +121,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     <div id="rolDropdown" class="dropdown-menu">
                         <?php if ($_SESSION['rol'] == 2): ?>
                             <a href="Index.php?accion=listarP" class="dropdown-item">
-                                <i class="fa-solid fa-box"></i> Mis Productos
+                                <i class="fa-solid fa-box"></i> Mis Dispositivos
                             </a>
                             <a href="Index.php?accion=formularioS" class="dropdown-item">
                                 <i class="fa-solid fa-plus-circle"></i> Crear Nueva Solicitud

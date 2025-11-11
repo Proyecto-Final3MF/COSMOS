@@ -7,7 +7,7 @@ require_once(__DIR__ . "/../include/UH.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Producto</title>
+    <title>Editar Dispositivo</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
@@ -19,12 +19,12 @@ require_once(__DIR__ . "/../include/UH.php");
 
 <div class="contenedor-formulario">
 <section class="formularios99">
-    <h3>Editar Producto</h3>
+    <h3>Editar Dispositivo</h3>
     <form method="POST" action="Index.php?accion=actualizarP" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($datosProducto['id']) ?>">
         <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($datosProducto['imagen']) ?>">
 
-        <p class="fade-label">Nombre del Equipo: </p>
+        <p class="fade-label">Nombre del Dispositivo: </p>
         <label for="nombre" class="form-label"></label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($datosProducto['nombre']) ?>" autocomplete="off" required> <br><br>
 

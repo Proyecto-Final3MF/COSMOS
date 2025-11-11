@@ -8,7 +8,7 @@ require_once(__DIR__ . "/../include/UH.php");
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Producto</title>
+    <title>Crear Dispositivo Urgente</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
 
 </head>
@@ -27,11 +27,11 @@ require_once(__DIR__ . "/../include/UH.php");
 
 <section class="formularios99">
 
-    <h3>Nuevo Producto Urgente</h3>
+    <h3>Nuevo Dispositivo Urgente</h3>
 
     <form method="POST" action="Index.php?accion=urgenteGP" enctype="multipart/form-data">
 
-        <p class="fade-label">Nombre del Equipo: </p>
+        <p class="fade-label">Nombre del Dispositivo: </p>
 
         <label for="nombre" class="form-label"></label>
         <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>

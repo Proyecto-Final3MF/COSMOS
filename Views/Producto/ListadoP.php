@@ -7,12 +7,12 @@ require_once(__DIR__ . "/../include/UH.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de mis productos</title>
+    <title>Lista de mis dispositivos</title>
     <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
 <body>
     <br>
-    <h1 class="inicio55">Tus Productos</h1>
+    <h1 class="inicio55">Tus Dispositivos</h1>
 <div class="botones-container fade-slide">
     <a href="Index.php?accion=formularioP"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../include/UH.php");
 
 <form action="Index.php" class="ordenar-form">
     <label for="search">Buscar: </label>
-    <input type="text" id="search" name="search" placeholder="Buscar Producto" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+    <input type="text" id="search" name="search" placeholder="Buscar Dispositivo" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
     <label for="orden">Ordenar por:</label>
     <input type="hidden" name="accion" value="listarP">
     <select name="orden" id="orden">
@@ -56,7 +56,7 @@ require_once(__DIR__ . "/../include/UH.php");
                 <td><?= htmlspecialchars($p['nombre']) ?></td>
                 <td>
                     <img src="<?= htmlspecialchars($p['imagen']) ?>" 
-                         alt="Imagen de producto" 
+                         alt="Imagen de dispositivo" 
                          class="zoom-img" 
                          style="max-width:100px; max-height:100px;" />
                 </td>
@@ -67,7 +67,7 @@ require_once(__DIR__ . "/../include/UH.php");
     <i class="fa fa-edit"></i>
     </a>
     <a href="Index.php?accion=borrarP&id=<?= $p['id'] ?>" 
-       onclick="return confirm('¿Seguro que quieres borrar este producto?');" 
+       onclick="return confirm('¿Seguro que quieres borrar este dispositivo?');" 
        class="icon-btn delete">
         <i class="fa fa-trash"></i>
     </a>
@@ -78,7 +78,7 @@ require_once(__DIR__ . "/../include/UH.php");
             <?php endforeach; ?>
         <?php } else { ?>
             <tr>
-                <td colspan="4">No tienes productos creados todavía</td>
+                <td colspan="4">No tienes dispositivos creados todavía</td>
             </tr>
         <?php } ?>
     </tbody>
