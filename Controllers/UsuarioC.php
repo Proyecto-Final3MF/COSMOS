@@ -119,6 +119,15 @@ class UsuarioC
             exit();
         }
 
+        // Nueva validación: El dominio debe ser ASCII (sin tildes, ñ, etc.)
+        $domain = substr(strrchr($mail, "@"), 1);  // Extrae el dominio (ej: gmail.com)
+        if (!preg_match('/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $domain)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "El dominio del correo electrónico debe contener solo letras, números, puntos y guiones (sin tildes ni ñ).";
+        header("Location: Index.php?accion=register");
+        exit();
+        }
+
         $success = $usuarioM->crearC($usuario, $mail, $rol_id, $contrasena_hash);
 
         if ($success) {
@@ -194,6 +203,15 @@ class UsuarioC
             $_SESSION['mensaje'] = "El correo electrónico '$mail' es invalido";
             header("Location: Index.php?accion=TecnicoForm");
             exit();
+        }
+
+        // Nueva validación: El dominio debe ser ASCII (sin tildes, ñ, etc.)
+        $domain = substr(strrchr($mail, "@"), 1);  // Extrae el dominio (ej: gmail.com)
+        if (!preg_match('/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $domain)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "El dominio del correo electrónico debe contener solo letras, números, puntos y guiones (sin tildes ni ñ).";
+        header("Location: Index.php?accion=TecnicoForm"); 
+        exit();
         }
 
         if (empty($especializaciones) && empty($otra_especialidad)) {
@@ -273,6 +291,15 @@ class UsuarioC
             $_SESSION['mensaje'] = "El correo electrónico '$email' es inválido.";
             header("Location: Index.php?accion=editarU&id=$id");
             exit();
+        }
+
+        // Nueva validación: El dominio debe ser ASCII (sin tildes, ñ, etc.)
+        $domain = substr(strrchr($email, "@"), 1);  // Extrae el dominio (ej: gmail.com)
+        if (!preg_match('/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $domain)) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "El dominio del correo electrónico debe contener solo letras, números, puntos y guiones (sin tildes ni ñ).";
+        header("Location: Index.php?accion=editarU&id=$id");
+        exit();
         }
 
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
