@@ -69,9 +69,17 @@ class UsuarioC
         $mail = trim($_POST['mail']);
         $rol_id = 2;
         $contrasena = $_POST['contrasena'];
+        $confirm = $_POST['confirmar_contrasena'];
 
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
+            $_SESSION['tipo_mensaje'] = "warning";
+            header("Location: Index.php?accion=register");
+            exit();
+        }
+
+        if ($contrasena !== $confirm) {
+            $_SESSION['mensaje'] = "Las contraseñas no coinciden.";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: Index.php?accion=register");
             exit();
