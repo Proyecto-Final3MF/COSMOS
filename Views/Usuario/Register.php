@@ -14,12 +14,12 @@ require_once(__DIR__ . "../../include/UH.php");
 
         <form method="POST" action="Index.php?accion=guardarU" enctype="multipart/form-data">
 
-            <p class="fade-label">Nombre de Usuario</p>
+            <p class="fade-label">Nombre</p>
             <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
 
             <p class="fade-label">Email </p>
             <label for="mail" class="form-label"></label>
-            <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" required> <br><br>
+            <input type="email" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" id="mail" name="mail" autocomplete="off" title="El dominio debe contener solo letras, números, puntos y guiones (sin tildes ni ñ)." required> <br><br>
             
             <p class="fade-label">Contraseña</p>
             <div class="password-container">

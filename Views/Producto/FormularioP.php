@@ -8,7 +8,7 @@ require_once(__DIR__ . "/../include/UH.php");
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Producto</title>
+    <title>Crear Dispositivo</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -28,11 +28,11 @@ require_once(__DIR__ . "/../include/UH.php");
 
 <section class="formularios99">
 
-    <h3>Nuevo Producto</h3>
+    <h3>Nuevo Dispositivo</h3>
 
     <form method="POST" action="Index.php?accion=guardarP" enctype="multipart/form-data">
 
-        <p class="fade-label">Nombre del Equipo: </p>
+        <p class="fade-label">Nombre del Dispositivo: </p>
 
         <label for="nombre" class="form-label"></label>
         <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required> <br><br>
@@ -47,7 +47,7 @@ require_once(__DIR__ . "/../include/UH.php");
 
         <div class="input-archivo">
 
-            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" autocomplete="off" required hidden>
+            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" autocomplete="off" required hidden capture>
             <label for="imagen" class="btn-boton3-input">Seleccionar Foto</label>
             <span id="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
     

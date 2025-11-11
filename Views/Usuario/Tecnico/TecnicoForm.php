@@ -21,7 +21,7 @@ require_once(__DIR__ . "../../../include/UH.php");
 
     <form class="tecnico-fields" method="POST" action="Index.php?accion=guardarT" enctype="multipart/form-data">
         
-        <p class="fade-label">Nombre de Usuario</p>
+        <p class="fade-label">Nombre</p>
         <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" placeholder="sin caracteres especiales" required> <br><br>
 
         <p class="fade-label">Email</p>

@@ -166,8 +166,7 @@ class SolicitudC
         }
     }
 
-    public function listarSLU()
-    {
+    public function listarSLU() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
@@ -178,8 +177,7 @@ class SolicitudC
         include(__DIR__ . "/../Views/Solicitudes/Cliente/ListadoSLU.php");
     }
 
-    public function ListarTL()
-    {
+    public function ListarTL() {
         if (isset($_SESSION['id'])) {
             $usuarioId = $_SESSION['id'];
             $search = $_GET['search'] ?? null;
@@ -194,8 +192,7 @@ class SolicitudC
         }
     }
 
-    public function asignarS()
-    {
+    public function asignarS() {
         $id_tecnico = $_SESSION['id'] ?? null;
         $id_soli = $_GET['id_solicitud'] ?? null;
 
@@ -236,8 +233,7 @@ class SolicitudC
         }
     }
 
-    public function listarSA()
-    {
+    public function listarSA() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
@@ -248,20 +244,19 @@ class SolicitudC
         include(__DIR__ . "/../Views/Solicitudes/listadoSA.php");
     }
 
-    public function listarST()
-    {
+    public function listarST() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
         }
+        $search = $_GET['search'] ?? null;
         $solicitud = new Solicitud();
-        $resultados = $solicitud->listarST($id_usuario);
+        $resultados = $solicitud->listarST($id_usuario, $search);
         include(__DIR__ . "/../Views/Solicitudes/listadoST.php");
     }
 
-    public function editarSF()
-    {
+    public function editarSF() {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             $_SESSION['mensaje'] = "Error: ID de solicitud no proporcionado.";
@@ -298,6 +293,13 @@ class SolicitudC
         if (!$checkU) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Accesso negado";
+            header("Location:Index.php?accion=listarSA");
+            exit();
+        }
+
+        if ($precio < 0) {
+            $_SESSION['tipo_mensaje'] = "error";
+            $_SESSION['mensaje'] = "El precio no puede ser negativo.";
             header("Location:Index.php?accion=listarSA");
             exit();
         }

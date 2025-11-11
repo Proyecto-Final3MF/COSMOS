@@ -31,7 +31,7 @@ require_once(__DIR__ . "../../include/UH.php");
             <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil" class="foto-perfil">
 
             <div class="input-archivo">
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden capture>
             <label for="foto_perfil" class="btn-boton3-input">Seleccionar Foto</label>
             <span class="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
             </div>
@@ -40,7 +40,9 @@ require_once(__DIR__ . "../../include/UH.php");
             <p class="fade-label">Nombre:</p>
             <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre']) ?>" required><br><br>
 
-             <p class="fade-label"> Email: </p> <input type="email" name="email" value="<?= $datos['email'] ?>"><br>
+             <p class="fade-label"> Email: </p> 
+            <input type="email" name="email" value="<?= $datos['email'] ?>" pattern="^[\p{L}0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+            title="El dominio debe contener solo letras, números, puntos y guiones (sin tildes ni ñ)." required><br>
 
             <br><br>
             <input type="submit" value="Guardar cambios">

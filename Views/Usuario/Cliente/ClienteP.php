@@ -35,8 +35,8 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarP">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-box btn-mis-productos"></i> 
-            <span class="title">Mis Productos</span>
-            <span class="desc">Consulta tus Productos Hecho o Crea uno Nuevo.</span>
+            <span class="title">Mis Dispositivos</span>
+            <span class="desc">Consulta tus Dispositivos Hecho o Crea uno Nuevo.</span>
         </button>
     </a>
 

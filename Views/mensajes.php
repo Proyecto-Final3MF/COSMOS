@@ -1,11 +1,14 @@
 <?php if (!empty($mensajes)): ?>
     <?php foreach ($mensajes as $m): ?>
         <?php
-        $nombre = ($m['usuario_id'] == $_SESSION['id']) ? 'Tú' : ($m['emisor'] ?? $m['receptor'] ?? '???');
+        // Determinar si el mensaje es del usuario actual
+        $esPropio = ($m['usuario_id'] == $_SESSION['id']);
+        $clase = $esPropio ? 'mensaje-emisor' : 'mensaje-receptor';
+        $nombre = $esPropio ? 'Tú' : htmlspecialchars($m['emisor'] ?? $m['receptor'] ?? '???');
         ?>
-        <div class="mensaje">
+        <div class="mensaje <?= $clase ?>">
             <p class="texto">
-                <strong><?= htmlspecialchars($nombre) ?>:</strong>
+                <strong><?= $nombre ?>:</strong>
                 <?= htmlspecialchars($m['mensaje'] ?? '') ?>
             </p>
         </div>
