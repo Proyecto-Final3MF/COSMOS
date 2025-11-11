@@ -1061,6 +1061,12 @@ table td, table th {
     margin-right: 5px; 
 }
 
+.alert-info1 {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
 /* aca terminan las tablas */
 
 /* aca empieza el css del historial */

@@ -47,8 +47,8 @@ require_once(__DIR__ . "../../../include/UH.php");
 </form>
 
 <?php if (empty($resultados)): ?>
-    <div class="alert alert-info">
-        No hay usuarios registrados. <a href="Index.php?accion=crear" class="btn btn-boton777">Crear el primero</a>
+    <div class="alert alert-info1">
+        No hay usuarios registrados con ese nombre
     </div>
 <?php else: ?>
     <table class="table table-striped">
