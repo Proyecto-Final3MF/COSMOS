@@ -350,17 +350,109 @@ class UsuarioC
     }
 
 
-    public function borrar()
-    {
-        $usuario = new Usuario();
-        $id = $_GET["id"];
-        $usuarioBorrado = $usuario->buscarUserId($id);
-        $nombre = $usuarioBorrado['nombre'];
-        $usuario->borrar($id);
-        $this->historialController->registrarModificacion($nombre, $id, 'fue eliminado', null, 0, null);
+
+    public function borrar() {
+    $usuarioM = new Usuario();
+    $id = $_GET["id"];
+
+    // Verificar si es auto-eliminación o eliminación por admin
+    $es_auto_eliminacion = ($_SESSION['id'] == $id);
+
+    if (!$es_auto_eliminacion && $_SESSION['rol'] !== ROL_ADMIN) {
+        $_SESSION['tipo_mensaje'] = "danger";
+        $_SESSION['mensaje'] = "Acceso denegado. Solo administradores pueden eliminar cuentas de otros usuarios.";
         header("Location: Index.php?accion=redireccion");
         exit();
     }
+
+    // Para auto-eliminación, verificar que no sea admin
+    if ($es_auto_eliminacion && $_SESSION['rol'] == ROL_ADMIN) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "Como administrador, no puedes eliminar tu propia cuenta desde aquí. Contacta a otro admin.";
+        header("Location: Index.php?accion=redireccion");
+        exit();
+    }
+
+    // Obtener datos del usuario ANTES de intentar eliminar (para historial)
+    $usuarioBorrado = $usuarioM->buscarUserId($id);
+    if (!$usuarioBorrado) {
+        $_SESSION['tipo_mensaje'] = "danger";
+        $_SESSION['mensaje'] = "Usuario no encontrado.";
+        $redirect = $es_auto_eliminacion ? "Index.php?accion=redireccion" : "Index.php?accion=listarU";
+        header("Location: $redirect");
+        exit();
+    }
+    $nombre = $usuarioBorrado['nombre'];
+
+    // Intentar eliminar
+    $success = $usuarioM->borrar($id);
+
+    if ($success) {
+        $this->historialController->registrarModificacion($nombre, $id, 'fue eliminado', null, 0, $es_auto_eliminacion ? 'Auto-eliminación por el usuario.' : 'Eliminado por administrador.');
+
+        if ($es_auto_eliminacion) {
+            session_unset();
+            session_destroy();
+            $_SESSION['tipo_mensaje'] = "success";
+            $_SESSION['mensaje'] = "Tu cuenta ha sido eliminada exitosamente.";
+            header("Location: Index.php?accion=inicio");
+            exit();
+        } else {
+            $_SESSION['tipo_mensaje'] = "success";
+            $_SESSION['mensaje'] = "Usuario eliminado exitosamente.";
+            header("Location: Index.php?accion=listarU");
+            exit();
+        }
+    } else {
+        $dependencias = $usuarioM->verificarDependencias($id);
+        if (!$dependencias['puede_eliminar']) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = $dependencias['mensaje'];
+        } else {
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "Error al eliminar el usuario. Inténtalo de nuevo.";
+        }
+
+        $redirect = $es_auto_eliminacion ? "Index.php?accion=redireccion" : "Index.php?accion=listarU";
+        header("Location: $redirect");
+        exit();
+    }
+}
+
+    // Nuevo método para mostrar confirmación de eliminación
+    public function confirmarEliminarU() {
+        $id = $_GET['id'] ?? null;
+        if (!$id || !is_numeric($id)) {
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "ID de usuario inválido.";
+            header("Location: Index.php?accion=redireccion");
+            exit();
+        }
+
+        $es_auto_eliminacion = ($_SESSION['id'] == $id);
+        if (!$es_auto_eliminacion && $_SESSION['rol'] !== ROL_ADMIN) {
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "Acceso denegado.";
+            header("Location: Index.php?accion=redireccion");
+            exit();
+        }
+
+        $usuarioM = new Usuario();
+        $usuario = $usuarioM->buscarUserId($id);
+        if (!$usuario) {
+            $_SESSION['tipo_mensaje'] = "danger";
+            $_SESSION['mensaje'] = "Usuario no encontrado.";
+            header("Location: Index.php?accion=redireccion");
+            exit();
+        }
+
+        // Verificar dependencias para mostrar advertencias
+        $dependencias = $usuarioM->verificarDependencias($id);
+        include(__DIR__ . "/../Views/Usuario/ConfirmarEliminarU.php"); // Nueva vista
+    }
+
+    // ... (resto del código existente)
+
 
     public function editarU($id = null)
     {

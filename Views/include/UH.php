@@ -3,6 +3,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once(__DIR__ . "/../include/popup.php");
+
+
 require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
 
 $notifC = new NotificacionC();
@@ -193,6 +196,9 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             </a>
                             <a href="Index.php?accion=logout" class="dropdown-item">
                                 <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
+                            </a>
+                            <a href="Index.php?accion=confirmarEliminarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
+                            <i class="fa fa-trash"></i> Eliminar Cuenta
                             </a>
                         </div>
                     </div>
