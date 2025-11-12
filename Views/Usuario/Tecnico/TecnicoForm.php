@@ -13,7 +13,6 @@ require_once(__DIR__ . "../../../include/UH.php");
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
 <div class="contenedor-formulario">
   <section class="formularios99">
 
@@ -68,18 +67,49 @@ require_once(__DIR__ . "../../../include/UH.php");
 
 <script>
 $(document).ready(function() {
-  $('.select2').select2({
-    placeholder: "Selecciona una o más especializaciones",
-    allowClear: true,
-    width: '100%',
-    closeOnSelect: false,
-    theme: 'bootstrap', // ✅ usa el mismo tema que en el otro formulario
-    language: {
-      noResults: function() {
-        return "No se encontraron resultados";
-      }
-    }
-  });
+    var selectedOrder = [];  // Array para trackear el orden de selección
+
+    $('.select2').select2({
+        placeholder: "Selecciona una o más especializaciones",
+        allowClear: true,
+        width: '100%',
+        closeOnSelect: false,
+        scrollAfterSelect: true,  // Scroll automático hacia la selección
+        theme: 'bootstrap',
+        language: {
+            noResults: function() {
+                return "No se encontraron resultados";
+            }
+        },
+        sorter: function(data) {  // ✅ Custom sorter para orden de selección
+            return data.sort(function(a, b) {
+                var aSelected = selectedOrder.indexOf(a.id) !== -1;
+                var bSelected = selectedOrder.indexOf(b.id) !== -1;
+                if (aSelected && !bSelected) return -1;  // Seleccionadas primero
+                if (!aSelected && bSelected) return 1;
+                if (aSelected && bSelected) {
+                    // Entre seleccionadas, orden por selección
+                    return selectedOrder.indexOf(a.id) - selectedOrder.indexOf(b.id);
+                }
+                // No seleccionadas: orden alfabético
+                return a.text.localeCompare(b.text);
+            });
+        }
+    });
+
+    // Trackear selecciones para el orden
+    $('.select2').on('select2:select', function(e) {
+        if (selectedOrder.indexOf(e.params.data.id) === -1) {
+            selectedOrder.push(e.params.data.id);  // Agrega al orden si no está
+        }
+    });
+
+    $('.select2').on('select2:unselect', function(e) {
+        var index = selectedOrder.indexOf(e.params.data.id);
+        if (index > -1) {
+            selectedOrder.splice(index, 1);  // Remueve del orden
+        }
+    });
 });
 </script>
 
