@@ -323,6 +323,10 @@ body {
     text-decoration: none;
 }
 
+.verlasnoti:hover {
+    color: #972f5f;
+}
+
 /* Scroll personalizado */
 .notificaciones .dropdown::-webkit-scrollbar {
     width: 6px;
