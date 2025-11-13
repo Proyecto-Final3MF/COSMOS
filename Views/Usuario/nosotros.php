@@ -8,7 +8,16 @@
     }
 ?>
 
-<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C O S M O S</title>
+</head>
+<body>
+    
+<br><br>
 
 <h1 class="inicio55"> Sobre Nosotros </h1>
 
@@ -19,7 +28,7 @@
     COSMOS es tu mejor aliado.
 </p>
 
-<br><br>
+<br>
 
 <h2 class="nosotros fade-slide">
     Cómo Nació
@@ -89,3 +98,6 @@
     </div>
     </a>
 </section>
+
+</body>
+</html>

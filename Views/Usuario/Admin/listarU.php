@@ -79,8 +79,9 @@ require_once(__DIR__ . "../../../include/UH.php");
                             <a href="Index.php?accion=editarU&id=<?= $u['id'] ?>" class="icon-btn edit">
                             <i class="fa fa-edit"></i></a>
                             <?php if ($_SESSION['rol'] == ROL_ADMIN): ?>
-                            <a href="Index.php?accion=eliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
-                            <i class="fa fa-trash"></i></a>
+                            <a href="Index.php?accion=confirmarEliminarU&id=<?= $u['id'] ?>" class="icon-btn delete">
+                            <i class="fa fa-trash"></i>
+                            </a>
                             <?php endif; ?>
                         </div>
                     </td>

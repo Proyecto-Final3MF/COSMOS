@@ -393,6 +393,11 @@ switch ($accion) {
     $controlador->enviarMensajeContacto();
   break;
 
+  case 'confirmarEliminarU':
+    $controller = new UsuarioC();
+    $controller->confirmarEliminarU();
+  break;
+
   //accion default
 
   case 'panelA':

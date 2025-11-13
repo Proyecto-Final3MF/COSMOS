@@ -304,16 +304,104 @@ class Usuario {
 
     // Eliminar usuario
 
+   
+ // ... (código existente)
+
+    /**
+     * Verifica si el usuario tiene dependencias activas que impidan su eliminación.
+     * @param int $id ID del usuario.
+     * @return array Array con 'puede_eliminar' (bool) y 'mensaje' (string) si no se puede.
+     */
+    public function verificarDependencias($id) {
+        // Verificar solicitudes activas (estado_id < 5, es decir, no finalizadas)
+        $sql_solicitudes = "SELECT COUNT(*) AS count FROM solicitud WHERE (cliente_id = ? OR tecnico_id = ?) AND estado_id < 5";
+        $stmt_solicitudes = $this->conn->prepare($sql_solicitudes);
+        $stmt_solicitudes->bind_param("ii", $id, $id);
+        $stmt_solicitudes->execute();
+        $result_solicitudes = $stmt_solicitudes->get_result();
+        $solicitudes_activas = $result_solicitudes->fetch_assoc()['count'];
+        $stmt_solicitudes->close();
+
+        if ($solicitudes_activas > 0) {
+            return ['puede_eliminar' => false, 'mensaje' => "No se puede eliminar el usuario porque tiene {$solicitudes_activas} solicitud(es) activa(s). Finaliza o reasigna las solicitudes primero."];
+        }
+
+        // Verificar productos asociados
+        $sql_productos = "SELECT COUNT(*) AS count FROM producto WHERE id_usuario = ?";
+        $stmt_productos = $this->conn->prepare($sql_productos);
+        $stmt_productos->bind_param("i", $id);
+        $stmt_productos->execute();
+        $result_productos = $stmt_productos->get_result();
+        $productos = $result_productos->fetch_assoc()['count'];
+        $stmt_productos->close();
+
+        if ($productos > 0) {
+            return ['puede_eliminar' => false, 'mensaje' => "No se puede eliminar el usuario porque tiene {$productos} producto(s) asociado(s). Elimina o reasigna los productos primero."];
+        }
+
+        // Si no hay dependencias críticas, permitir eliminación
+        return ['puede_eliminar' => true, 'mensaje' => ''];
+    }
+
     public function borrar($id) {
+        // Verificar dependencias
+        $dependencias = $this->verificarDependencias($id);
+        if (!$dependencias['puede_eliminar']) {
+            return false;
+        }
+
+        // Obtener datos del usuario ANTES de eliminar
         $usuario = $this->buscarUserId($id);
-        if ($usuario && $usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
+        if (!$usuario) {
+            return false;
+        }
+
+        // Eliminar foto de perfil si no es la default
+        if ($usuario['foto_perfil'] !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($usuario['foto_perfil'])) {
             unlink($usuario['foto_perfil']);
         }
-        $sql = "DELETE FROM usuario WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        return $stmt->execute();
+
+        // Iniciar transacción
+        $this->conn->begin_transaction();
+
+        try {
+            // Eliminar registros relacionados
+            $sql_notif = "DELETE FROM notificacion WHERE usuario_id = ?";
+            $stmt_notif = $this->conn->prepare($sql_notif);
+            $stmt_notif->bind_param("i", $id);
+            $stmt_notif->execute();
+            $stmt_notif->close();
+
+            $sql_reviews = "DELETE FROM reviews WHERE id_tecnico = ? OR id_cliente = ?";
+            $stmt_reviews = $this->conn->prepare($sql_reviews);
+            $stmt_reviews->bind_param("ii", $id, $id);
+            $stmt_reviews->execute();
+            $stmt_reviews->close();
+
+            // Finalmente, eliminar el usuario
+            $sql_usuario = "DELETE FROM usuario WHERE id = ?";
+            $stmt_usuario = $this->conn->prepare($sql_usuario);
+            $stmt_usuario->bind_param("i", $id);
+            $success = $stmt_usuario->execute();
+            $stmt_usuario->close();
+
+            if ($success) {
+                $this->conn->commit();
+                return true;
+            } else {
+                $this->conn->rollback();
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            error_log("Error al eliminar usuario: " . $e->getMessage());
+            return false;
+        }
     }
+
+    // ... (resto del código existente)
+
+    
 
     public function buscarUserId($id) {
         $sql = "SELECT * FROM usuario WHERE id = ?";
