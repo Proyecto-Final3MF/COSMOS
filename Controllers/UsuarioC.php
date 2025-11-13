@@ -456,11 +456,7 @@ class UsuarioC
         include(__DIR__ . "/../Views/Usuario/ConfirmarEliminarU.php"); // Nueva vista
     }
 
-    // ... (resto del código existente)
-
-
-    public function editarU($id = null)
-    {
+    public function editarU($id = null) {
         $usuarioM = new Usuario();
         $id = $id ?? $_GET['id'];
         $datos = $usuarioM->buscarUserId($id);
