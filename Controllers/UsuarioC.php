@@ -435,7 +435,7 @@ class UsuarioC
         }
 
         $es_auto_eliminacion = ($_SESSION['id'] == $id);
-        if (!$es_auto_eliminacion && $_SESSION['rol'] !== ROL_ADMIN) {
+        if (!$es_auto_eliminacion && $_SESSION['rol'] != ROL_ADMIN) {
             $_SESSION['tipo_mensaje'] = "danger";
             $_SESSION['mensaje'] = "Acceso denegado.";
             header("Location: Index.php?accion=redireccion");
