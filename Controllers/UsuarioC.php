@@ -263,14 +263,16 @@ class UsuarioC
         $email = trim($_POST['email']);
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
-        if ($_SESSION['rol'] !== ROL_ADMIN) {
-            if ($_SESSION['id'] !== $id) {
-                $_SESSION['tipo_mensaje'] = "warning";
-                $_SESSION['mensaje'] = "ACCESO NEGADO";
-                header("Location: Index.php?accion=redireccion");
-                exit();
-            }
+        if ($_SESSION['rol'] != ROL_ADMIN) {
+    // Si NO es admin, solo puede editar su propio perfil
+        if ($_SESSION['id'] != $id) {
+        $_SESSION['tipo_mensaje'] = "warning";
+        $_SESSION['mensaje'] = "Acceso denegado: no puedes editar el perfil de otro usuario.";
+        header("Location: Index.php?accion=redireccion");
+        exit();
         }
+    }
+
 
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
@@ -317,13 +319,10 @@ class UsuarioC
 
         if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
             if ($id == $_SESSION['id']) {
-                $_SESSION['usuario'] = $nombre;
-                $_SESSION['email'] = $email;
-                $_SESSION['foto_perfil'] = $foto_perfil;
-                $_SESSION['tipo_mensaje'] = "success";
-                $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
-                $_SESSION['tipo_mensaje'] = "success";
-            }
+            $_SESSION['usuario'] = $nombre;
+            $_SESSION['email'] = $email;
+            $_SESSION['foto_perfil'] = $foto_perfil;
+        }
 
             if ($nombreAntiguo == $nombre && $emailAntiguo == $email) {
                 $obs = "Ningún cambio detectado";
@@ -339,17 +338,23 @@ class UsuarioC
 
             $this->historialController->registrarModificacion($nombre, $id, 'fue actualizado', null, 0, $obs);
 
-            header("Location: Index.php?accion=redireccion&mensaje=Usuario actualizado con éxito.");
-            exit();
+        $_SESSION['tipo_mensaje'] = "success";
+        if ($_SESSION['rol'] == ROL_ADMIN && $_SESSION['id'] != $id) {
+            
+            $_SESSION['mensaje'] = "Actualizaste el perfil con éxito.";
+            header("Location: Index.php?accion=listarU");
         } else {
-            $_SESSION['tipo_mensaje'] = "danger";
-            $_SESSION['mensaje'] = "Error al actualizar el usuario.";
-            header("Location: Index.php?accion=editarU&id=$id");
-            exit();
+            $_SESSION['mensaje'] = "Actualizaste tu perfil con éxito.";
+            header("Location: Index.php?accion=redireccion");
+        }
+        exit();
+        } else {
+        $_SESSION['tipo_mensaje'] = "danger";
+        $_SESSION['mensaje'] = "Error al actualizar el usuario.";
+        header("Location: Index.php?accion=editarU&id=$id");
+        exit();
         }
     }
-
-
 
     public function borrar() {
     $usuarioM = new Usuario();

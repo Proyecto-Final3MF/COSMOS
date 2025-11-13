@@ -3,7 +3,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once(__DIR__ . "/../include/popup.php");
+// En la vista (ej. redireccion.php o listarU.php)
+if (isset($_SESSION['mensaje'])) {
+    include(__DIR__ . "/../Views/include/popup.php"); // Asegúrate de que popup.php muestre $_SESSION['mensaje']
+    unset($_SESSION['mensaje']); // Limpiar después de mostrar
+    unset($_SESSION['tipo_mensaje']);
+}
 
 
 require_once(dirname(__DIR__, 2) . '/Controllers/NotificacionC.php');
