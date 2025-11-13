@@ -236,7 +236,7 @@ switch ($accion) {
   case 'listarSLU':
     $controller = new SolicitudC();
     //ejecuta la funcion listarSLU para mostrar solicitudes de usuario
-    $controller->listarSLU();
+    $controller->listarSLC();
   break;
 
   case 'FormularioReview':

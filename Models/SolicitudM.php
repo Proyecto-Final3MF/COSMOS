@@ -87,7 +87,7 @@ class Solicitud {
         }
     }
 
-    public function ListarSLU($id_usuario) {
+    public function ListarSLC($id_usuario) {
         $id_usuario = (int)$id_usuario;
         $sql = "SELECT s.*, p.nombre, p.imagen FROM solicitud s 
                 inner join producto p on s.producto_id = p.id 

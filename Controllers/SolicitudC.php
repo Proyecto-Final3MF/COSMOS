@@ -166,14 +166,14 @@ class SolicitudC
         }
     }
 
-    public function listarSLU() {
+    public function listarSLC() {
         $id_usuario = $_SESSION['id'] ?? null;
         if ($id_usuario == null) {
             header("Location: Index.php?accion=login");
             exit();
         }
         $solicitud = new Solicitud();
-        $resultados = $solicitud->listarSLU($id_usuario);
+        $resultados = $solicitud->listarSLC($id_usuario);
         include(__DIR__ . "/../Views/Solicitudes/Cliente/ListadoSLU.php");
     }
 
