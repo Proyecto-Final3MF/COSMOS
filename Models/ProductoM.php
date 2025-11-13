@@ -185,7 +185,7 @@ public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
     }
 }
 
-    public function borrar($id) {
+    public function borrarP($id) {
         $sql = "DELETE FROM producto WHERE id = ?";
 
         $stmt = $this->conn->prepare($sql);
