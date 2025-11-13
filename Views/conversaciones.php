@@ -18,6 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
+    <br>
     <div class="conversaciones-container">
         <h2>Mis conversaciones</h2>
         <div class="btn-volver-container fade-slide">
@@ -36,7 +37,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <br>
                         <em><?= htmlspecialchars($c['ultimo_mensaje']) ?></em><br>
                         <small><?= $c['ultima_fecha'] ?></small><br>
-                        <a href="Index.php?accion=mostrarChat&usuario_id=<?= $c['otro_usuario_id'] ?><?= !empty($c['solicitud_id']) ? '&solicitud_id=' . $c['solicitud_id'] : '' ?>">
+                        <a class="miraresaconve" href="Index.php?accion=mostrarChat&usuario_id=<?= $c['otro_usuario_id'] ?><?= !empty($c['solicitud_id']) ? '&solicitud_id=' . $c['solicitud_id'] : '' ?>">
                             Ver conversacion
                         </a>
 

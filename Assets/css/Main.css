@@ -493,16 +493,7 @@ body {
 .btn-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch; /* Igualar alturas */
     flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 2rem;
@@ -515,7 +506,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 240px;  /* Tamaño fijo */
+    width: 240px;  /* Tamaño fijo en PC */
     height: 230px; /* Igual para todos */
     border-radius: 16px;
     border: 1px solid #d0d7de;
@@ -529,6 +520,7 @@ body {
     transition: all 0.3s ease;
     padding: 1rem;
     box-sizing: border-box;
+    flex-shrink: 0; /* Evita que se encojan */
 }
 
 /* Evita que textos largos cambien el tamaño del botón */
@@ -537,6 +529,7 @@ body {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap; /* Evita que el texto se envuelva y expanda */
 }
 
 /* Icono */
@@ -559,6 +552,11 @@ body {
     font-weight: 400;
     color: var(--text-color);
     line-height: 1.3;
+    white-space: normal; /* Permite envolver en móviles si es necesario */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 /* Hover */
@@ -577,7 +575,7 @@ body {
     background-color: var(--urgente1);
     border: 1px solid var(--urgente2);
     color: var(--urgente3);
-    width: 420px;
+    width: 420px; /* Ancho fijo en PC */
     height: 90px;
     border-radius: 18px;
     font-size: 1.1rem;
@@ -589,6 +587,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Evita encogimiento */
 }
 
 .btn-boton4445 i {
@@ -600,10 +599,54 @@ body {
     box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3);
 }
 
-/* Quita subrayado de los enlaces */
 a:has(> .btn-boton444), 
 a:has(> .btn-boton4445) {
     text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .btn-container {
+        flex-direction: row; 
+        justify-content: center;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .btn-boton444 {
+        flex: 1; 
+        max-width: none; 
+        min-width: 120px; 
+        height: 150px; 
+        padding: 0.8rem;
+        border-radius: 12px; 
+    }
+
+    .btn-boton444 span.desc {
+        font-size: 0.8rem;
+    }
+
+    .btn-boton444 i {
+        font-size: 1.8rem; 
+        margin-bottom: 0.4rem;
+    }
+
+    .btn-boton444 span.title {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .btn-boton4445 {
+        width: 100%; 
+        max-width: none;
+        height: 70px; 
+        font-size: 1rem;
+        gap: 0.5rem;
+        border-radius: 12px;
+    }
+
+    .btn-boton4445 i {
+        font-size: 1.4rem;
+    }
 }
 
 .btn-boton4442 {
@@ -685,25 +728,6 @@ a:has(> .btn-boton4442) {
     0% { transform: translateY(0) scale(1); }
     50% { transform: translateY(-2px) scale(1.02); }
     100% { transform: translateY(0) scale(1); }
-}
-
-@media (max-width: 768px) {
-    .btn-container {
-        flex-direction: column;      
-        align-items: center;
-    }
-
-    .btn-boton444 {
-        width: 90%;                  
-        height: auto;                
-        padding: 1.2rem 0.8rem;
-        font-size: 1.1rem;           
-    }
-
-    .btn-boton444 i {
-        font-size: 2.4rem;           
-        margin-bottom: 0.4rem;
-    }
 }
 
 .btn-volver-container {
@@ -1079,6 +1103,85 @@ table td, table th {
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+/* Wrapper para tablas responsivas */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Scroll horizontal suave si es necesario */
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+}
+
+.table-responsive table {
+  min-width: 600px; /* Mínimo ancho para evitar deformación */
+  table-layout: fixed; /* Fuerza anchos fijos proporcionales */
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .table-responsive table {
+    font-size: 0.85rem; /* Fuente más pequeña */
+    min-width: 800px; /* Aumenta mínimo para evitar scroll, pero ajusta si es necesario */
+  }
+
+  .table-responsive th,
+  .table-responsive td {
+    padding: 8px 4px; /* Padding reducido */
+    word-wrap: break-word; /* Rompe palabras largas */
+    overflow-wrap: break-word;
+  }
+
+  .table-responsive th {
+    font-size: 0.8rem;
+  }
+
+  .table-responsive td img {
+    width: 50px; /* Imágenes más pequeñas */
+    height: 50px;
+  }
+
+  /* Oculta columnas menos importantes en móviles pequeños */
+  .table-responsive .hide-mobile {
+    display: none;
+  }
+
+  /* Reduce ancho de columnas específicas */
+  .table-responsive th:nth-child(4), /* Descripción */
+  .table-responsive td:nth-child(4) {
+    width: 120px; /* Ancho fijo más pequeño */
+  }
+
+  .table-responsive th:nth-child(9), /* Fecha */
+  .table-responsive td:nth-child(9) {
+    width: 100px;
+  }
+
+  .table-responsive th:nth-child(10), /* Acciones */
+  .table-responsive td:nth-child(10) {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive table {
+    min-width: 700px; /* Reduce mínimo para menos scroll */
+    font-size: 0.8rem;
+  }
+
+  .table-responsive th,
+  .table-responsive td {
+    padding: 6px 2px;
+  }
+
+  .table-responsive td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Oculta más columnas si es necesario */
+  .table-responsive .hide-mobile-small {
+    display: none;
+  }
 }
 
 /* aca terminan las tablas */
@@ -1652,11 +1755,12 @@ input[type="text"]::placeholder {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   width: 400px;
   max-width: 85%;
+  max-height: 80vh; /* Limita altura para no salir de pantalla */
   opacity: 0;
   transition: all 0.25s ease;
   z-index: 9999;
   font-family: "Segoe UI", Roboto, sans-serif;
-  overflow: hidden;
+  overflow: hidden; /* Evita overflow general */
 }
 
 .popup-modal.active {
@@ -1708,15 +1812,52 @@ input[type="text"]::placeholder {
   text-align: center;
   color: #333;
   font-size: 0.95rem;
+  overflow-y: auto; 
+  max-height: calc(80vh - 60px);
 }
 
 .popup-body p {
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .popup-modal {
+    width: 95%; 
+    max-width: 95%;
+    max-height: 90vh; 
+    top: 45%; 
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  .popup-modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .popup-header {
+    padding: 10px 14px; 
+  }
+
+  .popup-header .popup-title {
+    font-size: 1rem; 
+  }
+
+  .popup-body {
+    padding: 15px; 
+    font-size: 0.9rem;
+    max-height: calc(90vh - 50px);
+  }
+}
+
 @media (max-width: 480px) {
   .popup-modal {
-    width: 90%;
+    width: 98%; 
+    max-width: 98%;
+    border-radius: 8px; 
+  }
+
+  .popup-body {
+    padding: 12px;
+    font-size: 0.85rem;
   }
 }
 
@@ -3505,6 +3646,10 @@ input:checked ~ label {
 
 .chat-input button[type="submit"]:hover {
   background: var(--primary-hover);
+}
+
+.miraresaconve:hover {
+    color: #972f5f;
 }
 
 .conversaciones-container {
