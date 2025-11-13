@@ -330,10 +330,12 @@ class ProductoC
             } else {
                 $_SESSION['mensaje'] = "Error al crear el producto.";
                 $_SESSION['tipo_mensaje'] = "error";
+                 header("Location: Index.php?accion=urgenteP");
             }
         } else {
             $_SESSION['mensaje'] = "Error al subir la imagen.";
             $_SESSION['tipo_mensaje'] = "error";
+             header("Location: Index.php?accion=urgenteP");
         }
     }
 }
