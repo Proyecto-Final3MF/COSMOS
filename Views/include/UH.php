@@ -89,35 +89,48 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                     <?php endif; ?>
 
                     <div class="dropdown">
-                        <?php if (count($notificaciones) > 0): ?>
-                            <?php foreach ($notificaciones as $n): ?>
-                                <?php
-                                $url = '';
-                                if (strpos($n['mensaje'], 'aceptada') !== false) {
-                                    $url = 'Index.php?accion=listarSA';
-                                } elseif (strpos($n['mensaje'], 'urgente') !== false) {
-                                    $url = 'Index.php?accion=listarTL';
-                                } elseif (strpos($n['mensaje'], 'verificar') !== false) {
-                                    $url = 'Index.php?accion=verificarTecnicos';
-                                } elseif (strpos($n['mensaje'], 'cambió de estado') !== false) {
-                                    $url = (strpos($n['mensaje'], 'Finalizado') !== false)
-                                        ? 'Index.php?accion=listarST'
-                                        : 'Index.php?accion=listarSA';
-                                } elseif (strpos($n['mensaje'], 'calificación') !== false) {
-                                    $url = 'Index.php?accion=listarST';
-                                }
-                                ?>
-                                <div class="notif-item">
-                                    <span class="notif-text"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $n['fecha'] ?></small></span>
-                                    <?php if ($url): ?>
-                                        <a href="<?= $url ?>" class="btn-ver">Ver</a>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p class="notif-item">Sin notificaciones nuevas</p>
-                        <?php endif; ?>
-                    </div>
+    <?php if (count($notificaciones) > 0): ?>
+        <?php foreach ($notificaciones as $n): ?>
+            <?php
+            $url = '';
+            if (stripos($n['mensaje'], 'aceptada') !== false) {
+                $url = 'Index.php?accion=listarSA';
+            } elseif (stripos($n['mensaje'], 'urgente') !== false) {
+                $url = 'Index.php?accion=listarTL';
+            } elseif (stripos($n['mensaje'], 'verificar') !== false) {
+                $url = 'Index.php?accion=verificarTecnicos';
+            } elseif (stripos($n['mensaje'], 'cambió de estado') !== false) {
+                $url = (stripos($n['mensaje'], 'Finalizado') !== false)
+                    ? 'Index.php?accion=listarST'
+                    : 'Index.php?accion=listarSA';
+            } elseif (stripos($n['mensaje'], 'calificación') !== false) {
+                $url = 'Index.php?accion=listarST';
+            }
+
+            // Formatear la fecha
+            $fecha_formateada = '';
+            if (!empty($n['fecha'])) {
+                try {
+                    $fecha = new DateTime($n['fecha']);
+                    $fecha_formateada = $fecha->format('H:i d/m/Y');
+                } catch (Exception $e) {
+                    $fecha_formateada = $n['fecha']; // Fallback si hay error
+                }
+            }
+            ?>
+            <div class="notif-item">
+                <span class="notif-text"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $fecha_formateada ?></small></span>
+                <?php if ($url): ?>
+                    <a href="<?= $url ?>" class="btn-ver">Ver</a>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="notif-item">Sin notificaciones nuevas</p>
+    <?php endif; ?>
+</div>
+
+
                 </div>
 
                 <!-- Menú de roles -->
