@@ -284,14 +284,14 @@ class ProductoC
         if (empty($nombre) || empty($categoria_id) || empty($_FILES['imagen']['name'])) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Todos los campos son obligatorios.";
-            header("Location: Index.php?accion=formularioP");
+            header("Location: Index.php?accion=urgenteP");
             exit();
         }
 
         if ($producto->existeProducto($nombre, $id_usuario)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Ya has creado un producto con ese nombre.";
-            header("Location: Index.php?accion=formularioP");
+            header("Location: Index.php?accion=urgenteP");
             exit();
         }
 
@@ -304,7 +304,7 @@ class ProductoC
         if (!in_array($tipoArchivo, $tiposPermitidos)) {
             $_SESSION['tipo_mensaje'] = "warning";
             $_SESSION['mensaje'] = "Error: Solo se permiten archivos de imagen (JPG, PNG, GIF o WEBP).";
-            header("Location: Index.php?accion=formularioP");
+            header("Location: Index.php?accion=urgenteP");
             exit();
         }
 

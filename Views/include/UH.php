@@ -121,7 +121,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
             <div class="notif-item">
                 <span class="notif-text"><?= htmlspecialchars($n['mensaje']) ?> <small><?= $fecha_formateada ?></small></span>
                 <?php if ($url): ?>
-                    <a href="<?= $url ?>" class="btn-ver">Ver</a>
+                    <a href="<?= $url ?>" class="verlasnoti">Ver</a>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>

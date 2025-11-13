@@ -318,6 +318,12 @@ body {
     margin-left: 10px;
 }
 
+.verlasnoti {
+    color: #fff;
+    background-color: #e83e8c;
+    height: 12px;
+}
+
 /* Scroll personalizado */
 .notificaciones .dropdown::-webkit-scrollbar {
     width: 6px;
@@ -3884,3 +3890,193 @@ input:checked ~ label {
 }
 
 /* aca termina el css de ganancias */
+
+/* aca empieza el css de la página de confirmación de eliminación */
+
+.confirmar-eliminacion-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: var(--specialz);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.confirmar-eliminacion-container h1 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    animation: slideDown 0.6s ease-out;
+}
+
+.confirmar-eliminacion-container .alert {
+    background-color: var(--urgente1); 
+    border: 2px solid var(--urgente2); 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+    animation: fadeIn 0.8s ease-out 0.3s both;
+}
+
+.confirmar-eliminacion-container .alert h2 {
+    color: var(--urgente3); 
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.confirmar-eliminacion-container .alert p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.confirmar-eliminacion-container .alert .text-danger {
+    color: var(--urgente3);
+    font-weight: bold;
+}
+
+.confirmar-eliminacion-container .form-eliminar {
+    margin-top: 30px;
+}
+
+.confirmar-eliminacion-container .btn-eliminar {
+    background-color: var(--urgente2); 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.confirmar-eliminacion-container .btn-eliminar:hover {
+    background-color: var(--urgente3); 
+    box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
+}
+
+.confirmar-eliminacion-container .btn-eliminar i {
+    font-size: 1.2rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .confirmar-eliminacion-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .confirmar-eliminacion-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .confirmar-eliminacion-container .alert {
+        padding: 15px;
+    }
+
+    .confirmar-eliminacion-container .alert h2 {
+        font-size: 1.2rem;
+    }
+
+    .confirmar-eliminacion-container .btn-eliminar {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+.confirmar-eliminacion-container .usuario-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.confirmar-eliminacion-container .usuario-label {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.confirmar-eliminacion-container .foto-perfil-confirmacion {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.confirmar-eliminacion-container .foto-perfil-confirmacion:hover {
+    transform: scale(1.1);
+}
+
+.confirmar-eliminacion-container .usuario-detalles {
+    font-size: 1rem;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .confirmar-eliminacion-container .usuario-info {
+        padding: 10px;
+    }
+
+    .confirmar-eliminacion-container .foto-perfil-confirmacion {
+        width: 80px;
+        height: 80px;
+    }
+
+    .confirmar-eliminacion-container .usuario-label {
+        font-size: 1rem;
+    }
+
+    .confirmar-eliminacion-container .usuario-detalles {
+        font-size: 0.9rem;
+    }
+}
+
+/* aca termina el css de la página de confirmación de eliminación */
