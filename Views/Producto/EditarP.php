@@ -2,15 +2,8 @@
 require_once(__DIR__ . "/../include/UH.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Dispositivo</title>
-    <link rel="stylesheet" href="./Assets/css/Main.css">
-</head>
-<body>
+<title>Editar Dispositivo</title>
+
 <div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
