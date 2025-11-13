@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "../include/UH.php");
+require_once(__DIR__ . "/../Views/include/UH.php");
 
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -27,8 +27,8 @@ if (session_status() === PHP_SESSION_NONE) {
 </div>
 
 <body>
-<br>
-      <?php
+    <br>
+    <?php
     // Obtener datos de la solicitud y el interlocutor
     $solicitudNombre = 'Sin solicitud';
     $interlocutorNombre = 'Usuario desconocido';
@@ -54,20 +54,20 @@ if (session_status() === PHP_SESSION_NONE) {
         <h1>Chat de la solicitud: <?php echo $solicitudNombre; ?></h1>
         <h2><?php echo $rolLabel; ?> <?php echo $interlocutorNombre; ?></h2>
 
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-    </div>
+        <div class="chat-container">
+            <div class="chat-box" id="chat-box"></div>
+        </div>
 
-    <form id="form-chat" class="chat-input" method="POST" action="Index.php?accion=enviarMensaje">
-        <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
-        <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
-        <?php if (isset($solicitudId) && $solicitudId): ?>
-            <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
-        <?php endif; ?>
+        <form id="form-chat" class="chat-input" method="POST" action="Index.php?accion=enviarMensaje">
+            <input type="hidden" name="usuario_id" value="<?= $_SESSION['id'] ?>">
+            <input type="hidden" name="receptor_id" value="<?= $otroUsuarioId ?>">
+            <?php if (isset($solicitudId) && $solicitudId): ?>
+                <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
+            <?php endif; ?>
 
-        <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
-        <button type="submit"><i class="fa fa-upload"></i></button>
-    </form>
+            <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
+            <button type="submit"><i class="fa fa-upload"></i></button>
+        </form>
 
 </body>
 

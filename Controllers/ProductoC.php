@@ -118,7 +118,7 @@ class ProductoC
         $id_usuario = $_SESSION['id'];
         $usuarioNombre = $_SESSION['usuario'] ?? 'Desconocido';
 
-        $producto->borrar($id);
+        $producto->borrarP($id);
         $_SESSION['tipo_mensaje'] = "success";
         $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
         $_SESSION['tipo_mensaje'] = "success";

@@ -77,7 +77,7 @@ class Usuario {
     /**
      * Obtiene el email de un usuario dado su ID.
      * Es ideal para usar en servicios de notificación.
-     * @param int $id El ID del usuario.
+     * @param int $id El ID del usuario.    
      * @return string|null El email del usuario o null si no existe.
      */
     public function obtenerEmailUsuarioPorId($id) {
@@ -231,13 +231,6 @@ class Usuario {
         return $stmt->execute(); 
     }
 
-    public function actualizarContrasena($id, $nuevoHash) {
-        $sql = "UPDATE usuario SET contrasena = ? WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("si", $nuevoHash, $id);
-        return $stmt->execute();
-    }
-
     // Listado de usuarios con filtros
     
     public function listarU($orden, $rol_filter, $search) {
@@ -343,7 +336,7 @@ class Usuario {
         return ['puede_eliminar' => true, 'mensaje' => ''];
     }
 
-    public function borrar($id) {
+    public function borrarU($id) {
         // Verificar dependencias
         $dependencias = $this->verificarDependencias($id);
         if (!$dependencias['puede_eliminar']) {
@@ -351,7 +344,7 @@ class Usuario {
         }
 
         // Obtener datos del usuario ANTES de eliminar
-        $usuario = $this->buscarUserId($id);
+        $usuario = $this->buscarUsuarioId($id);
         if (!$usuario) {
             return false;
         }
@@ -403,7 +396,7 @@ class Usuario {
 
     
 
-    public function buscarUserId($id) {
+    public function buscarUsuarioId($id) {
         $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
 
@@ -438,22 +431,6 @@ class Usuario {
             $especializaciones[] = $fila['nombre'];
         }
         return $especializaciones;
-    }
-
-    // Verificación de técnicos
-    
-    public function actualizarEstadoVerificacion($id, $estado) {
-        $sql = "UPDATE usuario SET estado_verificacion = ? WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("si", $estado, $id);
-        return $stmt->execute();
-    }
-
-    public function obtenerTecnicosPendientes() {
-        $sql = "SELECT id, nombre, email, evidencia_tecnica_ruta, foto_perfil FROM usuario 
-                WHERE rol_id = 1 AND estado_verificacion = 'pendiente'"; 
-        $resultado = $this->conn->query($sql);
-        return $resultado ? $resultado->fetch_all(MYSQLI_ASSOC) : [];
     }
 }
 ?>
