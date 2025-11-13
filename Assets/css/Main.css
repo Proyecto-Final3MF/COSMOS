@@ -319,9 +319,8 @@ body {
 }
 
 .verlasnoti {
-    color: #fff;
-    background-color: #e83e8c;
-    height: 12px;
+    color: #e83e8c;
+    text-decoration: none;
 }
 
 /* Scroll personalizado */
