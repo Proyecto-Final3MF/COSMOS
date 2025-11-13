@@ -83,7 +83,7 @@ class ReviewC {
         }
 
         //Agarra la cantidad de reviews q tiene el tecnico
-        $HayReview = $this->ReviewModel->agarrarCantReview($id_tecnico);
+        $HayReview = $this->ReviewModel->obtenerCantReview($id_tecnico);
         if ($HayReview === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
@@ -92,7 +92,7 @@ class ReviewC {
         }
 
         //Agarra el promedio del tecnico
-        $HayPromedio = $this->ReviewModel->agarrarPromedio($id_tecnico);
+        $HayPromedio = $this->ReviewModel->obtenerPromedio($id_tecnico);
         if ($HayPromedio === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";
@@ -101,7 +101,7 @@ class ReviewC {
         }
 
         //Agarra la suma de todas las calificacciones del tecnico
-        $HaySuma = $this->ReviewModel->agarrarSuma($id_tecnico);
+        $HaySuma = $this->ReviewModel->obtenerSuma($id_tecnico);
         if ($HaySuma === null) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "No se puede evaluar en este momento.";

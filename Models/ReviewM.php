@@ -6,7 +6,7 @@ class Review {
         $this->conn = conectar();
     }
 
-   public function agarrarCantReview ($id_tecnico) {
+   public function obtenerCantReview ($id_tecnico) {
         $sql = "SELECT cant_review FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -28,7 +28,7 @@ class Review {
         return $data['cant_review'] ?? null;
     }
 
-    public function agarrarPromedio($id_tecnico) {
+    public function obtenerPromedio($id_tecnico) {
         $sql = "SELECT promedio FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -179,7 +179,7 @@ class Review {
         }
     }
 
-    public function agarrarSuma($id_tecnico) {
+    public function obtenerSuma($id_tecnico) {
         $sql = "SELECT suma_rating FROM usuario WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
