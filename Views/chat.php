@@ -39,7 +39,7 @@ if (session_status() === PHP_SESSION_NONE) {
     // Obtener nombre del interlocutor
     require_once(__DIR__ . "/../Models/UsuarioM.php");
     $usuarioModel = new Usuario();
-    $interlocutor = $usuarioModel->buscarUserId($otroUsuarioId);
+    $interlocutor = $usuarioModel->buscarUsuarioId($otroUsuarioId);
     if ($interlocutor) {
         $interlocutorNombre = htmlspecialchars($interlocutor['nombre']);
     }
