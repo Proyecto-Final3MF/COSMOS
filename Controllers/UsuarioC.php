@@ -379,7 +379,7 @@ class UsuarioC
     }
 
     // Obtener datos del usuario ANTES de intentar eliminar (para historial)
-    $usuarioBorrado = $usuarioM->buscarUserId($id);
+    $usuarioBorrado = $usuarioM->buscarUsuarioId($id);
     if (!$usuarioBorrado) {
         $_SESSION['tipo_mensaje'] = "danger";
         $_SESSION['mensaje'] = "Usuario no encontrado.";
@@ -390,7 +390,7 @@ class UsuarioC
     $nombre = $usuarioBorrado['nombre'];
 
     // Intentar eliminar
-    $success = $usuarioM->borrar($id);
+    $success = $usuarioM->borrarU($id);
 
     if ($success) {
         $this->historialController->registrarModificacion($nombre, $id, 'fue eliminado', null, 0, $es_auto_eliminacion ? 'Auto-eliminación por el usuario.' : 'Eliminado por administrador.');
@@ -435,7 +435,7 @@ class UsuarioC
         }
 
         $es_auto_eliminacion = ($_SESSION['id'] == $id);
-        if (!$es_auto_eliminacion && $_SESSION['rol'] !== ROL_ADMIN) {
+        if (!$es_auto_eliminacion && $_SESSION['rol'] != ROL_ADMIN) {
             $_SESSION['tipo_mensaje'] = "danger";
             $_SESSION['mensaje'] = "Acceso denegado.";
             header("Location: Index.php?accion=redireccion");
@@ -443,7 +443,7 @@ class UsuarioC
         }
 
         $usuarioM = new Usuario();
-        $usuario = $usuarioM->buscarUserId($id);
+        $usuario = $usuarioM->buscarUsuarioId($id);
         if (!$usuario) {
             $_SESSION['tipo_mensaje'] = "danger";
             $_SESSION['mensaje'] = "Usuario no encontrado.";
@@ -456,14 +456,10 @@ class UsuarioC
         include(__DIR__ . "/../Views/Usuario/ConfirmarEliminarU.php"); // Nueva vista
     }
 
-    // ... (resto del código existente)
-
-
-    public function editarU($id = null)
-    {
+    public function editarU($id = null) {
         $usuarioM = new Usuario();
         $id = $id ?? $_GET['id'];
-        $datos = $usuarioM->buscarUserId($id);
+        $datos = $usuarioM->buscarUsuarioId($id);
         include(__DIR__ . "/../Views/Usuario/EditarU.php");
     }
 
@@ -539,7 +535,7 @@ class UsuarioC
             exit();
         }
 
-        $DatosTecnico = $Tecnico->buscarUserId($id_tecnico);
+        $DatosTecnico = $Tecnico->buscarUsuarioId($id_tecnico);
 
         if (!$DatosTecnico) {
             // Redirige a una acción inexistente para activar el default
