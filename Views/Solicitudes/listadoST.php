@@ -116,7 +116,7 @@ require_once(__DIR__ . "../../include/UH.php");
                 <td colspan="10">
                     No se terminaron solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
-                        <?php if ($_SESSION['rol'] == ROL_TECNICO): ?>
+                        <?php if ($_SESSION['rol'] == 1): ?>
                             <a href="Index.php?accion=listarTL">
                                 <button class="btn btn-boton777">Ver solicitudes disponibles</button>
                             </a>

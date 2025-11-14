@@ -138,7 +138,7 @@ class Producto {
 
     public function obtenerProductoPorId($id) {
         $id = (int)$id;
-        $sql = "SELECT p.*, c.nombre as categoria, c.id as id_cat FROM producto p INNER JOIN CATEGORIA c ON p.id_cat = c.id WHERE p.id = ? LIMIT 1";
+        $sql = "SELECT p.*, c.nombre as categoria, c.id as id_cat FROM producto p INNER JOIN categoria c ON p.id_cat = c.id WHERE p.id = ? LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
             return false;
@@ -168,7 +168,7 @@ public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
         return $resultado;
     }
 
-    public function crearP($nombre, $imagen, $categoria_id, $id_usuario) {
+    public function crearP($nombre, $rutaFinal, $categoria_id, $id_usuario) {
     $sql = "INSERT INTO producto (nombre, imagen, id_cat, id_usuario) VALUES (?, ?, ?, ?)";
     
     $stmt = $this->conn->prepare($sql);
@@ -176,7 +176,7 @@ public function actualizarProducto($id, $nombre, $imagen, $categoria_id) {
     if (!$stmt) {
         return false;
     }
-    $stmt->bind_param("ssii", $nombre, $imagen, $categoria_id, $id_usuario);
+    $stmt->bind_param("ssii", $nombre, $rutaFinal, $categoria_id, $id_usuario);
     
     if ($stmt->execute()) {
         return $stmt->insert_id;
