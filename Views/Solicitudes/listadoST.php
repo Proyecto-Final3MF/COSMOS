@@ -116,9 +116,15 @@ require_once(__DIR__ . "../../include/UH.php");
                 <td colspan="10">
                     No se terminaron solicitudes
                     <div style="display:flex; justify-content:center; margin-top:15px;">
-                        <a href="Index.php?accion=listarTL">
-                            <button class="btn btn-boton777">Ver solicitudes disponibles</button>
-                        </a>
+                        <?php if ($_SESSION['rol'] == 1): ?>
+                            <a href="Index.php?accion=listarTL">
+                                <button class="btn btn-boton777">Ver solicitudes disponibles</button>
+                            </a>
+                            <?php else: ?>
+                                <a href="Index.php?accion=listarSLU">
+                                <button class="btn btn-boton777">Ver tus solicitudes no asignadas</button>
+                            </a>
+                            <?php endif; ?>
                     </div>
                 </td>
             </tr>

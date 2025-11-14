@@ -418,6 +418,28 @@ class Usuario {
         return $data;
     }
 
+    public function checkEmail($email, $id) {
+        $sql = "SELECT* FROM usuario WHERE id != ? AND email = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt) {
+            error_log("MySQLi Prepare Error: " . $this->conn->error);
+            return [];
+        }
+
+        $stmt->bind_param("is", $id, $email);
+        if (!$stmt->execute()) {
+            error_log("MySQLi Execute Error: " . $stmt->error);
+            $stmt->close();
+            return [];
+        }
+
+        $resultado = $stmt->get_result();
+        $data = $resultado->fetch_assoc();
+        $stmt->close();
+        return $data;
+    }
+
     public function getEspecializacion($id_tecnico) {
         $sql = "SELECT e.nombre FROM especializacion e JOIN usuario_especializacion ue ON e.id = ue.especializacion_id WHERE ue.usuario_id = ?";
 

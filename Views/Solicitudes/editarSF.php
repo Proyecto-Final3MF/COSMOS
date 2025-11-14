@@ -50,7 +50,7 @@ if (!isset($estados) || $estados === null) {
             <p class="fade-label">Precio:</p>
             <div class="input-precio">
                 <span class="simbolo">$</span>
-                <input type="number" step="0.01" id="precio" name="precio" value="<?= htmlspecialchars($datosSolicitud['precio'] ?? 0.0) ?>">
+                <input type="number" min="100" step="0.01" id="precio" name="precio" value="<?= htmlspecialchars($datosSolicitud['precio'] ?? 0.0) ?>">
             </div>
             <br><br>
         </div>
