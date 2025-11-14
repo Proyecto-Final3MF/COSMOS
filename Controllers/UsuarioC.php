@@ -253,8 +253,7 @@ class UsuarioC
         }
     }
 
-    public function actualizarU()
-    {
+    public function actualizarU() {
         session_start();
         $usuarioM = new Usuario();
 
@@ -264,15 +263,22 @@ class UsuarioC
         $foto_actual = $_POST['foto_actual'] ?? "Assets/imagenes/perfil/fotodefault.webp";
 
         if ($_SESSION['rol'] != ROL_ADMIN) {
-    // Si NO es admin, solo puede editar su propio perfil
-        if ($_SESSION['id'] != $id) {
-        $_SESSION['tipo_mensaje'] = "warning";
-        $_SESSION['mensaje'] = "Acceso denegado: no puedes editar el perfil de otro usuario.";
-        header("Location: Index.php?accion=redireccion");
-        exit();
+        // Si NO es admin, solo puede editar su propio perfil
+            if ($_SESSION['id'] != $id) {
+                $_SESSION['tipo_mensaje'] = "warning";
+                $_SESSION['mensaje'] = "Acceso denegado: no puedes editar el perfil de otro usuario.";
+                header("Location: Index.php?accion=redireccion");
+                exit();
+            }
         }
-    }
 
+        $checkEmail = $usuarioM->checkEmail($email, $id);
+        if ($checkEmail) {
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Esse email ya esta en uso.";
+            header("Location: Index.php?accion=redireccion");
+            exit();
+        }
 
         if (!preg_match('/^[\p{L}\s]+$/u', $nombre)) {
             $_SESSION['tipo_mensaje'] = "warning";
