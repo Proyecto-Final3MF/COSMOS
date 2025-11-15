@@ -798,13 +798,13 @@ p {
 /* aca terminan los h y p */
 
 /* aca afectan las tablas, todo lo relacionado a ellas */
-
 table {
-    width: 95%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
-    margin: 40px auto;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);

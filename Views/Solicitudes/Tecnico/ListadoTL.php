@@ -2,15 +2,9 @@
 require_once(__DIR__ . "/../../include/UH.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="30">
-  <title>Solicitudes Libres</title>
-  <link rel="stylesheet" href="./Assets/css/Main.css" />
-</head>
+
+<title>Solicitudes Libres</title>
+
 <body>
   <br>
     <div>
@@ -18,10 +12,10 @@ require_once(__DIR__ . "/../../include/UH.php");
     </div>
 
     <div class="btn-volver-container fade-slide">
-  <button class="btn-volver" id="btnVolver">
-    <i class="fa fa-arrow-left"></i> Volver
-  </button>
-</div>
+      <button class="btn-volver" id="btnVolver">
+        <i class="fa fa-arrow-left"></i> Volver
+      </button>
+    </div>
 
   <form action="Index.php" method="GET" class="filter-form2 fade-slide">
     <input type="hidden" name="accion" value="listarTL">
@@ -30,7 +24,6 @@ require_once(__DIR__ . "/../../include/UH.php");
         <input type="text" id="search" autocomplete="off" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>
   </form>
-
 
   <table>
     <thead>
@@ -82,7 +75,7 @@ require_once(__DIR__ . "/../../include/UH.php");
   ?>
   </tbody>
 </table>
-</div>
+
 <div class='pagination-container'>
         <nav>
             <ul class="pagination">

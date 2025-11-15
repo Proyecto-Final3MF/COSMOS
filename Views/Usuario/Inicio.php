@@ -44,7 +44,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <p class="inicio44">Nos alegra verte de nuevo, <?= htmlspecialchars($_SESSION['usuario']) ?>.</p>
 
     <div class="btn-container2">
-        <a href="http://localhost/COSMOS/Index.php?accion=redireccion">
+        <a href="../../Index.php?accion=redireccion">
             <button class="btn btn-boton44">Ver mi Unidad</button>
         </a>
     </div>
