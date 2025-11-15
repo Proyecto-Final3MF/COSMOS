@@ -215,9 +215,6 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             <a href="Index.php?accion=logout" class="dropdown-item">
                                 <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
                             </a>
-                            <a href="Index.php?accion=confirmarEliminarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                            <i class="fa fa-trash"></i> Eliminar Cuenta
-                            </a>
                         </div>
                     </div>
                 </div>
