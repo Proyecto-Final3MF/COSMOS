@@ -254,7 +254,6 @@ class UsuarioC
     }
 
     public function actualizarU() {
-        session_start();
         $usuarioM = new Usuario();
 
         $id = $_POST['id'];
