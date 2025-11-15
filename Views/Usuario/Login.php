@@ -17,7 +17,6 @@ require_once(__DIR__ . "../../include/UH.php");
     <title>Login</title>
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
-
 <body>
     <div class="contenedor-formulario">
         <section class="formularios99">

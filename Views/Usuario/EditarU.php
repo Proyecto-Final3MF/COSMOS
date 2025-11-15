@@ -31,7 +31,7 @@ require_once(__DIR__ . "../../include/UH.php");
             <img id="preview" src="<?= htmlspecialchars($datos['foto_perfil']) ?>" alt="Foto de perfil" class="foto-perfil">
 
             <div class="input-archivo">
-            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden capture>
+            <input type="file" name="foto_perfil" accept="image/*" id="foto_perfil" hidden>
             <label for="foto_perfil" class="btn-boton3-input">Seleccionar Foto</label>
             <span class="nombre-archivo-seleccionado">Ningúna Foto seleccionada</span>
             </div>
