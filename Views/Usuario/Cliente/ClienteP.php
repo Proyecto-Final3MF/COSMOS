@@ -43,7 +43,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=formularioS">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-plus-circle btn-crear"></i> 
-            <span class="title">Crear Nueva Solicitud</span>
+            <span class="title">Crear Solicitud</span>
             <span class="desc">Crea Una Nueva Solicitud Asociando un Producto</span>
         </button>
     </a>
@@ -59,7 +59,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarSA">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-check btn-aceptadas"></i> 
-            <span class="title">Solicitudes que Aceptaron</span>
+            <span class="title">Solicitudes Aceptadas</span>
             <span class="desc">Consulta Tus Solicitudes Aceptadas Por el Tecnico y su Estado Actual</span>
         </button>
     </a>
