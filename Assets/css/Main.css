@@ -877,7 +877,7 @@ tbody tr:hover {
 .list-item td:last-child {
     display: flex;
     gap: 10px; 
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
@@ -4226,5 +4226,3 @@ input:checked ~ label {
         font-size: 0.9rem;
     }
 }
-
-/* aca termina el css de la página de confirmación de eliminación */

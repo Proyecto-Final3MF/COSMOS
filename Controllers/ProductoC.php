@@ -311,7 +311,7 @@ class ProductoC
         $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
         $nombreArchivoSeguro = uniqid('producto_', true) . '.' . $extension;
 
-        $rutaFinal = __DIR__ ."/../Image/" . $nombreArchivoSeguro;
+        $rutaFinal = "Image" . $nombreArchivoSeguro;
 
         if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
             $id = $producto->crearP($nombre, $rutaFinal, $categoria_id, $id_usuario);
