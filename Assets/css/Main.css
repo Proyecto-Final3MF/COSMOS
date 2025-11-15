@@ -800,7 +800,8 @@ p {
 /* aca afectan las tablas, todo lo relacionado a ellas */
 table {
     width: 50%;
-    margin: 25% auto;
+    margin-left: 25% auto;
+    margin-right: 25% auto;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
