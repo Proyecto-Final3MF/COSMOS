@@ -135,20 +135,20 @@ INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (3, 'Televisión'),
 (4, 'Monitor'),
 (5, 'Impresora'),
-(6, 'Consola de Videojuegos'),
+(6, 'Consola'),
 (7, 'Router/Módem'),
 (8, 'Smartwatch'),
-(9, 'Cámara Digital'),
-(10, 'Disco Duro Externo');
+(9, 'Camaras'),
+(10, 'Disco Duro');
 
 INSERT INTO `especializacion` (`id`, `nombre`) VALUES
-(1, 'Reparación de Laptops'),
-(2, 'Servicio Técnico de Celulares'),
-(3, 'Diagnóstico de Televisores'),
-(4, 'Mantenimiento de Monitores'),
-(5, 'Reparación de Impresoras'),
-(6, 'Consolas y Gaming'),
-(7, 'Redes y Conectividad (Router/Módem)'),
-(8, 'Dispositivos Wearable (Smartwatch)'),
-(9, 'Equipos de Fotografía Digital'),
-(10, 'Recuperación y Almacenamiento de Datos (HDD/SSD)');
+(1, 'Laptops'),
+(2, 'Celulares'),
+(3, 'Televisores'),
+(4, 'Monitores'),
+(5, 'Impresoras'),
+(6, 'Consolas'),
+(7, 'Router/Módem'),
+(8, 'Smartwatch'),
+(9, 'Camaras'),
+(10, 'Disco Duro');
