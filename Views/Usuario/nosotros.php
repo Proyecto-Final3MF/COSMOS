@@ -72,7 +72,7 @@
 
     <a href="https://github.com/A-R-G-B">
     <div class="miembro">
-        <img src="Assets/imagenes/perfil/yoese.jpeg" alt="Miembro 3">
+        <img src="Assets/imagenes/perfil/soyyoalex.jpg" alt="Miembro 3">
         <h3>Alex <br> Gonzalez</h3>
     </div>
     </a>
