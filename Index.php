@@ -123,11 +123,6 @@ switch ($accion) {
     $controller->logout();
   break;
 
-  case 'espera':
-    $controller = new UsuarioC();
-    $controller->espera();
-  break;
-
   case 'editarSF':
     $controller = new SolicitudC();
     $controller->editarSF();
