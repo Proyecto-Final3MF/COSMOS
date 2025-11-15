@@ -63,7 +63,7 @@ class SolicitudC
             $_SESSION['mensaje'] = "Solicitud guardada existosamente";
 
             $this->historiaC->registrarEvento($id_solicitud, "Solicitud creada");
-            $this->historialController->registrarModificacion($_SESSION['nombre'], $_SESSION['id'], "Creo la solicitud", $titulo, $id_solicitud, null);
+            $this->historialController->registrarModificacion($_SESSION['usuario'], $_SESSION['id'], "Creo la solicitud", $titulo, $id_solicitud, null);
 
             require_once(__DIR__ . '/NotificacionC.php');
             $notificacion = new NotificacionC();
