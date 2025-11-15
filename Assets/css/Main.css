@@ -812,6 +812,12 @@ table {
     opacity: 0;
 }
 
+.table-responsive {
+    width: 95%;
+    margin: 40px auto;
+    overflow-x: auto;
+}
+
 tr:hover {
     background-color: var(--color-hover);
 }
