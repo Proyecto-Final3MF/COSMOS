@@ -799,7 +799,7 @@ p {
 
 /* aca afectan las tablas, todo lo relacionado a ellas */
 table {
-    width: 75%;
+    width: 95%;
     margin-left: 5%;
     margin-right: 5%;
     background-color: var(--color-tabla-fondo);
