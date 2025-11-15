@@ -799,23 +799,24 @@ p {
 
 /* aca afectan las tablas, todo lo relacionado a ellas */
 
+.table-responsive {
+    width: 95%; 
+    margin: 40px auto; 
+    overflow-x: auto; 
+}
+
 table {
+    min-width: 950px; 
+    
     width: 100%;
-    min-width: 900px;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden; 
+    overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.8s ease forwards;
     opacity: 0;
-}
-
-.table-responsive {
-    width: 95%;
-    margin: 40px auto;
-    overflow-x: auto;
 }
 
 tr:hover {
