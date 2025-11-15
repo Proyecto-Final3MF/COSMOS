@@ -3,8 +3,7 @@ require_once(__DIR__ . "/../Models/UsuarioM.php");
 require_once(__DIR__ . "/../Views/include/popup.php");
 require_once(__DIR__ . "/../Controllers/HistorialC.php");
 
-class UsuarioC
-{
+class UsuarioC {
     private $historialController;
     private $reviewController;
     private $conn; // Propiedad para la conexión, necesaria para insert_id
@@ -33,31 +32,7 @@ class UsuarioC
         include(__DIR__ . "/../Views/Usuario/Tecnico/TecnicoForm.php");
     }
 
-    public function espera()
-    {
-        // 1. Obtener el email de la URL
-        $email = $_GET['email'] ?? '';
-
-        // 2. Instanciar el modelo (necesario para obtenerPorEmail)
-        $usuarioM = new Usuario();
-
-        // 3. Obtener los datos del usuario. $datos_usuario debe ser definido AQUÍ.
-        $datos_usuario = $usuarioM->obtenerPorEmail($email);
-
-        // 4. Verificación de seguridad: si no encuentra al usuario, redirige
-        if (!$datos_usuario) {
-            $_SESSION['tipo_mensaje'] = "danger";
-            $_SESSION['mensaje'] = "No se pudo encontrar la información del técnico.";
-            header("Location: Index.php?accion=login");
-            exit();
-        }
-
-        // 5. Incluir la vista. La vista espera que $datos_usuario exista.
-        include(__DIR__ . "Views/Usuario/Tecnico/Espera.php");
-    }
-
-    public function crear()
-    {
+    public function crear() {
         $usuario = new Usuario();
         $especializaciones = $usuario->obtenerEspecializaciones();
         include(__DIR__ . "/../Views/Usuario/Register.php");
