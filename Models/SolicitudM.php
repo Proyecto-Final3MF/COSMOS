@@ -349,7 +349,7 @@ class Solicitud {
     }
 
     public function obtenerNombreEstadoPorId($estado_id) {
-        $sql = "SELECT nombre FROM estado WHERE id = ?";
+        $sql = "SELECT nombre FROM estado WHERE id = 2,3,4,5";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $estado_id);
