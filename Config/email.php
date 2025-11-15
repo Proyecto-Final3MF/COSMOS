@@ -6,7 +6,7 @@ return [
         'host' => 'smtp.gmail.com',
         'port' => 587,
         'user' => 'tecnicosyasociados0@gmail.com',          // CAMBIAR: Tu email de Gmail
-        'pass' => 'contrasena',          // CAMBIAR: Tu contraseña de aplicación (16 caracteres)
+        'pass' => contrasena,          // CAMBIAR: Tu contraseña de aplicación (16 caracteres)
         'from_email' => 'tecnicosyasociados0@gmail.com',
         'from_name' => 'COSMOS',
         'secure' => 'tls',
