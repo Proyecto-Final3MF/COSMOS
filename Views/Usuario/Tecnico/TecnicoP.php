@@ -19,7 +19,7 @@ $contador_normales = count($notifC->listarNoLeidas('normal'));
     <title>Panel de Técnico</title>
     <link rel="stylesheet" href="./Assets/css/Main.css"> </head>
 <body>
-    <br>
+    <br><br>
 
     <h1 class="inicio55">Aquí podrás gestionar tus tareas como técnico.</h1>
 

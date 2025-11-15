@@ -17,7 +17,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
-    <br>
+    <br><br>
     <main>
         <h1 class="inicio55">Aquí podrás gestionar tus tareas como Admin.</h1>
     </main>

@@ -17,7 +17,7 @@ require_once(__DIR__ . "../../../include/UH.php");
      <link rel="stylesheet" href="./Assets/css/Main.css"></head>
 </head>
 <body>
-    <br>
+    <br><br>
 <div>
 
     <h1 class="inicio55">¿En qué podemos ayudarte?</h1>
