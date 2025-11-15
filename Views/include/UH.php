@@ -57,7 +57,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                 ?>
                     <li>
                         <a href="Index.php?accion=nosotros">
-                            <i class="fa fa-users"></i> Nosotros
+                            <i class="fa fa-users"></i> Info
                         </a>
                     </li>
                     <li>
