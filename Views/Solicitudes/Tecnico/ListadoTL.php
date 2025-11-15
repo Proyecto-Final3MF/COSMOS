@@ -25,7 +25,6 @@ require_once(__DIR__ . "/../../include/UH.php");
       </div>
   </form>
 
-<div class="table-responsive">
   <table>
     <thead>
       <tr>
@@ -76,7 +75,7 @@ require_once(__DIR__ . "/../../include/UH.php");
   ?>
   </tbody>
 </table>
-</div>
+
 <div class='pagination-container'>
         <nav>
             <ul class="pagination">
