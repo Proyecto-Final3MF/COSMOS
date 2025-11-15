@@ -799,9 +799,9 @@ p {
 
 /* aca afectan las tablas, todo lo relacionado a ellas */
 table {
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 75%;
+    margin-left: 5%;
+    margin-right: 5%;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
