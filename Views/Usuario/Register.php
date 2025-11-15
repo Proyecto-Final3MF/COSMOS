@@ -43,6 +43,9 @@ require_once(__DIR__ . "../../include/UH.php");
             <p id="error-password" class="error-text"></p>
             <br>
 
+           <input type="checkbox" id="terminos" name="terminos" required>
+           <label for="terminos">Acepto los <a id="link-terminos-cliente" class="link-terminos-cliente" href="javascript:void(0);">términos y condiciones</a></label>
+
             <input class="button" type="submit" value="Guardar">
             <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>
 
@@ -50,11 +53,20 @@ require_once(__DIR__ . "../../include/UH.php");
     </section>
     <br>
 </div>
+<div id="modal-terminos-cliente" class="modal-terminos-overlay-cliente" style="display: none;">
+    <div class="modal-terminos-content-cliente">
+        <span class="modal-terminos-close-cliente" id="close-modal-terminos-cliente">&times;</span>
+        <h2>Términos y Condiciones</h2>
+        <div id="modal-terminos-body-cliente">
+            
+        </div>
+    </div>
+</div>
 <script src="Assets/js/imagenformulario.js"></script>
 <script src="Assets/js/vercontrasena.js"></script>
+<script src="Assets/js/terminos.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 </body>
 </html>

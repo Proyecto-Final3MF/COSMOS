@@ -46,6 +46,13 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         $confirm = $_POST['confirmar_contrasena'];
 
+        if (!isset($_POST['terminos'])) {
+        $_SESSION['mensaje'] = "Debes aceptar los términos y condiciones para registrarte.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: Index.php?accion=register");
+        exit();
+        }
+
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";
             $_SESSION['tipo_mensaje'] = "warning";
@@ -138,6 +145,13 @@ class UsuarioC {
         $contrasena = $_POST['contrasena'];
         $especializaciones = $_POST['especializaciones'] ?? [];
         $otra_especialidad = trim($_POST['otra_especialidad']) ?: null;
+
+         if (!isset($_POST['terminos'])) {
+        $_SESSION['mensaje'] = "Debes aceptar los términos y condiciones para registrarte.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header("Location: Index.php?accion=TecnicoForm");
+        exit();
+        }
 
         if (strlen($contrasena) < 8 || empty($contrasena) || $contrasena === '' || preg_match('/^\s*$/', $contrasena)) {
             $_SESSION['mensaje'] = "La contraseña debe tener al menos 8 caracteres.";

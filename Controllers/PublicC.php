@@ -16,4 +16,9 @@ class PublicC
     {
         include(__DIR__ . "/../Views/Usuario/contacto.php");
     }
+
+    public function terminos()
+    {
+        include(__DIR__ . "/../Views/Usuario/terminos.php");
+    }
 }

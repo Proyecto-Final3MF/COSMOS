@@ -3023,6 +3023,91 @@ input::placeholder {
 
 }
 
+/* Para el modal del cliente */
+.modal-terminos-overlay-cliente {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;  /* Alto z-index para estar por encima de otros modales */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-terminos-content-cliente {
+    background-color: var(--color-fondo-formulario);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-terminos-close-cliente {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-terminos-close-cliente:hover {
+    color: black;
+}
+
+/* Para el modal del técnico (igual pero con clases únicas) */
+.modal-terminos-overlay-tecnico {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10001;  /* Un poco más alto si es necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-terminos-content-tecnico {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-terminos-close-tecnico {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-terminos-close-tecnico:hover {
+    color: black;
+}
+
+.link-terminos-cliente {
+    color: var(--rosado-en-eclipse);
+}
+
+.link-terminos-cliente:hover {
+    color: #972f5f;
+    text-decoration: underline;
+}
+
 /* aca termina el css del filtrado de las tablas */
 
 /* Aca hay CSS del inicio y nosotros con animaciones y eso */

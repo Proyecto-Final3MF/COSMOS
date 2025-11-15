@@ -16,7 +16,7 @@ require_once(__DIR__ . "/Controllers/PublicC.php");
 
 $accion = $_GET['accion'] ?? 'Index';
 
-$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'guardarT', 'redireccion', 'espera', 'trabajo', 'TecnicoForm' , 'inicio', 'nosotros', 'contacto' ];
+$acciones_publicas = ['login', 'autenticar', 'register', 'guardarU', 'guardarT', 'redireccion', 'espera', 'trabajo', 'TecnicoForm' , 'inicio', 'nosotros', 'contacto' , 'terminos' ];
 
 if (!in_array($accion, $acciones_publicas)) {
   if (!isset($_SESSION['usuario'])) {
@@ -61,6 +61,11 @@ switch ($accion) {
   case 'contacto':
     $controller = new PublicC();
     $controller->contacto();
+  break;
+
+  case 'terminos':
+    $controller = new PublicC();
+    $controller->terminos();
   break;
 
   case 'trabajo':
