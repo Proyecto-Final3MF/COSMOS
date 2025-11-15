@@ -801,6 +801,7 @@ p {
 table {
     width: 50%;
     margin-left: 25%;
+    margin-right: 25%;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
