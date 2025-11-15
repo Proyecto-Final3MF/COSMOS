@@ -806,8 +806,6 @@ p {
 }
 
 table {
-    min-width: 950px; 
-    
     width: 100%;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
