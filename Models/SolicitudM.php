@@ -343,7 +343,7 @@ class Solicitud {
     }
 
     public function obtenerEstados() {
-        $sql = "SELECT * FROM estado";
+        $sql = "SELECT 2,3,4,5 FROM estado";
         $resultado = $this->conn->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
