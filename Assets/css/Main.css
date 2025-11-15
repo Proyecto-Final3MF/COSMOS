@@ -800,13 +800,13 @@ p {
 /* aca afectan las tablas, todo lo relacionado a ellas */
 
 table {
-    width: 95%;
+    width: 100%;
+    min-width: 900px;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
-    margin: 40px auto;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden; 
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.8s ease forwards;
     opacity: 0;
