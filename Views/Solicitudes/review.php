@@ -1,6 +1,15 @@
 <?php require_once(__DIR__ . "../../include/UH.php"); ?>
 <link rel="stylesheet" href="./Assets/css/Main.css">
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar al Tecnico</title>
+</head>
+<body>
+    
 <div class="btn-volver-container fade-slide">
     <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
@@ -34,3 +43,6 @@
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
+
+</body>
+</html>

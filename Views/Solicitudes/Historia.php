@@ -19,7 +19,7 @@ require_once(__DIR__ . "../../include/UH.php");
     </button>
     </div>
 
-    <br>
+    <br><br>
     <h1 class="inicio55">Linea del Tiempo</h1>
     <div class="container4 fade-slide">
     <?php foreach ($resultados as $evento): ?>
@@ -27,7 +27,6 @@ require_once(__DIR__ . "../../include/UH.php");
     <p class="linea"> <?php echo $evento['evento']. " (". date('H:i:s d/m/Y', strtotime($evento['fecha_hora'])). ")"; ?>
     </p>
     </div>
-
     <?php endforeach; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
