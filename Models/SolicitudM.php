@@ -343,13 +343,13 @@ class Solicitud {
     }
 
     public function obtenerEstados() {
-        $sql = "SELECT 2,3,4,5 FROM estado";
+        $sql = "SELECT * WHERE id > 1 FROM estado";
         $resultado = $this->conn->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerNombreEstadoPorId($estado_id) {
-        $sql = "SELECT nombre FROM estado WHERE id = 2,3,4,5";
+        $sql = "SELECT nombre FROM estado WHERE id = ?";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $estado_id);
