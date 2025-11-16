@@ -16,8 +16,11 @@ require_once(__DIR__ . "../../../include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css">
 </head>
 <body>
+    <div class="content-wrapper">
     <br>
+<div class="sticky-header">
 <h1 class="inicio55">Listado de todos los Usuarios</h1>
+</div>
 
 <div class="btn-volver-container fade-slide">
   <button class="btn-volver" id="btnVolver">
@@ -102,6 +105,7 @@ require_once(__DIR__ . "../../../include/UH.php");
                 </li>
             </ul>
         </nav>
+    </div>
     </div>
     <script src="Assets/js/animaciondetablas.js"></script>
     <script src="Assets/js/botonvolver.js"></script>

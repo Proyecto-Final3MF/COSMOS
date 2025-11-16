@@ -13,8 +13,10 @@ require_once(__DIR__ . "../../include/UH.php");
 <body>
     <div class="content-wrapper"> 
     <br>
+    <div class="sticky-header">
     <div>
         <h1 class="inicio552">Solicitudes Terminadas</h1>
+    </div>
     </div>
 
     <?php if ($_SESSION['rol'] == ROL_TECNICO && !empty($resultados)): ?>

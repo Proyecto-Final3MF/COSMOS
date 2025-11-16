@@ -13,9 +13,12 @@ require_once(__DIR__ . "../../include/UH.php");
 </head>
 
 <body>
+    <div class="content-wrapper"> 
     <br>
+    <div class="sticky-header">
     <div>
-        <h1 class="inicio55">Solicitudes aceptadas</h1>
+        <h1 class="inicio552">Solicitudes aceptadas</h1>
+    </div>
     </div>
 
     <div class="btn-volver-container fade-slide">
@@ -129,7 +132,7 @@ require_once(__DIR__ . "../../include/UH.php");
         <span class="close">&times;</span>
         <img class="image-modal-content" id="modalImage">
     </div>
-
+    </div>
     <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>

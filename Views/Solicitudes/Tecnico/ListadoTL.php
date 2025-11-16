@@ -3,13 +3,23 @@ require_once(__DIR__ . "/../../include/UH.php");
 ?>
 
 
-<title>Solicitudes Libres</title>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes Libres</title>
+</head>
 <body>
-  <br>
+<div class="content-wrapper"> 
+<br>
+  <div class="sticky-header">
     <div>
       <h1 class="inicio55">Solicitudes no asignadas</h1>
     </div>
+  </div>
 
     <div class="btn-volver-container fade-slide">
       <button class="btn-volver" id="btnVolver">
@@ -93,11 +103,13 @@ require_once(__DIR__ . "/../../include/UH.php");
   <span class="close">&times;</span>
   <img class="image-modal-content" id="modalImage">
 </div>
+</div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
 <script src="Assets/js/animaciondetablas.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/paginacion.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>
