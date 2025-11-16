@@ -65,11 +65,6 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             <i class="fa fa-envelope"></i> Contáctanos
                         </a>
                     </li>
-                    <li>
-                        <a href="https://github.com/Proyecto-Final3MF/COSMOS/blob/main/READMEIN.md">
-                            Manual de usuario
-                        </a>
-                    </li>
                 <?php endif; ?>
             </ul>
         </div>
