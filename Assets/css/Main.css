@@ -1700,11 +1700,14 @@ input[type="text"]::placeholder {
 
 @media (max-width: 768px) {
     .dropdown-menu {
-        right: auto;  
-        left: 0;      
+        right: 0;  
+        left: auto;  
         width: 90vw; 
         max-width: 300px;  
         top: 50px;    
+        max-height: 60vh;  
+        overflow-y: auto;  
+        z-index: 9999;   
     }
 
     .menu-rol-container .dropdown-menu {
@@ -4238,18 +4241,6 @@ input:checked ~ label {
 
 /* aca termina el css del chat */
 
-@media (max-width: 768px) {
-    
-    body {
-        margin-top: 90px;
-    }
-
-    .navbar {
-        padding: 0.8rem 1rem; 
-    }
-
-}
-
 /* aca empieza el css de ganancias */
 
 .contador-ganancias {
@@ -4454,3 +4445,91 @@ input:checked ~ label {
         font-size: 0.9rem;
     }
 }
+
+@media (max-width: 768px) {
+    
+    body {
+        margin-top: 90px;
+    }
+
+    .navbar {
+        padding: 0.2rem 1rem; 
+    }
+
+}
+
+@media (max-width: 768px) {
+ 
+
+    .navbar-left {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        gap: 0.5rem; 
+        margin-bottom: 0rem; 
+    }
+
+    .navbar-right {
+        display: flex;
+        justify-content: flex-end !important;
+        gap: 2rem; 
+    }
+
+    .logo-link img {
+        height: 40px; 
+        width: auto; 
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row; 
+        justify-content: center; 
+        gap: 0.5rem; 
+        margin: 0; 
+        font-size: 0.9rem; 
+    }
+
+    .nav-links li {
+        margin: 0; 
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center; 
+        gap: 0.5rem; 
+    }
+
+    .user-menu-container,
+    .menu-rol-container {
+        margin-top: 1rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-left: 3.5rem; 
+    }
+    .btn-boton {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+    .user-menu-container,
+    .menu-rol-container {
+        margin-top: 0.7rem;
+    }
+    .dropdown-menu {
+        width: 90vw;
+        left: 5%;
+        right: 0;  
+        left: auto;  
+        width: 90vw; 
+        max-width: 300px;  
+        top: 50px;    
+        max-height: 60vh;  
+        overflow-y: auto;  
+        z-index: 9999; 
+    }
+}
+
+
