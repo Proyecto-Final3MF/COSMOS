@@ -11,9 +11,10 @@ require_once(__DIR__ . "../../include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css"/>
 </head>
 <body>
+    <div class="content-wrapper"> 
     <br>
     <div>
-        <h1 class="inicio55">Solicitudes Terminadas</h1>
+        <h1 class="inicio552">Solicitudes Terminadas</h1>
     </div>
 
     <?php if ($_SESSION['rol'] == ROL_TECNICO && !empty($resultados)): ?>
@@ -140,7 +141,7 @@ require_once(__DIR__ . "../../include/UH.php");
         <span class="close">&times;</span>
         <img class="image-modal-content" id="modalImage">
     </div>
-
+    </div>
     <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/botonvolver.js"></script>
     <script src="Assets/js/animaciondetablas.js"></script>

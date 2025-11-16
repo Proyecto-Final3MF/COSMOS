@@ -4454,6 +4454,7 @@ input:checked ~ label {
 
     .navbar {
         padding: 0.2rem 1rem; 
+        flex-direction: column;
     }
 
 }
@@ -4532,4 +4533,89 @@ input:checked ~ label {
     }
 }
 
+@media (max-width: 768px) {
+    .content-wrapper {
+        overflow-x: auto; 
+        width: 100vw;     
+        padding: 0;       
+        margin: 0;       
+    }
+    
+    .content-wrapper > * {
+        min-width: 800px;  
+        box-sizing: border-box;
+    }
 
+    .content-wrapper table {
+        min-width: 800px;
+        align-items: center;
+    }
+
+    .content-wrapper .btn-volver-container {
+        width: 800px;  
+        margin: 0 auto; 
+    }
+
+    .inicio55 {
+    text-align: center !important;
+}
+}
+
+/* Ajustes para móviles: hacer que el título y el formulario de búsqueda sean fijos, con más espacio para la tabla */
+@media (max-width: 768px) {
+    /* Fijar el título en la parte superior, con más espacio arriba */
+    .inicio552 {
+        position: fixed;
+        top: 160px; /* Aumentado de 160px para dar más espacio desde el botón "Volver" */
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-fondo); /* Fondo para que no se vea transparente */
+        z-index: 1001; /* Por encima del content-wrapper */
+        padding: 15px 20px; /* Más padding para separación */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        text-align: center !important;
+        margin: 0; /* Resetear márgenes */
+        font-size: 2rem; /* Reducir un poco el tamaño si se siente grande, opcional */
+    }
+
+    /* Fijar el formulario de búsqueda justo debajo del título, con más espacio */
+    .filter-form2 {
+        position: fixed;
+        top: 250px; /* Aumentado de 210px para más separación */
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-fondo); /* Fondo consistente */
+        z-index: 1001; /* Mismo z-index */
+        padding: 15px 20px; /* Más padding */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+        margin: 0; /* Resetear márgenes */
+    }
+
+    /* Ajustar el content-wrapper para bajar más la tabla y evitar superposiciones */
+    .content-wrapper {
+        margin-top: 350px; /* Aumentado de 260px para más espacio (título + formulario + padding extra) */
+        overflow-x: auto; /* Mantener scroll horizontal */
+        width: 100vw;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* Asegurar que la tabla y otros elementos dentro de content-wrapper no se vean afectados */
+    .content-wrapper > * {
+        min-width: 800px; /* Mantener ancho mínimo para scroll */
+        box-sizing: border-box;
+    }
+
+    .content-wrapper table {
+        min-width: 800px;
+        align-items: center;
+    }
+
+    .content-wrapper .btn-volver-container {
+        width: 800px;
+        margin: 0 auto;
+    }
+}
