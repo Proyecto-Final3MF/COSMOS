@@ -131,6 +131,18 @@ $(document).ready(function() {
             selectedOrder.splice(index, 1);  // Remueve del orden
         }
     });
+
+    $('.select2').on('select2:select select2:unselect', function() {
+        var $selection = $(this).next('.select2-container').find('.select2-selection__rendered');
+        var choices = $selection.find('.select2-selection__choice');
+        // Reordenar las tags basadas en selectedOrder
+        choices.sort(function(a, b) {
+            var aId = $(a).attr('title'); // Asumiendo que 'title' tiene el ID o texto; ajusta si es 'data-id'
+            var bId = $(b).attr('title');
+            return selectedOrder.indexOf(aId) - selectedOrder.indexOf(bId);
+        });
+        $selection.append(choices); // Reaplicar el orden
+    });
 });
 </script>
 
