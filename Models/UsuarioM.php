@@ -136,7 +136,7 @@ class Usuario {
     }
 
     public function obtenerEspecializaciones() {
-        $sql = "SELECT id, nombre FROM especializacion ORDER BY nombre ASC";
+        $sql = "SELECT id, nombre FROM especializacion ORDER BY id ASC";
         $resultado = $this->conn->query($sql);
         if ($resultado) {
             return $resultado->fetch_all(MYSQLI_ASSOC);
