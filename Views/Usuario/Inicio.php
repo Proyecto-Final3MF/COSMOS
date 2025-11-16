@@ -28,7 +28,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <h1 class="inicio55">C<img src="Assets/imagenes/logonueva.png" class="logoeninicio" height="50px" alt="logo de la app">SMOS</h1>
 
 <?php if (!isset($_SESSION['usuario'])): ?>
-    <!-- Contenido visible solo para visitantes -->
     <p class="inicio44">Te ayudamos a encontrar un técnico para arreglar tu dispositivo en tiempo récord</p>
 
     <div class="btn-container2 fade-slide">
@@ -40,10 +39,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <br>
 
 <?php else: ?>
-    <!-- Contenido visible solo para usuarios logueados -->
     <p class="inicio44">Nos alegra verte de nuevo, <?= htmlspecialchars($_SESSION['usuario']) ?>.</p>
 
-    <div class="btn-container2">
+    <div class="btn-container2 fade-slide">
         <a href="Index.php?accion=redireccion">
             <button class="btn btn-boton44">Ver mi Unidad</button>
         </a>
@@ -72,14 +70,26 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php endif; ?>
 </section>
 
-<h2 class="inicio44 fade-slide">¿Estás interesado en trabajar como técnico con nosotros? Haga click abajo</h2>
+<h2 class="inicio44 fade-slide">¿Estás interesado en trabajar como técnico con nosotros?</h2>
 
 <div class="btn-container2 fade-slide">
     <a href="Index.php?accion=trabajo">
-        <button class="btn btn-boton44">Trabajar con Nosotros</button>
+        <button class="btn btn-boton44 fade-slide">Trabajar con Nosotros</button>
     </a>
 </div>
 <br><br><br>
+
+<h2 class="inicio44 fade-slide">¿Necesitas Ayuda Para Moverte por la App?</h2>
+
+<div class="btn-container2 fade-slide">
+    <a href="https://github.com/Proyecto-Final3MF/COSMOS/blob/main/manualdeusuario.md" target="_blank">
+        <button class="btn btn-boton44 fade-slide">Manual de Usuario</button>
+    </a>
+    <a href="https://github.com/Proyecto-Final3MF/COSMOS/blob/main/READMEIN.md" target="_blank">
+        <button class="btn btn-boton44 fade-slide">User Manual</button>
+    </a>
+</div>
+<br><br><br><br>
 
 <script src="Assets/js/trancicion.js"></script>
 
