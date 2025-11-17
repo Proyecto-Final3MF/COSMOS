@@ -65,7 +65,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <input type="hidden" name="solicitud_id" value="<?= $solicitudId ?>">
             <?php endif; ?>
 
-            <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
+            <input type="text" autocomplete="off" name="mensaje" placeholder="Escribe tu mensaje..." required>
             <button type="submit"><i class="fa fa-upload"></i></button>
         </form>
 
