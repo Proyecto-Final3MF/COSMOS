@@ -301,15 +301,32 @@ class UsuarioC {
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
         $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
-        $foto_perfil = $foto_actual;
-        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
-            $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
-            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
-
-            if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
-                unlink($foto_actual);
-            }
+        $foto_perfil = $foto_actual;  // Inicia con la actual
+    if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+        // Genera ruta absoluta (agrega '/' al inicio para que sea desde la raíz del sitio)
+        $foto_perfil = "/Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
+        
+        // Verifica que la carpeta exista y tenga permisos
+        $directorio = __DIR__ . "/../../Assets/imagenes/perfil/";  // Ajusta la ruta relativa al directorio del controlador
+        if (!is_dir($directorio)) {
+            mkdir($directorio, 0755, true);  // Crea la carpeta si no existe
         }
+        
+        // Intenta mover el archivo
+        if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], __DIR__ . "/../../" . ltrim($foto_perfil, '/'))) {  // ltrim quita '/' para la ruta del servidor
+            // Éxito: elimina la foto anterior si no es default
+            if ($foto_actual !== "/Assets/imagenes/perfil/fotodefault.webp" && file_exists(__DIR__ . "/../../" . ltrim($foto_actual, '/'))) {
+                unlink(__DIR__ . "/../../" . ltrim($foto_actual, '/'));
+            }
+        } else {
+            // Error: registra y mantiene la foto actual
+            error_log("Error al subir foto para usuario ID $id: " . $_FILES['foto_perfil']['error']);
+            $_SESSION['tipo_mensaje'] = "warning";
+            $_SESSION['mensaje'] = "Error al subir la foto. Inténtalo de nuevo.";
+            header("Location: Index.php?accion=editarU&id=$id");
+            exit();
+        }
+    }
 
         if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
             if ($id == $_SESSION['id']) {
