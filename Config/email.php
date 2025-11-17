@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../secreto.php');
 // config/email.php
 return [
     'smtp' => [
-        'host' => 'smtp.gmail.com',
+        'host' => 'smtp.@gmail.com',
         'port' => 587,
         'user' => 'tecnicosyasociados0@gmail.com',          // CAMBIAR: Tu email de Gmail
         'pass' => 'contrasena',          // CAMBIAR: Tu contraseña de aplicación (16 caracteres)
