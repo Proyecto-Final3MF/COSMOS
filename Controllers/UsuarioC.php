@@ -301,15 +301,37 @@ class UsuarioC {
         $nombreAntiguo = $_SESSION['usuario'] ?? 'Nombre Desconocido';
         $emailAntiguo = $_SESSION['email'] ?? 'Email Desconocido';
 
-        $foto_perfil = $foto_actual;
-        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === 0) {
-            $foto_perfil = "Assets/imagenes/perfil/" . uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
-            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $foto_perfil);
-
-            if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($foto_actual)) {
-                unlink($foto_actual);
-            }
+        // En UsuarioC::actualizarU(), justo después de las validaciones iniciales:
+$foto_perfil = $foto_actual;  // Mantener la actual por defecto
+if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+    // Ruta absoluta al directorio (ajusta si tu estructura es diferente)
+    $directorio = __DIR__ . "/../Assets/imagenes/perfil/";
+    if (!is_dir($directorio)) {
+        mkdir($directorio, 0755, true);  // Crear directorio si no existe
+    }
+    
+    // Sanitizar el nombre del archivo (evitar caracteres problemáticos)
+    $nombre_original = basename($_FILES['foto_perfil']['name']);
+    $extension = pathinfo($nombre_original, PATHINFO_EXTENSION);
+    $nombre_seguro = preg_replace('/[^a-zA-Z0-9._-]/', '', $nombre_original);  // Remover caracteres no seguros
+    $nombre_archivo = uniqid() . "_" . $nombre_seguro;
+    $ruta_completa = $directorio . $nombre_archivo;
+    
+    // Ruta relativa para guardar en BD (como antes)
+    $foto_perfil = "Assets/imagenes/perfil/" . $nombre_archivo;
+    
+    if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $ruta_completa)) {
+        // Éxito: eliminar la foto anterior si no es la default
+        if ($foto_actual !== "Assets/imagenes/perfil/fotodefault.webp" && file_exists($directorio . basename($foto_actual))) {
+            unlink($directorio . basename($foto_actual));
         }
+    } else {
+        // Error: no actualizar la foto, mostrar mensaje y mantener la actual
+        $_SESSION['tipo_mensaje'] = "danger";
+        $_SESSION['mensaje'] = "Error al subir la foto de perfil. Verifica el tamaño del archivo o permisos del servidor.";
+        $foto_perfil = $foto_actual;
+    }
+}
 
         if ($usuarioM->editarU($id, $nombre, $email, $foto_perfil)) {
             if ($id == $_SESSION['id']) {
