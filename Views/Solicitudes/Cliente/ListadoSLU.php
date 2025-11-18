@@ -54,6 +54,9 @@ require_once(__DIR__ . "/../../include/UH.php");
                     <a href="Index.php?accion=borrarS&id=<?= $resultado['id']; ?>" class="icon-btn delete">
                     <i class="fa fa-trash"></i>
                     </a>
+                    <a href="Index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+                    <i class="fa fa-file-alt"></i>
+                    </a>
                     </div>
                 </td>
            

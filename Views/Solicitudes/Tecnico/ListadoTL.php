@@ -67,6 +67,9 @@ require_once(__DIR__ . "/../../include/UH.php");
             <a href="Index.php?accion=asignarS&id_solicitud=<?php echo $resultado['id'];?>" class="icon-btn aceptar" >  
               <i class="fa fa-check"></i>
             </a>
+            <a href="Index.php?accion=solicitud_historia&id_solicitud=<?= $resultado['id']; ?>" class="icon-btn historial">
+              <i class="fa fa-file-alt"></i>
+            </a>
           </div>
         </td>
       </tr>
