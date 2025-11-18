@@ -57,7 +57,7 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                 ?>
                     <li>
                         <a href="Index.php?accion=nosotros">
-                            <i class="fa fa-users"></i> Nosotros
+                            <i class="fa fa-users"></i> Info
                         </a>
                     </li>
                     <li>
@@ -214,9 +214,6 @@ $notificaciones = $notifC->listarNoLeidas('urgente');  // Solo urgentes
                             </a>
                             <a href="Index.php?accion=logout" class="dropdown-item">
                                 <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
-                            </a>
-                            <a href="Index.php?accion=confirmarEliminarU&id=<?= htmlspecialchars($_SESSION['id']) ?>" class="dropdown-item">
-                            <i class="fa fa-trash"></i> Eliminar Cuenta
                             </a>
                         </div>
                     </div>

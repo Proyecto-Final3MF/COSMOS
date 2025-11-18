@@ -19,7 +19,7 @@
     
 <br><br>
 
-<h1 class="inicio55"> Sobre Nosotros </h1>
+<h1 class="inicio55"> Sobre COSMOS </h1>
 
 <p class="inicio44">
     Les presento COSMOS, una plataforma web creada para conectar de forma 
@@ -34,7 +34,7 @@
     Cómo Nació
 </h2>
 
-<p class="nosotro fade-slide">
+<p class="nosotro inicio44">
     Todos hemos pasado por ese momento en que nuestra computadora, celular o 
     tablet deja de funcionar justo cuando más la necesitamos, ¿verdad? 
     Y lo peor es que no sabemos a quién acudir, los servicios tardan, o simplemente 
@@ -51,7 +51,7 @@
     Desarrolladores
 </h2>
 
-<p class="nosotro fade-slide">
+<p class="nosotro inicio44">
     La aplicacion COSMOS fue desarrolada por:
 </p>
 
@@ -72,7 +72,7 @@
 
     <a href="https://github.com/A-R-G-B">
     <div class="miembro">
-        <img src="Assets/imagenes/perfil/yoese.jpeg" alt="Miembro 3">
+        <img src="Assets/imagenes/perfil/soyyoalex.jpg" alt="Miembro 3">
         <h3>Alex <br> Gonzalez</h3>
     </div>
     </a>

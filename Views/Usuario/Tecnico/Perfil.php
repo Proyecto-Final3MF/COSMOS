@@ -19,7 +19,7 @@
 <div class="profile-info fade-slide">
     <img src="<?=htmlspecialchars($DatosTecnico['foto_perfil'])?>" alt="Foto de perfil"/>
     <div class="profile-details">
-        <p><?=$DatosTecnico['nombre']?> <?= $DatosTecnico['email']?></p>
+        <p><?=$DatosTecnico['nombre']?><br> <?= $DatosTecnico['email']?></p>
         <p>Cantidad de Reviews: <?=$DatosTecnico['cant_review']?> Promedio: <?=$DatosTecnico['promedio']?>⭐</p>
         <p>Especialidad: 
             <?php if ($especializaciones):

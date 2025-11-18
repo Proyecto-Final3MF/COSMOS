@@ -9,12 +9,11 @@ require_once(__DIR__ . "../../../include/UH.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Cliente</title>
-     <link rel="stylesheet" href="./Assets/css/Main.css"></head>
 </head>
 <body>
     <br><br>
@@ -35,7 +34,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarP">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-box btn-mis-productos"></i> 
-            <span class="title">Mis Dispositivos</span>
+            <span class="title">Mis<br>Dispositivos</span>
             <span class="desc">Consulta tus Dispositivos Hecho o Crea uno Nuevo.</span>
         </button>
     </a>
@@ -43,7 +42,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=formularioS">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-plus-circle btn-crear"></i> 
-            <span class="title">Crear Nueva Solicitud</span>
+            <span class="title">Crear<br>Solicitud</span>
             <span class="desc">Crea Una Nueva Solicitud Asociando un Producto</span>
         </button>
     </a>
@@ -51,7 +50,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarSLU">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-hourglass-half btn-sin-asignar"></i> 
-            <span class="title">Solicitudes Creadas</span>
+            <span class="title">Solicitudes<br>Creadas</span>
             <span class="desc">Consulta Tus Solicitudes ya Creadas en Espera de un Tecnico</span>
         </button>
     </a>
@@ -59,7 +58,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarSA">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-check btn-aceptadas"></i> 
-            <span class="title">Solicitudes que Aceptaron</span>
+            <span class="title">Solicitudes<br>Aceptadas</span>
             <span class="desc">Consulta Tus Solicitudes Aceptadas Por el Tecnico y su Estado Actual</span>
         </button>
     </a>
@@ -67,7 +66,7 @@ require_once(__DIR__ . "../../../include/UH.php");
     <a href="Index.php?accion=listarST">
         <button class="btn btn-boton444">
             <i class="fa-solid fa-flag-checkered btn-terminadas"></i> 
-            <span class="title">Solicitudes Terminadas</span>
+            <span class="title">Solicitudes<br>Terminadas</span>
             <span class="desc">Consulta tus Ya Terminadas y Puntua el trabajo del Tecnico</span>
         </button>
     </a>

@@ -2,26 +2,30 @@
 require_once(__DIR__ . "/../../include/UH.php");
 ?>
 
+
+
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="30">
   <title>Solicitudes Libres</title>
-  <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
 <body>
-  <br>
+<div class="content-wrapper"> 
+<br>
+  <div class="sticky-header">
     <div>
       <h1 class="inicio55">Solicitudes no asignadas</h1>
     </div>
+  </div>
 
     <div class="btn-volver-container fade-slide">
-  <button class="btn-volver" id="btnVolver">
-    <i class="fa fa-arrow-left"></i> Volver
-  </button>
-</div>
+      <button class="btn-volver" id="btnVolver">
+        <i class="fa fa-arrow-left"></i> Volver
+      </button>
+    </div>
 
   <form action="Index.php" method="GET" class="filter-form2 fade-slide">
     <input type="hidden" name="accion" value="listarTL">
@@ -30,7 +34,6 @@ require_once(__DIR__ . "/../../include/UH.php");
         <input type="text" id="search" autocomplete="off" name="search" placeholder="Buscar por titulo, producto o descripción" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       </div>
   </form>
-
 
   <table>
     <thead>
@@ -85,7 +88,7 @@ require_once(__DIR__ . "/../../include/UH.php");
   ?>
   </tbody>
 </table>
-</div>
+
 <div class='pagination-container'>
         <nav>
             <ul class="pagination">
@@ -103,11 +106,13 @@ require_once(__DIR__ . "/../../include/UH.php");
   <span class="close">&times;</span>
   <img class="image-modal-content" id="modalImage">
 </div>
+</div>
 <script src="Assets/js/zoomimagen.js"></script>
 <script src="Assets/js/botonvolver.js"></script>
 <script src="Assets/js/animaciondetablas.js"></script>
 <script src="Assets/js/trancicion.js"></script>
 <script src="Assets/js/paginacion.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>

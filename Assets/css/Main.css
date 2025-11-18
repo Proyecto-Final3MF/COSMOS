@@ -798,13 +798,13 @@ p {
 /* aca terminan los h y p */
 
 /* aca afectan las tablas, todo lo relacionado a ellas */
-
 table {
-    width: 95%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     background-color: var(--color-tabla-fondo);
     color: var(--color-tabla-texto);
     border-collapse: collapse;
-    margin: 40px auto;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -1700,11 +1700,14 @@ input[type="text"]::placeholder {
 
 @media (max-width: 768px) {
     .dropdown-menu {
-        right: auto;  
-        left: 0;      
+        right: 0;  
+        left: auto;  
         width: 90vw; 
         max-width: 300px;  
         top: 50px;    
+        max-height: 60vh;  
+        overflow-y: auto;  
+        z-index: 9999;   
     }
 
     .menu-rol-container .dropdown-menu {
@@ -2529,7 +2532,7 @@ input[type="submit"]:hover {
 
 .producto-con-boton {
     display: flex;
-    align-items: center; /* Alinea verticalmente select y botón */
+    align-items: center; 
     gap: 10px; 
     margin-bottom: 15px;
 }
@@ -2564,14 +2567,13 @@ input[type="submit"]:hover {
 }
 
 .rol-option.active {
-    border-color: #e83e8c; /* Borde rosado */
+    border-color: #e83e8c; 
     background-color: #ffe6f0;
     color: #e83e8c;
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(232, 62, 140, 0.3);
 }
 
-/* === Arreglo visual moderno para Select2 === */
 .select2-container--bootstrap .select2-selection {
     background-color: var(--color-fondo);
     border: 1px solid var(--color-borde);
@@ -2579,7 +2581,7 @@ input[type="submit"]:hover {
     color: var(--text-color);
     font-size: 16px;
     height: 50px;
-    padding: 5 20px  25px; /* espacio para la flecha y la X */
+    padding: 5 20px  25px; 
     display: flex;
     align-items: center;
     position: relative;
@@ -2587,18 +2589,16 @@ input[type="submit"]:hover {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Eliminar efecto al hacer foco o hover */
 .select2-container--bootstrap .select2-selection:focus-within,
 .select2-container--bootstrap .select2-selection:hover {
     border-color: var(--color-borde);
     box-shadow: none;
 }
 
-/* Input de búsqueda en el dropdown (mini buscador) */
 .select2-container--bootstrap .select2-search--dropdown .select2-search__field {
-    background-color: var(--color-fondo); /* Fondo que cambia con el modo */
-    color: var(--text-color); /* Texto que cambia */
-    border: 1px solid var(--color-borde); /* Borde que cambia */
+    background-color: var(--color-fondo); 
+    color: var(--text-color); 
+    border: 1px solid var(--color-borde); 
     border-radius: var(--border-radius);
     padding: 8px 10px;
     font-size: 14px;
@@ -2606,7 +2606,6 @@ input[type="submit"]:hover {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* Texto centrado correctamente */
 .select2-container--bootstrap .select2-selection__rendered {
     color: var(--text-color);
     width: 100%;
@@ -2616,13 +2615,11 @@ input[type="submit"]:hover {
     padding: 0;
 }
 
-/* Placeholder centrado igual que el texto */
 .select2-container--bootstrap .select2-selection__placeholder {
     color: var(--text-color);
     opacity: 0.7;
 }
 
-/* Flecha del dropdown (a la derecha centrada) */
 .select2-container--bootstrap .select2-selection__arrow {
     position: absolute;
     right: 12px;
@@ -2630,7 +2627,6 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
 }
 
-/* Botón de limpiar (la X) a la izquierda del texto */
 .select2-container--bootstrap .select2-selection__clear {
     position: absolute;
     left: 10px;
@@ -2647,7 +2643,6 @@ input[type="submit"]:hover {
     opacity: 1;
 }
 
-/* === Dropdown === */
 .select2-dropdown {
     background-color: var(--color-fondo);
     border: 1px solid var(--color-borde);
@@ -2672,7 +2667,6 @@ input[type="submit"]:hover {
     color: var(--text-color);
 }
 
-/* === Responsive === */
 @media (max-width: 768px) {
     .select2-container--bootstrap .select2-selection {
         font-size: 14px;
@@ -2680,20 +2674,17 @@ input[type="submit"]:hover {
     }
 }
 
-/* === Ajuste de altura para el Select2 del formulario de producto === */
 #categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection {
     height: 50px !important; /* altura más alta */
-    padding: 10px 40px 10px 35px !important; /* más espacio interno */
+    padding: 10px 40px 10px 35px !important; 
     font-size: 17px;
     align-items: center;
 }
 
-/* Centrar mejor el texto dentro del select */
 #categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__rendered {
     line-height: 30px !important;
 }
 
-/* Ajustar posición de la flecha (▼) y la X (clear) */
 #categoria.select2-hidden-accessible + .select2-container--bootstrap .select2-selection__arrow {
     right: 15px;
     top: 50%;
@@ -2706,7 +2697,6 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
 }
 
-/* === Estilo general para inputs y selects === */
 .form-control, select, input[type="text"], input[type="email"], input[type="password"], textarea {
     background-color: var(--color-fondo);
     color: var(--text-color);
@@ -2724,7 +2714,6 @@ input[type="submit"]:hover {
     outline: none;
 }
 
-/* === Botón === */
 .button {
     background-color: var(--primary-color);
     color: #fff;
@@ -2739,7 +2728,6 @@ input[type="submit"]:hover {
     background-color: var(--primary-color-hover);
 }
 
-/* === Select2 igual que el otro formulario === */
 .select2-container--bootstrap .select2-selection {
     background-color: var(--color-fondo);
     border: 1px solid var(--color-borde);
@@ -2772,22 +2760,19 @@ input[type="submit"]:hover {
     color: #fff;
 }
 
-/* === Scroll interno para múltiples selecciones === */
 .select2-container--bootstrap .select2-selection--multiple {
-    max-height: 90px;  /* ajusta según prefieras */
+    max-height: 90px;  
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    scrollbar-width: thin; /* scroll más fino en Firefox */
+    scrollbar-width: thin; 
 }
 
-/* Ocultar la X global (botón de limpiar) solo para este formulario */
 form[action*="guardarT"] .select2-selection__clear {
     display: none !important;
 }
 
-/* Asegurar que las etiquetas (tags) se mantengan visibles */
 .select2-container--bootstrap .select2-selection__choice {
     background-color: var(--color-fondo-formulario, #333);
     color: var(--text-color);
@@ -2808,16 +2793,14 @@ form[action*="guardarT"] .select2-selection__clear {
     transition: all 0.3s ease;
     box-sizing: border-box;
     margin: 0 auto;            
-    text-align: right; /* alinea el valor numérico a la derecha */
+    text-align: right; 
 }
 
-/* Efecto al pasar el mouse */
 #precio:hover {
     border-color: #e83e8c;
     box-shadow: 0 0 6px rgba(232, 62, 140, 0.3);
 }
 
-/* Ajuste para modo oscuro */
 body.dark-mode #precio {
     background-color: var(--color-fondo);
     color: var(--text-color);
@@ -2851,7 +2834,6 @@ body.dark-mode #precio::-webkit-outer-spin-button {
     border: 1px solid var(--color-navbar);
 }
 
-/* === Mejora visual para opciones seleccionadas en Select2 === */
 .select2-container--bootstrap .select2-results__option[aria-selected="true"] {
     background: var(--color-fondo) !important;
     color: var(--text-color) !important;
@@ -2859,21 +2841,185 @@ body.dark-mode #precio::-webkit-outer-spin-button {
     border-left: 3px solid var(--primary-color) !important;
     padding: 12px 15px !important;
     font-size: 16px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;  /* ✅ Sombra interna para profundidad */
-    border-radius: 9px !important;  /* Bordes redondeados para suavidad */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;  
+    border-radius: 9px !important; 
 }
 
-/* Hover solo para opciones NO seleccionadas (evita interferir con las seleccionadas) */
 .select2-container--bootstrap .select2-results__option:not([aria-selected="true"]):hover {
-    background-color: rgba(0, 0, 0, 0.1) !important;  /* Hover sutil para no seleccionadas */
+    background-color: rgba(0, 0, 0, 0.1) !important;  
     color: var(--text-color) !important;
 }
 
-/* === Opcional: Hacer todas las opciones del dropdown un poco más grandes === */
 .select2-container--bootstrap .select2-results__option {
     padding: 12px 15px !important;
     font-size: 16px !important;
     transition: background-color 0.2s, color 0.2s;
+}
+
+.select2-container--bootstrap .select2-selection--multiple {
+    background-color: var(--color-fondo);
+    border: 2px solid var(--color-borde);
+    border-radius: 12px; 
+    min-height: 50px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.select2-container--bootstrap .select2-selection--multiple:hover,
+.select2-container--bootstrap .select2-selection--multiple:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(232, 62, 140, 0.3); 
+}
+
+.select2-container--bootstrap .select2-selection__choice {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); 
+    color: #fff !important; 
+    border: none !important; 
+    border-radius: 20px !important; 
+    padding: 6px 12px !important;
+    margin: 4px 6px 4px 0 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    display: inline-flex !important;
+    align-items: center;
+    position: relative;
+}
+
+.select2-container--bootstrap .select2-selection__choice:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.select2-container--bootstrap .select2-selection__choice__remove {
+    color: #fff !important;
+    margin-left: 8px !important;
+    font-weight: bold !important;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-radius: 50%; 
+    padding: 2px;
+}
+
+.select2-container--bootstrap .select2-selection__choice__remove:hover {
+    color: #ffcccc !important; 
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+.select2-container--bootstrap .select2-selection__placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.select2-dropdown {
+    background-color: var(--color-fondo);
+    border: 2px solid var(--color-borde);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
+}
+
+.select2-container--bootstrap .select2-results__option {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    padding: 12px 16px !important;
+    font-size: 16px !important;
+    border-bottom: 1px solid var(--color-borde);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.select2-container--bootstrap .select2-results__option:last-child {
+    border-bottom: none;
+}
+
+.select2-container--bootstrap .select2-results__option:not([aria-selected="true"]):hover {
+    background-color: rgba(232, 62, 140, 0.1) !important; 
+    color: var(--text-color) !important;
+}
+
+.select2-container--bootstrap .select2-results__option[aria-selected="true"] {
+    background: var(--rosado-en-eclipse) !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    border-left: 4px solid #fff !important; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.select2-container--bootstrap .select2-search--dropdown .select2-search__field {
+    background-color: var(--color-fondo);
+    color: var(--text-color);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 100%;
+    margin: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.select2-container--bootstrap .select2-search--dropdown .select2-search__field:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .select2-container--bootstrap .select2-selection--multiple {
+        min-height: 45px;
+        font-size: 14px;
+    }
+    .select2-container--bootstrap .select2-selection__choice {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        margin: 2px 4px 2px 0 !important;
+    }
+    .select2-container--bootstrap .select2-results__option {
+        padding: 10px 12px !important;
+        font-size: 14px !important;
+    }
+}
+
+.select2-container--bootstrap .select2-selection__choice__remove {
+    color: #dc3545 !important; 
+    background-color: #fff !important; 
+    border-radius: 200% !important; 
+    padding: 2px 4px !important; 
+    margin-left: 8px !important;
+    font-weight: bold !important;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 12px !important; 
+}
+.select2-container--bootstrap .select2-selection__choice__remove:hover {
+    background-color: #c92020 !important; 
+    color: #000000 !important; 
+}
+
+.select2-container--bootstrap .select2-selection--multiple {
+    background-color: var(--color-fondo);
+    border: 2px solid var(--color-borde);
+    border-radius: 12px; 
+    height: auto !important; 
+    max-height: none !important; 
+    overflow: visible !important; 
+    padding: 8px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .select2-container--bootstrap .select2-selection--multiple {
+        max-height: 150px !important; 
+        overflow-y: auto !important; 
+        height: auto !important;
+        font-size: 14px;
+    }
 }
 
 /* Aca termina el CSS de los Formularios */
@@ -3021,6 +3167,95 @@ input::placeholder {
         font-size: 0.95rem;
     }
 
+    .ordenar-form {
+        margin-left: 1.5rem; 
+    }
+
+}
+
+/* Para el modal del cliente */
+.modal-terminos-overlay-cliente {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;  /* Alto z-index para estar por encima de otros modales */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-terminos-content-cliente {
+    background-color: var(--color-fondo-formulario);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-terminos-close-cliente {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-terminos-close-cliente:hover {
+    color: black;
+}
+
+/* Para el modal del técnico (igual pero con clases únicas) */
+.modal-terminos-overlay-tecnico {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10001;  /* Un poco más alto si es necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-terminos-content-tecnico {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-terminos-close-tecnico {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-terminos-close-tecnico:hover {
+    color: black;
+}
+
+.link-terminos-cliente {
+    color: var(--rosado-en-eclipse);
+}
+
+.link-terminos-cliente:hover {
+    color: #972f5f;
+    text-decoration: underline;
 }
 
 /* aca termina el css del filtrado de las tablas */
@@ -3028,6 +3263,14 @@ input::placeholder {
 /* Aca hay CSS del inicio y nosotros con animaciones y eso */
 
 h1.inicio55 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    animation: fadeDown 1s ease forwards;
+}
+
+h1.inicio552 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -4010,21 +4253,10 @@ input:checked ~ label {
 
 /* aca termina el css del chat */
 
-@media (max-width: 768px) {
-    
-    body {
-        margin-top: 90px;
-    }
-
-    .navbar {
-        padding: 0.8rem 1rem; 
-    }
-
-}
-
 /* aca empieza el css de ganancias */
 
 .contador-ganancias {
+    justify-content: center !important;
     text-align: center !important; 
     margin: 20px 0; 
     padding: 15px; 
@@ -4037,6 +4269,11 @@ input:checked ~ label {
     color: var(--text-color);
 }
 
+@media (max-width: 768px) {
+    .contador-ganancias {
+       margin-left: 3.5rem; 
+    }
+}
 /* aca termina el css de ganancias */
 
 /* aca empieza el css de la página de confirmación de eliminación */
@@ -4226,3 +4463,154 @@ input:checked ~ label {
         font-size: 0.9rem;
     }
 }
+
+@media (max-width: 768px) {
+    
+    body {
+        margin-top: 90px;
+    }
+
+    .navbar {
+        padding: 0.2rem 1rem; 
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 768px) {
+ 
+
+    .navbar-left {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        gap: 0.5rem; 
+        margin-bottom: 0rem; 
+    }
+
+    .navbar-right {
+        display: flex;
+        justify-content: flex-end !important;
+        gap: 2rem; 
+    }
+
+    .logo-link img {
+        height: 40px; 
+        width: auto; 
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row; 
+        justify-content: center; 
+        gap: 0.5rem; 
+        margin: 0; 
+        font-size: 0.9rem; 
+    }
+
+    .nav-links li {
+        margin: 0; 
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center; 
+        gap: 0.5rem; 
+    }
+
+    .user-menu-container,
+    .menu-rol-container {
+        margin-top: 1rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-left: 3.5rem; 
+    }
+    .btn-boton {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+    .user-menu-container,
+    .menu-rol-container {
+        margin-top: 0.7rem;
+    }
+    .dropdown-menu {
+        width: 90vw;
+        left: 5%;
+        right: 0;  
+        left: auto;  
+        width: 90vw; 
+        max-width: 300px;  
+        top: 50px;    
+        max-height: 60vh;  
+        overflow-y: auto;  
+        z-index: 9999; 
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        overflow-x: auto; 
+        width: 100vw;     
+        padding: 0;       
+        margin: 0;  
+    }
+    
+    .content-wrapper > * {
+        min-width: 800px;  
+        box-sizing: border-box;
+    }
+
+    .content-wrapper table {
+        min-width: 800px;
+        align-items: center;
+    }
+
+    .content-wrapper .btn-volver-container {
+        width: 800px;  
+        margin: 0 auto; 
+    }
+
+    .inicio55 {
+        text-align: center !important;
+    }
+
+    .inicio552 {
+        position: relative;  
+        padding: 15px 20px;
+        text-align: left !important;
+        margin: 0;
+        font-size: 2rem;
+        margin-left: 2.5rem;
+    }
+
+    .filter-form2 {
+        position: sticky;  
+        top: 60px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-fondo);
+        z-index: 100;
+        padding: 15px 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 0;
+    }
+
+    .sticky-header {
+        position: sticky;
+        top: 0;  
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-fondo);  
+        z-index: 100;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+        padding: 0;  
+    }
+
+}
+

@@ -64,6 +64,9 @@ require_once(__DIR__ . "../../../include/UH.php");
         <p id="error-password" class="error-text"></p>
         <br>
 
+        <input type="checkbox" id="terminos" name="terminos" required>
+        <label for="terminos">Acepto los <a id="link-terminos-cliente" class="link-terminos-cliente" href="javascript:void(0);">términos y condiciones</a></label>
+
         <input class="button" type="submit" value="Guardar">
         <a href="Index.php?accion=login" class="login9" >¿Ya tiene una cuenta? Inicie sesión</a>
 
@@ -72,6 +75,17 @@ require_once(__DIR__ . "../../../include/UH.php");
   <br>
 </div>
 
+<div id="modal-terminos-cliente" class="modal-terminos-overlay-cliente" style="display: none;">
+    <div class="modal-terminos-content-cliente">
+        <span class="modal-terminos-close-cliente" id="close-modal-terminos-cliente">&times;</span>
+        <h2>Términos y Condiciones</h2>
+        <div id="modal-terminos-body-cliente">
+
+        </div>
+    </div>
+</div>
+
+<script src="Assets/js/terminos.js"></script>
 <script>
 $(document).ready(function() {
     var selectedOrder = [];  // Array para trackear el orden de selección
@@ -116,6 +130,18 @@ $(document).ready(function() {
         if (index > -1) {
             selectedOrder.splice(index, 1);  // Remueve del orden
         }
+    });
+
+    $('.select2').on('select2:select select2:unselect', function() {
+        var $selection = $(this).next('.select2-container').find('.select2-selection__rendered');
+        var choices = $selection.find('.select2-selection__choice');
+        // Reordenar las tags basadas en selectedOrder
+        choices.sort(function(a, b) {
+            var aId = $(a).attr('title'); // Asumiendo que 'title' tiene el ID o texto; ajusta si es 'data-id'
+            var bId = $(b).attr('title');
+            return selectedOrder.indexOf(aId) - selectedOrder.indexOf(bId);
+        });
+        $selection.append(choices); // Reaplicar el orden
     });
 });
 </script>

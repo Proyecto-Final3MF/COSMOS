@@ -113,7 +113,7 @@ class SolicitudC
             $usuarioModel = new Usuario();  // Instancia del modelo
             $emailsTecnicos = $usuarioModel->obtenerEmailsTecnicos();
             $asunto = "🚨 Nueva Solicitud Urgente Creada: $titulo";
-            $mensaje = "Se ha creado una nueva solicitud urgente:<br><strong>Título:</strong> {$titulo}<br><strong>Descripción:</strong> {$descripcion}<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarTL' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+            $mensaje = "Se ha creado una nueva solicitud urgente:<br><strong>Título:</strong> {$titulo}<br><strong>Descripción:</strong> {$descripcion}<br><br>";
             foreach ($emailsTecnicos as $email) {
                 $this->emailService->enviarNotificacion($email, $asunto, $mensaje, 'urgente');
             }
@@ -218,7 +218,7 @@ class SolicitudC
             $usuarioModel = new Usuario();
             $emailCliente = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['cliente_id']);
             $asunto = "✅ Tu Solicitud Fue Aceptada: {$solicitud['titulo']}";
-            $mensaje = "Tu solicitud ha sido aceptada por un técnico.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSA' style='background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+            $mensaje = "Tu solicitud ha sido aceptada por un técnico.<br><br>";
             $this->emailService->enviarNotificacion($emailCliente, $asunto, $mensaje, 'normal');
 
             $this->historialController->registrarModificacion($_SESSION['usuario'], $id_tecnico, "seleccionó a la solicitud", $solicitud['titulo'], $id_soli, null);
@@ -332,8 +332,8 @@ class SolicitudC
                 $usuarioModel = new Usuario();
                 $emailCliente = $usuarioModel->obtenerEmailUsuarioPorId($datosSolicitud['cliente_id']);
                 $asunto = "🔄 Estado de Tu Solicitud Cambió: {$datosSolicitud['titulo']}";
-                $enlace = ($estado_id == 5) ? 'http://localhost/COSMOS/Index.php?accion=listarST' : 'http://localhost/COSMOS/Index.php?accion=listarSA';  // Finalizado -> listarST, otros -> listarSA
-                $mensaje = "El estado de tu solicitud cambió a: <strong>{$nuevoEstado['nombre']}</strong>.<br><br><a href='$enlace' style='background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+                 // Finalizado -> listarST, otros -> listarSA
+                $mensaje = "El estado de tu solicitud cambió a: <strong>{$nuevoEstado['nombre']}</strong>.<br><br>";
                 $this->emailService->enviarNotificacion($emailCliente, $asunto, $mensaje, 'normal');
             }
 
@@ -399,11 +399,11 @@ class SolicitudC
             if ($_SESSION['rol'] == 1) {  // Técnico canceló -> notificar al cliente
                 $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['cliente_id']);
                 $asunto = "❌ Tu Solicitud Fue Cancelada por el Técnico: {$solicitud['titulo']}";
-                $mensaje = "El técnico canceló tu solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSLU' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+                $mensaje = "El técnico canceló tu solicitud ya aceptada.<br><br>";
             } elseif ($_SESSION['rol'] == 2) {  // Cliente canceló -> notificar al técnico
                 $emailDestinatario = $usuarioModel->obtenerEmailUsuarioPorId($solicitud['tecnico_id']);
                 $asunto = "❌ Solicitud Cancelada por el Cliente: {$solicitud['titulo']}";
-                $mensaje = "El cliente canceló la solicitud ya aceptada.<br><br><a href='http://localhost/COSMOS/Index.php?accion=listarSA' style='background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Ver aquí</a>";
+                $mensaje = "El cliente canceló la solicitud ya aceptada.<br><br>";
             }
 
             $this->emailService->enviarNotificacion($emailDestinatario, $asunto, $mensaje, 'urgente');

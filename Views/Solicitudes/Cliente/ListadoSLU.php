@@ -12,18 +12,21 @@ require_once(__DIR__ . "/../../include/UH.php");
     <link rel="stylesheet" href="./Assets/css/Main.css" />
 </head>
 <body>
+    <div class="content-wrapper"> 
     <div class="btn-volver-container fade-slide">
   <button class="btn-volver" id="btnVolver">
     <i class="fa fa-arrow-left"></i> Volver
   </button>
 </div>
 <br>
+    <div class="sticky-header">
     <div>
     <h1 class="inicio55">Solicitudes Recien Creadas</h1>
     <p class="fade-slide">Aqui se mostraran todas tus solicitudes que ningun tecnico a aceptado todavia</p>
     <div class="botones-container fade-slide">
     <a href="Index.php?accion=formularioS"><button class="btn btn-boton4442 btn-crear"> <i class="fa-solid fa-plus-circle"></i></button></a>
 </div>
+    </div>
     <table>
         <thead>
             <tr>
@@ -93,6 +96,7 @@ require_once(__DIR__ . "/../../include/UH.php");
 <div id="imageModal" class="image-modal">
   <span class="close">&times;</span>
   <img class="image-modal-content" id="modalImage">
+</div>
 </div>
     <script src="Assets/js/zoomimagen.js"></script>
     <script src="Assets/js/botonvolver.js"></script>
